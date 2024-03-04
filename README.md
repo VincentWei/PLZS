@@ -1,3 +1,4 @@
-# The Programming Lesson for Zero-based Students
+# 给零基础学生的编程课
 
-This is a programming lesson for zero-based students aged 10 to 18, by Vincent Wei.
+这是由魏永明主讲的，针对 10 到 18 岁零基础学生的编程课。
+
