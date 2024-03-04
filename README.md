@@ -42,14 +42,18 @@
 
 ### 学习用电脑
 
-学习用电脑最好是专用的，以防误操作导致数据丢失。电脑可以是一般的台式机或者笔记本，苹果的 Mac 台式机或者笔记本也可以。
+学习用电脑最好是专用的，以防误操作导致数据丢失。电脑可以是：
+
+1. 支持 Ubuntu Linux 22.04 的台式机或笔记本；请参考如下页面获取认证的设备清单：<https://ubuntu.com/certified>。
+1. 2020 年以后生产的运行 macOS 14+ 的苹果 Mac 台式机或者笔记本。
+1. 2020 年以后生产的运行 Windows 10/11 的台式机或者笔记本。
 
 电脑的硬件配置要求：
 
 - 主频在 2GHz 以上的 4 核或以上处理器；若安装虚拟机，则应选择 8 核或以上处理器。
 - 内存 16GB 或以上；若安装虚拟机，则选择 32GB 或以上处理器。
 
-考虑到前半阶段对电脑配置的要求不高，故如果已有电脑可暂时不用购置新的电脑。再进入后半阶段学习时，需要运行开源的人工智能大模型，此时再行考虑购置新的开发用电脑。
+考虑到前半阶段对电脑配置的要求不高，故如果已有电脑则可暂时不用购置新的电脑。在进入后半阶段学习时，需要运行开源的人工智能大模型，此时再行考虑购置新的开发用电脑。
 
 ### 注册 GitHub 或者 Gitee 账号
 
@@ -64,14 +68,16 @@
 
 本课程所有开发环境以 macOS 和 Ubuntu Linux 22.04 为主，推荐在学习用电脑（台式机或笔记本）上安装 Ubuntu Linux 22.04。
 
-1. 若在电脑上直接安装 Linux，请参考 [本文](https://zhuanlan.zhihu.com/p/569347838) 安装 Ubuntu Linux 22.04。
+1. 若在电脑上直接安装 Ubuntu Linux 22.04，请参阅如下文档：
+   - [知乎文章：如何安装 Ubuntu 22.04 LTS 桌面版](https://zhuanlan.zhihu.com/p/569347838)。
+   - [知乎文章：Ubuntu 22.04.4 安装（双系统）](https://zhuanlan.zhihu.com/p/536994892)。
 1. 若使用 macOS，请参照如下文档安装 Homebrew：
    - [官方文档](https://brew.sh/zh-cn/)。
    - [知乎文章](https://zhuanlan.zhihu.com/p/372576355)。
 1. 若使用 Windows，可安装 WSL 或者 VirtualBox 虚拟机，然后再安装 Ubuntu Linux 22.04：
-   - [官方文档：如何使用 WSL 在 Windows 上安装 Linux](https://learn.microsoft.com/zh-cn/windows/wsl/install)。
+   - [微软文档：如何使用 WSL 在 Windows 上安装 Linux](https://learn.microsoft.com/zh-cn/windows/wsl/install)。
    - [知乎文章：安装 WSL2 并下载配置 Ubuntu](https://zhuanlan.zhihu.com/p/348813745)。
-   - [在 VirtualBox 虚拟机上安装 Ubuntu Linux 22.04](https://zhuanlan.zhihu.com/p/600668604)。
+   - [知乎文章：在 VirtualBox 虚拟机上安装 Ubuntu Linux 22.04](https://zhuanlan.zhihu.com/p/600668604)。
 
 在开课前，学员可尝试参阅以上资料自行搭建开发环境，安装不成功也没关系，但需要将遇到的问题记录下来，带着问题来听课。
 
