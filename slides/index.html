@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>计算机技术系列教程</title>
+
+		<link rel="stylesheet" href="/dist/reset.css">
+		<link rel="stylesheet" href="/dist/reveal.css">
+		<link rel="stylesheet" href="/dist/theme/black.css">
+		<link rel="stylesheet" href="/css/global.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="/plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<header class="mytitle">
+				<p><a href="/">考鼎<span>&reg;</span>学堂：魏永明系列课程</a></p>
+				<p><a href="https://work.weixin.qq.com/ca/cawcde42325deca4ec" target="_blank">报名：视频号主页 &gt; 客服</a></p>
+			</header>
+			<div class="slides">
+				<section>
+					<h2>给零基础学生的编程实战课</h2>
+					<section>
+						<h3>基础篇</h3>
+						<p><a href="readability.html">1. 提高代码可读性</a></p>
+						<p><a href="headers.html">2. 用好写好头文件</a></p>
+						<p><a href="warnings.html">3. 消除所有编译警告</a></p>
+						<p><a href="constants.html">4. 常量的定义和使用</a></p>
+						<p><a href="using-cmake.html">5. 善用构建系统生成器</a></p>
+					</section>
+					<section>
+						<h3>模式篇</h3>
+						<p><a href="interface-design-patterns.html">6. 接口设计模式</a></p>
+						<p><a href="decoupling-algorithms-and-data.html">7. 解耦代码和数据</a></p>
+						<p><a href="sub-drivers.html">8. 子驱动程序实现模型</a></p>
+						<p><a href="dynamicly-loading-modules.html">9. 动态加载模块</a></p>
+						<p><a href="state-machine.html">10. 状态机</a></p>
+					</section>
+					<section>
+						<h3>质量篇</h3>
+						<p><a href="coding-for-performance.html">11. 为性能编码</a></p>
+						<p><a href="unit-test.html">12. 单元测试</a></p>
+						<p><a href="efficient-debugging.html">13. 高效调试</a></p>
+					</section>
+					<section>
+						<h3>示范项目</h3>
+						<p><a target="_blank" href="https://gitlab.fmsoft.cn/VincentWei/best-practices-of-c">GitLab.FMSoft.CN</a></p>
+						<p><a target="_blank" href="https://github.com/VincentWei/best-practices-of-c">GitHub.COM</a></p>
+					</section>
+				</section>
+				<section id="grand-finale">
+					<h2>扫一扫</h2>
+					<img class="r-frame" style="height:30vh;width:auto;" src="assets/qrcode-wechat-channel-vincentwei.jpg">
+					<img class="r-frame" style="height:30vh;width:auto;" src="assets/qrcode-bilibili-space-coding-log.jpg">
+					<img class="r-frame" style="height:30vh;width:auto;" src="assets/qrcode-wechat-channel-enterprise.jpg">
+				</section>
+			</div>
+		</div>
+
+        <footer>
+            <address class="text-center">
+                <a target="_blank" href="http://beian.miit.gov.cn/">京ICP备05046847号-7</a>；
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802032210"><img src="/备案图标.png">京公网安备 11010802032210号</a>；经营许可证号：110108004781535
+            </address>
+        </footer>
+
+		<script src="/dist/reveal.js"></script>
+		<script src="/plugin/notes/notes.js"></script>
+		<script src="/plugin/markdown/markdown.js"></script>
+		<script src="/plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
