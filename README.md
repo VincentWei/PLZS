@@ -80,5 +80,7 @@
    - [知乎文章：安装 WSL2 并下载配置 Ubuntu](https://zhuanlan.zhihu.com/p/348813745)。
    - [知乎文章：在 VirtualBox 虚拟机上安装 Ubuntu Linux 22.04](https://zhuanlan.zhihu.com/p/600668604)。
 
-在开课前，学员可尝试参阅以上资料自行搭建开发环境，安装不成功也没关系，但需要将遇到的问题记录下来，带着问题来听课。
+若电脑上已有其他 Linux 系统，但不是 Ubuntu Linux 22.04，不想重装系统，可安装 VirtualBox 虚拟机，然后再安装 Ubuntu Linux 22.04。
+
+在开课前，学员可尝试参阅以上资料自行搭建开发环境，搭建不成功也没关系，但需要将遇到的问题记录下来，带着问题来听课。
 
