@@ -113,8 +113,8 @@ or available locally via: info '(coreutils) mkdir invocation'
 	
 ### Python 解释器的常见错误
 
-1. `SyntaxError: invalid syntax`：无效（invalid）语法（语法）。
-1. `NameError: name 'XXX' is not defined`：名称 XXX 未定义。
+1. `SyntaxError: SyntaxError: invalid character '÷' (U+00F7)`：语法错误：无效（invalid）字符。
+1. `NameError: name 'XXX' is not defined`：名称错误：名称 XXX 未定义。
 
 		
 ## Python 的表达式和运算符
