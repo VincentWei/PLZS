@@ -1,7 +1,7 @@
 ## 我的第一个 Python 程序
 
 1. 课程内容介绍
-1. Python 开发环境
+1. 走进 Python 的世界
 1. Python 表达式和运算符
 1. Python 函数
 1. 把源代码保存起来以备重复使用
@@ -20,6 +20,7 @@
 1. 对学生的要求
    - 对编程有强烈的兴趣且学有余力。
    - 做好“听课一小时，实践八小时”的投入准备。
+   - 要大胆尝试；计算机不会爆炸，顶多重装系统。
    - 不要依赖家长，要学会利用互联网，多请教老师和同学。
 
 	
@@ -43,6 +44,7 @@
 1. Ubuntu Linux 简介
 1. Python 简介
 1. 终端和命令行
+1. 把 Python 解释器当计算器用
 
 	
 ### 总结：实操过程涉及的命令
@@ -61,7 +63,7 @@
 
 - 终端（terminal）：该术语来自早期的计算机操作控制台，操作员通过一个可显示固定大小字符的显示器和一个键盘操控计算机。在图形显示器上的终端程序，是用软件模拟字符显示器运行的，也叫伪（pseudo）终端。
 - 外壳（shell）：操作系统为字符终端上的用户提供的最基本程序，用于输入（input）命令（command）并获得命令的执行结果。在这里，由于命令包括外壳程序的内部命令和外部程序（program）两种形式，故而使用命令这一术语。
-- 提示字符串（prompt string，PS）：外壳（或类似程序）展示在行首的提示文本，用于向用户表明可以输入一个新的命令了。
+- 提示字符串（prompt string，PS）：外壳（或类似程序）展示在行首的提示文本，用于向用户表明可以输入一个新的命令了。针对普通用户的命令，提示字符串通常使用 `$` 结尾；针对超级用户的命令，提示字符串通常使用 `#` 结尾。
 
 	
 ### 总结：实操过程涉及的术语
@@ -77,7 +79,7 @@
 1. 大部分情况下可用 Ctrl+C 终止一个正在运行的命令。
 1. 大部分情况下可用 `--help` 选项来显示一个命令的使用说明。
 1. 命令使用说明中的一些习惯用法：
-   - Linux 命令是区分大小写的，通常使用小写字母。
+   - Linux 命令是区分大小写的，通常使用小写字母。要注意字符的全角和半角区别。
    - 命令的选项（option）和参数（parameter）通常使用大写单词表示。
    - `[]` 包围起来表示可选的部分，不使用 `[]` 包围的表示一定要出现。
    - `|` 表示二选一或者多选一。
@@ -108,14 +110,14 @@ Full documentation <https://www.gnu.org/software/coreutils/mkdir>
 or available locally via: info '(coreutils) mkdir invocation'
 ```
 
-		
-## 实操：Python 的表达式和运算符
+	
+### Python 解释器的常见错误
+
+1. `SyntaxError: invalid syntax`：无效（invalid）语法（语法）。
+1. `NameError: name 'XXX' is not defined`：名称 XXX 未定义。
 
 		
-## 实操：Python 函数
-
-		
-## 实操：把源代码保存起来以备重复使用
+## Python 的表达式和运算符
 
 	
 ### 总结：实操过程涉及的术语
@@ -123,11 +125,8 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `mkdir`：创建（make）目录（directory）。
 - `cd`：改变（change）目录（directory）。
 
-	
-### 总结：实操过程涉及的命令
-
-- `mkdir`：创建（make）目录（directory）。
-- `cd`：改变（change）目录（directory）。
+		
+## Python 函数
 
 	
 ### 总结：实操过程涉及的命令
@@ -136,8 +135,30 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `cd`：改变（change）目录（directory）。
 
 		
-## 实操：我的第一个程序
+## 把源代码保存起来以备重复使用
+
+	
+### 总结：实操过程涉及的命令
+
+- `mkdir`：创建（make）目录（directory）。
+- `cd`：改变（change）目录（directory）。
+
+		
+## 我的第一个程序
 
 		
 ## 作业
+
+1. 搭建好基于 Ubuntu Linux 22.04 的学习环境，将本节所讲内容对照回放实操一遍。
+1. 整理自己所学的几何公式，将其写成对应的 Python 函数，程序调用这些函数，求值并打印对应的结果。
+
+```console
+$ formulas-with-one-parameter.py 11
+area_of_square(11): 121
+perimeter_of_square(11): 44
+
+$ formulas-with-two-paramemters.py 10 8
+perimeter_of_rectangle(10, 8): 36
+area_of_triangle(10, 8): 40
+```
 
