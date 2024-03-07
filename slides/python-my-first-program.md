@@ -290,7 +290,7 @@ The area is: 10000
 	
 ### 总结：实操用涉及的概念
 
-- 可执行（executable）程序和（编译后的）二进制（binary）程序。
+- 可执行（executable）程序、（编译后的）二进制（binary）程序以及程序的搜索路径。
 - 脚本（script）程序、源代码（source code）和源文件（source file）。
 - 绝大多数的脚本语言都支持使用 `#` 做注释（comment）；注释是程序中用自然语言解释程序功能用的，不是程序的一部分，解释器会忽略注释的内容。
 - 在脚本第一行使用 `#!/bin/python3` 这样的方式，可指定脚本程序的解释器。这样操作系统的外壳程序就知道用哪个解释器来执行脚本程序了。
@@ -304,6 +304,7 @@ The area is: 10000
 - `mkdir`：创建（make）目录（directory）。
 - `cd`：改变（change）目录（directory）。
 - `chmod`：改变（change）文件的许可模式（permission mode）。
+- `ls`：列出（list）当前目录中的文件和子目录。
 
 	
 ### 总结：编程中使用的技巧或约定
@@ -312,7 +313,7 @@ The area is: 10000
 - 将不同的程序分门别类保存到不同的目录中，有助于锻炼归纳和总结思维。
 
 	
-### 源文件
+### 第一个 Python 程序
 
 ```python
 #!/bin/python3
@@ -340,13 +341,13 @@ print(s)
 1. 整理自己所学的几何公式，将其写成对应的 Python 函数，程序调用这些函数，提示用户输入需要的参数值，求值并打印对应的结果。
 
 ```console
-$ formulas-with-one-parameter.py
+$ ./formulas-with-one-parameter.py
 将计算正方向的面积，请输入一个边长：<11>
 area_of_square(11): 121
 将计算正方向的周长，请输入一个边长：<11>
 perimeter_of_square(11): 44
 
-$ formulas-with-two-paramemters.py
+$ ./formulas-with-two-paramemters.py
 将计算矩形的周长，请输入一个边长：<10>
 将计算矩形的周长，请输入另一个边长：<8>
 perimeter_of_rectangle(10, 8): 36
