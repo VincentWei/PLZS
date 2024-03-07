@@ -63,11 +63,9 @@
 
 在注册后，请确保在开发用电脑上使用 Chrome、Edge 浏览器登录 GitHub，并让孩子牢记账号名称和账号密码。
 
-- Gitee: <https://gitee.com/vincentwei77/PLZS>
-
 ### 搭建开发环境
 
-本课程教学用的开发环境以 Ubuntu Linux 22.04 和 macOS Sonama (14.2)；学生在日常学习中使用这两个操作系统之一。有条件的学生，应在学习用电脑上直接安装 Ubuntu Linux 22.04。
+本课程教学用的开发环境以 Ubuntu Linux 22.04 和 macOS Sonama (14.2) 为准；学生在日常学习中使用这两个操作系统之一。有条件的学生，应在学习用电脑上直接安装 Ubuntu Linux 22.04。
 
 1. 若在电脑上直接安装 Ubuntu Linux 22.04，请参阅如下文档：
    - [知乎文章：如何安装 Ubuntu 22.04 LTS 桌面版](https://zhuanlan.zhihu.com/p/569347838)。
@@ -79,6 +77,7 @@
    - [微软文档：如何使用 WSL 在 Windows 上安装 Linux](https://learn.microsoft.com/zh-cn/windows/wsl/install)。
    - [知乎文章：安装 WSL2 并下载配置 Ubuntu](https://zhuanlan.zhihu.com/p/348813745)。
    - [知乎文章：在 VirtualBox 虚拟机上安装 Ubuntu Linux 22.04](https://zhuanlan.zhihu.com/p/600668604)。
+1. 若使用 macOS，可安装 VirtualBox 虚拟机或者 VMWare Fusion 虚拟机，然后再安装 Ubuntu Linux 22.04。
 
 若电脑上已有其他 Linux 系统，但不是 Ubuntu Linux 22.04，不想重装系统，可安装 VirtualBox 虚拟机，然后再安装 Ubuntu Linux 22.04。
 
