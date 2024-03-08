@@ -421,8 +421,10 @@ print(s)
 		
 ## 进一步学习资料
 
+1. [知乎文章：115个最常用的Linux命令行大全](https://zhuanlan.zhihu.com/p/420247468)
 1. [Python 3.10 官方文档](https://docs.python.org/zh-cn/3.10/index.html)
-1. [知乎文章：精通 VIM ，此文就够了](https://zhuanlan.zhihu.com/p/68111471)
+1. [VIM 官方文档中文版](https://yianwillis.github.io/vimcdoc/doc/help.html)
+1. [Vim 实操教程](https://dofy.gitbook.io/learn-vim/zh-CN)
 
 		
 ## 作业
