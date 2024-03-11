@@ -35,6 +35,7 @@
    - 虚拟机的显示器：把真机系统中的窗口当成虚拟机的显示器。
    - ...
 
+	
 <img class="fragment" src="assets/diagram-virtual-machine.svg" height="600" />
 
 	
