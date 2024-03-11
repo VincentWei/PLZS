@@ -13,9 +13,9 @@
    - macOS
    - Linux 桌面系统
 - 流行的 Linux 发行版
-   - Debian（开源社区维护）
-   - RedHat（红帽公司的商业版本）
-   - Ubuntu（基于 Debian 的商业版本）
+   - Debian（开源社区维护，三十岁了）
+   - RedHat（红帽公司的商业产品）
+   - Ubuntu（基于 Debian 的商业产品）
 
 	
 - Ubuntu Linux 发行版的版本号
@@ -35,7 +35,6 @@
    - 虚拟机的显示器：把真机系统中的窗口当成虚拟机的显示器。
    - ...
 
-	
 <img class="fragment" src="assets/diagram-virtual-machine.svg" height="600" />
 
 	
