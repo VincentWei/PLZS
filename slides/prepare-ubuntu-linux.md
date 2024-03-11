@@ -50,10 +50,10 @@
     - [Visual Studio Redistributable X64](https://aka.ms/vs/17/release/vc_redist.x64.exe)
     - [VirtualBox 安装程序](https://download.virtualbox.org/virtualbox/7.0.14/VirtualBox-7.0.14-161095-Win.exe)
     - [Ubuntu Linux 22.04 AMD64 ISO](https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso)
-- MacOS（Intel 芯片）
+- macOS（Intel 芯片）
     - [VirtualBox安装程序](https://download.virtualbox.org/virtualbox/7.0.14/VirtualBox-7.0.14-161095-Win.exe)
     - [Ubuntu Linux 22.04 AMD64 ISO](https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso)
-- MacOS（Apple 的 M1/M2 芯片）
+- macOS（Apple 的 M1/M2 芯片）
     - [VMware Fusion](https://download.virtualbox.org/virtualbox/7.0.14/VirtualBox-7.0.14-161095-Win.exe)：需要自行注册账号并获得针对个人的免费许可证
     - [Ubuntu Linux 22.04 ARM64 ISO](https://cdimage.ubuntu.com/jammy/daily-live/current/jammy-desktop-arm64.iso)
 - 其他非 Ubuntu Linux PC
