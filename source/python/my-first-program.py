@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 # 计算正方形面积的函数
 def area_of_square(a):
