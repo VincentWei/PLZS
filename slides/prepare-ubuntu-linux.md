@@ -101,3 +101,17 @@
     - [VirtualBox 安装包](https://www.virtualbox.org/wiki/Linux_Downloads)：根据自己的 Linux 发行版选择下载对应的安装包
     - [Ubuntu Linux 22.04 AMD64 ISO](https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso)
 
+		
+## 演示视频
+
+[0-1：在 Windows 10/11 上安装 VirtualBox 和 Ubuntu Linux 22.04](#)
+
+- 安装 VirtualBox。
+- 创建一个虚拟机，指定 CPU、内存和虚拟硬盘位置及大小。
+- 指定虚拟光驱，使用 Ubuntu Linux 22.04 的光盘映像文件。
+- 启动虚拟机并进入 Ubuntu 安装程序。
+- 选择简体中文、键盘布局、时区、选择安装类型。
+- 指定默认用户信息开始安装。
+- 安装结束后按 ENTER 键弹出光盘并重启系统。
+- 进入 Ubuntu 系统。
+- 关机。
