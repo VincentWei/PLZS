@@ -1,16 +1,24 @@
-a = int(input('请输入正方形的一个边长：'))
-area_of_square = a**2
-perimeter_of_square = a*4
-print('正方形面积:',area_of_square)
-print('正方形周长：',perimeter_of_square)
+#!/usr/bin/python3
 
-a = int(input('请输入长方形的一个边长：'))
-b = int(input('请输入长方形的另一个边长：'))
-perimeter_of_rectangle = a*2 + b*2
-print('长方形周长：',perimeter_of_rectangle)
+def perimeter_of_square(d):
+    return d * 4
 
-a = int(input('请输入三角形底边的长：'))
-h = int(input('请输入底边对应的高：'))
-area_of_triangle = a * h /2
-print('三角形面积：',area_of_triangle)
+def area_of_square(d):
+    return d ** 2
+
+d = float(input('将计算正方形的周长和面积，请输入正方形的边长：'))
+c = perimeter_of_square(d)
+print('perimeter_of_square(', d, '): ', c)
+
+a = area_of_square(d)
+print('area_of_square(', d, '): ', c)
+
+def area_of_triangle(d, h):
+   return d * h /2
+
+d = float(input('将计算三角形的面积，请输入三角形底边的长：'))
+h = float(input('再输入这个底边对应的高：'))
+
+a = area_of_triangle(d, h)
+print('area_of_triangle(', d, ',', h, '): ', a)
 
