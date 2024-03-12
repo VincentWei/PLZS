@@ -4,7 +4,7 @@
 1. 流程控制的来由
 1. Python 的逻辑表达式和逻辑运算符
 1. Python 的流程控制语句
-1. 使用 git 管理自己的代码
+1. 使用 Git 管理源文件
 
 		
 ## 第一讲作业回顾
@@ -25,6 +25,18 @@
 在函数中调用 `input()` 和 `print()` 完成交互：
 
 ```python
+def Square():
+    a = int(input("即将计算正方形周长与面积，请输入正方形边长："));
+    print("正方形周长为", a * 4);
+    print("正方形面积为", a ** 2);
+
+def Triangle():
+    a = int(input("即将计算三角形面积，请输入三角形底的长度:"));
+    b = int(input("即将计算三角形面积，请输入对应的高的长度:"));
+    print("三角形面积为", float(a * b / 2));
+
+Square();
+Triangle();
 ```
 
 		
@@ -56,6 +68,8 @@
 		
 # `for` 语句
 
+		
+## 使用 Git 管理源文件
 
 		
 ## 进一步学习资料
@@ -70,5 +84,23 @@
 
 ```console
 $ ./formulas.py
+To calculate the area/volume, please choose a geometrical shape:
+1. Triange
+2. Square
+3. Cone
+4. Circle
+0. Exit
+Your choice:<1>
+Please input the base of your triangle: <4>
+Please input the height of your triangle: <2>
+The area of your triangle is: 4.0
+To calculate the area/volume, please choose a geometrical shape:
+1. Triange
+2. Square
+3. Cone
+4. Circle
+0. Exit
+Your choice:<2>
+Please input the side of your square: <4>
+The area of your square is: 16.0
 ```
-
