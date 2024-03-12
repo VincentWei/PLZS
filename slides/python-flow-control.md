@@ -92,6 +92,7 @@ Triangle();
 2) 输出小于用户指定的正整数的 Fibonacci 数列。运行效果如下：
 ```console
 $ ./fibonacci.py
+Please input a positive integer:<-5>
 Please input a positive integer:<11>
 The Fibonacci series less than 11:
 0,1,1,2,3,5,8
