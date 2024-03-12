@@ -98,11 +98,6 @@
 1. [准备开发环境](https://courses.fmsoft.cn/plzs/prepare-ubuntu-linux.html)
 1. [我的第一个程序](https://courses.fmsoft.cn/plzs/python-my-first-program.html)
 
-各讲课件的源文件入口（Markdown 格式）：
-
-1. [准备开发环境](slides/prepare-ubuntu-linux.md)
-1. [我的第一个程序](slides/python-my-first-program.md)
-
 ## 许可证
 
 本仓库中的文档及示例程序遵循 AGPL 3.0 许可证发布；由北京飞漫软件技术有限公司持有其著作权。
