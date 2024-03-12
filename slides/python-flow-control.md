@@ -56,17 +56,26 @@ Triangle();
 		
 ## Python 的流程控制语句
 
-		
-# `if` 语句
+	
+### `pass` 语句
 
-		
-# `match` 语句
+	
+### `if` 语句
 
-		
-# `while` 语句
+	
+### `match` 语句
 
-		
-# `for` 语句
+	
+### `while` 语句
+
+	
+### `for` 语句和 `range()` 函数
+
+	
+### `break` 语句和 `continue` 语句
+
+	
+### 在循环中使用 `else` 分句
 
 		
 ## 使用 Git 管理源文件
@@ -79,7 +88,8 @@ Triangle();
 		
 ## 作业
 
-1. 在 GitHub 或者 Gitee 上创建一个代码仓库，用以维护自己的程序。
+1. 在 GitHub 或者 Gitee 上创建一个代码仓库（名为 `PLZS`），用以维护自己的程序。
+1. 输出小于用户指定正整数的 Fibonacci 数列。
 1. 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
 
 ```console
@@ -104,3 +114,14 @@ Your choice:<2>
 Please input the side of your square: <4>
 The area of your square is: 16.0
 ```
+
+1. 循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
+
+```console
+$ ./check_prime.py
+Please input a positive integer:<11>
+11 is a prime.
+Please input a positive integer:<12>
+12 equls to 2 * 6, so it's not a prime.
+```
+
