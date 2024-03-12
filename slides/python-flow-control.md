@@ -88,9 +88,17 @@ Triangle();
 		
 ## 作业
 
-1. 在 GitHub 或者 Gitee 上创建一个代码仓库（名为 `PLZS`），用以维护自己的程序。
-1. 输出小于用户指定正整数的 Fibonacci 数列。
-1. 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
+1) 在 GitHub 或者 Gitee 上创建一个代码仓库（名为 `PLZS`），用以维护自己的程序。
+2) 输出小于用户指定的正整数的 Fibonacci 数列。运行效果如下：
+```console
+$ ./fibonacci.py
+Please input a positive integer:<11>
+The Fibonacci series less than 11:
+0,1,1,2,3,5,8
+```
+
+	
+3) 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
 
 ```console
 $ ./formulas.py
@@ -115,10 +123,11 @@ Please input the side of your square: <4>
 The area of your square is: 16.0
 ```
 
-1. 循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
+	
+4) 循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
 
 ```console
-$ ./check_prime.py
+$ ./check-prime.py
 Please input a positive integer:<11>
 11 is a prime.
 Please input a positive integer:<12>
