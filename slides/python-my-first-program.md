@@ -103,7 +103,7 @@ Python 解释器（interpreter）的两种运行模式：
 1. 解释器模式执行指定的 Python 程序。
 
 	
-看演示视频[1-2：运行 Python 解释器](#)
+看演示视频[1-2：初次运行 Python 解释器](#)
 
 1. `python3` 命令在交互模式下的提示信息以及输入提示字符串。
 1. 尝试加减法算式。
@@ -381,8 +381,8 @@ The area is: 10000
 	
 ### 总结：演示视频中用到的命令
 
-- `mkdir`：创建（make）目录（directory）。
 - `chmod`：改变（change）文件的许可模式（permission mode）。
+- `mkdir`：创建（make）目录（directory）。
 - `which`：可显示给定命令对应的程序路径。
 - `file`：可分析并显示给定文件的类型。
 
