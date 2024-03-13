@@ -48,12 +48,9 @@
 
 ## 直播平台及报名
 
-课程的直播通过微信视频号进行，可扫码关注视频号“魏永明的编程课”：
+课程的直播通过微信视频号进行，可扫码关注视频号“魏永明的编程课”；报名可联系视频号客服或者直接添加企业微信工作人员：
 
 ![魏永明的编程课](https://courses.fmsoft.cn/plzs/assets/qrcode-wechat-channel-coding-log.png)
-
-报名可联系上述视频号客服或者直接添加企业微信工作人员：
-
 ![小李的企业微信](https://courses.fmsoft.cn/plzs/assets/qrcode-wechat-enterprise-lee.jpg)
 
 ## 准备阶段
