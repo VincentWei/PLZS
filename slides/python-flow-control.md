@@ -22,7 +22,7 @@
 	
 ### 作业点评
 
-在函数中调用 `input()` 和 `print()` 完成交互：
+在函数中调用 `input()` 和 `print()` 完成交互好不好？
 
 ```python
 def Square():
@@ -37,6 +37,54 @@ def Triangle():
 
 Square();
 Triangle();
+```
+
+	
+三人行必有我师
+
+```python
+def area_of_square(r):
+    return r*r
+
+def perimeter_of_square(r):
+    return 4*r
+
+def perimeter_of_rectangle(l,h):
+    return 2*(l+h)
+
+def area_of_triangle(s,h):
+    return (s*h)/2
+
+"""
+Helper function: Detecting negative value
+"""
+def detect (a):
+    if a <= 0:
+        a = float(input("输入数字不合规（小于或等于0），请重新输入："))
+        return detect(a)
+    else:
+        return a
+
+r_1 = float(input("将计算正方形面积，请输入一个边长："))
+r_1 = detect(r_1)
+print(f'area_of_square({r_1}): {area_of_square(r_1)}')
+
+r_2 = float(input("将计算正方形周长，请输入一个边长："))
+r_2 = detect(r_2)
+print(f'perimeter_of_square({r_2}): {perimeter_of_square(r_2)}')
+
+l_1 = float(input("将计算矩形周长，请输入一个边长："))
+l_1 = detect(l_1)
+h = float(input("将计算矩形周长，请输入另一个边长："))
+h = detect(h)
+print(f'perimeter_of_rectangle({l_1},{h}): {perimeter_of_rectangle(l_1,h)}')
+
+
+l_2 = float(input("将计算三角形面积，请输入底边长："))
+l_2 = detect(l_2)
+h_2 = float(input("将计算三角形面积，请输入高："))
+h_2 = detect(h_2)
+print(f'area_of_triangle({l_2},{h_2}): {area_of_triangle(l_2,h_2)}')
 ```
 
 		
