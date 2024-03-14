@@ -434,7 +434,7 @@ print(s)
 1. Python 算术表达式和算术运算符。
 1. Python 变量及函数。
 1. 常用 Python 内置函数。
-1. VIM 使用。
+1. VIM 的基本使用。
 1. 使用 Python 解释器执行 Python 程序。
 1. 常用 Linux 命令。
 
