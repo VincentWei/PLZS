@@ -29,7 +29,7 @@
 ```python
 def Square():
     a = int(input("即将计算正方形周长与面积，请输入正方形边长："));
-    print("正方形周长为", a * 4);
+    print("正方形周长为", a * 4, end=';');
     print("正方形面积为", a ** 2);
 ```
 
@@ -51,6 +51,7 @@ print(f'area_of_square({r_1}): {area_of_square(r_1)}')
 学到新技能：
 1. 块注释。
 1. print() 函数中使用格式化字符串。
+1. print() 函数中使用 `end = ','` 指定行尾的字符串，可替代默认的新行符。
 """
 
 def perimeter_of_square(d):
@@ -63,8 +64,8 @@ def prompt_for_square():
     d = float(input("即将计算正方形周长与面积，请输入正方形边长："))
     c = perimeter_of_square(d)
     s = area_of_square(d)
-    print(f"正方形周长为 {c}")
-    print(f"正方形面积为 {s}")
+    print(f"正方形周长为 {c}", end = '; ')
+    print(f"正方形面积为 {s}", end = '.\n')
 
 prompt_for_square()
 prompt_for_square()
@@ -377,7 +378,7 @@ $ ./fibonacci.py
 Please input a positive integer:<-5>
 Please input a positive integer:<11>
 The Fibonacci series less than 11:
-0,1,1,2,3,5,8
+0,1,1,2,3,5,8,
 ```
 
 	
