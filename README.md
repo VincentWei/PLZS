@@ -1,6 +1,8 @@
 # 给零基础学生的编程课
 
-本仓库包含由魏永明主讲的针对 10 到 18 岁零基础学生的编程课所用课件、示例程序等。
+本仓库包含由[魏永明](https://github.com/VincentWei)主讲的针对 10 到 18 岁零基础学生的编程课所用课件、示例程序等。
+
+Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](https://github.com/VincentWei).
 
 [TOC]
 

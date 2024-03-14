@@ -2,6 +2,7 @@
 
 1. 作业回顾
 1. 流程控制的来由
+1. 布尔运算快速入门
 1. Python 的逻辑表达式和逻辑运算符
 1. Python 的流程控制语句
 1. 使用 Git 管理源文件
@@ -12,79 +13,53 @@
 看演示视频[2-1：第一讲作业回顾](#)
 
 1. 使用 VIM 编写作业程序。
-1. 展示 VIM 的复制和粘贴功能。
-1. 展示在 VIM 中快速移动光标的功能。
-1. 展示在 VIM 快速删除代码的功能。
-1. 展示保存文件的功能。
+1. 从课件（浏览器）中复制代码到 VIM 编辑器。
+1. 在 VIM 中复制相似代码。
+1. 在 VIM 中快速移动光标的功能。
+1. 在 VIM 快速删除代码的功能。
+1. 保存文件。
 1. 在终端程序中启动多个标签页，切换标签页。
-1. 通过多个标签页调试程序。
+1. 通过多个标签页不退出 VIM 调试程序。
 
 	
 ### 作业点评
 
-在函数中调用 `input()` 和 `print()` 完成交互好不好？
+三人行必有我师
 
 ```python
 def Square():
     a = int(input("即将计算正方形周长与面积，请输入正方形边长："));
     print("正方形周长为", a * 4);
     print("正方形面积为", a ** 2);
-
-def Triangle():
-    a = int(input("即将计算三角形面积，请输入三角形底的长度:"));
-    b = int(input("即将计算三角形面积，请输入对应的高的长度:"));
-    print("三角形面积为", float(a * b / 2));
-
-Square();
-Triangle();
 ```
-
-	
-三人行必有我师
 
 ```python
 def area_of_square(r):
     return r*r
 
-def perimeter_of_square(r):
-    return 4*r
-
-def perimeter_of_rectangle(l,h):
-    return 2*(l+h)
-
-def area_of_triangle(s,h):
-    return (s*h)/2
-
-"""
-Helper function: Detecting negative value
-"""
-def detect (a):
-    if a <= 0:
-        a = float(input("输入数字不合规（小于或等于0），请重新输入："))
-        return detect(a)
-    else:
-        return a
-
 r_1 = float(input("将计算正方形面积，请输入一个边长："))
-r_1 = detect(r_1)
 print(f'area_of_square({r_1}): {area_of_square(r_1)}')
+```
 
-r_2 = float(input("将计算正方形周长，请输入一个边长："))
-r_2 = detect(r_2)
-print(f'perimeter_of_square({r_2}): {perimeter_of_square(r_2)}')
+	
+学到了
 
-l_1 = float(input("将计算矩形周长，请输入一个边长："))
-l_1 = detect(l_1)
-h = float(input("将计算矩形周长，请输入另一个边长："))
-h = detect(h)
-print(f'perimeter_of_rectangle({l_1},{h}): {perimeter_of_rectangle(l_1,h)}')
+```python
+def perimeter_of_square(d):
+    return d * 4
 
+def area_of_square(d):
+    return d * d
 
-l_2 = float(input("将计算三角形面积，请输入底边长："))
-l_2 = detect(l_2)
-h_2 = float(input("将计算三角形面积，请输入高："))
-h_2 = detect(h_2)
-print(f'area_of_triangle({l_2},{h_2}): {area_of_triangle(l_2,h_2)}')
+def prompt_for_square():
+    d = float(input("即将计算正方形周长与面积，请输入正方形边长："))
+    c = perimeter_of_square(d)
+    s = area_of_square(d)
+    print(f"正方形周长为 {c}")
+    print(f"正方形面积为 {s}")
+
+prompt_for_square()
+prompt_for_square()
 ```
 
 		
@@ -95,10 +70,57 @@ print(f'area_of_triangle({l_2},{h_2}): {area_of_triangle(l_2,h_2)}')
    - 判断三条线段是否可以构成三角形
 1. 计算机最擅长执行重复性工作。
    - 人生就是一天一天重复吃饭、干活、睡觉。
-   - 代码若不能最大化重复利用，便是对算力的浪费。
+   - 优秀的程序员始终追求最大化代码的重复利用。
+1. 所有的编程语言都支持流程控制（flow-control）语句。
 1. 流程控制语句的分类：
-   - 分支语句
-   - 循环语句
+   - 分支（branch）或条件（condition）语句
+   - 循环（loop）语句
+
+		
+## 布尔逻辑运算快速入门
+
+1. 布尔代数是计算机底层技术的数学基石（二进制）。
+1. 英国数学家 George Boole 在其著作《逻辑的数学分析》中首次系统阐述了“布尔代数”，揭示了逻辑运算及其规律。
+1. 用于表示命题真假的值称为布尔值，只有两种取值：真（True）假（False）。
+1. 我们对布尔值可以执行三种基本的运算，称为“逻辑运算”：与（and）、或（or）、非（not）。
+
+	
+### 逻辑运算及其定律
+
+1. 计算机科学文献中，通常用 `|` 表示“或”，`&` 表示“与”，`!` 表示“非”，`0` 表示假，`1` 表示真。
+1. 基本运算（真值表）
+
+| & | 0 | 1 |
+| 0 | 0 | 0 |
+| 1 | 0 | 1 |
+
+	
+1. 互补律
+  - `!!A = A`
+  - `A & !A = 0`
+  - `A | !A = 1`
+
+	
+1. 重言律
+  - `A & A = A`
+  - `A | A = A`
+  - `A & 1 = A`
+  - `A | 1 = 1`
+  - `A & 0 = 0`
+  - `A | 0 = A`
+
+	
+1. 交换律和结合律
+  - `A & B = B & A`
+  - `A | B = B | A`
+  - `(A & B) & C = A & (B & C)`
+  - `(A | B) | C = A | (B | C)`
+
+	
+1. 吸收律
+  - `A & (A | B) = A`（第一吸收律）
+  - `A | (A & B) = A`（第二吸收律）
+
 
 		
 ## Python 的逻辑表达式和逻辑运算符
@@ -106,7 +128,6 @@ print(f'area_of_triangle({l_2},{h_2}): {area_of_triangle(l_2,h_2)}')
 看演示视频[2-2：Python 的逻辑表达式和逻辑运算符](#)
 
 1. 现实世界中的命题和数学中的数值比较代数式
-1. 真假两个值的世界：逻辑代数/布尔代数
 
 		
 ## Python 的流程控制语句
@@ -166,7 +187,7 @@ print(f'area_of_triangle({l_2},{h_2}): {area_of_triangle(l_2,h_2)}')
 ### Git 的工作原理
 
 	
-### 视频中用到的主要命令：
+### 视频中用到的主要命令
 
 	
 ### 非对称加密算法
