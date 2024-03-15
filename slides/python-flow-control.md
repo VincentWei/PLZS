@@ -328,7 +328,7 @@ def can_make_a_triangle_workaround(d1, d2, d3):
 - Git 和 GitHub 的故事
 
 	
-看演示视频[2-4：在 GitHub 上创建代码仓库](#)
+看演示视频[2-4：在 Gitee 上创建代码仓库](#)
 
 1. 访问 GitHub 网站并登录。
 1. 生成 SSH 密钥対，并将公钥登记到 GitHub。
@@ -405,7 +405,6 @@ $ git push -u origin main
 1. `mkdir`：创建（`m`a`k`e）目录（`dir`ectory）。
 1. `cd`：改变（`c`hange）目录（`d`irectory）。
 1. `man`：显示指定命令的手册页（`man`ual page）内容，也就是随机文档（document）。
-1. `echo`：回声（`echo`）；将命令行指定的内容打印到终端上。
 1. `cp`：复制（`c`o`p`y）文件。
 1. `mv`：移动（`m`o`v`e）文件；亦可用于重命名文件。
 
@@ -433,7 +432,7 @@ The Fibonacci numbers less than 11:
 3) 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
 
 ```console
-$ ./formulas.py
+$ ./formulas-improved.py
 To calculate the area/volume, please choose a geometrical shape:
 1. Triange
 2. Square
