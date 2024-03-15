@@ -74,16 +74,16 @@ prompt_for_square()
 		
 ## 流程控制的来由
 
-1. 现实中存在很多逻辑判断，比如：
+1. 现实中存在很多逻辑判断：
    - 判断用户输入的合法性
    - 判断三条线段是否可以构成三角形
 1. 计算机最擅长执行重复性工作。
-   - 人生就是一天一天重复吃饭、干活、睡觉。
-   - 优秀的程序员始终追求最大化代码的重复利用。
-1. 所有的编程语言都支持流程控制（flow-control）语句。
-1. 流程控制语句的分类：
-   - 分支（branch）或条件（condition）语句
-   - 循环（loop）语句
+   - 人生就是一天一天重复吃饭、干活/学习、睡觉。
+   - 计算机的重复方法：重复执行一个程序；程序中重复执行某段代码。
+   - 优秀的程序员始终追求最大程度重复利用已有的代码。
+   - 爱炫耀的程序员喜欢写一些软件包给别人使用：开源的原动力。
+1. 所有的编程语言都支持流程控制（flow-control）。
+1. 流程控制建立在逻辑判断的基础之上。
 
 		
 ## 布尔逻辑运算快速入门
@@ -139,7 +139,7 @@ prompt_for_square()
 
 看演示视频[2-2：Python 的逻辑表达式和逻辑运算符](#)
 
-1. 计算机程序中的命题来自哪里？
+1. 计算机程序中的命题来自哪里？算术表达式的值、数值比较的结果、逻辑表达式、函数的返回值等等。
 1. Python 中用于比较数值的运算符（等于、不等于、大于、小于、大于等于、小于等于）。
 1. Python 中的逻辑运算符。
 1. 写一个函数判断三个线段长度能否构成一个三角形。
@@ -149,6 +149,11 @@ prompt_for_square()
 		
 ## Python 的流程控制语句
 
+1. 流程控制语句的分类：
+   - 条件（condition）语句或分支（branch）
+   - 循环（loop）语句
+
+	
 看演示视频[2-3：Python 的流程控制语句](#)
 
 1. `if` 语句的用途和写法；`else` 分句。
@@ -200,28 +205,10 @@ def is_even_or_odd_best(n):
     n = int(n)
     return n % 2 == 0
 
-# 直接对比浮点数会得到不正确的结果
-def can_make_a_triangle_bad(d1, d2, d3):
+def can_make_a_triangle(d1, d2, d3):
     if (d1 <= 0 or d2 <= 0 or d3 <= 0):
         return False
     elif ((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1):
-        return True
-    else:
-        return False
-
-# 折中方案
-def can_make_a_triangle_workaround(d1, d2, d3):
-    if (d1 > 10000 or d2 > 10000 or d3 > 10000):
-        return "<BadValue>"
-
-    if (d1 <= 0 or d2 <= 0 or d3 <= 0):
-        return False
-
-    d1 = int(d1 * 10000)
-    d2 = int(d2 * 10000)
-    d2 = int(d3 * 10000)
-
-    if ((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1):
         return True
     else:
         return False
@@ -303,6 +290,39 @@ def list_even_numbers_less_than_3(n):
         print(a * 2)
 ```
 
+	
+### 浮点数比较陷阱！
+
+- 在交互模式下试试逻辑表达式：`0.1 + 0.2 == 0.3`
+
+```python
+# 直接对比浮点数会得到不正确的结果
+def can_make_a_triangle_bad(d1, d2, d3):
+    if (d1 <= 0 or d2 <= 0 or d3 <= 0):
+        return False
+    elif ((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1):
+        return True
+    else:
+        return False
+
+# 折中方案
+def can_make_a_triangle_workaround(d1, d2, d3):
+    if (d1 > 10000 or d2 > 10000 or d3 > 10000):
+        return "<BadValue>"
+
+    if (d1 <= 0 or d2 <= 0 or d3 <= 0):
+        return False
+
+    d1 = int(d1 * 10000)
+    d2 = int(d2 * 10000)
+    d2 = int(d3 * 10000)
+
+    if ((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1):
+        return True
+    else:
+        return False
+```
+
 		
 ## 使用 Git 管理源文件
 
@@ -378,14 +398,14 @@ $ git push -u origin main
 		
 ## 作业
 
-1) 在 GitHub 或者 Gitee 上创建一个代码仓库（名为 `PLZS`），用以维护自己的程序。今后的作业提交分享仓库或者源文件链接给老师即可。
+1) 在 GitHub 或者 Gitee 上创建一个自己的代码仓库（名为 `plzs-homework`），用以维护自己的程序。今后的作业提交分享仓库或者源文件的链接给老师即可。
 2) 输出小于用户指定的正整数的 Fibonacci 数列。运行效果如下：
 
 ```console
 $ ./fibonacci.py
 Please input a positive integer:<-5>
 Please input a positive integer:<11>
-The Fibonacci series less than 11:
+The Fibonacci numbers less than 11:
 0,1,1,2,3,5,8,
 ```
 
@@ -416,7 +436,7 @@ The area of your square is: 16.0
 ```
 
 	
-4) 循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
+4) （选做）循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
 
 ```console
 $ ./check-prime.py
