@@ -163,7 +163,6 @@ prompt_for_square()
 1. `while` 语句的用途和写法。
 1. `for` 语句和 `range()` 函数。
 1. `break` 语句和 `continue` 语句。
-1. 在循环中使用 `else` 分句。
 1. `pass` 语句的用途。
 
 	
