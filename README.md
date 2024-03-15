@@ -110,11 +110,13 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 
 - 基础阶段：
    1. [准备开发环境](https://courses.fmsoft.cn/plzs/prepare-ubuntu-linux.html)
-   1. [我的第一个程序](https://courses.fmsoft.cn/plzs/python-my-first-program.html)
+   1. [我的第一个程序（Python）](https://courses.fmsoft.cn/plzs/python-my-first-program.html)
+   1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)
+   1. （静候）
 - 提高阶段：
-   1. （待定）
+   1. （静候）
 
-## 许可证
+## 版权声明及许可证
 
 本仓库中的文档及示例程序遵循 AGPL 3.0 许可证发布；由北京飞漫软件技术有限公司持有其著作权。
 
