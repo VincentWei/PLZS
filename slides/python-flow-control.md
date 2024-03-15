@@ -334,6 +334,7 @@ def can_make_a_triangle_workaround(d1, d2, d3):
 1. 访问 GitHub 网站并登录。
 1. 生成 SSH 密钥対，并将公钥登记到 GitHub。
 1. 新建公开代码仓库。
+1. 运行 `man git` 查看 Git 的手册页。
 1. 按照页面提示复制相关命令并在本地执行。
 1. 复制第一个 Python 程序到仓库中，并将其添加、提交、推送到 GitHub 仓库。
 1. 修改文件，提交修改并推送到 GitHub。
@@ -351,6 +352,12 @@ $ ssh-keygen
 # 设置 git 用户信息
 $ git config --global user.name "your-username"
 $ git config --global user.email "your-email-address"
+
+# 复制文件
+cp ~/my-first-python-program.py .
+
+# 复制文件
+mv ~/my-first-python-program.py .
 ```
 
 	
@@ -381,13 +388,27 @@ $ git push -u origin main
 ```
 
 		
-## 要点回顾
+## 必须掌握的知识点和技能
 
+1. 在 Linux 桌面不同应用之间复制、粘贴文本。
+1. Python 中的块注释方法。
 1. 在 `print()` 函数中使用格式化字符串。
 1. 布尔运算的基本概念。
 1. Python 的逻辑表达式和逻辑运算符。
 1. Python 的流程控制语句。
+1. 浮点数对比陷阱。
 1. 在 GitHub 或者 Gitee 上创建公开仓库并提交代码。
+
+		
+## 本节涉及的 Linux 系统命令
+
+1. `ls` 或 `ll`：列出（list）当前目录中的文件和子目录；`ll` 会输出更多信息并带颜色。
+1. `mkdir`：创建（`m`a`k`e）目录（`dir`ectory）。
+1. `cd`：改变（`c`hange）目录（`d`irectory）。
+1. `man`：显示指定命令的手册页（`man`ual page）内容，也就是随机文档（document）。
+1. `echo`：回声（`echo`）；将命令行指定的内容打印到终端上。
+1. `cp`：复制（`c`o`p`y）文件。
+1. `mv`：移动（`m`o`v`e）文件；亦可用于重命名文件。
 
 		
 ## 进一步学习资料
