@@ -53,6 +53,7 @@ a = area_of_triangle(d, h)
 print('area_of_triangle(', d, ',', h, '): ', a)
 ```
 
+	
 三人行必有我师
 
 ```python
