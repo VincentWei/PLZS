@@ -445,7 +445,7 @@ $ git push -u origin main
 ## 作业
 
 1) 在 GitHub 或者 Gitee 上创建一个自己的代码仓库（名为 `plzs-homework`），用以维护自己的程序。今后的作业提交分享仓库或者源文件的链接给老师即可。
-2) 输出小于用户指定的正整数的 Fibonacci 数列。运行效果如下：
+2) 输出小于用户指定的正整数的斐波那契（Fibonacci）数列。运行效果如下：
 
 ```console
 $ ./fibonacci.py
@@ -482,7 +482,7 @@ The area of your square is: 16.0
 ```
 
 	
-4) （选做）循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
+4) （初中及以上）循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
 
 ```console
 $ ./check-prime.py
