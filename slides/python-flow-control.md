@@ -10,7 +10,7 @@
 		
 ## 第一讲作业回顾
 
-看演示视频[2-1：第一讲作业回顾](#)
+看演示视频[2-1：第一讲作业回顾](https://www.douyin.com/video/7347519692115823881)
 
 1. 使用 VIM 编写作业程序。
 1. 从课件（浏览器）中复制代码到 VIM 编辑器。
@@ -166,7 +166,7 @@ prompt_for_square()
 		
 ## Python 的逻辑表达式和逻辑运算符
 
-看演示视频[2-2：Python 的逻辑表达式和逻辑运算符](#)
+看演示视频[2-2：Python 的逻辑表达式和逻辑运算符](https://www.douyin.com/video/7347520313871191346)
 
 1. 计算机程序中的命题来自哪里？算术表达式的值、数值比较的结果、逻辑表达式、函数的返回值等等。
 1. Python 中用于比较数值的运算符（等于、不等于、大于、小于、大于等于、小于等于）。
@@ -183,7 +183,7 @@ prompt_for_square()
    - 循环（loop）语句
 
 	
-看演示视频[2-3：Python 的流程控制语句](#)
+看演示视频[2-3：Python 的流程控制语句](https://www.douyin.com/video/7347520627844091174)
 
 1. `if` 语句的用途和写法；`else` 分句。
 1. 复合语句（compound statement）和分句（clause）。
@@ -357,7 +357,7 @@ def can_make_a_triangle_workaround(d1, d2, d3):
 - Git 和 GitHub 的故事
 
 	
-看演示视频[2-4：在 Gitee 上创建代码仓库](#)
+看演示视频[2-4：在 Gitee 上创建代码仓库](https://www.douyin.com/video/7347520971370237235)
 
 1. 访问 GitHub 网站并登录。
 1. 生成 SSH 密钥対，并将公钥登记到 GitHub。

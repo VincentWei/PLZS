@@ -104,7 +104,7 @@
 		
 ## 演示视频
 
-[0-1：在 Windows 10/11 上安装 VirtualBox 和 Ubuntu Linux 22.04](#)
+[0-1：在 Windows 10/11 上安装 VirtualBox 和 Ubuntu Linux 22.04](https://www.douyin.com/video/7347307828081642803)
 
 - 安装 VirtualBox。
 - 创建一个虚拟机，指定 CPU、内存和虚拟硬盘位置及大小。
