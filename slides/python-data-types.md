@@ -113,7 +113,7 @@ for i in range(2, max(n // 2, 3)):
         print(f'{n} equals to {i} * { int(n / i)}; it is not a prime.')
         break
 # 循环中可以使用 `else` 分句；该分句定义的语句体（suite），
-# 在循环条件为 False 时执行。
+# 在 while 循环的条件为 False 时，或者 for 循环结束时执行。
 else:
     print(f'{n} is a prime!')
 ```
@@ -124,6 +124,7 @@ else:
 ```python
 #!/usr/bin/python3
 
+# 该函数返回两个值；第一个值表示是否为质数，第二个值表示找到的因子。
 def check_prime(n):
     if n == 2:
         return True, 1
@@ -144,7 +145,6 @@ prime, factor = check_prime(2)
 # 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）
 # 程序的运行，方便调试。
 assert(prime is True)
-
 prime, factor = check_prime(3)
 assert(prime is True)
 prime, factor = check_prime(4)
@@ -166,7 +166,7 @@ prime, factor = check_prime(n)
 if prime:
     print(f'{n} is a prime!')
 else:
-    print(f'{n} has a factor not itself or one: {factor}; it is not a prime.')
+    print(f'{n} has a factor neither itself nor one: {factor}; it is not a prime.')
 ```
 
 	

@@ -39,4 +39,5 @@ prime, factor = check_prime(n)
 if prime:
     print(f'{n} is a prime!')
 else:
-    print(f'{n} has a factor not itself or one: {factor}; it is not a prime.')
+    print(f'{n} has a factor neither itself nor one: {factor}; it is not a prime.')
+
