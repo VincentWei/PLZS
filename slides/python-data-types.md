@@ -12,15 +12,168 @@
 ## 第二讲作业回顾
 
 	
-### 作业点评
-
-标准答案？
+### 参考实现：`fibonacci.py`
 
 ```python
+#!/usr/bin/python3
+
+n = 0
+while n <= 0:
+    n = int(input('Please input a positive integer: '))
+
+# 赋值语句一次可以操作多个变量。
+a, b = 0, 1
+while a <= n:
+    if a == n or b > n:
+        print(a, end = '.\n')
+    else:
+        print(a, end = ', ')
+    a, b = b, a + b
 ```
 
 	
-三人行必有我师
+### 参考实现：`formulas-improved.py`
+
+```python
+#!/usr/bin/python3
+
+def area_of_square(d):
+    return d * d
+
+def prompt_for_square():
+    d = 0
+    while d <= 0:
+        d = float(input("Please input the length of one side of a square: "))
+
+    s = area_of_square(d)
+    print(f"The area of the square is {s}")
+
+def area_of_triangle(d, h):
+    return d * h / 2
+
+def prompt_for_triangle():
+    d = h = 0
+    while d <= 0 or h <= 0:
+        d = float(input("Please input the length of one side of a triangle: "))
+        h = float(input("Please input the length of the height on the side: "))
+
+    s = area_of_triangle(d, h)
+    print(f"The area of the triangle is {s}")
+
+def area_of_circle(r):
+    return 3.14159265 * r * r
+
+def prompt_for_circle():
+    r = 0
+    while r <= 0:
+        r = float(input("Please input the length of one side of a circle: "))
+
+    s = area_of_circle(r)
+    print(f"The area of the circle is {s}")
+
+def prompt_for_formula():
+    formula = 4
+    while formula < 0 or formula > 3:
+        print('To calculate the area, please choose a geometrical shape:')
+        print('1. Triange')
+        print('2. Square')
+        print('3. Circle')
+        print('0. Exit')
+        formula = int(input('Your choice:'))
+
+    return formula
+
+while True:
+    match prompt_for_formula():
+        case 1:
+            prompt_for_triangle()
+        case 2:
+            prompt_for_square()
+        case 3:
+            prompt_for_circle()
+        case _: # _ 指不是 1，不是 2，也不是 3 的情况，相当于默认（default）
+            quit()
+```
+
+	
+### 参考实现：`check-prime.py`
+
+```python
+n = 2
+while n <= 2:
+    n = int(input('Please input an integer larger than 2: '))
+
+# 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
+for i in range(2, max(n // 2, 3)):
+    if n % i == 0:
+        print(f'{n} equals to {i} * { int(n / i)}; it is not a prime.')
+        break
+# 循环中可以使用 `else` 分句；该分句定义的语句体（suite），
+# 在循环条件为 False 时执行。
+else:
+    print(f'{n} is a prime!')
+```
+
+	
+### 参考实现：`check-prime-improved.py`
+
+```python
+#!/usr/bin/python3
+
+def check_prime(n):
+    if n == 2:
+        return True, 1
+
+    factor = 1
+    for i in range(2, max(n // 2, 3)):
+        if n % i == 0:
+            factor = i
+            break
+
+    if factor > 1:
+        return False, factor
+
+    return True, 1
+
+# 单元测试
+prime, factor = check_prime(2)
+# 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）
+# 程序的运行，方便调试。
+assert(prime is True)
+
+prime, factor = check_prime(3)
+assert(prime is True)
+prime, factor = check_prime(4)
+assert(prime is False)
+prime, factor = check_prime(5)
+assert(prime is True)
+prime, factor = check_prime(9)
+assert(prime is False)
+prime, factor = check_prime(1973)
+assert(prime is True)
+prime, factor = check_prime(2024)
+assert(prime is False)
+
+n = 1
+while n <= 1:
+    n = int(input('Please input an integer larger than 1: '))
+
+prime, factor = check_prime(n)
+if prime:
+    print(f'{n} is a prime!')
+else:
+    print(f'{n} has a factor not itself or one: {factor}; it is not a prime.')
+```
+
+	
+### 三人行必有我师
+
+1. 赋值语句一次可以操作多个变量。
+1. 函数一次可以返回多个数据。
+1. `case _:` 分句可在 `match` 语句中处理默认（default）情形。
+1. 循环中可以使用 `else` 分句。
+1. 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
+1. 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
 
 		
 ## 数据类型综述
