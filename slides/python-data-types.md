@@ -356,21 +356,24 @@ True
 7) 可使用 `del dict[KEY]` 语句移除一个键值对。
 
 	
-8) 针对字典的内置方法：
+8) 针对字典的常用内置方法：
    - `d.clear()`：清除字典中的所有键值对。
-   - `d.copy()`：复制字典。
-   - `d.fromkeys()`：使用指定的键元组以及可选的值构建一个字典。
    - `d.get()`：获取指定键的值；若不存在返回 `None`。
    - `d.items()`：返回构成的键值对列表，其中的每个单元是一个对应键、值构成的元组。
    - `d.keys()`：返回字典的键列表。
    - `d.pop(key[, default])`：弹出指定键对应的键值对，返回其值；若不存在则返回 `default`。
    - `d.popitem()`：删除最后插入字典的键值对，返回对应的值。
-   - `d.setdefault(key[, default])`：如果字典存在键 `key`，则返回其值。如果不存在，插入值为 `default` 的键 `key`，并返回 `default`。`default` 默认为 `None`。
-   - `d.update([other])`：使用来自 `other` 的键值对更新字典，覆盖原有的键。返回 `None`。
    - `d.values()`：返回字典的值列表。
 
 	
-9) 针对字典的运算符：
+9) 针对字典的其他内置方法：
+   - `d.copy()`：浅复制字典。
+   - `d.fromkeys()`：使用指定的键元组以及可选的值构建一个字典。
+   - `d.setdefault(key[, default])`：如果字典存在键 `key`，则返回其值。如果不存在，插入值为 `default` 的键 `key`，并返回 `default`。`default` 默认为 `None`。
+   - `d.update([other])`：使用来自 `other` 的键值对更新字典，覆盖原有的键。返回 `None`。
+
+	
+10) 针对字典的运算符：
    - `dict | other`：合并 `dict` 和 `other` 中的键和值来创建一个新的字典，两者必须都是字典。当 `dict` 和 `other` 有相同键时，`other` 的值优先。
    - `dict |= other`：用 `other` 的键和值更新字典 `dict`。`other` 可以是字典或可迭代的键值对。当 `dict` 和 `other` 有相同键时，`other` 的值优先。
 
