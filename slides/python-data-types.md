@@ -376,8 +376,8 @@ True
    - `del dict[KEY]` 语句移除一个键值对。
    - `key in d`：键检测；如果 `d` 中存在键 `key` 则结果为 `True`，否则为 `False`。
    - `key not in d`：非键检测；如果 `d` 中存在键 `key` 则结果为 `False`，否则为 `True`。
-   - `dict | other`：合并 `dict` 和 `other` 中的键和值来创建一个新的字典，两者必须都是字典。当 `dict` 和 `other` 有相同键时，`other` 的值优先。
-   - `dict |= other`：用 `other` 的键和值更新字典 `dict`。`other` 可以是字典或可迭代的键值对。当 `dict` 和 `other` 有相同键时，`other` 的值优先。
+   - `d | other`：合并 `d` 和 `other` 中的键和值来创建一个新的字典，两者必须都是字典。当 `d` 和 `other` 有相同键时，`other` 的值优先。
+   - `d |= other`：用 `other` 的键和值更新字典 `d`。`other` 可以是字典或可迭代的键值对。当 `d` 和 `other` 有相同键时，`other` 的值优先。
 
 	
 ### 拓展信息
