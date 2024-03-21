@@ -31,13 +31,17 @@ assert(prime is True)
 prime, factor = check_prime(2024)
 assert(prime is False)
 
-n = 1
-while n <= 1:
-    n = int(input('Please input an integer larger than 1: '))
+while True:
+    n = 1
+    while n <= 1:
+        try:
+            n = int(input('Please input an integer larger than 1: '))
+        except ValueError:
+            n = 0
 
-prime, factor = check_prime(n)
-if prime:
-    print(f'{n} is a prime!')
-else:
-    print(f'{n} has a factor neither itself nor one: {factor}; it is not a prime.')
+    prime, factor = check_prime(n)
+    if prime:
+        print(f'{n} is a prime!')
+    else:
+        print(f'{n} has a factor neither itself nor one: {factor}; it is not a prime.')
 

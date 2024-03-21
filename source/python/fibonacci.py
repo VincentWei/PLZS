@@ -2,7 +2,10 @@
 
 n = 0
 while n <= 0:
-    n = int(input('Please input a positive integer: '))
+    try:
+        n = int(input('Please input a positive integer: '))
+    except ValueError:
+        n = 0
 
 a, b = 0, 1
 while a <= n:

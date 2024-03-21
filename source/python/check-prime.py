@@ -2,7 +2,10 @@
 
 n = 2
 while n <= 2:
-    n = int(input('Please input an integer larger than 2: '))
+    try:
+        n = int(input('Please input an integer larger than 2: '))
+    except ValueError:
+        n = 1
 
 for i in range(2, max(n // 2, 3)):
     if n % i == 0:

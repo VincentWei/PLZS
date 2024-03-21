@@ -17,8 +17,11 @@ def area_of_triangle(d, h):
 def prompt_for_triangle():
     d = h = 0
     while d <= 0 or h <= 0:
-        d = float(input("Please input the length of one side of a triangle: "))
-        h = float(input("Please input the length of the height on the side: "))
+        try:
+            d = float(input("Please input the length of one side of a triangle: "))
+            h = float(input("Please input the length of the height on the side: "))
+        except ValueError:
+            d = h = 0
 
     s = area_of_triangle(d, h)
     print(f"The area of the triangle is {s}")
@@ -29,7 +32,10 @@ def area_of_circle(r):
 def prompt_for_circle():
     r = 0
     while r <= 0:
-        r = float(input("Please input the length of one side of a circle: "))
+        try:
+            r = float(input("Please input the length of one side of a circle: "))
+        except ValueError:
+            r = 0
 
     s = area_of_circle(r)
     print(f"The area of the circle is {s}")
@@ -42,7 +48,10 @@ def prompt_for_formula():
         print('2. Square')
         print('3. Circle')
         print('0. Exit')
-        formula = int(input('Your choice:'))
+        try:
+            formula = int(input('Your choice:'))
+        except:
+            formula = 0
 
     return formula
 
