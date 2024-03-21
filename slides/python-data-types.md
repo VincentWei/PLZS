@@ -23,7 +23,10 @@
 
 n = 0
 while n <= 0:
-    n = int(input('Please input a positive integer: '))
+    try:
+        n = int(input('Please input a positive integer: '))
+    except ValueError:
+        n = 0
 
 # 赋值语句一次可以操作多个变量。
 a, b = 0, 1
@@ -47,7 +50,10 @@ def area_of_square(d):
 def prompt_for_square():
     d = 0
     while d <= 0:
-        d = float(input("Please input the length of one side of a square: "))
+        try:
+            d = float(input("Please input the length of one side of a square: "))
+        except ValueError:
+            d = 0
 
     s = area_of_square(d)
     print(f"The area of the square is {s}")
@@ -58,8 +64,11 @@ def area_of_triangle(d, h):
 def prompt_for_triangle():
     d = h = 0
     while d <= 0 or h <= 0:
-        d = float(input("Please input the length of one side of a triangle: "))
-        h = float(input("Please input the length of the height on the side: "))
+        try:
+            d = float(input("Please input the length of one side of a triangle: "))
+            h = float(input("Please input the length of the height on the side: "))
+        except ValueError:
+            d = h = 0
 
     s = area_of_triangle(d, h)
     print(f"The area of the triangle is {s}")
@@ -70,7 +79,10 @@ def area_of_circle(r):
 def prompt_for_circle():
     r = 0
     while r <= 0:
-        r = float(input("Please input the length of one side of a circle: "))
+        try:
+            r = float(input("Please input the length of one side of a circle: "))
+        except ValueError:
+            r = 0
 
     s = area_of_circle(r)
     print(f"The area of the circle is {s}")
@@ -83,7 +95,10 @@ def prompt_for_formula():
         print('2. Square')
         print('3. Circle')
         print('0. Exit')
-        formula = int(input('Your choice:'))
+        try:
+            formula = int(input('Your choice:'))
+        except:
+            formula = 0
 
     return formula
 
@@ -95,8 +110,9 @@ while True:
             prompt_for_square()
         case 3:
             prompt_for_circle()
-        case _: # _ 指不是 1，不是 2，也不是 3 的情况，相当于默认（default）
+        case _:
             quit()
+
 ```
 
 	
@@ -105,7 +121,10 @@ while True:
 ```python
 n = 2
 while n <= 2:
-    n = int(input('Please input an integer larger than 2: '))
+    try:
+        n = int(input('Please input an integer larger than 2: '))
+    except ValueError:
+        n = 2
 
 # 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
 for i in range(2, max(n // 2, 3)):
@@ -158,15 +177,19 @@ assert(prime is True)
 prime, factor = check_prime(2024)
 assert(prime is False)
 
-n = 1
-while n <= 1:
-    n = int(input('Please input an integer larger than 1: '))
+while True:
+    n = 1
+    while n <= 1:
+        try:
+            n = int(input('Please input an integer larger than 1: '))
+        except ValueError:
+            n = 0
 
-prime, factor = check_prime(n)
-if prime:
-    print(f'{n} is a prime!')
-else:
-    print(f'{n} has a factor neither itself nor one: {factor}; it is not a prime.')
+    prime, factor = check_prime(n)
+    if prime:
+        print(f'{n} is a prime!')
+    else:
+        print(f'{n} has a factor neither itself nor one: {factor}; it is not a prime.')
 ```
 
 	
@@ -174,6 +197,7 @@ else:
 
 1. 赋值语句一次可以操作多个变量。
 1. 函数一次可以返回多个数据。
+1. 给 `int()`、`float()` 函数不可识别的字符串时，会产生 `ValueError` 错误；此时应使用 `try` 语句处理异常。
 1. `case _:` 分句可在 `match` 语句中处理默认（default）情形。
 1. 循环中可以使用 `else` 分句。
 1. 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
@@ -292,9 +316,19 @@ True
 ### 拓展信息
 
 1. 函数原型的描述方法。
+1. 字符串的构造函数 `str()` 可以串行化（serialize）任意一个数据。
 1. 字符集和编码。
 1. 拓展资料：
    - [Python 3.10 官方文档：字符串方法](https://docs.python.org/zh-cn/3.10/library/stdtypes.html#string-methods)
+
+```python
+#!/usr/bin/python3
+# coding=UTF-8
+
+print("这是 UTF-8 编码的中文简体汉字字符串")
+print(str(True))
+print(True)
+```
 
 		
 ## 列表和元组
@@ -310,10 +344,12 @@ True
 
 1) Python 中的列表使用成对出现的中括号（square brackets，`[]`）定义，各个单元之间使用逗号（comma，`,`）分隔。
 2) Python 中的元组本质上是就是不可变的列表，使用成对出现的小括号（parentheses，`()`）定义，各个单元之间使用逗号（comma，`,`）分隔。
-3) 针对字符串的运算符亦可用于列表和元组。
-4) 列表中的数据项可以是任意数据类型，也就是列表中可以包含另一个列表。
-5) 元组中的单元不可改变，但若其中的某成员是一个列表，则这个列表中的数据项可以改变。
-7) 可使用 `del list[INDEX]` 语句移除一个列表成员。
+3) 使用 `list()` 和 `tuple()` 亦可基于字符串和 `range()` 函数用于构造列表和元组，
+4) 针对字符串的运算符亦可用于列表和元组。
+5) 列表中的数据项可以是任意数据类型，也就是列表中可以包含另一个列表。
+6) 元组中的单元不可改变，但若其中的某成员是一个列表，则这个列表中的数据项可以改变。
+7) 在列表或者元组数据 `s` 上使用 `for x in s` 语句可以遍历其中的成员。
+8) 可使用 `del list[INDEX]` 语句移除一个列表成员。
 
 	
 ### 拓展信息
@@ -337,10 +373,12 @@ True
 [3-4：Python 数据类型：字典](#)
 
 1) Python 中的字典使用成对出现的大括号（braces，`{}`）定义，各个键值对之间使用逗号（comma，`,`）分隔，键和值之间使用冒号（colon，`:`）分隔。
-2) 在 Python 中使用 `dict[KEY]` 这样的语法引用一个键值对的值；字典中的键值对是无序的，无法使用索引值引用。
-3) 字典中的键可以是除字符串之外的其他数据类型，如整数、浮点数。
-4) 字典中的值可以是任意数据类型；在字典数据上使用 `for x in` 语句遍历值。
-5) `del dict[KEY]` 语句移除一个键值对。
+2) 使用 `dict()` 可基于键值对参数构造一个字典：`dict(one=1, two=2, three=3)`。
+3) 在 Python 中使用 `dict[KEY]` 这样的语法引用一个键值对的值；字典中的键值对是无序的，无法使用索引值引用。
+4) 字典中的键可以是除字符串之外的其他数据类型，如整数、浮点数；字典中的值可以是任意数据类型。
+6) 在字典数据 `d` 上使用 `for x in d` 语句遍历键。
+7) 在字典数据 `d` 上使用 `for x in d.values()` 语句遍历值。
+8) `del d[KEY]` 语句移除一个键值对。
 
 	
 ### 拓展信息
@@ -566,6 +604,54 @@ while True:
 		
 ## 本节必须掌握的知识点和技能
 
+1. 使用 `try` 语句处理异常。
+1. 定义或者构造字符串的方法以及相关运算符，以及遍历字符串中字符的方法。
+1. 定义或者构造列表、元组的方法以及相关运算符，以及遍历列表及元组中成员的方法。
+1. 定义或者构造字典数据的方法以及相关运算符，以及遍历字典中值的方法。
+
 		
 ## 作业
+
+1) 生成小于用户指定的正整数的斐波那契（Fibonacci）数列，计算相邻两个数的比值。运行效果如下：
+
+```console
+$ ./fibonacci-improved.py
+Please input a positive integer:<-5>
+Please input a positive integer:<11>
+The Fibonacci numbers less than 11:
+0 / 1: 0
+1 / 1: 1.0
+1 / 2: 0.5
+2 / 3: 0.6666666666666666
+3 / 5: 0.6
+5 / 8: 0.625
+```
+
+	
+2) 编写一个程序，该程序可以将用户输入的一个自然数转换为 2 到 36 进制展示出来。运行效果如下：
+
+```console
+$ ./show-number-in-different-bases.py
+Please input a natrual number:<15>
+In base  2: 15 in decimal is expressed as `1111`.
+In base  3: 15 in decimal is expressed as `120`.
+In base  4: 15 in decimal is expressed as `33`.
+In base  5: 15 in decimal is expressed as `30`.
+In base  6: 15 in decimal is expressed as `23`.
+In base  7: 15 in decimal is expressed as `21`.
+In base  8: 15 in decimal is expressed as `17`.
+In base  9: 15 in decimal is expressed as `16`.
+In base 10: 15 in decimal is expressed as `15`.
+In base 11: 15 in decimal is expressed as `14`.
+In base 12: 15 in decimal is expressed as `13`.
+In base 13: 15 in decimal is expressed as `12`.
+In base 15: 15 in decimal is expressed as `10`.
+In base 16: 15 in decimal is expressed as `F`.
+In base 17: 15 in decimal is expressed as `F`.
+In base 18: 15 in decimal is expressed as `F`.
+...
+```
+
+	
+3) 基于 `formulas-improved.py` 编写增强版本的 `formulas-refactored.py` 程序，将公式对应的函数、公式对应的几何形状名称、参数数量和提示字符串构造为一个合理的数据结构，并解耦代码和数据。运行效果不变。
 
