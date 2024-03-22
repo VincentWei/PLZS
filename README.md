@@ -108,12 +108,16 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 
 各讲课件的幻灯片版本入口：
 
-- 基础阶段：
+- 普及班：
    1. [准备开发环境](https://courses.fmsoft.cn/plzs/prepare-ubuntu-linux.html)
    1. [我的第一个程序（Python）](https://courses.fmsoft.cn/plzs/python-my-first-program.html)
+- 提高班：
    1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)
+   1. [数据类型（Python）](https://courses.fmsoft.cn/plzs/python-data-types.html)
    1. （静候）
-- 提高阶段：
+- AI班：
+   1. （静候）
+- 信奥班：
    1. （静候）
 
 ## 版权声明及许可证
