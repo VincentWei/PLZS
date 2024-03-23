@@ -131,8 +131,9 @@ for i in range(2, max(n // 2, 3)):
     if n % i == 0:
         print(f'{n} equals to {i} * { int(n / i)}; it is not a prime.')
         break
-# 循环中可以使用 `else` 分句；该分句定义的语句体（suite），
-# 在 while 循环的条件为 False 时，或者 for 循环的循环体未被执行时。
+# 循环语句中可以使用 `else` 分句；
+# 该分句定义的语句体（suite），在 `while` 或者 `for` 循环的条件
+# 为 `False` 时执行。
 else:
     print(f'{n} is a prime!')
 ```
