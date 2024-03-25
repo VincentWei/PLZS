@@ -1,6 +1,6 @@
 # 给零基础学生的编程课
 
-本仓库包含由[魏永明](https://github.com/VincentWei)主讲的针对 10 到 18 岁零基础学生的编程课所用课件、示例程序等。
+本仓库包含由[魏永明](https://github.com/VincentWei)主讲的针对十岁及以上零基础学生的编程实战系列课程所用课件、示例程序等。
 
 Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](https://github.com/VincentWei).
 
@@ -11,34 +11,49 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 本课程特点：
 
 1. 面向零基础但对编程有强烈兴趣的大中小学生（年龄在 10 到 18 周岁；小学五年级到大学一年级），学过一些编程课程的更好。
-1. 课程基础阶段围绕一个单机游戏进行，提高阶段围绕一个联网的游戏进行，五人一组协作开发。
-1. 整个课程会涉及到 Linux、Python、JavaScript、HVML、开源人工智能大模型等开发环境或编程语言。
-1. 课程分两个阶段：基础阶段和提高阶段。基础阶段适合零基础或者学习过其他编程语言的学生；提高阶段适合已经学习过基础阶段课程的学生。
-1. 整个课程包含 20 场直播，每场直播两个课时（每课时 40 分钟）。
-1. 整个课程包含总共 50 小时的视频讲解或实操演示。
-1. 课程分为周末班和暑期班两个班级。周末班每周一场直播；暑假班每周三场直播。学生可根据自身情况在不同的阶段选择不同的班级。
+1. 整个系列课程的内容和国际前沿接轨，会涉及到 Linux、Git、Python、JavaScript、开源 AI 大模型等开发环境或编程语言；下分四个课程：
+   - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 命令、VIM 编辑器、Git 使用、SHELL 编程及 Python 编程入门。
+   - 筑基班：针对已入门学生开设，课程内容涉及 Python 和 JavaScript 编程语言，最终实现一个单机游戏的两个版本：终端版本和网页版本。
+   - AI实战班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及网页编程，五人一组协作开发一个联网的网页游戏。
+   - AI信奥班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及 C++ 编程语言，课程内容围绕一个联网的桌面游戏进行。
+1. 授课方式：
+   - 零基础普及版为录播课，外加答疑直播。
+   - 筑牢基础班、AI实战班以及AI信奥班均为直播课，外加作业点评及答疑直播。
+   - 作业点评和答疑直播每周至少安排两场，学生可连麦提问。
+1. 学习周期：
+   - 零基础普及班：两到三周。
+   - 筑基班：周末班两个月；暑期班一个月。
+   - AI实战班：周末班两个月；暑期班一个月。
+   - AI信奥班：周末班两个月；暑期班一个月。
+
+![课程体系](slides/course-framework.svg)
 
 对学生的要求：
 
-1. 对编程有强烈的兴趣且学有余力。
+1. 小学五年级及以上。
+1. 学有余力且对编程有强烈的兴趣。
 1. 做好“听课一小时，实践八小时”的投入准备。
 
 家长不用担心自己不懂软件或者编程而无法辅导孩子，只要做好如下几件事情即可：
 
 1. 准备好一台专用于学习和开发的台式电脑或笔记本电脑给孩子使用。
-1. 协助年龄较小的孩子注册开发者账号。
+1. 协助年龄较小的孩子在 Gitee 或者 GitHub 平台上注册开发者账号。
 
 ## 主讲介绍
 
-魏永明，青海湟中人，清华大学精仪系机械制造专业毕业，研究生学历，工学硕士学位，飞漫软件创始人，2013 年度“开源软件杰出贡献人物”，2023 年度世界开源贡献榜人物。1999 年发布了知名开源软件 MiniGUI 并持续研发至今。二十多年来，该软件广泛应用于各类硬件产品。其主要编（译）著有《MiniGUI 剖析》、《Linux 实用教程》、《Linux 设备驱动程序》（二、三版）等。2018 年 11 月，发起合璧操作系统开源协作项目；2020 年 8 月，提出世界首款可编程标记语言 HVML；2022 年 7 月，开源发布 HVML 解释器及渲染器。2022 年底，HVML 项目获评 CSDN 2022 “年度开源影响力项目”；2023 年，HVML 项目入选国际测试委员会年度世界开源 Top100 榜。
+魏永明，青海湟中人，清华大学精仪系机械制造专业毕业，研究生学历，工学硕士学位，飞漫软件创始人，2013 年度“开源软件杰出贡献人物”，2023 年度世界开源贡献榜人物。1999 年发布了知名开源软件 MiniGUI 并持续研发至今。二十多年来，该软件广泛应用于各类硬件产品。其主要编（译）著有《MiniGUI 剖析》、《Linux 实用教程》、《Linux 设备驱动程序》（二、三版）、《C 语言最佳实践》等。2018 年 11 月，发起合璧操作系统开源协作项目；2020 年 8 月，提出世界首款可编程标记语言 HVML；2022 年 7 月，开源发布 HVML 解释器及渲染器。2022 年底，HVML 项目获评 CSDN 2022 “年度开源影响力项目”；2023 年，HVML 项目入选国际测试委员会年度世界开源 Top100 榜。
+
+![主讲头像](slides/vincent-wei.jpg)
 
 ## 课程计划
 
 本课程和一般聚焦于某个特定编程语言的课程不同，课程中会涉及很多开发环境、工具和编程语言。课程的目的不是培养熟悉特定编程语言的专家，而是能够熟练利用已有的资源，包括各种开发工具、软件包、开源软件等来完成特定开发任务的小小软件工程师。
 
-课程分两个阶段。
+课程分三个阶段。
 
-基础阶段通过一个从简单逐步变复杂的单机游戏，来引导学生了解各种常用的开发工具和编程语言的特点，掌握各种不同的开发环境和编程语言的共性。期间会涉及 Linux/Unix 命令行、代码编辑器VIM、SHELL 程序、代码仓库管理工具（git）、Python、HTML/CSS/JavaScript、HVML 等。对应的教学目标是，学生面对任何一种常见编程语言编写的程序代码，都能大致读懂其工作流程，借助互联网资源和开源世界中的各种已有软件包和代码，能够实现自己需要的增强功能，最终破除学生对程序、编程语言的神秘感，并激发其好奇心。
+入门阶段（零基础普及版），生在 Linux 上开发程序为目标；期间会涉及 Linux/Unix 命令行、代码编辑器VIM、SHELL 程序、代码仓库管理工具（git）、Python
+
+阶段通过一个从简单逐步变复杂的单机游戏，来引导学生了解各种常用的开发工具和编程语言的特点，掌握各种不同的开发环境和编程语言的共性。期间会涉及 Linux/Unix 命令行、代码编辑器VIM、SHELL 程序、代码仓库管理工具（git）、Python、HTML/CSS/JavaScript、HVML 等。对应的教学目标是，学生面对任何一种常见编程语言编写的程序代码，都能大致读懂其工作流程，借助互联网资源和开源世界中的各种已有软件包和代码，能够实现自己需要的增强功能，最终破除学生对程序、编程语言的神秘感，并激发其好奇心。
 
 基础阶段包含 10 场直播课和相应的视频内容。学生主要使用 Python、JavaScript 来完成两个单机游戏，前者用于字符界面，后者用于图形界面，故而基础阶段的课程内容主要围绕这两个编程语言进行。
 
@@ -84,40 +99,23 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 
 在注册后，请确保在开发用电脑上使用 Chrome、Edge 浏览器登录 GitHub，并让孩子牢记账号名称和账号密码。
 
-### 搭建开发环境
-
-本课程教学用的开发环境以 Ubuntu Linux 22.04 为准。有条件的学生，应在学习用电脑上直接安装 Ubuntu Linux 22.04。
-
-1. 若在电脑上直接安装 Ubuntu Linux 22.04，请参阅如下文档：
-   - [知乎文章：如何安装 Ubuntu 22.04 LTS 桌面版](https://zhuanlan.zhihu.com/p/569347838)。
-   - [知乎文章：Ubuntu 22.04.4 安装（双系统）](https://zhuanlan.zhihu.com/p/536994892)。
-1. 若使用 macOS，请参照如下文档在系统中安装 Homebrew：
-   - [官方文档](https://brew.sh/zh-cn/)。
-   - [知乎文章](https://zhuanlan.zhihu.com/p/372576355)。
-1. 若使用 Windows，可安装 WSL 或者 VirtualBox 虚拟机，然后再安装 Ubuntu Linux 22.04：
-   - [微软文档：如何使用 WSL 在 Windows 上安装 Linux](https://learn.microsoft.com/zh-cn/windows/wsl/install)。
-   - [知乎文章：安装 WSL2 并下载配置 Ubuntu](https://zhuanlan.zhihu.com/p/348813745)。
-   - [知乎文章：在 VirtualBox 虚拟机上安装 Ubuntu Linux 22.04](https://zhuanlan.zhihu.com/p/600668604)。
-1. 若使用 macOS，可安装 VirtualBox 虚拟机或者 VMWare Fusion 虚拟机，然后再安装 Ubuntu Linux 22.04。
-
-若电脑上已有其他 Linux 系统，但不是 Ubuntu Linux 22.04，也不想重装系统，可安装 VirtualBox 虚拟机，然后再安装 Ubuntu Linux 22.04。
-
-在开课前，学员可尝试参阅以上资料自行搭建开发环境，搭建不成功也没关系，但需要将遇到的问题记录下来，带着问题来听课。
-
 ## 课程资料
 
 各讲课件的幻灯片版本入口：
 
-- 普及班：
-   1. [准备开发环境](https://courses.fmsoft.cn/plzs/prepare-ubuntu-linux.html)
-   1. [我的第一个程序（Python）](https://courses.fmsoft.cn/plzs/python-my-first-program.html)
-- 提高班：
+- 零基础普及班：
+   1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
+   1. [学用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop.html)
+   1. [我的第一个 Shell 程序](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
+   1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
+   1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
+- 筑基班：
    1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)
    1. [数据类型（Python）](https://courses.fmsoft.cn/plzs/python-data-types.html)
    1. （静候）
-- AI班：
+- AI 实战班：
    1. （静候）
-- 信奥班：
+- AI 信奥班：
    1. （静候）
 
 ## 版权声明及许可证

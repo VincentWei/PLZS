@@ -115,3 +115,20 @@
 - 安装结束后按 ENTER 键弹出光盘并重启系统。
 - 进入 Ubuntu 系统。
 - 关机。
+
+
+		
+## 参考链接
+
+1. 若在电脑上直接安装 Ubuntu Linux 22.04，请参阅如下文档：
+   - [知乎文章：如何安装 Ubuntu 22.04 LTS 桌面版](https://zhuanlan.zhihu.com/p/569347838)。
+   - [知乎文章：Ubuntu 22.04.4 安装（双系统）](https://zhuanlan.zhihu.com/p/536994892)。
+1. 若使用 macOS，请参照如下文档在系统中安装 Homebrew：
+   - [官方文档](https://brew.sh/zh-cn/)。
+   - [知乎文章](https://zhuanlan.zhihu.com/p/372576355)。
+1. 若使用 Windows，可安装 WSL 或者 VirtualBox 虚拟机，然后再安装 Ubuntu Linux 22.04：
+   - [微软文档：如何使用 WSL 在 Windows 上安装 Linux](https://learn.microsoft.com/zh-cn/windows/wsl/install)。
+   - [知乎文章：安装 WSL2 并下载配置 Ubuntu](https://zhuanlan.zhihu.com/p/348813745)。
+   - [知乎文章：在 VirtualBox 虚拟机上安装 Ubuntu Linux 22.04](https://zhuanlan.zhihu.com/p/600668604)。
+1. 若使用 macOS，可安装 VirtualBox 虚拟机或者 VMWare Fusion 虚拟机，然后再安装 Ubuntu Linux 22.04。
+
