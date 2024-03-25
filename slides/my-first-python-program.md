@@ -1,4 +1,4 @@
-## 第一讲：我的第一个 Python 程序
+## 我的第一个 Python 程序
 
 1. 走进 Python 的世界
 1. Python 表达式和运算符
