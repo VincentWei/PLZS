@@ -21,12 +21,12 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
    - 筑牢基础班、AI实战班以及AI信奥班均为直播课，外加作业点评及答疑直播。
    - 作业点评和答疑直播每周至少安排两场，学生可连麦提问。
 1. 学习周期：
-   - 零基础普及班：两到三周。
-   - 筑基班：周末班两个月；暑期班一个月。
-   - AI实战班：周末班两个月；暑期班一个月。
-   - AI信奥班：周末班两个月；暑期班一个月。
+   - 零基础普及班：一个月。
+   - 筑基班：周末班三个月；暑期班一个月。
+   - AI实战班：周末班三个月；暑期班一个月。
+   - AI信奥班：周末班三个月；暑期班一个月。
 
-![课程体系](slides/course-framework.svg)
+![课程体系](slides/plzs-course-framework.svg)
 
 对学生的要求：
 
@@ -101,7 +101,7 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 
 - 零基础普及班：
    1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
-   1. [学用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop.html)
+   1. [学用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
    1. [我的第一个 Shell 程序](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
    1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
    1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
