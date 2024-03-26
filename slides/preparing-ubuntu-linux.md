@@ -3,8 +3,9 @@
 1. 课程内容介绍
 1. 背景知识
 1. 虚拟机的概念
-1. 安装包下载链接
-1. 安装实操演示
+1. 在虚拟机上安装 Ubuntu Linux
+1. 参考链接
+1. 作业
 
 		
 ## 课程内容介绍
@@ -63,6 +64,10 @@
 		
 ## 背景知识
 
+### 演示视频
+
+[0-1-1：有关 Ubuntu Linux 和虚拟机的背景知识](#)
+
 - 常见桌面操作系统
    - 微软的 Windows
    - 苹果的 macOS
@@ -80,8 +85,8 @@
    - LTS 版本的维护、支持周期长达 5 年。
    - 除了 LTS 之外的版本是实验性的版本，适用于喜欢尝鲜的用户。
 
-		
-## 虚拟机的概念
+	
+### 虚拟机的概念
 
 - 在真实的计算机（物理机）上创建出一个软件模拟出来的虚拟计算机（virtual machine），仿佛这个虚拟机拥有自己的处理器、内存以及硬盘、显示器、键盘、鼠标、网卡等外设，从而在这个虚拟机上运行另一个操作系统。
    - 虚拟机的CPU：从物理机中分配部分处理器核（core）。
@@ -99,7 +104,9 @@
    - VMware Fusion（商业软件，但可申请针对个人的免费许可证）。
 
 		
-## 下载链接
+## 在虚拟机上安装 Ubuntu Linux
+
+### 下载链接
 
 - Windows 10/11
     - [Visual Studio Redistributable X64](https://aka.ms/vs/17/release/vc_redist.x64.exe)
@@ -115,10 +122,10 @@
     - [VirtualBox 安装包](https://www.virtualbox.org/wiki/Linux_Downloads)：根据自己的 Linux 发行版选择下载对应的安装包
     - [Ubuntu Linux 22.04 AMD64 ISO](https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso)
 
-		
-## 演示视频
+	
+### 演示视频
 
-[0-1：在 Windows 10/11 上安装 VirtualBox 和 Ubuntu Linux 22.04](https://www.douyin.com/video/7347307828081642803)
+[0-1-2：在 Windows 10/11 上安装 VirtualBox 和 Ubuntu Linux 22.04](https://www.douyin.com/video/7347307828081642803)
 
 - 安装 VirtualBox。
 - 创建一个虚拟机，指定 CPU、内存和虚拟硬盘位置及大小。
@@ -129,7 +136,6 @@
 - 安装结束后按 `<ENTER>` 键弹出光盘并重启系统。
 - 进入 Ubuntu 系统。
 - 关机。
-
 
 		
 ## 参考链接
