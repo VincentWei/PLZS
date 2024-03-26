@@ -111,12 +111,15 @@ or available locally via: info '(coreutils) mkdir invocation'
 1. 压缩或归档工具
 1. 文本文件工具；标准输入/输出及重定向；正则表达式
 1. 流编辑器；管道
+1. 系统管理工具
+1. 网络管理工具
 
 	
 ### 知识点：获取帮助
 
 - `man`：显示指定命令的手册页（manual page）内容，也就是随机文档（document）。
 - `info`：显示 GNU 项目开发的各种工具的完整指南文档。
+- `whatis`：
 - `GNU`：GNU's Not Unix。
 
 	
@@ -140,6 +143,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `which`：可显示给定命令对应的程序路径。
 - `file`：可分析并显示给定文件的类型。
 - `date`：显示当前时间（墙钟，wall clock）。
+- `history`：
 
 	
 ### 知识点：文件及文件系统工具
@@ -154,13 +158,15 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `mkdir`：创建（`m`a`k`e）目录（`dir`ectory）。
 - `rmdir`：移除（`r`e`m`ove）指定的目录（目录须为空）。
 - `find`：在指定目录树中按照名称、大小、创建日期等条件搜索文件。
+- `du`：显示磁盘使用情况（`d`isk `u`sage）。
 
 	
 ### 知识点：压缩或归档工具
 
 - `tar`：归档工具；将指定目录树打包为单个文件。
-- `gzip`：压缩解压工具（使用 Lempel-Ziv 编码，LZ77）。使用该工具压缩的文件通常使用 `.gz` 后缀名。
-- `bzip2`：压缩解压工具（使用 Burrows-Wheeler 块排序文本压缩算法和 Huffman 编码）。使用该工具压缩的文件通常使用 `.bz2` 后缀名。
+- `zip/unzip`：压缩解压工具（使用 Phil Katz 的 ZIP 算法）。使用该工具压缩的文件通常使用 `.zip` 后缀名。
+- `gzip/gunzip`：压缩解压工具（使用 Lempel-Ziv 编码，LZ77）。使用该工具压缩的文件通常使用 `.gz` 后缀名。
+- `bzip2/bunzip2`：压缩解压工具（使用 Burrows-Wheeler 块排序文本压缩算法和 Huffman 编码）。使用该工具压缩的文件通常使用 `.bz2` 后缀名。
 
 	
 ### 知识点：文本文件工具
@@ -173,12 +179,47 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `wc`：统计并打印文件中的新行符、单词和字节数量（`w`ords `c`ount）。
 - `nano`：文本编辑器（Nano's ANOther editor）。
 - `ed`：面向行的编辑器；主要方便在 Shell 脚本中编辑文本文件。
+- `more/less`：
+- `head/tail`：
 
 	
 ### 知识点：流编辑器
 
 - `sed`：用于过滤和转换文本的流编辑器（`s`tream `ed`itor）。
 - `tr`：转换（`tr`anslate）或删除标准输出上的字符，并打印到标准输出上。
+
+	
+### 知识点：系统管理工具
+
+- `ps`：
+- `kill`：
+- `top`：
+- `free`：
+- `df`：
+- `sudo`：
+- `passwd`：
+- `uptime`：
+- `shutdown`：
+- `reboot`：
+- `poweroff`：
+
+	
+### 知识点：系统管理工具（续）
+
+- `hostname`：
+- `whoami`：
+- `id`:
+- `groups`：
+- `uname`：
+
+	
+### 知识点：网络管理工具
+
+- `ping`：
+- `ifconfig`：
+- `dig`：
+- `nslookup`：
+- `wget`：
 
 		
 ## 用 Vim 编辑文本文件
