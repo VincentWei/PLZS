@@ -1,7 +1,7 @@
 ## 我的第一个开源代码仓库
 
 1. 使用 Git 管理源文件
-1. 编辑 `README.md` 文件
+1. Markdown 语法
 
 		
 ## 使用 Git 管理源文件
@@ -74,5 +74,17 @@ $ git push -u origin main
 		
 ## 作业
 
-1) 在 GitHub 或者 Gitee 上创建一个自己的代码仓库（名为 `plzs-homework`），并将自己已经编写过的程序纳入该仓库管理。
-2) 使用 Markdown 语法撰写 `README.md` 文件，添加上对自己的一个简单介绍。
+1) 在 GitHub 或者 Gitee 上创建一个自己的代码仓库（名为 `plzs-homework`）；提交作业时提供仓库链接即可。
+2) 使用 Markdown 语法为上述代码仓库撰写 `README.md` 文件，添加上对自己的一个简单介绍。
+3) 将自己在完成本课程作业时编写的程序纳入该仓库管理。要求目录结构以及文件名称如下所示：
+
+```console
+.
+├── README.md
+└── source
+    ├── bash
+    │   └── my-first-shell-program.sh
+    └── python
+        └── my-first-python-program.py
+```
+
