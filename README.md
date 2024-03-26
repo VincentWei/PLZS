@@ -12,7 +12,7 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 
 1. 面向零基础但对编程有强烈兴趣的大中小学生（年龄在 10 到 18 周岁；小学五年级到大学一年级），学过一些编程课程的更好。
 1. 整个系列课程的内容和国际前沿接轨，会涉及到 Linux、Git、Python、JavaScript、开源 AI 大模型等开发环境或编程语言；下分四个课程：
-   - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 命令、VIM 编辑器、Git 使用、SHELL 编程及 Python 编程入门。
+   - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 命令、Vim 编辑器、Git 使用、SHELL 编程及 Python 编程入门。
    - 筑基班：针对已入门学生开设，课程内容涉及 Python 和 JavaScript 编程语言，最终实现一个单机游戏的两个版本：终端版本和网页版本。
    - AI实战班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及网页编程，五人一组协作开发一个联网的网页游戏。
    - AI信奥班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及 C++ 编程语言，课程内容围绕一个联网的桌面游戏进行。
@@ -21,7 +21,7 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
    - 筑牢基础班、AI实战班以及AI信奥班均为直播课，外加作业点评及答疑直播。
    - 作业点评和答疑直播每周至少安排两场，学生可连麦提问。
 1. 学习周期：
-   - 零基础普及班：一个月。
+   - 零基础普及班：两周。
    - 筑基班：周末班三个月；暑期班一个月。
    - AI实战班：周末班三个月；暑期班一个月。
    - AI信奥班：周末班三个月；暑期班一个月。
@@ -41,7 +41,7 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 
 ## 主讲介绍
 
-魏永明，青海湟中人，清华大学精仪系机械制造专业毕业，研究生学历，工学硕士学位，飞漫软件创始人，2013 年度“开源软件杰出贡献人物”，2023 年度世界开源贡献榜人物。1999 年发布了知名开源软件 MiniGUI 并持续研发至今。二十多年来，该软件广泛应用于各类硬件产品。其主要编（译）著有《MiniGUI 剖析》、《Linux 实用教程》、《Linux 设备驱动程序》（二、三版）、《C 语言最佳实践》等。2018 年 11 月，发起合璧操作系统开源协作项目；2020 年 8 月，提出世界首款可编程标记语言 HVML；2022 年 7 月，开源发布 HVML 解释器及渲染器。2022 年底，HVML 项目获评 CSDN 2022 “年度开源影响力项目”；2023 年，HVML 项目入选国际测试委员会年度世界开源 Top100 榜。
+魏永明，青海西宁人，清华大学精仪系机械制造专业毕业，研究生学历，工学硕士学位，飞漫软件创始人，2013 年度“开源软件杰出贡献人物”，2023 年度世界开源贡献榜人物。1999 年发布了知名开源软件 MiniGUI 并持续研发至今。二十多年来，该软件广泛应用于各类硬件产品。其主要编（译）著有《MiniGUI 剖析》、《Linux 实用教程》、《Linux 设备驱动程序》（二、三版）、《C 语言最佳实践》等。2018 年 11 月，发起合璧操作系统开源协作项目；2020 年 8 月，提出世界首款可编程标记语言 HVML；2022 年 7 月，开源发布 HVML 解释器及渲染器。2022 年底，HVML 项目获评 CSDN 2022 “年度开源影响力项目”；2023 年，HVML 项目入选国际测试委员会年度世界开源 Top100 榜。
 
 ## 课程计划
 
@@ -69,7 +69,42 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 
 ![小李的企业微信](https://courses.fmsoft.cn/plzs/assets/qrcode-wechat-enterprise-lee.png)
 
-## 准备阶段
+## 课程资料
+
+课程讲义的幻灯片入口：
+
+- 零基础普及班：
+   1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
+   1. [学用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
+   1. [我的第一个 Shell 程序](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
+   1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
+   1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
+- 筑基班：
+   1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)
+   1. [数据类型（Python）](https://courses.fmsoft.cn/plzs/python-data-types.html)
+   1. Python 标准库和常用模块
+   1. 大作业相关知识点（Python）
+   1. HTTP 协议及 HTML/CSS
+   1. JavaScript 编程语言
+   1. 更新网页内容
+   1. 在网页中绘制图形
+   1. 在网页中和用户交互
+   1. 大作业相关知识点（JavaScript）
+- AI 实战班：
+   1. 基于 Git 的协作式软件开发
+   1. 大作业需求分析及架构设计
+   1. Linux 服务器的安装和配置
+   1. Web 服务器网关程序
+   1. 用户账号管理及登录界面
+   1. WebSocket 服务器及客户端
+   1. 从网页中连接到 WebSocket 服务器
+   1. 架设开源 AI 大模型
+   1. 网页端利用 AI 功能
+   1. 部署服务器端软件
+- AI 信奥班：
+   1. （静候）
+
+## 学前准备
 
 ### 学习用电脑
 
@@ -94,25 +129,6 @@ Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](http
 - Gitee: <https://gitee.com/vincentwei7/PLZS>
 
 在注册后，请确保在开发用电脑上使用 Chrome、Edge 浏览器登录 GitHub，并让孩子牢记账号名称和账号密码。
-
-## 课程资料
-
-各讲课件的幻灯片版本入口：
-
-- 零基础普及班：
-   1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
-   1. [学用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
-   1. [我的第一个 Shell 程序](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
-   1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
-   1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
-- 筑基班：
-   1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)
-   1. [数据类型（Python）](https://courses.fmsoft.cn/plzs/python-data-types.html)
-   1. （静候）
-- AI 实战班：
-   1. （静候）
-- AI 信奥班：
-   1. （静候）
 
 ## 版权声明及许可证
 
