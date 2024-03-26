@@ -73,7 +73,7 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
 
 - 零基础普及班：
    1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
-   1. [学用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
+   1. [使用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
    1. [我的第一个 Shell 程序](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
    1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
    1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
