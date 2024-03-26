@@ -6,7 +6,7 @@
 1. Bash 流程控制
 1. Bash 字符串操作
 1. Bash 中的用户交互
-1. Bash 脚本程序示例
+1. 示例脚本程序
 
 		
 ## Bash Shell 概述
@@ -112,7 +112,7 @@ echo $x
 - `FILE1 -ot FILE2` 文件 FILE1 比 FILE2 更老（`o`lder `t`han）
 
 	
-### 知识点：条件判断
+### 典型用法：`if` 分支
 
 ```bash
 #!/bin/bash
@@ -131,7 +131,7 @@ exit 0
 ```
 
 	
-### 知识点：`for` 循环
+### 典型用法：`for` 循环
 
 使用通配符列出当前目录下匹配的文件：
 
@@ -147,13 +147,13 @@ exit 0
 ```
 
 	
-### 知识点：`while` 循环
+### 典型用法：`while` 循环
 
 	
-### 知识点：`until` 循环
+### 典型用法：`until` 循环
 
 	
-### 知识点：`case` 分支
+### 典型用法：`case` 分支
 
 ```bash
 #!/bin/bash
@@ -182,10 +182,9 @@ exit 0
 
 1. Bash 函数的写法。
 1. Bash 函数的调用。
-1. Bash 函数中的局部变量。
 
 	
-### 知识点
+### 典型用法
 
 ```bash
 #!/bin/bash
@@ -217,6 +216,9 @@ exit 0
 - `${var/pattern/replacement}`：表示将变量 `$var` 中第一个出现的 `pattern` 模式替换为 `replacement` 字符串。
 - `${var//pattern/replacement}`：表示将变量 `$var` 中出现的所有 `pattern` 模式全部都替换为 `replacment` 字符串。
 
+	
+### 典型用法
+
 		
 ## Bash 中的用户交互
 
@@ -228,7 +230,7 @@ exit 0
 1. 使用 `read` 指令。
 
 	
-### 知识点
+### 典型用法
 
 ```baseh
 #!/bin/bash
@@ -260,7 +262,7 @@ exit 0
 ```
 
 		
-## Bash 示例脚本程序
+## 示例脚本程序
 
 ```base
 #!/bin/bash
@@ -314,7 +316,8 @@ $ ./my-first-bash-program.sh
 To calculate the area of a surface, please select one shape:
 1) Square
 2) Circle
-3) Quit
+3) Triangle
+4) Quit
 #? 1
 Please input the lenght of a side of the square:
 10
