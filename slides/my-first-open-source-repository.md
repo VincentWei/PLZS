@@ -1,7 +1,7 @@
 ## 我的第一个开源代码仓库
 
 1. 使用 Git 管理源文件
-1. Markdown 语法
+1. Markdown 语法创建格式化文本文件
 
 		
 ## 使用 Git 管理源文件
@@ -69,9 +69,30 @@ $ git push -u origin main
 ```
 
 		
+## Markdown 语法创建格式化文本文件
+
+	
+### 演示视频
+
+[0-5-2：Markdown 的由来和基本语法](#)
+
+1. 查看网页内容（HTML 文件）了解 Markdown 的由来。
+1. 使用 Markdown 语法定义标题。
+1. 使用 Markdown 语法定义段落和强制换行。
+1. 使用 Markdown 语法定义超链接。
+1. 使用 Markdown 语法定义强调文本。
+1. 使用 Markdown 语法定义有序列表。
+1. 使用 Markdown 语法定义无序列表。
+1. 使用 Markdown 语法引用图片。
+1. 使用 Markdown 语法定义代码段落。
+1. 使用 Markdown 语法定义引用段落。
+1. 使用 Markdown 语法定义表格。
+
+		
 ## 进一步学习资料
 
 1. [知乎文章：最常用的19个Git命令](https://zhuanlan.zhihu.com/p/40461007])
+1. [Markdown 官方教程之基本语法](https://markdown.com.cn/basic-syntax/)
 
 		
 ## 作业
