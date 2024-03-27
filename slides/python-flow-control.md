@@ -452,7 +452,7 @@ $ ./fibonacci.py
 Please input a positive integer:<-5>
 Please input a positive integer:<11>
 The Fibonacci numbers less than 11:
-0,1,1,2,3,5,8.
+0, 1, 1, 2, 3, 5, 8.
 ```
 
 	

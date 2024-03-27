@@ -421,6 +421,63 @@ type(pass())
    1. 使用 `def` 语句定义的函数便是一个可调用类型。
    1. 内置的函数或方法。
    1. 用户自定义的类、构造函数及其方法。
+- 特殊函数：生成器（generator）；使用 `yield` 语句；内置函数 `range()` 本质上就是一个生成器。
+
+```python
+#!/usr/bin/python3
+
+def my_range(start, stop = None, step = None):
+    if not isinstance(start, int):
+        raise(ValueError)
+
+    if stop is None:
+        stop = start
+        start = 0
+    elif not isinstance(stop, int):
+        raise(ValueError)
+
+    if step is None:
+        if stop > start:
+            step = 1
+        else:
+            step = -1
+    elif not isinstance(step, int) or step == 0:
+        raise(ValueError)
+
+    if stop > start and step < 0:
+        raise(ValueError)
+    elif stop < start and step > 0:
+        raise(ValueError)
+
+    i = start
+    if step > 0:
+        while i < stop:
+            yield i
+            i += step
+        else:
+            pass
+    else:
+        while i > stop:
+            yield i
+            i += step
+        else:
+            pass
+
+l = list(my_range(5))
+print(l)
+
+l = list(my_range(-5))
+print(l)
+
+l = list(my_range(2, 10))
+print(l)
+
+l = list(my_range(2, 2))
+print(l)
+
+l = list(my_range(2, 10, 2))
+print(l)
+```
 
 	
 ### 模块
@@ -487,13 +544,19 @@ type(pass())
 	
 ### 针对序列的运算符
 
-1. `n + s`：`s` 和 `t` 拼接。
-1. `n * s` 或 `s * n`：相当于 s 与自身进行 n 次拼接。
+1. `s + t`：`s` 和 `t` 拼接；返回一个新的序列。
+1. `n * s` 或 `s * n`：相当于将 `s` 重复 `n` 次返回一个新的序列。
 1. `s[i]`：`s` 的第 `i` 项，起始为 0。
 1. `s[i:j]`：`s` 从 `i` 到 `j` 的切片（slice）。
 1. `s[i:j:k]`：`s` 从 `i` 到 `j` 步长为 `k` 的切片。
 1. `x in s`：成员检测；如果 `s` 中的某项等于 `x` 则结果为 `True`，否则为 `False`。
 1. `x not in s`：非成员检测；如果 `s` 中的某项等于 `x` 则结果为 `False`，否则为 `True`。
+
+	
+### 针对可变序列的运算符
+
+1. `s += t`：将 `t` 追加到 `s`。
+1. `s *= n`：将 `s` 的内容拼接给自己 `n - 1` 次；n <= 0 时，`s` 变空。
 
 	
 ### 针对映射的运算符
@@ -625,7 +688,7 @@ while True:
 		
 ## 作业
 
-1) 生成小于用户指定的正整数的斐波那契（Fibonacci）数列，计算相邻两个数的比值。运行效果如下：
+1) 生成小于用户指定的正整数的斐波那契（Fibonacci）数列（使用列表），然后计算相邻两个数的比值。运行效果如下：
 
 ```console
 $ ./fibonacci-improved.py
@@ -666,5 +729,31 @@ In base 18: 15 in decimal is expressed as `F`.
 ```
 
 	
-3) 重构 `formulas-improved.py` 为 `formulas-refactored.py` 程序，将公式对应的函数、公式对应的几何形状名称、参数数量和提示字符串构造为一个合理的数据结构，并解耦代码和数据。运行效果不变。
+3) 编写 `fibonacci-generator.py` 程序，使用生成器实现 Fibonacci 数列的生成功能。运行效果如下：
+
+```console
+$ ./fibonacci-generator.py
+Please input a positive integer:<-5>
+Please input a positive integer:<100>
+The Fibonacci numbers less than 100:
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89.
+```
+
+	
+4) 重构本讲 `my-range-generator.py` 程序为 `my-range-generator-improved.py`，将测试用例组织为适当的数据结构，并解耦代码和数据。运行效果如下：
+
+```console
+% ./my-range-generator-improved.py
+case 0: passed.
+case 1: passed.
+case 2: passed.
+case 3: passed.
+case 4: passed.
+case 5: passed.
+case 6: passed.
+case 7: passed.
+```
+
+	
+4) 重构 `formulas-improved.py` 为 `formulas-refactored.py` 程序，将公式对应的函数、公式对应的几何形状名称、参数数量和提示字符串构造为一个合理的数据结构，并解耦代码和数据。运行效果不变。
 
