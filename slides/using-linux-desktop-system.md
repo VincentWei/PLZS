@@ -2,6 +2,7 @@
 
 1. 初识开发环境：终端和命令行
 1. 常用系统命令及工具
+1. 管道的使用
 1. 用 Vim 编辑文本文件
 
 		
@@ -136,6 +137,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 ### 知识点：常用命令
 
 - `cd`：改变（`c`hange）工作目录（`d`irectory）。
+- `history`：显示命令行历史；使用 `!<history number>` 可执行对应的历史命令。
 - `pwd`：打印（`p`rint）当前（current）/工作（`w`orking）目录（`d`irectory）。
 - `alias`：定义或显示命令的别名（alias）。
 - `export`：定义或修改环境变量。
@@ -143,7 +145,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `which`：可显示给定命令对应的程序路径。
 - `file`：可分析并显示给定文件的类型。
 - `date`：显示当前时间（墙钟，wall clock）。
-- `history`：显示命令行历史。
+- `sleep`：睡眠（暂定当前脚本的执行）指定的秒数。
 
 	
 ### 知识点：文件及文件系统工具
@@ -173,6 +175,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 
 - `echo`：打印一行文本到标准输出。
 - `cat`：拼接（concatenate）多个文件并打印到标准输出。
+- `cut`：从文件的每一行移除指定的字段（field）。
 - `grep`：打印匹配指定模式（pattern）的行。
 - `sort`：对文本文件的行进行排序。
 - `diff`：查看两个文件的差异。
@@ -221,20 +224,132 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `wget`：非交互式网络下载器；主要用于网页资源（页面、图片、CSS、JS）的下载。
 
 		
+## 重定向和管道的使用
+
+### 演示视频
+
+[0-2-3：重定向和管道的使用](https://www.douyin.com/video/7347347606030290185)
+
+	
+### 命令行示例
+
+将当前日期和用户名拼接在一起，将输出重定向追加到 `users.log` 文件中：
+
+```console
+# 使用反单引号包围命令，则该命令的标准输出将作为命令行的一部分
+$ echo `date` ": $USER" >> users.log
+$ echo `date` ": $USER" >> users.log
+$ echo `date` ": $USER" >> users.log
+$ cat users.log
+2024年 03月 27日 星期三 11:30:53 CST : weiym
+2024年 03月 27日 星期三 11:30:54 CST : weiym
+2024年 03月 27日 星期三 11:30:55 CST : weiym
+```
+
+	
+### 命令行示例
+
+使用 `cat`、`cut` 和 `sort`列出系统中所有的用户账号并排序：
+
+1. 使用 `cat` 命令读取 `/etc/passwd` 文件内容并打印到标准输出。
+1. 使用 `cut` 命令截取 `/etc/passwd` 每行中的第一个字段（即用户账号）到标准输出。
+1. 使用 `sort` 命令将标准输入的内容排序并打印到标准输出。
+
+```console
+$ cat /etc/passwd | cut -d':' -f1 | sort
+_apt
+avahi
+avahi-autoipd
+backup
+bin
+cn-fmsoft-hybridos-hibus
+colord
+com-example-foo
+cups-pk-helper
+daemon
+dnsmasq
+_flatpak
+fwupd-refresh
+games
+gdm
+geoclue
+gnats
+gnome-initial-setup
+hplip
+irc
+kernoops
+lightdm
+list
+lp
+lxc-dnsmasq
+lxd
+mail
+man
+messagebus
+news
+nm-openvpn
+nobody
+proxy
+pulse
+root
+rtkit
+saned
+speech-dispatcher
+sshd
+sssd
+sync
+sys
+syslog
+systemd-coredump
+systemd-network
+systemd-oom
+systemd-resolve
+systemd-timesync
+tcpdump
+tss
+usbmux
+uucp
+uuidd
+weiym
+whoopsie
+www-data
+```
+
+	
+### 命令行示例
+
+查找所有使用 `bash` 的 `.sh` 脚本程序并拼接在一起显示
+
+```console
+# xargs 命令将管道左侧命令的标准输出作为 `cat` 的命令行参数
+$ grep bash *.sh -l | xargs cat | less
+```
+
+	
+### 命令行示例
+
+用 Vim 打开所有包含 `SHELL` 的 `.md` 文件。
+
+```console
+# 使用反单引号包围命令，则该命令的标准输出将作为命令行的一部分
+$ vim `grep SHELL -l *.md`
+```
+	
+### 命令行示例
+
+使用流编辑器 `sed` 就地（in-place）编辑包含 `SHELL` 的 `.md` 文件，将每一行中的 `SHELL` 替换为 `Shell`。
+
+```console
+$ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
+```
+
+		
 ## 用 Vim 编辑文本文件
-
-常用代码编辑器：
-
-- 集成开发环境（IDE）自带的编辑器
-- Visual Studio Code
-- Vim（`V`i `IM`proved）：程序员专用文本编辑器
-
-**Linux 桌面环境就是最好的 IDE！**
 
 	
 ### 演示视频
 
-[0-2-3：用 Vim 编辑文本文件](https://www.douyin.com/video/7347347606030290185)
+[0-2-4：用 Vim 编辑文本文件](https://www.douyin.com/video/7347347606030290185)
 
 1. `vi` 和 `vim` 的区别。
 1. 安装 `vim`。

@@ -10,7 +10,7 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
 
 1. 面向零基础但对编程有强烈兴趣的大中小学生（年龄在 10 到 18 周岁；小学五年级到大学一年级），学过一些编程课程的更好。
 1. 整个系列课程的内容和国际前沿接轨，会涉及到 Linux、Git、Python、JavaScript、开源 AI 大模型等开发环境或编程语言；下分四个课程：
-   - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 命令、Vim 编辑器、Git 使用、SHELL 编程及 Python 编程入门。
+   - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 命令、Vim 编辑器、Git 使用、Shell 编程及 Python 编程入门。
    - 筑基班：针对已入门学生开设，课程内容涉及 Python 和 JavaScript 编程语言，最终实现一个单机游戏的两个版本：终端版本和网页版本。
    - AI实战班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及网页编程，五人一组协作开发一个联网的网页游戏。
    - AI信奥班：针对计划在初中阶段或高中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux、Python 和 JavaScript 编程。课程内容涉及开源 AI 模型以及 C++ 编程语言，课程内容围绕一个联网的桌面游戏进行，通过将 NOI 大纲中所列知识点融入游戏程序加深学生对相关知识的理解和掌握。
@@ -47,7 +47,7 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
 
 课程分三个阶段。
 
-入门阶段（零基础普及班）主要针对零基础的学生准备，期间会涉及 Linux/Unix 命令行、代码编辑器 Vim、Shell 程序、代码仓库管理工具（Git）、Python、Markdown 等内容。学生最终写出自己的第一个 Shell 程序和第一个 Python 程序，并创建自己的第一个开源代码仓库。
+入门阶段（零基础普及班）主要针对零基础的学生准备，期间会涉及 Linux/Unix 命令行、代码编辑器 Vim、Shell 程序、代码仓库管理工具（Git）、Python、Markdown 等内容。学生最终写出自己的第一个 Python 程序和第一个 Bash 脚本，并创建自己的第一个开源代码仓库。
 
 夯实基础阶段（筑基班）包含 10 场直播课和相应的视频内容。基础阶段的课程内容主要围绕 Python 和 JavaScript 编程程语言进行。学生最终要完成一个益智类单机游戏的两个版本，一个使用 Python 开发（字符界面），另一个使用 JavaScript 开发（图形界面）。对应的教学目标是，学生面对任何一种常见编程语言编写的程序代码，都能大致读懂其工作流程，借助互联网资源和开源世界中的各种已有软件包和代码，能够实现自己需要的增强功能，最终破除学生对程序、编程语言的神秘感，并激发其好奇心。
 
@@ -74,8 +74,8 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
 - 零基础普及班：
    1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
    1. [使用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
-   1. [我的第一个 Shell 程序](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
    1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
+   1. [我的第一个 Bash 脚本](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
    1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
 - 筑基班：
    1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)

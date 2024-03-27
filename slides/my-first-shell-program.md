@@ -1,4 +1,4 @@
-## 我的第一个 Shell 程序
+## 我的第一个 Bash 脚本
 
 1. Bash Shell 概述
 1. 初识 Bash 程序
@@ -13,22 +13,36 @@
 
 1. Bash：GNU `B`ourne-`A`gain `SH`ell。
 1. Bash 是几乎所有 Linux 发行版的默认 Shell 程序。
-1. Bash 支持编程；通过编写一些小的 Bash 脚本程序，可以完成一些复杂的系统管理和维护工作。
+1. Bash 支持编程；通过编写一些小的 Bash 脚本程序，可以完成一些简单或复杂的系统管理和维护工作。
 1. Bash 编程非常简单易学； Linux 系统大量使用 Bash 脚本程序来管理系统功能和服务。
 1. Bash 脚本程序通过调用内置命令以及已有的系统外部程序完成工作，主要用于系统管理或自动化维护，不适合科学计算、复杂交互和图形用户界面等程序的开发。
 
 		
-## 初识 Bash 程序
+## 初识 Bash 脚本
 
 ### 演示视频
 
-[0-5：初识 Bash 程序](#)
+[0-4-1：初识 Bash 程序](#)
 
-1. Linux 系统中已有的 Bash 脚本程序。
+1. 查看 Linux 系统中已有的 Bash 脚本程序。
+1. UNIX 设计哲学：每个程序专注于自身的功能，然后通过管道将多个程序串接在一起使用。
 1. 最简单的例子；指定解释器、注释以及引用环境变量。
 1. 自定义变量和特殊变量。
 1. 执行 Bash 程序的方法。
 
+	
+### 示例程序：最简单的 Bash 脚本
+
+```bash
+#!/bin/bash
+
+# Hello, world!
+echo Hello, world!
+echo - $USER@$HOSTNAME
+
+FULLNAME='WEI Yongming'
+echo - $FULLNAME@$HOSTNAME
+```
 	
 ### 知识点：Bash 保留变量
 
@@ -44,9 +58,8 @@
 
 ### 演示视频
 
-[0-6：在 Bash 程序中进行表达式求值](#)
+[0-4-2：在 Bash 程序中进行表达式求值](#)
 
-1. UNIX 设计哲学。
 1. Bash 只支持两种数据类型：整数和字符串。
 1. `let` 指令和 `expr` 程序：四则运算表达式的求值。
 
@@ -72,16 +85,14 @@ echo $x
 		
 ## Bash 流程控制
 
-### 讲解及演示视频
+### 演示视频
 
-[0-7：流程控制的由来](#)
-
-[0-8：Bash 的流程控制](#)
+[0-4-3：Bash 流程控制](#)
 
 1. `if` 指令及逻辑判断：`test` 程序和 `[` 程序。
-1. `for` 指令。
-1. `while` 指令。
 1. `case` 指令。
+1. `for` 指令。
+1. `while` 和 `until` 指令。
 
 	
 ### 知识点：`[` 程序支持的对比操作
@@ -131,6 +142,25 @@ exit 0
 ```
 
 	
+### 典型用法：`case` 分支
+
+```bash
+#!/bin/bash
+
+echo "Hit a key, then hit return."
+read Keypress
+
+case "$Keypress" in
+  [a-z] ) echo "Lowercase letter";;
+  [A-Z] ) echo "Uppercase letter";;
+  [0-9] ) echo "Digit";;
+  * ) echo "Punctuation, whitespace, or other";;
+esac
+
+exit 0
+```
+
+	
 ### 典型用法：`for` 循环
 
 使用通配符列出当前目录下匹配的文件：
@@ -152,33 +182,12 @@ exit 0
 	
 ### 典型用法：`until` 循环
 
-	
-### 典型用法：`case` 分支
-
-```bash
-#!/bin/bash
-
-echo "Hit a key, then hit return."
-read Keypress
-
-case "$Keypress" in
-  [a-z] ) echo "Lowercase letter";;
-  [A-Z] ) echo "Uppercase letter";;
-  [0-9] ) echo "Digit";;
-  * ) echo "Punctuation, whitespace, or other";;
-esac
-
-exit 0
-```
-
 		
 ## Bash 函数
 
-### 讲解及演示视频
+### 演示视频
 
-[0-9：函数的由来](#)
-
-[0-10：Bash 函数和局部变量](#)
+[0-4-4：Bash 函数](#)
 
 1. Bash 函数的写法。
 1. Bash 函数的调用。
@@ -206,7 +215,7 @@ exit 0
 
 ### 演示视频
 
-[0-11：Bash 字符串操作](#)
+[0-4-5：Bash 字符串操作](#)
 
 	
 ### 知识点
