@@ -61,7 +61,7 @@ echo - $FULLNAME@$HOSTNAME
 [0-4-2：在 Bash 程序中进行表达式求值](#)
 
 1. Bash 只支持两种数据类型：整数和字符串。
-1. `let` 指令和 `expr` 程序：四则运算表达式的求值。
+1. `let` 指令、`((...))` 语法和 `expr` 程序：运算表达式的求值。
 
 	
 ### 知识点：针对整数的运算符
@@ -77,9 +77,10 @@ echo - $FULLNAME@$HOSTNAME
 
 x=2024
 let "x = $x + 1"
-echo $x
-x="The next year is"$x
-echo $x
+# 等价写法：x=$((x+1))
+# 等价写法：((x=x+1))
+
+x="The next year is: "$x
 ```
 
 		
@@ -90,6 +91,7 @@ echo $x
 [0-4-3：Bash 流程控制](#)
 
 1. `if` 指令及逻辑判断：`test` 程序和 `[` 程序。
+1. Shell 判断一个程序是否成功的条件：程序是否返回 0。
 1. `case` 指令。
 1. `for` 指令。
 1. `while` 和 `until` 指令。
@@ -123,7 +125,24 @@ echo $x
 - `FILE1 -ot FILE2` 文件 FILE1 比 FILE2 更老（`o`lder `t`han）
 
 	
-### 典型用法：`if` 分支
+### `if` 分支
+
+- 语法：
+
+```bash
+if [CONDITION1]
+  [COMMANDS]
+then
+  [COMMANDS]
+elif [CONDITION2]
+  then
+    [COMMANDS]
+  else
+    [COMMANDS]
+fi
+```
+
+- 典型用法
 
 ```bash
 #!/bin/bash
@@ -142,7 +161,29 @@ exit 0
 ```
 
 	
-### 典型用法：`case` 分支
+### `case` 分支
+
+- 语法：
+
+```bash
+case EXPRESSION in
+  Pattern_Case_1)
+   STATEMENTS
+   ;;
+ Pattern_Case_1)
+   STATEMENTS
+   ;;
+ Pattern_Case_N)
+   STATEMENTS
+   ;;
+ *)
+   STATEMENTS
+   ;;
+esac
+```
+
+	
+- 典型用法
 
 ```bash
 #!/bin/bash
@@ -161,9 +202,44 @@ exit 0
 ```
 
 	
-### 典型用法：`for` 循环
+### `for` 循环
 
-使用通配符列出当前目录下匹配的文件：
+- 语法：
+
+```bash
+for item in [LIST]
+do
+  [COMMANDS]
+done
+```
+
+	
+- 遍历词元（token）：
+
+```bash
+for city in Beijing Shanghai Guangzhou Shenzhen
+do
+  echo "City: $city"
+done
+```
+
+	
+- 遍历数值范围：
+
+```bash
+for i in {0..10}
+do
+  echo "Number: $i"
+done
+
+for i in {0..10..2}
+do
+  echo "Even number: $i"
+done
+```
+
+	
+- 使用通配符列出当前目录下匹配的文件：
 
 ```bash
 #!/bin/bash
@@ -177,10 +253,77 @@ exit 0
 ```
 
 	
-### 典型用法：`while` 循环
+### `while` 循环
+
+- 语法：
+
+```bash
+while [CONDITION]
+do
+  [COMMANDS]
+done
+```
 
 	
-### 典型用法：`until` 循环
+- 累加到指定值：
+
+```bash
+i=0
+while [ $i -le 2 ]
+do
+  echo Number: $i
+  ((i++))
+done
+```
+
+	
+- 无限循环
+
+```bash
+while :
+do
+  echo "Press <CTRL+C> to exit."
+  sleep 1
+done
+```
+
+	
+- 从文件中循环读取一行并进行处理：
+
+```bash
+file=/etc/passwd
+
+while read -r line; do
+  echo $line
+done < "$file"
+```
+
+	
+### `until` 循环
+
+- 语法：
+
+```bash
+until [CONDITION]
+do
+  [COMMANDS]
+done
+```
+
+	
+- 等待远程 Git 仓库可用：
+
+```bash
+#!/bin/bash
+
+until git pull &> /dev/null
+do
+    echo "Waiting for the git host ..."
+    sleep 1
+done
+
+echo -e "\nThe git repository is pulled."
+```
 
 		
 ## Bash 函数
@@ -241,7 +384,7 @@ exit 0
 	
 ### 典型用法
 
-```baseh
+```bash
 #!/bin/bash
 
 OPTIONS="Hello Quit"
@@ -272,6 +415,42 @@ exit 0
 
 		
 ## 示例脚本程序
+
+### 定时关机
+
+```bash
+#!/bin/bash
+
+while:
+do
+    hour=`date '+%H'`
+    if [ $hour -eq 0 ]
+    then
+        poweroff
+    else
+        sleep 1
+    fi
+done
+```
+
+	
+### 批量更改后缀名
+
+```bash
+#!/bin/bash
+
+if [ $# < 2 ]
+then
+    echo 'Usage: change-postfix.sh org dst'
+fi
+
+for file in *.$1; do
+    mv -- "$file" "${file%.$1}.$2"
+done
+```
+
+	
+### 计算面积
 
 ```base
 #!/bin/bash
