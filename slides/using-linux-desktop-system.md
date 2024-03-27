@@ -10,7 +10,7 @@
 	
 ### 演示视频
 
-[0-2：初识 Ubuntu Linux 桌面环境](https://www.douyin.com/video/7347522409789967653)
+[0-2-1：初识 Ubuntu Linux 桌面环境](https://www.douyin.com/video/7347522409789967653)
 
 1. 通过程序坞（Dock）启动应用。
 1. 启动浏览器（FireFox）；访问 PLZS 仓库以及在线课件；设置书签。
@@ -102,9 +102,9 @@ or available locally via: info '(coreutils) mkdir invocation'
 	
 ### 演示视频
 
-[0-3：常用系统命令及工具](#)
+[0-2-2：常用系统命令及工具](#)
 
-1. 获取帮助；递归
+1. 获取帮助；递归命名
 1. 环境变量
 1. 常用命令
 1. 文件及文件系统工具；通配符的概念
@@ -119,7 +119,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 
 - `man`：显示指定命令的手册页（manual page）内容，也就是随机文档（document）。
 - `info`：显示 GNU 项目开发的各种工具的完整指南文档。
-- `whatis`：
+- `whatis`：显示随机手册页的描述信息；通常用于展示某个命令的简短描述。
 - `GNU`：GNU's Not Unix。
 
 	
@@ -130,7 +130,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `OLDPWD`：老的工作路径；`$ cd -` 命令依赖此环境变量工作。
 - `LOGNAME` 或 `USER`：登录用户名。
 - `PATH`：定义可执行程序的搜索路径，以 `:` 分隔多个路径。
-- `LC_TIME`：定义时间和日期的格式。
+- `LC_TIME`：用来定义时间和日期格式的区域（`l`ocale）类别（`c`ategory）。
 
 	
 ### 知识点：常用命令
@@ -143,7 +143,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `which`：可显示给定命令对应的程序路径。
 - `file`：可分析并显示给定文件的类型。
 - `date`：显示当前时间（墙钟，wall clock）。
-- `history`：
+- `history`：显示命令行历史。
 
 	
 ### 知识点：文件及文件系统工具
@@ -179,8 +179,8 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `wc`：统计并打印文件中的新行符、单词和字节数量（`w`ords `c`ount）。
 - `nano`：文本编辑器（Nano's ANOther editor）。
 - `ed`：面向行的编辑器；主要方便在 Shell 脚本中编辑文本文件。
-- `more/less`：
-- `head/tail`：
+- `more/less`：方便在终端上查看大文件，通常用在管道的末尾。
+- `head/tail`：打印文件头部/尾部的内容。
 
 	
 ### 知识点：流编辑器
@@ -191,35 +191,34 @@ or available locally via: info '(coreutils) mkdir invocation'
 	
 ### 知识点：系统管理工具
 
-- `ps`：
-- `kill`：
-- `top`：
-- `free`：
-- `df`：
-- `sudo`：
-- `passwd`：
-- `uptime`：
-- `shutdown`：
-- `reboot`：
-- `poweroff`：
+- `ps`：打印系统中正在运行的进程。
+- `kill`：杀掉指定的进程。
+- `top`：全屏查看进程信息，以资源占用情况排序。
+- `free`：查看系统内存使用情况。
+- `df`：文件系统的磁盘使用情况。
+- `sudo`：以超级用户身份执行命令。
+- `passwd`：修改当前用户的登录密码。
+- `uptime`：查看系统运行时间。
+- `shutdown`：暂停、关机或者重启机器。
+- `halt/poweroff/reboot`：分别用于暂停、关机或者重启机器。
 
 	
 ### 知识点：系统管理工具（续）
 
-- `hostname`：
-- `whoami`：
-- `id`:
-- `groups`：
-- `uname`：
+- `uname`：打印系统信息。
+- `hostname`：显示主机名。
+- `whoami`：打印当前有效用户标识符。
+- `id`：打印真实及有效用户标识符、组标识符等。
+- `groups`：打印指定用户（默认为当前有效用户）所在的组。
 
 	
 ### 知识点：网络管理工具
 
-- `ping`：
-- `ifconfig`：
-- `dig`：
-- `nslookup`：
-- `wget`：
+- `ping`：向指定的主机发送网络回声请求；通常用来判断网络是否可达指定的主机。
+- `ifconfig`：配置网络接口（network `i`nter`f`ace）。
+- `dig`：DNS 查找工具。
+- `nslookup`：交互式查询互联网名称服务器。
+- `wget`：非交互式网络下载器；主要用于网页资源（页面、图片、CSS、JS）的下载。
 
 		
 ## 用 Vim 编辑文本文件
@@ -235,7 +234,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 	
 ### 演示视频
 
-[0-4：用 Vim 编辑文本文件](https://www.douyin.com/video/7347347606030290185)
+[0-2-3：用 Vim 编辑文本文件](https://www.douyin.com/video/7347347606030290185)
 
 1. `vi` 和 `vim` 的区别。
 1. 安装 `vim`。

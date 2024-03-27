@@ -9,7 +9,9 @@
 - Git 和 GitHub 的故事
 
 	
-看演示视频[2-4：在 Gitee 上创建代码仓库](https://www.douyin.com/video/7347520971370237235)
+### 演示视频
+
+[0-5-1：在 Gitee 上创建代码仓库](https://www.douyin.com/video/7347520971370237235)
 
 1. 访问 Gitee/GitHub 网站并登录。
 1. 生成 SSH 密钥対，并将公钥登记到 Gitee/GitHub。
