@@ -88,7 +88,7 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
    1. 在网页中和用户交互
    1. 大作业相关知识点（JavaScript）
 - AI 实战班：
-   1. [Bash Shell 编程](https://courses.fmsoft.cn/plzs/my-first-shell-program.html)
+   1. Bash Shell 编程
    1. 基于 Git 的协作式软件开发
    1. 大作业需求分析及架构设计
    1. Linux 服务器的安装和配置
