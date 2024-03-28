@@ -1,4 +1,4 @@
-## 我的第一个 Bash 脚本
+## Bash Shell 编程
 
 1. Bash Shell 概述
 1. 初识 Bash 程序
