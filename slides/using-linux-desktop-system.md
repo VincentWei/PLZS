@@ -162,6 +162,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `rmdir`：移除（`r`e`m`ove）指定的目录（目录须为空）。
 - `find`：在指定目录树中按照名称、大小、创建日期等条件搜索文件。
 - `du`：显示磁盘使用情况（`d`isk `u`sage）。
+- `tree`：以树状（`tree`）形式展示目录以及文件的层次结构（hierarchy）。
 
 	
 ### 知识点：压缩或归档工具
