@@ -11,7 +11,7 @@
 	
 ### 演示视频
 
-[0-5-1：在 Gitee 上创建代码仓库](https://www.douyin.com/video/7347520971370237235)
+[0-4-1：在 Gitee 上创建代码仓库](https://www.douyin.com/video/7347520971370237235)
 
 1. 访问 Gitee/GitHub 网站并登录。
 1. 生成 SSH 密钥対，并将公钥登记到 Gitee/GitHub。
@@ -74,7 +74,7 @@ $ git push -u origin main
 	
 ### 演示视频
 
-[0-5-2：Markdown 的由来和基本语法](#)
+[0-4-2：Markdown 的由来和基本语法](#)
 
 1. 查看网页内容（HTML 文件）了解 Markdown 的由来。
 1. 使用 Markdown 语法定义标题。
