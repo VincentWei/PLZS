@@ -163,17 +163,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 > Talk is cheap, show me the code.
 > -- Linus Torvalds
 
+### 各编程语言的 `Hello, world!` 程序
+
+#### Python
+
 ```python
 print('Hello, world!')
 ```
+
+#### JavaScript
 
 ```javascript
 console.log('Hello, world!')
 ```
 
+#### Bash
+
 ```bash
 echo 'Hello, world!'
 ```
+
+#### C
 
 ```c
 #include <stdio.h>
@@ -185,6 +195,8 @@ int main(void)
 }
 ```
 
+#### C++
+
 ```cplusplus
 #include <iostream>
 using namespace std;
@@ -195,3 +207,4 @@ int main()
     return 0;
 }
 ```
+
