@@ -8,7 +8,6 @@
 		<link rel="stylesheet" href="/dist/reveal.css">
 		<link rel="stylesheet" href="/dist/theme/solarized.css">
 		<link rel="stylesheet" href="/css/global.css">
-
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="/plugin/highlight/monokai.css">
 	</head>
@@ -33,11 +32,11 @@
 				</section>
 			</div>
 		</div>
-
 		<script src="/dist/reveal.js"></script>
 		<script src="/plugin/notes/notes.js"></script>
 		<script src="/plugin/markdown/markdown.js"></script>
 		<script src="/plugin/highlight/highlight.js"></script>
+		<script src="/js/utils/code-copy.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -48,10 +47,9 @@
 				margin: 0.04,
 				hash: true,
 				slideNumber: true,
-
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
+			}).then(() => initCodeCopy());
 		</script>
 	</body>
 </html>
