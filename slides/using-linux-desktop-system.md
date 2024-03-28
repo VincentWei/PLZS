@@ -2,7 +2,7 @@
 
 1. 初识开发环境：终端和命令行
 1. 常用系统命令及工具
-1. 管道的使用
+1. 重定向和管道的使用
 1. 用 Vim 编辑文本文件
 
 		
@@ -21,7 +21,6 @@
 1. 将终端、设置程序添加到程序坞中。
 1. 启动文件管理器，对比终端中的目录项；了解 Linux 文件系统和 Windows 文件系统的区别。
 1. 运行 `sudo apt` 命令更新或升级系统。
-1. 运行 `man apt` 查看 `apt` 命令的用法。
 1. 在命令行按上下键翻看命令行历史。
 
 	
@@ -42,16 +41,15 @@
 	
 ### 知识点：演示视频涉及的系统命令
 
-- `sudo`：以超级（super）用户（user）身份干活（do）。
+- `sudo`：以超级（`s`uper）用户（`u`ser）身份干活（`do`）。
 - `apt`：Ubuntu 使用的软件包管理工具：
-   - `apt install`：安装（install）某个软件包。
-   - `apt remove`：移除（remove）某个软件包。
-   - `apt update`：检查是否有需要更新（update）的软件包。
-   - `apt upgrade`：升级（upgrade）软件包到最新版本。
-- `man`：显示指定命令的手册页（manual page）内容，也就是随机文档（document）。
-- `pwd`：打印（print）当前（current）目录（directory）。
-- `cd`：改变（change）目录（directory）。
-- `ls` 或 `ll`：列出（list）当前目录中的文件和子目录。
+   - `apt install`：安装（`install`）某个软件包。
+   - `apt remove`：移除（`remove`）某个软件包。
+   - `apt update`：检查是否有需要更新（`update`）的软件包。
+   - `apt upgrade`：升级（`upgrade`）软件包到最新版本。
+- `pwd`：打印（`p`rint）当前（current）或工作（`w`orking）目录（`d`irectory）。
+- `cd`：改变（`c`hange）目录（`d`irectory）。
+- `ls` 或 `ll`：列出（`l`i`s`t）当前目录中的文件和子目录。
 
 	
 ### 知识点：一些常识
@@ -61,19 +59,17 @@
 3) 大部分情况下可用 `Ctrl+C`（`^C`） 终止一个正在运行的命令；如果是全屏运行的程序，大部分情况下可以按 `q` 键退出。
 4) Linux 命令是区分大小写的，通常使用小写字母。键入时要注意字符的全角（fullwidth）和半角（halfwidth）的区别。
 5) 命令行中的参数（argument）通常用来表示命令要操作的目标对象，比如文件名、主机名等；选项（option）用来表示执行该命令时的动作开关或标志。
-   - 当参数中包含空白字符时，可使用单引号或者双引号包围该参数。
-6) 使用反引号（backtick，`` ` ``）包围一条命令行，可将该命令行的标准输出作为整个命令行的一部分。
+6) 当参数中包含空白字符时，可使用单引号或者双引号包围该参数。
 
 	
 ### 知识点：一些常识（续）
 
-7) 一条命令行中可以包含多条命令，中间用分号（semicolon，`;`）分隔。
-8) 大部分情况下可用 `--help` 选项来显示一个命令的简易使用说明。
-9) 命令使用说明文档中的一些约定或习惯写法：
+7) 大部分情况下可用 `--help` 选项来显示一个命令的简易使用说明。
+8) 命令使用说明文档中的一些约定或习惯写法：
    - 命令的选项和参数通常使用大写单词表示。
    - `[]` 包围起来表示可选的部分，不使用 `[]` 包围的表示一定要出现。
    - `...` 表示某个部分可以多次重复出现。
-10) 命令行中的选项通常使用 `-` 或者 `--` 打头，前者只用一个字母区别不同的选项；后者用单词或者用 `-` 连接的短语区别不同的选项。
+9) 命令行中的选项通常使用 `-` 或者 `--` 打头，前者只用一个字母区别不同的选项；后者用单词或者用 `-` 连接的短语区别不同的选项。
 
 	
 
@@ -113,7 +109,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 1. 常用命令
 1. 文件及文件系统工具；通配符的概念
 1. 压缩或归档工具
-1. 文本文件工具；标准输入/输出及重定向；正则表达式
+1. 文本文件工具；正则表达式
 1. 流编辑器；管道
 1. 系统管理工具
 1. 网络管理工具
@@ -121,10 +117,10 @@ or available locally via: info '(coreutils) mkdir invocation'
 	
 ### 知识点：获取帮助
 
-- `man`：显示指定命令的手册页（manual page）内容，也就是随机文档（document）。
-- `info`：显示 GNU 项目开发的各种工具的完整指南文档。
+- `man`：显示指定命令的手册页（`man`ual page）内容，也就是随机文档（document）。
+- `info`：显示 GNU 项目开发的各种工具的完整信息（`info`rmation）。
 - `whatis`：显示随机手册页的描述信息；通常用于展示某个命令的简短描述。
-- `GNU`：GNU's Not Unix。
+- `GNU`：`G`NU's `N`ot `U`nix；递归命名。
 
 	
 ### 知识点：环境变量
@@ -144,9 +140,9 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `cd`：改变（`c`hange）工作目录（`d`irectory）。
 - `history`：显示命令行历史；使用 `!<history number>` 可执行对应的历史命令。
 - `pwd`：打印（`p`rint）当前（current）/工作（`w`orking）目录（`d`irectory）。
-- `alias`：定义或显示命令的别名（alias）。
+- `alias`：定义或显示命令的别名（`alias`）。
 - `export`：定义或修改环境变量。
-- `env`：显示当前环境变量或者在给定环境变量下运行指定的程序。
+- `env`：显示当前环境变量（`env`ironment）或者在给定环境变量下运行指定的程序。
 - `which`：可显示给定命令对应的程序路径。
 - `file`：可分析并显示给定文件的类型。
 - `date`：显示当前时间（墙钟，wall clock）。
@@ -161,7 +157,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `touch`：改变指定文件的时间戳为当前时间；若指定文件不存在则新建一个空文件。
 - `cp`：复制（`c`o`p`y）文件。
 - `mv`：移动（`m`o`v`e）文件；亦可用于重命名文件。
-- `rm`：删除（`r`emo`v`e）文件；亦可用于删除一个目录树。
+- `rm`：删除（`r`emo`v`e）文件；亦可用于删除一个目录树（使用 `-r` 递归选项）。
 - `mkdir`：创建（`m`a`k`e）目录（`dir`ectory）。
 - `rmdir`：移除（`r`e`m`ove）指定的目录（目录须为空）。
 - `find`：在指定目录树中按照名称、大小、创建日期等条件搜索文件。
@@ -182,13 +178,23 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `cat`：拼接（concatenate）多个文件并打印到标准输出。
 - `cut`：从文件的每一行移除指定的字段（field）。
 - `grep`：打印匹配指定模式（pattern）的行。
-- `sort`：对文本文件的行进行排序。
+- `sort`：对文本文件按行进行排序。
 - `diff`：查看两个文件的差异。
 - `wc`：统计并打印文件中的新行符、单词和字节数量（`w`ords `c`ount）。
 - `nano`：文本编辑器（Nano's ANOther editor）。
 - `ed`：面向行的编辑器；主要方便在 Shell 脚本中编辑文本文件。
 - `more/less`：方便在终端上查看大文件，通常用在管道的末尾。
 - `head/tail`：打印文件头部/尾部的内容。
+
+	
+### 知识点：正则表达式
+
+- 正则表达式（regular expression, 简称 `regex`）就是用一个“字符串”来描述一个特征，然后去验证另一个“字符串”是否符合这个特征。
+- 使用正则表达式描述的字符串特征称为`模式`（pattern），验证的过程就是判断一个字符串是否`匹配`（match）这个模式。
+- 比如模式 `lo[o]?ng` 描述的特征是“`lo` 外加一个可能的 `o`，再加 `ng`”，那么 `long` 和 `loong` 都匹配这个模式。
+- 正则表达式是一种比通配符更加强大的字符串特征描述方法，在 Linux 命令行及各种程序中广泛使用：
+   - 匹配满足特定模式的行或者文本。
+   - 检查用户输入的手机号码、邮件地址等是否正确。
 
 	
 ### 知识点：流编辑器
@@ -229,11 +235,23 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `wget`：非交互式网络下载器；主要用于网页资源（页面、图片、CSS、JS）的下载。
 
 		
-## 重定向和管道的使用
+## 重定向和管道
 
 ### 演示视频
 
-[0-2-3：重定向和管道的使用](https://www.douyin.com/video/7347347606030290185)
+[0-2-3：重定向和管道](#)
+
+- 标准输入（`stdin`）、标准输出（`stdout`）和标准错误（`stderr`）。
+- 重定向标准输出、标准错误的概念和方法。
+- 组合多条命令的几种方法：
+   1. 一个命令行中可以包含多条顺序执行的命令，中间用分号（semicolon，`;`）分隔。
+   1. 若双引号包围的参数中含有 `$` 打头的环境变量或 `$(...)` 表达式，将首先对其求值并置换；单引号包围时忽略。
+   1. 使用反引号（backtick，`` ` ``）包围一条命令，可将该命令的标准输出作为整个命令行的一部分。
+   1. `xargs`：从标准输入中构造命令行参数并执行指定的命令。
+   1. 管道：将管道（pipe，`|`）左侧的命令之标准输出作为管道右侧命令的标准输入。
+- UNIX 设计哲学：
+   1. 一切皆文件。
+   1. 功能单一的程序或模块合作完成复杂任务。
 
 	
 ### 命令行示例
@@ -274,6 +292,72 @@ cups-pk-helper
 daemon
 dnsmasq
 _flatpak
+fwupd-refresh
+games
+gdm
+geoclue
+gnats
+gnome-initial-setup
+hplip
+irc
+kernoops
+lightdm
+list
+lp
+lxc-dnsmasq
+lxd
+mail
+man
+messagebus
+news
+nm-openvpn
+nobody
+proxy
+pulse
+root
+rtkit
+saned
+speech-dispatcher
+sshd
+sssd
+sync
+sys
+syslog
+systemd-coredump
+systemd-network
+systemd-oom
+systemd-resolve
+systemd-timesync
+tcpdump
+tss
+usbmux
+uucp
+uuidd
+weiym
+whoopsie
+www-data
+```
+
+	
+### 命令行示例
+
+在上一条命令基础上将 `_` 打头的用户名过滤掉：
+
+1. 在 `sort` 前使用 `sed` 命令。
+1. 使用 `sed` 的删除命令 `/^_/d`，其中的正则表达式 `^_` 将匹配所有以 `_` 打头的行。
+
+```console
+$ cat /etc/passwd | cut -d':' -f1 | sed '/^_/d' | sort
+avahi
+avahi-autoipd
+backup
+bin
+cn-fmsoft-hybridos-hibus
+colord
+com-example-foo
+cups-pk-helper
+daemon
+dnsmasq
 fwupd-refresh
 games
 gdm
@@ -469,6 +553,7 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 ## 进一步学习资料
 
 1. [知乎文章：115个最常用的Linux命令行大全](https://zhuanlan.zhihu.com/p/420247468)
+1. [揭开正则表达式的神秘面纱](http://www.regexlab.com/zh/regref.htm)
 1. [Vim 官方文档中文版](https://yianwillis.github.io/vimcdoc/doc/help.html)
 1. [Vim 实操教程](https://dofy.gitbook.io/learn-vim/zh-CN)
 
