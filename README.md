@@ -161,6 +161,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ## 附言
 
 > Talk is cheap, show me the code.
+>
 > -- Linus Torvalds
 
 ### 各编程语言的 `Hello, world!` 程序
