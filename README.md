@@ -1,8 +1,7 @@
 # 给零基础学生的编程课
 
-本仓库包含由[魏永明](https://github.com/VincentWei)主讲的针对十岁及以上零基础学生的编程实战系列课程所用课件、示例程序等。
-
-PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei](https://github.com/VincentWei).
+本仓库包含由[魏永明](https://github.com/VincentWei)主讲的针对十岁及以上零基础学生的编程实战系列课程所用课件、示例程序等。<br/>
+Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincent Wei](https://github.com/VincentWei).
 
 ## 概述
 
@@ -11,7 +10,7 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
 1. 面向零基础但对编程有强烈兴趣的大中小学生（年龄在 10 到 18 周岁；小学五年级到大学一年级），学过一些编程课程的更好。
 1. 整个系列课程的内容和国际前沿接轨，会涉及到 Linux、Git、Python、JavaScript、开源 AI 大模型等开发环境或编程语言；下分四个课程：
    - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 系统命令、Vim 编辑器、Git 使用及 Python 编程入门。
-   - 筑基班：针对已入门学生开设，课程内容涉及 Python 和 JavaScript 编程语言，最终实现一个单机游戏的两个版本：终端版本和网页版本。
+   - 筑基班：针对已入门学生开设，课程内容涉及 Python、JavaScript 编程语言和 Bash Shell 编程，最终实现一个单机游戏的两个版本：终端版本和网页版本。
    - AI实战班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及网页编程，五人一组协作开发一个联网的网页游戏。
    - AI信奥班：针对计划在初中阶段或高中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux、Python 和 JavaScript 编程。课程内容涉及开源 AI 模型以及 C++ 编程语言，课程内容围绕一个联网的桌面游戏进行，通过将 NOI 大纲中所列知识点融入游戏程序加深学生对相关知识的理解和掌握。
 1. 授课方式：
@@ -57,6 +56,15 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
 
 该系列课程的设计以“授人以渔”为目标，通过在教学中模拟当下流行的开源协作软件开发模式，讲述软件工程师日常使用的工具和需要掌握的知识，以大作业为依托，引导学生理解需求、实现需求，通过自身的努力实践，将零基础的学生培养成面向未来的信息技术专家，助理升学及深造。
 
+各课程涉及的编程语言及技术如下表所列：
+
+| 课程          | 编程语言                  | 其他技术                                          |
+| --            | --                        | --                                                |
+| 零基础普及班  | Python                    | Linux, Vim, Git, Markdown                         |
+| 筑基班        | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket                 |
+| AI实战班      | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket, AI             |
+| AI信奥班      | Python, C++, Bash         | Linux, Windows, GCC, CMake, HTTP, WebSocket, AI   |
+
 ## 直播平台及报名
 
 课程的直播通过微信视频号进行，可扫码关注视频号“魏永明的编程课”：
@@ -69,7 +77,7 @@ PLZS: Programming Lessons for Zero-based Students Aged 10 to 18, by [Vincent Wei
 
 ## 课程资料
 
-课程讲义的幻灯片入口：
+各课程的课件幻灯片入口：
 
 - 零基础普及班：
    1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
@@ -150,3 +158,40 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+## 附言
+
+> Talk is cheap, show me the code.
+> -- Linus Torvalds
+
+```python
+print('Hello, world!')
+```
+
+```javascript
+console.log('Hello, world!')
+```
+
+```bash
+echo 'Hello, world!'
+```
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    printf("Hello, world!");
+    return 0;
+}
+```
+
+```cplusplus
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << 'Hello, world!';
+    return 0;
+}
+```
