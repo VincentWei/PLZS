@@ -561,6 +561,15 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 - `:%s/WORD1/WORD2/gc`　命令模式下，全局搜索 WORD1 并使用 WORD2 替换。`gc` 是可选后缀：`g` 表示替换行内所有搜索到的 WORD1，`c` 表示需要用户确认是否替换。
 
 		
+## 要点回顾
+
+1. 掌握常用的 Linux 系统命令。
+1. 掌握通配符的用法。
+1. 掌握在 Linux Shell 命令行中组合使用多个命令的基本用法。
+1. 了解正则表达式的基本概念。
+1. 掌握基本的 Vim 操作。
+
+		
 ## 进一步学习资料
 
 1. [知乎文章：115个最常用的Linux命令行大全](https://zhuanlan.zhihu.com/p/420247468)

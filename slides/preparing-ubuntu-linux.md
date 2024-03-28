@@ -157,6 +157,13 @@
 1. 若使用 macOS，可安装 VirtualBox 虚拟机或者 VMWare Fusion 虚拟机，然后再安装 Ubuntu Linux 22.04。
 
 		
+## 要点回顾
+
+1. 了解 Linux 发行版和桌面系统的发展历史。
+1. 了解虚拟机的概念。
+1. 掌握在虚拟机上安装 Ubuntu Linux 的方法。
+
+		
 ## 作业
 
 1. 在自己的宿主操作系统上安装虚拟机管理程序，并在其上安装 Ubuntu Linux 22.04 LTS。
