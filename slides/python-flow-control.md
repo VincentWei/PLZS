@@ -127,7 +127,7 @@ prompt_for_square()
 1. 基本运算（真值表）
 
 	
-<img class="r-frame" src="assets/plzs-true-values-table.svg" height="600" />
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-true-values-table.svg" />
 
 	
 1) 互补律

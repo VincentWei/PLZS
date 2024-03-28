@@ -28,7 +28,7 @@
     - AI信奥班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及 C++ 编程语言，课程内容围绕一个联网的桌面游戏进行。
 
 	
-<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-course-framework.svg">
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-course-framework.svg" />
 
 	
 2) 对学生的要求
@@ -96,7 +96,7 @@
    - ...
 
 	
-<img class="r-frame" src="assets/plzs-diagram-virtual-machine.svg" height="600" />
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-diagram-virtual-machine.svg" />
 
 	
 - 流行的桌面虚拟机管理软件
