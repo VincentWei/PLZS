@@ -2,7 +2,7 @@
 
 1. 初识开发环境：终端和命令行
 1. 常用系统命令及工具
-1. 组合使用多个命令
+1. 有趣的 Shell 命令行
 1. 用 Vim 编辑文本文件
 1. 要点回顾
 1. 作业
@@ -101,6 +101,10 @@ or available locally via: info '(coreutils) mkdir invocation'
 		
 ## 常用系统命令及工具
 
+- 大部分常用的系统命令由自由软件基金会的 GNU 项目开发。
+- `GNU`：`G`NU's `N`ot `U`nix；递归命名。
+- 自由软件基金会创始人 Richard Stallman 的故事。
+
 	
 ### 演示视频
 
@@ -122,7 +126,6 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `man`：显示指定命令的手册页（`man`ual page）内容，也就是随机文档（document）。
 - `info`：显示 GNU 项目开发的各种工具的完整信息（`info`rmation）。
 - `whatis`：显示随机手册页的描述信息；通常用于展示某个命令的简短描述。
-- `GNU`：`G`NU's `N`ot `U`nix；递归命名。
 
 	
 ### 知识点：环境变量
@@ -238,19 +241,22 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `wget`：非交互式网络下载器；主要用于网页资源（页面、图片、CSS、JS）的下载。
 
 		
-## 组合使用多个命令
+## 有趣的 Shell 命令行
 
 	
 ### 演示视频
 
-[0-2-3：组合使用多个命令](#)
+[0-2-3：有趣的 Shell 命令行](#)
 
 1. UNIX 设计哲学：
-   1. 一切皆文件。
-   1. 功能单一的程序或模块合作完成复杂任务。
-1. 标准输入（`stdin`）、标准输出（`stdout`）和标准错误（`stderr`）。
-1. 重定向标准输出、标准错误的概念和方法。
-1. 在单条命令行中组合使用多个命令的若干方法。
+   - 一切皆文件。
+   - 功能单一的程序或模块合作完成复杂任务。
+1. 标准输入（`stdin/0`）、标准输出（`stdout/1`）和标准错误（`stderr/2`）。
+1. 重定向标准输出、标准错误的概念和方法：
+   - `[1]>FILE`：将标准输出重定向到文件 `FILE`。
+   - `2>FILE`：将标准错误重定向到文件 `FILE`。
+   - `[1]>>FILE`：将标准错误重定向并追加到文件 `FILE`。
+1. 通过管道甚至可以重定向标准输入。
 
 	
 ### 知识点：组合多个命令的方法
