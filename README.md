@@ -198,7 +198,7 @@ int main(void)
 
 #### C++
 
-```cplusplus
+```c++
 #include <iostream>
 using namespace std;
 
