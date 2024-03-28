@@ -266,7 +266,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 	
 ### 命令行示例
 
-将当前日期和用户名拼接在一起，将输出重定向追加到 `users.log` 文件中：
+- 将当前日期和用户名拼接在一起，将输出重定向追加到 `users.log` 文件中：
 
 ```console
 # 使用反单引号包围命令，则该命令的标准输出将作为命令行的一部分
@@ -284,13 +284,13 @@ $ cat users.log
 	
 ### 命令行示例
 
-使用 `cat`、`cut` 和 `sort`列出系统中所有的用户账号并排序：
-
-1. 使用 `cat` 命令读取 `/etc/passwd` 文件内容并打印到标准输出。
-1. 使用 `cut` 命令截取 `/etc/passwd` 每行中的第一个字段（即用户账号）到标准输出。
-1. 使用 `sort` 命令将标准输入的内容排序并打印到标准输出。
+- 使用 `cat`、`cut` 和 `sort`列出系统中所有的用户账号并排序：
 
 ```console
+# 使用 `cat` 命令读取 `/etc/passwd` 文件内容并打印到标准输出。
+# 使用 `cut` 命令截取 `/etc/passwd` 每行中的第一个字段（即用户账号）到标准输出。
+# 使用 `sort` 命令将标准输入的内容排序并打印到标准输出。
+
 $ cat /etc/passwd | cut -d':' -f1 | sort
 _apt
 avahi
@@ -353,12 +353,12 @@ www-data
 	
 ### 命令行示例
 
-在上一条命令行基础上将 `_` 打头的用户名过滤掉：
-
-1. 在 `sort` 前使用 `sed` 命令。
-1. 使用 `sed` 的删除命令 `/^_/d`，其中的正则表达式 `^_` 将匹配所有以 `_` 打头的行。
+- 在上一条命令行基础上将 `_` 打头的用户名过滤掉：
 
 ```console
+# 在 `sort` 前使用 `sed` 命令。
+# 使用 `sed` 的删除命令 `/^_/d`，其中的正则表达式 `^_` 将匹配所有以 `_` 打头的行。
+
 $ cat /etc/passwd | cut -d':' -f1 | sed '/^_/d' | sort
 avahi
 avahi-autoipd
@@ -419,7 +419,7 @@ www-data
 	
 ### 命令行示例
 
-查找所有使用 `bash` 的 `.sh` 脚本程序并拼接在一起显示：
+- 查找所有使用 `bash` 的 `.sh` 脚本程序并拼接在一起显示：
 
 ```console
 # xargs 命令将管道左侧命令的标准输出作为 `cat` 的命令行参数
@@ -429,7 +429,7 @@ $ grep bash *.sh -l | xargs cat | less
 	
 ### 命令行示例
 
-用 Vim 打开所有包含 `SHELL` 的 `.md` 文件：
+- 用 Vim 打开所有包含 `SHELL` 的 `.md` 文件：
 
 ```console
 # 使用反单引号包围命令，则该命令的标准输出将作为命令行的一部分
@@ -438,7 +438,7 @@ $ vim `grep SHELL -l *.md`
 	
 ### 命令行示例
 
-使用流编辑器 `sed` 就地（in-place）编辑包含 `SHELL` 的 `.md` 文件，将每一行中的 `SHELL` 替换为 `Shell`。
+- 使用流编辑器 `sed` 就地（in-place）编辑包含 `SHELL` 的 `.md` 文件，将每一行中的 `SHELL` 替换为 `Shell`：
 
 ```console
 # 使用 `sed` 命令的 `-i` 选项，可直接编辑对应的文件。
