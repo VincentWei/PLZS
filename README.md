@@ -1,4 +1,4 @@
-# 给零基础学生的编程课
+# 给零基础学生的编程系列课程
 
 本仓库包含由[魏永明](https://github.com/VincentWei)主讲的针对十岁及以上零基础学生的编程实战系列课程所用课件、示例程序等。<br/>
 Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincent Wei](https://github.com/VincentWei).
