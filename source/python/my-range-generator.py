@@ -60,7 +60,7 @@ for x in my_range(7):
     print(x)
 
 f = my_range(0, 10, 2)
-print(f)
+print(type(f))
 for x in f:
     print(x)
 
