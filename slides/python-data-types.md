@@ -1,6 +1,6 @@
 ## Python 数据类型
 
-1. 第二讲作业点评
+1. 三人行必有我师
 1. 数值
 1. 字符串
 1. 列表及元组
@@ -11,30 +11,14 @@
 1. 作业
 
 		
-## 第二讲作业回顾
-
-1. 输出小于用户指定的正整数的斐波那契（Fibonacci）数列。
-1. 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。
-1. 循环提示用户输入一个正整数，并判断该正整数是否为一个质数。
-1. 代码仓库的管理要求：
-   - 在仓库的根目录下创建一个 `README.md` 文件，写上一些介绍性的基本信息。
-   - 创建 `source/python` 目录，在其中按每一节创建子目录，比如 `lesson-1`、`lesson-2`，然后将程序文件放到不同的目录下。
-   - 按照课件作业描述中的要求命名程序文件，比如 `formulas-improved.py`、`fibonacci.py` 等。
+## 三人行必有我师
 
 	
-### 参考实现：`fibonacci.py`
+### 赋值语句一次可以操作多个变量
+
+使用逗号（colon，`,`）可在赋值语句中一次操作多个变量；函数亦可一次返回多个值。
 
 ```python
-#!/usr/bin/python3
-
-n = 0
-while n <= 0:
-    try:
-        n = int(input('Please input a positive integer: '))
-    except ValueError:
-        n = 0
-
-# 赋值语句一次可以操作多个变量。
 a, b = 0, 1
 while a <= n:
     if a == n or b > n:
@@ -45,93 +29,43 @@ while a <= n:
 ```
 
 	
-### 参考实现：`formulas-improved.py`
+### 处理解释器异常
+
+给 `int()`、`float()` 函数不可识别的字符串时，会产生 `ValueError` 错误；此时应使用 `try` 语句处理异常。
 
 ```python
-#!/usr/bin/python3
-
-def area_of_square(d):
-    return d * d
-
-def prompt_for_square():
-    d = 0
-    while d <= 0:
-        try:
-            d = float(input("Please input the length of one side of a square: "))
-        except ValueError:
-            d = 0
-
-    s = area_of_square(d)
-    print(f"The area of the square is {s}")
-
-def area_of_triangle(d, h):
-    return d * h / 2
-
-def prompt_for_triangle():
-    d = h = 0
-    while d <= 0 or h <= 0:
-        try:
-            d = float(input("Please input the length of one side of a triangle: "))
-            h = float(input("Please input the length of the height on the side: "))
-        except ValueError:
-            d = h = 0
-
-    s = area_of_triangle(d, h)
-    print(f"The area of the triangle is {s}")
-
-def area_of_circle(r):
-    return 3.14159265 * r * r
-
-def prompt_for_circle():
-    r = 0
-    while r <= 0:
-        try:
-            r = float(input("Please input the length of one side of a circle: "))
-        except ValueError:
-            r = 0
-
-    s = area_of_circle(r)
-    print(f"The area of the circle is {s}")
-
-def prompt_for_formula():
-    formula = 4
-    while formula < 0 or formula > 3:
-        print('To calculate the area, please choose a geometrical shape:')
-        print('1. Triange')
-        print('2. Square')
-        print('3. Circle')
-        print('0. Exit')
-        try:
-            formula = int(input('Your choice:'))
-        except:
-            formula = 0
-
-    return formula
-
-while True:
-    match prompt_for_formula():
-        case 1:
-            prompt_for_triangle()
-        case 2:
-            prompt_for_square()
-        case 3:
-            prompt_for_circle()
-        case _:
-            quit()
-
+d = 0
+while d <= 0:
+    try:
+        d = float(input("Please input the length of one side of a square: "))
+    except ValueError:
+        d = 0
 ```
 
 	
-### 参考实现：`check-prime.py`
+### 在 `match` 语句中处理默认情形
+
+`case _:` 分句可在 `match` 语句中处理默认（default）情形。
 
 ```python
-n = 2
-while n <= 2:
-    try:
-        n = int(input('Please input an integer larger than 2: '))
-    except ValueError:
-        n = 2
+match prompt_for_formula():
+    case 1:
+        prompt_for_triangle()
+    case 2:
+        prompt_for_square()
+    case 3:
+        prompt_for_circle()
+    case _:
+        quit()
+```
 
+	
+### 内置函数 `max()` 和 `min()`
+
+1. 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
+1. 循环中可以使用 `else` 分句。
+
+```python
 # 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
 for i in range(2, max(n // 2, 3)):
     if n % i == 0:
@@ -145,71 +79,18 @@ else:
 ```
 
 	
-### 参考实现：`check-prime-improved.py`
+### 巧用 `assert()` 函数协助调试
+
+1. 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
+1. 使用运算符 `is` 和 `is not` 可判断一个值是否为 `True`、`False` 等特殊值。
 
 ```python
-#!/usr/bin/python3
-
-# 该函数返回两个值；第一个值表示是否为质数，第二个值表示找到的因子。
-def check_prime(n):
-    if n == 2:
-        return True, 1
-
-    factor = 1
-    for i in range(2, max(n // 2, 3)):
-        if n % i == 0:
-            factor = i
-            break
-
-    if factor > 1:
-        return False, factor
-
-    return True, 1
-
-# 单元测试
 prime, factor = check_prime(2)
 # 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）
 # 程序的运行，方便调试。
 assert(prime is True)
 prime, factor = check_prime(3)
-assert(prime is True)
-prime, factor = check_prime(4)
-assert(prime is False)
-prime, factor = check_prime(5)
-assert(prime is True)
-prime, factor = check_prime(9)
-assert(prime is False)
-prime, factor = check_prime(1973)
-assert(prime is True)
-prime, factor = check_prime(2024)
-assert(prime is False)
-
-while True:
-    n = 1
-    while n <= 1:
-        try:
-            n = int(input('Please input an integer larger than 1: '))
-        except ValueError:
-            n = 0
-
-    prime, factor = check_prime(n)
-    if prime:
-        print(f'{n} is a prime!')
-    else:
-        print(f'{n} has a factor neither itself nor one: {factor}; it is not a prime.')
 ```
-
-	
-### 三人行必有我师
-
-1. 赋值语句一次可以操作多个变量。
-1. 函数一次可以返回多个数据。
-1. 给 `int()`、`float()` 函数不可识别的字符串时，会产生 `ValueError` 错误；此时应使用 `try` 语句处理异常。
-1. `case _:` 分句可在 `match` 语句中处理默认（default）情形。
-1. 循环中可以使用 `else` 分句。
-1. 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
-1. 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
-1. 使用运算符 `is` 和 `is not` 可判断一个值是否为 `True`、`False` 等特殊值。
 
 		
 ## 数据类型综述
@@ -757,5 +638,5 @@ case 7: passed.
 ```
 
 	
-4) 重构 `formulas-improved.py` 为 `formulas-refactored.py` 程序，将公式对应的函数、公式对应的几何形状名称、参数数量和提示字符串构造为一个合理的数据结构，并解耦代码和数据。运行效果不变。
+5) 重构 `formulas-improved.py` 为 `formulas-refactored.py` 程序，将公式对应的函数、公式对应的几何形状名称、参数数量和提示字符串构造为一个合理的数据结构，并解耦代码和数据。运行效果不变。
 
