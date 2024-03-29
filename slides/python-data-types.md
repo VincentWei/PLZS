@@ -15,7 +15,7 @@
 
 ### 赋值语句一次可以操作多个变量
 
-使用逗号（colon，`,`）可在赋值语句中一次操作多个变量；函数亦可一次返回多个值。
+- 使用逗号（colon，`,`）可在赋值语句中一次操作多个变量；函数亦可一次返回多个值。
 
 ```python
 a, b = 0, 1
@@ -30,7 +30,7 @@ while a <= n:
 	
 ### 处理解释器异常
 
-给 `int()`、`float()` 函数不可识别的字符串时，会产生 `ValueError` 错误；此时应使用 `try` 语句处理异常。
+- 给 `int()`、`float()` 函数不可识别的字符串时，会产生 `ValueError` 错误；此时应使用 `try` 语句处理异常。
 
 ```python
 d = 0
@@ -44,7 +44,7 @@ while d <= 0:
 	
 ### 在 `match` 语句中处理默认情形
 
-`case _:` 分句可在 `match` 语句中处理默认（default）情形。
+- `case _:` 分句可在 `match` 语句中处理默认（default）情形。
 
 ```python
 match prompt_for_formula():
@@ -61,8 +61,8 @@ match prompt_for_formula():
 	
 ### 内置函数 `max()` 和 `min()`
 
-1. 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
-1. 循环中可以使用 `else` 分句。
+- 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
+- 循环中可以使用 `else` 分句。
 
 ```python
 # 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
@@ -80,8 +80,8 @@ else:
 	
 ### 巧用 `assert()` 函数协助调试
 
-1. 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
-1. 使用运算符 `is` 和 `is not` 可判断一个值是否为 `True`、`False` 等特殊值。
+- 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
+- 使用运算符 `is` 和 `is not` 可判断一个值是否为 `True`、`False` 等特殊值。
 
 ```python
 prime, factor = check_prime(2)
