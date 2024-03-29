@@ -56,3 +56,11 @@ for case in positive_cases:
     print('passed.')
     i += 1
 
+for x in my_range(7):
+    print(x)
+
+f = my_range(0, 10, 2)
+print(f)
+for x in f:
+    print(x)
+

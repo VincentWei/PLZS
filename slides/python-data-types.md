@@ -13,7 +13,6 @@
 		
 ## 三人行必有我师
 
-	
 ### 赋值语句一次可以操作多个变量
 
 使用逗号（colon，`,`）可在赋值语句中一次操作多个变量；函数亦可一次返回多个值。
@@ -306,6 +305,9 @@ type(pass())
    1. 用户自定义的类、构造函数及其方法。
 - 特殊函数：生成器（generator）；使用 `yield` 语句；内置函数 `range()` 本质上就是一个生成器。
 
+	
+`my_range()` 实现：
+
 ```python
 #!/usr/bin/python3
 
@@ -360,6 +362,14 @@ print(l)
 
 l = list(my_range(2, 10, 2))
 print(l)
+
+for x in my_range(7):
+    print(x)
+
+f = my_range(0, 10, 2)
+print(f)
+for x in f:
+    print(x)
 ```
 
 	
