@@ -106,29 +106,82 @@ or available locally via: info '(coreutils) mkdir invocation'
 - 自由软件基金会创始人 Richard Stallman 的故事。
 
 	
+### 有关文件系统的一些常识
+
+- Linux 系统中的文件系统被组成成单个层次结构（hierarchy），根目录表示为 `/`。
+- 一个目录项（directory entry）指目录中的某个子（child）目录或者文件。
+- 在文件系统中定位一个目录项时，使用 `/` 分隔目录层次关系，从而构成指向这个目录项的路径（path）。
+- Linux 系统中的绝对（absolute）路径始终使用 `/` 打头；不以 `/` 打头的路径视作相对（relative）路径，指相对于当前目录的路径。
+- `.` 和 `..` 是两个特殊的目录项，分别表示当前目录和父（parent）目录。
+
+	
+### 通配符
+
+- 通配符（wildcard）是一种利用特殊字符指代多个字符或者单个字符的简单方法。比如 `A*B` 表示 `A` 开头 `B` 结尾的一个字符串，中间可包含任意数量的任意字符。
+- 在 Shell 命令行中使用时，可使用通配符指代匹配（match）对应模式（pattern）的一组文件。
+- Shell 处理参数中的通配符并将匹配（match）通配符的文件名作为参数传入命令；命令行参数被引号包围时不做此处理。
+- Shell 通常常用如下几种通配符：
+   1. `*`：匹配 0 或多个字符。
+   1. `?`：匹配任意单个字符。
+   1. `[list]`：匹配 `list` 中的任意单个字符。
+   1. `[c1-c2]`：匹配 `c1` 到 `c2` 的任意字符，如 `[0-9]`、`[a-z]`。
+
+```console
+# 查找当前目录下所有名称以 `.md` 结尾的文件；若当前目录下只有一个 `README.md` 文件，
+# 则下面的命令行实际等价于 `find . -name README.md`。
+$ find . -name *.md
+./README.md
+
+
+# 若使用下面的命令行，则 `*.md` 将被 `find` 处理，从而可以找到当前目录下所有
+# 后缀名为 `md` 的文件。
+$ find . -name "*.md"
+./slides/my-first-python-program.md
+./slides/my-first-open-source-repository.md
+./slides/python-data-types.md
+./slides/preparing-ubuntu-linux.md
+./slides/python-flow-control.md
+./slides/python-standard-library.md
+./slides/bash-shell-programming.md
+./slides/using-linux-desktop-system.md
+./README.md
+```
+
+	
+### 正则表达式
+
+- 正则表达式（regular expression, 简称 `regex`）就是用一个“字符串”来描述一个特征，然后去验证另一个“字符串”是否符合这个特征。
+- 类似通配符，使用正则表达式描述的字符串特征称为模式，验证的过程就是判断一个字符串是否匹配这个模式。
+- 比如模式 `lo[o]?ng` 描述的特征是“`lo` 外加一个可能的 `o`，再加 `ng`”，那么 `long` 和 `loong` 都匹配这个模式。
+- 正则表达式是一种比通配符更加强大的字符串特征描述方法，在 Linux 文本处理工具、编程语言以及各种程序中广泛使用：
+   - 匹配满足特定模式的行或者文本。
+   - 检查用户输入的手机号码、邮件地址等是否正确。
+- 大部分编程语言规定的变量名之命名规范符合如下正则表达式：`^[a-zA-Z_][a-zA-Z0-9_]*$`。
+
+	
 ### 演示视频
 
 [0-2-2：常用系统命令及工具](#)
 
-1. 获取帮助；递归命名
+1. 获取帮助
 1. 环境变量
 1. 常用命令
-1. 文件及文件系统工具；通配符的概念
+1. 文件及文件系统工具
 1. 压缩或归档工具
-1. 文本文件工具；正则表达式
+1. 文本文件工具
 1. 流编辑器；管道
 1. 系统管理工具
 1. 网络管理工具
 
 	
-### 知识点：获取帮助
+### 获取帮助
 
 - `man`：显示指定命令的手册页（`man`ual page）内容，也就是随机文档（document）。
 - `info`：显示 GNU 项目开发的各种工具的完整信息（`info`rmation）。
 - `whatis`：显示随机手册页的描述信息；通常用于展示某个命令的简短描述。
 
 	
-### 知识点：环境变量
+### 环境变量
 
 使用 `$` 可在命令行直接引用环境（environment）变量：
 
@@ -140,7 +193,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `LC_TIME`：用来定义时间和日期格式的区域（`l`ocale）类别（`c`ategory）。
 
 	
-### 知识点：常用命令
+### 常用命令
 
 - `cd`：改变（`c`hange）工作目录（`d`irectory）。
 - `history`：显示命令行历史；使用 `!<history number>` 可执行对应的历史命令。
@@ -154,7 +207,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `sleep`：睡眠（暂定当前脚本的执行）指定的秒数。
 
 	
-### 知识点：文件及文件系统工具
+### 文件及文件系统工具
 
 - `ls`：列出（list）指定目录（或当前目录）中的文件和子目录。
 - `ll`：`ls -alF` 的别名。
@@ -167,10 +220,10 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `rmdir`：移除（`r`e`m`ove）指定的目录（目录须为空）。
 - `find`：在指定目录树中按照名称、大小、创建日期等条件搜索文件。
 - `du`：显示磁盘使用情况（`d`isk `u`sage）。
-- `tree`：以树状（`tree`）形式展示目录以及文件的层次结构（hierarchy）。
+- `tree`：以树状（`tree`）形式展示目录以及文件的层次结构。
 
 	
-### 知识点：压缩或归档工具
+### 压缩或归档工具
 
 - `tar`：归档工具；将指定目录树打包为单个文件。
 - `zip/unzip`：压缩解压工具（使用 Phil Katz 的 ZIP 算法）。使用该工具压缩的文件通常使用 `.zip` 后缀名。
@@ -178,7 +231,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `bzip2/bunzip2`：压缩解压工具（使用 Burrows-Wheeler 块排序文本压缩算法和 Huffman 编码）。使用该工具压缩的文件通常使用 `.bz2` 后缀名。
 
 	
-### 知识点：文本文件工具
+### 文本文件工具
 
 - `echo`：打印一行文本到标准输出。
 - `cat`：拼接（concatenate）多个文件并打印到标准输出。
@@ -193,23 +246,13 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `head/tail`：打印文件头部/尾部的内容。
 
 	
-### 知识点：正则表达式
-
-- 正则表达式（regular expression, 简称 `regex`）就是用一个“字符串”来描述一个特征，然后去验证另一个“字符串”是否符合这个特征。
-- 使用正则表达式描述的字符串特征称为`模式`（pattern），验证的过程就是判断一个字符串是否`匹配`（match）这个模式。
-- 比如模式 `lo[o]?ng` 描述的特征是“`lo` 外加一个可能的 `o`，再加 `ng`”，那么 `long` 和 `loong` 都匹配这个模式。
-- 正则表达式是一种比通配符更加强大的字符串特征描述方法，在 Linux 命令行及各种程序中广泛使用：
-   - 匹配满足特定模式的行或者文本。
-   - 检查用户输入的手机号码、邮件地址等是否正确。
-
-	
-### 知识点：流编辑器
+### 流编辑器
 
 - `sed`：用于过滤和转换文本的流编辑器（`s`tream `ed`itor）。
 - `tr`：转换（`tr`anslate）或删除标准输出上的字符，并打印到标准输出上。
 
 	
-### 知识点：系统管理工具
+### 系统管理工具
 
 - `ps`：打印系统中正在运行的进程。
 - `kill`：杀掉指定的进程。
@@ -223,7 +266,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `halt/poweroff/reboot`：分别用于暂停、关机或者重启机器。
 
 	
-### 知识点：系统管理工具（续）
+### 系统管理工具（续）
 
 - `uname`：打印系统信息。
 - `hostname`：显示主机名。
@@ -232,7 +275,7 @@ or available locally via: info '(coreutils) mkdir invocation'
 - `groups`：打印指定用户（默认为当前有效用户）所在的组。
 
 	
-### 知识点：网络管理工具
+### 网络管理工具
 
 - `ping`：向指定的主机发送网络回声请求；通常用来判断网络是否可达指定的主机。
 - `ifconfig`：配置网络接口（network `i`nter`f`ace）。
@@ -243,23 +286,28 @@ or available locally via: info '(coreutils) mkdir invocation'
 		
 ## 有趣的 Shell 命令行
 
+1. UNIX 设计哲学：
+   - 一切皆文件。
+   - 功能单一的程序或模块合作完成复杂任务。
+1. 标准输入（`stdin/0`）、标准输出（`stdout/1`）和标准错误（`stderr/2`）的概念。
+1. 重定向的概念。
+1. 管道的概念。
+
 	
 ### 演示视频
 
 [0-2-3：有趣的 Shell 命令行](#)
 
-1. UNIX 设计哲学：
-   - 一切皆文件。
-   - 功能单一的程序或模块合作完成复杂任务。
-1. 标准输入（`stdin/0`）、标准输出（`stdout/1`）和标准错误（`stderr/2`）。
-1. 重定向标准输出、标准错误的概念和方法：
+1. 重定向标准输出、标准错误的方法：
    - `[1]>FILE`：将标准输出重定向到文件 `FILE`。
    - `2>FILE`：将标准错误重定向到文件 `FILE`。
    - `[1]>>FILE`：将标准错误重定向并追加到文件 `FILE`。
-1. 通过管道甚至可以重定向标准输入。
+1. 通过管道重定向标准输入。
+1. 在单条命令行组合多个命令的方法。
+1. 若干命令行示例。
 
 	
-### 知识点：组合多个命令的方法
+### 组合多个命令的方法
 
 1. 一条命令行中可以包含多个顺序执行的命令，中间用分号（semicolon，`;`）。
 1. 若使用 `&&` 分隔两个命令，则仅当第一个命令执行成功时才会执行第二个命令。
