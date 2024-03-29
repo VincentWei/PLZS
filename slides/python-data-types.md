@@ -384,9 +384,9 @@ for x in f:
 
 1. 用于表达一般性的二进制数据，比如图片、语音、视频等多媒体数据。
 1. 在 Python 中有两种字节序列类型：
-   - 字节们（`bytes`）：使用 `bytes()` 构造。
+   - 字节串（`bytes`）：使用 `bytes()` 构造。
    - 字节组（`bytearray`）：使用 `bytearray()` 构造。
-1. 字节们本质上是字节为单位的不可变序列。
+1. 字节串本质上是字节为单位的不可变序列。
 1. 字节组本质上是字节为单位的可变序列。
 1. 为什么不直接使用 `int` 列表？
 
@@ -416,7 +416,7 @@ for x in f:
    - 字符串（`str`）；不可变（immutable）
    - 元组（`tuple`）；不可变（immutable）
    - 列表（`list`）；可变（mutable）
-   - 字节们（`bytes`）；不可变（immutable）
+   - 字节串（`bytes`）；不可变（immutable）
    - 字节组（`bytearray`）；可变（mutable）
 
 	
