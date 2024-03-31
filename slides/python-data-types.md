@@ -306,7 +306,7 @@ type(pass())
 - 特殊函数：生成器（generator）；使用 `yield` 语句；内置函数 `range()` 本质上就是一个生成器。
 
 	
-`my_range()` 实现：
+`my-range-generator.py`：
 
 ```python
 #!/usr/bin/python3
@@ -515,14 +515,18 @@ for i in range(len(cases)):
 
 ```python
 def prompt_for_formula():
-    formula = 4
+    formula = -1
     while formula < 0 or formula > 3:
         print('To calculate the area, please choose a geometrical shape:')
         print('1. Triange')
         print('2. Square')
         print('3. Circle')
         print('0. Exit')
-        formula = int(input('Your choice:'))
+
+        try:
+            formula = int(input('Your choice:'))
+        except ValueError:
+            formula = -1
 
     return formula
 
@@ -549,7 +553,7 @@ formulas = [
 ]
 
 def prompt_for_formula():
-    formula = len(formulas) + 1
+    formula = -1
     while formula < 0 or formula > len(formulas):
         print('To calculate the area, please choose a geometrical shape:')
         i = 1
@@ -557,7 +561,10 @@ def prompt_for_formula():
             print(f'{i}. {f["name"]}')
             i = i + 1
         print('0. Exit')
-        formula = int(input('Your choice:'))
+        try:
+            formula = int(input('Your choice:'))
+        except ValueError:
+            formula = -1
 
     return formula
 
@@ -572,7 +579,7 @@ while True:
 		
 ## 要点回顾
 
-1. 使用 `try` 语句处理异常。
+1. 使用 `try` 语句处理可能得异常。
 1. 数值表达中的进制。
 1. 定义或者构造字符串的方法以及相关运算符，以及遍历字符串中字符的方法。
 1. 定义或者构造列表、元组的方法以及相关运算符，以及遍历列表及元组中成员的方法。
