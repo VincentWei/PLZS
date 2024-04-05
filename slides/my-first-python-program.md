@@ -278,7 +278,7 @@ print(s)
 
 1. 以交互模式运行 Python 解释器。
 1. Python 算术表达式和算术运算符。
-1. Python 变量和语句
+1. Python 变量和语句。
 1. Python 函数。
 1. 常用 Python 内置函数。
 1. 使用 Python 解释器执行 Python 程序（文件模式）。
