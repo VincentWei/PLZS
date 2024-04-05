@@ -15,7 +15,7 @@
 - 为什么选择 Python 作为入门编程语言？
 - 千万记住：我们用的是 Python 3！
 - Python 解释器（interpreter）的两种运行模式：
-   1. 交互模式（interactive mode）：学习、探索、调试
+   1. 交互模式（interactive mode）：学习、探索、调试。
    1. 文件模式：解释器模式执行指定的 Python 程序。
 
 	
