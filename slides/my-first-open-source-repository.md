@@ -65,7 +65,7 @@ $ git init
 $ git add README.md
 $ git commit -m "first commit"
 $ git branch -M main
-$ git remote add origin git@github.com:VincentWei/plzs-homework.git
+$ git remote add origin git@github.com:<YourAccountName>/plzs-homework.git
 $ git push -u origin main
 ```
 
