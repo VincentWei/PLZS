@@ -499,15 +499,19 @@ assert(f.closed)
 	
 ### `sys` 模块及其主要接口
 
-1) `sys` 模块中包含了系统相关的一些信息，被解释器初始化为指定的可直接使用对象：
-   - 标准输入、标准输出和标准错误对应的文件对象：`sys.stdin`、`sys.stdout`、`sys.stderr`。
-   - `sys.argv`：传递给 Python 脚本的命令行参数（列表）；其中 `argv[0]` 为脚本的名称。
-   - `sys.copyright`：一个字符串，包含了 Python 解释器有关的版权信息。
-   - `sys.path`：一个字符串列表，包含了模块的搜索路径。
-   - `sys.platform`：一个字符串，包含平台标识符，可用于判断底层平台（操作系统）是 Windows、Linux 还是 macOS 等。
-   - `sys.version`：一个包含 Python 解释器版本号加编译版本号以及所用编译器等额外信息的字符串。 此字符串会在交互式解释器启动时显示。
-   - `sys.version_info`：一个包含版本号五部分的元组: `major`, `minor`, `micro`, `releaselevel` 和 `serial`。对应于 Python 版本 3.10.0 的 `version_info` 值为 `(3, 10, 0, 'final', 0)`。可用来判断 Python 解释器的版本，用于向后兼容性处理。
+1) `sys` 模块中主要包含了系统相关的一些信息，被解释器初始化为指定的可直接使用的对象。
 2) `sys.exit([arg])`：退出程序并指定程序的退出值。注：在 Linux Shell 中，一个程序的退出值为 `0` 表示成功。
+3) `sys.stdin`、`sys.stdout`、`sys.stderr`：标准输入、标准输出和标准错误对应的文件对象。
+4) `sys.argv`：传递给 Python 脚本的命令行参数（列表）；其中 `argv[0]` 为脚本的名称
+5) `sys.path`：一个字符串列表，包含了模块的搜索路径。
+
+	
+### `sys` 模块及其主要接口（续）
+
+6) `sys.copyright`：一个字符串，包含了 Python 解释器有关的版权信息。
+7) `sys.platform`：一个字符串，包含平台标识符，可用于判断底层平台（操作系统）是 Windows、Linux 还是 macOS 等。
+8) `sys.version`：一个包含 Python 解释器版本号加编译版本号以及所用编译器等额外信息的字符串。 此字符串会在交互式解释器启动时显示。
+9) `sys.version_info`：一个包含版本号五部分的元组: `major`, `minor`, `micro`, `releaselevel` 和 `serial`。对应于 Python 版本 3.10.0 的 `version_info` 值为 `(3, 10, 0, 'final', 0)`。可用来判断 Python 解释器的版本，用于向后兼容性处理。
 
 		
 ## 要点回顾
