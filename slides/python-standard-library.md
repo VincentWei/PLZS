@@ -268,6 +268,9 @@ class Circle(object):           # `object` 是 Python 基类（base class）或�
 
     def area(self):
         return self.pi * self.r * self.r
+
+    def __str__(self):
+        return 'A circle with a radius of ' + str(self.r) + '.'
 ```
 
 	
@@ -277,14 +280,22 @@ class Circle(object):           # `object` 是 Python 基类（base class）或�
 1. 通过类的实例可访问（access）类或实例的属性或调用方法。
 
 ```python
-c1 = Circle(1.0)    # 解释器会创建一个 Circle 对象并调用 Circle 类的 __init__() 方法。
-s = c1.area()       # 调用 Circle 对象的 area 方法；此时将使用类属性 pi 的默认值进行计算。
-                    # 解释器会将 c1 作为第一个参数传入 Circle 类的 `area` 函数。
+c = Circle(1.0)     # 解释器会创建一个 Circle 对象并调用 Circle 类的 __init__() 方法。
+s = c.area()        # 调用 Circle 对象的 area 方法；此时将使用类属性 pi 的默认值进行计算。
+                    # 解释器会将 c 作为第一个参数传入 Circle 类的 `area` 函数。
+
+# print() 将调用 Circle 类的 `__str__()` 方法。
+print(c, "Its area is", s)
 
 import math
 Circle.pi = math.pi # 使用 math 模块中的 pi 常量覆盖类属性 pi 的值。
-s = c1.area()       # 调用 Circle 对象的 area 方法；此时将使用修改后的类属性 pi 的默认值进行计算。
-                    # 解释器会将 c1 作为第一个参数传入 Circle 类的 `area` 函数。
+s = c.area()        # 调用 Circle 对象的 area 方法；此时将使用修改后的类属性 pi 的默认值进行计算。
+                    # 解释器会将 c 作为第一个参数传入 Circle 类的 `area` 函数。
+c1 = Circle(1.0)
+s = c1.area()
+
+# print() 将调用 Circle 类的 `__str__()` 方法。
+print(c, "Its area is", s)
 ```
 
 		
@@ -518,7 +529,7 @@ assert(f.closed)
 
 1. 掌握递归调用函数的概念并积极实践。
 1. 掌握类的定义和使用方法。
-1. 了解针对不同数据类型的内置方法或函数。
+1. 掌握针对不同数据类型的常用内置方法或函数。
 1. 掌握 `io` 及 `sys` 模块的常用接口及其用法。
 
 		
@@ -536,6 +547,8 @@ The factorial of 20 is: 2432902008176640000
 
 	
 3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、三角形、圆、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意根据三个边长计算三角形的面积需要用到 `math` 模块中的三角函数。运行效果同前。
+
+	
 4) 严格按照内置函数 `print()` 的[接口描述](https://docs.python.org/zh-cn/3.10/library/functions.html#print)实现 `my_print()` 函数，添加测试代码并和 `print()` 的执行结果做对比。测试方法：创建两个文件并将 `my_print()` 和 `print()` 的结果输出分别到不同的文件中，最后对比两个文件的内容是否一致。要求使用 `sys` 和 `io` 模块。运行效果如下：
 
 ```console
