@@ -418,6 +418,79 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 	
 ### `io` 模块及其主要接口
 
+1) 文件 I/O 和流（stream）的基本概念
+2) 文件 I/O 的基本操作
+   - 打开（open）：以指定的读/写或文本/二进制模式打开指定的文件。
+   - 读取（read）：从当前读写位置读取数据并修改当前的读写位置。
+   - 写入（write）：在当前读写位置写入指定的数据并修改当前读写位置。
+   - 定位（seek）：修改当前的读写位置。
+   - 刷新（flush）：将缓冲区中的内容刷新到操作系统（可理解为写入到文件）。
+   - 关闭（close）：刷新缓冲区中的内容并关闭文件。
+
+	
+3) 文本 I/O（由 `TextIOBase` 类实现）
+   - 读取将产生字符串（`str`）对象；写入要求传入 `str` 对象。
+   - 会执行新行符（`\n`）的平台相关的转换（在 Windows 上，写入的 `\n` 将被存储为 `\r\n` 两个字符；读取的 `\r\n` 会转换为 `\n` 单个字符）。
+   - 采取行缓冲（line-buffering）策略：写入时，遇到 `\n` 才会将缓冲区中的内容刷新到操作系统；否则只会保存到缓冲区——提高读写性能。
+   - 可执行文本的编码转换，默认和当前的区域（locale）设置有关；建议使用 UTF-8 编码。
+   - `f = open("myfile.txt", "r")`
+4) 二进制 I/O（由 `BufferedIOBase` 类实现）
+   - 读取将产生字节串（`bytes`）对象；写入要求传入类似字节串的对象。
+   - 采取块缓冲（block-buffering）策略：写入时，只有缓冲区中的内容达到事先创建的缓冲区大小（通常为 8192 字节）才会将数据刷新到操作系统；否则会保存到缓冲区——提高读写性能。
+   - `f = open("myfile.jpg", "rb")`
+5) 裸（raw）I/O（由 `RawIOBase` 类实现）
+   - 本质上就是无缓冲（unbuffered）的二进制 I/O。
+   - `f = open("myfile.jpg", "rb", buffering = 0)`
+
+	
+6) 主要接口：
+   - `closed()`：如果流已关闭，则返回 `True`。
+   - `close()`：刷新并关闭此流。如果文件已经关闭，则此方法无效。文件关闭后，对文件的任何操作（例如读取或写入）都会引发 `ValueError`。
+   - `flush()`：刷新流的写入缓冲区（如果适用）。这对只读和无缓冲流不起作用。
+   - `readable()`：如果可以读取流则返回 `True`，否则为 `False`；不可读时，在流上调用 `read()` 方法将引发 `OSError` 错误。
+   - `readline(size=-1, /)`：从流中读取并返回一行。如果指定了 `size`，将至多读取 `size` 个字节。
+   - `readlines(hint=- 1, /)`：从流中读取并返回包含多行的列表。可以指定 `hint` 来控制要读取的行数。
+
+	
+7) 主要接口（续）：
+   - `seek(offset, whence=SEEK_SET, /)`：将流位置修改到给定的字节 `offset`。`offset` 将相对于由 `whence` 指定的位置进行解析。`whence` 的默认值为 `SEEK_SET`。`whence` 的可用值有：
+      * `SEEK_SET` 或 0 -- 流的开头（默认值）；`offset` 应为零或正值。
+      * `SEEK_CUR` or 1 -- 当前流位置；`offset` 可以为负值。
+      * `SEEK_END` or 2 -- 流的末尾；`offset` 通常为负值。
+   - `seekable()`：如果流支持随机访问则返回 `True`。如返回 `False`，则 `seek()`, `tell()` 和 `truncate()` 将引发 `OSError`。
+   - `tell()`：返回当前流的位置。
+   - `truncate(size=None, /)`：将流的大小调整为给定的 `size` 个字节（如果未指定 `size` 则调整至当前位置）。当前的流读写位置不变。
+   - `writable()`：如果流支持写入则返回 `True`。若返回 `False`，则 `write()` 和 `truncate()` 将引发 `OSError`。
+   - `writelines(lines, /)`：将行列表写入到流。注意该函数不会为每行新行符，需要自行添加。
+
+	
+8) 用法示例：
+
+```python
+#!/usr/bin/python3
+
+lines = [
+    'line 1\n',
+    'line 2\n',
+    'line 3\n',
+]
+
+with open('sample.txt', 'w') as f:
+    f.writelines(lines)
+    f.close()
+
+with open('sample.txt', 'r') as f:
+    for line in f:
+        print(line, end='')
+
+    f.seek(0)
+    lines = f.readlines()
+    f.close()
+
+    for line in lines:
+        print(line, end='')
+```
+
 	
 ### `sys` 模块及其主要接口
 
@@ -444,5 +517,16 @@ The factorial of 20 is: 2432902008176640000
 
 	
 3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、三角形、圆、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意根据三个边长计算三角形的面积需要用到 `math` 模块中的三角函数。运行效果同前。
-4) 严格按照内置函数 `print()` 的接口[描述](https://docs.python.org/zh-cn/3.10/library/functions.html#print)，实现 `my_print()` 函数，添加测试代码并和 `print()` 的结果做对比。测试方法：创建两个文件并将 `my_print()` 和 `print()` 的结果输出分别到不同的文件中，最后对比两个文件的内容是否一致。
+4) 严格按照内置函数 `print()` 的[接口描述](https://docs.python.org/zh-cn/3.10/library/functions.html#print)实现 `my_print()` 函数，添加测试代码并和 `print()` 的执行结果做对比。测试方法：创建两个文件并将 `my_print()` 和 `print()` 的结果输出分别到不同的文件中，最后对比两个文件的内容是否一致。要求使用 `sys` 和 `io` 模块。运行效果如下：
+
+```console
+$ ./my_print.py my_print.txt print.txt
+Printing test case 0 to my_print.txt...done.
+Printing test case 0 to print.txt...done.
+Printing test case 1 to my_print.txt...done.
+Printing test case 1 to print.txt...done.
+...
+Comparing contents of my_print.txt and print.txt...
+All test cases passed.
+```
 
