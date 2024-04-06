@@ -448,12 +448,12 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 
 	
 6) 主要接口：
-   - `closed()`：如果流已关闭，则返回 `True`。
+   - `closed`：如果流已关闭，则为 `True`。
    - `close()`：刷新并关闭此流。如果文件已经关闭，则此方法无效。文件关闭后，对文件的任何操作（例如读取或写入）都会引发 `ValueError`。
    - `flush()`：刷新流的写入缓冲区（如果适用）。这对只读和无缓冲流不起作用。
    - `readable()`：如果可以读取流则返回 `True`，否则为 `False`；不可读时，在流上调用 `read()` 方法将引发 `OSError` 错误。
    - `readline(size=-1, /)`：从流中读取并返回一行。如果指定了 `size`，将至多读取 `size` 个字节。
-   - `readlines(hint=- 1, /)`：从流中读取并返回包含多行的列表。可以指定 `hint` 来控制要读取的行数。
+   - `readlines(hint=-1, /)`：从流中读取并返回包含多行的列表。可以指定 `hint` 来控制要读取的行数。
 
 	
 7) 主要接口（续）：
@@ -471,7 +471,7 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
    - `writelines(lines, /)`：将行列表写入到流。注意该函数不会为每行新行符，需要自行添加。
 
 	
-9) 用法示例：
+9) 用法示例；注意在其中使用了 `with` 语句以简化异常处理，且不需要显式（explicitly）调用 `f.close()` 方法。
 
 ```python
 #!/usr/bin/python3
@@ -484,7 +484,6 @@ lines = [
 
 with open('sample.txt', 'w') as f:
     f.writelines(lines)
-    f.close()
 
 with open('sample.txt', 'r') as f:
     for line in f:
@@ -492,10 +491,11 @@ with open('sample.txt', 'r') as f:
 
     f.seek(0)
     lines = f.readlines()
-    f.close()
 
     for line in lines:
         print(line, end='')
+
+assert(f.closed)
 ```
 
 	
