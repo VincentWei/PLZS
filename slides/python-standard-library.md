@@ -250,18 +250,18 @@ def foo(a, b, /, c, *, d):
 	
 ### Python 类的定义
 
-- 使用 `class` 语句定义一个类；`object` 是 Python 基类（base class）或父类（parent class）。
+- 使用 `class` 语句定义一个类。
 - 一个类由一组属性（attribute）和一组方法（method）构成。
 - 属性有类属性和实例属性之分。
 - 使用预定义方法 `__init__()` 定义一个类的初始化（initialize）函数。
 - 所有类方法的第一个参数用于传递该类的实例对象，故而常用 `self` 作为该参数的名称。
 
 ```python
-class Circle(object):
-    pi = 3.14159265             # 类属性
+class Circle(object):           # `object` 是 Python 基类（base class）或父类（parent class）
+    pi = 3.14159265             # pi 是类属性，对所有类的实例只有一个副本
 
     def __init__(self, r):
-        self.r = r              # 实例属性
+        self.r = r              # 实例属性，每个类的实例均有自己的副本
 
     def premiter(self):
         return 2. * self.pi * self.r
@@ -274,7 +274,7 @@ class Circle(object):
 ### Python 类的使用
 
 1. 使用类名称作为函数名调用类的构造方法以创建一个实例。
-1. 通过类的实例可访问（access）对应的属性或调用对应的方法。
+1. 通过类的实例可访问（access）类或实例的属性或调用方法。
 
 ```python
 c1 = Circle(1.0)    # 解释器会创建一个 Circle 对象并调用 Circle 类的 __init__() 方法。
@@ -302,7 +302,7 @@ s = c1.area()       # 调用 Circle 对象的 area 方法；此时将使用修�
 	
 ### 学会看语法描述文档
 
-1) 以 Python 的浮点数描述语法
+- Python 的浮点数描述语法
 
 ```
 sign        ::=  "+" | "-"
@@ -338,9 +338,27 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 	
 ### 针对字符串的接口
 
-1. `str.endswith()`：如果字符串以指定的 `suffix` 结束返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选项 `end`，将在所指定位置停止比较。
+1. `str.capitalize()`：返回原字符串的一个副本（copy），其首个字符大写，其余为小写。
+1. `str.casefold()`：返回原字符串消除大小写的副本。 消除大小写的字符串可用于忽略大小写的匹配。
+1. `str.find(sub[, start[, end]])`：返回子字符串 `sub` 在 `s[start:end]` 切片内被找到的最小索引。如果 `sub` 未被找到则返回 -1。
+1. `str.index(sub[, start[, end]])`：类似于 `find()`，但在找不到子字符串时会引发 `ValueError`。
+1. `str.endswith(suffix[, start[, end]])`：如果字符串以指定的 `suffix` 结束返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选项 `end`，将在所指定位置停止比较。
 1. `str.startswith(prefix[, start[, end]])`：如果字符串以指定的 `prefix` 开始则返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选参数 `end`，将在所指定位置停止比较。
-1. `str.replace(old, new[, count])`：返回字符串的副本（copy），其中出现的所有子字符串 `old` 都将被替换为 `new`。如果给出了可选参数 `count`，则只替换前 `count` 次出现。
+1. `str.replace(old, new[, count])`：返回字符串的副本，其中出现的所有子字符串 `old` 都将被替换为 `new`。如果给出了可选参数 `count`，则只替换前 `count` 次出现。
+1. `str.format(*args, **kwargs)`：执行字符串格式化操作。调用此方法的字符串可以包含字符串字面值或者以花括号 `{}` 括起来的替换域。每个替换域可以包含一个位置参数的数字索引，或者一个关键字参数的名称。返回的字符串副本中每个替换域都会被替换为对应参数的字符串值。
+1. [更多字符串方法](https://docs.python.org/zh-cn/3.10/library/stdtypes.html#string-methods)。
+
+	
+#### 示例
+
+```python
+# str.format()
+"The sum of 1 + 2 is {0}".format(1+2)                   # 'The sum of 1 + 2 is 3'
+"The sum of 1 + 2 is {sum}".format(sum=1+2)             # the same as above
+
+'The quick brown fox jumps over the lazy dog'.endswith('dog')     # True
+'The quick brown fox jumps over the lazy dog'.index('foobar')     # ValueError
+```
 
 	
 ### 针对容器的内置全局函数
@@ -386,18 +404,30 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 
 	
 2) 针对字典的其他内置方法：
-   - `d.copy()`：浅复制字典。
+   - `d.copy()`：返回原字典的一个浅（shallow）拷贝。
    - `d.fromkeys()`：使用指定的键元组以及可选的值构建一个字典。
    - `d.setdefault(key[, default])`：如果字典存在键 `key`，则返回其值。如果不存在，插入值为 `default` 的键 `key`，并返回 `default`。`default` 默认为 `None`。
    - `d.update([other])`：使用来自 `other` 的键值对更新字典，覆盖原有的键。返回 `None`。
 
 		
+## 常用模块及其主要接口
+
+1. `sys`
+1. `math`
+1. ``
+
+		
 ## 要点回顾
+
+1. 掌握递归调用函数的概念并积极实践。
+1. 掌握类的定义和使用方法。
+1. 了解针对不同数据类型的内置方法或函数。
+1. 掌握 `sys` 模块的常用接口及其用法。
 
 		
 ## 作业
 
-1) 优化使用递归函数生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
+1) 使用缓存结果的方式优化递归生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
 2) 使用递归函数计算阶乘，运行效果如下：
 
 ```console
@@ -408,14 +438,6 @@ The factorial of 20 is: 2432902008176640000
 ```
 
 	
-3) 按照内置函数 `print()` 的接口定义，实现 `my_print()` 函数，添加测试代码并和 `print()` 的结果做对比。
-
-```python
-print(*objects, sep=' ', end='\n', file=None, flush=False)
-```
-
-   - 将 `objects` 打印输出至 `file` 指定的文本流，以 `sep` 分隔并在末尾加上 `end`。`sep`、 `end`、 `file` 和 `flush` 必须以关键字参数的形式给出。
-   - 所有非关键字参数都会被转换为字符串，就像是执行了 `str()` 一样，并会被写入到流，以 `sep` 分隔并在末尾加上 `end`。`sep` 和 `end` 都必须为字符串；它们也可以为 `None`，这意味着使用默认值。如果没有给出 `objects`，则 `print()` 将只写入 `end`。
-   - `file` 参数必须是一个具有 `write(string)` 方法的对象；如果参数不存在或为 `None`，则将使用 `sys.stdout`。 由于要打印的参数会被转换为文本字符串，因此 `print()` 不能用于二进制模式的文件对象。 对于这些对象，应改用 `file.write(...)`。
-   - 输出缓冲通常由 `file` 确定。 但是，如果 `flush` 为真值，流将被强制刷新。
+3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、三角形、圆、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意根据三个边长计算三角形的面积需要用到 `math` 模块中的三角函数。运行效果同前。
+4) 严格按照内置函数 `print()` 的接口[描述](https://docs.python.org/zh-cn/3.10/library/functions.html#print)，实现 `my_print()` 函数，添加测试代码并和 `print()` 的结果做对比。测试方法：创建两个文件并将 `my_print()` 和 `print()` 的结果输出分别到不同的文件中，最后对比两个文件的内容是否一致。
 
