@@ -291,23 +291,7 @@ s = c1.area()       # 调用 Circle 对象的 area 方法；此时将使用修�
 ## 针对常用数据类型的接口
 
 	
-### 针对数值的接口
-
-- `abs(x)`：返回一个数的绝对值。参数 `x` 可以是整数、浮点数或任何实现了 `__abs__()` 方法的对象。
-- `divmod(a, b)`：以两个（非复数）数字为参数，在作整数除法时，返回商和余数。
-   1. 对于整数而言，结果与 `(a // b, a % b)` 相同。
-   1. 对于浮点数则结果为 `(q, a % b)`，其中 `q` 通常为 `math.floor(a / b)`，但也可能比它小 `1`。
-- `round(number[, ndigits])`：返回 `number` 舍入到小数点后 `ndigits` 位精度的值。
-   1. 如果 `ndigits` 被省略或为 `None`，则返回最接近输入值的整数。
-   1. 对于支持 `round()` 方法的内置类型，结果值会舍入至最接近的 10 的负 `ndigits` 次幂的倍数；如果与两个倍数同样接近，则选用偶数。因此，`round(0.5)` 和 `round(-0.5)` 均得出 0 而 `round(1.5)` 则为 2。
-   1. `ndigits` 可为任意整数值（正数、零或负数）。如果省略了 `ndigits` 或为 `None`，则返回值将为整数。否则返回值与 `number` 的类型相同。
-   1. 对于一般的 Python 对象 `x`, `round` 将委托（delegate）给 `x.__round__()`。
-- `pow(base, exp[, mod])`：返回 `base` 的 `exp` 次幂。
-   1. 如果 `mod` 存在，则返回 `base` 的 `exp` 次幂对 `mod` 取余（比 `pow(base, exp) % mod` 更高效）。
-   1. 两参数形式 `pow(base, exp)` 等价于乘方运算符: `base ** exp`。
-
-	
-### 针对数值的接口
+### 重新理解 `int()` 和 `float()` 内置函数
 
 - `class int([x])` 和 `class int(x, base=10)`： 返回一个基于数字或字符串 `x` 构造的整数对象，或者在未给出参数时返回 `0`。
    1. 对一般性的对象 `x`，如果 `x` 定义了 `__int__()`，`int(x)` 将返回 `x.__int__()`；如果 `x` 定义了 `__index__()`，它将返回 `x.__index__()`；如果 `x` 定义了 `__trunc__()`，它将返回 `x.__trunc__()`。
@@ -330,6 +314,22 @@ exponent    ::=  ("e" | "E") ["+" | "-"] digitpart
 floatnumber ::=  number [exponent]
 floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 ```
+
+	
+### 针对数值的接口
+
+- `abs(x)`：返回一个数的绝对值。参数 `x` 可以是整数、浮点数或任何实现了 `__abs__()` 方法的对象。
+- `divmod(a, b)`：以两个（非复数）数字为参数，在作整数除法时，返回商和余数。
+   1. 对于整数而言，结果与 `(a // b, a % b)` 相同。
+   1. 对于浮点数则结果为 `(q, a % b)`，其中 `q` 通常为 `math.floor(a / b)`，但也可能比它小 `1`。
+- `round(number[, ndigits])`：返回 `number` 舍入到小数点后 `ndigits` 位精度的值。
+   1. 如果 `ndigits` 被省略或为 `None`，则返回最接近输入值的整数。
+   1. 对于支持 `round()` 方法的内置类型，结果值会舍入至最接近的 10 的负 `ndigits` 次幂的倍数；如果与两个倍数同样接近，则选用偶数。因此，`round(0.5)` 和 `round(-0.5)` 均得出 0 而 `round(1.5)` 则为 2。
+   1. `ndigits` 可为任意整数值（正数、零或负数）。如果省略了 `ndigits` 或为 `None`，则返回值将为整数。否则返回值与 `number` 的类型相同。
+   1. 对于一般的 Python 对象 `x`, `round` 将委托（delegate）给 `x.__round__()`。
+- `pow(base, exp[, mod])`：返回 `base` 的 `exp` 次幂。
+   1. 如果 `mod` 存在，则返回 `base` 的 `exp` 次幂对 `mod` 取余（比 `pow(base, exp) % mod` 更高效）。
+   1. 两参数形式 `pow(base, exp)` 等价于乘方运算符: `base ** exp`。
 
 	
 ### 针对字符串的接口
