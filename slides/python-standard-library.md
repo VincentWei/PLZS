@@ -553,7 +553,7 @@ The factorial of 20 is: 2432902008176640000
 3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、三角形、圆、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意根据三个边长计算三角形的面积需要用到 `math` 模块中的三角函数。运行效果同前。
 
 	
-4) 严格按照内置函数 `print()` 的[接口描述](https://docs.python.org/zh-cn/3.10/library/functions.html#print)实现 `my_print()` 函数，添加测试代码并和 `print()` 的执行结果做对比。测试方法：创建两个文件并将 `my_print()` 和 `print()` 的结果输出分别到不同的文件中，最后对比两个文件的内容是否一致。要求使用 `sys` 和 `io` 模块。运行效果如下：
+4) 严格按照内置函数 `print()` 的[接口描述](https://docs.python.org/zh-cn/3.10/library/functions.html#print)实现 `my_print()` 函数，添加测试代码并和 `print()` 的执行结果做对比。测试方法：创建两个文件并将 `my_print()` 和 `print()` 的结果分别输出到不同文件，最后对比这两个文件的内容是否一致。要求使用 `sys` 和 `io` 模块。运行效果如下：
 
 ```console
 $ ./my_print.py my_print.txt print.txt
@@ -565,4 +565,3 @@ Printing test case 1 to print.txt...done.
 Comparing contents of my_print.txt and print.txt...
 All test cases passed.
 ```
-
