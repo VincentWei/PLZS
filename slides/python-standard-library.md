@@ -13,8 +13,6 @@
 
 ### 递归（recursive）调用生成斐波那契数列
 
-- 使用递归函数生成斐波那契数列。
-
 ```python
 #!/usr/bin/python3
 
