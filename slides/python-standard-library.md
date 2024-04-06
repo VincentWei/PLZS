@@ -434,10 +434,14 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
    - 采取行缓冲（line-buffering）策略：写入时，遇到 `\n` 才会将缓冲区中的内容刷新到操作系统；否则只会保存到缓冲区——提高读写性能。
    - 可执行文本的编码转换，默认和当前的区域（locale）设置有关；建议使用 UTF-8 编码。
    - `f = open("myfile.txt", "r")`
+
+	
 4) 二进制 I/O（由 `BufferedIOBase` 类实现）
    - 读取将产生字节串（`bytes`）对象；写入要求传入类似字节串的对象。
    - 采取块缓冲（block-buffering）策略：写入时，只有缓冲区中的内容达到事先创建的缓冲区大小（通常为 8192 字节）才会将数据刷新到操作系统；否则会保存到缓冲区——提高读写性能。
    - `f = open("myfile.jpg", "rb")`
+
+	
 5) 裸（raw）I/O（由 `RawIOBase` 类实现）
    - 本质上就是无缓冲（unbuffered）的二进制 I/O。
    - `f = open("myfile.jpg", "rb", buffering = 0)`
@@ -459,12 +463,15 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
       * `SEEK_END` or 2 -- 流的末尾；`offset` 通常为负值。
    - `seekable()`：如果流支持随机访问则返回 `True`。如返回 `False`，则 `seek()`, `tell()` 和 `truncate()` 将引发 `OSError`。
    - `tell()`：返回当前流的位置。
+
+	
+8) 主要接口（再续）：
    - `truncate(size=None, /)`：将流的大小调整为给定的 `size` 个字节（如果未指定 `size` 则调整至当前位置）。当前的流读写位置不变。
    - `writable()`：如果流支持写入则返回 `True`。若返回 `False`，则 `write()` 和 `truncate()` 将引发 `OSError`。
    - `writelines(lines, /)`：将行列表写入到流。注意该函数不会为每行新行符，需要自行添加。
 
 	
-8) 用法示例：
+9) 用法示例：
 
 ```python
 #!/usr/bin/python3
