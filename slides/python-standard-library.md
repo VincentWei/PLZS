@@ -355,6 +355,10 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 1. `str.index(sub[, start[, end]])`：类似于 `find()`，但在找不到子字符串时会引发 `ValueError`。
 1. `str.endswith(suffix[, start[, end]])`：如果字符串以指定的 `suffix` 结束返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选项 `end`，将在所指定位置停止比较。
 1. `str.startswith(prefix[, start[, end]])`：如果字符串以指定的 `prefix` 开始则返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选参数 `end`，将在所指定位置停止比较。
+
+	
+### 针对字符串的接口（续）
+
 1. `str.replace(old, new[, count])`：返回字符串的副本，其中出现的所有子字符串 `old` 都将被替换为 `new`。如果给出了可选参数 `count`，则只替换前 `count` 次出现。
 1. `str.format(*args, **kwargs)`：执行字符串格式化操作。调用此方法的字符串可以包含字符串字面值或者以花括号 `{}` 括起来的替换域。每个替换域可以包含一个位置参数的数字索引，或者一个关键字参数的名称。返回的字符串副本中每个替换域都会被替换为对应参数的字符串值。
 1. [更多字符串方法](https://docs.python.org/zh-cn/3.10/library/stdtypes.html#string-methods)。
