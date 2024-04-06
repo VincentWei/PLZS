@@ -1,9 +1,10 @@
 ## Python 标准库和常用模块
 
 1. 三人行必有我师
-1. 针对字符串的接口
+1. Python 标准库概览
+1. Python 函数的参数类型
 1. 针对常用数据类型的接口
-1. 常用模块
+1. 常用模块及其主要接口
 1. 要点回顾
 1. 作业
 
@@ -11,6 +12,9 @@
 ## 三人行必有我师
 
 ### 递归（recursive）调用生成斐波那契数列
+
+- 使用递归函数生成斐波那契数列。
+- 效率较低；如何优化？
 
 ```python
 #!/usr/bin/python3
@@ -123,6 +127,103 @@ def my_range(start, stop = None, step = None):
 ```
 
 		
+## Python 标准库概览
+
+1) [Python 标准库官方文档](https://docs.python.org/zh-cn/3.10/library/index.html)
+2) 常用：
+   - 内置函数、常量以及针对针对内置数据类型的接口。
+   - 内置异常。
+   - 文本及二进制数据处理。
+   - 针对日期、时区、日历等数据类型以及容器、数组、堆队列等抽象数据结构的接口。
+   - 数值及数学模块，包括 `math`、`cmath` 等模块。
+   - 文件和目录访问。
+   - 通用操作系统服务。
+   - 运行时服务。
+   - 数据持久化。
+   - 国际化。
+
+	
+3) 高阶：
+   - 加解密。
+   - 文件格式。
+   - 并发执行。
+   - 数据压缩和归档。
+   - 网络和进程间通讯。
+   - 互联网数据处理。
+   - 结构化标记语言支持。
+   - 互联网协议和支持。
+   - 多媒体服务。
+   - 开发工具。
+   - 调试和分析。
+   - 软件打包和分发。
+   - 导入模块。
+   - Python 语言服务。
+   - ...
+
+		
+## Python 函数参数类型
+
+1) 默认（default）参数。
+   - 使用赋值运算符（`=`）定义特定形参的默认值。
+   - 调用时，定义有默认值的形参之默认值可被实参覆盖。
+   - 不定义默认值的形参位置应该置于默认参数之前。
+
+```python
+def my_range(start, stop = None, step = None):
+    ...
+```
+
+	
+2) 关键字参数和位置参数
+   - 在调用函数时，使用 `kwarg=value` 的写法指定传入函数的实参。
+   - 不使用关键词参数时，参数的位置决定了实参对应的形参。
+   - 关键词参数应在位置参数之后传入。
+   - 所有参数只能赋值一次。
+
+```python
+print(n, end=', ')
+```
+
+	
+3) 任意位置参数
+
+```python
+import sys
+
+result = 10
+print("The result is: ", result, sep='')
+
+def my_print(*t):
+    for x in t:
+        s = str(x)
+        for c in s:
+            sys.stdout.write(c)
+
+    sys.stdout.write('\n')
+
+my_print("The result is: ", result)
+```
+
+	
+4) 任意关键词参数
+
+```python
+d1 = dict(name='Vincent', weight=68, age=50)
+
+def my_dict(**kws):
+    # return kws
+
+    d = {}
+    for k in kws:
+        d[k] = kws[k]
+    return d
+
+d2 = dict(name='Vincent', weight=68, age=50)
+assert(d1 == d2)
+```
+
+print(*objects, sep=' ', end='\n', file=None, flush=False)
+		
 ## 针对常用数据类型的接口
 
 	
@@ -190,3 +291,15 @@ def my_range(start, stop = None, step = None):
 		
 ## 作业
 
+1) 优化使用递归函数生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
+2) 使用递归函数计算阶乘，运行效果如下：
+
+```console
+$ ./factorial.py
+Please input a positive integer: <-5>
+Please input a positive integer: <20>
+The factorial of 20 is: 2432902008176640000
+```
+
+	
+3) 

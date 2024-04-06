@@ -644,7 +644,7 @@ The Fibonacci numbers less than 100:
 4) 重构本讲 `my-range-generator.py` 程序为 `my-range-generator-improved.py`，将测试用例组织为适当的数据结构，并解耦代码和数据。运行效果如下：
 
 ```console
-% ./my-range-generator-improved.py
+$ ./my-range-generator-improved.py
 case 0: passed.
 case 1: passed.
 case 2: passed.
