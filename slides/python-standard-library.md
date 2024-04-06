@@ -211,7 +211,7 @@ my_print("The result is: ", result)
 d1 = dict(name='Vincent', weight=68, age=50)
 
 def my_dict(**kws):
-    # return kws
+    '''return kws'''
 
     d = {}
     for k in kws:
@@ -222,7 +222,6 @@ d2 = dict(name='Vincent', weight=68, age=50)
 assert(d1 == d2)
 ```
 
-print(*objects, sep=' ', end='\n', file=None, flush=False)
 		
 ## 针对常用数据类型的接口
 
@@ -302,4 +301,15 @@ The factorial of 20 is: 2432902008176640000
 ```
 
 	
-3) 
+3) 按照内置函数 `print()` 的接口定义，实现 `my_print()` 函数，添加测试代码并和 `print()` 的结果做对比。
+
+> `print(*objects, sep=' ', end='\n', file=None, flush=False)`
+>
+> 将 `objects` 打印输出至 `file` 指定的文本流，以 `sep` 分隔并在末尾加上 `end`。`sep`、 `end`、 `file` 和 `flush` 必须以关键字参数的形式给出。
+>
+> 所有非关键字参数都会被转换为字符串，就像是执行了 `str()` 一样，并会被写入到流，以 `sep` 分隔并在末尾加上 `end`。`sep` 和 `end` 都必须为字符串；它们也可以为 `None`，这意味着使用默认值。如果没有给出 `objects`，则 `print()` 将只写入 `end`。
+>
+> `file` 参数必须是一个具有 `write(string)` 方法的对象；如果参数不存在或为 `None`，则将使用 `sys.stdout`。 由于要打印的参数会被转换为文本字符串，因此 `print()` 不能用于二进制模式的文件对象。 对于这些对象，应改用 `file.write(...)`。
+>
+> 输出缓冲通常由 `file` 确定。 但是，如果 `flush` 为真值，流将被强制刷新。
+
