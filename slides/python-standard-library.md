@@ -440,8 +440,6 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
    - 读取将产生字节串（`bytes`）对象；写入要求传入类似字节串的对象。
    - 采取块缓冲（block-buffering）策略：写入时，只有缓冲区中的内容达到事先创建的缓冲区大小（通常为 8192 字节）才会将数据刷新到操作系统；否则会保存到缓冲区——提高读写性能。
    - `f = open("myfile.jpg", "rb")`
-
-	
 5) 裸（raw）I/O（由 `RawIOBase` 类实现）
    - 本质上就是无缓冲（unbuffered）的二进制 I/O。
    - `f = open("myfile.jpg", "rb", buffering = 0)`
