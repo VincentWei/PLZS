@@ -1,43 +1,145 @@
 ## Python 标准库和常用模块
 
-1. 第三讲作业点评
-1. 接口和函数
-1. 针对抽象数据类型的接口
+1. 三人行必有我师
+1. 针对字符串的接口
+1. 针对常用数据类型的接口
 1. 常用模块
 1. 要点回顾
 1. 作业
 
 		
-## 第三讲作业回顾
+## 三人行必有我师
 
-1. 输出小于用户指定的正整数的斐波那契（Fibonacci）数列。
-1. 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。
-1. 循环提示用户输入一个正整数，并判断该正整数是否为一个质数。
-
-	
-### 参考实现：`xxx.py`
+### 递归（recursive）调用生成斐波那契数列
 
 ```python
+#!/usr/bin/python3
+
+def fibonacci(n):
+   if n <= 1:
+       return n
+   else:
+       return fibonacci(n - 1) + fibonacci(n - 2)
+
+mx = 0
+while mx <= 0:
+    try:
+        mx = int(input('Please input a positive integer: '))
+    except ValueError:
+        mx = 0
+
+print(f"The Fibonacci numbers less than {mx}:")
+
+for i in range(mx):
+    a = fibonacci(i)
+    b = fibonacci(i + 1)
+    if a >= mx or b >= mx:
+        print(a, end = '.\n')
+        break
+    else:
+        print(a, end = ', ')
 ```
 
 	
-### 三人行必有我师
+### 消除重复代码
+
+- `my_range()` 函数的原始实现
+
+```python
+def my_range(start, stop = None, step = None):
+    if not isinstance(start, int):
+        raise(ValueError)
+
+    if stop is None:
+        stop = start
+        start = 0
+    elif not isinstance(stop, int):
+        raise(ValueError)
+
+    if step is None:
+        if stop > start:
+            step = 1
+        else:
+            step = -1
+    elif not isinstance(step, int) or step == 0:
+        raise(ValueError)
+
+    if stop > start and step < 0:
+        raise(ValueError)
+    elif stop < start and step > 0:
+        raise(ValueError)
+
+    i = start
+    if step > 0:
+        while i < stop:
+            yield i
+            i += step
+        else:
+            pass
+    else:
+        while i > stop:
+            yield i
+            i += step
+        else:
+            pass
+```
+
+	
+
+- 消除重复代码
+
+```python
+def my_range(start, stop = None, step = None):
+    if not isinstance(start, int):
+        raise(ValueError)
+
+    if stop is None:
+        stop = start
+        start = 0
+    elif not isinstance(stop, int):
+        raise(ValueError)
+
+    if step is None:
+        if stop > start:
+            step = 1
+        else:
+            step = -1
+    elif not isinstance(step, int) or step == 0:
+        raise(ValueError)
+
+    if stop > start and step < 0:
+        raise(ValueError)
+    elif stop < start and step > 0:
+        raise(ValueError)
+
+    i = start
+    sign = 1
+    if step > 0:
+        sign = -1
+
+    while i * sign < stop * sign:
+        yield i
+        i += step
+```
 
 		
-## 针对字符串的接口
+## 针对常用数据类型的接口
+
+	
+### 针对数值的接口
+
+	
+### 针对字符串的接口
 
 1. `str.endswith()`：如果字符串以指定的 `suffix` 结束返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选项 `end`，将在所指定位置停止比较。
 1. `str.startswith(prefix[, start[, end]])`：如果字符串以指定的 `prefix` 开始则返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选参数 `end`，将在所指定位置停止比较。
 1. `str.replace(old, new[, count])`：返回字符串的副本，其中出现的所有子字符串 old 都将被替换为 new。 如果给出了可选参数 count，则只替换前 count 次出现。
 
-		
-## 针对抽象数据类型的接口
-
 	
 ### 针对容器的内置全局函数
 
 1. 容器（container）：序列、集合及映射统称为容器。
-1. `len()`：获取容器的长度（length），亦即容器成员（或元素）的个数。
+1. `len()`：获取容器的长度（length），亦即容器成员（或键值对）的个数。
 1. `max()`：获取容器中各单元之最大值。
 1. `min()`：获取容器中各单元之最小值。
 
@@ -45,22 +147,22 @@
 ### 针对可变序列的内置方法
 
 1. `s.append(x)`：在 `s` 的尾部追加新单元 `x`。
-1. `s.clear()`：清除所有成员，变成空列表。
-1. `s.copy()`：复制列表。
-1. `s.count(x)`：返回 `x` 在列表中出现的次数。
+1. `s.clear()`：清除所有成员，变成空序列。
+1. `s.copy()`：复制序列。
+1. `s.count(x)`：返回 `x` 在序列中出现的次数。
 1. `s.extend(t)`：用 `t` 的内容扩展 `s`。
 1. `s.index(x)`：搜索并返回和指定数据 `x` 匹配的（matched）第一个成员之索引值。
 1. `s.insert(i, x)`：插入数据 `x` 到指定的位置 `i`。
 1. `s.pop()`：提取最后一项，并将其从 `s` 中移除。
 1. `s.pop(i)`：提取在 `i` 位置上的项，并将其从 `s` 中移除。
 1. `s.remove(x)`：移除和指定数据 `x` 匹配的第一个项。
-1. `s.reverse()`：就地将列表成员逆序。
-1. `s.sort()`：对列表中的成员排序。
+1. `s.reverse()`：就地（in-place）将序列成员逆序。
+1. `s.sort()`：对序列中的成员排序。
 
 	
 ### 针对不可变序列的内置方法
 
-1. `s.count(x)`：返回 `x` 在元组中出现的次数。
+1. `s.count(x)`：返回 `x` 在序列中出现的次数。
 1. `s.index(x[, i[, j])`：`x` 在 `s` 中首次出现项的索引号（索引号在 `i` 或其后且在 `j` 之前）。
 
 	
@@ -68,7 +170,7 @@
 
 1) 针对字典的常用内置方法：
    - `d.clear()`：清除字典中的所有键值对。
-   - `d.get()`：获取指定键的值；若不存在返回 `None`。
+   - `d.get()`：获取指定键的值；若不存在返回 `None`（不产生异常）。
    - `d.items()`：返回构成的键值对列表，其中的每个单元是一个对应键、值构成的元组。
    - `d.keys()`：返回字典的键列表。
    - `d.pop(key[, default])`：弹出指定键对应的键值对，返回其值；若不存在则返回 `default`。

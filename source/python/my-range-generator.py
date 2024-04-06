@@ -23,6 +23,7 @@ def my_range(start, stop = None, step = None):
     elif stop < start and step > 0:
         raise(ValueError)
 
+    '''
     i = start
     if step > 0:
         while i < stop:
@@ -36,6 +37,16 @@ def my_range(start, stop = None, step = None):
             i += step
         else:
             pass
+    '''
+
+    i = start
+    sign = 1
+    if step > 0:
+        sign = -1
+
+    while i * sign < stop * sign:
+        yield i
+        i += step
 
 positive_cases = [
     { 'args': (0, None, None), 'result': [] },
