@@ -319,6 +319,9 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 ### 针对数值的内置函数
 
 - `abs(x)`：返回一个数的绝对值。参数 `x` 可以是整数、浮点数或任何实现了 `__abs__()` 方法的对象。
+- `pow(base, exp[, mod])`：返回 `base` 的 `exp` 次幂。
+   1. 如果 `mod` 存在，则返回 `base` 的 `exp` 次幂对 `mod` 取余（比 `pow(base, exp) % mod` 更高效）。
+   1. 两参数形式 `pow(base, exp)` 等价于乘方运算符: `base ** exp`。
 - `divmod(a, b)`：以两个（非复数）数字为参数，在作整数除法时，返回商和余数。
    1. 对于整数而言，结果与 `(a // b, a % b)` 相同。
    1. 对于浮点数则结果为 `(q, a % b)`，其中 `q` 通常为 `math.floor(a / b)`，但也可能比它小 `1`。
@@ -331,9 +334,6 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
    1. 对于支持 `round()` 方法的内置类型，结果值会舍入至最接近的 10 的负 `ndigits` 次幂的倍数；如果与两个倍数同样接近，则选用偶数。因此，`round(0.5)` 和 `round(-0.5)` 均得出 0 而 `round(1.5)` 则为 2。
    1. `ndigits` 可为任意整数值（正数、零或负数）。如果省略了 `ndigits` 或为 `None`，则返回值将为整数。否则返回值与 `number` 的类型相同。
    1. 对于一般的 Python 对象 `x`, `round` 将委托（delegate）给 `x.__round__()`。
-- `pow(base, exp[, mod])`：返回 `base` 的 `exp` 次幂。
-   1. 如果 `mod` 存在，则返回 `base` 的 `exp` 次幂对 `mod` 取余（比 `pow(base, exp) % mod` 更高效）。
-   1. 两参数形式 `pow(base, exp)` 等价于乘方运算符: `base ** exp`。
 
 	
 ### 针对字符串的接口
@@ -367,7 +367,7 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 1. `s.sort()`：对序列中的成员排序。
 
 	
-### 针对不可变序列的内置方法
+### 针对序列的内置方法
 
 1. `s.count(x)`：返回 `x` 在序列中出现的次数。
 1. `s.index(x[, i[, j])`：`x` 在 `s` 中首次出现项的索引号（索引号在 `i` 或其后且在 `j` 之前）。
@@ -410,13 +410,12 @@ The factorial of 20 is: 2432902008176640000
 	
 3) 按照内置函数 `print()` 的接口定义，实现 `my_print()` 函数，添加测试代码并和 `print()` 的结果做对比。
 
-> `print(*objects, sep=' ', end='\n', file=None, flush=False)`
->
-> 将 `objects` 打印输出至 `file` 指定的文本流，以 `sep` 分隔并在末尾加上 `end`。`sep`、 `end`、 `file` 和 `flush` 必须以关键字参数的形式给出。
->
-> 所有非关键字参数都会被转换为字符串，就像是执行了 `str()` 一样，并会被写入到流，以 `sep` 分隔并在末尾加上 `end`。`sep` 和 `end` 都必须为字符串；它们也可以为 `None`，这意味着使用默认值。如果没有给出 `objects`，则 `print()` 将只写入 `end`。
->
-> `file` 参数必须是一个具有 `write(string)` 方法的对象；如果参数不存在或为 `None`，则将使用 `sys.stdout`。 由于要打印的参数会被转换为文本字符串，因此 `print()` 不能用于二进制模式的文件对象。 对于这些对象，应改用 `file.write(...)`。
->
-> 输出缓冲通常由 `file` 确定。 但是，如果 `flush` 为真值，流将被强制刷新。
+```python
+print(*objects, sep=' ', end='\n', file=None, flush=False)
+```
+
+   - 将 `objects` 打印输出至 `file` 指定的文本流，以 `sep` 分隔并在末尾加上 `end`。`sep`、 `end`、 `file` 和 `flush` 必须以关键字参数的形式给出。
+   - 所有非关键字参数都会被转换为字符串，就像是执行了 `str()` 一样，并会被写入到流，以 `sep` 分隔并在末尾加上 `end`。`sep` 和 `end` 都必须为字符串；它们也可以为 `None`，这意味着使用默认值。如果没有给出 `objects`，则 `print()` 将只写入 `end`。
+   - `file` 参数必须是一个具有 `write(string)` 方法的对象；如果参数不存在或为 `None`，则将使用 `sys.stdout`。 由于要打印的参数会被转换为文本字符串，因此 `print()` 不能用于二进制模式的文件对象。 对于这些对象，应改用 `file.write(...)`。
+   - 输出缓冲通常由 `file` 确定。 但是，如果 `flush` 为真值，流将被强制刷新。
 
