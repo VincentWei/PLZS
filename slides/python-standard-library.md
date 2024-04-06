@@ -3,6 +3,7 @@
 1. 三人行必有我师
 1. Python 标准库概览
 1. Python 函数的参数类型
+1. Python 类和对象的基本概念
 1. 针对常用数据类型的接口
 1. 常用模块及其主要接口
 1. 要点回顾
@@ -172,7 +173,7 @@ def my_range(start, stop = None, step = None):
 
 	
 2) 关键字参数和位置参数
-   - 在调用函数时，使用 `kwarg=value` 的写法指定传入函数的实参。
+   - 在调用函数时，使用 `kw=value` 的写法指定传入函数的实参。
    - 不使用关键词参数时，参数的位置决定了实参对应的形参。
    - 关键词参数应在位置参数之后传入。
    - 所有参数只能赋值一次。
@@ -183,6 +184,8 @@ print(n, end=', ')
 
 	
 3) 任意位置参数
+   - 适用于参数数量可变的情形。
+   - 任意位置参数会被解释器构成一个元组传入函数，对应的形参之前使用单个星号（asterisk，`*`）。
 
 ```python
 import sys
@@ -203,6 +206,8 @@ my_print("The result is: ", result)
 
 	
 4) 任意关键词参数
+   - 适用于参数数量可变的且使用 `kw=value` 形式传递的参数。
+   - 任意位置参数会被解释器构成一个字典传入函数，对应的形参之前使用两个星号。
 
 ```python
 d1 = dict(name='Vincent', weight=68, age=50)
@@ -219,18 +224,115 @@ d2 = dict(name='Vincent', weight=68, age=50)
 assert(d1 == d2)
 ```
 
+	
+5) 特殊形参（`/` 和 `*`）
+   - 在定义函数时，位于 `/` 之前的参数只能以位置参数的形式传递。
+   - 在定义函数时，位于 `*` 之后的参数只能以关键词参数的形式传递。
+   - 不符合以上用法的函数调用产生 `TypeError` 错误。
+
+```python
+# a, b：只能以位置参数形式传递。
+# c：位置或关键词参数形式传递。
+# d：只能以关键词参数形式传递。
+def foo(a, b, /, c, *, d):
+    ...
+```
+
+		
+## Python 类和对象的基本概念
+
+- 大部分编程语言支持面向对象的编程。
+- 类（class）用来定义一类具有共同属性的事务，由一组数据和方法构成。
+- 对象（object）则是某个类的一个实例。
+- 在 Python 中，所有内置数据类型对应一个内置类。
+- 在自定义类中，通过实现一些内部预定义的方法，比如 `__abs__()`、`__str__()` 等，可实现针对该类之对象的取绝对值、字符串化等操作。
+
+	
+### Python 类的定义
+
+- 使用 `class` 语句定义一个类；`object` 是 Python 基类（base class）或父类（parent class）。
+- 一个类由一组属性（attribute）和一组方法（method）构成。
+- 属性有类属性和实例属性之分。
+- 使用预定义方法 `__init__()` 定义一个类的初始化（initialize）函数。
+- 所有类方法的第一个参数用于传递该类的实例对象，故而常用 `self` 作为该参数的名称。
+
+```python
+class Circle(object):
+    pi = 3.14159265             # 类属性
+
+    def __init__(self, r):
+        self.r = r              # 实例属性
+
+    def premiter(self):
+        return 2. * self.pi * self.r
+
+    def area(self):
+        return self.pi * self.r * self.r
+```
+
+	
+### Python 类的使用
+
+1. 使用类名称作为函数名调用类的构造方法以创建一个实例。
+1. 通过类的实例可访问（access）对应的属性或调用对应的方法。
+
+```python
+c1 = Circle(1.0)    # 解释器会创建一个 Circle 对象并调用 Circle 类的 __init__() 方法。
+s = c1.area()       # 调用 Circle 对象的 area 方法；此时将使用类属性 pi 的默认值进行计算。
+                    # 解释器会将 c1 作为第一个参数传入 Circle 类的 `area` 函数。
+
+import math
+Circle.pi = math.pi # 使用 math 模块中的 pi 常量覆盖类属性 pi 的值。
+s = c1.area()       # 调用 Circle 对象的 area 方法；此时将使用修改后的类属性 pi 的默认值进行计算。
+                    # 解释器会将 c1 作为第一个参数传入 Circle 类的 `area` 函数。
+```
+
 		
 ## 针对常用数据类型的接口
 
 	
 ### 针对数值的接口
 
+- `abs(x)`：返回一个数的绝对值。参数 `x` 可以是整数、浮点数或任何实现了 `__abs__()` 方法的对象。
+- `divmod(a, b)`：以两个（非复数）数字为参数，在作整数除法时，返回商和余数。
+   1. 对于整数而言，结果与 `(a // b, a % b)` 相同。
+   1. 对于浮点数则结果为 `(q, a % b)`，其中 `q` 通常为 `math.floor(a / b)`，但也可能比它小 `1`。
+- `class int([x])` 和 `class int(x, base=10)`： 返回一个基于数字或字符串 `x` 构造的整数对象，或者在未给出参数时返回 `0`。
+   1. 对一般性的对象 `x`，如果 `x` 定义了 `__int__()`，`int(x)` 将返回 `x.__int__()`；如果 `x` 定义了 `__index__()`，它将返回 `x.__index__()`；如果 `x` 定义了 `__trunc__()`，它将返回 `x.__trunc__()`。
+   1. 对于浮点数，它将向零舍入。
+- `class float([x])`：返回从数值或字符串 `x` 生成的浮点数。
+   1. 对于一般性的对象 `x`；如果 `x` 定义了 `__float__(x)`，则会返回 `x.__float__()`；如果未定义 `__float__()`，则将回退（fallback）至 `__index__()`。
+- `round(number[, ndigits])`：返回 `number` 舍入到小数点后 `ndigits` 位精度的值。
+   1. 如果 `ndigits` 被省略或为 `None`，则返回最接近输入值的整数。
+   1. 对于支持 `round()` 方法的内置类型，结果值会舍入至最接近的 10 的负 `ndigits` 次幂的倍数；如果与两个倍数同样接近，则选用偶数。因此，`round(0.5)` 和 `round(-0.5)` 均得出 0 而 `round(1.5)` 则为 2。
+   1. `ndigits` 可为任意整数值（正数、零或负数）。如果省略了 `ndigits` 或为 `None`，则返回值将为整数。否则返回值与 `number` 的类型相同。
+   1. 对于一般的 Python 对象 `x`, `round` 将委托（delegate）给 `x.__round__()`。
+- `pow(base, exp[, mod])`：返回 `base` 的 `exp` 次幂。
+   1. 如果 `mod` 存在，则返回 `base` 的 `exp` 次幂对 `mod` 取余（比 `pow(base, exp) % mod` 更高效）。
+   1. 两参数形式 `pow(base, exp)` 等价于乘方运算符: `base ** exp`。
+
+	
+### 学会看语法描述文档
+
+1) 以 Python 的浮点数描述语法
+
+```
+sign        ::=  "+" | "-"
+infinity    ::=  "Infinity" | "inf"
+nan         ::=  "nan"
+digitpart   ::=  digit (["_"] digit)*
+number      ::=  [digitpart] "." digitpart | digitpart ["."]
+exponent    ::=  ("e" | "E") ["+" | "-"] digitpart
+floatnumber ::=  number [exponent]
+floatvalue  ::=  [sign] (floatnumber | infinity | nan)
+```
+
 	
 ### 针对字符串的接口
 
 1. `str.endswith()`：如果字符串以指定的 `suffix` 结束返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选项 `end`，将在所指定位置停止比较。
 1. `str.startswith(prefix[, start[, end]])`：如果字符串以指定的 `prefix` 开始则返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选参数 `end`，将在所指定位置停止比较。
-1. `str.replace(old, new[, count])`：返回字符串的副本，其中出现的所有子字符串 old 都将被替换为 new。 如果给出了可选参数 count，则只替换前 count 次出现。
+1. `str.replace(old, new[, count])`：返回字符串的副本（copy），其中出现的所有子字符串 `old` 都将被替换为 `new`。如果给出了可选参数 `count`，则只替换前 `count` 次出现。
 
 	
 ### 针对容器的内置全局函数
