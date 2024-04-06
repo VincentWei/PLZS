@@ -349,8 +349,6 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 	
 ### 针对字符串的接口
 
-1. `str.capitalize()`：返回原字符串的一个副本（copy），其首个字符大写，其余为小写。
-1. `str.casefold()`：返回原字符串消除大小写的副本。 消除大小写的字符串可用于忽略大小写的匹配。
 1. `str.find(sub[, start[, end]])`：返回子字符串 `sub` 在 `s[start:end]` 切片内被找到的最小索引。如果 `sub` 未被找到则返回 -1。
 1. `str.index(sub[, start[, end]])`：类似于 `find()`，但在找不到子字符串时会引发 `ValueError`。
 1. `str.endswith(suffix[, start[, end]])`：如果字符串以指定的 `suffix` 结束返回 `True`，否则返回 `False`。如果有可选参数 `start`，将从所指定位置开始检查。如果有可选项 `end`，将在所指定位置停止比较。
@@ -359,6 +357,8 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 	
 ### 针对字符串的接口（续）
 
+1. `str.capitalize()`：返回原字符串的一个副本（copy），其首个字符大写，其余为小写。
+1. `str.casefold()`：返回原字符串消除大小写的副本。 消除大小写的字符串可用于忽略大小写的匹配。
 1. `str.replace(old, new[, count])`：返回字符串的副本，其中出现的所有子字符串 `old` 都将被替换为 `new`。如果给出了可选参数 `count`，则只替换前 `count` 次出现。
 1. `str.format(*args, **kwargs)`：执行字符串格式化操作。调用此方法的字符串可以包含字符串字面值或者以花括号 `{}` 括起来的替换域。每个替换域可以包含一个位置参数的数字索引，或者一个关键字参数的名称。返回的字符串副本中每个替换域都会被替换为对应参数的字符串值。
 1. [更多字符串方法](https://docs.python.org/zh-cn/3.10/library/stdtypes.html#string-methods)。
