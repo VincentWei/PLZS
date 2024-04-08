@@ -13,7 +13,7 @@
 	
 ### 演示视频
 
-[0-2-1：初识 Ubuntu Linux 桌面环境](https://www.douyin.com/video/735503799636774429)
+[0-2-1：初识 Ubuntu Linux 桌面环境](https://www.douyin.com/video/7355037996367744296)
 
 1. 通过程序坞（Dock）启动应用。
 1. 启动浏览器（FireFox）；访问 PLZS 仓库以及在线课件；设置书签。
