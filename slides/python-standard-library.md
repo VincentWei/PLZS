@@ -241,10 +241,10 @@ def foo(a, b, /, c, *, d):
 		
 ## Python 类和对象的基本概念
 
-- 大部分编程语言支持面向对象的编程。
+- 大部分编程语言支持面向对象（object-oriented）的编程。
 - 类（class）用来定义一类具有共同属性的事务，由一组数据和方法构成。
 - 对象（object）则是某个类的一个实例。
-- 在 Python 中，所有内置数据类型对应一个内置类。
+- 在 Python 中，所有内置数据类型对应一个内置的类。
 - 在自定义类中，通过实现一些内部预定义的方法，比如 `__abs__()`、`__str__()` 等，可实现针对该类之对象的取绝对值、字符串化等操作。
 
 	
@@ -434,16 +434,17 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 ### `io` 模块及其主要接口
 
 1) 文件 I/O 和流（stream）的基本概念
-2) 文件 I/O 的基本操作
+2) 文件 I/O 中缓冲区（buffer）的概念。
+3) 文件 I/O 的基本操作
    - 打开（open）：以指定的读/写或文本/二进制模式打开指定的文件。
    - 读取（read）：从当前读写位置读取数据并修改当前的读写位置。
    - 写入（write）：在当前读写位置写入指定的数据并修改当前读写位置。
    - 定位（seek）：修改当前的读写位置。
-   - 刷新（flush）：将缓冲区中的内容刷新到操作系统（可理解为写入到文件）。
+   - 刷新（flush）：将缓冲区中的内容刷新到操作系统（可理解为将缓冲区的内容写入到文件）。
    - 关闭（close）：刷新缓冲区中的内容并关闭文件。
 
 	
-3) 文本 I/O（由 `TextIOBase` 类实现）
+4) 文本 I/O（由 `TextIOBase` 类实现）
    - 读取将产生字符串（`str`）对象；写入要求传入 `str` 对象。
    - 会执行新行符（`\n`）的平台相关的转换（在 Windows 上，写入的 `\n` 将被存储为 `\r\n` 两个字符；读取的 `\r\n` 会转换为 `\n` 单个字符）。
    - 采取行缓冲（line-buffering）策略：写入时，遇到 `\n` 才会将缓冲区中的内容刷新到操作系统；否则只会保存到缓冲区——提高读写性能。
@@ -451,16 +452,16 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
    - `f = open("myfile.txt", "r")`
 
 	
-4) 二进制 I/O（由 `BufferedIOBase` 类实现）
+5) 二进制 I/O（由 `BufferedIOBase` 类实现）
    - 读取将产生字节串（`bytes`）对象；写入要求传入类似字节串的对象。
    - 采取块缓冲（block-buffering）策略：写入时，只有缓冲区中的内容达到事先创建的缓冲区大小（通常为 8192 字节）才会将数据刷新到操作系统；否则会保存到缓冲区——提高读写性能。
    - `f = open("myfile.jpg", "rb")`
-5) 裸（raw）I/O（由 `RawIOBase` 类实现）
+6) 裸（raw）I/O（由 `RawIOBase` 类实现）
    - 本质上就是无缓冲（unbuffered）的二进制 I/O。
    - `f = open("myfile.jpg", "rb", buffering = 0)`
 
 	
-6) 主要接口：
+7) 主要接口：
    - `closed`：如果流已关闭，则为 `True`。
    - `close()`：刷新并关闭此流。如果文件已经关闭，则此方法无效。文件关闭后，对文件的任何操作（例如读取或写入）都会引发 `ValueError`。
    - `flush()`：刷新流的写入缓冲区（如果适用）。这对只读和无缓冲流不起作用。
@@ -469,7 +470,7 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
    - `readlines(hint=-1, /)`：从流中读取并返回包含多行的列表。可以指定 `hint` 来控制要读取的行数。
 
 	
-7) 主要接口（续）：
+8) 主要接口（续）：
    - `seek(offset, whence=SEEK_SET, /)`：将流位置修改到给定的字节 `offset`。`offset` 将相对于由 `whence` 指定的位置进行解析。`whence` 的默认值为 `SEEK_SET`。`whence` 的可用值有：
       * `SEEK_SET` 或 0 -- 流的开头（默认值）；`offset` 应为零或正值。
       * `SEEK_CUR` or 1 -- 当前流位置；`offset` 可以为负值。
@@ -478,13 +479,13 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
    - `tell()`：返回当前流的位置。
 
 	
-8) 主要接口（再续）：
+9) 主要接口（再续）：
    - `truncate(size=None, /)`：将流的大小调整为给定的 `size` 个字节（如果未指定 `size` 则调整至当前位置）。当前的流读写位置不变。
    - `writable()`：如果流支持写入则返回 `True`。若返回 `False`，则 `write()` 和 `truncate()` 将引发 `OSError`。
    - `writelines(lines, /)`：将行列表写入到流。注意该函数不会为每行新行符，需要自行添加。
 
 	
-9) 用法示例；注意在其中使用了 `with` 语句以简化异常处理，且不需要显式（explicitly）调用 `f.close()` 方法。
+10) 用法示例；注意在其中使用了 `with` 语句以简化异常处理，且不需要显式（explicitly）调用 `f.close()` 方法。
 
 ```python
 #!/usr/bin/python3
@@ -532,7 +533,7 @@ assert(f.closed)
 ## 要点回顾
 
 1. 掌握递归调用函数的概念并积极实践。
-1. 掌握类的定义和使用方法。
+1. 掌握类的基本定义和使用方法。
 1. 掌握针对不同数据类型的常用内置方法或函数。
 1. 掌握 `io` 及 `sys` 模块的常用接口及其用法。
 
@@ -540,7 +541,7 @@ assert(f.closed)
 ## 作业
 
 1) 使用缓存结果的方式优化递归生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
-2) 使用递归函数计算阶乘，运行效果如下：
+2) 使用递归函数计算阶乘（n!），运行效果如下：
 
 ```console
 $ ./factorial.py
@@ -550,7 +551,7 @@ The factorial of 20 is: 2432902008176640000
 ```
 
 	
-3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、三角形、圆、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意根据三个边长计算三角形的面积需要用到 `math` 模块中的三角函数。运行效果同前。
+3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、圆、三角形（高中及以上）、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意构造三角形应给定三个边长，并根据三个边长计算三角形的面积（需要用到 `math` 模块中的三角函数）。运行效果同前。
 
 	
 4) 严格按照内置函数 `print()` 的[接口描述](https://docs.python.org/zh-cn/3.10/library/functions.html#print)实现 `my_print()` 函数，添加测试代码并和 `print()` 的执行结果做对比。测试方法：创建两个文件并将 `my_print()` 和 `print()` 的结果分别输出到不同文件，最后对比这两个文件的内容是否一致。要求使用 `sys` 和 `io` 模块。运行效果如下：
@@ -565,3 +566,4 @@ Printing test case 1 to print.txt...done.
 Comparing contents of my_print.txt and print.txt...
 All test cases passed.
 ```
+

@@ -87,7 +87,7 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
 - 筑基班：
    1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)
    1. [数据类型（Python）](https://courses.fmsoft.cn/plzs/python-data-types.html)
-   1. [Python 标准库和常用模块](https://courses.fmsoft.cn/plzs/python-standard-library.html)
+   1. [Python 标准库](https://courses.fmsoft.cn/plzs/python-standard-library.html)
    1. 大作业相关知识点（Python）
    1. HTTP 协议及 HTML/CSS
    1. JavaScript 编程语言
@@ -110,7 +110,7 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    1. 我的第一个 C++ 程序
    1. C++ 工具链及项目构建
    1. C++ 标准模板库
-   1. 字符串基本操作及算法
+   1. 字符串基本操作及其算法
    1. 基础数据结构
    1. 基础算法
    1. 经典例题一
