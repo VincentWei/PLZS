@@ -387,25 +387,23 @@ The Fibonacci numbers less than 11:
 ```
 
 	
-2) 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
+2) 增强普及班 Python 编程作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
 
 ```console
 $ ./formulas-improved.py
-To calculate the area/volume, please choose a geometrical shape:
+To calculate the area, please choose a geometrical shape:
 1. Triange
 2. Square
-3. Cone
-4. Circle
+3. Circle
 0. Exit
 Your choice:<1>
 Please input the base of your triangle: <4>
 Please input the height of your triangle: <2>
 The area of your triangle is: 4.0
-To calculate the area/volume, please choose a geometrical shape:
+To calculate the area, please choose a geometrical shape:
 1. Triange
 2. Square
-3. Cone
-4. Circle
+3. Circle
 0. Exit
 Your choice:<2>
 Please input the side of your square: <4>
