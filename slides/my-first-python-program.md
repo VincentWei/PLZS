@@ -1,4 +1,4 @@
-## 我的第一个 Python 程序
+# 我的第一个 Python 程序
 
 1. 运行 Python 解释器
 1. Python 算术表达式和运算符

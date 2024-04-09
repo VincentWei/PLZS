@@ -1,4 +1,4 @@
-## Python 数据类型
+# Python 数据类型
 
 1. 作业回顾
 1. 数值
@@ -144,7 +144,7 @@ True
    1. 复数（`complex`）
 
 	
-### 讲解视频
+### 演示视频
 
 [3-1：Python 数据类型：数值](https://www.douyin.com/video/7349792693872053523)
 
@@ -189,7 +189,7 @@ True
 - 三单引号或者三双引号定义的文本段落也被当做块注释（block comment）使用。
 
 	
-### 讲解视频
+### 演示视频
 
 [3-2：Python 数据类型：字符串](https://www.douyin.com/video/7349793411769175308)
 
@@ -225,7 +225,7 @@ print(True)
 - 在其他编程语言中，可能使用数组（array）这一术语（term）。
 
 	
-### 讲解视频
+### 演示视频
 
 [3-3：Python 数据类型：列表和元组](https://www.douyin.com/video/7349794459124550975)
 
@@ -260,7 +260,7 @@ print(True)
 1. 在其他编程语言中，可能使用对象（object）这一术语或者关联数组（associated array）这一术语；键值对会被称为“属性（property）”。
 
 	
-### 讲解视频
+### 演示视频
 
 [3-4：Python 数据类型：字典](#https://www.douyin.com/video/7349773341986802979)
 
