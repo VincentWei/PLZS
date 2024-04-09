@@ -1,18 +1,17 @@
-## Python 流程控制
+# Python 流程控制
 
 1. 作业回顾
 1. 流程控制的来由
 1. 布尔运算快速入门
 1. Python 的逻辑表达式和逻辑运算符
 1. Python 的流程控制语句
-1. 使用 Git 管理源文件
 1. 要点回顾
 1. 作业
 
 		
-## 第一讲作业回顾
+## 作业回顾
 
-看演示视频[2-1：第一讲作业回顾](https://www.douyin.com/video/7347519692115823881)
+演示视频[2-1：第一讲作业回顾](https://www.douyin.com/video/7347519692115823881)
 
 1. 使用 Vim 编写作业程序。
 1. 从课件（浏览器）中复制代码到 Vim 编辑器。
@@ -55,7 +54,7 @@ print('area_of_triangle(', d, ',', h, '): ', a)
 ```
 
 	
-三人行必有我师
+### 三人行必有我师
 
 ```python
 def Square():
@@ -73,7 +72,7 @@ print(f'area_of_square({r_1}): {area_of_square(r_1)}')
 ```
 
 	
-学到了新技巧
+### 学到了新技巧
 
 ```python
 #!/usr/bin/python3
@@ -183,7 +182,9 @@ prompt_for_square()
    - 循环（loop）语句
 
 	
-看演示视频[2-3：Python 的流程控制语句](https://www.douyin.com/video/7347520627844091174)
+### 演示视频
+
+[2-3：Python 的流程控制语句](https://www.douyin.com/video/7347520627844091174)
 
 1. `if` 语句的用途和写法；`else` 分句。
 1. 复合语句（compound statement）和分句（clause）。
@@ -352,70 +353,6 @@ def can_make_a_triangle_workaround(d1, d2, d3):
 ```
 
 		
-## 使用 Git 管理源文件
-
-- Git 和 GitHub 的故事
-
-	
-看演示视频[2-4：在 Gitee 上创建代码仓库](https://www.douyin.com/video/7347520971370237235)
-
-1. 访问 GitHub 网站并登录。
-1. 生成 SSH 密钥対，并将公钥登记到 GitHub。
-1. 新建公开代码仓库。
-1. 运行 `man git` 查看 Git 的手册页。
-1. 按照页面提示复制相关命令并在本地执行。
-1. 复制第一个 Python 程序到仓库中，并将其添加、提交、推送到 GitHub 仓库。
-1. 修改文件，提交修改并推送到 GitHub。
-1. 刷新 GitHub 页面查看源文件。
-1. 分享仓库或者源文件链接给老师或者同学。
-1. 看看 Gitee 页面：基本功能和 GitHub 雷同。
-
-	
-### 视频中用到的主要命令
-
-```console
-# 生成 SSH 密钥对
-$ ssh-keygen
-
-# 设置 git 用户信息
-$ git config --global user.name "your-username"
-$ git config --global user.email "your-email-address"
-
-# 复制文件
-cp ~/my-first-python-program.py .
-
-# 复制文件
-mv ~/my-first-python-program.py .
-```
-
-	
-克隆 Github 上的代码仓库到本地
-
-```console
-$ git clone git@github.com:<YourAccountName>/plzs-homework.git
-$ cd plzs-homework
-$ vim README.md
-$ git add README.md
-$ git commit -m "first commit"
-$ git branch -M main
-$ git push -u origin main
-```
-
-或者，在本地创建 Git 仓库并推送到 GitHub：
-
-```console
-$ mkdir plzs-homework
-$ cd plzs-homework
-$ vim README.md
-$ git init
-$ git add README.md
-$ git commit -m "first commit"
-$ git branch -M main
-$ git remote add origin git@github.com:VincentWei/plzs-homework.git
-$ git push -u origin main
-```
-
-		
 ## 要点回顾
 
 1. 在 Linux 桌面不同应用之间复制、粘贴文本。
@@ -428,26 +365,14 @@ $ git push -u origin main
 1. 在 GitHub 或者 Gitee 上创建公开仓库并提交代码。
 
 		
-## 本节涉及的 Linux 系统命令
-
-1. `ls` 或 `ll`：列出（list）当前目录中的文件和子目录；`ll` 会输出更多信息并带颜色。
-1. `mkdir`：创建（`m`a`k`e）目录（`dir`ectory）。
-1. `cd`：改变（`c`hange）目录（`d`irectory）。
-1. `man`：显示指定命令的手册页（`man`ual page）内容，也就是随机文档（document）。
-1. `cp`：复制（`c`o`p`y）文件。
-1. `mv`：移动（`m`o`v`e）文件；亦可用于重命名文件。
-
-		
 ## 进一步学习资料
 
 1. [Python 3.10 官方文档](https://docs.python.org/zh-cn/3.10/index.html)
-1. [知乎文章：最常用的19个Git命令](https://zhuanlan.zhihu.com/p/40461007])
 
 		
 ## 作业
 
-1) 在 GitHub 或者 Gitee 上创建一个自己的代码仓库（名为 `plzs-homework`），用以维护自己的程序。今后的作业提交分享仓库或者源文件的链接给老师即可。
-2) 输出小于用户指定的正整数的斐波那契（Fibonacci）数列。运行效果如下：
+1) 输出小于用户指定的正整数的斐波那契（Fibonacci）数列。运行效果如下：
 
 ```console
 $ ./fibonacci.py
@@ -458,7 +383,7 @@ The Fibonacci numbers less than 11:
 ```
 
 	
-3) 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
+2) 增强第一讲作业，循环提示用户选择一个公式，并判断用户输入的合法性。运行效果如下：
 
 ```console
 $ ./formulas-improved.py
@@ -484,7 +409,7 @@ The area of your square is: 16.0
 ```
 
 	
-4) （初中及以上）循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
+3) 循环提示用户输入一个正整数，并判断该正整数是否为一个质数。运行效果如下：
 
 ```console
 $ ./check-prime.py
