@@ -6,6 +6,7 @@
 1. Python 类和对象的基本概念
 1. 针对常用数据类型的接口
 1. 常用模块及其主要接口
+1. 深入理解递归调用
 1. 要点回顾
 1. 作业
 
@@ -530,9 +531,73 @@ assert(f.closed)
 9) `sys.version_info`：一个包含版本号五部分的元组: `major`, `minor`, `micro`, `releaselevel` 和 `serial`。对应于 Python 版本 3.10.0 的 `version_info` 值为 `(3, 10, 0, 'final', 0)`。可用来判断 Python 解释器的版本，用于向后兼容性处理。
 
 		
+## 深入理解递归调用
+
+- 递归实现 `pow()` 函数
+   1. 指数幂的求解满足递推（recurrence）公式：P(n) = n * P(n - 1)；
+   1. 当 n 为 0 时递推终止：P(0) = 1。
+
+```python
+#!/usr/bin/python3
+
+def make_indent(n):
+    s = ''
+    for x in range(n):
+        s += ' '
+    return s
+
+def my_pow(f, n, i = 0):
+    indent = make_indent(i)
+    print('{3}Call #{0}: my_power({1}, {2})'.format(i, f, n, indent))
+    if n == 0:
+        r = 1
+    else:
+        r = f * my_pow(f, n - 1, i + 1)
+
+    print('{2}Return {1} for Call #{0}'.format(i, r, indent))
+    return r
+
+print('The value of 2 raised to the power of 8 is', my_pow(2, 8))
+```
+
+	
+### 运行效果
+
+```console
+$ ./pow-recursion.py
+Call #0: my_power(2, 8)
+ Call #1: my_power(2, 7)
+  Call #2: my_power(2, 6)
+   Call #3: my_power(2, 5)
+    Call #4: my_power(2, 4)
+     Call #5: my_power(2, 3)
+      Call #6: my_power(2, 2)
+       Call #7: my_power(2, 1)
+        Call #8: my_power(2, 0)
+        Return 1 for Call #8
+       Return 2 for Call #7
+      Return 4 for Call #6
+     Return 8 for Call #5
+    Return 16 for Call #4
+   Return 32 for Call #3
+  Return 64 for Call #2
+ Return 128 for Call #1
+Return 256 for Call #0
+The value of 2 raised to the power of 8 is 256
+```
+
+	
+### 递推的陷进
+
+1. 过深的递归调用可能耗尽系统内存（栈溢出）； 在 Python 中有两个 `sys` 接口可获取或设置解释器内部的递归调用深度（depth）极值（limit）：
+   - `sys.getrecursionlimit()`：获取当前的递归调用极值。
+   - `sys.setrecursionlimit(limit)`：设置新的递归调用极值。
+1. 不恰当的递归调用会极大降低性能。
+
+		
 ## 要点回顾
 
-1. 掌握递归调用函数的概念并积极实践。
+1. 掌握递归的概念并积极实践。
 1. 掌握类的基本定义和使用方法。
 1. 掌握针对不同数据类型的常用内置方法或函数。
 1. 掌握 `io` 及 `sys` 模块的常用接口及其用法。
@@ -540,8 +605,7 @@ assert(f.closed)
 		
 ## 作业
 
-1) 使用缓存结果的方式优化递归生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
-2) 使用递归函数计算阶乘（n!），运行效果如下：
+1) 使用递归函数计算阶乘（n!），运行效果如下：
 
 ```console
 $ ./factorial.py
@@ -549,6 +613,8 @@ Please input a positive integer: <-5>
 Please input a positive integer: <20>
 The factorial of 20 is: 2432902008176640000
 ```
+
+2) 使用缓存结果的方法（使用字典）优化递归生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
 
 	
 3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、圆、三角形（高中及以上）、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意构造三角形应给定三个边长，并根据三个边长计算三角形的面积（需要用到 `math` 模块中的三角函数）。运行效果同前。
