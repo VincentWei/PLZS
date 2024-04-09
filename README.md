@@ -94,7 +94,6 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    1. 更新网页内容并和用户交互
    1. 在网页中绘制图形
    1. 大作业相关知识点（JavaScript）
-   1. [Bash Shell 编程](https://courses.fmsoft.cn/plzs/bash-shell-programming.html)
 - AI 实战班：
    1. 基于 Git 的协作式软件开发
    1. 大作业需求分析及架构设计
@@ -117,6 +116,15 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    1. 高级数据结构
    1. 进阶算法
    1. 经典例题二
+- 番外
+   1. [Bash Shell 编程](https://courses.fmsoft.cn/plzs/bash-shell-programming.html)
+   1. [其他编程语言长什么样？](https://courses.fmsoft.cn/plzs/other-programming-languages.html)
+   1. [为什么选择二进制？](https://courses.fmsoft.cn/plzs/icsm-why-choose-binary.html)
+   1. [二进制运算](https://courses.fmsoft.cn/plzs/icsm-binary-arithmetic.html)
+   1. [数值：整数和实数](https://courses.fmsoft.cn/plzs/icsm-numbers.html)
+   1. [文字：字符集及编码](https://courses.fmsoft.cn/plzs/icsm-text.html)
+   1. [多媒体：图像、图形和音视频](https://courses.fmsoft.cn/plzs/icsm-multimedia.html)
+   1. [结构化数据](https://courses.fmsoft.cn/plzs/icsm-structured-data.html)
 
 ## 学前准备
 
