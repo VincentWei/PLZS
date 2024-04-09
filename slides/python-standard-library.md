@@ -68,27 +68,8 @@ print('.')
 
 ```python
 def my_range(start, stop = None, step = None):
-    if not isinstance(start, int):
-        raise(ValueError)
-
-    if stop is None:
-        stop = start
-        start = 0
-    elif not isinstance(stop, int):
-        raise(ValueError)
-
-    if step is None:
-        if stop > start:
-            step = 1
-        else:
-            step = -1
-    elif not isinstance(step, int) or step == 0:
-        raise(ValueError)
-
-    if stop > start and step < 0:
-        raise(ValueError)
-    elif stop < start and step > 0:
-        raise(ValueError)
+    # Statements validating arguments are omitted.
+    ...
 
     i = start
     if step > 0:
@@ -111,27 +92,8 @@ def my_range(start, stop = None, step = None):
 
 ```python
 def my_range(start, stop = None, step = None):
-    if not isinstance(start, int):
-        raise(ValueError)
-
-    if stop is None:
-        stop = start
-        start = 0
-    elif not isinstance(stop, int):
-        raise(ValueError)
-
-    if step is None:
-        if stop > start:
-            step = 1
-        else:
-            step = -1
-    elif not isinstance(step, int) or step == 0:
-        raise(ValueError)
-
-    if stop > start and step < 0:
-        raise(ValueError)
-    elif stop < start and step > 0:
-        raise(ValueError)
+    # Statements validating arguments are omitted.
+    ...
 
     i = start
     sign = 1
