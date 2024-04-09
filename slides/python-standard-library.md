@@ -44,6 +44,24 @@ for i in range(mx):
 ```
 
 	
+### 巧妙处理打印多个数值的分隔符和终止符
+
+```python
+# 0, 1, 1, 2, 3, 5, 8, 13.
+for i in range(a):
+    p = Fibonacci(i)
+    if p > a:
+        break
+
+    if p == 0:
+        pass
+    else:
+        print(', ', end='')
+    print(p, end='')
+print('.')
+```
+
+	
 ### 消除重复代码
 
 - `my_range()` 函数的原始实现
