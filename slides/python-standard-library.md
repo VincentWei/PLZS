@@ -18,11 +18,11 @@
 ```python
 #!/usr/bin/python3
 
-def fibonacci(n):
+def nth_fibonacci(n):
    if n <= 1:
        return n
    else:
-       return fibonacci(n - 1) + fibonacci(n - 2)
+       return nth_fibonacci(n - 1) + nth_fibonacci(n - 2)
 
 mx = 0
 while mx <= 0:
@@ -34,8 +34,8 @@ while mx <= 0:
 print(f"The Fibonacci numbers less than {mx}:")
 
 for i in range(mx):
-    a = fibonacci(i)
-    b = fibonacci(i + 1)
+    a = nth_fibonacci(i)
+    b = nth_fibonacci(i + 1)
     if a >= mx or b >= mx:
         print(a, end = '.\n')
         break
@@ -49,7 +49,7 @@ for i in range(mx):
 ```python
 # 0, 1, 1, 2, 3, 5, 8, 13.
 for i in range(a):
-    p = Fibonacci(i)
+    p = fibonacci(i)
     if p > a:
         break
 
