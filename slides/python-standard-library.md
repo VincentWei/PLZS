@@ -369,7 +369,7 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 
 1. `s.append(x)`：在 `s` 的尾部追加新单元 `x`。
 1. `s.clear()`：清除所有成员，变成空序列。
-1. `s.copy()`：复制序列。
+1. `s.copy()`：复制序列；返回一个浅（shallow）拷贝。
 1. `s.count(x)`：返回 `x` 在序列中出现的次数。
 1. `s.extend(t)`：用 `t` 的内容扩展 `s`。
 1. `s.index(x)`：搜索并返回和指定数据 `x` 匹配的（matched）第一个成员之索引值。
@@ -400,7 +400,7 @@ floatvalue  ::=  [sign] (floatnumber | infinity | nan)
 
 	
 2) 针对字典的其他内置方法：
-   - `d.copy()`：返回原字典的一个浅（shallow）拷贝。
+   - `d.copy()`：返回原字典的一个浅拷贝。
    - `d.fromkeys()`：使用指定的键元组以及可选的值构建一个字典。
    - `d.setdefault(key[, default])`：如果字典存在键 `key`，则返回其值。如果不存在，插入值为 `default` 的键 `key`，并返回 `default`。`default` 默认为 `None`。
    - `d.update([other])`：使用来自 `other` 的键值对更新字典，覆盖原有的键。返回 `None`。
