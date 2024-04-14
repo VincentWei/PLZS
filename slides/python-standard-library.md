@@ -585,7 +585,7 @@ The value of 2 raised to the power of 8 is 256
 		
 ## 作业
 
-1) 使用递归函数计算阶乘（n!），运行效果如下：
+1) 使用递归函数计算三个递推代数式的值（如阶乘：n!），运行效果如下：
 
 ```console
 $ ./factorial.py
@@ -594,7 +594,7 @@ Please input a positive integer: <20>
 The factorial of 20 is: 2432902008176640000
 ```
 
-2) 使用缓存结果的方法（使用字典）优化递归生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
+2) 使用缓存结果的方法（使用列表）优化递归生成斐波那契数列的程序（命名为 `fibonacci-recursion-optimized.py`），运行效果同前。
 
 	
 3) 使用类重构 `formulas.py` 程序（命名为 `formulas-in-classes.py`），实现正方形、矩形、圆、三角形（高中及以上）、椭圆（高中及以上）四种几何图形对应的类，并实现用于计算周长和面积的方法。注意构造三角形应给定三个边长，并根据三个边长计算三角形的面积（需要用到 `math` 模块中的三角函数）。运行效果同前。
