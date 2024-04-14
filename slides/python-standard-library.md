@@ -244,7 +244,7 @@ class Circle(object):           # `object` 是 Circle 的基类（base class）�
     def __init__(self, r):
         self.r = r              # 实例属性，每个类的实例均有自己的副本
 
-    def premiter(self):
+    def perimeter(self):
         return 2. * self.pi * self.r
 
     def area(self):
