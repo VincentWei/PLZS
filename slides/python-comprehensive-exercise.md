@@ -5,6 +5,7 @@
 1. 时间的获取和转换
 1. 终端编程
 1. 数据持久化
+1. 其他知识点
 1. 要点回顾
 
 		
@@ -45,7 +46,7 @@ for i in range(mx):
 
 - 参考如下游戏中的一款，用 Python 实现（难度逐步提高）：
    1. 2048（`$ sudo apt install 2048 && 2048`）
-   1. 贪婪（`$ sudo apt install gread && gread`）
+   1. 贪婪（`$ sudo apt install greed && greed`）
    1. 数独（`$ sudo apt nudoku && nudoku`）
    1. 打字员（`$ sudo apt install gtypist && gtypist`）
    1. 俄罗斯方块（`$ sudo apt install bastet && bastet`）
@@ -125,13 +126,17 @@ for i in range(mx):
 ### `sqlite3` 模块
 
 		
+## 其他知识点
+
+		
 ## 要点回顾
 
 1. 掌握 `time` 和 `datetime` 模块的基本用法。
 1. 掌握 ANSI 转义序列的基本概念。
 1. 掌握使用 `pip` 命令安装第三方 Python 模块的方法。
 1. 掌握 `colorist` 和 `curses` 模块的基本用法。
-1. 掌握二进制数据读写的基本方法。
+1. 掌握二进制文件读写的基本方法。
 1. 掌握 `pickle` 模块的基本用法。
 1. 掌握 `sqlite3` 模块的基本用法。
+1. 掌握随机数的生成方法。
 
