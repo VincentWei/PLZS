@@ -89,12 +89,13 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    1. [流程控制（Python）](https://courses.fmsoft.cn/plzs/python-flow-control.html)
    1. [数据类型（Python）](https://courses.fmsoft.cn/plzs/python-data-types.html)
    1. [Python 标准库](https://courses.fmsoft.cn/plzs/python-standard-library.html)
-   1. 大作业相关知识点（Python）
-   1. HTTP 协议及 HTML/CSS
-   1. JavaScript 编程语言
-   1. 更新网页内容并和用户交互
+   1. [Python 综合练习及知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
+   1. 搭建网页服务器
+   1. JavaScript 及网页编程
+   1. 更新网页内容
    1. 在网页中绘制图形
-   1. 大作业相关知识点（JavaScript）
+   1. 在网页中和用户交互
+   1. JavaScript 综合练习
 - AI 实战班：
    1. 基于 Git 的协作式软件开发
    1. 大作业需求分析及架构设计
