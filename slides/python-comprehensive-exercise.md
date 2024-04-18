@@ -56,7 +56,7 @@ for i in range(mx):
 
 - 有关时间的术语和问题
 - `time` 模块
-- 其他时间相关模块
+- `datetime` 模块
 
 	
 ### 有关时间的知识点
@@ -133,18 +133,17 @@ for i in range(mx):
 	
 ### `datetime` 模块
 
-- 术语：
-   - Gregorian calendar：格里高利历法，也就是公元纪年法；每个日期有一个格里高利历的序号（oridinal），其中公元 1 年 1 月 1 日的序号为 1。
-   - ISO 6801：日期及时间格式的国际标准，通常具有类似 `2024-04-18 10:58:23.283+08:00` 的形式。
+- Gregorian calendar：格里高利历法，也就是公元纪年法；每个日期有一个格里高利历的序号（oridinal），其中公元 1 年 1 月 1 日的序号为 1。
+- ISO 6801：日期及时间格式的国际标准，通常具有类似 `2024-04-18 10:58:23.283+08:00` 的形式。
 - [`datetime` 模块](https://docs.python.org/zh-cn/3.10/library/datetime.html)：支持日期和时间的数学运算、格式化输出和数据的操作。
 - `datetime` 模块提供的类继承关系：
-   - object
-      - timedelta
-      - tzinfo
-         - timezone
-      - time
-      - date
-         - datetime
+   - `object`
+      - `timedelta`
+      - `tzinfo`
+         - `timezone`
+      - `time`
+      - `date`
+         - `datetime`
 
 	
 `timedelta` 类
