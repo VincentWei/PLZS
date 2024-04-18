@@ -271,8 +271,8 @@ while True:
 ### `colorist` 模块
 
 - `colorist` 是一个简单的第三方 Python 模块，一定程度上简化了控制终端文字属性的操控。
-- [官方文档](https://jakob-bagterp.github.io/colorist-for-python/)。
-- 安装 `colorist`：`$ pip install colorist`。
+- 官方文档[链接](https://jakob-bagterp.github.io/colorist-for-python/)。
+- 安装：`$ pip install colorist`。
 - 用法：
 
 ```python
