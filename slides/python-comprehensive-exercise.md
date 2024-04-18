@@ -56,8 +56,7 @@ for i in range(mx):
 
 - 有关时间的术语和问题
 - `time` 模块
-- `datetime` 模块
-- `calendar` 模块
+- 其他时间相关模块
 
 	
 ### 有关时间的知识点
@@ -90,7 +89,7 @@ for i in range(mx):
 ### `time` 模块
 
 1. 用于获取操作系统维护的各类时钟对应的时间，并执行时区相关的转换
-1. [官方文档](https://docs.python.org/3.10/library/time.html)
+1. [官方文档](https://docs.python.org/zh-cn/3.10/library/time.html)
 
 	
 #### `time` 模块主要接口
@@ -134,12 +133,83 @@ for i in range(mx):
 	
 ### `datetime` 模块
 
-- [官方文档](https://docs.python.org/zh-cn/3.10/library/datetime.html)
+- 术语：
+   - Gregorian calendar：格里高利历法，也就是公元纪年法；每个日期有一个格里高利历的序号（oridinal），其中公元 1 年 1 月 1 日的序号为 1。
+   - ISO 6801：日期及时间格式的国际标准，通常具有类似 `2024-04-18 10:58:23.283+08:00` 的形式。
+- [`datetime` 模块](https://docs.python.org/zh-cn/3.10/library/datetime.html)：支持日期和时间的数学运算、格式化输出和数据的操作。
+- `datetime` 模块提供的类继承关系：
+   - object
+      - timedelta
+      - tzinfo
+         - timezone
+      - time
+      - date
+         - datetime
 
 	
-### `calendar` 模块
+`timedelta` 类
 
-- [官方文档](https://docs.python.org/zh-cn/3.10/library/calendar.html)
+```python
+>>> from datetime import timedelta
+>>> year = timedelta(days=365)
+>>> ten_years = 10 * year
+>>> ten_years
+datetime.timedelta(days=3650)
+>>> ten_years.days // 365
+10
+>>> nine_years = ten_years - year
+>>> nine_years
+datetime.timedelta(days=3285)
+>>> three_years = nine_years // 3
+>>> three_years, three_years.days // 365
+(datetime.timedelta(days=1095), 3)
+```
+
+	
+`date` 类
+
+```python
+>>> from datetime import date
+>>> d = date.fromordinal(730920) # 730920th day after 1. 1. 0001
+>>> d
+datetime.date(2002, 3, 11)
+
+>>> # Methods related to formatting string output
+>>> d.isoformat()
+'2002-03-11'
+>>> d.strftime("%d/%m/%y")
+'11/03/02'
+>>> d.strftime("%A %d. %B %Y")
+'Monday 11. March 2002'
+>>> d.ctime()
+'Mon Mar 11 00:00:00 2002'
+>>> 'The {1} is {0:%d}, the {2} is {0:%B}.'.format(d, "day", "month")
+'The day is 11, the month is March.'
+```
+
+	
+`datetime` 类
+
+```python
+>>> from datetime import datetime, date, time, timezone
+
+>>> # Using datetime.combine()
+>>> d = date(2005, 7, 14)
+>>> t = time(12, 30)
+>>> datetime.combine(d, t)
+datetime.datetime(2005, 7, 14, 12, 30)
+
+>>> # Using datetime.now()
+>>> datetime.now()
+datetime.datetime(2007, 12, 6, 16, 29, 43, 79043)   # GMT +1
+>>> datetime.now(timezone.utc)
+datetime.datetime(2007, 12, 6, 15, 29, 43, 79060, tzinfo=datetime.timezone.utc)
+
+>>> # Using datetime.strptime()
+>>> dt = datetime.strptime("21/11/06 16:30", "%d/%m/%y %H:%M")
+>>> dt
+datetime.datetime(2006, 11, 21, 16, 30)
+```
 
 		
 ## 终端编程
