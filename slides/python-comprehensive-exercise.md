@@ -149,65 +149,72 @@ for i in range(mx):
 `timedelta` 类
 
 ```python
->>> from datetime import timedelta
->>> year = timedelta(days=365)
->>> ten_years = 10 * year
->>> ten_years
-datetime.timedelta(days=3650)
->>> ten_years.days // 365
-10
->>> nine_years = ten_years - year
->>> nine_years
-datetime.timedelta(days=3285)
->>> three_years = nine_years // 3
->>> three_years, three_years.days // 365
-(datetime.timedelta(days=1095), 3)
+from datetime import timedelta
+
+year = timedelta(days=365)
+ten_years = 10 * year
+# datetime.timedelta(days=3650)
+
+ten_years.days // 365
+# 10
+
+nine_years = ten_years - year
+nine_years
+# datetime.timedelta(days=3285)
+
+three_years = nine_years // 3
+three_years, three_years.days // 365
+# (datetime.timedelta(days=1095), 3)
 ```
 
 	
 `date` 类
 
 ```python
->>> from datetime import date
->>> d = date.fromordinal(730920) # 730920th day after 1. 1. 0001
->>> d
-datetime.date(2002, 3, 11)
+from datetime import date
+d = date.fromordinal(730920) # 730920th day after 1. 1. 0001
+d
+# datetime.date(2002, 3, 11)
 
->>> # Methods related to formatting string output
->>> d.isoformat()
-'2002-03-11'
->>> d.strftime("%d/%m/%y")
-'11/03/02'
->>> d.strftime("%A %d. %B %Y")
-'Monday 11. March 2002'
->>> d.ctime()
-'Mon Mar 11 00:00:00 2002'
->>> 'The {1} is {0:%d}, the {2} is {0:%B}.'.format(d, "day", "month")
-'The day is 11, the month is March.'
+d.isoformat()
+# '2002-03-11'
+
+d.strftime("%d/%m/%y")
+# '11/03/02'
+
+d.strftime("%A %d. %B %Y")
+# 'Monday 11. March 2002'
+
+d.ctime()
+# 'Mon Mar 11 00:00:00 2002'
+
+'The {1} is {0:%d}, the {2} is {0:%B}.'.format(d, "day", "month")
+# 'The day is 11, the month is March.'
 ```
 
 	
 `datetime` 类
 
 ```python
->>> from datetime import datetime, date, time, timezone
+from datetime import datetime, date, time, timezone
 
->>> # Using datetime.combine()
->>> d = date(2005, 7, 14)
->>> t = time(12, 30)
->>> datetime.combine(d, t)
-datetime.datetime(2005, 7, 14, 12, 30)
+# 使用 datetime.combine()
+d = date(2005, 7, 14)
+t = time(12, 30)
+datetime.combine(d, t)
+# datetime.datetime(2005, 7, 14, 12, 30)
 
->>> # Using datetime.now()
->>> datetime.now()
-datetime.datetime(2007, 12, 6, 16, 29, 43, 79043)   # GMT +1
->>> datetime.now(timezone.utc)
-datetime.datetime(2007, 12, 6, 15, 29, 43, 79060, tzinfo=datetime.timezone.utc)
+# 使用 datetime.now()
+datetime.now()
+# datetime.datetime(2007, 12, 6, 16, 29, 43, 79043)   # GMT +1
 
->>> # Using datetime.strptime()
->>> dt = datetime.strptime("21/11/06 16:30", "%d/%m/%y %H:%M")
->>> dt
-datetime.datetime(2006, 11, 21, 16, 30)
+datetime.now(timezone.utc)
+# datetime.datetime(2007, 12, 6, 15, 29, 43, 79060, tzinfo=datetime.timezone.utc)
+
+# 使用 datetime.strptime()
+dt = datetime.strptime("21/11/06 16:30", "%d/%m/%y %H:%M")
+dt
+# datetime.datetime(2006, 11, 21, 16, 30)
 ```
 
 		
@@ -219,6 +226,45 @@ datetime.datetime(2006, 11, 21, 16, 30)
 
 	
 ### ANSI 转义序列
+
+- ANSI 转义序列（escape sequence）可在向终端输出的文本中插入 `\x1B` 打头的转义代码，从而改变其后字符的颜色、粗斜体、下划线、闪烁等属性。
+- 亦可使用 ANSI 转义序列控制光标的位置、滚屏、清屏等功能。
+
+```python
+print("这段文字中的颜色名称将以对应的颜色显示：\x1b[31m红色\x1b[0m、\x1b[32m绿色\x1b[0m、\x1b[34m蓝色\x1b[0m。")
+```
+
+	
+### ANSI 转义序列（续）
+
+- 下面的示例程序显示当前时间并不停更新。
+- 其中使用了 `sys`、`time` 和 `datetime` 模块。
+
+```python
+#!/usr/bin/python3
+
+from datetime import datetime
+import time
+import sys
+
+timestr = ''
+def show_time():
+    global timestr
+    new_timestr = datetime.now().isoformat(timespec='seconds')
+
+    if timestr != new_timestr:
+        print('\033[1G\x1b[31m', new_timestr, '\x1b[0m', sep='', end='')
+        sys.stdout.flush()
+        timestr = new_timestr
+
+while True:
+    try:
+        time.sleep(0.5)
+        show_time()
+    except KeyboardInterrupt:
+        print()
+        sys.exit(0)
+```
 
 	
 ### `colorist` 模块
