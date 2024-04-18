@@ -93,16 +93,29 @@ for i in range(mx):
 1. [官方文档](https://docs.python.org/3.10/library/time.html)
 
 	
-1) `time` 模块主要接口
+#### `time` 模块主要接口
 
 - `time.time()`：返回以秒为单位的纪元时间；浮点数。
 - `time.time_ns()`：返回以纳秒为单位的纪元时间；整数。
+- `time.monotonic()`：返回以秒为单位的单调时钟时间；浮点数。
+- `time.monotonic_ns()`：返回以纳秒为单位的单调时钟时间；整数。
+- `time.thread_time()`：返回以秒为单位的当前线程使用的 CPU 时间；浮点数。
+- `time.thread_time_ns()`：返回以纳秒为单位的当前线程使用的 CPU 时间；整数。
+- `time.process_time()`：返回以秒为单位的当前进程使用的 CPU 时间；浮点数。
+- `time.process_time_ns()`：返回以纳秒为单位的当前进程使用的 CPU 时间；整数。
+- `time.sleep(secs)`：休眠当前线程 `secs` 秒（浮点数）。
+
+	
+#### `time` 模块主要接口
+
 - `time.gmtime([secs])`：将以秒为单位的纪元时间转换为 UTC `struct_time`。
 - `time.localtime([secs])`：将以秒为单位的纪元时间转换为本地时区的 `struct_time`。
 - `class time.struct_time`：`gmtime()`、`localtime()` 返回的命名元组对象（named tuple：继承自元组的类，同时增加了通过名称访问元组中各个成员的能力）。
+- `time.strftime(format[, t])`：将 `struct_time` 表示的时间转换为字符串，如 `2024年 04月 18日 星期四 10:21:59 CST`。
+- `time.strptime(string[, format])`：根据格式解析表示时间的字符串，返回一个 `struct_time` 对象。
 
 	
-2) `class time.struct_time` 接口
+#### `class time.struct_time`
 
 | 索引 | 属性 | 值 |
 | - | - | - |
