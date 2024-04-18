@@ -12,17 +12,18 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 系统命令、Vim 编辑器、Git 使用及 Python 编程入门。
    - 筑基班：针对已入门学生开设，课程内容涉及 Python、JavaScript 编程语言和 Bash Shell 编程，最终实现一个单机游戏的两个版本：终端版本和网页版本。
    - AI实战班：针对已掌握 Python 和 JavaScript 编程的学生开设。课程内容涉及开源 AI 模型以及网页编程，五人一组协作开发一个联网的网页游戏。
-   - AI信奥班：针对计划在初中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面系统的使用以及 Python 或 JavaScript 编程语言。课程内容涉及开源 AI 模型以及 C++ 编程语言，课程作业围绕一个联网的桌面游戏进行，其中内嵌有一个脚本编程语言解释器。通过将 NOI 大纲中所列知识点融入游戏程序和脚本语言的解释器加深学生对相关知识的理解和掌握。当然本课程既然面向竞赛，免不了要刷题。
-
+   - 信奥初级班：针对计划在初中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面系统的使用以及 Python 或 JavaScript 编程语言。课程内容围绕 JSON 解析器进行，通过将 NOI 大纲（初级）中所列知识点融入 JSON 解析器加深学生对相关知识的理解和掌握。
+   - 信奥初级班：针对计划在高中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握信奥初级班的内容。课程内容围绕一个脚本语言的解释器开展。通过将 NOI 大纲（提高级）中所列知识点融入脚本语言的解释器加深学生对相关知识的理解和掌握。
 1. 授课方式：
    - 零基础普及班为录播课，外加答疑直播。
-   - 筑牢基础班、AI实战班以及AI信奥班均为直播课，外加作业点评及答疑直播。
+   - 筑牢基础班、AI实战班以及信奥班均为直播课，外加作业点评及答疑直播。
    - 作业点评和答疑直播每周至少安排两场。
 1. 学习周期：
    - 零基础普及班：两周。
    - 筑基班：周末班三个月；暑期班一个月。
    - AI实战班：周末班三个月；暑期班一个月。
-   - AI信奥班：周末班三个月；暑期班一个月。
+   - 信奥初级班：周末班三个月；暑期班一个月。
+   - 信奥提高班：周末班四个月；暑期班一个半月。
 
 ![课程体系](slides/plzs-course-framework.svg)
 
@@ -53,7 +54,9 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
 
 实战阶段（AI实战班）包含 10 场直播课和相应的视频内容。五人一组协作，使用 Python 和 JavaScript 完成一个联网的且使用开源 AI 模型的页面游戏。分组的策略是混合编队，就是不同年龄段的学生编到一个组当中，有基础或者大年龄段的学生担任组长，助教扮演项目主管角色。小组通过自建的代码仓库完成分工协作。大作业的任务可以由小组讨论确定（需要经过教学团队确认，以免目标太大无法完成），也可以选择教学团队给定的任务。大作业必须是联网的、包含人工智能元素的多人参与的小型网页游戏。
 
-实战阶段（AI信奥班）包含 10 场直播课和相应的视频内容。该课程的内容针对计划在初中阶段或高中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面环境以及Python 或 JavaScript 编程语言。课程内容涉及开源 AI 模型以及 C++ 编程语言，课程内容围绕一个联网的桌面游戏进行，通过将 NOI 大纲中所列知识点融入游戏程序加深学生对相关知识的理解和掌握。在课程学习当中，学生要学习掌握 NOI 大纲中提及的各种算法和数据结构，并使用 Python 和 C++ 编程语言完成一个联网的且使用开源 AI 模型的桌面（Linux/Windows）游戏。
+实战阶段（信奥初级班）包含 10 场直播课和相应的视频内容。该课程的内容针对计划在初中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面环境以及 Python 或 JavaScript 编程语言。课程内容围绕一个 JSON 解析器进行，通过将 NOI 大纲（初级）中所列知识点融入游戏程序加深学生对相关知识的理解和掌握。在课程学习当中，学生要学习掌握 NOI 大纲中提及的各种算法和数据结构，并使用 C++ 编程语言完成一个 JSON 解析器。
+
+实战阶段（信奥提高班）包含 15 场直播课和相应的视频内容。该课程的内容针对计划在高中阶段参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握信奥初级班的内容。课程内容围绕一个脚本语言解释器进行，通过将 NOI 大纲（提高级）中所列知识点融入游戏程序加深学生对相关知识的理解和掌握。在课程学习当中，学生要学习掌握 NOI 大纲中提及的各种算法和数据结构，并使用 C++ 编程语言完成一个脚本语言的解释器。
 
 该系列课程的设计以“授人以渔”为目标，通过在教学中模拟当下流行的开源协作软件开发模式，讲述软件工程师日常使用的工具和需要掌握的知识，以大作业为依托，引导学生理解需求、实现需求，通过自身的努力实践，将零基础的学生培养成面向未来的信息技术专家，助力升学及深造。
 
@@ -64,7 +67,8 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
 | 零基础普及班  | Python                    | Linux, Vim, Git, Markdown                         |
 | 筑基班        | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket                 |
 | AI实战班      | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket, AI             |
-| AI信奥班      | Python, C++, Bash         | Linux, Windows, GCC, CMake, HTTP, WebSocket, AI   |
+| 信奥初级班    | Python, C++               | Linux, Windows, GCC, CMake, JSON                  |
+| 信奥提高班    | Python, C++, Bash         | Linux, Windows, GCC, CMake                        |
 
 ## 直播平台及报名
 
@@ -98,6 +102,7 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    1. JavaScript 综合练习
 - AI 实战班：
    1. 基于 Git 的协作式软件开发
+   1. [Bash Shell 编程](https://courses.fmsoft.cn/plzs/bash-shell-programming.html)
    1. 大作业需求分析及架构设计
    1. Linux 服务器的安装和配置
    1. Web 服务器网关程序
@@ -107,10 +112,11 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    1. 架设开源 AI 大模型
    1. 网页端利用 AI 功能
    1. 部署服务器端软件
-- AI 信奥班：
+- 信奥初级班：
    1. 我的第一个 C++ 程序
    1. C++ 工具链及项目构建
    1. C++ 标准模板库
+   1. JSON 解析器的架构
    1. 字符串基本操作及其算法
    1. 基础数据结构
    1. 基础算法
@@ -118,8 +124,17 @@ Programming Lessons for Zero-based Students Aged 10 to 18 (**PLZS**), by [Vincen
    1. 高级数据结构
    1. 进阶算法
    1. 经典例题二
-- 番外
+- 信奥提高班：
+   1. C++ 和其他编程语言的互操作性
    1. [Bash Shell 编程](https://courses.fmsoft.cn/plzs/bash-shell-programming.html)
+   1. 脚本解释器的架构
+   1. 高阶数据结构
+   1. 高阶算法
+   1. 经典例题一
+   1. 高级数据结构
+   1. 进阶算法
+   1. 经典例题二
+- 番外
    1. [其他编程语言长什么样？](https://courses.fmsoft.cn/plzs/other-programming-languages.html)
    1. [为什么选择二进制？](https://courses.fmsoft.cn/plzs/icsm-why-choose-binary.html)
    1. [二进制运算](https://courses.fmsoft.cn/plzs/icsm-binary-arithmetic.html)
