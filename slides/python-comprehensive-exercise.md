@@ -227,7 +227,7 @@ dt
 	
 ### ANSI 转义序列
 
-- ANSI 转义序列（escape sequence）可在向终端输出的文本中插入 `\x1B` 打头的转义代码，从而改变其后字符的颜色、粗斜体、下划线、闪烁等属性。
+- ANSI 转义序列（escape sequence）可在向终端输出的字符中插入 `\x1B` 打头的转义代码，从而改变其后字符的颜色、粗斜体、下划线、闪烁等属性。
 - 亦可使用 ANSI 转义序列控制光标的位置、滚屏、清屏等功能。
 
 ```python
@@ -270,7 +270,7 @@ while True:
 	
 ### `colorist` 模块
 
-- `colorist` 是一个简单的第三方 Python 模块，一定程度上简化了控制终端文字属性的操控。
+- `colorist` 是一个简单的第三方 Python 模块，一定程度上简化了控制终端字符属性的操控。
 - 官方文档[链接](https://jakob-bagterp.github.io/colorist-for-python/)。
 - 安装：`$ pip install colorist`。
 - 用法：
