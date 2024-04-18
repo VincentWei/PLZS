@@ -93,13 +93,16 @@ for i in range(mx):
 1. [官方文档](https://docs.python.org/3.10/library/time.html)
 
 	
-### `time` 模块主要接口
+1) `time` 模块主要接口
 
 - `time.time()`：返回以秒为单位的纪元时间；浮点数。
 - `time.time_ns()`：返回以纳秒为单位的纪元时间；整数。
 - `time.gmtime([secs])`：将以秒为单位的纪元时间转换为 UTC `struct_time`。
 - `time.localtime([secs])`：将以秒为单位的纪元时间转换为本地时区的 `struct_time`。
 - `class time.struct_time`：`gmtime()`、`localtime()` 返回的命名元组对象（named tuple：继承自元组的类，同时增加了通过名称访问元组中各个成员的能力）。
+
+	
+2) `class time.struct_time` 接口
 
 | 索引 | 属性 | 值 |
 | - | - | - |
