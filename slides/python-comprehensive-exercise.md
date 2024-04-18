@@ -231,7 +231,8 @@ dt
 - 亦可使用 ANSI 转义序列控制光标的位置、滚屏、清屏等功能。
 
 ```python
-print("这段文字中的颜色名称将以对应的颜色显示：\x1b[31m红色\x1b[0m、\x1b[32m绿色\x1b[0m、\x1b[34m蓝色\x1b[0m。")
+print("这段文字中的颜色名称将以对应的颜色显示："
+        "\x1b[31m红色\x1b[0m、\x1b[32m绿色\x1b[0m、\x1b[34m蓝色\x1b[0m。")
 ```
 
 	
@@ -268,6 +269,19 @@ while True:
 
 	
 ### `colorist` 模块
+
+- `colorist` 是一个简单的第三方 Python 模块，一定程度上简化了控制终端文字属性的操控。
+- 安装 `colorist`：`$ pip install colorist`。
+- 用法：
+
+```python
+import colorist
+from colorist import Color
+
+print(f"{Color.RED}This text is in RED{Color.OFF}!")
+
+colorist.effect_blink("CYAN and BLINKING!", Color.CYAN)
+```
 
 	
 ### `curses` 模块
