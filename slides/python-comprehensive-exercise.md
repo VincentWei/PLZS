@@ -54,7 +54,7 @@ for i in range(mx):
 		
 ## 时间的获取和转换
 
-- 有关时间的术语和问题
+- 有关时间的知识点
 - `time` 模块
 - `datetime` 模块
 
@@ -286,6 +286,102 @@ colorist.effect_blink("CYAN and BLINKING!", Color.CYAN)
 
 	
 ### `curses` 模块
+
+- `curses` 模块是 Unix 系统上一个广泛应用的字符终端操作函数库 `ncurses` 的 Python 封装，主要用来简化终端编程，比如移动光标、滚动屏幕、擦除区域、直接获取键盘输入等。
+- 在类 Unix 系统中，在全屏字符终端应用的开发中，`ncurses` 的使用较为广泛，比如 Linux 上的文件管理器 `mc`。
+- `curses` 隐藏了底层终端类型的差异，提供了一个简单的窗口和面板抽象机制（非重叠），但未提供更加抽象的用户界面（user interface）元素类型，比如按钮、复选框、对话框、菜单等。
+- [用 Python 进行 Curses 编程](https://docs.python.org/zh-cn/3.10/howto/curses.html)。
+
+	
+#### `curses` 的初始化和终止
+
+- 初始化
+
+```python
+import curses
+
+stdscr = curses.initscr()      # 返回一个代表整个屏幕的窗口对象。
+
+curses.noecho()                 # 关闭输入回显。
+curses.cbreak()                 # 关闭标准输入的缓冲模式并进入 `cbreak` 模式。
+                                # 之后，用户的按键将立即被上报给应用程序。
+
+stdscr.keypad(True)            # 开启小键盘的翻译功能，上下左右等特殊按键将
+                                # 被翻译为 curses 定义的常量，如 curses.KEY_UP。
+```
+
+- 终止
+
+```python
+stdscr.keypad(False)           # 关闭小键盘的翻译功能。
+curses.nocbreak()               # 关闭 `cbreak` 模式。
+curses.echo()                   # 开启回显模式。
+curses.endwin()                 # 还原终端到原始模式。
+```
+
+	
+#### 使用包装器简化
+
+- 由于终端模式的改变，若在初始化 `curses` 后程序出现异常而没有执行终止操作，会严重影响后续的命令行操作。
+- 通常应使用包装器（wrapper）完成终端的初始化和终止操作，并优雅地（gracefully）处理未被捕获的异常。
+
+```python
+import curses
+
+def main(stdscr):
+    try:
+        # event loop here
+
+    except KeyboardInterrupt:
+        return
+
+curses.wrapper(main)
+```
+
+	
+#### 常用接口
+
+- `curses.newwin(nlines, ncols)` 或者 `curses.newwin(nlines, ncols, begin_y, begin_x)`：创建一个实际的窗口（Window）。
+- `curses.newpad(nlines, ncols)`：创建一个虚拟的窗口（亦称为面板，pad）。
+- `window.clear()`：清空窗口内容。
+- `window.addch(ch[, attr])` 或者 `window.addch(y, x, ch[, attr])`：向窗口（的指定位置）添加字符。
+- `window.addstr(str[, attr])` 或者 `window.addstr(y, x, str[, attr])`：向窗口（的指定位置）添加字符串；`attr` 是可选的颜色、加粗、闪烁等样式（style）信息。
+- `window.refresh([pminrow, pmincol, sminrow, smincol, smaxrow, smaxcol])`：刷新窗口或面板。刷新面板时，需要指定源（面板）左上角坐标以及目标位置的左上角坐标及左下角坐标。
+- 注意事项：
+    - 屏幕左上角为坐标原点，x 轴水平向右，y 轴竖直向下。
+    - `curses` 中指定坐标时，先是行（y）后是列（x）。
+    - 在窗口、子窗口或面板之外写入字符会引发 `curses.error` 异常。
+
+	
+#### 字符的颜色和属性
+
+- 颜色对（color pair）：用于定义字符前景色和背景色的一对颜色。在终端编程中，需要指定颜色对的编号，且 0 号颜色对始终为黑底白字。
+- 在调用 `window.addch()` 和 `window.addstr()` 函数时，可通过最后一个 `attr` 参数指定字符或者字符串的颜色对，并和其他属性一并使用。
+- 常用字符属性：
+   1. `curses.A_BLINK`：闪烁文本。
+   1. `curses.A_BOLD`：超亮或粗体文本。
+   1. `curses.A_DIM`：半明亮文本。
+   1. `curses.A_REVERSE`：反相显示文本。
+   1. `curses.A_STANDOUT`：可用的最佳突出显示模式。
+   1. `curses.A_UNDERLINE`：带下划线的文本。
+
+	
+#### 自定义颜色对
+
+- 由于不同终端类型对颜色的支持能力不同，故而我们通常仅使用八种标准颜色定义颜色对，或者在支持丰富颜色的情形下在程序中做特殊处理。
+
+```python
+curses.use_default_colors()     # 调用该函数后，可使用 -1 指定透明背景色
+
+# 使用标准颜色和透明色自定义颜色对；注意 0 号颜色对不可更改，始终为白色（前景色）
+color_pairs = 1
+for c in (curses.COLOR_BLUE, curses.COLOR_CYAN, curses.COLOR_GREEN, curses.COLOR_MAGENTA, curses.COLOR_RED, curses.COLOR_YELLOW, curses.COLOR_BLACK):
+    curses.init_pair(color_pairs, c, -1)
+    color_pairs += 1
+
+# 使用时，调用 curses.color_pair() 函数
+stdscr.addstr(new_timestr, curses.color_pair(1) | curses.A_BLINK)
+```
 
 		
 ## 数据持久化
