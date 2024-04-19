@@ -347,10 +347,13 @@ curses.wrapper(main)
 - `window.addch(ch[, attr])` 或者 `window.addch(y, x, ch[, attr])`：向窗口（的指定位置）添加字符。
 - `window.addstr(str[, attr])` 或者 `window.addstr(y, x, str[, attr])`：向窗口（的指定位置）添加字符串；`attr` 是可选的颜色、加粗、闪烁等样式（style）信息。
 - `window.refresh([pminrow, pmincol, sminrow, smincol, smaxrow, smaxcol])`：刷新窗口或面板。刷新面板时，需要指定源（面板）左上角坐标以及目标位置的左上角坐标及左下角坐标。
-- 注意事项：
-    - 屏幕左上角为坐标原点，x 轴水平向右，y 轴竖直向下。
-    - 在 `curses` 中指定坐标时，先是行（y）后是列（x）。
-    - 在窗口、子窗口或面板之外写入字符会引发 `curses.error` 异常。
+
+	
+#### 注意事项
+
+- 屏幕左上角为坐标原点，x 轴水平向右，y 轴竖直向下。
+- 在 `curses` 中指定坐标时，先是行（y）后是列（x）。
+- 在窗口、子窗口或面板之外写入字符会引发 `curses.error` 异常。
 
 	
 #### 字符的颜色和属性
@@ -394,7 +397,6 @@ stdscr.addstr(new_timestr, curses.color_pair(1) | curses.A_BLINK)
    - 如果 `delay` 为正值，则 `getch()` 将阻塞 `delay` 毫秒，若此期间仍无输入将返回 `-1`。
 - `window.getch([y, x])`：获取一个按键对应的字符；键盘上的功能键、小键盘键等按键是由大于 255 的数值表示的。在非阻塞模式下，如果没有输入则返回 -1，阻塞模式下会等待直至有键被按下。
 - `window.getkey([y, x])`：获取一个按键对应的字符但返回一个字符串而不是一个整数。功能键、小键盘键和其他特殊键则是返回一个包含键名的字符串，如 `KEY_UP`。在非阻塞模式下，如果没有输入则引发一个异常。
-- `window.keypad(flag)`：如果 `flag` 为 `True`，则某些键（小键盘键、功能键等）生成的转义序列将由 curses 解析为整数。如果 `flag` 为 `False`，转义序列将保持原样。
 
 	
 #### 其他接口
@@ -404,6 +406,7 @@ stdscr.addstr(new_timestr, curses.color_pair(1) | curses.A_BLINK)
 - `window.clrtoeol()`：从光标位置开始擦除直至行尾。
 - `window.clrtobot()`：从光标位置开始擦除直至窗口末端：光标以下的所有行都会被删除，然后会执行 `clrtoeol()` 的等效操作。
 - `window.scroll([lines=1])`：将屏幕或滚动区域向上滚动 `lines` 行。
+- `window.keypad(flag)`：如果 `flag` 为 `True`，则某些键（小键盘键、功能键等）生成的转义序列将由 curses 解析为整数。如果 `flag` 为 `False`，转义序列将保持原样。
 
 	
 #### 示例程序
