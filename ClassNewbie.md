@@ -79,9 +79,9 @@
 
 ## 直播平台及相关链接
 
-作业点评和答疑直播通过微信视频号进行，请扫码关注视频号“魏永明的编程课”：
+作业点评和答疑直播通过微信视频号进行，请扫码关注视频号“考鼎学堂”：
 
-![魏永明的编程课](https://courses.fmsoft.cn/plzs/assets/qrcode-wechat-channel-weiym.png)
+![考鼎学堂](https://courses.fmsoft.cn/plzs/assets/qrcode-wechat-channel-weiym.png)
 
 班主任的企业微信：
 
