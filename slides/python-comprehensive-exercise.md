@@ -490,9 +490,6 @@ curses.wrapper(main)
 	
 ### `pickle` 模块
 
-	
-### `sqlite3` 模块
-
 		
 ## 其他知识点
 
@@ -505,6 +502,5 @@ curses.wrapper(main)
 1. 掌握 `colorist` 和 `curses` 模块的基本用法。
 1. 掌握二进制文件读写的基本方法。
 1. 掌握 `pickle` 模块的基本用法。
-1. 掌握 `sqlite3` 模块的基本用法。
 1. 掌握随机数的生成方法。
 
