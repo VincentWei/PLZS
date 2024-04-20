@@ -10,34 +10,44 @@
 		
 ## 作业回顾
 
-### 在递归调用中缓存结果
+### 将元组成员作为函数的位置参数传入
 
 ```python
 #!/usr/bin/python3
 
-def nth_fibonacci(n):
-   if n <= 1:
-       return n
-   else:
-       return nth_fibonacci(n - 1) + nth_fibonacci(n - 2)
+test_cases = (
+    {
+        'args': 5,
+        'expected_result': [0, 1, 2, 3, 4]
+    },
+    {
+        'args': (5,),
+        'expected_result': [0, 1, 2, 3, 4]
+    },
+)
 
-mx = 0
-while mx <= 0:
-    try:
-        mx = int(input('Please input a positive integer: '))
-    except ValueError:
-        mx = 0
-
-print(f"The Fibonacci numbers less than {mx}:")
-
-for i in range(mx):
-    a = nth_fibonacci(i)
-    b = nth_fibonacci(i + 1)
-    if a >= mx or b >= mx:
-        print(a, end = '.\n')
-        break
+for test_case in test_cases:
+    input_params = test_case['args']
+    if isinstance(test_case['args'], tuple):
+        result = list(my_range(*test_case['args']))
     else:
-        print(a, end = ', ')
+        result = list(my_range(test_case['args']))
+```
+
+### 恰当命名，保持简洁
+
+```ptyon
+class Square:
+    def __init__(self, side):
+        self.side = side
+
+    # Don't name as calculate_perimeter()
+    def perimeter(self):
+        return 4 * self.side
+
+    # Don't name as calculate_area()
+    def area(self):
+        return self.side ** 2
 ```
 
 		
