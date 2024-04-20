@@ -528,6 +528,7 @@ print()
 - `random.choice(seq)`：从非空序列 `seq` 返回一个随机元素。如果 `seq` 为空，则引发 `IndexError`。
 - `random.shuffle(x[, random])`：就地打乱可变序列 `x`（洗牌）。
 
+	
 ### 使用系统随机数生成器
 
 - `class random.SystemRandom([seed])`：使用 `os.urandom()` 函数的类，从操作系统提供的源生成随机数。
