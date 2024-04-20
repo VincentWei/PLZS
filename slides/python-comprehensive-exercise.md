@@ -97,7 +97,7 @@ class Square:
 
 编辑 `~/.vimrc` 文件，添加如下设置：
 
-```
+```vim
 set expandtab
 set tabstop=4
 set shiftwidth=4
