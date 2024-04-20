@@ -38,6 +38,19 @@ for test_case in test_cases:
 - 类似地，能否将字典作为关键词参数传入函数？
 
 	
+### `map()` 函数和迭代器
+
+- `map(function, iterable, ...)`：该函数返回一个迭代器；在该迭代器上迭代时，会将 `function` 作用于 `iterable` 中的每一项并返回结果。
+- 迭代器（iterator）的概念：一个可以记住遍历位置的对象。
+- 迭代器可用于 `for` 循环以及支持可迭代对象的函数或方法。
+- 序列、映射以及实现了 `__iter__()` 和 `__next__()` 方法的类都是可迭代的（iterable）。
+
+```ptyon
+def my_print(*args, sep=' ', end='\n', file=None, flush=False):
+    contents = sep.join(map(str, args)) + end
+```
+
+	
 ### 处理构建对象时的传入非法值
 
 ```ptyon
