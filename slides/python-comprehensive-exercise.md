@@ -34,6 +34,7 @@ for test_case in test_cases:
         result = list(my_range(test_case['args']))
 ```
 
+	
 ### 恰当命名，保持简洁
 
 ```ptyon
@@ -41,11 +42,13 @@ class Square:
     def __init__(self, side):
         self.side = side
 
-    # Don't name as calculate_perimeter()
+    # Don't name like calculate_perimeter();
+    # calc_perimeter() may be better.
     def perimeter(self):
         return 4 * self.side
 
-    # Don't name as calculate_area()
+    # Don't name as calculate_area();
+    # calc_area() may be better.
     def area(self):
         return self.side ** 2
 ```
