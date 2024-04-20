@@ -6,6 +6,7 @@
 1. 终端编程
 1. 伪随机数
 1. 要点回顾
+1. 综合作业注意事项
 
 		
 ## 作业回顾
@@ -34,13 +35,38 @@ for test_case in test_cases:
         result = list(my_range(test_case['args']))
 ```
 
+- 类似地，能否将字典作为关键词参数传入函数？
+
+	
+### 处理构建对象时的传入非法值
+
+```ptyon
+class Square:
+    def __init__(self, side):
+        if not isinstance(side, float) or side < 0:
+            raise(ValueError)
+        self.side = side
+```
+
+或者，
+
+```ptyon
+class Square:
+    def __init__(self, side):
+        self.side = float(side)
+        if self.side < 0:
+            raise(ValueError)
+```
+
 	
 ### 恰当命名，保持简洁
 
 ```ptyon
 class Square:
     def __init__(self, side):
-        self.side = side
+        self.side = float(side)
+        if self.side < 0:
+            raise(ValueError)
 
     # Don't name like calculate_perimeter();
     # calc_perimeter() may be better.
@@ -51,6 +77,23 @@ class Square:
     # calc_area() may be better.
     def area(self):
         return self.side ** 2
+```
+
+	
+### Vim 默认设置
+
+编辑 `~/.vimrc` 文件，添加如下设置：
+
+```
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set cindent
+set list
+set listchars=tab:▷⋯,trail:◇
+set cc=80
+set ruler
+syntax on
 ```
 
 		
@@ -568,4 +611,12 @@ print()
 1. 掌握使用 `pip` 命令安装第三方 Python 模块的方法。
 1. 掌握 `colorist` 和 `curses` 模块的基本用法。
 1. 掌握伪随机数的生成方法。
+
+		
+## 综合练习注意事项
+
+1. 适当简化功能，两周内开发完成。
+1. 先做基础功能，将基础功能实现为类或者函数。
+1. 积极实践测试驱动开发（test-driven development），确保基础功能的正确性。
+
 
