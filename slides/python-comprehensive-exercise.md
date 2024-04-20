@@ -60,7 +60,7 @@ for i in range(mx):
 	
 ### 有关时间的知识点
 
-1. `epoch`：Unix 类系统的计时起点，即 1970 年 1 月 1 日 00:00:00（UTC）。
+1. `epoch`：Unix 类系统的计时起点，即 1970 年 1 月 1 日 00:00:00（UTC）；也称作“Unix 纪元”起点。
 1. `纪元时间（seconds since the epoch）`，也称为 `Unix 时间`：自 epoch 以来的秒数，通常不包括润秒（leap seconds）。
 1. UTC（协调世界时，Coordinated Universal Time）：早先的 GMT（格林威治时间）。
 1. DTS（夏时制，Daylight Saving Time）：某些时区（timezone）为在夏季最大化利用日光而进行的时间调整，通常比冬季时间快一个小时。
@@ -482,6 +482,69 @@ curses.wrapper(main)
 
 		
 ## 伪随机数
+
+- 随机数的意义
+- 计算机有两种随机数产生方法，一种是伪随机数，一种由内核收集各种随机事件（如按键速度、鼠标位置等）产生。前者常用于非关键领域，而后者更接近于真随机数。
+- 伪随机数（pseudo random number）的产生基于一个种子（seed），然后使用固定的算法生成一串看似随机的数值：
+   - 种子值通常取系统的纪元时间。
+   - 种子值和算法确定时，生成的随机数序列是固定的。
+   - 知道随机数序列中的两个随机值之后，其后的随机数序列是可以预测的。
+
+	
+### 最基本的伪随机数算法
+
+```python
+#!/usr/bin/python3
+
+import time
+
+def my_seed(seed):
+    global holdrand
+    holdrand = seed
+
+def my_rand():
+    global holdrand
+    holdrand = (holdrand * 214013 + 2531011) >> 16 & 0x7fff
+    return holdrand
+
+my_seed(time.time_ns())
+
+n = 0
+while n < 100:
+    print(my_rand(), end = ', ')
+    n += 1
+print()
+```
+
+	
+### `random` 模块
+
+- `random.seed(a=None, version=2)`：初始化随机数生成器。
+- `random.random()`： 返回 `[0.0, 1.0)` 范围内的下一个随机浮点数。
+- `random.uniform(a, b)`：返回一个随机浮点数 N ，当 `a <= b` 时 `a <= N <= b`，当 `b < a` 时 `b <= N <= a`。
+- `random.randrange(stop)` 或者 `random.randrange(start, stop[, step])`：相当于从 `range(start, stop, step)` 中返回一个随机值。
+- `random.randint(a, b)`：返回随机整数 N 满足 `a <= N <= b`；相当于 `randrange(a, b+1)`。
+- `random.randint(a, b)`：返回随机整数 N 满足 `a <= N <= b`；相当于 `randrange(a, b+1)`。
+- `random.choice(seq)`：从非空序列 `seq` 返回一个随机元素。如果 `seq` 为空，则引发 `IndexError`。
+- `random.shuffle(x[, random])`：就地打乱可变序列 `x`（洗牌）。
+
+### 使用系统随机数生成器
+
+- `class random.SystemRandom([seed])`：使用 `os.urandom()` 函数的类，从操作系统提供的源生成随机数。
+- 可在该类的对象上调用上述 `random` 模块提供的方法，但无需调用 `seed()`。
+
+```python
+#!/usr/bin/python3
+
+import random
+
+sysrand = random.SystemRandom()
+n = 0
+while n < 100:
+    print(sysrand.random(), end = ', ')
+    n += 1
+print()
+```
 
 		
 ## 要点回顾
