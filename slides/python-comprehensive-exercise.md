@@ -40,15 +40,16 @@ for test_case in test_cases:
 	
 ### `map()` 函数和可迭代对象
 
-- `map(function, iterable, ...)`：该函数返回一个迭代器；在该迭代器上迭代时，会将 `function` 作用于 `iterable` 中的每一项并返回结果。
-- 迭代器（iterator）：一个可以记住遍历位置的对象，对应的类要实现 `__next__()` 方法。
-- 可迭代（iterable）对象：实现了 `__iter__()` 方法的类的对象。
-- Python 序列、映射以及实现了 `__iter__()` 方法的类都是可迭代的。
-
 ```ptyon
 def my_print(*args, sep=' ', end='\n', file=None, flush=False):
     contents = sep.join(map(str, args)) + end
 ```
+
+- `sep.join()`：该字符串方法接受可迭代对象作为参数，迭代可迭代对象返回的数据，将其转换为字符串，然后使用 `sep` 作为分隔符将这些字符串拼接起来。
+- `map(function, iterable, ...)`：该函数返回一个迭代器；在该迭代器上迭代时，会将 `function` 作用于 `iterable` 中的每一项并返回结果。
+- 迭代器（iterator）：一个可以记住遍历位置的对象，对应的类要实现 `__next__()` 方法。
+- 可迭代（iterable）对象：实现了 `__iter__()` 方法的类的对象。
+- Python 序列、映射以及实现了 `__iter__()` 方法的类都是可迭代的。
 
 	
 ### 使用迭代器实现斐波那契数列
