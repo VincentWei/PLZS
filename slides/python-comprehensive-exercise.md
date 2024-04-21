@@ -38,16 +38,76 @@ for test_case in test_cases:
 - 类似地，能否将字典作为关键词参数传入函数？
 
 	
-### `map()` 函数和迭代器
+### `map()` 函数和可迭代对象
 
 - `map(function, iterable, ...)`：该函数返回一个迭代器；在该迭代器上迭代时，会将 `function` 作用于 `iterable` 中的每一项并返回结果。
-- 迭代器（iterator）的概念：一个可以记住遍历位置的对象。
-- 迭代器可用于 `for` 循环以及支持可迭代对象的函数或方法。
-- 序列、映射以及实现了 `__iter__()` 和 `__next__()` 方法的类都是可迭代的（iterable）。
+- 迭代器（iterator）：一个可以记住遍历位置的对象，对应的类要实现 `__next__()` 方法。
+- 可迭代（iterable）对象：实现了 `__iter__()` 方法的类的对象。
+- Python 序列、映射以及实现了 `__iter__()` 方法的类都是可迭代的。
 
 ```ptyon
 def my_print(*args, sep=' ', end='\n', file=None, flush=False):
     contents = sep.join(map(str, args)) + end
+```
+
+	
+### 使用迭代器实现斐波那契数列
+
+- 在可迭代对象上使用 `iter()` 函数可以构造迭代器；迭代器由类的 `__iter__()` 方法创建。
+- 在迭代器上调用 `next()` 函数，将调用迭代器对象的 `__next__()` 方法获取下个数据。
+- 可迭代对象可用于 `for` 循环以及支持可迭代对象的函数或方法。
+
+```ptyon
+#!/usr/bin/python3
+
+class FibIterator(object):
+    def __init__(self):
+        self.a = 0
+        self.b = 1
+
+    def __next__(self):
+        r = self.a
+        self.a, self.b = self.b, self.a + self.b
+        return r
+
+class Fibonacci(object):
+    def __init__(self):
+        pass
+
+    def make_list(self, maxn):
+        l = []
+        a, b = 0, 1
+        while a <= maxn:
+            l += (a, )
+            if a == maxn or b > maxn:
+                break
+            a, b = b, a + b
+        return l
+
+    def __iter__(self):
+        return FibIterator()
+
+fib = Fibonacci()
+
+print("Use make_list() to generate Fibonacci numbers less than 50:")
+fibs = fib.make_list(50)
+for x in fibs:
+    print(x)
+
+print("Use iter() and next() to generate Fibonacci numbers less than 50:")
+it = iter(fib)
+while True:
+    x = next(it)
+    if x > 50:
+        break
+    print(x)
+
+print("Use `for x in iterable` statment to generate Fibonacci numbers less than 50:")
+for x in fib:
+    if x > 50:
+        break
+    print(x)
+
 ```
 
 	
@@ -368,20 +428,20 @@ colorist.effect_blink("CYAN and BLINKING!", Color.CYAN)
 ```python
 import curses
 
-stdscr = curses.initscr()      # 返回一个代表整个屏幕的窗口对象。
+stdscr = curses.initscr()       # 返回一个代表整个屏幕的窗口对象。
 
 curses.noecho()                 # 关闭输入回显。
 curses.cbreak()                 # 关闭标准输入的缓冲模式并进入 `cbreak` 模式。
                                 # 之后，用户的按键将立即被上报给应用程序。
 
-stdscr.keypad(True)            # 开启小键盘的翻译功能，上下左右等特殊按键将
+stdscr.keypad(True)             # 开启小键盘的翻译功能，上下左右等特殊按键将
                                 # 被翻译为 curses 定义的常量，如 curses.KEY_UP。
 ```
 
 - 终止
 
 ```python
-stdscr.keypad(False)           # 关闭小键盘的翻译功能。
+stdscr.keypad(False)            # 关闭小键盘的翻译功能。
 curses.nocbreak()               # 关闭 `cbreak` 模式。
 curses.echo()                   # 开启回显模式。
 curses.endwin()                 # 还原终端到原始模式。
@@ -392,6 +452,7 @@ curses.endwin()                 # 还原终端到原始模式。
 
 - 由于终端模式的改变，若在初始化 `curses` 后程序出现异常而没有执行终止操作，会严重影响后续的命令行操作。
 - 通常应使用包装器（wrapper）完成终端的初始化和终止操作，并优雅地（gracefully）处理未被捕获的异常。
+- 思考：初始化 `curses` 模块之后，`print()` 和 `input()` 函数的行为会发生变化吗？
 
 ```python
 import curses
@@ -428,6 +489,7 @@ curses.wrapper(main)
 
 - 颜色对（color pair）：用于定义字符前景色和背景色的一对颜色。在终端编程中，需要指定颜色对的编号，且 0 号颜色对始终为黑底白字。
 - 在调用 `window.addch()` 和 `window.addstr()` 函数时，可通过最后一个 `attr` 参数指定字符或者字符串的颜色对，并和其他属性一并使用。
+- 在 `window.addstr()` 函数中，字符串中使用 ANSI 转义序列不会生效。
 - 常用字符属性：
    1. `curses.A_BLINK`：闪烁文本。
    1. `curses.A_BOLD`：超亮或粗体文本。
@@ -619,6 +681,7 @@ print()
 		
 ## 要点回顾
 
+1. 掌握可迭代对象和迭代器的概念，并积极实践。
 1. 掌握 `time` 和 `datetime` 模块的基本用法。
 1. 掌握 ANSI 转义序列的基本概念。
 1. 掌握使用 `pip` 命令安装第三方 Python 模块的方法。
@@ -631,5 +694,5 @@ print()
 1. 适当简化功能，两周内开发完成。
 1. 先做基础功能，将基础功能实现为类或者函数。
 1. 积极实践测试驱动开发（test-driven development），确保基础功能的正确性。
-
+1. 积极尝试解耦代码和数据，提高代码的可维护性。
 
