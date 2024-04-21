@@ -29,12 +29,12 @@ class Fibonacci(object):
 
 fib = Fibonacci()
 
-print("Use make_list() to generate Fibonacci numbers:")
+print("Use make_list() to generate Fibonacci numbers less than 50:")
 fibs = fib.make_list(50)
 for x in fibs:
     print(x)
 
-print("Use iter() and next() to generate Fibonacci numbers:")
+print("Use iter() and next() to generate Fibonacci numbers less than 50:")
 it = iter(fib)
 while True:
     x = next(it)
@@ -42,7 +42,7 @@ while True:
         break
     print(x)
 
-print("Use `for x in iterable` statment to generate Fibonacci numbers:")
+print("Use `for x in iterable` statment to generate Fibonacci numbers less than 50:")
 for x in fib:
     if x > 50:
         break
