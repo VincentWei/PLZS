@@ -1,7 +1,8 @@
-# Python 综合练习
+# Python 大作业及相关知识点
 
 1. 作业回顾
-1. 综合练习可选项目
+1. 可迭代对象和迭代器
+1. 大作业可选项目
 1. 时间的获取和转换
 1. 终端编程
 1. 伪随机数
@@ -38,7 +39,66 @@ for test_case in test_cases:
 - 类似地，能否将字典作为关键词参数传入函数？
 
 	
-### `map()` 函数和可迭代对象
+### 处理构建对象时的传入非法值
+
+```ptyon
+class Square:
+    def __init__(self, side):
+        if not isinstance(side, float) or side < 0:
+            raise(ValueError)
+        self.side = side
+```
+
+或者，
+
+```ptyon
+class Square:
+    def __init__(self, side):
+        self.side = float(side)
+        if self.side < 0:
+            raise(ValueError)
+```
+
+	
+### 恰当命名，保持简洁
+
+```ptyon
+class Square:
+    def __init__(self, side):
+        self.side = float(side)
+        if self.side < 0:
+            raise(ValueError)
+
+    # Don't name like calculate_perimeter();
+    # calc_perimeter() may be better.
+    def perimeter(self):
+        return 4 * self.side
+
+    # Don't name as calculate_area();
+    # calc_area() may be better.
+    def area(self):
+        return self.side ** 2
+```
+
+	
+### Vim 默认设置
+
+编辑 `~/.vimrc` 文件，添加如下设置：
+
+```vim
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set cindent
+set list
+set listchars=tab:▷⋯,trail:◇
+set cc=80
+set ruler
+syntax on
+```
+
+		
+## 可迭代对象和迭代器
 
 ```ptyon
 def my_print(*args, sep=' ', end='\n', file=None, flush=False):
@@ -112,67 +172,8 @@ for x in fib:
 
 ```
 
-	
-### 处理构建对象时的传入非法值
-
-```ptyon
-class Square:
-    def __init__(self, side):
-        if not isinstance(side, float) or side < 0:
-            raise(ValueError)
-        self.side = side
-```
-
-或者，
-
-```ptyon
-class Square:
-    def __init__(self, side):
-        self.side = float(side)
-        if self.side < 0:
-            raise(ValueError)
-```
-
-	
-### 恰当命名，保持简洁
-
-```ptyon
-class Square:
-    def __init__(self, side):
-        self.side = float(side)
-        if self.side < 0:
-            raise(ValueError)
-
-    # Don't name like calculate_perimeter();
-    # calc_perimeter() may be better.
-    def perimeter(self):
-        return 4 * self.side
-
-    # Don't name as calculate_area();
-    # calc_area() may be better.
-    def area(self):
-        return self.side ** 2
-```
-
-	
-### Vim 默认设置
-
-编辑 `~/.vimrc` 文件，添加如下设置：
-
-```vim
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set cindent
-set list
-set listchars=tab:▷⋯,trail:◇
-set cc=80
-set ruler
-syntax on
-```
-
 		
-## 综合练习可选项目
+## 大作业可选项目
 
 - 参考如下游戏中的一款，用 Python 实现（难度逐步提高）：
    1. 2048（`$ sudo apt install 2048 && 2048`）
@@ -691,7 +692,7 @@ print()
 1. 掌握伪随机数的生成方法。
 
 		
-## 综合练习注意事项
+## 大作业注意事项
 
 1. 适当简化功能，两周内开发完成。
 1. 先做基础功能，将基础功能实现为类或者函数，积极尝试使用生成器和迭代器。
