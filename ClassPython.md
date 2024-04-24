@@ -63,7 +63,7 @@
 
 视频内容分发账号：
 
-![魏永明的编程课之筑基班](https://courses.fmsoft.cn/plzs/assets/qrcode-douyin-class-pythonjpg)
+![魏永明的编程课之筑基班](https://courses.fmsoft.cn/plzs/assets/qrcode-douyin-class-python.png)
 
 ---
 
