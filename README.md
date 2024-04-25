@@ -386,7 +386,8 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 主要学习内容：
 
 1. C++ 编程语言的基本语法
-1. GCC 及 CMake 构建生成器
+1. GCC，Make 及 Makefile
+1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
 
 适宜人群：
 
