@@ -55,7 +55,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 | AI 实战班     | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket, Nginx, MySQL, AI   |
 | 信奥筑基班    | C++                       | Linux, GCC, Make/Makefile                             |
 | 信奥初级班    | C++                       | Linux, GCC, CMake, JSON, CSP-J                        |
-| 信奥提高班    | C++                       | Linux, GCC, CMake, RegEx, CSP-P                       |
+| 信奥提高班    | C++                       | Linux, GCC, CMake, RegEx, CSP-S                       |
 
 对学生的要求：
 
@@ -589,9 +589,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 主要学习内容：
 
 1. C++ 编程语言的高级用法
-1. CSP-P 重要考点，包括各进阶算法和高级数据结构
+1. CSP-S 重要考点，包括各进阶算法和高级数据结构
 1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
-1. CSP-P 真题演练及辅导
+1. CSP-S 真题演练及辅导
 
 适宜人群：
 
@@ -609,8 +609,8 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 课程收获：
 
 1. 快速掌握现代 C++ 编程语言的高级功能。
-1. 覆盖 CSP-P 重要考点，结合数学问题讲解，强化训练孩子的抽象思维、逻辑思维和发散思维。
-1. 通过具有实际意义的大作业加深的 CSP-P 重要考点的理解。
+1. 覆盖 CSP-S 重要考点，结合数学问题讲解，强化训练孩子的抽象思维、逻辑思维和发散思维。
+1. 通过具有实际意义的大作业加深的 CSP-S 重要考点的理解。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何提高代码的可维护性、可扩展性和可测试性。
 1. 基于开源协作平台的作业批改，培养孩子基于开源平台的协作能力。
 1. 主讲老师亲自在线答疑，提供专业辅导。
@@ -650,7 +650,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 离散及组合数学
 1. 结业大作业
    - Lua 或简化的 Python 解释器
-1. CSP-P 真题演练
+1. CSP-S 真题演练
 
 课程须知：
 
