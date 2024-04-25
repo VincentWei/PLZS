@@ -20,29 +20,29 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 ### 课程简介
 
 本系列课程面向对编程有强烈兴趣的大中小学生（年龄在 10 到 22 周岁；小学五年级到大学毕业前）。整个系列课程的内容和产业界热门技术、国际前沿技术接轨，会涉及到 Linux、Git、Python、C++、JavaScript、开源 AI 大模型等开发环境、开发工具、编程语言以及算法和数据结构；下分五门课程：
-   - 普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 系统命令、Vim 编辑器、Git 使用及 Python 编程入门。学生最终写出自己的第一个 Python 程序并创建自己的第一个开源代码仓库。
-   - 筑基班：针对已入门学生开设，课程讲述 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
-   - AI实战班：针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 编程语言、JavaScript 编程语言、网页前后端编程、数据库以及开源 AI 模型等，五人一组协作开发一个联网的具有人工智能元素的网页游戏。
+   - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 系统命令、Vim 编辑器、Git 使用及 Python 编程入门。学生最终写出自己的第一个 Python 程序并创建自己的第一个开源代码仓库。
+   - AI 筑基班：针对已入门学生开设，课程讲述 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
+   - AI 实战班：针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 编程语言、JavaScript 编程语言、网页前后端编程、数据库以及开源 AI 模型等，五人一组协作开发一个联网的具有人工智能元素的网页游戏。
    - 信奥基础班：针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，课程讲述 C++ 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个四则运算计算器。
    - 信奥初级班：针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握信奥基础班的内容。课程内容围绕 C++ 编程语言和常见解析器的实现进行，通过将 NOI 大纲（初级）中所列知识点融入解析器的开发加深学生对相关知识的理解和掌握。
    - 信奥提高班：针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握信奥初级班的内容。课程内容围绕 C++ 编程语言和一个脚本语言的解释器开展，通过将 NOI 大纲（提高级）中所列知识点融入脚本语言的解释器加深学生对相关知识的理解和掌握。
 1. 授课方式：
    - 普及班为录播课，外加作业点评及答疑直播。
-   - 筑基班、AI实战班、信奥基础班、信奥初级班、信奥提高班均为直播课，外加作业点评及答疑直播。
+   - AI 筑基班、AI 实战班、信奥基础班、信奥初级班、信奥提高班均为直播课，外加作业点评及答疑直播。
    - 作业点评和答疑直播每周至少安排两场。
 1. 学习周期：
    - 普及班：4讲8课时；周末班2周；暑期班1周。
-   - 筑基班：5讲20课时；周末班6周；暑期班3周。
-   - AI实战班：10讲40课时；周末班10周；暑期班5周。
+   - AI 筑基班：5讲20课时；周末班6周；暑期班3周。
+   - AI 实战班：10讲40课时；周末班10周；暑期班5周。
    - 信奥基础班：6讲24课时；周末班7周；暑期班4周。
    - 信奥初级班：10讲40课时；周末班10周；暑期班5周。
    - 信奥提高班：10讲40课时；周末班10周；暑期班5周。
 1. 建议学习路线：
-   - 零基础想学习全栈 AI 开发技术的学生：普及班 ➜ 筑基班 ➜ AI 实战班
-   - 零基础想参加信奥竞赛的学生： 普及班 ➜ 筑基班 ➜ 信奥初级班 ➜ 信奥提高班
-   - 已学习 Python 的学生：普及班 ➜ 信奥初级班 ➜ AI 实战班 ➜ 信奥提高班
-   - 只对信奥竞赛感兴趣的学生：普及班 ➜ 信奥初级班 ➜ 信奥提高班
-   - 通过信奥提高级要参加 NOIP 竞赛的学生：AI 实战班
+   - 零基础想学习全栈 AI 开发技术的学生：普及班 ➜ AI 筑基班 ➜ AI 实战班
+   - 零基础想参加信奥竞赛的学生： 普及班 ➜ 信奥基础班 ➜ 信奥初级班 ➜ 信奥提高班
+   - 已学习 Python 的学生：普及班 ➜ 信奥基础班 ➜ 信奥初级班 ➜ 信奥提高班
+   - 只对信奥竞赛感兴趣的学生：普及班 ➜ 信奥基础班 ➜ 信奥初级班 ➜ 信奥提高班
+   - 通过信奥提高级要参加 NOIP 竞赛的学生：普及班 ➜ AI 筑基班 ➜ AI 实战班
 
 ![课程体系](slides/plzs-course-framework.svg)
 
@@ -51,8 +51,8 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 | 课程          | 编程语言                  | 其他技术                                              |
 | --            | --                        | --                                                    |
 | 普及班        | Python                    | Linux, Vim, Git, Markdown                             |
-| 筑基班        | Python                    | Linux, Vim, Git                                       |
-| AI实战班      | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket, Nginx, MySQL, AI   |
+| AI 筑基班     | Python                    | Linux, Vim, Git                                       |
+| AI 实战班     | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket, Nginx, MySQL, AI   |
 | 信奥基础班    | C++                       | Linux, GCC, Make/Makefile                             |
 | 信奥初级班    | C++                       | Linux, GCC, CMake, JSON, CSP-J                        |
 | 信奥提高班    | C++                       | Linux, GCC, CMake, RegEx, CSP-P                       |
@@ -159,10 +159,10 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 问：如何联系客服?  
 答：如有其他疑问，在视频号主页点击客服按钮，即可咨询客服。
 
-### 筑基班
+### AI 筑基班
 
 - 商品名称  
-学生编程课筑基班
+学生编程课AI筑基班
 - 简介  
 本课程针对已入门学生开设，课程内容涉及 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
 
@@ -199,7 +199,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 赠送课程：
 
-直接购买筑基班课程的，同时赠送普及班课程；详情请联系客服或班主任。
+直接购买 AI 筑基班课程的，同时赠送普及班课程；详情请联系客服或班主任。
 
 课程目录：
 
@@ -268,10 +268,10 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 问：如何联系客服?  
 答：如有其他疑问，在视频号主页点击客服按钮，即可咨询客服。
 
-### AI实战班
+### AI 实战班
 
 - 商品名称  
-学生编程课AI实战班
+学生编程课 AI 实战班
 - 简介  
 本课程针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 和 JavaScript 编程语言、网页前后端技术、数据库以及开源 AI 模型等。在进入大作业阶段时，将五人一组协作开发一个联网的具有人工智能元素的网页游戏。
 
@@ -288,7 +288,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 适宜人群：
 
-- 十岁及以上学生（小学五年级到大学毕业前），已完成筑基班的课程内容。
+- 十岁及以上学生（小学五年级到大学毕业前），已完成 AI 筑基班的课程内容。
 - 就业前的大学生或初高中阶段的科技特长生。
 - 对人工智能等新兴技术有强烈兴趣的学生。
 
@@ -311,7 +311,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 优惠活动：
 
-直接购买本课程的，可优惠购买筑基班课程并获赠普及班课程；详情请联系客服。
+直接购买本课程的，可优惠购买 AI 筑基班课程并获赠普及班课程；详情请联系客服。
 
 课程目录：
 
@@ -690,52 +690,12 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    1. [使用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
    1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
    1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
-- 筑基班：
+- AI 筑基班：
    1. [Python 流程控制](https://courses.fmsoft.cn/plzs/python-flow-control.html)
    1. [Python 数据类型](https://courses.fmsoft.cn/plzs/python-data-types.html)
    1. [Python 标准库](https://courses.fmsoft.cn/plzs/python-standard-library.html)
    1. [Python 大作业及相关知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
    1. [Python 大作业辅导](https://courses.fmsoft.cn/plzs/python-project-coaching.html)
-- AI 实战班：
-   1. 搭建网页服务器
-   1. JavaScript 及网页编程
-   1. 更新网页内容
-   1. 在网页中绘制图形
-   1. 在网页中和用户交互
-   1. JavaScript 综合练习
-   1. 基于 Git 的协作式软件开发
-   1. [Bash Shell 编程](https://courses.fmsoft.cn/plzs/bash-shell-programming.html)
-   1. 大作业需求分析及架构设计
-   1. Linux 服务器的安装和配置
-   1. Web 服务器网关程序
-   1. 用户账号管理及登录界面
-   1. WebSocket 服务器及客户端
-   1. 从网页中连接到 WebSocket 服务器
-   1. 架设开源 AI 大模型
-   1. 网页端利用 AI 功能
-   1. 部署服务器端软件
-- 信奥初级班：
-   1. 我的第一个 C++ 程序
-   1. C++ 工具链及项目构建
-   1. C++ 标准模板库
-   1. JSON 解析器的架构
-   1. 字符串基本操作及其算法
-   1. 基础数据结构
-   1. 基础算法
-   1. 经典例题一
-   1. 高级数据结构
-   1. 进阶算法
-   1. 经典例题二
-- 信奥提高班：
-   1. C++ 和其他编程语言的互操作性
-   1. [Bash Shell 编程](https://courses.fmsoft.cn/plzs/bash-shell-programming.html)
-   1. 脚本解释器的架构
-   1. 高阶数据结构
-   1. 高阶算法
-   1. 经典例题一
-   1. 高级数据结构
-   1. 进阶算法
-   1. 经典例题二
 - 番外
    1. [其他编程语言长什么样？](https://courses.fmsoft.cn/plzs/other-programming-languages.html)
    1. [为什么选择二进制？](https://courses.fmsoft.cn/plzs/icsm-why-choose-binary.html)
@@ -744,6 +704,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    1. [文字：字符集及编码](https://courses.fmsoft.cn/plzs/icsm-text.html)
    1. [多媒体：图像、图形和音视频](https://courses.fmsoft.cn/plzs/icsm-multimedia.html)
    1. [结构化数据](https://courses.fmsoft.cn/plzs/icsm-structured-data.html)
+
+
+其他课程课件入口见收货短信提示之页面。
 
 ## 学前准备
 
