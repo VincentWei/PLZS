@@ -15,7 +15,7 @@
 	
 - Android 架构图
 
-<img class="r-frame" style="height:auto;width:100%;" src="assets/android-framework.svg" />
+<img class="r-frame" style="height:400px;width:auto;" src="assets/android-framework.svg" />
 
 	
 ### 看 Python 3.10 标准库的目录结构
