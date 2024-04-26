@@ -179,6 +179,7 @@ for x in fib:
    1. 2048（`$ sudo apt install 2048 && 2048`）
    1. 贪婪（`$ sudo apt install greed && greed`）
    1. 数独（`$ sudo apt nudoku && nudoku`）
+   1. 贪吃蛇（`$ sudo apt nsnake && nsnake`）
    1. 打字员（`$ sudo apt install gtypist && gtypist`）
    1. 俄罗斯方块（`$ sudo apt install bastet && bastet`）
 
