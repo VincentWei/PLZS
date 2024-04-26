@@ -15,6 +15,7 @@
 - 软件的模块化管理方法
 - 复杂软件（如操作系统）构成了由多个不同层级的软件构成的一个堆叠结构（software stack）
 
+<img class="r-frame" style="height:auto;width:100%;" src="assets/android-framework.svg" />
 
 	
 ### 看 Python 3.10 标准库的目录结构
