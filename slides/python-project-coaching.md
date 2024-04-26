@@ -24,6 +24,20 @@
 - 以 `curses` 模块为例：
 
 ```console
+$ cd /usr/lib/python3.10/
+$ tree curses/
+curses/
+├── ascii.py
+├── has_key.py
+├── __init__.py
+├── panel.py
+├── __pycache__
+│   ├── ascii.cpython-310.pyc
+│   ├── has_key.cpython-310.pyc
+│   ├── __init__.cpython-310.pyc
+│   ├── panel.cpython-310.pyc
+│   └── textpad.cpython-310.pyc
+└── textpad.py
 ```
 
 	
@@ -47,6 +61,13 @@
 - 复杂软件的源文件也应该按照模块在树状目录中进行组织，如：
 
 ```console
+$ tree project-bastet/
+project-bastet/
+├── bastet.py
+├── shapes.py
+└── utils
+    ├── misc.py
+    └── timing.py
 ```
 
 - `import foo.bar`：在 `./foo` 目录中装载 `bar` 模块（或 `./foo/bar` 目录中的 `__init__.py` 模块）。
