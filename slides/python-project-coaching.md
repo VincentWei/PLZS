@@ -254,24 +254,31 @@ if __name__ == '__main__':
 
 1. 调试器（debugger）有用，但不要过度依赖。
 1. `$ python3 -m pdb foo.py`
-1. 常用命令：
-   - `l`：查看源代码。
-   - `ll`：查看当前函数或模块的所有源代码。
-   - `b [lineno | filename:lineno | functionname]`：设置断点（break point）。
-   - `tbreak [lineno | filename:lineno | functionname]`：设置临时（temporary）断点，也就是一次性断点。
-   - `cl [filename:lineno | bpnumber [bpnumber ...]]`：清除断点。
-   - `p expression`：打印表达式的值。
-   - `s`：单步（step）执行下一行，会进入函数体内。
-   - `n`：单步执行下一行，但不进入函数体。
-   - `r`：若当前在函数中，则执行直到函数返回前，否则执行下一行。
-   - `c`：继续执行直到终止或者下个断点。
-   - `unt lineno`：执行到指定的行号处。
-   - `j lineno`：从当前位置跳过代码直接到指定行号处。
-   - `a`：在函数中时，打印传递给函数的参数及参数值。
-   - `w`：打印函数的调用栈帧信息。
-   - `whatis expression`：打印表达式类型。
-   - `interact`：启动解释器的交互模式。
-   - `q`：退出调试器。
+
+	
+### `pdb` 常用命令
+
+- `l`：查看源代码。
+- `ll`：查看当前函数或模块的所有源代码。
+- `b [lineno | filename:lineno | functionname]`：设置断点（break point）。
+- `tbreak [lineno | filename:lineno | functionname]`：设置临时（temporary）断点，也就是一次性断点。
+- `cl [filename:lineno | bpnumber [bpnumber ...]]`：清除断点。
+- `p expression`：打印表达式的值。
+
+	
+### `pdb` 常用命令（续）
+
+- `s`：单步（step）执行下一行，会进入函数体内。
+- `n`：单步执行下一行，但不进入函数体。
+- `r`：若当前在函数中，则执行直到函数返回前，否则执行下一行。
+- `c`：继续执行直到终止或者下个断点。
+- `unt lineno`：执行到指定的行号处。
+- `j lineno`：从当前位置跳过代码直接到指定行号处。
+- `a`：在函数中时，打印传递给函数的参数及参数值。
+- `w`：打印函数的调用栈帧信息。
+- `whatis expression`：打印表达式类型。
+- `interact`：启动解释器的交互模式。
+- `q`：退出调试器。
 
 		
 ## AI 实战班内容介绍
