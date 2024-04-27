@@ -186,7 +186,6 @@ sorted_students = sorted(student_tuples, key=itemgetter(2))
 
 - `repr(x)` 函数返回一个字符串，该字符串是 `x` 的可打印表述（representation）形式；该字符串可传递给 `eval()` 将其转换为一个 Python 数据。
 - `eval(expression[, globals[, locals]])` 函数对一个符合 Python 语法的字符串表达式 `expression` 进行求值；`globals` 和 `locals` 用于指定对表达式求值时的全局或局部变量，通常为字典，保存了变量名和对应数据之间的键值对。
-- 使用 `repr()` 函数可将复杂数据转换为字符串保存到文件中；之后读取该文件后使用 `eval()` 函数即可将对应的内容转换为 Python 数据。因此，这两个函数常用于数据的简单情形下的持久化存储。
 - 用户自定义类可通过定义 `__repr__` 这一特殊方法为 `repr()` 函数提供自定义的表述形式。
 - `__repr__` 和 `__str__` 的区别。
 
@@ -216,6 +215,14 @@ sorted_students = sorted(student_objects, key=attrgetter('age'))
 # use dict in __repr__ method:
 # [{'name': '王红', 'grade': 'B', 'age': 10}, {'name': '张丽', 'grade': 'B', 'age': 12}, {'name': '李华', 'grade': 'A', 'age': 15}]
 ```
+
+	
+### `repr()` 和 `eval()` 函数（续）
+
+- 使用 `repr()` 可在调试和日志中输出对象的字符串表述，便于理解和排查问题：人机共读。
+- 使用 `repr()` 函数可将复杂数据转换为字符串保存到文件中，方便读取和查看：一种简单的持久化存储方法。
+- 将 `repr()` 返回的字符串再使用 `eval()` 函数即可将对应的内容转换为 Python 对象：对象的序列化和反序列化。
+
 
 		
 ## Python 编码风格
