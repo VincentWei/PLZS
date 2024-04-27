@@ -11,7 +11,7 @@
 ## Python 程序的模块化管理
 
 1. 将复杂软件划分为不同的模块，有利于项目的管理和维护。
-1. 复杂软件（如操作系统）构成了由多个不同层级的软件构成的一个堆叠栈（software stack）。
+1. 复杂软件（如操作系统）通常是由多个不同层级的软件构成的一个堆叠栈（software stack）。
 
 	
 - Android 架构图
@@ -164,10 +164,10 @@ sorted_students = sorted(student_tuples, key=lambda st: st[2])
 ```
 
 	
-### `operator` 模块方法
+### `operator` 模块
 
 - `operator` 模块提供了一套与Python的内置运算符对应的高效率函数。例如 `operator.add(x, y)` 与表达式 `x+y` 相同。
-- `operator` 模块的方法返回一个可调用数据，可当做函数传递给 `sorted()` 等函数或方法使用。
+- `operator` 模块的方法返回一个可调用对象，可当做函数传递给 `sorted()` 等函数或方法使用。
 - [官方文档](https://docs.python.org/zh-cn/3.10/library/operator.html)
 
 ```python
@@ -184,7 +184,7 @@ sorted_students = sorted(student_tuples, key=itemgetter(2))
 	
 ### `repr()` 和 `eval()` 函数
 
-- `repr(x)` 函数返回一个字符串，该字符串是 `x` 的可打印表述（representation）形式；该字符串可传递给 `eval()` 将其转换为一个 Python 数据。
+- `repr(x)` 函数返回一个字符串，该字符串是 `x` 的可打印表述（representation）形式；该字符串可传递给 `eval()` 将其转换为一项 Python 数据。
 - 用户自定义类可通过定义 `__repr__` 这一特殊方法为 `repr()` 函数提供自定义的表述形式。
 - `__repr__` 和 `__str__` 的区别。
 
@@ -218,11 +218,10 @@ sorted_students = sorted(student_objects, key=attrgetter('age'))
 	
 ### `repr()` 和 `eval()` 函数（续）
 
-- `eval(expression[, globals[, locals]])` 函数对一个符合 Python 语法的字符串表达式 `expression` 进行求值；`globals` 和 `locals` 用于指定对表达式求值时的全局或局部变量，通常为字典，保存了变量名和对应数据之间的键值对。
+- `eval(expression[, globals[, locals]])` 函数对一个符合 Python 语法的字符串表达式 `expression` 进行求值；`globals` 和 `locals` 用于指定对表达式求值时的全局或局部变量，通常为字典，包含了变量名和对应数据构成的键值对。
 - 使用 `repr()` 可在调试和日志中输出对象的字符串表述，便于理解和排查问题：人机共读。
-- 使用 `repr()` 函数可将复杂数据转换为字符串保存到文件中，方便读取和查看：一种简单的持久化存储方法。
-- 将 `repr()` 返回的字符串再使用 `eval()` 函数即可将对应的内容转换为 Python 对象：对象的序列化和反序列化。
-
+- 使用 `repr()` 函数可将复杂数据转换为字符串保存到文件中，方便读取和查看：一种简单的数据持久化方法。
+- 将 `repr()` 返回的字符串再使用 `eval()` 函数即可将对应的内容转换为 Python 对象：一种对象的序列化和反序列化方法。
 
 		
 ## Python 编码风格
@@ -293,3 +292,4 @@ if __name__ == '__main__':
 1. WebSocket 服务器及客户端
 1. 架设开源 AI 大模型
 1. Bash Shell 编程及服务器运维
+
