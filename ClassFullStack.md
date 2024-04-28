@@ -4,35 +4,17 @@
 
 ## 课前准备
 
-家长不用担心自己不懂软件或者编程而无法辅导孩子，只要做好如下三件事情即可：
-
-1. 准备好一台专用于学习和开发的台式电脑或笔记本电脑给孩子使用。
-1. 协助年龄较小的孩子在 Gitee 或者 GitHub 平台上注册开发者账号。
-1. 督促孩子完成作业，鼓励孩子提问，并为孩子取得的每一个成果和进步点赞。
-
 ### 学习用电脑
 
-学习用电脑最好是专用的，以防误操作导致数据丢失。电脑可以是：
+由于要运行 AI 大模型，需要配置较高的电脑，建议以小组为单位租用云主机服务器。
 
-1. 2020 年以后生产的运行 Windows 10/11 的台式机或者笔记本（推荐）。
+如果要在自己的电脑上运行大模型，则需要直接安装 Ubuntu Linux，不能在虚拟机中运行，对应的硬件配置要求如下：
+
 1. 支持 Ubuntu Linux 22.04 的台式机或笔记本；请参考如下页面获取认证的设备清单：<https://ubuntu.com/certified>。
-1. 2020 年以后生产的运行 macOS 14+ 的苹果 Mac 台式机或者笔记本。
+1. 主频在 2GHz 以上的 8 核或以上处理器。
+1. 内存 32GB 或以上。
 
-电脑的硬件配置要求：
-
-- 主频在 2GHz 以上的 4 核或以上处理器。
-- 内存 16GB 或以上。
-
-考虑到普及班的教学内容对电脑配置的要求不高，故如果手头已有满足以上配置的电脑则不建议购置新的电脑。在进入提高阶段学习需要运行开源人工智能大模型时，再行考虑购置新的开发用电脑。
-
-### 注册 GitHub 账号
-
-家长需协助孩子在 <https://github.com> 或者 <https://gitee.com> 上注册一个开发者账号。在 GitHub 上注册需要一个电子邮件地址，在 Gitee 上注册需要一个中国大陆地区的手机号码。本系列课程相关的学习资料、文档、示例程序等，通过如下代码仓库发布：
-
-- GitHub: <https://github.com/VincentWei/PLZS>，或
-- Gitee: <https://gitee.com/vincentwei7/PLZS>
-
-在注册后，请确保在开发用电脑上使用 Chrome 或 Edge 浏览器登录 GitHub，并让孩子牢记账号名称和账号密码。
+其他要求同普及班内容；获赠普及班课程的同学，请转[这里](ClassNewbie.md)。
 
 ## 课程资料
 
@@ -40,24 +22,32 @@
 
 AI实战班的课件入口：
 
-1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
-1. [使用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
-1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
-1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
+1. [Web 相关背景知识](https://courses.fmsoft.cn/plzs/fullstack-basic-of-web.html)
+1. [架设 Linux 服务器](https://courses.fmsoft.cn/plzs/fullstack-setting-up-linux-server.html)
+1. [JavaScript 编程语言](https://courses.fmsoft.cn/plzs/fullstack-javascript-language.html)
+1. [Web 前端开发](https://courses.fmsoft.cn/plzs/fullstack-web-programming.html)
+1. [网页前端综合练习及专题辅导](https://courses.fmsoft.cn/plzs/fullstack-web-programming-exercise.html)
+1. [基于 Git 的协作式软件开发](https://courses.fmsoft.cn/plzs/fullstack-collaborative-development-based-on-github.html)
+1. [开源 AI 大模型](https://courses.fmsoft.cn/plzs/fullstack-open-source-ai-llm.html)
+1. [大作业需求分析及架构设计](https://courses.fmsoft.cn/plzs/fullstack-project-design.html)
+1. [大作业专题辅导](https://courses.fmsoft.cn/plzs/fullstack-project-coaching.html)
+1. [服务的部署和运维](https://courses.fmsoft.cn/plzs/fullstack-deploying-and-operations.html)
 
 ### 建议学习方法
 
-1. 在电脑上用浏览器登录[抖音官网](https://www.douyin.com)或者安装抖音电脑版应用，用已关注“魏永明的编程课之AI实战班”的账号登录，即可通过该账号主页观看相应的课程内容。
-1. 首先按照视频封面和标题所标示的顺序观看各讲的课程视频（我们称之为串讲视频）。
-1. 观看完串讲视频做实操练习或者做作业时，可在电脑上用浏览器打开对应的课件页面。此时若点击课件页面中演示视频的链接，就会跳转到抖音页面播放对应的视频（需要使用已关注“魏永明的编程课之AI实战班”的账号登录抖音，否则无法观看）。此时，可在电脑上对照补充视频进行相应的实操练习。
-1. 建议在两到三周内完成学习并及时提交作业给主讲老师。
+1. 观看直播课程或回放时，务必横屏观看，使用平板观看的效果更好。
+1. 观看直播（回放）做实操练习或者作业时，可在电脑上用浏览器打开对应的课件页面，此时，可在电脑上对照演示视频进行相应的实操练习。
+1. 务必通过在 GitHub 或者 Gitee 上创建的代码仓库提交作业，老师会通过开源平台对作业进行点评。
 
-特别提示：
+## 课程表
 
-1. 在课件页面中点击视频链接时，可按住 Shift 键或者 Windows 键/Command 键在新窗口或者新标签页页中播放视频。
-1. 在浏览器中播放抖音视频时，默认声音是关闭的，请操作页面上的音量按钮打开声音。
-1. 使用抖音电脑版应用可以获得更好的播放体验；此时可转到“魏永明的编程课之AI实战班”主页中根据视频的封面和标题选择播放对应的视频。
-1. 抖音上发布的视频支持弹幕或者评论。欢迎同学们挑错并通过弹幕或者评论发表自己的看法，亦可提出问题。
+### 暑期集训营
+
+![AI实战班暑期集训营课程表](assets/schedule-class-fullstack-2024-summer-intensified.jpg)
+
+### 秋季学期周末组
+
+（待定）
 
 ## 课后服务
 
@@ -77,10 +67,6 @@ AI实战班的课件入口：
 班主任的企业微信：
 
 ![班主任的企业微信](https://courses.fmsoft.cn/plzs/assets/qrcode-wechat-enterprise-lee.png)
-
-视频内容分发账号：
-
-![魏永明的编程课之AI实战班](https://courses.fmsoft.cn/plzs/assets/qrcode-douyin-class-fullstack.jpg)
 
 ---
 

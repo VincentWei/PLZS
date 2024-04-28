@@ -1,6 +1,6 @@
 # 魏永明的学生编程课之信奥筑基班
 
-首先感谢各位家长和同学的支持！本文件包含了魏永明的学生编程课之信奥筑基班直播课程的课前准备工作、课程视频获取方法、课件入口以及课后服务的介绍。请务必仔细阅读。
+首先感谢各位家长和同学的支持！本文件包含了魏永明的学生编程课之信奥筑基班直播课程的课前准备工作、演示视频获取方法、课程表、课件入口以及课后服务的介绍。请务必仔细阅读。
 
 ## 课前准备
 
@@ -8,12 +8,12 @@
 
 ## 课程资料
 
-### 视频内容
+### 演示视频内容
 
 为保证良好的视频播放效果，我们使用抖音平台分发本课程涉及的演示视频内容。请在报名后添加班主任的企业微信，并告知孩子的抖音号，同时申请关注用于分发视频课的抖音私密账号：
 
 - 抖音号：57262203445
-- 昵称：魏永明的编程课之信奥筑基班
+- 昵称：魏永明的编程课之筑基班
 
 在班主任确认了孩子的抖音账号之后，即可观看上述私密账号中的演示视频内容。
 
@@ -21,18 +21,19 @@
 
 信奥筑基班的课件入口：
 
-1. [Python 流程控制](https://courses.fmsoft.cn/plzs/python-flow-control.html)
-1. [Python 数据类型](https://courses.fmsoft.cn/plzs/python-data-types.html)
-1. [Python 标准库](https://courses.fmsoft.cn/plzs/python-standard-library.html)
-1. [Python 大作业及相关知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
-1. [Python 大作业辅导](https://courses.fmsoft.cn/plzs/python-project-coaching.html)
+1. [C++ 快速入门](https://courses.fmsoft.cn/plzs/cpp-quick-start.html)
+1. [C++ 流程控制](https://courses.fmsoft.cn/plzs/cpp-flow-control.html)
+1. [C++ 数据类型](https://courses.fmsoft.cn/plzs/cpp-data-types.html)
+1. [C++ 面向对象编程](https://courses.fmsoft.cn/plzs/cpp-class-and-oop.html)
+1. [C++ 大作业及相关知识点](https://courses.fmsoft.cn/plzs/cpp-project.html)
+1. [C++ 大作业辅导](https://courses.fmsoft.cn/plzs/cpp-project-coaching.html)
 
 ### 建议学习方法
 
 1. 观看直播课程或回放时，务必横屏观看，使用平板观看的效果更好。
 1. 补充演示视频的观看：
-    1. 在电脑上用浏览器登录[抖音官网](https://www.douyin.com)或者安装抖音电脑版应用，用已关注“魏永明的编程课之信奥筑基班”的账号登录，即可通过该账号主页观看相应的课程内容。
-    1. 观看直播（回放）做实操练习或者作业时，可在电脑上用浏览器打开对应的课件页面。此时若点击课件页面中演示视频的链接，就会跳转到抖音页面播放对应的视频（需要使用已关注“魏永明的编程课之信奥筑基班”的账号登录抖音，否则无法观看）。此时，可在电脑上对照演示视频进行相应的实操练习。
+    1. 在电脑上用浏览器登录[抖音官网](https://www.douyin.com)或者安装抖音电脑版应用，用已关注“魏永明的编程课之筑基班”的账号登录，即可通过该账号主页观看相应的课程内容。
+    1. 观看直播（回放）做实操练习或者作业时，可在电脑上用浏览器打开对应的课件页面。此时若点击课件页面中演示视频的链接，就会跳转到抖音页面播放对应的视频（需要使用已关注“魏永明的编程课之筑基班”的账号登录抖音，否则无法观看）。此时，可在电脑上对照演示视频进行相应的实操练习。
 1. 务必通过在 GitHub 或者 Gitee 上创建的代码仓库提交作业，老师会通过开源平台对作业进行点评。
 
 特别提示：
@@ -41,6 +42,16 @@
 1. 在浏览器中播放抖音视频时，默认声音是关闭的，请操作页面上的音量按钮打开声音。
 1. 使用抖音电脑版应用可以获得更好的播放体验；此时可转到“魏永明的编程课之信奥筑基班”主页中根据视频的封面和标题选择播放对应的视频。
 1. 抖音上发布的视频支持弹幕或者评论。欢迎同学们挑错并通过弹幕或者评论发表自己的看法，亦可提出问题。
+
+## 课程表
+
+### 周末组
+
+![信奥筑基班周末组课程表](assets/schedule-class-cpp-2024-spring-weekend.jpg)
+
+### 暑期组
+
+![信奥筑基班暑期组课程表](assets/schedule-class-cpp-2024-summer-intensified.jpg)
 
 ## 课后服务
 
@@ -63,7 +74,7 @@
 
 视频内容分发账号：
 
-![魏永明的编程课之信奥筑基班](https://courses.fmsoft.cn/plzs/assets/qrcode-douyin-class-python.png)
+![魏永明的编程课之筑基班](https://courses.fmsoft.cn/plzs/assets/qrcode-douyin-class-python.png)
 
 ---
 

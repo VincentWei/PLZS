@@ -1,72 +1,43 @@
 # 魏永明的学生编程课之信奥初级班
 
-首先感谢各位家长和同学的支持！本文件包含了信奥初级班线上视频课程的课前准备工作、课程视频获取方法、课件入口以及课后服务的介绍。请务必仔细阅读。
+首先感谢各位家长和同学的支持！本文件包含了信奥初级班线上视频课程的课前准备工作、课件入口、课程表以及课后服务的介绍。请务必仔细阅读。
 
 ## 课前准备
 
-家长不用担心自己不懂软件或者编程而无法辅导孩子，只要做好如下三件事情即可：
-
-1. 准备好一台专用于学习和开发的台式电脑或笔记本电脑给孩子使用。
-1. 协助年龄较小的孩子在 Gitee 或者 GitHub 平台上注册开发者账号。
-1. 督促孩子完成作业，鼓励孩子提问，并为孩子取得的每一个成果和进步点赞。
-
-### 学习用电脑
-
-学习用电脑最好是专用的，以防误操作导致数据丢失。电脑可以是：
-
-1. 2020 年以后生产的运行 Windows 10/11 的台式机或者笔记本（推荐）。
-1. 支持 Ubuntu Linux 22.04 的台式机或笔记本；请参考如下页面获取认证的设备清单：<https://ubuntu.com/certified>。
-1. 2020 年以后生产的运行 macOS 14+ 的苹果 Mac 台式机或者笔记本。
-
-电脑的硬件配置要求：
-
-- 主频在 2GHz 以上的 4 核或以上处理器。
-- 内存 16GB 或以上。
-
-考虑到普及班的教学内容对电脑配置的要求不高，故如果手头已有满足以上配置的电脑则不建议购置新的电脑。在进入提高阶段学习需要运行开源人工智能大模型时，再行考虑购置新的开发用电脑。
-
-### 注册 GitHub 账号
-
-家长需协助孩子在 <https://github.com> 或者 <https://gitee.com> 上注册一个开发者账号。在 GitHub 上注册需要一个电子邮件地址，在 Gitee 上注册需要一个中国大陆地区的手机号码。本系列课程相关的学习资料、文档、示例程序等，通过如下代码仓库发布：
-
-- GitHub: <https://github.com/VincentWei/PLZS>，或
-- Gitee: <https://gitee.com/vincentwei7/PLZS>
-
-在注册后，请确保在开发用电脑上使用 Chrome 或 Edge 浏览器登录 GitHub，并让孩子牢记账号名称和账号密码。
+同普及班内容；获赠普及班课程的同学，请转[这里](ClassNewbie.md)。
 
 ## 课程资料
-
-### 视频内容
-
-为保证良好的视频播放效果，我们使用抖音平台分发本课程的视频内容。请在报名后添加班主任的企业微信，并告知孩子的抖音号，同时申请关注用于分发视频课的抖音私密账号：
-
-- 抖音号：21612985666
-- 昵称：魏永明的编程课之信奥初级班
-
-在班主任确认了孩子的抖音账号之后，即可观看上述私密账号中的视频课程。
 
 ### 课件入口
 
 信奥初级班的课件入口：
 
-1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
-1. [使用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
-1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
-1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
+1. [C++ 编程语言的高级特性](https://courses.fmsoft.cn/plzs/noijunior-cpp-advanced-features.html)
+1. [基础算法](https://courses.fmsoft.cn/plzs/noijunior-basic-algorithms.html)
+1. [线性数据结构](https://courses.fmsoft.cn/plzs/noijunior-linear-data-structures.html)
+1. [树型数据结构](https://courses.fmsoft.cn/plzs/noijunior-tree-data-structures.html)
+1. [中期大作业](https://courses.fmsoft.cn/plzs/noijunior-midterm-project.html)
+1. [搜索算法](https://courses.fmsoft.cn/plzs/noijunior-search-algorithms.html)
+1. [图及图论算法](https://courses.fmsoft.cn/plzs/noijunior-graph-and-graph-theory.html)
+1. [其他算法和数据结构](https://courses.fmsoft.cn/plzs/noijunior-other-data-structures.html)
+1. [结业大作业](https://courses.fmsoft.cn/plzs/noijunior-term-project.html)
+1. [CSP-J 真题演练](https://courses.fmsoft.cn/plzs/noijunior-csp-exercises.html)
 
 ### 建议学习方法
 
-1. 在电脑上用浏览器登录[抖音官网](https://www.douyin.com)或者安装抖音电脑版应用，用已关注“魏永明的编程课之信奥初级班”的账号登录，即可通过该账号主页观看相应的课程内容。
-1. 首先按照视频封面和标题所标示的顺序观看各讲的课程视频（我们称之为串讲视频）。
-1. 观看完串讲视频做实操练习或者做作业时，可在电脑上用浏览器打开对应的课件页面。此时若点击课件页面中演示视频的链接，就会跳转到抖音页面播放对应的视频（需要使用已关注“魏永明的编程课之信奥初级班”的账号登录抖音，否则无法观看）。此时，可在电脑上对照补充视频进行相应的实操练习。
-1. 建议在两到三周内完成学习并及时提交作业给主讲老师。
+1. 观看直播课程或回放时，务必横屏观看，使用平板观看的效果更好。
+1. 观看直播（回放）做实操练习或者作业时，可在电脑上用浏览器打开对应的课件页面，此时，可在电脑上对照演示视频进行相应的实操练习。
+1. 务必通过在 GitHub 或者 Gitee 上创建的代码仓库提交作业，老师会通过开源平台对作业进行点评。
 
-特别提示：
+## 课程表
 
-1. 在课件页面中点击视频链接时，可按住 Shift 键或者 Windows 键/Command 键在新窗口或者新标签页页中播放视频。
-1. 在浏览器中播放抖音视频时，默认声音是关闭的，请操作页面上的音量按钮打开声音。
-1. 使用抖音电脑版应用可以获得更好的播放体验；此时可转到“魏永明的编程课之信奥初级班”主页中根据视频的封面和标题选择播放对应的视频。
-1. 抖音上发布的视频支持弹幕或者评论。欢迎同学们挑错并通过弹幕或者评论发表自己的看法，亦可提出问题。
+### 暑期集训营
+
+![信奥初级班暑期集训营课程表](assets/schedule-class-noijunior-2024-summer-intensified.jpg)
+
+### 秋季学期周末组
+
+（待定）
 
 ## 课后服务
 
