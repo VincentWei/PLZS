@@ -632,6 +632,7 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 ## 使用 Gtypist 练习键盘打字
 
 - 科学练习键盘打字的重要性
+- QWERTY 键盘布局和指法
 
 	
 ### QWERTY 键盘布局
