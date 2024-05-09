@@ -656,7 +656,7 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 	
 ### 左手小指键位
 
-<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-4.webp" />
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-4.png" />
 
 	
 ### 右手食指键位
