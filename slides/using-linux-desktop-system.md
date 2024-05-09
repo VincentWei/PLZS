@@ -632,7 +632,56 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 ## 使用 Gtypist 练习键盘打字
 
 - 科学练习键盘打字的重要性
-- [键盘打字指法规范](https://zhuanlan.zhihu.com/p/536226696)
+
+	
+### QWERTY 键盘布局
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-0.webp" />
+
+	
+### 左手食指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-1.webp" />
+
+	
+### 左手中指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-2.webp" />
+
+	
+### 左手无名指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-3.webp" />
+
+	
+### 左手小指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-4.webp" />
+
+	
+### 右手食指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-5.png" />
+
+	
+### 右手中指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-6.png" />
+
+	
+### 右手无名指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-7.png" />
+
+	
+### 右手小指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-8.png" />
+
+	
+### 左右大拇指键位
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-9.webp" />
 
 	
 ### 演示视频
@@ -660,6 +709,7 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 1. [揭开正则表达式的神秘面纱](http://www.regexlab.com/zh/regref.htm)
 1. [Vim 官方文档中文版](https://yianwillis.github.io/vimcdoc/doc/help.html)
 1. [Vim 实操教程](https://dofy.gitbook.io/learn-vim/zh-CN)
+1. [键盘打字指法规范](https://zhuanlan.zhihu.com/p/536226696)
 
 		
 ## 作业
