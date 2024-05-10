@@ -2,8 +2,8 @@ math-arithmetic:算术：探究机械计算的方法
 math-end-on-system:进制及进制转换
 math-binary-arithmetic:二进制运算及实数的计算机表达
 math-integers:有趣的整数：亲和数、平方数以及斐波那契数列
-math-primes.html:质数：质数的判定以及合数的质数分解
+math-primes:质数：质数的判定以及合数的质数分解
 math-rational-numbers:有理数：如何找到任意有理数的最简分数表达
 math-irrational-numbers-square-root-of-2:无理数：如何计算二的平方根
 math-irrational-numbers-pi:无理数：计算圆周率的若干种方法
-math-irrational-numbers-natural-constant.html:无理数：自然常数
+math-irrational-numbers-natural-constant:无理数：自然常数
