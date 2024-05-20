@@ -687,7 +687,7 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 	
 ### 演示视频
 
-[0-2-5：使用 Gtypist 练习键盘打字]()
+[0-2-5：使用 Gtypist 练习键盘打字](https://www.douyin.com/video/7369652386752662835)
 
 1. 了解键盘打字的指法规范。
 1. 安装 `Gtypist`。
