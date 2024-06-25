@@ -16,10 +16,13 @@
    1. 面向对象编程（object-oriented programming，OOP）
    1. 基于模板的泛型编程（generic programming，GP）
 - C++ 继承了 C 的特色，可同时作为系统和应用编程语言，广泛应用于服务器软件、桌面应用、游戏、实时系统、高性能计算、嵌入式系统等领域。
-- C++ 于 1998 年吸纳为 ISO 标准，称为“C++98”。
+- C++ 标准：
+   1. 于 1998 年被接受为 ISO 标准，称为 `C++98`。
+   1. 最新的 C++ 标准为 `C++20`。
+   1. 现阶段被业界广泛使用的标准为 `C++14`，而 `C++17` 刚开始被业界接纳。
 
 	
-<img class="r-frame" style="height:auto;width:100%;" src="assets/plzs-keyboard-typing-9.webp" />
+<img class="r-frame" style="height:auto;width:100%;" src="assets/cpp-stroustrup.jpg" />
 
 ## 最简单的 C++ 程序
 
