@@ -5,6 +5,7 @@
 1. C++ 编译器和 C++ 程序的构建
 1. 变量、数值和四则运算表达式
 1. C++ 中的函数
+1. C++ 标准库和常用接口
 1. C++ 和 Python 的异同
 1. 作业
 1. 参考链接
@@ -47,7 +48,7 @@ int main()
 1. `main()` 函数
 1. 由一对花括号（brace）`{}` 定义的函数体
 1. C++ 语句
-   - `std::cout` 对象
+   - `std::cout` 对象及命名空间。
    - `<<` 运算符
    - 字符串字面量（literal）
    - `std::endl` 常量
@@ -75,6 +76,13 @@ int main ()
   return 0;                     // return 0 explicitly
 }
 ```
+
+		
+## C++ 和 C 的关系
+
+- C++ 的基本语法来自 C。
+- C++ 是 C 的超集，C++ 程序中可以直接调用 C 的接口。
+- C++ 的功能丰富，演进快速；C 的特性稳定，更加简洁。
 
 		
 ## 编译器和 C++ 程序的构建
@@ -144,9 +152,9 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 	
 ### 变量的声明及初始化
 
-1. 声明变量类型。
-1. 使用赋值语句。
-1. 使用 `std::cin` 的 `>>` 运算符从用户输入中转入。
+1. 声明变量类型并给变量一个名称（标识符）。
+1. 使用赋值语句初始化变量；或者，
+1. 使用 `std::cin` 的 `>>` 运算符从用户输入中转换。
 
 ```cpp
 #include <iostream>
@@ -165,14 +173,25 @@ int main()
 ```
 
 	
-### 立即数：字符
+### C++ 特有的初始化方法
+
+1. 构造器（constructor）初始化
+1. 统一（uniform）初始化
+
+```cpp
+    int c (10);     // constructor initialization.
+    int d {10};     // uniform initialization.
+```
+
+	
+### 常量：字符
 
 ```cpp
     char ch;
     unsigned char uch;
 
     ch = 'a';       // 字符字面量
-    ch = 0x20;      // 直接使用整数立即数初始化字符变量
+    ch = 0x20;      // 直接使用整数常量初始化字符变量
     ch = '\xFF';    // 十六进制
     ch = '\024';    // 八进制，一到三个小于 8 的数字组成，很少用到
 
@@ -181,7 +200,7 @@ int main()
 ```
 
 	
-## 立即数：整数
+### 常量：整数
 
 ```cpp
     int i = 100;
@@ -201,7 +220,7 @@ int main()
 ```
 
 	
-## 立即数：浮点数
+### 常量：浮点数
 
 ```cpp
     float f1 = 0.1F;
@@ -209,6 +228,27 @@ int main()
     double f3 = 2.99E10;            // 科学记数法
     long double f4 = 0.1L;
 ```
+
+	
+### 字符串字面量及 `string` 类
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main ()
+{
+    string mystring ("This is a string");
+    cout << mystring << endl;
+    return 0;
+}
+```
+
+1. 默认使用 `std` 命名空间。
+1. 用双引号定义字符串字面量。
+1. 使用字符串字面量初始化 `string` 类。
 
 	
 ### 四则运算表达式
@@ -256,6 +296,40 @@ int main()
 		
 ## C++ 中的函数
 
+- 函数返回值、参数等均应定义明确的数据类型。
+- 可定义参数的默认值。
+- 函数的签名由函数返回值类型、函数名称、各参数的类型构成；故而可定义同名但参数类型不同的函数，编译器将根据调用时的参数类型确定具体调用哪个函数。
+- 在使用函数前，应首先通过包含头文件或者给出函数签名来声明函数的原型。
+- 在 C++ 中调用 C 函数，应使用前缀 `::`，用于指定全局命名空间。
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int addition(int a, int b = 0)
+{
+    int r;
+    r = a + b;
+    return r;
+}
+
+double addition(double a, double b)
+{
+    return a + b;
+}
+
+int main()
+{
+    int rz;
+    rz = addition(5, 3);
+    cout << "The result (integer version) is " << rz << endl;
+
+    double rf = addition(5.0, (double)3);
+    cout << "The result (float version) is " << rf << endl;
+}
+```
+
 	
 ### 课堂练习
 
@@ -264,6 +338,42 @@ int main()
 1. 将 `circle-area.cpp` 改造为调用函数 `calc_circle_area()` 函数的形式。
 1. 编译成可执行程序并运行。
 1. 测试正常后，将 `circle-area.cpp` 的改进版提交到 Git 仓库，并推送到自己的远程 Gitee 仓库上。
+
+		
+## C++ 标准库和常用接口
+
+- C++ 标准库分为如下几个组成部分：
+   1. C 标准函数库。
+   1. 容器模板类库（如数组、矢量、列表、栈、队列、集合、映射等）。
+   1. 输入输出库，提供基于流的文件读写、控制台输入输出功能。
+   1. 多线程支持。
+   1. 其他（如算法、时间、复数、异常处理等）。
+- C++ 通过模板类实现了绝大部分常用的数据结构和算法，并使这些实现和具体的类型无关（泛型）。
+- C++ 标准模板库简称为 STL（Standard Template Library）。
+
+	
+### 常用 C 标准函数库接口
+
+1. 格式化输入输出：`<cstdio> (stdio.h)`，执行格式化输入及输出的 C 函数接口，如 `printf()` 和 `scanf()` 函数。
+1. 通用工具：`<cstdlib> (stdlib.h)`，C 标准通用函数，如字符串转换 `atoi()` 等。
+1. 字符串操作：`<cstring> (string.h)`，C 字符串函数，如 `strcmp()` 等。
+1. 时间操作：`<ctime> (time.h)`，C 时间操作及转换函数，如 `time()` 等。
+1. 数学库：`<cmath> (math.h)`，包含了常用的数学函数，如三角函数、双曲线函数、指数和对数函数、幂次及求根函数等，如 `sin()`、`power()` 和 `sqrt()` 等。
+
+	
+### 课堂演示
+
+1. 使用 C 数学函数计算给定数值的平方根。
+
+	
+### 课堂练习
+
+十分钟内完成：
+
+1. 复制文件为 `circle-area.cpp` 为 `square-area.cpp`。
+1. 修改其中的 `calc_circle_area()` 函数为 `calc_square_area()` 函数，并调用 `<cmath>` 中的 `power()` 函数计算正方形面积。
+1. 编译成可执行程序并运行。
+1. 测试正常后，将 `square-area.cpp` 的改进版提交到 Git 仓库，并推送到自己的远程 Gitee 仓库上。
 
 		
 ## C++ 和 Python 的异同
@@ -278,7 +388,7 @@ int main()
 		
 ## 作业
 
-1) 编写一个 C++ 程序，该程序可计算给定无符号长长整数对质数 `2^31 - 1` 的模。要求使用 Vim 编辑源文件。运行效果如下所示：
+1) 编写一个 C++ 程序，该程序可计算给定无符号长长整数对质数 `2^31 - 1` 的模。要求使用 Vim 编辑源文件，使用命令行编译。运行效果如下所示：
 
 ```console
 % ./ull-mode
@@ -286,7 +396,7 @@ int main()
 3
 ```
 
-2) 编写一个 C++ 程序，该程序可计算正方形、圆和三角形（使用海伦公式）的面积。程序提示用户输入需要的参数，调用相应的函数计算并打印对应的结果。要求使用 Vim 编辑源文件。运行效果如下所示：
+2) 编写一个 C++ 程序，该程序可计算正方形、圆和三角形（使用海伦公式）的面积。程序提示用户输入需要的参数，调用相应的函数计算并打印对应的结果。要求使用 Vim 编辑源文件，使用命令行编译。运行效果如下所示：
 
 ```console
 $ ./areas
@@ -303,3 +413,4 @@ area_of_triangle(3, 4, 5): 6.000000
 
 1. [海伦公式](https://www.cnblogs.com/jiahuafu/p/4596962.html)
 1. [大质数表](https://www.cnblogs.com/ljxtt/p/13514346.html)
+1. [C++标准库参考](https://cplusplus.com/reference/)
