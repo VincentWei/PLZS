@@ -2,10 +2,11 @@
 
 1. C++ 的发展历史及现状
 1. 最简单的 C++ 程序
-1. 编译器和 C++ 程序的构建
-1. 整数、浮点数和四则运算表达式
-1. 函数的概念
-1. 标准库常用接口
+1. C++ 编译器和 C++ 程序的构建
+1. 字符、整数、浮点数和四则运算表达式
+1. C++ 中的函数
+1. C++ 标准库及常用接口
+1. C++ 和 Python 的异同
 
 		
 ## C++ 的发展历史及现状
@@ -17,7 +18,7 @@
    1. 基于模板的泛型编程（generic programming，GP）
 - C++ 继承了 C 的特色，可同时作为系统和应用编程语言，广泛应用于服务器软件、桌面应用、游戏、实时系统、高性能计算、嵌入式系统等领域。
 - C++ 标准：
-   1. 于 1998 年被接受为 ISO 标准，称为 `C++98`。
+   1. 于 1998 年被接纳为 ISO（国际标准化组织）标准，称为 `C++98`。
    1. 最新的 C++ 标准为 `C++20`（ISO/IEC 14882:2020）。
    1. 现阶段被业界广泛认可的标准为 `C++14`，而 `C++17` 刚开始被业界接纳。
 
@@ -81,10 +82,10 @@ int main ()
    1. 预处理（preprocess）。
    1. 编译（compile）。
    1. 链接（link）。
-- Linux 上常用的 C++ 编译器：
+- Linux 上常用的 C++ 编译器（compiler）：
    1. GCC（GNU Compiler Collection）
    1. Clang（Apple 主持的 C/C++/Objective C 编译器，基于 LLVM）
-- LLVM（Low Level Virtual Machine）是一个使用 C++ 开发的编译器和工具链基础函数库，主要用于现代编程语言的编译器开发。
+- LLVM（Low Level Virtual Machine）是一个使用 C++ 开发的编译器和工具链（toolchain）基础函数库，主要用于现代编程语言的编译器开发。
 
 ```console
 # 安装 g++ 和 Clang
@@ -102,6 +103,7 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 
 1. 录入 `Hello, world1` 程序并构建最终的可执行程序。
 1. 将 `hello-world.cpp` 文件添加到 `plzs-homework` 仓库并推送到远程仓库。
+1. 查看源文件在经过预处理之后的源代码。
 
 	
 ### 课堂练习
@@ -117,13 +119,115 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 
 1. C++ 源文件（source file）一定要具有 `cpp` 后缀吗？
 1. `main()` 函数的返回值到底起什么作用，为何可以省略 `return 0` 语句？
-1. C++ 中有没有类似 Python `print()` 的函数？
+1. C++ 中有没有类似 Python 的 `print()` 函数？
 
 		
 ## 字符、整数、浮点数和四则运算表达式
 
+- C++ 是一种强类型编程语言，所有的变量、函数参数及函数返回值均需要事先声明（declare）其类型。
+- 使用 `auto` 关键词可自动推导数据类型。
+- C++ 中用于表示数值的基本数据类型：
+   1. 字符：`char`/无符号字符：`unsigned char`；8 位二进制。
+   1. 短整数：`short`/无符号短整数：`unsigned short`；16 位二进制。
+   1. 整数：`int`/无符号整数：`unsigned int`；32 位二进制。
+   1. 长整数：`long`/无符号长整数：`unsigned long`；32 位/64 位二进制（具体位数和架构相关）。
+   1. 长长整数：`long long`/无符号长长整数：`unsigned long long`；64 位二进制。
+   1. 浮点数：`float`；32 位二进制。
+   1. 双精度浮点数：`double`；64 位二进制。
+   1. 长双精度浮点数：`long double`；96 位二进制。
+- `sizeof` 运算符可用于计算常量、字符串字面量、变量的尺寸（字节数）。
+
+	
+### 变量的声明及初始化
+
+1. 声明变量类型。
+1. 使用赋值语句。
+1. 使用 `std::cin` 的 `>>` 运算符从用户输入中转入。
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    int a = 10, b;
+
+    std::cout << "Please input an integer: ";
+    std::cin >> b;
+
+    auto sum = a + b;
+    std::cout << "Th summary of `" << a << "` and `" << b << "` is `" << sum << "`." << std::endl;
+    std::cout << "The size of `" << sum << "` is `" << sizeof(sum) << "`." << std::endl;
+}
+```
+
+	
+### 立即数：字符
+
+```cpp
+    char ch;
+    unsigned char uch;
+
+    ch = 'a';       // 字符字面量
+    ch = 0x20;      // 直接使用整数立即数初始化字符变量
+    ch = '\xFF';    // 十六进制
+    ch = '\024';    // 八进制，一到三个小于 8 的数字组成，很少用到
+
+    uch = '\xFF';   // 十六进制
+    uch = '\124';   // 八进制，一到三个小于 8 的数字组成，很少用到
+```
+
+	
+## 立即数：整数
+
+```cpp
+    int i = 100;
+    unsigned int u;
+
+    u = 100;                        // 十进制
+    u = 0124;                       // 0 作为前缀，八进制
+    u = 0x80000000U;                // 0x 作为前缀，十六进制
+    u = (unsigned int)-1;           // 0xFFFFFFFF
+    u = (unsigned int)-2;           // 0xFFFFFFFE
+
+    long l = 0x80000000L;           // 后缀：l/L
+    unsigned ul = 0x80000000UL;     // 后缀：U、L，顺序和大小写无关
+
+    long long ll = 0x8000000000000000LL;
+    unsinged long long ull = 0x8000000000000000ULL;
+```
+
+	
+## 立即数：浮点数
+
+```cpp
+    float f1 = 0.1F;
+    double f2 = 0.1;                // 没有后缀！
+    double f3 = 2.99E10;            // 科学记数法
+    long double f4 = 0.1L;
+```
+
+	
+### 四则运算表达式
+
+- 运算符
+   1. `+`：
+   1. `+=`：
+   1. `++`：
+   1. `-`：
+   1. `-=`：
+   1. `--`：
+   1. `*`：
+   1. `*=`：
+   1. `/`：
+   1. `/=`：
+   1. `%`：
+   1. `%=`：
+- 使用小括号指定四则运算优先级
+
 	
 ### 课堂练习
+
+1. 编写计算圆面积的程序。该程序接受一个用户输入的浮点数或整数作为半径，计算对应的圆面积，然后输出计算结果。
 
 		
 ## C++ 中的函数
@@ -140,9 +244,28 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 		
 ## C++ 和 Python 的异同
 
+1. C++ 程序需要经过编译和链接构建成可执行程序后才能运行，而 Python 程序可直接运行；C++ 程序的执行效率远高于 Python。
+1. C++ 程序的入口函数为 `main()`，而Python 从程序的第一行开始顺序执行。
+1. C++ 是强类型语言，变量的类型一经确定就无法改变，而 Python 是弱类型语言，变量的类型在初始化时决定且可随时改变。
+1. Python 3 的整型数据是无限精度的，而 C++ 的整型数据的精度是有限的；在 C++ 代码中，要特别注意整型计算的溢出问题。
+1. Python 和 C++ 中的浮点数本质上事一样的，C++ 提供了不同精度的浮点数类型供应用程序选择，Python 始终使用双精度浮点数。
+1. Python 中进行浮点数计算的功能由解释器调用 C 的函数实现，C++ 中可直接调用 C 函数。
+
 		
 ## 参考链接
 
 		
 ## 作业
+
+1. 编写一个 C++ 程序，该程序可计算正方形、圆和三角形（使用海伦公式）的面积。程序提示用户输入需要的参数，调用相应的函数计算并打印对应的结果。要求使用 Vim 编辑源文件。运行效果如下所示：
+
+```console
+$ ./areas
+To calculate the area of a square, please input the length of one side: <11>
+area_of_square(11): 121.000000
+To calculate the area of a circle, please input the length of the radio: <10>
+area_of_circle(10): 31.415926.
+To calculate the area of a triangle, please input the lengthes of three sides (seprate with space): <3> <4> <5>
+area_of_triangle(3, 4, 5): 6.000000
+```
 
