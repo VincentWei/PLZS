@@ -106,7 +106,7 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 	
 ### 课堂练习
 
-十五分钟内完成：
+十分钟内完成：
 
 1. 手工键入 `Hello world!` 程序，命名为 `hello-world.cpp`，并保存在自己的 `plzs-homework` 仓库中（`source/cpp/lesson-1/` 目录下）。
 1. 使用上面的命令行（可复制）编译成可执行程序并运行。
