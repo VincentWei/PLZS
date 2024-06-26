@@ -5,7 +5,6 @@
 1. C++ 编译器和 C++ 程序的构建
 1. 变量、数值和四则运算表达式
 1. C++ 中的函数
-1. C++ 标准库及常用接口
 1. C++ 和 Python 的异同
 1. 作业
 1. 参考链接
@@ -103,7 +102,8 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 	
 ### 课堂演示
 
-1. 录入 `Hello, world1` 程序并构建最终的可执行程序。
+1. 录入 `Hello, world!` 程序并构建最终的可执行程序。
+1. 常见编译错误及处理。
 1. 将 `hello-world.cpp` 文件添加到 `plzs-homework` 仓库并推送到远程仓库。
 1. 查看源文件在经过预处理之后的源代码。
 
@@ -214,24 +214,44 @@ int main()
 ### 四则运算表达式
 
 - 运算符
-   1. `+`：
-   1. `+=`：
-   1. `++`：
-   1. `-`：
-   1. `-=`：
-   1. `--`：
-   1. `*`：
-   1. `*=`：
-   1. `/`：
-   1. `/=`：
-   1. `%`：
-   1. `%=`：
-- 使用小括号指定四则运算优先级
+   1. `a + b`：求 `a` 和 `b` 的和。
+   1. `a += b`：求左值（lvalue） `a` 和右值（rvalue）`b` 的和并赋值给左值（lvalue ）`a`。
+   1. `a++`：相当于 `a += 1`。
+   1. `a - b`：求 `a` 和 `b` 的差。
+   1. `a -= b`：求左值 `a` 和右值 `b` 的和并赋值给左值 `a`。
+   1. `a --`：相当于 `a -= 1`。
+   1. `a * b`：求 `a` 和 `b` 的积。
+   1. `a *= b`：求左值 `a` 和右值 `b` 的积并赋值给左值`a`。
+   1. `a / b`：求 `a` 和 `b` 的商（整数的商始终为整数）。
+   1. `a /= b`：求左值 `a` 和右值 `b` 的商并赋值给左值 `a`。
+   1. `a % b`：求 `a` 被 `b` 除时的余数（求模）。
+   1. `a %= b`：求 `a` 被 `b` 除时的余数（求模）并赋值给左值 `a`。
+- 四则运算中的优先级。
+- 使用小括号指定四则运算的优先级。
+- 混合运算中的隐式类型转换。
+- 除数为零时会产生被零除错误。
+
+	
+### C/C++ 的取模规则
+
+从 C99 和 C++11 起，规定商向零取整（舍弃小数部分），取模的符号与被除数相同（注意和数学上的取模定义不同）：
+
+```cpp
+5 % 3 == 2;
+5 % -3 == 2;
+-5 % 3 == -2;
+-5 % -3 == -2;
+```
 
 	
 ### 课堂练习
 
-1. 编写计算圆面积的程序。该程序接受一个用户输入的浮点数或整数作为半径，计算对应的圆面积，然后输出计算结果。
+十分钟内完成：
+
+1. 试试对浮点数执行 `++` 运算、零作为除数时的编译和执行效果。
+1. 编写计算圆面积的程序 `circle-area.cpp`。该程序接受一个用户输入的浮点数或整数作为半径，计算对应的圆面积，然后输出计算结果。
+1. 编译成可执行程序并运行。
+1. 测试正常后，将 `circle-area.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
 
 		
 ## C++ 中的函数
@@ -239,11 +259,11 @@ int main()
 	
 ### 课堂练习
 
-		
-## C++ 标准库和常用的接口
+十分钟内完成：
 
-	
-### 课堂练习
+1. 将 `circle-area.cpp` 改造为调用函数 `calc_circle_area()` 函数的形式。
+1. 编译成可执行程序并运行。
+1. 测试正常后，将 `circle-area.cpp` 的改进版提交到 Git 仓库，并推送到自己的远程 Gitee 仓库上。
 
 		
 ## C++ 和 Python 的异同
@@ -274,7 +294,7 @@ To calculate the area of a square, please input the length of one side: <11>
 area_of_square(11): 121.000000
 To calculate the area of a circle, please input the length of the radio: <10>
 area_of_circle(10): 31.415926.
-To calculate the area of a triangle, please input the lengthes of three sides (seprate with space): <3> <4> <5>
+To calculate the area of a triangle, please input the lengthes of three sides (separated with space): <3> <4> <5>
 area_of_triangle(3, 4, 5): 6.000000
 ```
 
