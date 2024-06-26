@@ -98,13 +98,26 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 ```
 
 	
+### 课堂演示
+
+1. 录入 `Hello, world1` 程序并构建最终的可执行程序。
+1. 将 `hello-world.cpp` 文件添加到 `plzs-homework` 仓库并推送到远程仓库。
+
+	
 ### 课堂练习
 
-十分钟内完成：
+十五分钟内完成：
 
 1. 手工键入 `Hello world!` 程序，命名为 `hello-world.cpp`，并保存在自己的 `plzs-homework` 仓库中（`source/cpp/lesson-1/` 目录下）。
 1. 使用上面的命令行（可复制）编译成可执行程序并运行。
 1. 运行正常后，将 `hello-world.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
+
+	
+### 问题探讨
+
+1. C++ 源文件（source file）一定要具有 `cpp` 后缀吗？
+1. `main()` 函数的返回值到底起什么作用，为何可以省略 `return 0` 语句？
+1. C++ 中有没有类似 Python `print()` 的函数？
 
 		
 ## 字符、整数、浮点数和四则运算表达式
