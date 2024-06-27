@@ -89,7 +89,6 @@
 ### 课堂演示
 
 1. `if` 语句的用途和写法；`else` 分句。
-1. `else if` 分句的来由。
 1. `switch` 语句的用途和写法；`case` 分句。
 1. `while` 语句的用途和写法。
 1. `do-while` 语句的用途和写法。
@@ -109,21 +108,25 @@ bool is_even_or_odd_0(int n)
             return false;
         }
     }
+
+    return false;
 }
 
 bool is_even_or_odd_1(int n)
 {
     if (n % 2 == 0)
-        return true
-    elif (n % 2 == 1)
-        return false
+        return true;
+    else if (n % 2 == 1)
+        return false;
+
+    return false;
 }
 
 bool is_even_or_odd_2(int n)
 {
     if (n % 2 == 0)
         return true;
-    else:
+    else
         return false;
 }
 
@@ -138,13 +141,14 @@ bool is_even_or_odd_3(int n)
 bool is_even_or_odd_4(int n)
 {
     if (n % 2)
-        return false
+        return false;
 
-    return true
+    return true;
+}
 
 bool is_even_or_odd_best(int n)
 {
-    return n & 0x01 == 0;
+    return (n & 0x01) == 0;
 }
 
 bool can_make_a_triangle(double d1, double d2, double d3)
@@ -152,7 +156,7 @@ bool can_make_a_triangle(double d1, double d2, double d3)
     if (d1 <= 0 or d2 <= 0 or d3 <= 0) {
         return false;
     }
-    else if ((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1) {
+    else if (((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1)) {
         return true;
     }
 
@@ -164,25 +168,27 @@ bool can_make_a_triangle(double d1, double d2, double d3)
 ### 实例：`switch` 语句
 
 ```cpp
+using namespace std;
+
 string day_of_week(int weekday)
 {
     switch (weekday) {
         case 0:
-            return "Sunday"
+            return "Sunday";
         case 1:
-            return "Monday"
+            return "Monday";
         case 2:
-            return "Tuesday"
+            return "Tuesday";
         case 3:
-            return "Wednesday"
+            return "Wednesday";
         case 4:
-            return "Thursday"
+            return "Thursday";
         case 5:
-            return "Friday"
+            return "Friday";
         case 6:
-            return "Saturday"
+            return "Saturday";
         default:
-            return "<Wrong Weekday Value>"
+            return "<Wrong Weekday Value>";
     }
 
     return "<NeverGetHere>";
@@ -194,6 +200,7 @@ bool is_prime_less_than_10(unsigned n)
         return false;
 
     switch (n) {
+        case 2:
         case 3:
         case 5:
         case 7:
@@ -202,6 +209,7 @@ bool is_prime_less_than_10(unsigned n)
 
     return false;
 }
+
 ```
 
 	
@@ -210,51 +218,72 @@ bool is_prime_less_than_10(unsigned n)
 ```cpp
 void list_even_numbers_less_than_v0(unsigned n)
 {
-    int a = 0;
+    unsigned a = 0;
     while (a < n) {
-        if a % 2 == 0:
-            cout << a << endl;
+        if ((a % 2) == 0)
+            cout << a << " ";
         a = a + 1;
     }
+
+    cout << endl;
 }
 
 void list_even_numbers_less_than_v1(unsigned n)
 {
-    int a = 0
+    unsigned a = 0;
     bool flag = true;
     while (true) {
         if (a >= n)
             break;
 
-        if flag:
-            cout << a << endl;
+        if (flag)
+            cout << a << " ";
 
         a = a + 1;
         flag = !flag;
     }
+
+    cout << endl;
 }
 
 void list_even_numbers_less_than_v2(unsigned n)
 {
-    for (int i = 0; i < n; i += 2 {
-        cout << a << endl;
-    }
+    unsigned a = 0;
+    do {
+        if ((a & 0x01) == 0)
+            cout << a << " ";
+    } while (++a < n);
+
+    cout << endl;
 }
 
 void list_even_numbers_less_than_v3(unsigned n)
 {
-    n /= 2;
-    for (int i = 0; i < n; i++) {
-        cout << i * 2 << endl;
+    for (unsigned i = 0; i < n; i += 2) {
+        cout << i << " ";
     }
+
+    cout << endl;
 }
 
 void list_even_numbers_less_than_v4(unsigned n)
 {
-    n >>= 1;
-    for (int i = 0; i < n; i++) {
-        cout << (i << 1) << endl;
+    n /= 2;
+    for (unsigned i = 0; i < n; i++) {
+        cout << i * 2 << " ";
     }
+
+    cout << endl;
+}
+
+void list_even_numbers_less_than_v5(unsigned n)
+{
+    n >>= 1;
+    for (unsigned i = 0; i < n; i++) {
+        cout << (i << 1) << " ";
+    }
+
+    cout << endl;
 }
 ```
 
@@ -264,21 +293,19 @@ void list_even_numbers_less_than_v4(unsigned n)
 - 试试逻辑表达式：`0.1 + 0.2 == 0.3`
 
 ```cpp
-#include <cstdint>
-
-// 直接对比浮点数会得到不正确的结果
 bool can_make_a_triangle_bad(double d1, double d2, double d3)
 {
-    if (d1 <= 0 or d2 <= 0 or d3 <= 0)
+    if (d1 <= 0 or d2 <= 0 or d3 <= 0) {
         return false;
-    else if ((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1)
+    }
+    else if (((d1 + d2) > d3) and ((d1 + d3) > d2) and ((d2 + d3) > d1)) {
         return true;
-    else
-        return false;
+    }
+
+    return false;
 }
 
-// 折中方案
-bool can_make_a_triangle_workaround(double d1, doubled2, double d3)
+bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 {
     if (d1 > UINT32_MAX or d2 > UINT32_MAX or d3 > UINT32_MAX) {
         return false;
@@ -291,12 +318,13 @@ bool can_make_a_triangle_workaround(double d1, doubled2, double d3)
     uint64_t ull2 = uint64_t(d2 * UINT32_MAX);
     uint64_t ull3 = uint64_t(d3 * UINT32_MAX);
 
-    if ((ull1 + ull2) > ull3) and ((ull1 + ull3) > ull2) and
-            ((ull2 + ull3) > ull1)
+    if (((ull1 + ull2) > ull3) and ((ull1 + ull3) > ull2) and
+            ((ull2 + ull3) > ull1))
         return true;
-    else:
-        return false;
+
+    return false;
 }
+
 ```
 
 		
