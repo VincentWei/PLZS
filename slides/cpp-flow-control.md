@@ -72,9 +72,18 @@
 ## C++ 的逻辑表达式和逻辑运算符
 
 1. 计算机程序中的命题来自哪里？算术表达式的值、数值比较的结果、逻辑表达式、函数的返回值等等。
-1. C++ 中的布尔类型（`bool`）、真假值。
-1. C++ 中用于比较数值的运算符（等于、不等于、大于、小于、大于等于、小于等于）。
-1. C++ 中的逻辑运算符。
+1. C++ 中的布尔类型（`bool`）、真值（`true`）、假值（`false`）。
+1. C++ 中用于比较数值的运算符：
+   - 等于（`==`）
+   - 不等于（`!=`）
+   - 大于（`>`）
+   - 小于（`<`）
+   - 大于或等于（`>=`）
+   - 小于或等于（`<=`）
+1. C++ 中的逻辑运算符：
+   - 逻辑与：`&&` 或 `and`
+   - 逻辑或：`||` 或 `or`
+   - 逻辑非：`!` 或 `not`
 
 		
 ## C++ 的流程控制语句
@@ -150,7 +159,7 @@ bool is_even_or_odd_best(int n)
     return (n & 0x01) == 0;
 }
 
-bool can_make_a_triangle(double d1, double d2, double d3)
+bool can_make_a_triangle(int d1, int d2, int d3)
 {
     if (d1 <= 0 or d2 <= 0 or d3 <= 0) {
         return false;
@@ -199,16 +208,15 @@ bool is_prime_less_than_10(unsigned n)
         return false;
 
     switch (n) {
-        case 2:
-        case 3:
-        case 5:
-        case 7:
-            return true;
+    case 2:
+    case 3:
+    case 5:
+    case 7:
+        return true;
     }
 
     return false;
 }
-
 ```
 
 	
@@ -287,9 +295,18 @@ void list_even_numbers_less_than_v5(unsigned n)
 ```
 
 	
-### 浮点数比较陷阱！
+### 课堂练习
 
-- 试试逻辑表达式：`0.1 + 0.2 == 0.3`
+（十分钟内完成）
+
+1. 编写程序判断给定的三个浮点数是否可以构成一个三角形；命名为 `can-make-a-triangle.cpp`，并保存在自己的 `plzs-homework` 仓库中（`source/cpp/lesson-2/` 目录下）。
+1. 使用上面的命令行（可复制）编译成可执行程序并运行。
+1. 运行正常后，将 `can-make-a-triangle.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
+
+	
+### 浮点数比较陷阱
+
+- 对上面的程序，试试三个值：0.1 0.2 0.3
 
 ```cpp
 bool can_make_a_triangle_bad(double d1, double d2, double d3)
@@ -303,6 +320,16 @@ bool can_make_a_triangle_bad(double d1, double d2, double d3)
 
     return false;
 }
+```
+
+	
+折中方案
+
+1. 将浮点数比较转换为为整数比较。
+1. 使用 `<cstdint>` 头文件中定义的 `uint64_t` 类型以及 `UINT32_MAX` 等常量宏。
+
+```cpp
+#include <cstdint>
 
 bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 {
@@ -323,8 +350,45 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 
     return false;
 }
-
 ```
+
+		
+## 函数的递归调用
+
+- 数学上的很多计算满足递推（recurrence）公式。
+- 如求解某个数值的正整数次幂：
+   1. P(n) = n * P(n - 1)；
+   1. 当 n 为 0 时递推终止：P(0) = 1。
+- 类似的还有阶乘：
+   1. n! = n * (n - 1)!；
+   1. 当 n 为 0 时递推终止：0! = 1。
+- 故而我们可以编写调用自己的函数，也就是递归（recursively）调用。
+
+	
+整数次幂函数的递归实现：
+
+```cpp
+double power(double f, unsigned n)
+{
+    double r;
+
+    if (n == 0)
+        r = 1.0;
+    else
+        r = f * power(f, n - 1);
+
+    return r;
+}
+```
+
+	
+### 课堂练习
+
+（十分钟内完成）
+
+1. 递归实现阶乘程序，命名为 `factorial-recursively.cpp`，并保存在自己的 `plzs-homework` 仓库中（`source/cpp/lesson-2/` 目录下）。
+1. 使用上面的命令行（可复制）编译成可执行程序并运行。
+1. 运行正常后，将 `factorial-recursively.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
 
 		
 ## 要点回顾
@@ -342,6 +406,14 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 
 ```console
 $ ./fibonacci
+<11>
+1, 1, 2, 3, 5, 8.
+```
+
+1) 使用递归输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
+
+```console
+$ ./fibonacci-recursively
 <11>
 1, 1, 2, 3, 5, 8.
 ```
@@ -402,81 +474,60 @@ No solution
 		
 ## 作业回顾
 
-### 赋值语句一次可以操作多个变量
+### 使用 `Makefile` 方便构建 C++ 程序的构建
 
-- 使用逗号（colon，`,`）可在赋值语句中一次操作多个变量；函数亦可一次返回多个值。
+```makefile
+TARGETS = can-make-a-triangle power-recursively
 
-```cpp
-a, b = 0, 1
-while a <= n:
-    if a == n or b > n:
-        print(a, end = '.\n')
-    else:
-        print(a, end = ', ')
-    a, b = b, a + b
-```
+CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
-	
-### 处理解释器异常
+ifeq ($(CXX), g++)
+    CXXFLAGS += -fmax-errors=10
+else ifeq ($(CXX), clang++)
+    CXXFLAGS += -ferror-limit=10
+endif
 
-- 给 `int()`、`float()` 函数不可识别的字符串时，会产生 `ValueError` 错误；此时应使用 `try` 语句处理异常。
+all:$(TARGETS)
 
-```cpp
-d = 0
-while d <= 0:
-    try:
-        d = float(input("Please input the length of one side of a square: "))
-    except ValueError:
-        d = 0
-```
+$(TARGETS):%:%.o
+	$(CXX) -o $@ $<
 
-	
-### 在 `match` 语句中处理默认情形
+%.o:%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-- `case _:` 分句可在 `match` 语句中处理默认（default）情形。
+.PHONY: clean
 
-```cpp
-match prompt_for_formula():
-    case 1:
-        prompt_for_triangle()
-    case 2:
-        prompt_for_square()
-    case 3:
-        prompt_for_circle()
-    case _:
-        quit()
-```
-
-	
-### 内置函数 `max()` 和 `min()`
-
-- 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
-- 循环中可以使用 `else` 分句。
-
-```cpp
-# 内置函数 `max()` 可用于取最大值；`min()` 可用于取最小值。
-for i in range(2, max(n // 2, 3)):
-    if n % i == 0:
-        print(f'{n} equals to {i} * { int(n / i)}; it is not a prime.')
-        break
-# 循环语句中可以使用 `else` 分句；
-# 该分句定义的语句体（suite），在 `while` 或者 `for` 循环的条件
-# 为 `False` 时执行。
-else:
-    print(f'{n} is a prime!')
+clean:
+	rm -f *.o $(TARGETS)
 ```
 
 	
 ### 巧用 `assert()` 函数协助调试
 
-- 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
-- 使用运算符 `is` 和 `is not` 可判断一个值是否为 `True`、`False` 等特殊值。
+- 使用 `<cassert>` 中定义的宏 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
 
 ```cpp
-prime, factor = check_prime(2)
-# 内置函数 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）
-# 程序的运行，方便调试。
-assert(prime is True)
-prime, factor = check_prime(3)
+#include <iostream>
+#include <cassert>
+
+using namespace std;
+
+double power(double f, unsigned n)
+{
+    double r;
+
+    if (n == 0)
+        r = 1.0;
+    else
+        r = f * power(f, n - 1);
+
+    return r;
+}
+
+
+int main()
+{
+    assert(power(3, 2) == 9);
+}
 ```
 

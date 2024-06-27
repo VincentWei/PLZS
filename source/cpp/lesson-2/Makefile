@@ -1,4 +1,4 @@
-TARGETS = flow-control float-trap
+TARGETS = flow-control float-trap power-recursively
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
