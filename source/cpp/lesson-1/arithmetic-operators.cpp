@@ -8,14 +8,15 @@ int main()
     auto u = 0xFFFFFFFFU;
     auto ul = 0UL;
 
-    float f = 0.0;
-    f++;
+    auto f1 = 0.0f;
+    decltype(f1) f2 = f1++;
 
-    double d = 50.0 / 0;
+    auto d = 50.0 / 0;
 
     cout << i << ": " << sizeof(i) << endl;
     cout << u << ": " << sizeof(u) << endl;
     cout << ul << ": " << sizeof(ul) << endl;
-    cout << f << ": " << sizeof(f) << endl;
+    cout << f1 << ": " << sizeof(f1) << endl;
+    cout << f2 << ": " << sizeof(f2) << endl;
     cout << d << ": " << sizeof(d) << endl;
 }
