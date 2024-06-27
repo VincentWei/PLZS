@@ -14,10 +14,11 @@
 
 1) 数据类型（data type）：编程语言用来表达（represent）现实世界中不同种类数据的方法。
 2) 我们已经接触过若干种 C++ 基础数据类型：
-   - 布尔型（bool）
-   - 字符型（char）
-   - 各种长度/有无符号的整型（int）
-   - 三种精度的浮点数（float）
+   - 布尔型（`bool`）
+   - 字符型（`char`）
+   - 各种长度/有无符号的整型（`int`）
+   - 三种精度的浮点数（`float`）
+3) 本质上，所有的 C++ 基础数据类型为单字节、双字节、四字节、八字节的二进制数据。
 
 	
 ### 数值
@@ -40,32 +41,125 @@
 ### 数组
 
 1. C++ 中的数组使用成对出现的中括号（square brackets，`[]`）定义。
+1. 一旦初始化，C++ 数组的长度（单元个数）就是固定的。
 1. C++ 数组中的数据项具有相同的数据类型。
-1. 初始化数组时，各个单元之间使用逗号（comma，`,`）分隔。
+1. 初始化数组时，使用 `[]` 包围数组单元，各个单元之间使用逗号（comma，`,`）分隔。
 
 	
-### C 字符串
+### 字符串
 
 - 计算机程序中的字符串主要用来表达构成自然语言的文本或者文本片段。
 - 字符串字面值（literal）的概念。
-- C++ 的字符串字面值使用成对出现的双引号（double-quote，`""`）定义。
-- 定义字符串字面值时要考虑的两个问题：
+- C/C++ 的字符串字面值使用成对出现的双引号（double-quote，`""`）定义。
+- 转义（escape）字符：
    1. 如果文本本身包含双引号（`"`）怎么办？
    1. 如果文本中需要包含一些特殊字符，如换行符、回车符怎么办？
+- C/C++ 字符串字面值本质上是不可更改的字符数组。
 
 	
-### C++ 字符串
+#### C 字符串
+
+- C 字符串本质上是一个字符数组。
+- C 字符串的尾部始终包含一个空字符（`\0`）表示字符串的结尾。
+
+```cpp
+```
+
+	
+#### C++ 标准库字符串
+
+- C++ 标准库定义的字符串是一个类（`string`），可通过 C 字符串来初始化。
+- `string` 类的实例是可动态修改的，其长度可变化。
+- 通过 `string` 类的 `.c_str()` 方法，可将 `string` 类对象转换为 C 字符串进行只读访问。
 
 	
 ### 指针
 
 		
-## 枚举量
-
-		
 ## 结构体
 
 1. C++ 程序中的结构体（struct）通常用来表达具有多重属性的复杂对象，比如一名学生的学号、姓名、性别、生日、身高、体重等。
+
+```console
+struct type_name {
+    member_type1 member_name1;
+    member_type2 member_name2;
+    member_type3 member_name3;
+    ...
+} object_name;
+```
+
+如，
+
+```cpp
+struct student {
+    string  id;
+    string  name;
+    string  birthday;
+    bool    gender;
+    int     height;
+    float   weight;
+};
+
+struct student s1 { "20240101", "Amy", "2010-09-03", false, 160, 50.3f };
+```
+
+		
+## 其他数据类型
+
+	
+### 联合体
+
+```
+union type_name {
+    member_type1 member_name1;
+    member_type2 member_name2;
+    member_type3 member_name3;
+    ...
+} object_name;
+```
+
+	
+### 枚举量
+
+```
+enum type_name {
+  value1,
+  value2,
+  value3,
+  .
+  .
+} object_names;
+```
+
+	
+### 类型别名
+
+- 使用 `typedef`
+
+```cpp
+typedef char BYTE;
+typedef unsigned int WORD;
+typedef unsigned long long ULL;
+
+typedef enum rainbow_color {
+    red = 1,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    purple,
+} rainbo_color_k;
+```
+
+- 使用 `using`
+
+```cpp
+using BYTE = char;
+using WORD = unsigned int;
+using ULL = unsigned long long;
+```
 
 		
 ## 内存的动态分配及释放

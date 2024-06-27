@@ -85,6 +85,26 @@
    - 逻辑或：`||` 或 `or`
    - 逻辑非：`!` 或 `not`
 
+	
+### 判断逻辑表达式的真假
+
+```cpp
+int a = 2, b = 3, c = 6;
+
+(a == 5)
+(a*b >= c)
+(b+4 > a*c)
+((b=2) == a)
+
+!(c == 6)
+!(a <= 4)
+!true
+!false
+
+((a == 2) && (c > b))
+((a == 3) || (b > c))
+```
+
 		
 ## C++ 的流程控制语句
 
@@ -94,7 +114,7 @@
    - 异常处理
 
 	
-### 课堂演示
+### 实例分析
 
 1. `if` 语句的用途和写法；`else` 分句。
 1. `switch` 语句的用途和写法；`case` 分句。
@@ -104,7 +124,7 @@
 1. `break` 语句和 `continue` 语句。
 
 	
-### 实例：`if` 语句
+### `if` 语句
 
 ```cpp
 bool is_even_or_odd_0(int n)
@@ -173,7 +193,7 @@ bool can_make_a_triangle(int d1, int d2, int d3)
 ```
 
 	
-### 实例：`switch` 语句
+### `switch` 语句
 
 ```cpp
 using namespace std;
@@ -220,7 +240,7 @@ bool is_prime_less_than_10(unsigned n)
 ```
 
 	
-### 实例：`while` 或 `for` 循环
+### `while` 或 `for` 循环
 
 ```cpp
 void list_even_numbers_less_than_v0(unsigned n)
@@ -306,7 +326,7 @@ void list_even_numbers_less_than_v5(unsigned n)
 	
 ### 浮点数比较陷阱
 
-- 对上面的程序，试试三个值：0.1 0.2 0.3
+- 对上面的程序，试试三个值：`0.1 0.2 0.3`
 
 ```cpp
 bool can_make_a_triangle_bad(double d1, double d2, double d3)
@@ -357,11 +377,11 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 
 - 数学上的很多计算满足递推（recurrence）公式。
 - 如求解某个数值的正整数次幂：
-   1. P(n) = n * P(n - 1)；
-   1. 当 n 为 0 时递推终止：P(0) = 1。
+   1. `P(n) = n * P(n - 1)`；
+   1. 当 n 为 0 时递推终止：`P(0) = 1`。
 - 类似的还有阶乘：
-   1. n! = n * (n - 1)!；
-   1. 当 n 为 0 时递推终止：0! = 1。
+   1. `n! = n * (n - 1)!`；
+   1. 当 n 为 0 时递推终止：`0! = 1`。
 - 故而我们可以编写调用自己的函数，也就是递归（recursively）调用。
 
 	

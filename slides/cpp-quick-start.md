@@ -6,6 +6,7 @@
 1. 变量、数值和四则运算表达式
 1. 二进制位运算
 1. 函数、形参和实参
+1. 基本输入输出
 1. C++ 标准库和常用接口
 1. C++ 和 Python 的异同
 1. 作业
@@ -367,6 +368,41 @@ int main()
 1. 测试正常后，将 `circle-area.cpp` 的改进版提交到 Git 仓库，并推送到自己的远程 Gitee 仓库上。
 
 		
+## 基本输入输出
+
+- `std::cout`：标准输出，默认为屏幕（终端）。
+
+```cpp
+using namespace std;
+...
+
+int x = 230;
+
+cout << "Hello, world!";    // prints `Hello, world!` on screen
+cout << 120;                // prints number 120 on screen
+cout << x;                  // prints the value of x on screen 
+
+cout << "First sentence." << endl;
+cout << "Second sentence." << endl;
+
+cout << "First sentence.\n" << "Second sentence.\n";
+```
+
+	
+- `cin`：标准输入，默认为键盘。
+
+```cpp
+int age;
+cin >> age;
+
+double a, b;
+cin >> a >> b;
+
+string mystring;
+cin >> mystring;
+```
+
+		
 ## C++ 标准库和常用接口
 
 - C++ 标准库分为如下几个组成部分：
@@ -462,3 +498,7 @@ const double pi = 3.14159265;
 ...
     area = pi * r * r;
 ```
+
+	
+- 
+
