@@ -1,24 +1,23 @@
 #include <iostream>
+
 using namespace std;
 
-int addition(int a, int b)
+int rounded_addition(int a, int b = 0)
 {
-    int r;
-    r = a + b;
+    auto r = a + b;
     return r;
 }
 
-double addition(double a, double b)
+int rounded_addition(double a, double b = 0)
 {
-    return a + b;
+    return (int)(a + 0.5) + (int)(b + 0.5);
 }
 
 int main()
 {
-    int rz;
-    rz = addition(5, 3);
+    auto rz = rounded_addition(5, 3);
     cout << "The result is " << rz << endl;
 
-    double rf = addition(5.0, (double)3);
+    auto rf = rounded_addition(5.4, (double)3.6);
     cout << "The result is " << rf << endl;
 }

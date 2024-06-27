@@ -139,14 +139,15 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
    1. 字符：`char`/无符号字符：`unsigned char`；8 位二进制。
    1. 短整数：`short`/无符号短整数：`unsigned short`；16 位二进制。
    1. 整数：`int`/无符号整数：`unsigned int`；32 位二进制。
-   1. 长整数：`long`/无符号长整数：`unsigned long`；32 位/64 位二进制（具体位数和架构相关）。
+   1. 长整数：`long`/无符号长整数：`unsigned long`；32 位/64 位二进制（具体位数和架构、编译器相关）。
    1. 长长整数：`long long`/无符号长长整数：`unsigned long long`；64 位二进制。
    1. 浮点数：`float`；32 位二进制。
    1. 双精度浮点数：`double`；64 位二进制。
-   1. 长双精度浮点数：`long double`；96 位二进制。
+   1. 长双精度浮点数：`long double`；64 或 128 位二进制（具体位数和架构、编译器相关）。
 
 	
 - 使用 `auto` 关键词可自动推导数据类型。
+- 使用 `decltype` 运算符可获得特定变量的类型。
 - `sizeof` 运算符可用于计算常量、字符串字面量、变量的尺寸（字节数）。
 
 	
@@ -246,9 +247,14 @@ int main ()
 }
 ```
 
-1. 默认使用 `std` 命名空间。
-1. 用双引号定义字符串字面量。
-1. 使用字符串字面量初始化 `string` 类。
+1. 默认使用 `std` 命名空间：  
+`using namespace std;`
+1. 不再添加名字空间前缀：  
+`cout << mystring << endl;`
+1. 用双引号定义字符串字面量：  
+`"This is a string"`
+1. 使用构造器初始化 `string` 类：  
+`string mystring ("This is a string");`
 
 	
 ### 四则运算表达式
@@ -264,8 +270,8 @@ int main ()
    1. `a *= b`：求左值 `a` 和右值 `b` 的积并赋值给左值`a`。
    1. `a / b`：求 `a` 和 `b` 的商（整数的商始终为整数）。
    1. `a /= b`：求左值 `a` 和右值 `b` 的商并赋值给左值 `a`。
-   1. `a % b`：求 `a` 被 `b` 除时的余数（求模）。
-   1. `a %= b`：求 `a` 被 `b` 除时的余数（求模）并赋值给左值 `a`。
+   1. `a % b`：求 `a` 被 `b` 除时的余数（取模）。
+   1. `a %= b`：求 `a` 被 `b` 除时的余数（取模）并赋值给左值 `a`。
 
 	
 ### 优先级及类型转换
@@ -285,6 +291,18 @@ int main ()
 5 % -3 == 2;
 -5 % 3 == -2;
 -5 % -3 == -2;
+```
+
+	
+### 使用预处理指令定义宏指代常量
+
+- 为常用常量定义一个宏可防止键入错误，同时提高代码的可读性。
+
+```cpp
+#define PI 3.14159
+
+...
+    area = PI * r * r;
 ```
 
 	
@@ -314,26 +332,25 @@ int main ()
 
 using namespace std;
 
-int addition(int a, int b = 0)
+int rounded_addition(int a, int b = 0)
 {
     int r;
     r = a + b;
     return r;
 }
 
-double addition(double a, double b)
+int rounded_addition(double a, double b = 0)
 {
-    return a + b;
+    return (int)(a + 0.5) + (int)(b + 0.5);
 }
 
 int main()
 {
-    int rz;
-    rz = addition(5, 3);
-    cout << "The result (integer version) is " << rz << endl;
+    auto rz = rounded_addition(5, 3);
+    cout << "The result is " << rz << endl;
 
-    double rf = addition(5.0, (double)3);
-    cout << "The result (float version) is " << rf << endl;
+    auto rf = rounded_addition(5.4, (double)3.6);
+    cout << "The result is " << rf << endl;
 }
 ```
 
@@ -365,7 +382,7 @@ int main()
 1. 通用工具：`<cstdlib> (stdlib.h)`，C 标准通用函数，如字符串转换 `atoi()` 等。
 1. 字符串操作：`<cstring> (string.h)`，C 字符串函数，如 `strcmp()` 等。
 1. 时间操作：`<ctime> (time.h)`，C 时间操作及转换函数，如 `time()` 等。
-1. 数学库：`<cmath> (math.h)`，包含了常用的数学函数，如三角函数、双曲线函数、指数和对数函数、幂次及求根函数等，如 `sin()`、`power()` 和 `sqrt()` 等。
+1. 数学库：`<cmath> (math.h)`，包含了常用的数学常量（圆周率、自然常数等）以及常用的数学函数（三角函数、双曲线函数、指数和对数函数、幂次及求根函数等），如 `sin()`、`power()` 和 `sqrt()` 等。
 
 	
 ### 课堂演示
