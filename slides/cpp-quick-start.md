@@ -4,11 +4,11 @@
 1. 最简单的 C++ 程序
 1. C++ 编译器和 C++ 程序的构建
 1. 变量、数值和四则运算表达式
-1. C++ 中的函数
+1. 二进制位运算
+1. 函数、形参和实参
 1. C++ 标准库和常用接口
 1. C++ 和 Python 的异同
 1. 作业
-1. 参考链接
 
 		
 ## C++ 的发展历史及现状
@@ -432,13 +432,13 @@ To calculate the area of a triangle, please input the lengthes of three sides (s
 area_of_triangle(3, 4, 5): 6.000000
 ```
 
-		
-## 参考链接
+	
+### 参考链接
 
 1. [海伦公式](https://www.cnblogs.com/jiahuafu/p/4596962.html)
 1. [大质数表](https://www.cnblogs.com/ljxtt/p/13514346.html)
 1. [C++标准库参考](https://cplusplus.com/reference/)
 
-		
-## 作业回顾
+	
+### 作业回顾
 
