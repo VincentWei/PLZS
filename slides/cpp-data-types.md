@@ -36,19 +36,6 @@
    - 可打印字符（printable character）：包括空白字符在内的所有可显示在屏幕上的字符；
    - 标点字符（punctuation）：除了字母、数字、空白之外的可打印字符，如 `,`、`.` 等。
 
-```cpp
-    char digit = '0';       // '0'
-    digit += '5' - '0';     // digit now is '5'
-
-    char letter = 0x42;     // letter now is 'B';
-    letter += 'a' - 'A';    // letter now is 'b';
-
-    letter -= 'a';          // letter now is `\x01'
-    letter += 2;            // letter now is '\x03'
-    letter %= 26;           // letter now is '\x03'
-    letter += 'a';          // letter now is 'c'
-```
-
 	
 - 使用 `<cctype>` 中定义的接口，可判断字符类型：
    1. `isascii()`：是否合法的 ASCII 字符。
@@ -69,6 +56,22 @@
 
     char digit = '0';
     assert(isdigit(digit));
+```
+
+	
+- 字符的常见运算
+
+```cpp
+    char digit = '0';       // '0'
+    digit += '5' - '0';     // digit now is '5'
+
+    char letter = 0x42;     // letter now is 'B';
+    letter += 'a' - 'A';    // letter now is 'b';
+
+    letter -= 'a';          // letter now is `\x01'
+    letter += 2;            // letter now is '\x03'
+    letter %= 26;           // letter now is '\x03'
+    letter += 'a';          // letter now is 'c'
 ```
 
 	
