@@ -21,7 +21,72 @@
 3) 本质上，所有的 C++ 基础数据类型为单字节、双字节、四字节、八字节的二进制数据。
 
 	
-### 数值
+### 字符
+
+- C++ 字符类型（`char`）来自 C 语言，主要用于表达 ASCII 字符，本质上是单字节数值，取值范围 `-127 ~ 128`。
+- 命令 `man ascii` 可获得 ASCII 字符的定义；ASCII 码的取值范围：0x00 ~ 0x7F。
+- 字符的分类：
+   - 数字（digit）：`'0 ~ '9'`；
+   - 字母（alphabetic character）：`'A' ~ 'Z'`（upper letters）和 `'a' ~ 'z'`（lower letters）；
+   - 空格（blank character）：`' ', '\t'`；
+   - 空白（white-space character）：`' ', '\t', '\f', '\n', '\r', '\t', '\v'`；
+   - 控制字符（control character）：大于等于 0x00，小于 0x20 的字符，如 `\0`、`\n`、`\r`、`\t`、`\f` 等；
+   - 可打印字符（printable character）：包括空白字符在内的所有可显示在屏幕上的字符；
+   - 标点字符（punctuation）：除了字母、数字、空白之外的可打印字符，如 `,`、`.` 等。
+
+```cpp
+    char digit = '0';       // '0'
+    digit += '5' - '0';     // digit now is '5'
+
+    char letter = 0x42;     // letter now is 'B';
+    letter += 'a' - 'A';    // letter now is 'b';
+
+    letter -= 'a';          // letter now is `\x01'
+    letter += 2;            // letter now is '\x03'
+    letter %= 26;           // letter now is '\x03'
+    letter += 'a';          // letter now is 'c'
+```
+
+	
+- 使用 `<cctype>` 中定义的接口，可判断字符类型：
+   1. `isascii()`：是否合法的 ASCII 字符。
+   1. `isalnum()`：是否为字母数字。
+   1. `isalpha()`：是否为字母。
+   1. `isdigit()`：是否为数字。
+   1. `isblank()`：是否为空格。
+   1. `islower()`：是否为小写字母。
+   1. `isupper()`：是否为大写字母。
+   1. `isxdigit()`：是否为十六进制数字（数字及 `'a ~ 'f'` 或 `'A' ~ 'F'`）。
+   1. ...
+
+```cpp
+#include <cctype>
+#include <cassert>
+
+...
+
+    char digit = '0';
+    assert(isdigit(digit));
+```
+
+	
+- `unsigned char`：本质上是一个单字节非负整数，表达范围 0 ~ 255。
+- 要谨防运算溢出。
+
+```cpp
+#include <cctype>
+#include <cassert>
+
+...
+
+    unsigned char uc = 0;
+    for (; uc < 256; uc++) {
+        // dead loop
+    }
+```
+
+	
+### 布尔值
 
 1. 计算机程序中的数值（number）用来表达数学上的数值。
 1. 在 C++ 中布尔值被视作等同于整数；算术表达式中使用布尔值时，`false` 等同于 0，`true` 等同于 1。
