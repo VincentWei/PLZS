@@ -407,7 +407,7 @@ static inline bool is_close_longdoubles(long double a, long double b)
 	
 ### 指针
 
-- 指针用于指代某项数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机架构位宽相等。
+- 指针（pointer）用于指代某项数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机架构位宽相等。
 - 对指针变量做加减运算，其值将按照指针类型的字节数成倍增减。
 
 ```cpp
@@ -529,6 +529,7 @@ int strcasecmp(const char *s1, const char *s2);
 int strncasecmp(const char *s1, const char *s2, size_t n);
 ```
 
+	
 2) 测试用代码：
 
 ```cpp
@@ -580,13 +581,32 @@ int main()
 
 ```cpp
 #include <string>
+#include <cctype>
 
     string str ("Hello, world!");
-    str += "-- From me";
+    str += '\n';
+    str += "-- From Vincent";
 
     cout << str << endl;
     cout << str.c_str() << endl;
+
+    /* 将字符全部转成大写。 */
+    const char *p = str.c_str();
+    i = 0;
+    while (*p) {
+        str[i] = toupper(*p);
+        p++;
+        i++;
+    }
+
+    cout << str << endl;
 ```
+
+	
+### 课堂练习
+
+1) 复制上面的示例代码，将字符串中的字符全部转换为小写。
+2) 保存为 `string.cpp` 并提交到自己的作业仓库。
 
 		
 ## 结构体
@@ -603,25 +623,25 @@ struct student {
     float   weight;
 };
 
-struct student s1 { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f };
-struct student *p = &s1;
+    struct student s1 { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f };
+    struct student *p = &s1;
 
-/* 使用 . 访问结构体变量的成员。 */
-cout << s1.name << endl;
+    /* 使用 . 访问结构体变量的成员。 */
+    cout << s1.name << endl;
 
-/* 使用 -> 访问结构体指针变量的成员。 */
-cout << p->id << endl;
+    /* 使用 -> 访问结构体指针变量的成员。 */
+    cout << p->id << endl;
 
-/* 定义结构体数组 */
-struct student students = [
-    { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f },
-    { "20240102", "Lisa",  "2010-08-15", 'F', 158, 45.5f },
-    { "20240103", "Tom",   "2010-07-10", 'M', 166, 65.5f },
-];
+    /* 定义结构体数组 */
+    struct student students = [
+        { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f },
+        { "20240102", "Lisa",  "2010-08-15", 'F', 158, 45.5f },
+        { "20240103", "Tom",   "2010-07-10", 'M', 166, 65.5f },
+    ];
 
-for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
-    cout << "Student " << students[i].id << ": " << students[i].name << endl;
-}
+    for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
+        cout << "Student " << students[i].id << ": " << students[i].name << endl;
+    }
 ```
 
 	
@@ -648,6 +668,12 @@ for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
         [3., 4., 1., 2.],
         [4., 1., 2., 3.],
     ];
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 5; j++) {
+            matrix[i][j] *= 100.0;
+        }
+    }
 ```
 
 	
@@ -689,13 +715,34 @@ enum rainbow_color {
     purple,
 };
 
-enum rainbow_color c;
-...
+const char *rainbow_color_name(enum rainbow_color c)
+{
+    const char *name = NULL;
 
-switch (c) {
-    case 10:    /* 警告：10 不是 rainbow_color 的有效取值。 */
-        ...
+    switch (c) {
+    case red:
+        name = "red";
         break;
+    case orange:
+        name = "orange";
+        break;
+    case yellow:
+        name = "yellow";
+        break;
+    case cyan:
+        name = "cyan";
+        break;
+    case blue:
+        name = "blue";
+        break;
+    case purple:
+        name = "purple";
+        break;
+    case 10:    /* 警告：10 不是 rainbow_color 的有效取值。 */
+        break;
+    }
+
+    return name;
 }
 ```
 
@@ -706,7 +753,7 @@ switch (c) {
 
 ```cpp
 typedef char BYTE;
-typedef unsigned int WORD;
+typedef unsigned short WORD;
 typedef unsigned long long ULL;
 
 typedef enum rainbow_color {
@@ -717,15 +764,25 @@ typedef enum rainbow_color {
     cyan,
     blue,
     purple,
-} rainbo_color_k;
+} rainbow_color_k;
 ```
 
+	
 - 使用 `using`
 
 ```cpp
 using BYTE = char;
 using WORD = unsigned int;
 using ULL = unsigned long long;
+using rainbow_color_k = enum rainbow_color;
+```
+
+- 使用预处理宏（不推荐）
+
+```cpp
+#define BYTE unsigned char
+#define WORD unsigned short
+#define ULL  unsigned long long
 ```
 
 		
@@ -793,7 +850,7 @@ $ ./crt
 ```console
 $ ./prime-factors
 <12>
-2: 2 3
+12: 2 3
 $ ./prime-factors
 <11>
 1: 11
