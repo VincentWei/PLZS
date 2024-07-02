@@ -160,29 +160,29 @@ int count_one_bits(unsigned char byte)
 
 ```cpp
 /* Minimum of signed integral types.  */
-# define INT8_MIN▷⋯⋯▷⋯⋯⋯(-128)
-# define INT16_MIN▷⋯▷⋯⋯⋯(-32767-1)
-# define INT32_MIN▷⋯▷⋯⋯⋯(-2147483647-1)
-# define INT64_MIN▷⋯▷⋯⋯⋯(-__INT64_C(9223372036854775807)-1)
+# define INT8_MIN       (-128)
+# define INT16_MIN      (-32767-1)
+# define INT32_MIN      (-2147483647-1)
+# define INT64_MIN      (-__INT64_C(9223372036854775807)-1)
 /* Maximum of signed integral types.  */
-# define INT8_MAX▷⋯⋯▷⋯⋯⋯(127)
-# define INT16_MAX▷⋯▷⋯⋯⋯(32767)
-# define INT32_MAX▷⋯▷⋯⋯⋯(2147483647)
-# define INT64_MAX▷⋯▷⋯⋯⋯(__INT64_C(9223372036854775807))
+# define INT8_MAX       (127)
+# define INT16_MAX      (32767)
+# define INT32_MAX      (2147483647)
+# define INT64_MAX      (__INT64_C(9223372036854775807))
 
 /* Maximum of unsigned integral types.  */
-# define UINT8_MAX▷⋯▷⋯⋯⋯(255)
-# define UINT16_MAX▷▷⋯⋯⋯(65535)
-# define UINT32_MAX▷▷⋯⋯⋯(4294967295U)
-# define UINT64_MAX▷▷⋯⋯⋯(__UINT64_C(18446744073709551615))
+# define UINT8_MAX      (255)
+# define UINT16_MAX     (65535)
+# define UINT32_MAX     (4294967295U)
+# define UINT64_MAX     (__UINT64_C(18446744073709551615))
 
 /* Minimum for largest signed integral type.  */
-# define INTMAX_MIN▷▷⋯⋯⋯(-__INT64_C(9223372036854775807)-1)
+# define INTMAX_MIN     (-__INT64_C(9223372036854775807)-1)
 /* Maximum for largest signed integral type.  */
-# define INTMAX_MAX▷▷⋯⋯⋯(__INT64_C(9223372036854775807))
+# define INTMAX_MAX     (__INT64_C(9223372036854775807))
 
 /* Maximum for largest unsigned integral type.  */
-# define UINTMAX_MAX▷⋯⋯⋯▷⋯⋯⋯(__UINT64_C(18446744073709551615))
+# define UINTMAX_MAX    (__UINT64_C(18446744073709551615))
 ```
 
 	
@@ -213,9 +213,6 @@ int count_one_bits(unsigned char byte)
    1. 表示颜色。
    1. 表示定点数。
    1. 表示标识符（identifier）或索引值。
-
-```cpp
-```
 
 	
 ### 浮点数
@@ -269,24 +266,24 @@ float sqrtf(float x);
 - `<cmath>` 中还定义有常用的数学常量：
 
 ```cpp
-# define M_E▷⋯⋯⋯▷⋯⋯⋯2.7182818284590452354▷⋯⋯/* e */
-# define M_LOG2E▷⋯⋯⋯1.4426950408889634074▷⋯⋯/* log_2 e */
-# define M_LOG10E▷⋯⋯0.43429448190325182765▷⋯/* log_10 e */
-# define M_LN2▷⋯▷⋯⋯⋯0.69314718055994530942▷⋯/* log_e 2 */
-# define M_LN10▷▷⋯⋯⋯2.30258509299404568402▷⋯/* log_e 10 */
-# define M_PI▷⋯⋯▷⋯⋯⋯3.14159265358979323846▷⋯/* pi */
-# define M_PI_2▷▷⋯⋯⋯1.57079632679489661923▷⋯/* pi/2 */
-# define M_PI_4▷▷⋯⋯⋯0.78539816339744830962▷⋯/* pi/4 */
-# define M_1_PI▷▷⋯⋯⋯0.31830988618379067154▷⋯/* 1/pi */
-# define M_2_PI▷▷⋯⋯⋯0.63661977236758134308▷⋯/* 2/pi */
-# define M_2_SQRTPI▷1.12837916709551257390▷⋯/* 2/sqrt(pi) */
-# define M_SQRT2▷⋯⋯⋯1.41421356237309504880▷⋯/* sqrt(2) */
-# define M_SQRT1_2▷⋯0.70710678118654752440▷⋯/* 1/sqrt(2) */
+# define M_E        2.7182818284590452354▷⋯⋯/* e */
+# define M_LOG2E    1.4426950408889634074▷⋯⋯/* log_2 e */
+# define M_LOG10E   0.43429448190325182765▷⋯/* log_10 e */
+# define M_LN2      0.69314718055994530942▷⋯/* log_e 2 */
+# define M_LN10     2.30258509299404568402▷⋯/* log_e 10 */
+# define M_PI       3.14159265358979323846▷⋯/* pi */
+# define M_PI_2     1.57079632679489661923▷⋯/* pi/2 */
+# define M_PI_4     0.78539816339744830962▷⋯/* pi/4 */
+# define M_1_PI     0.31830988618379067154▷⋯/* 1/pi */
+# define M_2_PI     0.63661977236758134308▷⋯/* 2/pi */
+# define M_2_SQRTPI 1.12837916709551257390▷⋯/* 2/sqrt(pi) */
+# define M_SQRT2    1.41421356237309504880▷⋯/* sqrt(2) */
+# define M_SQRT1_2  0.70710678118654752440▷⋯/* 1/sqrt(2) */
 ```
 
 	
 - 数学运算可能出现计算溢出（无穷或无限接近零）的情形或者对负数开方的情形。
-- 使用 `<cmath>` 中的接口（实际定义为宏）可判断浮点数类型：
+- 使用 `<cmath>` 中的接口（`fpclassify()`，实际定义为宏）可判断浮点数类型：
    1. `FP_INFINITE`：是一个无穷值。
    1. `FP_NAN`：不是一个数（NaN）。
    1. `FP_NORMAL`：规范化的数值（表示这个数值可以用浮点数表达）。
@@ -601,6 +598,19 @@ int main()
 ```
 
 	
+- C++ 标准库字符串通过 `<string>` 头文件暴露了常用接口，如：
+  1. `size_t length()`：获取字符串长度。
+  1. `void clear()` ：清空字符串内容。
+  1. `bool empty()`：测试是否为空字符串。
+  1. `char &operator[]`：返回给定索引位置的单元之引用，可用于左值或右值。
+  1. `char &at(size_t pos)`：返回给定索引位置的单元之引用。
+  1. `char &back()`：返回最后面字符之引用。
+  1. `char &front()`：返回最前面字符之引用。
+  1. `string &operator+= ()`：追加内容到字符串。
+  1. ...
+- [参考链接](https://cplusplus.com/reference/string/string/)
+
+	
 ### 课堂练习
 
 1) 复制并修改上面的示例代码，要求：
@@ -869,6 +879,7 @@ void make_indent(string &indent, unsigned n)
 }
 ```
 
+	
 - 如果不使用引用而使用指针，上述代码将变成：
 
 ```cpp
@@ -1019,4 +1030,7 @@ $ ./amicable-pairs
 9363544 9437056
 ...
 ```
+
+	
+### 作业回顾
 
