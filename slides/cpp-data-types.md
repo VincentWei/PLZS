@@ -5,9 +5,7 @@
 1. 字符串
 1. 结构体
 1. 其他数据类型
-1. 内存的动态分配及释放
-1. 函数调用中的数组、指针和引用
-1. 深入理解递归调用
+1. 深入理解函数调用
 1. 作业
 
 		
@@ -585,7 +583,7 @@ int main()
 
     string str ("Hello, world!");
     str += '\n';
-    str += "-- From Vincent";
+    str += "-- By Vincent";
 
     cout << str << endl;
     cout << str.c_str() << endl;
@@ -605,7 +603,9 @@ int main()
 	
 ### 课堂练习
 
-1) 复制上面的示例代码，将字符串中的字符全部转换为小写。
+1) 复制并修改上面的示例代码，要求：
+   - 名字 `Vincent` 使用 `cin` 读入。
+   - 将字符串中的字符全部转换为小写。
 2) 保存为 `string.cpp` 并提交到自己的作业仓库。
 
 		
@@ -786,23 +786,114 @@ using rainbow_color_k = enum rainbow_color;
 ```
 
 		
-## 内存的动态分配及释放
+## 深入理解函数调用
 
-		
-## 函数调用中的数组、指针和引用
+- C/C++ 函数调用过程
+- 栈（stack）和栈帧（stack frame）
+- 通过递归调用理解函数的调用过程
 
-		
-## 要点回顾
+```cpp
+#include <iostream>
+#include <string>
 
-1. 定义或者构造字符串的方法以及相关运算符，以及遍历字符串中字符的方法。
-1. 定义或者构造列表、元组的方法以及相关运算符，以及遍历列表及元组中成员的方法。
-1. 定义或者构造字典数据的方法以及相关运算符，以及遍历字典中值的方法。
-1. 了解解耦数据和代码的概念并积极实践。
+using namespace std;
+
+string make_indent(unsigned n)
+{
+    string indent = "";
+    for (unsigned i = 0; i < n; i++) {
+        indent += ' ';
+    }
+
+    return indent;
+}
+
+double my_power(double f, unsigned n, unsigned i = 0)
+{
+    string indent = make_indent(i);
+    cout << indent << "Call #" << i << " my_power(" << f << ", " << n << ")" << endl;
+
+    double r;
+    if (n == 0)
+        r = 1;
+    else
+        r = f * my_power(f, n - 1, i + 1);
+
+    cout << indent << "Return " << r << " for Call #" << i << "." << endl;
+    return r;
+}
+
+int main()
+{
+    double r = my_power(2.0, 8);
+    cout << "The value of 2 raised to the power of 8 is " << r << endl;
+}
+```
+
+	
+### 函数参数的传递：值、指针和引用
+
+- 当函数参数中包括数组或者大型结构体、类的实例时，传递值将导致栈帧过大且需要参数值的复制过程。
+- 当函数返回数组或者大型结构体、类的实例时，将产生额外的返回值的复制过程。
+
+```cpp
+#include <cctype>
+
+void strtoupper(char dst[10])
+{
+    for (int i = 0; i < sizeof(dst); i++) {
+        dst[i] = toupper(dst[i]);
+    }
+}
+
+void strtoupper(char *dst)
+{
+    while (*dst) {
+        *dst = toupper(*dst);
+        dst++;
+    }
+}
+```
+
+
+	
+- C++ 提供了引用类型，用于在函数调用中传递变量本身而不需要传递其值。
+- C++ 的引用本质上通过指针实现，但提供了更好的代码书写效果。
+
+```cpp
+void make_indent(string &indent, unsigned n)
+{
+    for (unsigned i = 0; i < n; i++) {
+        indent += ' ';
+    }
+}
+```
+
+- 如果不使用引用而使用指针，上述代码将变成：
+
+```cpp
+void make_indent(string *indent, unsigned n)
+{
+    for (unsigned i = 0; i < n; i++) {
+        *indent += ' ';         // 或者 indent->push_back(' ');
+    }
+}
+
+string make_indent(unsigned n)
+{
+    string indent;
+    while (n--) {
+        indent += ' ';
+    }
+
+    return indent;
+}
+```
 
 		
 ## 作业
 
-1) 生成小于用户指定的正整数的斐波那契（Fibonacci）数列（使用动态分配的数组），然后计算相邻两个数的比值。运行效果如下：
+1) 生成小于用户指定的正整数的斐波那契（Fibonacci）数列，然后计算相邻两个数的比值。运行效果如下：
 
 ```console
 $ ./fibonacci-improved
@@ -815,7 +906,7 @@ $ ./fibonacci-improved
 ```
 
 	
-2) 编写一个程序，该程序可以将用户输入的一个自然数转换为 2 到 36 进制展示出来。运行效果如下：
+2) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 进制展示出来。运行效果如下：
 
 ```console
 $ ./show-number-in-different-bases
@@ -824,7 +915,16 @@ $ ./show-number-in-different-bases
 ```
 
 	
-3) 求解给定的同余方程组，要求给出至少十个解。运行效果如下：
+3) 编写一个函数，该函数可以将用户输入的一个特定进制的数用十进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行测试。运行效果如下：
+
+```console
+$ ./strtoll
+<56ABC 20>  # 第一个数值指定一个字符串，第二个数字指定该数值的进制，两者用空格分隔。
+852232
+```
+
+	
+4) 求解给定的同余方程组，要求给出至少十个解。运行效果如下：
 
 ```console
 $ ./crt
@@ -845,7 +945,7 @@ $ ./crt
 ```
 
 	
-4) 给定任意正整数，给出其所有质因子（重复的质因子只保留一个）。
+5) 给定任意正整数，给出其所有质因子（重复的质因子只保留一个）。
 
 ```console
 $ ./prime-factors
@@ -857,7 +957,7 @@ $ ./prime-factors
 ```
 
 	
-5) 给定任意整数 `n`，列出用于计算 `D(n)` 和 `O(n)` 的所有可能形式。
+6) 给定任意整数 `n`，列出用于计算 `D(n)` 和 `O(n)` 的所有可能形式。
 
 ```console
 $ ./dn-on
@@ -870,7 +970,7 @@ $ ./dn-on
 ```
 
 	
-6) 编程找到尽可能多的亲和数。运行效果如下：
+7) 编程找到尽可能多的亲和数。运行效果如下：
 
 ```console
 $ ./amicable-pairs
