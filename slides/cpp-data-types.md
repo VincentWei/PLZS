@@ -1,9 +1,10 @@
 # C++ 数据类型
 
 1. C++ 基础数据类型
-1. 数组、字符串和指针
-1. 枚举量
+1. 数组和指针
+1. 字符串
 1. 结构体
+1. 其他数据类型
 1. 内存的动态分配及释放
 1. 函数调用中的数组、指针和引用
 1. 深入理解递归调用
@@ -308,6 +309,38 @@ int isinf(x);
 - 浮点数和整数间的转换：
    1. 64 位的双精度浮点数只能精确表达 32 位整数。
    1. 大整数在转换为浮点数时，将丢失精度。
+   1. `<cmath>` 中的接口提供了将浮点数圆整为整数的接口：
+
+	
+```cpp
+#include <math.h>
+
+/* 圆整为不大于 x 的最大整数。 */
+double floor(double x);
+float floorf(float x);
+long double floorl(long double x);
+
+/* 圆整为不小于 x 的最小整数。 */
+double ceil(double x);
+float ceilf(float x);
+long double ceill(long double x);
+
+/* 圆整到最近的整数（远离 0 的方向）；
+   round(0.5) 结果为 1.0，round(-0.5) 的结果为 -1.0。 */
+double round(double x);
+float roundf(float x);
+long double roundl(long double x);
+
+/* 圆整到最近的整数（远离 0 的方向）；
+   lround(0.5) 结果为 1L，lround(-0.5) 的结果为 -1L。 */
+long int lround(double x);
+long int lroundf(float x);
+long int lroundl(long double x);
+
+long long int llround(double x);
+long long int llroundf(float x);
+long long int llroundl(long double x);
+```
 
 	
 - 对比两个浮点数的大小时，应考虑表达误差。
@@ -340,12 +373,11 @@ static inline bool is_close_longdoubles(long double a, long double b)
 ```
 
 		
-## 数组、字符串和指针
+## 数组和指针
 
 - C/C++ 中的数组（array）用来表达可使用索引（index）值引用的一组有序（ordered）数据。
 - 数组中的一个项（item）也会被称为一个单元（unit）或一个成员（member）。
 - 字符串本质上是由字符构成的数组。
-- 指针用于指代某个数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机的架构位宽相等。
 
 	
 ### 数组
@@ -357,10 +389,50 @@ static inline bool is_close_longdoubles(long double a, long double b)
 
 ```cpp
     int fibonacci[] = [ 1, 1, 2, 3, 5, 8 ];
+
+    for (int i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+        fibonacci[i] = -fibonacci[i];
+        cout << fibonacci[i] << endl;
+    }
 ```
 
 	
-### 字符串
+### 指针
+
+- 指针用于指代某项数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机架构位宽相等。
+- 对指针变量做加减运算，其值将按照指针类型的字节数成倍增减。
+
+```cpp
+    int a;
+    int *p = &a;
+
+    cout << p << endl;
+    cout << p + 1 << endl;
+
+    *p = 3;
+    cout << sizeof(p) << endl;
+    cout << a << endl;
+```
+
+	
+- 数组变量可看成是指向该数组第一个单元的指针。
+
+```cpp
+    int fibonacci[] = [ 1, 1, 2, 3, 5, 8 ];
+    int *p = fibonacci;
+
+    for (int i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+        cout << p[i] << endl;
+    }
+
+    for (int i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+        cout << *p << endl;
+        p++;
+    }
+```
+
+	
+## 字符串
 
 - 计算机程序中的字符串主要用来表达构成自然语言的文本或者文本片段。
 - 字符串字面值（literal）的概念。
@@ -368,10 +440,10 @@ static inline bool is_close_longdoubles(long double a, long double b)
 - 转义（escape）字符：
    1. 如果文本本身包含双引号（`"`）怎么办？
    1. 如果文本中需要包含一些特殊字符，如换行符、回车符怎么办？
-- C/C++ 字符串字面值本质上是不可更改的字符数组。
+- C/C++ 字符串字面值本质上是不可更改的字符数组，对应类型为 `const char *`。
 
 	
-#### C 字符串
+### C 字符串
 
 - C 字符串本质上是一个字符数组。
 - C 字符串的尾部始终包含一个空字符（`\0`）表示字符串的结尾。
@@ -380,19 +452,119 @@ static inline bool is_close_longdoubles(long double a, long double b)
     char hello1[200] = { 'H', 'e', 'l', 'l', 'o', ',', 'w', 'o', 'r', 'l', 'd', '!', '\0' };
     cout << hello1 << endl;
 
+    cout << sizeof(hello1) << endl;
+    cout << sizeof("0123456789") << endl;
+
     char hello2[] = "Hello, world!";
     cout << hello2 << endl;
 
-    // 试试如下操作
     hello1[100] = 'M';
     cout << hello1 << endl;
 
     hello2[100] = 'M';
     cout << hello2 << endl;
+
+    const char *hello3 = "Hello, world!";
+
+    hello3[0] = 'h';
+    cout << hello3 << endl;
 ```
 
 	
-#### C++ 标准库字符串
+- `<cstring>` 中定义了操作 C 字符串的常用接口：
+
+```cpp
+#include <string.h>
+
+/* 计算字符串长度（不包括末尾的空字符）。 */
+size_t strlen(const char *s);
+size_t strnlen(const char *s, size_t maxlen);
+
+/* 串接两个 C 字符串。 */
+char *strcat(char *dest, const char *src);
+char *strncat(char *dest, const char *src, size_t n);
+
+/* 复制字符串。*/
+char *strcpy(char *dest, const char *src);
+char *strncpy(char *dest, const char *src, size_t n);
+
+/* 复制字符串。*/
+int strcmp(const char *s1, const char *s2);
+int strncmp(const char *s1, const char *s2, size_t n);
+
+/* 查找字符。 */
+char *strchr(const char *s, int c);
+
+/* 从尾部反向查找字符。 */
+char *strrchr(const char *s, int c);
+
+/* 查找子字符串 */
+char *strstr(const char *haystack, const char *needle);
+```
+
+	
+### 课堂练习
+
+（十五分钟内完成）
+
+1) 尝试实现如下三个函数，调试通过后，将其保存为 `strings.cpp` 文件并提交到自己的作业仓库（`source/cpp/lesson-3/` 目录下）。
+
+```cpp
+/* Copy a string from src to dest, returning a pointer to
+   the end of the resulting string at dest. */
+char *stpcpy(char *dest, const char *src);
+
+/* Compare the strings s1 and s2 ignoring case. */
+int strcasecmp(const char *s1, const char *s2);
+
+/* Compare the first n bytes of the strings s1 and s2 ignoring case. */
+int strncasecmp(const char *s1, const char *s2, size_t n);
+```
+
+2) 测试用代码：
+
+```cpp
+#include <cstring>
+#include <strings.h>
+
+/* Copy a string from src to dest, returning a pointer to
+   the end of the resulting string at dest. */
+char *stpcpy(char *dest, const char *src)
+{
+    ...
+}
+
+/* Compare the strings s1 and s2 ignoring case. */
+int strcasecmp(const char *s1, const char *s2)
+{
+    ...
+}
+
+/* Compare the first n bytes of the strings s1 and s2 ignoring case. */
+int strncasecmp(const char *s1, const char *s2, size_t n)
+{
+    ...
+}
+
+int main()
+{
+    char buf[100];
+    const char *hello1 = "Hello, world!";
+
+    char *result = stpcpy(buf, hello1));
+    char *expected = ::stpcpy(buf, hello1));
+
+    assert(r0 == r1);
+    assert(strcmp(r0, r1) == 0);
+
+    const char *hello2 = "hello, world.";
+    assert(strcasecmp(hello1, hello2) == ::strcasecmp(hello1, hello2));
+    assert(strncasecmp(hello1, hello2, 5) == ::strncasecmp(hello1, hello2, 5));
+}
+```
+
+	
+### C++ 标准库字符串
 
 - C++ 标准库定义的字符串是一个类（`string`），可通过 C 字符串来初始化。
 - `string` 类的实例是可动态修改的，其长度可变化。
@@ -408,64 +580,111 @@ static inline bool is_close_longdoubles(long double a, long double b)
     cout << str.c_str() << endl;
 ```
 
-	
-### 指针
-
 		
 ## 结构体
 
-1. C++ 程序中的结构体（struct）通常用来表达具有多重属性的复杂对象，比如一名学生的学号、姓名、性别、生日、身高、体重等。
-
-```console
-struct type_name {
-    member_type1 member_name1;
-    member_type2 member_name2;
-    member_type3 member_name3;
-    ...
-} object_name;
-```
-
-如，
+- C++ 程序中的结构体（struct）通常用来表达具有多重属性的复杂对象，比如一名学生的学号、姓名、性别、生日、身高、体重等。
 
 ```cpp
 struct student {
     string  id;
     string  name;
     string  birthday;
-    bool    gender;
+    char    gender;         // 'M' for male, 'F' for female
     int     height;
     float   weight;
 };
 
-struct student s1 { "20240101", "Amy", "2010-09-03", false, 160, 50.3f };
+struct student s1 { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f };
+struct student *p = &s1;
+
+/* 使用 . 访问结构体变量的成员。 */
+cout << s1.name << endl;
+
+/* 使用 -> 访问结构体指针变量的成员。 */
+cout << p->id << endl;
+
+/* 定义结构体数组 */
+struct student students = [
+    { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f },
+    { "20240102", "Lisa",  "2010-08-15", 'F', 158, 45.5f },
+    { "20240103", "Tom",   "2010-07-10", 'M', 166, 65.5f },
+];
+
+for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
+    cout << "Student " << students[i].id << ": " << students[i].name << endl;
+}
 ```
+
+	
+### 课堂练习
+
+（五分钟内完成）
+
+1) 复制上面的示例代码，使用指针遍历 `students` 数组。
 
 		
 ## 其他数据类型
 
 	
+### 多维数组
+
+```cpp
+    double matrix[4][5] = [
+        [1., 2., 3., 4.],
+        [2., 3., 4., 1.],
+        [3., 4., 1., 2.],
+        [4., 1., 2., 3.],
+    ];
+```
+
+	
 ### 联合体
 
-```
-union type_name {
-    member_type1 member_name1;
-    member_type2 member_name2;
-    member_type3 member_name3;
-    ...
-} object_name;
+- 联合体在 C/C++ 中有妙用。
+- 相当于给某个变量取个不同位宽数据类型的别名。
+
+```cpp
+union natural {
+    unsigned int    natural;
+    unsigned short  half[2];
+    unsigned char   bytes[4];
+};
+
+cout << sizeof(union natural) << endl;
+
+union natural n;
+
+n.natural = 0x13141314u;
+cout << n.half[0] << ", " << n.half[1] << endl;
+cout << n.bytes[0] << ", " << n.bytes[1] << ", " << n.bytes[2] << ", " << n.bytes[3] << endl;
 ```
 
 	
 ### 枚举量
 
+- C 的枚举量本质上是整数；相当于给一组整数取了一个符号化的名称，以方便代码的编写。
+- 在枚举量上执行 `switch` 语句时，编译器可对 `case` 的取值进行一些逻辑上的判断。
+
 ```
-enum type_name {
-  value1,
-  value2,
-  value3,
-  .
-  .
-} object_names;
+enum rainbow_color {
+    red = 1,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    purple,
+};
+
+enum rainbow_color c;
+...
+
+switch (c) {
+    case 10:    /* 警告：10 不是 rainbow_color 的有效取值。 */
+        ...
+        break;
+}
 ```
 
 	
