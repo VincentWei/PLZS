@@ -51,6 +51,7 @@
    1. `int isxdigit(int c)`：是否为十六进制数字（数字及 `'a ~ 'f'` 或 `'A' ~ 'F'`）。
    1. ...
 
+	
 ```cpp
 #include <cctype>
 #include <cassert>
@@ -286,14 +287,13 @@ float sqrtf(float x);
 ```
 
 	
-- 数学运算可能出现计算溢出（无穷或无限接近零）情形或者对负数开方的情形；
-- 因此，浮点数表达中包含有是否合法、是否表示无限大等信息。
+- 数学运算可能出现计算溢出（无穷或无限接近零）的情形或者对负数开方的情形。
+- 使用 `<cmath>` 中的接口（实际定义为宏）可判断浮点数类型：
    1. `FP_INFINITE`：是一个无穷值。
    1. `FP_NAN`：不是一个数（NaN）。
    1. `FP_NORMAL`：规范化的数值（表示这个数值可以用浮点数表达）。
    1. `FP_SUBNORMAL`：非规范化的数值（通常表示一个数值因为太小或接近于 0 而无法规范化表达）。
    1. `FP_ZERO`：表示零（0 或者 -0）。
-- 使用 `<cmath>` 中的接口（实际定义为宏）可判断浮点数类型：
 
 ```cpp
 #include <math.h>
@@ -388,10 +388,18 @@ static inline bool is_close_longdoubles(long double a, long double b)
 1. 初始化数组时，使用 `[]` 包围数组单元，各个单元之间使用逗号（comma，`,`）分隔。
 
 ```cpp
-    int fibonacci[] = [ 1, 1, 2, 3, 5, 8 ];
+    // 未明确初始化的单元将默认初始化为 0
+    int fibonacci[100] = [ 1, 1, 2, 3, 5, 8 ];
+
+    int i = 0;
+    while (fibonacci[i] > 0) {
+        cout << fibonacci[i] << endl;
+    }
 
     for (int i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
-        fibonacci[i] = -fibonacci[i];
+        if (fibonacci[i] == 0) {
+            fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+        }
         cout << fibonacci[i] << endl;
     }
 ```
@@ -622,12 +630,16 @@ for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
 （五分钟内完成）
 
 1) 复制上面的示例代码，使用指针遍历 `students` 数组。
+2) 保存为 `students.cpp` 并提交到自己的作业仓库。
 
 		
 ## 其他数据类型
 
 	
 ### 多维数组
+
+- 通常用于数学上的矩阵运算（二维数组）。
+- 其他情况下较少使用。
 
 ```cpp
     double matrix[4][5] = [
