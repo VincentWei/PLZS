@@ -285,7 +285,8 @@ float sqrtf(float x);
 ```
 
 	
-- 数学运算可能出现计算溢出情形，或者对负数开方的情形；浮点数表达中包含有是否合法、是否表示无限大等信息。
+- 数学运算可能出现计算溢出（无穷或无限接近零）情形或者对负数开方的情形；
+- 因此，浮点数表达中包含有是否合法、是否表示无限大等信息。
    1. `FP_INFINITE`：是一个无穷值。
    1. `FP_NAN`：不是一个数（NaN）。
    1. `FP_NORMAL`：规范化的数值（表示这个数值可以用浮点数表达）。
@@ -341,19 +342,22 @@ static inline bool is_close_longdoubles(long double a, long double b)
 		
 ## 数组、字符串和指针
 
-- C++ 中的数组（array）用来表达可使用索引（index）值引用的一组有序（ordered）数据。
+- C/C++ 中的数组（array）用来表达可使用索引（index）值引用的一组有序（ordered）数据。
 - 数组中的一个项（item）也会被称为一个单元（unit）或一个成员（member）。
-- 在其他编程语言中，可能使用列表（list）这一术语（term）。
-- 字符串本质上是由多个字符构成的数组。
-- 指针用于指代某个数据在进程地址空间中的地址值，本质上是一个无符号整数。
+- 字符串本质上是由字符构成的数组。
+- 指针用于指代某个数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机的架构位宽相等。
 
 	
 ### 数组
 
-1. C++ 中的数组使用成对出现的中括号（square brackets，`[]`）定义。
-1. 一旦初始化，C++ 数组的长度（单元个数）就是固定的。
-1. C++ 数组中的数据项具有相同的数据类型。
+1. C/C++ 中的数组使用成对出现的中括号（square brackets，`[]`）定义。
+1. 一旦初始化，C/C++ 数组的长度（单元个数）就是固定的。
+1. C/C++ 数组中的数据项具有相同的数据类型。
 1. 初始化数组时，使用 `[]` 包围数组单元，各个单元之间使用逗号（comma，`,`）分隔。
+
+```cpp
+    int fibonacci[] = [ 1, 1, 2, 3, 5, 8 ];
+```
 
 	
 ### 字符串
@@ -373,6 +377,18 @@ static inline bool is_close_longdoubles(long double a, long double b)
 - C 字符串的尾部始终包含一个空字符（`\0`）表示字符串的结尾。
 
 ```cpp
+    char hello1[200] = { 'H', 'e', 'l', 'l', 'o', ',', 'w', 'o', 'r', 'l', 'd', '!', '\0' };
+    cout << hello1 << endl;
+
+    char hello2[] = "Hello, world!";
+    cout << hello2 << endl;
+
+    // 试试如下操作
+    hello1[100] = 'M';
+    cout << hello1 << endl;
+
+    hello2[100] = 'M';
+    cout << hello2 << endl;
 ```
 
 	
@@ -381,6 +397,16 @@ static inline bool is_close_longdoubles(long double a, long double b)
 - C++ 标准库定义的字符串是一个类（`string`），可通过 C 字符串来初始化。
 - `string` 类的实例是可动态修改的，其长度可变化。
 - 通过 `string` 类的 `.c_str()` 方法，可将 `string` 类对象转换为 C 字符串进行只读访问。
+
+```cpp
+#include <string>
+
+    string str ("Hello, world!");
+    str += "-- From me";
+
+    cout << str << endl;
+    cout << str.c_str() << endl;
+```
 
 	
 ### 指针
