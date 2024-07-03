@@ -1,4 +1,4 @@
-TARGETS = function-calls
+TARGETS = check-triangle array-pointer reference strings
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

@@ -144,6 +144,10 @@ int count_one_bits(unsigned char byte)
    1. 整数（`int`）、无符号整数（`unsigned int`）：32 位二进制。
    1. 长整数（`long`）、无符号长整数（`unsigned long`）：32 位/64 位二进制（具体位数和架构、编译器相关）。
    1. 长长整数（`long long`）、无符号长长整数（`unsigned long long`）：64 位二进制。
+- 专用于表示大小的整数类型：`size_t` 和 `ssize_t`：
+   1. 其位宽通常和计算机架构的自然位宽相同，可用来表示系统支持的最大内存块、文件长度等。
+   1. `ssize_t` 是带有符号的，其值小于零时通常表示错误。
+   1. `sizeof` 运算符的返回值类型为 `size_t`。
 
 	
 - 可使用 `<cstdint>` 中定义的具有确定位宽（bit-width）的整数类型：
@@ -206,11 +210,12 @@ int count_one_bits(unsigned char byte)
 	
 - 整数类型的用途
    1. 用于算术或数学运算。
+   1. 用于数组下标（索引值）。
    1. 用于循环计数。
    1. 表示字符；ASCII 只能用于表达 128 个字符，当用于表达中文等复杂语言的字符时，使用 16 位或者 32 位整数。
    1. 表示颜色。
    1. 表示定点数。
-   1. 表示标识符（identifier）或索引值。
+   1. 表示标识符（identifier）。
 
 	
 ### 浮点数
@@ -250,33 +255,34 @@ int count_one_bits(unsigned char byte)
 
 	
 - 浮点数数值类型的用途：主要用于科学或者工程计算。
-- 使用 `<cmath>` 中定义的数学函数接口，可完成相应的数学初等函数计算，如幂、对数、三角函数等。注意每个初等函数对应三个版本，分别用于单精度浮点数、双精度浮点数和长双精度浮点数：
+- 使用 `<cmath>` 中定义的数学函数接口，可完成相应的数学初等函数计算，如幂、对数、三角函数等；使用这些接口，需要在命令行指定 `-lm` 选项。
+- 注意每个初等函数对应三个版本，分别用于单精度浮点数、双精度浮点数和长双精度浮点数：
 
 ```cpp
 #include <math.h>
 
 double sqrt(double x);
-long double sqrtl(long double x);
 float sqrtf(float x);
+long double sqrtl(long double x);
 ```
 
 	
 - `<cmath>` 中还定义有常用的数学常量：
 
 ```cpp
-# define M_E        2.7182818284590452354▷⋯⋯/* e */
-# define M_LOG2E    1.4426950408889634074▷⋯⋯/* log_2 e */
-# define M_LOG10E   0.43429448190325182765▷⋯/* log_10 e */
-# define M_LN2      0.69314718055994530942▷⋯/* log_e 2 */
-# define M_LN10     2.30258509299404568402▷⋯/* log_e 10 */
-# define M_PI       3.14159265358979323846▷⋯/* pi */
-# define M_PI_2     1.57079632679489661923▷⋯/* pi/2 */
-# define M_PI_4     0.78539816339744830962▷⋯/* pi/4 */
-# define M_1_PI     0.31830988618379067154▷⋯/* 1/pi */
-# define M_2_PI     0.63661977236758134308▷⋯/* 2/pi */
-# define M_2_SQRTPI 1.12837916709551257390▷⋯/* 2/sqrt(pi) */
-# define M_SQRT2    1.41421356237309504880▷⋯/* sqrt(2) */
-# define M_SQRT1_2  0.70710678118654752440▷⋯/* 1/sqrt(2) */
+# define M_E        2.7182818284590452354   /* e */
+# define M_LOG2E    1.4426950408889634074   /* log_2 e */
+# define M_LOG10E   0.43429448190325182765  /* log_10 e */
+# define M_LN2      0.69314718055994530942  /* log_e 2 */
+# define M_LN10     2.30258509299404568402  /* log_e 10 */
+# define M_PI       3.14159265358979323846  /* pi */
+# define M_PI_2     1.57079632679489661923  /* pi/2 */
+# define M_PI_4     0.78539816339744830962  /* pi/4 */
+# define M_1_PI     0.31830988618379067154  /* 1/pi */
+# define M_2_PI     0.63661977236758134308  /* 2/pi */
+# define M_2_SQRTPI 1.12837916709551257390  /* 2/sqrt(pi) */
+# define M_SQRT2    1.41421356237309504880  /* sqrt(2) */
+# define M_SQRT1_2  0.70710678118654752440  /* 1/sqrt(2) */
 ```
 
 	
@@ -337,8 +343,8 @@ long long int llroundl(long double x);
 
 	
 - 对比两个浮点数的大小时，应考虑表达误差。
-   1. 使用单精度浮点数表示十进制 0.1，实际得到：`0.100000001490116119384765625`。
-   1. 0.1 的平方 0.01：`0.010000000298023226097399174250313080847263336181640625`。
+   1. 使用单精度浮点数表示十进制 `0.1`，实际得到：`0.100000001490116119384765625`。
+   1. `0.1` 的平方 `0.01`：`0.010000000298023226097399174250313080847263336181640625`。
    1. `<cfloat>` 中包含有浮点数表达相关的常数。`xxx_EPSILON` 常量定义了对应类型的两个浮点数之间的最小间歇值。
 
 	
@@ -346,24 +352,32 @@ long long int llroundl(long double x);
 #include <cmath>
 #include <cfloat>
 
-static inline bool is_close_floats(float a, float b)
-{
-    float max_val = fabsf(a) > fabsf(b) ? fabsf(a) : fabsf(b);
-    return (fabs(a - b) <= max_val * FLT_EPSILON);
-}
-
-static inline bool is_close_doubles(double a, double b)
+bool isclose(double a, double b)
 {
     double max_val = fabs(a) > fabs(b) ? fabs(a) : fabs(b);
     return (fabs(a - b) <= max_val * DBL_EPSILON);
 }
 
-static inline bool is_close_longdoubles(long double a, long double b)
+bool isclosef(float a, float b)
+{
+    float max_val = fabsf(a) > fabsf(b) ? fabsf(a) : fabsf(b);
+    return (fabs(a - b) <= max_val * FLT_EPSILON);
+}
+
+bool isclosel(long double a, long double b)
 {
     long double max_val = fabsl(a) > fabsl(b) ? fabsl(a) : fabsl(b);
     return (fabsl(a - b) <= max_val * LDBL_EPSILON);
 }
 ```
+
+	
+### 课堂练习
+
+（十分钟内完成）
+
+1) 使用上页的 `isclose()` 函数完成程序 `check-triangle.cpp`，判断输入的三角形三边是否可以构成一个三角形。
+2) 提交到自己的作业仓库（`source/cpp/lesson-3/` 目录下）。
 
 		
 ## 数组和指针
@@ -375,21 +389,23 @@ static inline bool is_close_longdoubles(long double a, long double b)
 	
 ### 数组
 
-1. C/C++ 中的数组使用成对出现的中括号（square brackets，`[]`）定义。
-1. 一旦初始化，C/C++ 数组的长度（单元个数）就是固定的。
+1. C/C++ 中的数组使用成对出现的中括号（square brackets，`[]`）定义；可通过整型常量指定数组大小。
+1. C99 开始，C/C++ 支持变长数组（variable length array，VLA），可用变量定义数组的大小（单元个数）。
+1. 一旦初始化，C/C++ 数组的长度就是固定的。
 1. C/C++ 数组中的数据项具有相同的数据类型。
-1. 初始化数组时，使用 `[]` 包围数组单元，各个单元之间使用逗号（comma，`,`）分隔。
+1. 初始化数组时，使用 `{}` 包围数组单元，各个单元之间使用逗号（comma，`,`）分隔。
 
 ```cpp
     // 未明确初始化的单元将默认初始化为 0
-    int fibonacci[100] = [ 1, 1, 2, 3, 5, 8 ];
+    uint64_t fibonacci[100] = { 1, 1, 2, 3, 5, 8 };
 
     int i = 0;
     while (fibonacci[i] > 0) {
         cout << fibonacci[i] << endl;
+        i++;
     }
 
-    for (int i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+    for (size_t i = 0; i < sizeof(fibonacci)/sizeof(uint64_t); i++) {
         if (fibonacci[i] == 0) {
             fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
         }
@@ -401,7 +417,9 @@ static inline bool is_close_longdoubles(long double a, long double b)
 ### 指针
 
 - 指针（pointer）用于指代某项数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机架构位宽相等。
-- 对指针变量做加减运算，其值将按照指针类型的字节数成倍增减。
+- 指针变量使用 `<typename> *` 的方式定义，亦可使用 `void *` 定义不和具体类型关联的指针。
+- 对指针变量做加减运算，其值将按照指针类型的字节数成倍增减；但 `void *` 指针上的算术运算，其行为不确定。
+- C++ 使用 `nullptr` 关键词指代一个空（NULL）指针，而 C 使用 `NULL` 宏；访问空指针将导致程序异常终止，大部分情况下，函数返回空指针表示错误或失败的情形。
 
 ```cpp
     int a;
@@ -419,17 +437,101 @@ static inline bool is_close_longdoubles(long double a, long double b)
 - 数组变量可看成是指向该数组第一个单元的指针。
 
 ```cpp
-    int fibonacci[] = [ 1, 1, 2, 3, 5, 8 ];
+    int fibonacci[] = { 1, 1, 2, 3, 5, 8 };
     int *p = fibonacci;
 
-    for (int i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+    for (size_t i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
         cout << p[i] << endl;
     }
 
-    for (int i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+    for (size_t i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
         cout << *p << endl;
         p++;
     }
+```
+
+	
+- 声明指针变量时使用 `const` 限定词（qualifier），表示指针指向的内容不可更改；编译器将据此检查可能的逻辑错误。
+
+```cpp
+    int fibonacci[20] = { 1, 1, 2, 3, 5, 8 };
+
+    int *p = fibonacci;
+    for (size_t i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+        if (p[i] == 0) {
+            p[i] = p[i - 1] + p[i - 2];
+        }
+
+        cout << p[i] << endl;
+    }
+
+    const int *cp = fibonacci;
+    for (size_t i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
+        cout << *cp << endl;
+        cp++;
+    }
+```
+
+	
+### 课堂练习
+
+（十分钟内完成）
+
+1) 复制并修改上页代码（`fibonacci.cpp`），将斐波那契数组的大小设置为 `90` 并查看结果。
+2) 调整代码使之可输出正常结果，最后提交到自己的作业仓库（`source/cpp/lesson-3/` 目录下）。
+
+	
+## 引用
+
+- 引用（reference）是 C++ 引入的数据类型，可以理解为给一个已有的变量取个别名。
+- 定义引用变量时，使用 `<typename> &` 的语法。
+- 通过引用，可将变量传递给函数。
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int addition(const int &a, const int &b)
+{
+    return a + b;
+}
+
+int &addition(int &r, const int &a, const int &b)
+{
+    r = a + b;
+    return r;
+}
+
+int main()
+{
+    int a;
+    int &b = a;
+
+    b = 5;
+    cout << a << endl;
+
+    b = addition(a, b);
+    cout << a << endl;
+
+    c = addition(b, a, b);
+    cout << a << endl;
+    cout << c << endl;
+}
+
+```
+
+	
+- 不能在立即数上定义引用。
+- 不能以引用的方式返回局部变量。
+
+```cpp
+int &addition(const int &a, const int &b)
+{
+    int &c = 4;
+    int r = a + b;
+    return r;
+}
 ```
 
 	
@@ -513,37 +615,39 @@ char *strstr(const char *haystack, const char *needle);
 ```cpp
 /* Copy a string from src to dest, returning a pointer to
    the end of the resulting string at dest. */
-char *stpcpy(char *dest, const char *src);
+char *mystpcpy(char *dest, const char *src);
 
 /* Compare the strings s1 and s2 ignoring case. */
-int strcasecmp(const char *s1, const char *s2);
+int mystrcasecmp(const char *s1, const char *s2);
 
 /* Compare the first n bytes of the strings s1 and s2 ignoring case. */
-int strncasecmp(const char *s1, const char *s2, size_t n);
+int mystrncasecmp(const char *s1, const char *s2, size_t n);
 ```
 
 	
 2) 测试用代码：
 
 ```cpp
+#include <cctype>
+#include <cassert>
 #include <cstring>
 #include <strings.h>
 
 /* Copy a string from src to dest, returning a pointer to
    the end of the resulting string at dest. */
-char *stpcpy(char *dest, const char *src)
+char *mystpcpy(char *dest, const char *src)
 {
     ...
 }
 
 /* Compare the strings s1 and s2 ignoring case. */
-int strcasecmp(const char *s1, const char *s2)
+int mystrcasecmp(const char *s1, const char *s2)
 {
     ...
 }
 
 /* Compare the first n bytes of the strings s1 and s2 ignoring case. */
-int strncasecmp(const char *s1, const char *s2, size_t n)
+int mystrncasecmp(const char *s1, const char *s2, size_t n)
 {
     ...
 }
@@ -553,15 +657,15 @@ int main()
     char buf[100];
     const char *hello1 = "Hello, world!";
 
-    char *result = stpcpy(buf, hello1));
-    char *expected = ::stpcpy(buf, hello1));
+    char *result = mystpcpy(buf, hello1);
+    char *expected = ::stpcpy(buf, hello1);
 
-    assert(r0 == r1);
-    assert(strcmp(r0, r1) == 0);
+    assert(result == expected);
+    assert(::strcmp(result, expected) == 0);
 
     const char *hello2 = "hello, world.";
-    assert(strcasecmp(hello1, hello2) == ::strcasecmp(hello1, hello2));
-    assert(strncasecmp(hello1, hello2, 5) == ::strncasecmp(hello1, hello2, 5));
+    assert(mystrcasecmp(hello1, hello2) == ::strcasecmp(hello1, hello2));
+    assert(mystrncasecmp(hello1, hello2, 5) == ::strncasecmp(hello1, hello2, 5));
 }
 ```
 
@@ -605,6 +709,10 @@ int main()
   1. `char &back()`：返回最后面字符之引用。
   1. `char &front()`：返回最前面字符之引用。
   1. `string &operator+= ()`：追加内容到字符串。
+  1. `string &append()`：追加内容到字符串。
+  1. `string &insert()`：插入内容到字符串的指定位置（长度变长）。
+  1. `string &erase()`：擦除字符串内的指定内容（长度变短）。
+  1. `const char *c_str()`：返回只读的 C 字符串等价指针。
   1. ...
 - [参考链接](https://cplusplus.com/reference/string/string/)
 
