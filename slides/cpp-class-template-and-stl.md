@@ -264,22 +264,94 @@ class Circle: public Basic2DShape {
 };
 ```
 
-	
-### 课堂练习
-
-（十分钟内完成）
-
-1) 在上述代码基础上实现 `Triangle` 类和 `Square` 类。
-2) 将代码保存为 `shapes.cpp` 文件，调试通过后提交到自己的作业仓库。
-
 		
 ## C++ 模板
+
+- C++ 引入的模板，可用来实现代码的类型无关（泛型编程），从而大幅提高开发效率。
+- 在 C++ 中，可使用模板定义函数、类等。
+
+```cpp
+int summary(int a, int b)
+{
+    return a+b;
+}
+
+double summary(double a, double b)
+{
+    return a+b;
+}
+
+float summary(float a, float b)
+{
+    return a+b;
+}
+
+long double summary(long double a, long double b)
+{
+    return a+b;
+}
+```
+
+	
+### 函数模板
+
+```cpp
+template <class T>
+T summary(T a, T b)
+{
+  return a+b;
+}
+
+    auto x = summary<int>(10, 20);
+    auto y = summary<double>(10.03, 20.01);
+    auto z = summary<long double>(10.00003l, 20.00009l);
+```
+
+	
+### 类模板
+
+```cpp
+template <class T>
+class Pair {
+    T values[2];
+
+  public:
+    Pair(T first, T second)  {
+      values[0] = first; values[1] = second;
+    }
+
+    T max();
+    T min();
+};
+
+template <class T>
+T Pair<T>::max()
+{
+    T retval;
+    retval = values[0] > values[1] ? values[0] : values[1];
+    return retval;
+}
+
+template <class T>
+T Pair<T>::min()
+{
+    T retval;
+    retval = values[0] > values[1] ? values[1] : values[0];
+    return retval;
+}
+
+    Pair<double> coordinates(100.0, 75.0);
+    cout << coordinates.max() << endl;
+```
 
 		
 ## C++ STL（标准模板库）
 
 		
 ## 作业
+
+	
+1) 使用层次化的类重构上一讲中的 `calc-areas.cpp` 程序。运行效果不变。
 
 	
 ### 作业回顾

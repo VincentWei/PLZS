@@ -1,4 +1,4 @@
-TARGETS = rectangle shapes
+TARGETS = rectangle shapes template
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
