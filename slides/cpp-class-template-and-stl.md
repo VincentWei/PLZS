@@ -3,4 +3,284 @@
 1. C++ 类和对象
 1. C++ 模板
 1. C++ STL（标准模板库）
-1. 作业
+
+		
+## C++ 类和对象
+
+- 类（class）是结构体（structure）的一个扩展，其中不仅仅包括数据，同时也包括基于这些数据完成特定功能的函数。
+- 类中定义的数据称作“数据成员”，也称为“属性（property）”。
+- 类中定义的函数称作“函数成员”；根据用途的不同，可进一步区分为设置器（setter）、获取器（getter）或者方法（method）。
+- 对象（object）是类的一个实例（instance），每个类的对象有自己的实例数据。
+- C++ 中，可使用 `struct` 或者 `class` 关键词定义一个类。
+- C++ 类的定义通常置于独立的头文件中，以方便其他模块引用。
+
+```cpp
+class Rectangle {
+    double width, height;
+
+  public:
+    // Rectangle 类的构造器（constructor)
+    Rectangle(double w, double h) {
+        width = w; height = h;
+    }
+
+    // Rectangle 类的 perimeter 方法（method)，用于计算周长。
+    double perimeter(void) {
+        return (width + height) * 2.0;
+    }
+
+    // Rectangle 类的 area 方法，用于计算面积。
+    double area(void) {
+        return width * height;
+    }
+};
+
+    Rectangle rc_a {20.0, 20.0};
+    Rectangle rc_b {20.0, 10.0};
+    cout << rc_a.perimeter() << endl;
+    cout << rc_b.area() << endl;
+```
+
+	
+### 课堂练习
+
+（五分钟内完成）
+
+1) 基于上面的示例代码，实现 `Circle` 类。
+2) 保存为 `circle.cpp` 并提交到自己的作业仓库。
+
+	
+### 补充属性获取器和设置器
+
+```cpp
+class Rectangle {
+    double _w, _h;
+
+  public:
+    // Rectangle 的默认构造器
+    Rectangle() {
+        _w = 0; _h = 0;
+    }
+
+    Rectangle(double w, double h) {
+        _w = w; _h = h;
+    }
+
+    // Rectangle 的属性设置器（setter），用于设置 width 属性
+    void setWidth(double w) {
+        _w = w;
+    }
+
+    // Rectangle 的属性设置器（setter），用于设置 height 属性
+    void setHeight(double h) {
+        _h = h;
+    }
+
+    // Rectangle 的属性获取器（getter），用于获取 width 属性
+    double width() const {
+        return _w;
+    }
+
+    // Rectangle 的属性获取器（getter），用于获取 height 属性
+    double height() const {
+        return _h;
+    }
+
+    double perimeter(void) {
+        return (_w + _h) * 2.0;
+    }
+
+    double area(void) {
+        return _w * _h;
+    }
+};
+
+    Rectangle rc;
+    double w, h;
+    cin >> w >> h;
+    rc.setWidth(w);
+    rc.setHeight(h);
+
+    cout << "Perimter: " << rc.perimeter() << endl;
+    cout << "Area: " << rc.area() << endl;
+```
+
+	
+### 重载 `<<` 运算符
+
+- 自定义左值类型为 `ostream` 右值类型为 `Rectangle` 的 `<<` 运算符，可实现 `Rectangle` 类的个性化输出。
+- `ostream` 是全局对象 `cout` 的类名称。
+
+```cpp
+ostream &operator<< (ostream &os, Rectangle &rc) {
+    os << "Rectangle (" << rc.width() << " x " << rc.height() << ")";
+    return os;
+}
+
+    Rectangle rc {20.0, 30.0};
+    cout << "Perimter of " << rc << ": " << rc.perimeter() << endl;
+    cout << "Area of " << rc << ": " << rc.area() << endl;
+```
+
+	
+### 重载 `>>` 运算符
+
+- 类似地，自定义左值类型为 `istream`，右值类型为 `Rectangle` 的 `>>` 运算符，可实现 `Rectangle` 类的个性化输入。
+- `istream` 是全局对象 `cin` 的类名称。
+
+```cpp
+istream &operator>> (istream &is, Rectangle &rc)
+{
+    double w, h;
+
+    is >> w >> h;
+
+    rc.setWidth(w);
+    rc.setHeight(h);
+    return is;
+}
+
+    Rectangle rc_c;
+    cin >> rc_c;
+    cout << "Perimter of " << rc_c << ": " << rc_c.perimeter() << endl;
+    cout << "Area of " << rc_c << ": " << rc_c.area() << endl;
+```
+
+	
+### 课堂练习
+
+（十五分钟内完成）
+
+1) 照猫画虎，继续完善自己的 `Circle` 类，实现默认构造器、属性获取器和设置器，以及两个运算符重载函数。
+2) 将增强版本提交到自己的作业仓库。
+
+	
+### 构建类的派生体系
+
+- 将不同的公共接口归纳到基类中定义，并在子类中按需要重载。
+- C++ 中可被子类重载的成员函数称为“虚函数”。
+- 在子类中重载虚函数，实现面向对象当中的多态（polymorphism）。
+
+```cpp
+class Basic2DShape {
+  public:
+    virtual double perimeter(void) = 0;
+    virtual double area(void) = 0;
+
+    virtual void write(ostream &os) = 0;
+    virtual void read(istream &is) = 0;
+};
+
+/* 通过调用基类的虚函数实现 << 运算符的重载，从而该重载只需要实现一次。 */
+ostream &operator<< (ostream &os, Basic2DShape &rc)
+{
+    rc.write(os);
+    return os;
+}
+
+/* 通过调用基类的虚函数实现 >> 运算符的重载，从而该重载只需要实现一次。 */
+istream &operator>> (istream &is, Basic2DShape &rc)
+{
+    rc.read(is);
+    return is;
+}
+```
+
+	
+- 基于基类实现 `Rectangle` 类
+
+```cpp
+class Rectangle: public Basic2DShape {
+    double _w, _h;
+
+  public:
+    Rectangle() {
+        _w = 0; _h = 0;
+    }
+
+    Rectangle(double w, double h) {
+        _w = w; _h = h;
+    }
+
+    ...
+
+    virtual double perimeter(void) {
+        return (_w + _h) * 2.0;
+    }
+
+    virtual double area(void) {
+        return _w * _h;
+    }
+
+    virtual void write(ostream &os) {
+        os << "Rectangle (" << _w << " x " << _h << ")";
+    }
+
+    virtual void read(istream &is) {
+        is >> _w >> _h;
+    }
+};
+```
+
+	
+- 基于基类实现 `Circle` 类
+
+```cpp
+class Circle: public Basic2DShape {
+    double _r;
+
+  public:
+    Circle() {
+        _r = 0;
+    }
+
+    Circle(double r) {
+        _r = r;
+    }
+
+    void setRadius(double r) {
+        _r = r;
+    }
+
+    double radius() const {
+        return _r;
+    }
+
+    virtual double perimeter(void) {
+        return 2.0 * M_PI * _r;
+    }
+
+    virtual double area(void) {
+        return M_PI * _r * _r;
+    }
+
+    virtual void write(ostream &os) {
+        os << "Circle (" << _r << ")";
+    }
+
+    virtual void read(istream &is) {
+        is >> _r;
+    }
+};
+```
+
+	
+### 课堂练习
+
+（十分钟内完成）
+
+1) 在上述代码基础上实现 `Triangle` 类和 `Square` 类。
+2) 将代码保存为 `shapes.cpp` 文件，调试通过后提交到自己的作业仓库。
+
+		
+## C++ 模板
+
+		
+## C++ STL（标准模板库）
+
+		
+## 作业
+
+	
+### 作业回顾
+
