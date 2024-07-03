@@ -185,6 +185,17 @@ istream &operator>> (istream &is, Basic2DShape &rc)
     rc.read(is);
     return is;
 }
+
+    // 不管是 Rectangle 还是 Circle 类，均具有相同的接口和用法
+    Rectangle rc;
+    cin >> rc;
+    cout << "Perimter of " << rc << ": " << rc.perimeter() << endl;
+    cout << "Area of " << rc << ": " << rc.area() << endl;
+
+    Circle circle;
+    cin >> circle;
+    cout << "Perimter of " << circle << ": " << circle.perimeter() << endl;
+    cout << "Area of " << circle << ": " << circle.area() << endl;
 ```
 
 	
@@ -360,7 +371,7 @@ T Pair<T>::min()
 - C++ STL 通过类模板和函数模板实现了大量的基础数据结构、算法和功能，如输入输出、字符串、容器、迭代器等。
 - 标准对象 `cout` 和 `cin` 分别是 `ostream` 和 `istream` 类的实例，而 `ostream` 和 `istream` 分别是 `basic_ostream` 和 `basic_istream` 类模板的实例。
 - `string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char`，也就是 8 位字符。
-- `u16string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char16_t`，也就是 - 位字符。
+- `u16string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char16_t`，也就是 16 位字符。
 - `u32string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char32_t`，也就是 32 位字符。
 
 	
@@ -368,6 +379,7 @@ T Pair<T>::min()
 - `array` 类模板可用于定义任意数据类型和类的固定大小的序列容器。
 - `vector` 类模板可用于定义任意数据类型和类的可变大小的序列容器。
 - STL 为容器类提供了用于迭代器的模板函数：`begin()` 和 `end()`。
+- 基于迭代器，STL 以函数模板的形式提供了针对容器中元素的各种操作或功能，如 `transform()`、`sort()` 等。
 
 	
 ### `string` 类
@@ -381,7 +393,10 @@ T Pair<T>::min()
 ### `vector` 模板类
 
 	
-### 基于迭代器的函数模板
+### 迭代器
+
+	
+### 基于迭代器的常用算法函数模板
 
 
 		
