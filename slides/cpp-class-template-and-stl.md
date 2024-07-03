@@ -12,7 +12,7 @@
 - 类中定义的函数称作“函数成员”；根据用途的不同，可进一步区分为设置器（setter）、获取器（getter）或者方法（method）。
 - 对象（object）是类的一个实例（instance），每个类的对象有自己的实例数据。
 - C++ 中，可使用 `struct` 或者 `class` 关键词定义一个类。
-- C++ 类的定义通常置于独立的头文件中，以方便其他模块引用。
+- 在正式项目中，C++ 类的定义通常置于独立的头文件中，以方便其他模块引用。
 
 ```cpp
 class Rectangle {
@@ -108,7 +108,7 @@ class Rectangle {
 	
 ### 重载 `<<` 运算符
 
-- 自定义左值类型为 `ostream` 右值类型为 `Rectangle` 的 `<<` 运算符，可实现 `Rectangle` 类的个性化输出。
+- 自定义左值类型为 `ostream` 右值类型为 `Rectangle` 的 `<<` 运算符，可实现 `Rectangle` 类的定制输出。
 - `ostream` 是全局对象 `cout` 的类名称。
 
 ```cpp
@@ -125,7 +125,7 @@ ostream &operator<< (ostream &os, Rectangle &rc) {
 	
 ### 重载 `>>` 运算符
 
-- 类似地，自定义左值类型为 `istream`，右值类型为 `Rectangle` 的 `>>` 运算符，可实现 `Rectangle` 类的个性化输入。
+- 类似地，自定义左值类型为 `istream`，右值类型为 `Rectangle` 的 `>>` 运算符，可实现 `Rectangle` 类的定制输入。
 - `istream` 是全局对象 `cin` 的类名称。
 
 ```cpp
@@ -155,7 +155,7 @@ istream &operator>> (istream &is, Rectangle &rc)
 2) 将增强版本提交到自己的作业仓库。
 
 	
-### 构建类的派生体系
+### 构建类的层次结构
 
 - 将不同的公共接口归纳到基类中定义，并在子类中按需要重载。
 - C++ 中可被子类重载的成员函数称为“虚函数”。
@@ -350,8 +350,10 @@ T Pair<T>::min()
 		
 ## 作业
 
-	
 1) 使用层次化的类重构上一讲中的 `calc-areas.cpp` 程序。运行效果不变。
+
+	
+2) 
 
 	
 ### 作业回顾
