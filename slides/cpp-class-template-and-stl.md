@@ -357,15 +357,17 @@ T Pair<T>::min()
 ## C++ STL（标准模板库）
 
 - C++ STL（standard template library，标准模板库）是 C++ 的标准库。
-- C++ STL 通过类模板和函数模板实现了大量的基础数据结构、算法和功能，如输入输出、字符串、容器、迭代器等。如，
-   1. 标准对象 `cout` 和 `cin` 分别是 `ostream` 和 `istream` 类的实例，而 `ostream` 和 `istream` 分别是 `basic_ostream` 和 `basic_istream` 类模板的实例。
-   1. `string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char`，也就是 8 位字符。
-   1. `u16string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char16_t`，也就是 16 位字符。
-   1. `u32string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char32_t`，也就是 32 位字符。
-   1. 基于函数模板以及 `string` 等类，STL 提供了 `stoi()`、`stoull()`、`stod()` 等函数，可将字符串对象分别转换为整数、无符号长整数或者双精度浮点数等。
-   1. `array` 类模板可用于定义任意数据类型和类的固定大小的序列容器。
-   1. `vector` 类模板可用于定义任意数据类型和类的可变大小的序列容器。
-   1. STL 为容器类提供了用于迭代器的模板函数：`begin()` 和 `end()`。
+- C++ STL 通过类模板和函数模板实现了大量的基础数据结构、算法和功能，如输入输出、字符串、容器、迭代器等。
+- 标准对象 `cout` 和 `cin` 分别是 `ostream` 和 `istream` 类的实例，而 `ostream` 和 `istream` 分别是 `basic_ostream` 和 `basic_istream` 类模板的实例。
+- `string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char`，也就是 8 位字符。
+- `u16string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char16_t`，也就是 - 位字符。
+- `u32string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char32_t`，也就是 32 位字符。
+
+	
+- 基于函数模板以及 `string` 等类，STL 提供了 `stoi()`、`stoull()`、`stod()` 等函数，可将字符串对象分别转换为整数、无符号长整数或者双精度浮点数等。
+- `array` 类模板可用于定义任意数据类型和类的固定大小的序列容器。
+- `vector` 类模板可用于定义任意数据类型和类的可变大小的序列容器。
+- STL 为容器类提供了用于迭代器的模板函数：`begin()` 和 `end()`。
 
 	
 ### `string` 类
