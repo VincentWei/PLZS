@@ -1,11 +1,9 @@
-# C++ 数据类型
+# C++ 数据类型（上）
 
 1. C++ 基础数据类型
 1. 数组和指针
+1. 引用
 1. 字符串
-1. 结构体
-1. 其他数据类型
-1. 深入理解函数调用
 1. 作业
 
 		
@@ -619,289 +617,6 @@ int main()
 2) 保存为 `string.cpp` 并提交到自己的作业仓库。
 
 		
-## 结构体
-
-- C++ 程序中的结构体（struct）通常用来表达具有多重属性的复杂对象，比如一名学生的学号、姓名、性别、生日、身高、体重等。
-
-```cpp
-struct student {
-    string  id;
-    string  name;
-    string  birthday;
-    char    gender;         // 'M' for male, 'F' for female
-    int     height;
-    float   weight;
-};
-
-    struct student s1 { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f };
-    struct student *p = &s1;
-
-    /* 使用 . 访问结构体变量的成员。 */
-    cout << s1.name << endl;
-
-    /* 使用 -> 访问结构体指针变量的成员。 */
-    cout << p->id << endl;
-
-    /* 定义结构体数组 */
-    struct student students = [
-        { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f },
-        { "20240102", "Lisa",  "2010-08-15", 'F', 158, 45.5f },
-        { "20240103", "Tom",   "2010-07-10", 'M', 166, 65.5f },
-    ];
-
-    for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
-        cout << "Student " << students[i].id << ": " << students[i].name << endl;
-    }
-```
-
-	
-### 课堂练习
-
-（五分钟内完成）
-
-1) 复制上面的示例代码，使用指针遍历 `students` 数组。
-2) 保存为 `students.cpp` 并提交到自己的作业仓库。
-
-		
-## 其他数据类型
-
-	
-### 多维数组
-
-- 通常用于数学上的矩阵运算（二维数组）。
-- 其他情况下较少使用。
-
-```cpp
-    double matrix[4][5] = [
-        [1., 2., 3., 4.],
-        [2., 3., 4., 1.],
-        [3., 4., 1., 2.],
-        [4., 1., 2., 3.],
-    ];
-
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 5; j++) {
-            matrix[i][j] *= 100.0;
-        }
-    }
-```
-
-	
-### 联合体
-
-- 联合体在 C/C++ 中有妙用。
-- 相当于给某个变量取个不同位宽数据类型的别名。
-
-```cpp
-union natural {
-    unsigned int    natural;
-    unsigned short  half[2];
-    unsigned char   bytes[4];
-};
-
-cout << sizeof(union natural) << endl;
-
-union natural n;
-
-n.natural = 0x13141314u;
-cout << n.half[0] << ", " << n.half[1] << endl;
-cout << n.bytes[0] << ", " << n.bytes[1] << ", " << n.bytes[2] << ", " << n.bytes[3] << endl;
-```
-
-	
-### 枚举量
-
-- C 的枚举量本质上是整数；相当于给一组整数取了一个符号化的名称，以方便代码的编写。
-- 在枚举量上执行 `switch` 语句时，编译器可对 `case` 的取值进行一些逻辑上的判断。
-
-```
-enum rainbow_color {
-    red = 1,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    purple,
-};
-
-const char *rainbow_color_name(enum rainbow_color c)
-{
-    const char *name = NULL;
-
-    switch (c) {
-    case red:
-        name = "red";
-        break;
-    case orange:
-        name = "orange";
-        break;
-    case yellow:
-        name = "yellow";
-        break;
-    case cyan:
-        name = "cyan";
-        break;
-    case blue:
-        name = "blue";
-        break;
-    case purple:
-        name = "purple";
-        break;
-    case 10:    /* 警告：10 不是 rainbow_color 的有效取值。 */
-        break;
-    }
-
-    return name;
-}
-```
-
-	
-### 类型别名
-
-- 使用 `typedef`
-
-```cpp
-typedef char BYTE;
-typedef unsigned short WORD;
-typedef unsigned long long ULL;
-
-typedef enum rainbow_color {
-    red = 1,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    purple,
-} rainbow_color_k;
-```
-
-	
-- 使用 `using`
-
-```cpp
-using BYTE = char;
-using WORD = unsigned int;
-using ULL = unsigned long long;
-using rainbow_color_k = enum rainbow_color;
-```
-
-- 使用预处理宏（不推荐）
-
-```cpp
-#define BYTE unsigned char
-#define WORD unsigned short
-#define ULL  unsigned long long
-```
-
-		
-## 深入理解函数调用
-
-- C/C++ 函数调用过程
-- 栈（stack）和栈帧（stack frame）
-- 通过递归调用理解函数的调用过程
-
-```cpp
-#include <iostream>
-#include <string>
-
-using namespace std;
-
-string make_indent(unsigned n)
-{
-    string indent = "";
-    for (unsigned i = 0; i < n; i++) {
-        indent += ' ';
-    }
-
-    return indent;
-}
-
-double my_power(double f, unsigned n, unsigned i = 0)
-{
-    string indent = make_indent(i);
-    cout << indent << "Call #" << i << " my_power(" << f << ", " << n << ")" << endl;
-
-    double r;
-    if (n == 0)
-        r = 1;
-    else
-        r = f * my_power(f, n - 1, i + 1);
-
-    cout << indent << "Return " << r << " for Call #" << i << "." << endl;
-    return r;
-}
-
-int main()
-{
-    double r = my_power(2.0, 8);
-    cout << "The value of 2 raised to the power of 8 is " << r << endl;
-}
-```
-
-	
-### 函数参数的传递：值、指针和引用
-
-- 当函数参数中包括数组或者大型结构体、类的实例时，传递值将导致栈帧过大且需要参数值的复制过程。
-- 当函数返回数组或者大型结构体、类的实例时，将产生额外的返回值的复制过程。
-
-```cpp
-#include <cctype>
-
-void strtoupper(char dst[10])
-{
-    for (int i = 0; i < sizeof(dst); i++) {
-        dst[i] = toupper(dst[i]);
-    }
-}
-
-void strtoupper(char *dst)
-{
-    while (*dst) {
-        *dst = toupper(*dst);
-        dst++;
-    }
-}
-```
-
-
-	
-- C++ 提供了引用类型，用于在函数调用中传递变量本身而不需要传递其值。
-- C++ 的引用本质上通过指针实现，但提供了更好的代码书写效果。
-
-```cpp
-void make_indent(string &indent, unsigned n)
-{
-    for (unsigned i = 0; i < n; i++) {
-        indent += ' ';
-    }
-}
-```
-
-	
-- 如果不使用引用而使用指针，上述代码将变成：
-
-```cpp
-void make_indent(string *indent, unsigned n)
-{
-    for (unsigned i = 0; i < n; i++) {
-        *indent += ' ';         // 或者 indent->push_back(' ');
-    }
-}
-
-string make_indent(unsigned n)
-{
-    string indent;
-    while (n--) {
-        indent += ' ';
-    }
-
-    return indent;
-}
-```
-
-		
 ## 作业
 
 1) 生成小于用户指定的正整数的斐波那契（Fibonacci）数列，然后计算相邻两个数的比值。运行效果如下：
@@ -917,7 +632,7 @@ $ ./fibonacci-improved
 ```
 
 	
-2) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 进制展示出来。运行效果如下：
+2) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 的进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
 
 ```console
 $ ./show-number-in-different-bases
@@ -926,7 +641,7 @@ $ ./show-number-in-different-bases
 ```
 
 	
-3) 编写一个函数，该函数可以将用户输入的一个特定进制的数用十进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行测试。运行效果如下：
+3) 编写一个函数，该函数可以将用户输入的一个特定进制的数用十进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
 
 ```console
 $ ./strtoll
@@ -934,8 +649,16 @@ $ ./strtoll
 852232
 ```
 
+4) 给定任意长度的十进制自然数，给出其补数。运行效果如下：
+
+```console
+$ ./decimal-complement
+<123456789098765432101234567890987654321>
+876543210901234567898765432109012345678
+```
+
 	
-4) 求解给定的同余方程组，要求给出至少十个解。运行效果如下：
+5) 求解给定的同余方程组，要求给出至少十个解。运行效果如下：
 
 ```console
 $ ./crt

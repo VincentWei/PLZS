@@ -422,7 +422,7 @@ double power(double f, unsigned n)
 		
 ## 作业
 
-1) 输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
+1) 使用循环输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
 
 ```console
 $ ./fibonacci
@@ -430,7 +430,7 @@ $ ./fibonacci
 1, 1, 2, 3, 5, 8.
 ```
 
-1) 使用递归输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
+2) 使用递归输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
 
 ```console
 $ ./fibonacci-recursively
