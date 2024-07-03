@@ -5,7 +5,6 @@
 1. 多维数组
 1. 联合体
 1. 枚举量
-1. 类型别名
 1. 作业
 
 		
@@ -241,6 +240,7 @@ cout << n.bytes[0] << ", " << n.bytes[1] << ", " << n.bytes[2] << ", " << n.byte
 - 在枚举量上执行 `switch` 语句时，编译器可对 `case` 的取值进行一些逻辑上的判断。
 
 ```cpp
+
 enum rainbow_color {
     red = 1,
     orange,
@@ -251,9 +251,12 @@ enum rainbow_color {
     purple,
 };
 
-const char *rainbow_color_name(enum rainbow_color c)
+// typedef enum rainbow_color rainbow_color_k;
+using rainbow_color_k = enum rainbow_color;
+
+const char *rainbow_color_name(rainbow_color_k c)
 {
-    const char *name = NULL;
+    const char *name = nullptr;
 
     switch (c) {
     case red:
@@ -280,47 +283,6 @@ const char *rainbow_color_name(enum rainbow_color c)
 
     return name;
 }
-```
-
-		
-## 类型别名
-
-	
-### 使用 `typedef`
-
-```cpp
-typedef char BYTE;
-typedef unsigned short WORD;
-typedef unsigned long long ULL;
-
-typedef enum rainbow_color {
-    red = 1,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    purple,
-} rainbow_color_k;
-```
-
-	
-### 使用 `using`
-
-```cpp
-using BYTE = char;
-using WORD = unsigned int;
-using ULL = unsigned long long;
-using rainbow_color_k = enum rainbow_color;
-```
-
-	
-### 使用预处理宏（不推荐）
-
-```cpp
-#define BYTE unsigned char
-#define WORD unsigned short
-#define ULL  unsigned long long
 ```
 
 		
@@ -371,6 +333,28 @@ $ ./dn-on
 1 1 1
 ```
 
+	
+4) 使用结构体定义一个二维几何形状（三角形、正方形、圆），其中包含几何形状名称、构造该几何形状的参数数量、通过函数指针定义的面积计算函数等，最终实现 `calc-areas.cpp` 程序。运行效果如下：
+
+```console
+$ ./calc-area
+To calculate the area, please choose a geometrical shape:
+1. Triange
+2. Square
+3. Circle
+0. Exit
+Your choice:<1>
+Please input the lengthes of three sides of a triangle: <3 4 5>
+The area of your triangle is: 6.0
+To calculate the area, please choose a geometrical shape:
+1. Triange
+2. Square
+3. Circle
+0. Exit
+Your choice:<2>
+Please input the side of your square: <4>
+The area of your square is: 16.0
+```
 
 	
 ### 作业回顾

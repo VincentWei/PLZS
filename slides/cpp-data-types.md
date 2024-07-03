@@ -4,6 +4,7 @@
 1. 数组和指针
 1. 引用
 1. 字符串
+1. 类型别名
 1. 作业
 
 		
@@ -723,6 +724,39 @@ int main()
    - 名字 `Vincent` 使用 `cin` 读入。
    - 将字符串中的字符全部转换为小写。
 2) 保存为 `string.cpp` 并提交到自己的作业仓库。
+
+		
+## 类型别名
+
+- 在 C/C++ 代码中，可以为数据类型取个别名。
+- 类型别名主要用于方便代码的书写。
+
+	
+### 使用 `typedef`
+
+```cpp
+typedef char BYTE;
+typedef unsigned short WORD;
+typedef unsigned long long ULL;
+```
+
+	
+### 使用 `using`
+
+```cpp
+using BYTE = char;
+using WORD = unsigned int;
+using ULL = unsigned long long;
+```
+
+	
+### 使用预处理宏（不推荐）
+
+```cpp
+#define BYTE unsigned char
+#define WORD unsigned short
+#define ULL  unsigned long long
+```
 
 		
 ## 作业
