@@ -1,4 +1,4 @@
-TARGETS = function-calls
+TARGETS = function-calls pointer-array
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
