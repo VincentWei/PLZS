@@ -666,6 +666,9 @@ int main()
 - 在 C++ 中，`iterator` 以类模板的形式提供，在 `<iterator>` 中定义，可在其上执行 `+=`、`-=`、`++`、`--` 等操作，表示使迭代器向前或者向后几次。
 - 通过 STL 为容器类提供的 `begin()` 和 `end()` 等函数，可创建对应的迭代器对象。
 
+	
+- 迭代器示例
+
 ```cpp
 #include <iostream>
 #include <string>
