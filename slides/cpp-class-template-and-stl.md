@@ -1,6 +1,8 @@
 # C++ 类、模板和 STL
 
 1. C++ 类和对象
+1. 重载
+1. 构建类的层次结构
 1. C++ 模板
 1. C++ STL（标准模板库）
 
@@ -48,7 +50,7 @@ class Rectangle {
 （十分钟内完成）
 
 1) 基于上面的示例代码，实现 `Circle` 类。
-2) 保存为 `circle.cpp` 并提交到自己的作业仓库。
+2) 保存为 `circle.cpp`，调试通过后提交到自己的作业仓库。
 
 	
 ### 补充属性获取器和设置器
@@ -106,6 +108,73 @@ class Rectangle {
     cout << "Area: " << rc.area() << endl;
 ```
 
+		
+## 重载
+
+- 重载（overload）是面向对象编程中一个重要的方法。
+- 在 C++ 中，运算符、普通函数、类的虚拟（virtual）成员函数，均可以被重载。
+- 编译器根据运算符左右操作数（operand）的类型、普通函数的参数类型、真实的类名称确定真正调用的函数。
+
+	
+### 普通函数的重载
+
+```cpp
+#include <cmath>
+
+long int rounded_addition(long a, long b = 0)
+{
+    int r;
+    r = a + b;
+    return r;
+}
+
+long int rounded_addition(double a, double b = 0)
+{
+    return lround(a) + lround(b);
+}
+
+    auto rz = rounded_addition(5, 3);
+    cout << "The result is " << rz << endl;
+
+    auto rf = rounded_addition(5.4, 3.6);
+    cout << "The result is " << rf << endl;
+```
+
+	
+### 运算符重载
+
+- 不能自定义运算符。
+- 不是所有的运算符均可重载。
+- 运算符重载必须发生在某个操作数的类型是类或枚举类型时。
+- 某些运算符只能定义为类成员。
+- [参考链接：C++运算符的重载规则](https://www.cnblogs.com/summernight/p/8541079.html)
+
+```cpp
+#include <cmath>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+long int& operator<< (long int& l, string &str)
+{
+    l = lround(stod(str));
+    return l;
+}
+
+int main()
+{
+    long int a = (long int)5.6;
+    long int b;
+    string s("5.6");
+
+    b << s;
+
+    cout << a << endl;      // 5
+    cout << b << endl;      // 6
+}
+```
+
 	
 ### 重载 `<<` 运算符
 
@@ -155,8 +224,8 @@ istream &operator>> (istream &is, Rectangle &rc)
 1) 照猫画虎，继续完善自己的 `Circle` 类，实现默认构造器、属性获取器和设置器，以及两个运算符重载函数。
 2) 将增强版本提交到自己的作业仓库。
 
-	
-### 构建类的层次结构
+		
+## 构建类的层次结构
 
 - 将不同的公共接口归纳到基类中定义，并在子类中按需要重载。
 - C++ 中可被子类重载的成员函数称为“虚函数”。
@@ -199,7 +268,7 @@ istream &operator>> (istream &is, Basic2DShape &rc)
 ```
 
 	
-- 基于基类实现 `Rectangle` 类
+### 基于基类实现 `Rectangle` 类
 
 ```cpp
 class Rectangle: public Basic2DShape {
@@ -235,7 +304,7 @@ class Rectangle: public Basic2DShape {
 ```
 
 	
-- 基于基类实现 `Circle` 类
+### 基于基类实现 `Circle` 类
 
 ```cpp
 class Circle: public Basic2DShape {
@@ -316,7 +385,7 @@ T summary(T a, T b)
 
     auto x = summary<int>(10, 20);
     auto y = summary<double>(10.03, 20.01);
-    auto z = summary<long double>(10.00003l, 20.00009l);
+    auto z = summary<long double>(10.00003L, 20.00009L);
 ```
 
 	
@@ -361,42 +430,159 @@ T Pair<T>::min()
 
 （十五分钟内完成）
 
-1) 基于上面的示例代码，实现一个 `Triple` 模板类。
-2) 保存为 `template-triple.cpp` 并提交到自己的作业仓库。
+1) 基于上面的示例代码，实现一个 `Triple` 模板类，并增加一个 `average()` 方法。
+2) 保存为 `template-triple.cpp`，调试通过后提交到自己的作业仓库。
 
 		
 ## C++ STL（标准模板库）
 
 - C++ STL（standard template library，标准模板库）是 C++ 的标准库。
 - C++ STL 通过类模板和函数模板实现了大量的基础数据结构、算法和功能，如输入输出、字符串、容器、迭代器等。
+
+	
+### 输入输出模块类的层次结构
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/cpp-iostream.gif" />
+
+	
+### `cin`、`cout`、`cerr`、`clog` 对象
+
+- 标准输入输出对象在 C++ 程序启动时被自动创建。
 - 标准对象 `cout` 和 `cin` 分别是 `ostream` 和 `istream` 类的实例，而 `ostream` 和 `istream` 分别是 `basic_ostream` 和 `basic_istream` 类模板的实例。
-- `string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char`，也就是 8 位字符。
-- `u16string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char16_t`，也就是 16 位字符。
-- `u32string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char32_t`，也就是 32 位字符。
+- 标准对象 `cin` 对应 C 的标准输入流（`stdin`）；未被重定向的情况下，标准输入为键盘。
+- 标准对象 `cout` 对应 C 的标准输出流（`stdout`）；未被重定向的情况下，标准输出为终端（屏幕终端或者伪终端）。
+- 标准对象 `cerr` 对应 C 的标准错误输出流（`stderr`）；未被重定向的情况下，同标准输出，但不带缓冲区。
+- 标准对象 `clog` 是 C++ 定义的标准日志输出流，默认保持和 `cerr` 的同步。
 
 	
-- 基于函数模板以及 `string` 等类，STL 提供了 `stoi()`、`stoull()`、`stod()` 等函数，可将字符串对象分别转换为整数、无符号长整数或者双精度浮点数等。
-- `array` 类模板可用于定义任意数据类型和类的固定大小的序列容器。
-- `vector` 类模板可用于定义任意数据类型和类的可变大小的序列容器。
-- STL 为容器类提供了用于迭代器的模板函数：`begin()` 和 `end()`。
-- 基于迭代器，STL 以函数模板的形式提供了针对容器中元素的各种操作或功能，如 `transform()`、`sort()` 等。
+### `ostream` 类的接口
+
+1. 格式化输出：通过运算符 `<<` 提供。
+1. 无格式化输出：通过 `put()` 方法和 `write()` 方式提供。
+1. 定位：通过 `tellp()` 和 `seekp()` 方法提供。
+1. 同步（刷新缓冲）：通过 `flush()` 方法提供。
+1. 控制格式化输出的行为：通过基类 `ios_base` 的方法提供，如 `flags()`、`setf()`、`precision()`、`width()` 等。
+1. [参考链接：ostream](https://cplusplus.com/reference/ostream/ostream/)
+
+```cpp
+#include <iostream>     // std::cout, std::ios
+
+using namespace std;
+
+int main() {
+    cout.flags(ios::right | ios::hex | ios::showbase);
+    cout.width(10);
+    cout << 255 << '\n';
+}
+```
 
 	
-### `string` 类
+### `istream` 类的接口
 
+1. 格式化输入：通过运算符 `>>` 提供。
+1. 无格式化输入：通过 `get()`、`getline()`、`read()` 方式提供。
+1. 定位：通过 `tellg()` 和 `seekg()` 方法提供。
+1. 同步输入缓冲区：通过 `sync()` 方法提供。
+1. [参考链接：istream](https://cplusplus.com/reference/istream/istream/)
+
+```cpp
+#include <iostream>     // std::cin, std::cout
+
+using namespace std;
+
+int main()
+{
+    char first_name[256], last_name[256];
+
+    cout << "Please enter your first name: ";
+    cin.getline(first_name, 256);
+
+    cout << "Please enter your last name: ";
+    cin.getline(last_name, 256);
+
+    cout << "Hello, " << first_name << " " << last_name << endl;
+}
+```
+
+	
+### `ofstream` 和 `ifstream` 类
+
+- `ofstream` 类是 `ostream` 类的子类，用于向普通文件中写入数据。
+- `ifstream` 类是 `istream` 类的子类，用于从普通文件中读入数据。
+- 通过 `open()` 和 `close()` 方法打开和关闭文件。
+1. [参考链接：fstream](https://cplusplus.com/reference/fstream/)
+
+```cpp
+#include <iostream>     // std::cout
+#include <fstream>      // std::ofstream and std::ifstream
+
+using namespace std;
+
+int main()
+{
+    ofstream ofs;
+    ofs.open("test.txt", ofstream::out);
+    ofs << "The first line" << endl;
+    ofs << "The second line" << endl;
+    ofs.close();
+
+    ifstream ifs;
+    ifs.open("test.txt", ifstream::in);
+
+    while (true) {
+        char c = ifs.get();
+        if (c == EOF)
+            break;
+        cout << c;
+    }
+
+    ifs.close();
+}
+```
+
+	
+### `stringstream` 类
+
+- `stringstream` 类是 `iostream` 类的子类。
+- 通过 `stringstream` 类，可对字符串中的内容执行格式化输入和输出；也就是说，`stringstream` 类支持 `<<` 和 `>>` 运算符。
+- [参考链接：stringstream](https://cplusplus.com/reference/sstream/)
+
+```cpp
+#include <sstream>
+
+    string astr("1234 5678");
+    int a, b;
+    stringstream(astr) >> a >> b;       // a = 1234, b = 5678
+```
+
+	
+### `string`、`u16string`、`u32string` 类
+
+- `string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char`，也就是 8 位字符，主要用于处理 ASCII 字符串以及兼容 ASCII 的 UTF-8 等编码字符串。
+- `u16string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char16_t`，也就是 16 位字符，可处理常见语言的字符。
+- `u32string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char32_t`，也就是 32 位字符，可处理所有 Unicode 标准定义的字符。
+- 基于函数模板以及 `string` 等类，STL 提供了 `stoi()`、`stoull()`、`stod()` 等函数，可分别解析字符串对象并返回对应的整数、无符号长整数或者双精度浮点数等。
+- [参考链接：string](https://cplusplus.com/reference/string/)
 
 	
 ### `array` 模板类
 
+- `array` 类模板可用于定义任意数据类型和类的固定大小的序列容器。
 
 	
 ### `vector` 模板类
 
+- `vector` 类模板可用于定义任意数据类型和类的可变大小的序列容器。
+
 	
 ### 迭代器
 
+- STL 为容器类提供了用于迭代器的模板函数：`begin()` 和 `end()`。
+
 	
 ### 基于迭代器的常用算法函数模板
+
+- 基于迭代器，STL 以函数模板的形式提供了针对容器中元素的各种操作或功能，如 `transform()`、`sort()` 等。
 
 
 		
@@ -405,7 +591,55 @@ T Pair<T>::min()
 1) 使用层次化的类重构上一讲中的 `calc-areas.cpp` 程序。运行效果不变。
 
 	
-2) 
+2) 编程找到尽可能多的亲和数（提示：使用 `vector` 保存某个整数的真因子）。运行效果如下：
+
+```console
+$ ./amicable-pairs
+220 284
+1184 1210
+2620 2924
+5020 5564
+6232 6368
+10744 10856
+12285 14595
+17296 18416
+63020 76084
+66928 66992
+67095 71145
+69615 87633
+79750 88730
+100485 124155
+122265 139815
+122368 123152
+141664 153176
+142310 168730
+171856 176336
+180848 176272
+185368 203432
+196724 202444
+280540 365084
+308620 389924
+319550 430402
+356408 399592
+437456 455344
+469028 486178
+503056 514736
+522405 525915
+600392 669688
+609928 686072
+624184 691256
+635624 712216
+643336 652664
+667964 783556
+726104 796696
+802725 863835
+879712 901424
+898216 980984
+947835 1125765
+9980104 1043096
+9363544 9437056
+...
+```
 
 	
 ### 作业回顾

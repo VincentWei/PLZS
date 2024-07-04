@@ -1,4 +1,4 @@
-TARGETS = rectangle shapes template
+TARGETS = rectangle shapes template overload cout-flags cin-getline fstream
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
