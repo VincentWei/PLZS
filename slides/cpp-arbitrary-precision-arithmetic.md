@@ -298,6 +298,158 @@ void nap_factorial(string &r, const string &n)
 		
 ## 基于 `vector` 的实现
 
+- 用一个 `int8_t` 表示十进制的两位数字。
+- 使用 `vector<int8_t>` 从数值的低位开始存储，每个单元表示两位十进制数字。
+- 设计为 `BigInt` 类，以方便提供多种构造方法以及运算符重载等能力。
+
+		
+### 类的定义
+
+```cpp
+#include <vector>
+#include <string>
+#include <cstdint>
+
+using namespace std;
+
+class BigInt {
+    bool _sign;
+    vector<int8_t> _bytes;
+
+  public:
+    // 默认构造器
+    BigInt() {
+        _sign = false;
+        _bytes.push_back(0);
+    }
+
+    // 构造器
+    BigInt(intmax_t ll);
+    BigInt(const std::string& str);
+    BigInt(const BigInt &other);            // 复制构造器
+
+    // 属性获取器
+    bool sign() const { return _sign; }
+    const vector<int8_t>& bytes() const { return _bytes; }
+
+    // 重载运算符
+    BigInt& operator+ (const BigInt& other) const;
+    BigInt& operator- (const BigInt& other) const;
+    BigInt& operator- () const;             // -bi
+
+    BigInt& operator++ ();                  // ++bi
+    BigInt& operator++ (int);               // bi++
+
+    BigInt& operator-- ();                  // --bi
+    BigInt& operator-- (int);               // bi--
+
+    BigInt& operator* (const BigInt& other) const;
+    BigInt& operator*= (const BigInt& other);
+
+    BigInt& operator/ (const BigInt& other) const;
+    BigInt& operator/= (const BigInt& other);
+
+    BigInt& operator= (const BigInt& other) const;
+    BigInt& operator+= (const BigInt& other);
+    BigInt& operator-= (const BigInt& other);
+
+    bool operator== (const BigInt& other) const;
+    bool operator!= (const BigInt& other) const;
+    bool operator> (const BigInt& other) const;
+    bool operator>= (const BigInt& other) const;
+    bool operator< (const BigInt& other) const;
+    bool operator<= (const BigInt& other) const;
+};
+```
+
+		
+### 构造器
+
+```cpp
+BigInt::BigInt(intmax_t ll) {
+    if (ll < 0) {
+        _sign = true;
+        ll = -ll;
+    }
+    else
+        _sign = false;
+
+    for (size_t i = 0; i < sizeof(intmax_t); i++) {
+        if (ll == 0)
+            break;
+
+        int8_t r = ll % 100;
+        _bytes.push_back(r);
+        ll /= 100;
+    }
+}
+
+BigInt::BigInt(const string& str) {
+    size_t len = str.length();
+    if (len == 0) {
+        _sign = false;
+        _bytes.push_back(0);
+        return;
+    }
+
+    if (str[0] == '-')
+        _sign = true;
+    else
+        _sign = false;
+
+    size_t left = _sign ? len - 1 : len;
+    while (left > 0) {
+        string digits;
+        size_t pos = len - left;
+        if (left > 1) {
+            digits = str.substr(pos, 2);
+            left -= 2;
+        }
+        else {
+            digits = str.substr(pos, 1);
+            left -= 1;
+        }
+
+        int r = stoi(digits);
+        _bytes.push_back(r);
+    }
+}
+
+BigInt::BigInt(const BigInt &other)
+{
+    _sign = other.sign();
+    _bytes = other.bytes();
+}
+```
+
+	
+### 重载 `<<` 运算符
+
+```cpp
+ostream& operator<< (ostream& os, const BigInt& bi) {
+    if (bi.sign()) {
+        os << "-";
+    }
+
+    auto bytes = bi.bytes();
+    for (auto it = end(bytes); ; --it) {
+        if (it == end(bytes))
+            continue;
+
+        os << (int)*it;
+        if (it == begin(bytes))
+            break;
+    }
+
+    return os;
+}
+```
+
+	
+### 重载 `+` 运算符
+
+```cpp
+```
 
 		
 ## 作业
