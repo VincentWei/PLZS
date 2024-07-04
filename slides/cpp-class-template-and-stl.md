@@ -457,12 +457,12 @@ T Pair<T>::min()
 	
 ### `ostream` 类的接口
 
-1. 格式化输出：通过运算符 `<<` 提供。
-1. 无格式化输出：通过 `put()` 方法和 `write()` 方式提供。
-1. 定位：通过 `tellp()` 和 `seekp()` 方法提供。
-1. 同步（刷新缓冲）：通过 `flush()` 方法提供。
-1. 控制格式化输出的行为：通过基类 `ios_base` 的方法提供，如 `flags()`、`setf()`、`precision()`、`width()` 等。
-1. [参考链接：ostream](https://cplusplus.com/reference/ostream/ostream/)
+- 格式化输出：通过运算符 `<<` 提供。
+- 无格式化输出：通过 `put()` 方法和 `write()` 方式提供。
+- 定位：通过 `tellp()` 和 `seekp()` 方法提供。
+- 同步（刷新缓冲）：通过 `flush()` 方法提供。
+- 控制格式化输出的行为：通过基类 `ios_base` 的方法提供，如 `flags()`、`setf()`、`precision()`、`width()` 等。
+- [参考链接：ostream](https://cplusplus.com/reference/ostream/ostream/)
 
 ```cpp
 #include <iostream>     // std::cout, std::ios
@@ -479,11 +479,11 @@ int main() {
 	
 ### `istream` 类的接口
 
-1. 格式化输入：通过运算符 `>>` 提供。
-1. 无格式化输入：通过 `get()`、`getline()`、`read()` 方式提供。
-1. 定位：通过 `tellg()` 和 `seekg()` 方法提供。
-1. 同步输入缓冲区：通过 `sync()` 方法提供。
-1. [参考链接：istream](https://cplusplus.com/reference/istream/istream/)
+- 格式化输入：通过运算符 `>>` 提供。
+- 无格式化输入：通过 `get()`、`getline()`、`read()` 方式提供。
+- 定位：通过 `tellg()` 和 `seekg()` 方法提供。
+- 同步输入缓冲区：通过 `sync()` 方法提供。
+- [参考链接：istream](https://cplusplus.com/reference/istream/istream/)
 
 ```cpp
 #include <iostream>     // std::cin, std::cout
@@ -510,7 +510,7 @@ int main()
 - `ofstream` 类是 `ostream` 类的子类，用于向普通文件中写入数据。
 - `ifstream` 类是 `istream` 类的子类，用于从普通文件中读入数据。
 - 通过 `open()` 和 `close()` 方法打开和关闭文件。
-1. [参考链接：fstream](https://cplusplus.com/reference/fstream/)
+- [参考链接：fstream](https://cplusplus.com/reference/fstream/)
 
 ```cpp
 #include <iostream>     // std::cout
