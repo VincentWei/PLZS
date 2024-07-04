@@ -770,7 +770,7 @@ int main()
 1) 使用层次化的类重构上一讲中的 `calc-areas.cpp` 程序。运行效果不变。
 
 	
-2) 给定任意整数 `n`，列出用于计算 `D(n)` 和 `O(n)` 的所有可能形式，要求使用 `vector`。运行效果如下：
+2) 给定任意整数 `n`，列出用于计算 `D(n)` 和 `O(n)` 的所有可能形式（提示：使用 `vector` 保存分解后的整数）。运行效果如下：
 
 ```console
 $ ./dn-on
@@ -838,13 +838,8 @@ $ ./amicable-pairs
 
 ```console
 $ ./primes
-<3>
-True
-<1979>
-True
-<12>
-False
-<quit>
+<12 3 1979 2 5 99>
+F T T T T F
 ```
 
 	
