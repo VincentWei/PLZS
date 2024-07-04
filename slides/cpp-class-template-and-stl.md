@@ -561,29 +561,205 @@ int main()
 - `string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char`，也就是 8 位字符，主要用于处理 ASCII 字符串以及兼容 ASCII 的 UTF-8 等编码字符串。
 - `u16string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char16_t`，也就是 16 位字符，可处理常见语言的字符。
 - `u32string` 类是 `basic_string` 类模板的一个实例，其中的字符类型为 `char32_t`，也就是 32 位字符，可处理所有 Unicode 标准定义的字符。
-- 基于函数模板以及 `string` 等类，STL 提供了 `stoi()`、`stoull()`、`stod()` 等函数，可分别解析字符串对象并返回对应的整数、无符号长整数或者双精度浮点数等。
 - [参考链接：string](https://cplusplus.com/reference/string/)
 
 	
-### `array` 模板类
+- 基于函数模板以及 `string` 等类，STL 提供了 `stoi()`、`stoull()`、`stod()` 等函数，可分别解析字符串对象并返回对应的整数、无符号长整数或者双精度浮点数等。
 
-- `array` 类模板可用于定义任意数据类型和类的固定大小的序列容器。
+```cpp
+#include <iostream>   // std::cout
+#include <string>     // std::string, std::stoull
+
+using namespace std;
+
+int main()
+{
+    string str = "8246821 0xffff 020 -1";
+    string::size_type sz = 0;   // alias of size_t
+
+    while (!str.empty()) {
+        unsigned long long ull = stoull(str, &sz, 0);
+        cout << str.substr(0,sz) << " interpreted as " << ull << '\n';
+        str = str.substr(sz);
+    }
+}
+```
 
 	
-### `vector` 模板类
+### 课堂练习
+
+（五分钟内完成）
+
+1) 复制上面的示例代码，修改代码使 `cout` 以十六进制形式输出整数。
+2) 保存为 `strtoull.cpp`，调试通过后提交到自己的作业仓库。
+
+	
+- STL 提供针对基础数据类型的 `to_string()` 函数，可基于整数、浮点数等构造 `string` 对象。
+
+```cpp
+string to_string(int val);
+string to_string(long val);
+string to_string(long long val);
+string to_string(unsigned val);
+string to_string(unsigned long val);
+string to_string(unsigned long long val);
+string to_string(float val);
+string to_string(double val);
+string to_string(long double val);
+```
+
+	
+### `array` 类模板
+
+- `array` 类模板可用于定义任意数据类型和类的固定大小的序列容器。
+- 相比数组，使用 `array` 类可通过迭代器获得更加灵活的数据处理手段。
+- [参考链接：array](https://cplusplus.com/reference/array/)
+
+```cpp
+#include <iostream>
+#include <array>
+
+using namespace std;
+
+int main()
+{
+    array<int, 6> primes { 2, 3, 5, 7, 11, 13 };
+
+    for (size_t i = 0; i < primes.size(); i++) {
+        cout << primes[i] << endl;
+    }
+}
+```
+
+	
+### `vector` 类模板
 
 - `vector` 类模板可用于定义任意数据类型和类的可变大小的序列容器。
+- `array` 对象的大小（单元个数）不可变，但 `vector` 类对象的大小可变。
+- [参考链接：vector](https://cplusplus.com/reference/vector/)
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    vector<int> primes { 2, 3, 5, 7 };
+
+    primes.push_back(11);
+    primes.push_back(13);
+    primes.push_back(17);
+    primes.push_back(19);
+
+    for (size_t i = 0; i < primes.size(); i++) {
+        cout << primes[i] << endl;
+    }
+}
+```
 
 	
 ### 迭代器
 
-- STL 为容器类提供了用于迭代器的模板函数：`begin()` 和 `end()`。
+- 迭代器（iterator）常见于面向对象编程语言，它提供了以某种方向遍历容器或数组中特定范围内元素的抽象方法。
+- 在 C++ 中，`iterator` 以类模板的形式提供，在 `<iterator>` 中定义，可在其上执行 `+=`、`-=`、`++`、`--` 等操作，表示使迭代器向前或者向后几次。
+- 通过 STL 为容器类提供的 `begin()` 和 `end()` 等函数，可创建对应的迭代器对象。
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <array>
+
+using namespace std;
+
+int main()
+{
+    array<int, 4> primes_10 { 2, 3, 5, 7 };
+
+    for (auto it = begin(primes_10); it != end(primes_10); ++it) {
+        cout << *it << endl;
+    }
+
+    vector<int> primes { 2, 3, 5, 7, 11 };
+
+    primes.push_back(13);
+    primes.push_back(17);
+    primes.push_back(19);
+
+    for (auto it = begin(primes); it != end(primes); ++it) {
+        cout << *it << endl;
+    }
+
+    string hexchars("0123456789ABCDEF");
+    for (auto it = begin(hexchars); it != end(hexchars); ++it) {
+        cout << *it << endl;
+    }
+}
+```
 
 	
 ### 基于迭代器的常用算法函数模板
 
 - 基于迭代器，STL 以函数模板的形式提供了针对容器中元素的各种操作或功能，如 `transform()`、`sort()` 等。
 
+	
+- `transform()` 示例
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+char my_tolower(char c)
+{
+    return tolower(c);
+}
+
+int main()
+{
+    string hexchars("0123456789ABCDEF");
+
+    transform(hexchars.begin(), hexchars.end(), hexchars.begin(), my_tolower);
+
+    cout << hexchars << endl;
+}
+```
+
+	
+- `sort()` 示例
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>    // std::shuffle and std::sort
+#include <random>       // std::default_random_engine
+#include <chrono>       // std::chrono::system_clock
+
+using namespace std;
+
+bool islessthan(char c1, char c2)
+{
+    return c1 < c2;
+}
+
+int main()
+{
+    string hexchars("0123456789ABCDEF");
+
+    // obtain a time-based seed:
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    shuffle(hexchars.begin(), hexchars.end(), default_random_engine(seed));
+    cout << hexchars << endl;
+
+    sort(hexchars.begin(), hexchars.end(), islessthan);
+
+    cout << hexchars << endl;
+}
+```
 
 		
 ## 作业

@@ -1,4 +1,4 @@
-TARGETS = rectangle shapes template overload cout-flags cin-getline fstream
+TARGETS = rectangle shapes template overload cout-flags cin-getline fstream strtoull array vector iterator transform sort
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
