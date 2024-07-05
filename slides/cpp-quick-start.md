@@ -380,32 +380,31 @@ int main()
 
 ```cpp
 using namespace std;
-...
 
-int x = 230;
+    int x = 230;
 
-cout << "Hello, world!";    // prints `Hello, world!` on screen
-cout << 120;                // prints number 120 on screen
-cout << x;                  // prints the value of x on screen 
+    cout << "Hello, world!";    // prints `Hello, world!` on screen
+    cout << 120;                // prints number 120 on screen
+    cout << x;                  // prints the value of x on screen 
 
-cout << "First sentence." << endl;
-cout << "Second sentence." << endl;
+    cout << "First sentence." << endl;
+    cout << "Second sentence." << endl;
 
-cout << "First sentence.\n" << "Second sentence.\n";
+    cout << "First sentence.\n" << "Second sentence.\n";
 ```
 
 	
-- `cin`：标准输入，默认为键盘。
+- `std::cin`：标准输入，默认为键盘。
 
 ```cpp
-int age;
-cin >> age;
+    int age;
+    cin >> age;
 
-double a, b;
-cin >> a >> b;
+    double a, b;
+    cin >> a >> b;
 
-string mystring;
-cin >> mystring;
+    string mystring;
+    cin >> mystring;
 ```
 
 		
@@ -525,7 +524,6 @@ area_of_triangle(3, 4, 5): 6.000000
 ```cpp
 #define PI 3.14159265
 
-...
     area = PI * r * r;
 ```
 
@@ -534,7 +532,6 @@ area_of_triangle(3, 4, 5): 6.000000
 ```cpp
 const double pi = 3.14159265;
 
-...
     area = pi * r * r;
 ```
 
