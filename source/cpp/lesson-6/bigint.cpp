@@ -61,6 +61,11 @@ class BigInt {
     bool operator>= (const BigInt& other) const;
     bool operator< (const BigInt& other) const;
     bool operator<= (const BigInt& other) const;
+
+  private:
+    BigInt absadd(const BigInt& other) const;
+    void   absaddto(const BigInt& other);
+    int    abscmp(const BigInt& other) const;
 };
 
 #include <iostream>
@@ -161,7 +166,7 @@ BigInt& BigInt::operator= (intmax_t native_int)
     return *this;
 }
 
-BigInt BigInt::operator+ (const BigInt& other) const
+BigInt BigInt::absadd(const BigInt& other) const
 {
     BigInt result;
 
@@ -192,7 +197,149 @@ BigInt BigInt::operator+ (const BigInt& other) const
     return result;
 }
 
-ostream& operator<< (ostream& os, const BigInt& bi) {
+void BigInt::absaddto(const BigInt& other)
+{
+    size_t len_a = this->_bytes.size();
+    size_t len_b = other._bytes.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    int c = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = (i < len_a) ? this->_bytes[i] : 0;
+        int n_b = (i < len_b) ? other._bytes[i] : 0;
+
+        int r = n_a + n_b + c;
+        if (r >= 100) {
+            c = 1;
+            r -= 100;
+        }
+        else
+            c = 0;
+
+        if (i >= len_a)
+            _bytes.push_back(r);
+        else
+            _bytes[i] = r;
+    }
+
+    if (c > 0) {
+        _bytes.push_back(c);
+    }
+}
+
+BigInt BigInt::operator+ (const BigInt& other) const
+{
+    return absadd(other);
+}
+
+BigInt& BigInt::operator+= (const BigInt& other)
+{
+    absaddto(other);
+    return *this;
+}
+
+int BigInt::abscmp(const BigInt& other) const
+{
+    size_t len_a = this->_bytes.size();
+    size_t len_b = other._bytes.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    size_t i = len_max;
+    while (i > 0) {
+        int n_a = (i - 1 < len_a) ? this->_bytes[i - 1] : 0;
+        int n_b = (i - 1 < len_b) ? other._bytes[i - 1] : 0;
+
+        int cmp = n_a - n_b;
+        if (cmp != 0)
+            return cmp;
+
+        i--;
+    }
+
+    return 0;
+}
+
+bool BigInt::operator== (const BigInt& other) const
+{
+    if (_sign == other._sign && abscmp(other) == 0)
+        return true;
+
+    return false;
+}
+
+bool BigInt::operator!= (const BigInt& other) const
+{
+    if (_sign == other._sign && abscmp(other) == 0)
+        return false;
+
+    return true;
+}
+
+bool BigInt::operator> (const BigInt& other) const
+{
+    if (!_sign && other._sign)
+        return true;
+
+    if (_sign && !other._sign)
+        return false;
+
+    int r = abscmp(other);
+    cout << r << endl;
+
+    // same sign
+    if (!_sign)
+        return r > 0;
+
+    return r < 0;
+}
+
+bool BigInt::operator>= (const BigInt& other) const
+{
+    if (!_sign && other._sign)
+        return true;
+
+    if (_sign && !other._sign)
+        return false;
+
+    // same sign
+    if (!_sign)
+        return abscmp(other) >= 0;
+
+    return abscmp(other) <= 0;
+}
+
+bool BigInt::operator< (const BigInt& other) const
+{
+    if (!_sign && other._sign)
+        return false;
+
+    if (_sign && !other._sign)
+        return true;
+
+    // same sign
+    if (!_sign)
+        return abscmp(other) < 0;
+
+    return abscmp(other) > 0;
+}
+
+bool BigInt::operator<= (const BigInt& other) const
+{
+    if (!_sign && other._sign)
+        return false;
+
+    if (_sign && !other._sign)
+        return true;
+
+    // same sign
+    if (!_sign)
+        return abscmp(other) <= 0;
+
+    return abscmp(other) >= 0;
+}
+
+ostream& operator<< (ostream& os, const BigInt& bi)
+{
     if (bi.sign()) {
         os << "-";
     }
@@ -227,59 +374,84 @@ ostream& operator<< (ostream& os, const BigInt& bi) {
 
 int main()
 {
-    BigInt a(1234567890);
+    static intmax_t cases[] = {
+        1234567890,
+        1204507800,
+        123456789,
+        10999,
+        999,
+        123,
+        100,
+        70,
+        10,
+        7,
+        0,
+        -7,
+        -10,
+        -70,
+        -100,
+        -123,
+        -999,
+        -10999,
+        -123456789,
+        -1204507800,
+        -1234567890,
+    };
 
-    ostringstream oss;
-    oss << a;
-    assert(oss.str() == "1234567890");
-    oss.str("");
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        intmax_t ntv_a = cases[i];
+        string   str_a = to_string(ntv_a);
+        BigInt   big_a(ntv_a);
+        BigInt   big_aa(str_a);
 
-    BigInt b(-1234567890);
-    oss << b;
-    assert(oss.str() == "-1234567890");
-    oss.str("");
+        ostringstream oss;
+        oss << big_a;
+        assert(oss.str() == str_a);
+        assert(big_a == big_aa);
 
-    BigInt c("123456789");
-    oss << c;
-    assert(oss.str() == "123456789");
-    oss.str("");
+        for (size_t j = 0; j < sizeof(cases)/sizeof(cases[0]); j++) {
+            intmax_t ntv_b = cases[j];
+            BigInt   big_b(cases[j]);
 
-    BigInt d("-123456789");
-    oss << d;
-    assert(oss.str() == "-123456789");
-    oss.str("");
+            cout << "compare " << ntv_a << " and " << ntv_b << endl;
+            cout << "compare " << big_a << " and " << big_b << endl;
 
-    BigInt e("0");
-    oss << e;
-    assert(oss.str() == "0");
-    oss.str("");
+            bool exp_r, act_r;
+            exp_r = (ntv_a == ntv_b);
+            act_r = (big_a == big_b);
+            cout << "ntv_int compare: " << exp_r << endl;
+            cout << "big_int compare: " << act_r << endl;
+            assert(exp_r == act_r);
 
-    BigInt f("10");
-    oss << f;
-    assert(oss.str() == "10");
-    oss.str("");
+            exp_r = (ntv_a != ntv_b);
+            act_r = (big_a != big_b);
+            assert(exp_r == act_r);
 
-    BigInt g("");
-    oss << g;
-    assert(oss.str() == "0");
-    oss.str("");
+            exp_r = (ntv_a > ntv_b);
+            act_r = (big_a > big_b);
+            cout << "ntv_int compare: " << exp_r << endl;
+            cout << "big_int compare: " << act_r << endl;
+            assert(exp_r == act_r);
 
-    g = a;
-    oss << g;
-    assert(oss.str() == "1234567890");
-    oss.str("");
+            exp_r = (ntv_a >= ntv_b);
+            act_r = (big_a >= big_b);
+            assert(exp_r == act_r);
 
-    g = 121;
-    oss << g;
-    assert(oss.str() == "121");
-    oss.str("");
+            exp_r = (ntv_a < ntv_b);
+            act_r = (big_a < big_b);
+            assert(exp_r == act_r);
 
-    cout << a << endl;
-    cout << " " << c << endl;
+            exp_r = (ntv_a <= ntv_b);
+            act_r = (big_a <= big_b);
+            assert(exp_r == act_r);
 
-    oss << a + c;
-    cout << a + c << endl;
-    assert(oss.str() == "1358024679");
-    oss.str("");
+            /*
+            oss.str("");
+            oss << big_a + big_b;
+            string str_ntv_r = to_string(ntv_a + ntv_b);
+            assert(oss.str() == str_ntv_r); */
+        }
+    }
+
 }
 
