@@ -88,20 +88,20 @@
 ### 判断逻辑表达式的真假
 
 ```cpp
-int a = 2, b = 3, c = 6;
+    int a = 2, b = 3, c = 6;
 
-(a == 5)
-(a*b >= c)
-(b+4 > a*c)
-((b=2) == a)
+    (a == 5)
+    (a*b >= c)
+    (b+4 > a*c)
+    ((b=2) == a)
 
-!(c == 6)
-!(a <= 4)
-!true
-!false
+    !(c == 6)
+    !(a <= 4)
+    !true
+    !false
 
-((a == 2) && (c > b))
-((a == 3) || (b > c))
+    ((a == 2) && (c > b))
+    ((a == 3) || (b > c))
 ```
 
 		
@@ -493,7 +493,7 @@ No solution
 		
 ## 作业回顾
 
-### 使用 `Makefile` 方便构建 C++ 程序的构建
+### 使用 `Makefile` 方便 C++ 程序的构建
 
 ```makefile
 TARGETS = can-make-a-triangle power-recursively
