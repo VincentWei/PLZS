@@ -52,7 +52,7 @@
 ### 复合函数的导数
 
 - 若 `𝑦 = 𝑓(𝑢)，𝑢 = 𝜑(𝑥)`，则
-- <code>𝑦'<sub>𝑥</sub> = 𝑦'<sub>𝑢</sub> ∙ 𝑢'<sub>𝑥</sub></code>
+- <code>𝑦<sub>𝑥</sub>' = 𝑦<sub>𝑢</sub>' ∙ 𝑢<sub>𝑥</sub>'</code>
 
 		
 ## 极值的确定
