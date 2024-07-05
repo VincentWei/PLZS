@@ -1,4 +1,4 @@
-TARGETS = arithmetic-operators hello-world ull-mode function numeric-types variables
+TARGETS = arithmetic-operators hello-world ull-mode function numeric-types variables errors
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
