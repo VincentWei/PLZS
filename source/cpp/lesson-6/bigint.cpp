@@ -19,7 +19,6 @@ class BigInt {
   public:
     BigInt() {
         _sign = false;
-        _bytes.push_back(0);
     }
 
     BigInt(intmax_t native_int);
@@ -31,9 +30,10 @@ class BigInt {
     const std::vector<int8_t>& bytes() const { return _bytes; }
 
     BigInt& operator= (const BigInt& other);
+    // BigInt& operator= (const BigInt&& other);
     BigInt& operator= (intmax_t native_int);
 
-    BigInt& operator+ (const BigInt& other) const;
+    BigInt operator+ (const BigInt& other) const;
     BigInt& operator+= (const BigInt& other);
 
     BigInt& operator- (const BigInt& other) const;
@@ -91,7 +91,7 @@ BigInt::BigInt(const string& str)
     size_t len = str.length();
     if (len == 0) {
         _sign = false;
-        _bytes.push_back(0);
+        _bytes.clear();
         return;
     }
 
@@ -100,17 +100,22 @@ BigInt::BigInt(const string& str)
     else
         _sign = false;
 
-    size_t left = _sign ? len - 1 : len;
+    size_t left = len;
+    size_t two_digits = _sign ? 2 : 1;
+    size_t one_digit = _sign ? 1 : 0;
     while (left > 0) {
         string digits;
-        size_t pos = len - left;
-        if (left > 1) {
-            digits = str.substr(pos, 2);
+        if (left > two_digits) {
+            digits = str.substr(left - 2, 2);
             left -= 2;
         }
-        else {
-            digits = str.substr(pos, 1);
+        else if (left > one_digit) {
+            digits = str.substr(left - 1, 1);
             left -= 1;
+        }
+
+        if (digits.empty()) {
+            break;
         }
 
         int r = stoi(digits);
@@ -138,6 +143,16 @@ BigInt& BigInt::operator= (const BigInt& other)
     return *this;
 }
 
+#if 0
+BigInt& BigInt::operator= (const BigInt&& other)
+{
+    _sign = other._sign;
+    // _bytes = other._bytes;
+    _bytes = std::move(tmp._bytes);
+    return *this;
+}
+#endif
+
 BigInt& BigInt::operator= (intmax_t native_int)
 {
     BigInt tmp(native_int);
@@ -146,53 +161,125 @@ BigInt& BigInt::operator= (intmax_t native_int)
     return *this;
 }
 
+BigInt BigInt::operator+ (const BigInt& other) const
+{
+    BigInt result;
+
+    size_t len_a = this->_bytes.size();
+    size_t len_b = other._bytes.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    int c = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = (i < len_a) ? this->_bytes[i] : 0;
+        int n_b = (i < len_b) ? other._bytes[i] : 0;
+
+        int r = n_a + n_b + c;
+        if (r >= 100) {
+            c = 1;
+            r -= 100;
+        }
+        else
+            c = 0;
+
+        result._bytes.push_back(r);
+    }
+
+    if (c > 0) {
+        result._bytes.push_back(c);
+    }
+
+    return result;
+}
+
 ostream& operator<< (ostream& os, const BigInt& bi) {
     if (bi.sign()) {
         os << "-";
     }
 
     auto bytes = bi.bytes();
-    for (auto it = end(bytes); ; --it) {
-        if (it == end(bytes))
-            continue;
+    size_t len = bytes.size();
+    if (len == 0) {
+        os << "0";
+    }
+    else {
+        for (size_t i = len - 1; ; i--) {
+            int r = (int)bytes[i];
+            if (i == len - 1) {
+                os << r;
+            }
+            else {
+                if (r < 10)
+                    os << "0";
+                os << r;
+            }
 
-        os << (int)*it;
-        if (it == begin(bytes))
-            break;
+            if (i == 0)
+                break;
+        }
     }
 
     return os;
 }
 
 #include <cassert>
+#include <sstream>
 
 int main()
 {
     BigInt a(1234567890);
-    cout << a << endl;
+
+    ostringstream oss;
+    oss << a;
+    assert(oss.str() == "1234567890");
+    oss.str("");
 
     BigInt b(-1234567890);
-    cout << b << endl;
+    oss << b;
+    assert(oss.str() == "-1234567890");
+    oss.str("");
 
     BigInt c("123456789");
-    cout << c << endl;
+    oss << c;
+    assert(oss.str() == "123456789");
+    oss.str("");
 
     BigInt d("-123456789");
-    cout << d << endl;
+    oss << d;
+    assert(oss.str() == "-123456789");
+    oss.str("");
 
     BigInt e("0");
-    cout << e << endl;
+    oss << e;
+    assert(oss.str() == "0");
+    oss.str("");
 
     BigInt f("10");
-    cout << f << endl;
+    oss << f;
+    assert(oss.str() == "10");
+    oss.str("");
 
     BigInt g("");
-    cout << g << endl;
+    oss << g;
+    assert(oss.str() == "0");
+    oss.str("");
 
     g = a;
-    cout << g << endl;
+    oss << g;
+    assert(oss.str() == "1234567890");
+    oss.str("");
 
     g = 121;
-    cout << g << endl;
+    oss << g;
+    assert(oss.str() == "121");
+    oss.str("");
+
+    cout << a << endl;
+    cout << " " << c << endl;
+
+    oss << a + c;
+    cout << a + c << endl;
+    assert(oss.str() == "1358024679");
+    oss.str("");
 }
 
