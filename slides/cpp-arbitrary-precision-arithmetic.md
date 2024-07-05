@@ -543,14 +543,6 @@ BigInt& BigInt::operator= (intmax_t native_int)
     _bytes = std::move(tmp._bytes);
     return *this;
 }
-
-BigInt& BigInt::operator= (uintmax_t native_uint)
-{
-    BigInt tmp(native_uint);
-    _sign = tmp._sign;
-    _bytes = std::move(tmp._bytes);
-    return *this;
-}
 ```
 
 		
@@ -564,6 +556,7 @@ $ ./summary-of-factorials-nap
 94269001683709979260859834124473539872070722613982672442938359305624678223479506023400294093599136466986609124347432647622826870038220556442336528920420940314
 ```
 
+	
 2) 给定两个任意长度的两个自然数，计算相除的结果（整数商及余数）。运行效果如下：
 
 ```console
@@ -578,6 +571,7 @@ $ ./nap-divide
 Bad
 ```
 
+	
 3) 给定任意小数（正值），给出其最简分数表达。运行效果如下：
 
 ```console
@@ -590,6 +584,7 @@ $ ./rational-number-to-fraction
 1123/23
 ```
 
+	
 4) 尝试实现 `BigInt` 类的 `+`、`+=`、`++`、`*` 和 `*=` 运算符，并使用 `BigInt` 实现阶乘之和。运行效果如下：
 
 ```console
