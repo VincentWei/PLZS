@@ -4,7 +4,6 @@
 1. 最简单的 C++ 程序
 1. C++ 编译器和 C++ 程序的构建
 1. 变量、数值和算术运算表达式
-1. 二进制位运算
 1. 函数、形参和实参
 1. 基本输入输出
 1. C++ 标准库和常用接口
@@ -77,6 +76,12 @@ int main ()
 }
 ```
 
+	
+### C++ 代码写法要点
+
+1. 关键词、变量名、函数名等区分大小写（大小写敏感）。
+1. 通过分号（`;`）、大中小括号（`{}`、`[]`、`()`）等定义语义；对空格、缩进等无特别要求。
+
 		
 ## C++ 和 C 的关系
 
@@ -96,6 +101,7 @@ int main ()
    1. Clang（Apple 主持的 C/C++/Objective C 编译器，基于 LLVM）
 - LLVM（Low Level Virtual Machine）是一个使用 C++ 开发的编译器和工具链（toolchain）基础函数库，主要用于现代编程语言的编译器开发。
 
+	
 ```console
 # 安装 g++ 和 Clang
 $ sudo apt install gcc g++ clang
@@ -137,11 +143,10 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 - C++ 是一种强类型编程语言，所有的变量、函数参数及函数返回值均需要事先声明（declare）其类型。
 - C++ 中常用于表示数值的基本数据类型：
    1. 字符（`char`）、无符号字符（`unsigned char`）
-   1. 短整数（`short`）、无符号短整数（`unsigned short`）
    1. 整数（`int`）、无符号整数（`unsigned int`）
    1. 长整数（`long`）、无符号长整数（`unsigned long`）
-   1. 长长整数（`long long`）、无符号长长整数（`unsigned long long`）
-   1. 浮点数（`float`）
+   1. 长长整数（`long long`）、无符号长长整数（`unsigned long`）
+   1. 单精度浮点数（`float`）
    1. 双精度浮点数（`double`）
    1. 长双精度浮点数（`long double`）
 
@@ -154,6 +159,7 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
 ### 变量的声明及初始化
 
 1. 声明变量类型并给变量一个名称（标识符）。
+1. 变量名称必须以字母或下划线打头，后跟字母、下划线或数字；变量的名称不能使用 C++ 保留字（关键词），
 1. 使用赋值语句初始化变量；或者，
 1. 使用 `std::cin` 的 `>>` 运算符从用户输入中转换。
 
@@ -327,7 +333,7 @@ int main ()
 		
 ## 函数、形参及实参
 
-- 函数返回值、参数等均应定义明确的数据类型。
+- 函数返回值、参数等均应定义明确的数据类型；函数无返回值时使用 `void` 类型。
 - 可定义形参的默认值。
 - 函数的签名由函数返回值类型、函数名称、各参数的类型构成；故而可定义同名但参数类型不同的函数，编译器将根据调用时的参数类型确定具体调用哪个函数。
 - 在使用函数前，应首先通过包含头文件或者给出函数签名来声明函数的原型。
@@ -487,7 +493,7 @@ square_area(r)
 		
 ## 作业
 
-1) 复制本节课程中的示例代码并编辑为完整 C++ 程序（一段示例代码对应一个程序）。要求使用 Vim 编译源文件，使用命令行编译。
+1) 复制本节课程中的示例代码并编辑为完整的 C++ 程序（一段示例代码对应一个程序）。要求使用 Vim 编译源文件，使用命令行编译。
 
 2) 编写一个 C++ 程序，该程序可计算给定无符号长长整数对质数 `2^31 - 1` 的模。要求使用 Vim 编辑源文件，使用命令行编译。运行效果如下所示：
 
@@ -497,22 +503,23 @@ square_area(r)
 3
 ```
 
+	
 3) 编写一个 C++ 程序，该程序可计算正方形、圆和三角形（使用海伦公式）的面积。程序提示用户输入需要的参数，调用相应的函数计算并打印对应的结果。要求使用 Vim 编辑源文件，使用命令行编译。运行效果如下所示：
 
 ```console
 $ ./areas
 To calculate the area of a square, please input the length of one side: <11>
-area_of_square(11): 121.000000
+area_of_square(11): 121
 To calculate the area of a circle, please input the length of the radio: <10>
-area_of_circle(10): 31.415926.
+area_of_circle(10): 31.415926
 To calculate the area of a triangle, please input the lengthes of three sides (separated with space): <3> <4> <5>
-area_of_triangle(3, 4, 5): 6.000000
+area_of_triangle(3, 4, 5): 6
 ```
 
 	
 ### 参考链接
 
-1. [海伦公式](https://www.cnblogs.com/jiahuafu/p/4596962.html)
+1. [根据三条边计算三角形面积的海伦公式](https://www.cnblogs.com/jiahuafu/p/4596962.html)
 1. [大质数表](https://www.cnblogs.com/ljxtt/p/13514346.html)
 1. [C++标准库参考](https://cplusplus.com/reference/)
 
