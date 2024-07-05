@@ -12,11 +12,9 @@
 #include <string>
 #include <cstdint>
 
-using namespace std;
-
 class BigInt {
     bool _sign;
-    vector<int8_t> _bytes;
+    std::vector<int8_t> _bytes;
 
   public:
     BigInt() {
@@ -24,15 +22,22 @@ class BigInt {
         _bytes.push_back(0);
     }
 
-    BigInt(intmax_t ll);
+    BigInt(intmax_t native_int);
     BigInt(const std::string& str);
     BigInt(const BigInt &other);            // copy constructor
+    BigInt(const BigInt &&other);           // move constructor
 
     bool sign() const { return _sign; }
-    const vector<int8_t>& bytes() const { return _bytes; }
+    const std::vector<int8_t>& bytes() const { return _bytes; }
+
+    BigInt& operator= (const BigInt& other);
+    BigInt& operator= (intmax_t native_int);
 
     BigInt& operator+ (const BigInt& other) const;
+    BigInt& operator+= (const BigInt& other);
+
     BigInt& operator- (const BigInt& other) const;
+    BigInt& operator-= (const BigInt& other);
     BigInt& operator- () const;             // -bi
 
     BigInt& operator++ ();                  // ++bi
@@ -47,9 +52,8 @@ class BigInt {
     BigInt& operator/ (const BigInt& other) const;
     BigInt& operator/= (const BigInt& other);
 
-    BigInt& operator= (const BigInt& other) const;
-    BigInt& operator+= (const BigInt& other);
-    BigInt& operator-= (const BigInt& other);
+    BigInt& operator% (const BigInt& other) const;
+    BigInt& operator%= (const BigInt& other);
 
     bool operator== (const BigInt& other) const;
     bool operator!= (const BigInt& other) const;
@@ -59,22 +63,26 @@ class BigInt {
     bool operator<= (const BigInt& other) const;
 };
 
-BigInt::BigInt(intmax_t ll)
+#include <iostream>
+
+using namespace std;
+
+BigInt::BigInt(intmax_t native_int)
 {
-    if (ll < 0) {
+    if (native_int < 0) {
         _sign = true;
-        ll = -ll;
+        native_int = -native_int;
     }
     else
         _sign = false;
 
     for (size_t i = 0; i < sizeof(intmax_t); i++) {
-        if (ll == 0)
+        if (native_int == 0)
             break;
 
-        int8_t r = ll % 100;
+        int8_t r = native_int % 100;
         _bytes.push_back(r);
-        ll /= 100;
+        native_int /= 100;
     }
 }
 
@@ -116,7 +124,27 @@ BigInt::BigInt(const BigInt &other)
     _bytes = other.bytes();
 }
 
-#include <iostream>
+BigInt::BigInt(const BigInt &&other)
+{
+    cout << "move constructor called\n";
+    _sign = other._sign;
+    _bytes = std::move(other._bytes);
+}
+
+BigInt& BigInt::operator= (const BigInt& other)
+{
+    _sign = other._sign;
+    _bytes = other._bytes;
+    return *this;
+}
+
+BigInt& BigInt::operator= (intmax_t native_int)
+{
+    BigInt tmp(native_int);
+    _sign = tmp._sign;
+    _bytes = std::move(tmp._bytes);
+    return *this;
+}
 
 ostream& operator<< (ostream& os, const BigInt& bi) {
     if (bi.sign()) {
@@ -159,6 +187,12 @@ int main()
     cout << f << endl;
 
     BigInt g("");
+    cout << g << endl;
+
+    g = a;
+    cout << g << endl;
+
+    g = 121;
     cout << g << endl;
 }
 

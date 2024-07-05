@@ -105,6 +105,7 @@ int main()
 ### 自然数加法
 
 ```cpp
+/* 结果通过第一个引用参数返回 */
 void nap_add(string &result, const string &a, const string &b)
 {
     size_t len_a = a.length();
@@ -133,6 +134,37 @@ void nap_add(string &result, const string &a, const string &b)
     }
 }
 
+/* 直接返回临时变量；将启用 string 的移动构造器 */
+string nap_add(const string &a, const string &b)
+{
+    string result;
+    size_t len_a = a.length();
+    size_t len_b = b.length();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    int c = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = ((i < len_a) ? a[len_a - i - 1] : '0') - '0';
+        int n_b = ((i < len_b) ? b[len_b - i - 1] : '0') - '0';
+
+        int r = n_a + n_b + c;
+        if (r >= 10) {
+            c = 1;
+            r -= 10;
+        }
+        else
+            c = 0;
+
+        result.insert(0, 1, '0' + r);
+    }
+
+    if (c > 0) {
+        result.insert(0, 1, '1');
+    }
+
+    return result;
+}
+
     string r;
 
     nap_add(r, "0", "1");
@@ -143,6 +175,15 @@ void nap_add(string &result, const string &a, const string &b)
     assert(r == "101");
     nap_add(r, "101", "99");
     assert(r == "200");
+
+    r = nap_add("0", "1");
+    assert(r == "1");
+    r = nap_add("1", "9");
+    assert(r == "10");
+    r = nap_add("91", "10");
+    assert(r == "101");
+    r = nap_add("101", "99");
+    assert(r == "200");
 ```
 
 	
@@ -151,36 +192,34 @@ void nap_add(string &result, const string &a, const string &b)
 （二十分钟内完成）
 
 1) 复制上述 `nap_add()` 函数并实现 `nap_add_to()` 函数，保存为 `nap-arithmetic.cpp`。
-2) 调试通过后提交到自己的作业仓库（`source/cpp/lesson-5/` 目录下，下同）。
+2) 调试通过后提交到自己的作业仓库（`source/cpp/lesson-6/` 目录下，下同）。
 
 	
 ### 自然数乘法
 
 ```cpp
-void nap_mul(string &result, const string &a, const string &b)
+string nap_mul(const string &a, const string &b)
 {
+    string result = "0";
     string times = "0";
 
-    result = "0";
     while (b != times) {
-        string tmp;
-        nap_add(tmp, result, a);
-        result = tmp;
-
-        nap_add(tmp, times, "1");
-        times = tmp;
+        result = nap_add(result, a);
+        times = nap_add(times, "1");
     }
+
+    return result;
 }
 
     string r;
 
-    nap_mul(r, "2", "2");
+    r = nap_mul("2", "2");
     assert(r == "4");
-    nap_mul(r, "2", "10");
+    r = nap_mul("2", "10");
     assert(r == "20");
-    nap_mul(r, "20", "20");
+    r = nap_mul("20", "20");
     assert(r == "400");
-    nap_mul(r, "11", "11");
+    r = nap_mul("11", "11");
     assert(r == "121");
 ```
 
@@ -189,16 +228,17 @@ void nap_mul(string &result, const string &a, const string &b)
 
 （十分钟内完成）
 
-1) 复制上述 `nap_mul()` 函数并调用 `nap_add_to()` 实现 `nap_mul_alt()` 函数，保存到 `nap-arithmetic.cpp` 文件中。
+1) 复制上述 `nap_mul()` 函数并调用 `nap_add_to()` 实现 `nap_mul_op()` 函数，保存到 `nap-arithmetic.cpp` 文件中。
 2) 调试通过后提交到自己的作业仓库。
 
 	
 ### 竖式乘法
 
 ```cpp
-void nap_mul_alt(string &r, const string &a, const string &b)
+/* Use vertical multiplication method */
+string nap_mul_alt(const string &a, const string &b)
 {
-    r.clear();
+    string r;
 
     size_t len_a = a.length();
     size_t len_b = b.length();
@@ -245,6 +285,8 @@ void nap_mul_alt(string &r, const string &a, const string &b)
 
         assert(len_r == r.length());
     }
+
+    return r;
 }
 ```
 
@@ -252,38 +294,59 @@ void nap_mul_alt(string &r, const string &a, const string &b)
 ### 阶乘
 
 ```cpp
-void nap_factorial(string &r, const string &n)
+// Use vector<string> to cache the factorial result
+static vector<string> cached_factorial(50);
+
+string nap_factorial(const string &n)
 {
-    if (n.empty() or n == "0") {
-        r = "1";
-        return;
+    string r;
+    size_t native_n;
+    string times = "1";
+
+    native_n = (size_t)stoul(n);
+    if (native_n < cached_factorial.size() &&
+            cached_factorial[native_n] != "") {
+        r = cached_factorial[native_n];
+        goto done;
     }
 
-    string times = "1";
+    if (n.empty() or n == "0") {
+        r = "1";
+        goto done;
+    }
 
     r = n;
     while (n != times) {
-        string tmp;
-        nap_mul_alt(tmp, r, times);
-        r = tmp;
-
+        r = nap_mul_alt(r, times);
         nap_add_to(times, "1");
     }
+
+    // cached the result
+    if (native_n < cached_factorial.size()) {
+        cached_factorial[native_n] = r;
+    }
+    else {
+        cached_factorial.resize(native_n + 1, "");
+        cached_factorial[native_n] = r;
+    }
+
+done:
+    return r;
 }
 
     string r;
 
-    nap_factorial(r, "0");
+    r = nap_factorial("0");
     assert(r == "1");
-    nap_factorial(r, "1");
+    r = nap_factorial("1");
     assert(r == "1");
-    nap_factorial(r, "2");
+    r = nap_factorial("2");
     assert(r == "2");
-    nap_factorial(r, "3");
+    r = nap_factorial("3");
     assert(r == "6");
-    nap_factorial(r, "4");
+    r = nap_factorial("4");
     assert(r == "24");
-    nap_factorial(r, "5");
+    r = nap_factorial("5");
     assert(r == "120");
 ```
 
@@ -292,8 +355,8 @@ void nap_factorial(string &r, const string &n)
 
 （十分钟内完成）
 
-1) 复制上述代码并实现 `nap_factorial_recursive()` 函数，即阶乘的递归函数。
-2) 编译调试通过后提交到自己的作业仓库（`source/cpp/lesson-4/` 目录下）。
+1) 在 `nap_factorial()` 函数基础上实现 `nap_factorial_recursive()` 函数，即阶乘的递归实现，并保留缓存功能。
+2) 编译调试通过后提交到自己的作业仓库。
 
 		
 ## 基于 `vector` 的实现
@@ -324,7 +387,7 @@ class BigInt {
     }
 
     // 构造器
-    BigInt(intmax_t ll);
+    BigInt(intmax_t native_int);
     BigInt(const std::string& str);
     BigInt(const BigInt &other);            // 复制构造器
 
@@ -333,8 +396,14 @@ class BigInt {
     const vector<int8_t>& bytes() const { return _bytes; }
 
     // 重载运算符
+    BigInt& operator= (const BigInt& other);
+    BigInt& operator= (intmax_t native_int);
+
     BigInt& operator+ (const BigInt& other) const;
+    BigInt& operator+= (const BigInt& other);
+
     BigInt& operator- (const BigInt& other) const;
+    BigInt& operator-= (const BigInt& other);
     BigInt& operator- () const;             // -bi
 
     BigInt& operator++ ();                  // ++bi
@@ -349,9 +418,8 @@ class BigInt {
     BigInt& operator/ (const BigInt& other) const;
     BigInt& operator/= (const BigInt& other);
 
-    BigInt& operator= (const BigInt& other) const;
-    BigInt& operator+= (const BigInt& other);
-    BigInt& operator-= (const BigInt& other);
+    BigInt& operator% (const BigInt& other) const;
+    BigInt& operator%= (const BigInt& other);
 
     bool operator== (const BigInt& other) const;
     bool operator!= (const BigInt& other) const;
@@ -360,27 +428,33 @@ class BigInt {
     bool operator< (const BigInt& other) const;
     bool operator<= (const BigInt& other) const;
 };
+
+    BigInt a(1234567890);
+    BigInt b("2345");
+
+    a += b;
+    cout << a / b << endl;
 ```
 
 		
 ### 构造器
 
 ```cpp
-BigInt::BigInt(intmax_t ll) {
-    if (ll < 0) {
+BigInt::BigInt(intmax_t native_int) {
+    if (native_int < 0) {
         _sign = true;
-        ll = -ll;
+        native_int = -native_int;
     }
     else
         _sign = false;
 
     for (size_t i = 0; i < sizeof(intmax_t); i++) {
-        if (ll == 0)
+        if (native_int == 0)
             break;
 
-        int8_t r = ll % 100;
+        int8_t r = native_int % 100;
         _bytes.push_back(r);
-        ll /= 100;
+        native_int /= 100;
     }
 }
 
@@ -420,6 +494,12 @@ BigInt::BigInt(const BigInt &other)
     _sign = other.sign();
     _bytes = other.bytes();
 }
+
+BigInt::BigInt(const BigInt &&other)
+{
+    _sign = other._sign;
+    _bytes = std::move(other._bytes);
+}
 ```
 
 	
@@ -446,9 +526,31 @@ ostream& operator<< (ostream& os, const BigInt& bi) {
 ```
 
 	
-### 重载 `+` 运算符
+### 重载 `=` 运算符
 
 ```cpp
+BigInt& BigInt::operator= (const BigInt& other)
+{
+    _sign = other._sign;
+    _bytes = other._bytes;
+    return *this;
+}
+
+BigInt& BigInt::operator= (intmax_t native_int)
+{
+    BigInt tmp(native_int);
+    _sign = tmp._sign;
+    _bytes = std::move(tmp._bytes);
+    return *this;
+}
+
+BigInt& BigInt::operator= (uintmax_t native_uint)
+{
+    BigInt tmp(native_uint);
+    _sign = tmp._sign;
+    _bytes = std::move(tmp._bytes);
+    return *this;
+}
 ```
 
 		
@@ -457,12 +559,26 @@ ostream& operator<< (ostream& os, const BigInt& bi) {
 1) 给定正整数 `n`，给出 `0! + 1! + 2! + ... + n!` 的结果（阶乘之和）。运行效果如下：
 
 ```console
-$ ./summary-of-factorials
+$ ./summary-of-factorials-nap
 <100>
-94269001683709979260859834124473539872070722613982672442938359305624678223479506023400294093599136466986609124347432647622826870038220556442336528920420940313
+94269001683709979260859834124473539872070722613982672442938359305624678223479506023400294093599136466986609124347432647622826870038220556442336528920420940314
 ```
 
-2) 给定任意小数（正值），给出其最简分数表达。运行效果如下：
+2) 给定两个任意长度的两个自然数，计算相除的结果（整数商及余数）。运行效果如下：
+
+```console
+$ ./nap-divide
+<11 13>
+0 11
+$ ./nap-divide
+<78260869565217391304347826086956521 4347826086956521739130434782608695>
+18 11
+$ ./nap-divide
+<100 0>
+Bad
+```
+
+3) 给定任意小数（正值），给出其最简分数表达。运行效果如下：
 
 ```console
 $ ./rational-number-to-fraction
@@ -472,5 +588,13 @@ $ ./rational-number-to-fraction
 $ ./rational-number-to-fraction
 <48.8260869565217391304347 22>
 1123/23
+```
+
+4) 尝试实现 `BigInt` 类的 `+`、`+=`、`++`、`*` 和 `*=` 运算符，并使用 `BigInt` 实现阶乘之和。运行效果如下：
+
+```console
+$ ./summary-of-factorials-bigint
+<500>
+1222581999810786173488382263893486121736784649845260488587055662127413631697914209099541725989446667613701624271378831210621838417780811766002473336942870600195037012201905233810236995284666050368045972495314286948596890492959045138704466475196055082304091214424335155644013903958356823605973150159110295578782843348252925883263557585556478987722745938465211447729783160621865568392455888286712354379272785542107324774997192436923989074655546365212898701875799458234466791378320221140358905721655475503366304295011345436395868843079546378053608723961924505161575921825309198649451288200312309059880509012275371359184552944166761037071150384173845166703990330636505622758303549033598720775172343137459008549361297203752431405977559950082400276439557196120290170551660607313565028810793747453185145183036587639267895948090547733582550623337958494636037989666434209666688780729576638277517618320396232253506068607096479320263132522604054741925038640750661849690108363701190203548476572823422774327197718781800269558204647391176582851167312182026188795156620056856503340092247479478684738621107994804323593105039052556442336528920420940314
 ```
 

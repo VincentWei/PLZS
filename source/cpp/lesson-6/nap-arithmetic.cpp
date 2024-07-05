@@ -44,6 +44,36 @@ void nap_add(string &result, const string &a, const string &b)
     }
 }
 
+string nap_add(const string &a, const string &b)
+{
+    string result;
+    size_t len_a = a.length();
+    size_t len_b = b.length();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    int c = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = ((i < len_a) ? a[len_a - i - 1] : '0') - '0';
+        int n_b = ((i < len_b) ? b[len_b - i - 1] : '0') - '0';
+
+        int r = n_a + n_b + c;
+        if (r >= 10) {
+            c = 1;
+            r -= 10;
+        }
+        else
+            c = 0;
+
+        result.insert(0, 1, '0' + r);
+    }
+
+    if (c > 0) {
+        result.insert(0, 1, '1');
+    }
+
+    return result;
+}
+
 void nap_add_to(string &r, const string &a)
 {
     size_t len_r = r.length();
@@ -100,20 +130,35 @@ void nap_mul(string &result, const string &a, const string &b)
     }
 }
 
-void nap_mul_op(string &result, const string &a, const string &b)
+string nap_mul(const string &a, const string &b)
 {
+    string result = "0";
     string times = "0";
-    result = "0";
+
+    while (b != times) {
+        result = nap_add(result, a);
+        times = nap_add(times, "1");
+    }
+
+    return result;
+}
+
+string nap_mul_op(const string &a, const string &b)
+{
+    string times("0");
+    string result("0");
     while (b != times) {
         nap_add_to(result, a);
         nap_add_to(times, "1");
     }
+
+    return result;
 }
 
 /* Use vertical multiplication method */
-void nap_mul_alt(string &r, const string &a, const string &b)
+string nap_mul_alt(const string &a, const string &b)
 {
-    r.clear();
+    string r;
 
     size_t len_a = a.length();
     size_t len_b = b.length();
@@ -160,33 +205,33 @@ void nap_mul_alt(string &r, const string &a, const string &b)
 
         assert(len_r == r.length());
     }
+
+    return r;
 }
 
 static vector<string> cached_factorial(50);
 
-void nap_factorial(string &r, const string &n)
+string nap_factorial(const string &n)
 {
+    string r;
     size_t native_n;
+    string times = "1";
+
     native_n = (size_t)stoul(n);
     if (native_n < cached_factorial.size() &&
             cached_factorial[native_n] != "") {
         r = cached_factorial[native_n];
-        return;
+        goto done;
     }
 
     if (n.empty() or n == "0") {
         r = "1";
-        return;
+        goto done;
     }
-
-    string times = "1";
 
     r = n;
     while (n != times) {
-        string tmp;
-        nap_mul_alt(tmp, r, times);
-        r = tmp;
-
+        r = nap_mul_alt(r, times);
         nap_add_to(times, "1");
     }
 
@@ -198,6 +243,9 @@ void nap_factorial(string &r, const string &n)
         cached_factorial.resize(native_n + 1, "");
         cached_factorial[native_n] = r;
     }
+
+done:
+    return r;
 }
 
 void nap_dec(string &n)
@@ -235,28 +283,28 @@ void nap_dec(string &n)
         n.erase(0, 1);
 }
 
-void nap_factorial_recursive(string &r, const string &n)
+string nap_factorial_recursive(const string &n)
 {
+    string r;
+    size_t native_n;
+    string prev_n = n;
+
     if (n.empty() or n == "0") {
         r = "1";
-        return;
+        goto done;
     }
 
-    size_t native_n;
     native_n = (size_t)stoul(n);
     if (native_n < cached_factorial.size() &&
             cached_factorial[native_n] != "") {
         r = cached_factorial[native_n];
-        return;
+        goto done;
     }
 
-    string prev_n = n;
     nap_dec(prev_n);
 
-    nap_factorial_recursive(r, prev_n);
-    string tmp;
-    nap_mul_alt(tmp, r, n);
-    r = tmp;
+    r = nap_factorial_recursive(prev_n);
+    r = nap_mul_alt(r, n);
 
     // cached the result
     if (native_n < cached_factorial.size()) {
@@ -266,25 +314,26 @@ void nap_factorial_recursive(string &r, const string &n)
         cached_factorial.resize(native_n + 1, "");
         cached_factorial[native_n] = r;
     }
+
+done:
+    return r;
 }
 
-void summary_of_factorials(string &r, const string &n)
+string summary_of_factorials(const string &n)
 {
-    string times = "1";
-
-    r = "0";
-    if (!nap_not_zero(n))
-        return;
+    string result("0");
+    string times("0");
 
     while (true) {
-        string factorial;
-        nap_factorial_recursive(factorial, times);
-        nap_add_to(r, factorial);
+        string factorial = nap_factorial_recursive(times);
+        nap_add_to(result, factorial);
 
         if (n == times)
             break;
         nap_add_to(times, "1");
     }
+
+    return result;
 }
 
 int main()
@@ -300,6 +349,18 @@ int main()
     assert(r == "101");
     nap_add(r, "101", "99");
     assert(r == "200");
+    cout << "test for nap_add() passed\n";
+
+    // test nap_add_alt()
+    r = nap_add("0", "1");
+    assert(r == "1");
+    r = nap_add("1", "9");
+    assert(r == "10");
+    r = nap_add("91", "10");
+    assert(r == "101");
+    r = nap_add("101", "99");
+    assert(r == "200");
+    cout << "test for nap_add_alt() passed\n";
 
     // test nap_add_to()
     r = "0";
@@ -311,7 +372,7 @@ int main()
     assert(r == "101");
     nap_add_to(r, "99");
     assert(r == "200");
-    // cout << "test for nap_add_to() passed\n";
+    cout << "test for nap_add_to() passed\n";
 
     // test nap_dec()
     r = "1";
@@ -324,50 +385,64 @@ int main()
     // cout << "test for nap_dec() passed\n";
 
     // test nap_mul_op()
-    nap_mul_op(r, "2", "2");
+    r = nap_mul_op("2", "2");
     assert(r == "4");
-    nap_mul_op(r, "2", "10");
+    r = nap_mul_op("2", "10");
     assert(r == "20");
-    nap_mul_op(r, "20", "20");
+    r = nap_mul_op("20", "20");
     assert(r == "400");
-    nap_mul_op(r, "11", "11");
+    r= nap_mul_op("11", "11");
     assert(r == "121");
-    // cout << "test for nap_mul_op() passed\n";
+    cout << "test for nap_mul_op() passed\n";
 
     // test nap_mul_alt()
-    nap_mul_alt(r, "33", "77");
+    r = nap_mul_alt("33", "77");
     assert(r == "2541");
-    nap_mul_alt(r, "2", "2");
+    r = nap_mul_alt("2", "2");
     assert(r == "4");
-    nap_mul_alt(r, "2", "10");
+    r = nap_mul_alt("2", "10");
     assert(r == "20");
-    nap_mul_alt(r, "20", "20");
+    r = nap_mul_alt("20", "20");
     assert(r == "400");
-    nap_mul_alt(r, "11", "11");
+    r = nap_mul_alt("11", "11");
     assert(r == "121");
 
-    // test for nap_factorial_recursive()
-    r.clear();
-    nap_factorial_recursive(r, "0");
+    // test for nap_factorial()
+    r = nap_factorial("0");
     assert(r == "1");
-    nap_factorial_recursive(r, "1");
+    r = nap_factorial("1");
     assert(r == "1");
-    nap_factorial_recursive(r, "2");
+    r = nap_factorial("2");
     assert(r == "2");
-    nap_factorial_recursive(r, "3");
+    r = nap_factorial("3");
     assert(r == "6");
-    nap_factorial_recursive(r, "4");
+    r = nap_factorial("4");
     assert(r == "24");
-    nap_factorial_recursive(r, "5");
+    r = nap_factorial("5");
     assert(r == "120");
-    // cout << "test for nap_factorial_recursive() passed\n";
+    cout << "test for nap_factorial() passed\n";
+
+    // test for nap_factorial_recursive()
+    r = nap_factorial_recursive("0");
+    assert(r == "1");
+    r = nap_factorial_recursive("1");
+    assert(r == "1");
+    r = nap_factorial_recursive("2");
+    assert(r == "2");
+    r = nap_factorial_recursive("3");
+    assert(r == "6");
+    r = nap_factorial_recursive("4");
+    assert(r == "24");
+    r = nap_factorial_recursive("5");
+    assert(r == "120");
+    cout << "test for nap_factorial_recursive() passed\n";
 
     // the real code for P1009
     string n;
     cin >> n;
 
     string summary;
-    summary_of_factorials(summary, n);
+    summary = summary_of_factorials(n);
     cout << summary << endl;
     return 0;
 }
