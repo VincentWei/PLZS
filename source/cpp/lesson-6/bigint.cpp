@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 #include <cstdint>
+#include <cassert>
 
 class BigInt {
     bool _sign;
@@ -37,7 +38,7 @@ class BigInt {
     BigInt& operator+= (const BigInt& other);
 
     BigInt operator- () const;             // -bi
-    BigInt& operator- (const BigInt& other) const;
+    BigInt operator- (const BigInt& other) const;
     BigInt& operator-= (const BigInt& other);
 
     BigInt& operator++ ();                  // ++bi
@@ -63,15 +64,50 @@ class BigInt {
     bool operator<= (const BigInt& other) const;
 
   private:
+    void normalize();
     bool iszero() const;
     void absadd(const BigInt& other, BigInt& result) const;
     void absaddto(const BigInt& other);
     int  abscmp(const BigInt& other) const;
+
+    void abssub(const BigInt& other, BigInt& result) const;
+    void abssubfrom(const BigInt& other);
 };
 
 #include <iostream>
 
 using namespace std;
+
+ostream& operator<< (ostream& os, const BigInt& bi)
+{
+    if (bi.sign()) {
+        os << "-";
+    }
+
+    auto bytes = bi.bytes();
+    size_t len = bytes.size();
+    if (len == 0) {
+        os << "0";
+    }
+    else {
+        for (size_t i = len - 1; ; i--) {
+            int r = (int)bytes[i];
+            if (i == len - 1) {
+                os << r;
+            }
+            else {
+                if (r < 10)
+                    os << "0";
+                os << r;
+            }
+
+            if (i == 0)
+                break;
+        }
+    }
+
+    return os;
+}
 
 BigInt::BigInt(intmax_t native_int)
 {
@@ -183,24 +219,24 @@ void BigInt::absadd(const BigInt& other, BigInt &result) const
 
     result._bytes.clear();
 
-    int c = 0;
+    int carry = 0;
     for (size_t i = 0; i < len_max; i++) {
         int n_a = (i < len_a) ? this->_bytes[i] : 0;
         int n_b = (i < len_b) ? other._bytes[i] : 0;
 
-        int r = n_a + n_b + c;
+        int r = n_a + n_b + carry;
         if (r >= 100) {
-            c = 1;
+            carry = 1;
             r -= 100;
         }
         else
-            c = 0;
+            carry = 0;
 
         result._bytes.push_back(r);
     }
 
-    if (c > 0) {
-        result._bytes.push_back(c);
+    if (carry > 0) {
+        result._bytes.push_back(carry);
     }
 }
 
@@ -210,18 +246,18 @@ void BigInt::absaddto(const BigInt& other)
     size_t len_b = other._bytes.size();
     size_t len_max = (len_a > len_b) ? len_a : len_b;
 
-    int c = 0;
+    int carry = 0;
     for (size_t i = 0; i < len_max; i++) {
         int n_a = (i < len_a) ? this->_bytes[i] : 0;
         int n_b = (i < len_b) ? other._bytes[i] : 0;
 
-        int r = n_a + n_b + c;
+        int r = n_a + n_b + carry;
         if (r >= 100) {
-            c = 1;
+            carry = 1;
             r -= 100;
         }
         else
-            c = 0;
+            carry = 0;
 
         if (i >= len_a)
             _bytes.push_back(r);
@@ -229,26 +265,144 @@ void BigInt::absaddto(const BigInt& other)
             _bytes[i] = r;
     }
 
-    if (c > 0) {
-        _bytes.push_back(c);
+    if (carry > 0) {
+        _bytes.push_back(carry);
     }
+}
+
+void BigInt::normalize()
+{
+    auto it = end(_bytes);
+    while (it != begin(_bytes)) {
+        it--;
+
+        int n = *it;
+        if (n == 0)
+            _bytes.pop_back();
+        else
+            break;
+    }
+
+    /* check if it is zero */
+    if (it == begin(_bytes) && *it == 0)
+        _sign = false;
+}
+
+/* this must be large than other */
+void BigInt::abssub(const BigInt& other, BigInt &result) const
+{
+    size_t len_a = this->_bytes.size();
+    size_t len_b = other._bytes.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    result._bytes.clear();
+
+    int borrow = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = (i < len_a) ? this->_bytes[i] : 0;
+        int n_b = (i < len_b) ? other._bytes[i] : 0;
+
+        int r;
+        if (n_a - borrow >= n_b) {
+            r = n_a - borrow - n_b;
+            borrow = 0;
+        }
+        else {
+            r = n_a - borrow + 100 - n_b;
+            borrow = 1;
+        }
+
+        result._bytes.push_back(r);
+    }
+
+    assert(borrow == 0);
+    result.normalize();
+}
+
+/* this must be large than other */
+void BigInt::abssubfrom(const BigInt& other)
+{
+    size_t len_a = this->_bytes.size();
+    size_t len_b = other._bytes.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = (i < len_a) ? this->_bytes[i] : 0;
+        int n_b = (i < len_b) ? other._bytes[i] : 0;
+
+        int r;
+        if (n_a >= n_b) {
+            r = n_a - n_b;
+        }
+        else {
+            assert(i + 1 < len_a);
+
+            r = n_a + 100 - n_b;
+            _bytes[i + 1] -= 1;
+        }
+
+        _bytes[i] = r;
+    }
+
+    normalize();
 }
 
 BigInt BigInt::operator+ (const BigInt& other) const
 {
+    if (other.iszero()) {
+        return *this;
+    }
+
     BigInt result;
     if (_sign == other._sign) {
         absadd(other, result);
         result._sign = _sign;
     }
-    // TODO
+    else {
+        int cmp = abscmp(other);
+        if (cmp == 0) {
+            return result;
+        }
+        else if (cmp > 0) {
+            abssub(other, result);
+            result._sign = _sign;
+        }
+        else {      // cmp < 0
+            other.abssub(*this, result);
+            result._sign = other._sign;
+        }
+    }
 
     return result;
 }
 
 BigInt& BigInt::operator+= (const BigInt& other)
 {
-    absaddto(other);
+    if (other.iszero()) {
+        return *this;
+    }
+
+    if (_sign == other._sign) {
+        absaddto(other);
+    }
+    else {
+        int cmp = abscmp(other);
+        if (cmp == 0) {
+            _sign = false;
+            _bytes.clear();
+            return *this;
+        }
+        else if (cmp > 0) {
+            abssubfrom(other);
+        }
+        else {      // cmp < 0
+            BigInt result;
+            other.abssub(*this, result);
+            _sign = other._sign;
+            _bytes = std::move(result._bytes);
+        }
+    }
+
     return *this;
 }
 
@@ -260,6 +414,64 @@ BigInt BigInt::operator- () const
     BigInt result(*this);
     result._sign = !_sign;
     return result;
+}
+
+BigInt BigInt::operator- (const BigInt& other) const
+{
+    if (other.iszero()) {
+        return *this;
+    }
+
+    BigInt result;
+    if (_sign != other._sign) {
+        absadd(other, result);
+        result._sign = _sign;
+    }
+    else {
+        int cmp = abscmp(other);
+        if (cmp == 0) {
+            return result;
+        }
+        else if (cmp > 0) {
+            abssub(other, result);
+            result._sign = _sign;
+        }
+        else {      // cmp < 0
+            other.abssub(*this, result);
+            result._sign = !_sign;
+        }
+    }
+
+    return result;
+}
+
+BigInt& BigInt::operator-= (const BigInt& other)
+{
+    if (other.iszero()) {
+        return *this;
+    }
+
+    if (_sign != other._sign) {
+        absaddto(other);
+    }
+    else {
+        int cmp = abscmp(other);
+        if (cmp == 0) {
+            _sign = false;
+            _bytes.clear();
+        }
+        else if (cmp > 0) {
+            abssubfrom(other);
+        }
+        else {      // cmp < 0
+            BigInt result;
+            other.abssub(*this, result);
+            _sign = !_sign;
+            _bytes = std::move(result._bytes);
+        }
+    }
+
+    return *this;
 }
 
 int BigInt::abscmp(const BigInt& other) const
@@ -362,38 +574,6 @@ bool BigInt::operator<= (const BigInt& other) const
     return abscmp(other) >= 0;
 }
 
-ostream& operator<< (ostream& os, const BigInt& bi)
-{
-    if (bi.sign()) {
-        os << "-";
-    }
-
-    auto bytes = bi.bytes();
-    size_t len = bytes.size();
-    if (len == 0) {
-        os << "0";
-    }
-    else {
-        for (size_t i = len - 1; ; i--) {
-            int r = (int)bytes[i];
-            if (i == len - 1) {
-                os << r;
-            }
-            else {
-                if (r < 10)
-                    os << "0";
-                os << r;
-            }
-
-            if (i == 0)
-                break;
-        }
-    }
-
-    return os;
-}
-
-#include <cassert>
 #include <sstream>
 
 int main()
@@ -437,14 +617,12 @@ int main()
             intmax_t ntv_b = cases[j];
             BigInt   big_b(cases[j]);
 
-            cout << "compare " << ntv_a << " and " << ntv_b << endl;
-            cout << "compare " << big_a << " and " << big_b << endl;
+            cout << "native integers: " << ntv_a << " and " << ntv_b << endl;
+            cout << "   big integers: " << big_a << " and " << big_b << endl;
 
             bool exp_r, act_r;
             exp_r = (ntv_a == ntv_b);
             act_r = (big_a == big_b);
-            cout << "ntv_int compare: " << exp_r << endl;
-            cout << "big_int compare: " << act_r << endl;
             assert(exp_r == act_r);
 
             exp_r = (ntv_a != ntv_b);
@@ -453,8 +631,6 @@ int main()
 
             exp_r = (ntv_a > ntv_b);
             act_r = (big_a > big_b);
-            cout << "ntv_int compare: " << exp_r << endl;
-            cout << "big_int compare: " << act_r << endl;
             assert(exp_r == act_r);
 
             exp_r = (ntv_a >= ntv_b);
@@ -474,18 +650,39 @@ int main()
             oss.str("");
             oss << -big_b;
             str_ntv_r = to_string(-ntv_b);
+            assert(oss.str() == str_ntv_r);
+
+            oss.str("");
+            oss << big_a + big_b;
+            str_ntv_r = to_string(ntv_a + ntv_b);
+            assert(oss.str() == str_ntv_r);
+
+            big_a += big_b;
+            ntv_a += ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            assert(oss.str() == str_ntv_r);
+
+            oss.str("");
+            oss << big_a - big_b;
+            str_ntv_r = to_string(ntv_a - ntv_b);
+            assert(oss.str() == str_ntv_r);
+
+            cout << "native integers: " << ntv_a << " and " << ntv_b << endl;
+            cout << "   big integers: " << big_a << " and " << big_b << endl;
+
+            big_a -= big_b;
+            ntv_a -= ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
             cout << oss.str() << endl;
             cout << str_ntv_r << endl;
             assert(oss.str() == str_ntv_r);
 
-            // TODO
-            if ((ntv_a >= 0 && ntv_b >= 0) ||
-                    (ntv_a < 0 && ntv_b < 0)) {
-                oss.str("");
-                oss << big_a + big_b;
-                str_ntv_r = to_string(ntv_a + ntv_b);
-                assert(oss.str() == str_ntv_r);
-            }
         }
     }
 }
