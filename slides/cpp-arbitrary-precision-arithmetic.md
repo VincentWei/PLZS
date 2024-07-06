@@ -383,13 +383,12 @@ class BigInt {
     // 默认构造器
     BigInt() {
         _sign = false;
-        _bytes.push_back(0);
     }
 
     // 构造器
     BigInt(intmax_t native_int);
     BigInt(const std::string& str);
-    BigInt(const BigInt &other);            // 复制构造器
+    BigInt(const BigInt &other);            // copy constructor
 
     // 属性获取器
     bool sign() const { return _sign; }
@@ -427,6 +426,11 @@ class BigInt {
     bool operator>= (const BigInt& other) const;
     bool operator< (const BigInt& other) const;
     bool operator<= (const BigInt& other) const;
+
+  private:
+    BigInt absadd(const BigInt& other) const;
+    void   absaddto(const BigInt& other);
+    int    abscmp(const BigInt& other) const;
 };
 
     BigInt a(1234567890);
@@ -440,7 +444,8 @@ class BigInt {
 ### 构造器
 
 ```cpp
-BigInt::BigInt(intmax_t native_int) {
+BigInt::BigInt(intmax_t native_int)
+{
     if (native_int < 0) {
         _sign = true;
         native_int = -native_int;
@@ -458,11 +463,12 @@ BigInt::BigInt(intmax_t native_int) {
     }
 }
 
-BigInt::BigInt(const string& str) {
+BigInt::BigInt(const string& str)
+{
     size_t len = str.length();
     if (len == 0) {
         _sign = false;
-        _bytes.push_back(0);
+        _bytes.clear();
         return;
     }
 
@@ -471,17 +477,22 @@ BigInt::BigInt(const string& str) {
     else
         _sign = false;
 
-    size_t left = _sign ? len - 1 : len;
+    size_t left = len;
+    size_t two_digits = _sign ? 2 : 1;
+    size_t one_digit = _sign ? 1 : 0;
     while (left > 0) {
         string digits;
-        size_t pos = len - left;
-        if (left > 1) {
-            digits = str.substr(pos, 2);
+        if (left > two_digits) {
+            digits = str.substr(left - 2, 2);
             left -= 2;
         }
-        else {
-            digits = str.substr(pos, 1);
+        else if (left > one_digit) {
+            digits = str.substr(left - 1, 1);
             left -= 1;
+        }
+
+        if (digits.empty()) {
+            break;
         }
 
         int r = stoi(digits);
@@ -493,12 +504,6 @@ BigInt::BigInt(const BigInt &other)
 {
     _sign = other.sign();
     _bytes = other.bytes();
-}
-
-BigInt::BigInt(const BigInt &&other)
-{
-    _sign = other._sign;
-    _bytes = std::move(other._bytes);
 }
 ```
 
@@ -545,6 +550,41 @@ BigInt& BigInt::operator= (intmax_t native_int)
 }
 ```
 
+	
+### 重载 `==` 运算符
+
+```cpp
+int BigInt::abscmp(const BigInt& other) const
+{
+    size_t len_a = this->_bytes.size();
+    size_t len_b = other._bytes.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    size_t i = len_max;
+    while (i > 0) {
+        int n_a = (i - 1 < len_a) ? this->_bytes[i - 1] : 0;
+        int n_b = (i - 1 < len_b) ? other._bytes[i - 1] : 0;
+
+        int cmp = n_a - n_b;
+        if (cmp != 0)
+            return cmp;
+
+        i--;
+    }
+
+    return 0;
+}
+
+bool BigInt::operator== (const BigInt& other) const
+{
+    if (_sign == other._sign && abscmp(other) == 0)
+        return true;
+
+    return false;
+}
+
+```
+
 		
 ## 作业
 
@@ -557,7 +597,7 @@ $ ./summary-of-factorials-nap
 ```
 
 	
-2) 给定两个任意长度的两个自然数，计算相除的结果（整数商及余数）。运行效果如下：
+2) 给定两个任意长度的两个正整数，计算相除的结果（整数商及余数）。运行效果如下：
 
 ```console
 $ ./nap-divide

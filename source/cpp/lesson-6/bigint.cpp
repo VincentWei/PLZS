@@ -36,9 +36,9 @@ class BigInt {
     BigInt operator+ (const BigInt& other) const;
     BigInt& operator+= (const BigInt& other);
 
+    BigInt operator- () const;             // -bi
     BigInt& operator- (const BigInt& other) const;
     BigInt& operator-= (const BigInt& other);
-    BigInt& operator- () const;             // -bi
 
     BigInt& operator++ ();                  // ++bi
     BigInt& operator++ (int);               // bi++
@@ -63,9 +63,10 @@ class BigInt {
     bool operator<= (const BigInt& other) const;
 
   private:
-    BigInt absadd(const BigInt& other) const;
-    void   absaddto(const BigInt& other);
-    int    abscmp(const BigInt& other) const;
+    bool iszero() const;
+    void absadd(const BigInt& other, BigInt& result) const;
+    void absaddto(const BigInt& other);
+    int  abscmp(const BigInt& other) const;
 };
 
 #include <iostream>
@@ -152,8 +153,7 @@ BigInt& BigInt::operator= (const BigInt& other)
 BigInt& BigInt::operator= (const BigInt&& other)
 {
     _sign = other._sign;
-    // _bytes = other._bytes;
-    _bytes = std::move(tmp._bytes);
+    _bytes = std::move(other._bytes);
     return *this;
 }
 #endif
@@ -166,13 +166,22 @@ BigInt& BigInt::operator= (intmax_t native_int)
     return *this;
 }
 
-BigInt BigInt::absadd(const BigInt& other) const
+bool BigInt::iszero() const
 {
-    BigInt result;
+    if (_bytes.size() == 0 ||
+            (_bytes.size() == 1 && _bytes[0] == 0))
+        return true;
 
+    return false;
+}
+
+void BigInt::absadd(const BigInt& other, BigInt &result) const
+{
     size_t len_a = this->_bytes.size();
     size_t len_b = other._bytes.size();
     size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    result._bytes.clear();
 
     int c = 0;
     for (size_t i = 0; i < len_max; i++) {
@@ -193,8 +202,6 @@ BigInt BigInt::absadd(const BigInt& other) const
     if (c > 0) {
         result._bytes.push_back(c);
     }
-
-    return result;
 }
 
 void BigInt::absaddto(const BigInt& other)
@@ -229,13 +236,30 @@ void BigInt::absaddto(const BigInt& other)
 
 BigInt BigInt::operator+ (const BigInt& other) const
 {
-    return absadd(other);
+    BigInt result;
+    if (_sign == other._sign) {
+        absadd(other, result);
+        result._sign = _sign;
+    }
+    // TODO
+
+    return result;
 }
 
 BigInt& BigInt::operator+= (const BigInt& other)
 {
     absaddto(other);
     return *this;
+}
+
+BigInt BigInt::operator- () const
+{
+    if (iszero())
+        return *this;
+
+    BigInt result(*this);
+    result._sign = !_sign;
+    return result;
 }
 
 int BigInt::abscmp(const BigInt& other) const
@@ -445,13 +469,24 @@ int main()
             act_r = (big_a <= big_b);
             assert(exp_r == act_r);
 
-            /*
+            string str_ntv_r;
+
             oss.str("");
-            oss << big_a + big_b;
-            string str_ntv_r = to_string(ntv_a + ntv_b);
-            assert(oss.str() == str_ntv_r); */
+            oss << -big_b;
+            str_ntv_r = to_string(-ntv_b);
+            cout << oss.str() << endl;
+            cout << str_ntv_r << endl;
+            assert(oss.str() == str_ntv_r);
+
+            // TODO
+            if ((ntv_a >= 0 && ntv_b >= 0) ||
+                    (ntv_a < 0 && ntv_b < 0)) {
+                oss.str("");
+                oss << big_a + big_b;
+                str_ntv_r = to_string(ntv_a + ntv_b);
+                assert(oss.str() == str_ntv_r);
+            }
         }
     }
-
 }
 
