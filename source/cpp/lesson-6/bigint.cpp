@@ -30,14 +30,16 @@ class BigInt {
        slice_t _slices[max_nint_slices_k];
 
     public:
-       slice_a() = default;
+       slice_a(): _size(0) { }
+
+       slice_a(slice_t slice) {
+           _size = 1;
+           _slices[0] = slice;
+       }
 
        size_t size() const { return _size; };
 
-       void clear() {
-           _size = 0;
-           memset(_slices, 0, sizeof(slice_t) * max_nint_slices_k);
-       }
+       void clear() { _size = 0; }
 
        void push_back(slice_t val) {
            assert(_size < max_nint_slices_k);
@@ -52,9 +54,7 @@ class BigInt {
     };
 
   public:
-    BigInt() {
-        _sign = false;
-    }
+    BigInt(): _sign(false) { }
 
     BigInt(intmax_t nint);
     BigInt(const std::string& str);
@@ -86,10 +86,24 @@ class BigInt {
     BigInt& operator-= (intmax_t other);
 
     BigInt& operator++ ();                  // ++bi
-    BigInt& operator++ (int);               // bi++
+    BigInt  operator++ (int);               // bi++
 
     BigInt& operator-- ();                  // --bi
-    BigInt& operator-- (int);               // bi--
+    BigInt  operator-- (int);               // bi--
+
+    bool operator== (const BigInt& other) const;
+    bool operator!= (const BigInt& other) const;
+    bool operator>  (const BigInt& other) const;
+    bool operator>= (const BigInt& other) const;
+    bool operator<  (const BigInt& other) const;
+    bool operator<= (const BigInt& other) const;
+
+    bool operator== (intmax_t other) const;
+    bool operator!= (intmax_t other) const;
+    bool operator>  (intmax_t other) const;
+    bool operator>= (intmax_t other) const;
+    bool operator<  (intmax_t other) const;
+    bool operator<= (intmax_t other) const;
 
     BigInt  operator*  (const BigInt& other) const;
     BigInt& operator*= (const BigInt& other);
@@ -106,30 +120,16 @@ class BigInt {
     BigInt  operator%  (intmax_t other) const;
     BigInt& operator%= (intmax_t other);
 
-    bool operator== (const BigInt& other) const;
-    bool operator!= (const BigInt& other) const;
-    bool operator>  (const BigInt& other) const;
-    bool operator>= (const BigInt& other) const;
-    bool operator<  (const BigInt& other) const;
-    bool operator<= (const BigInt& other) const;
-
-    bool operator== (intmax_t other) const;
-    bool operator!= (intmax_t other) const;
-    bool operator>  (intmax_t other) const;
-    bool operator>= (intmax_t other) const;
-    bool operator<  (intmax_t other) const;
-    bool operator<= (intmax_t other) const;
-
   private:
     static int _max_nint_slices;
 
     template <class T>
-    static void initfrom(intmax_t other, T& result);
+    static void initfrom(intmax_t nint, T& slices);
 
     bool _sign;
     slice_v _slices;
 
-    void initfrom(intmax_t other);
+    void initfrom(intmax_t nint);
     void normalize();
     bool iszero() const;
 
@@ -196,6 +196,11 @@ ostream& operator<< (ostream& os, const BigInt& bi)
 template <class T>
 void BigInt::initfrom(intmax_t nint, T& slices)
 {
+    assert(slices.size() == 0);
+
+    if (nint < 0)
+        nint = -nint;
+
     for (size_t i = 0; i < sizeof(intmax_t); i++) {
         if (nint == 0)
             break;
@@ -210,7 +215,6 @@ void BigInt::initfrom(intmax_t nint)
 {
     if (nint < 0) {
         _sign = true;
-        nint = -nint;
     }
     else
         _sign = false;
@@ -545,11 +549,11 @@ BigInt& BigInt::operator+= (const BigInt& other)
 
 BigInt BigInt::operator+ (intmax_t other) const
 {
-    BigInt result;
-
     if (other == 0) {
         return *this;
     }
+
+    BigInt result;
 
     slice_a other_slices;
     initfrom(other, other_slices);
@@ -593,7 +597,6 @@ BigInt& BigInt::operator+= (intmax_t other)
         if (cmp == 0) {
             _sign = false;
             _slices.clear();
-            return *this;
         }
         else if (cmp > 0) {
             abssubfrom(other_slices);
@@ -677,6 +680,141 @@ BigInt& BigInt::operator-= (const BigInt& other)
     return *this;
 }
 
+BigInt BigInt::operator- (intmax_t other) const
+{
+    if (other == 0) {
+        return *this;
+    }
+
+    BigInt result;
+
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    if (_sign != (other < 0)) {
+        absadd(_slices, other_slices, result);
+        result._sign = _sign;
+    }
+    else {
+        int cmp = abscmp(_slices, other_slices);
+        if (cmp == 0) {
+            return result;
+        }
+        else if (cmp > 0) {
+            abssub(_slices, other_slices, result);
+            result._sign = _sign;
+        }
+        else {      // cmp < 0
+            abssub(other_slices, _slices, result);
+            result._sign = !_sign;
+        }
+    }
+
+    return result;
+}
+
+BigInt& BigInt::operator-= (intmax_t other)
+{
+    if (other == 0) {
+        return *this;
+    }
+
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    if (_sign != (other < 0)) {
+        absaddto(other_slices);
+    }
+    else {
+        int cmp = abscmp(_slices, other_slices);
+        if (cmp == 0) {
+            _sign = false;
+            _slices.clear();
+        }
+        else if (cmp > 0) {
+            abssubfrom(other_slices);
+        }
+        else {      // cmp < 0
+            BigInt result;
+            abssub(other_slices, _slices, result);
+            _sign = !_sign;
+            _slices = std::move(result._slices);
+        }
+    }
+
+    return *this;
+}
+
+// ++bi
+BigInt& BigInt::operator++ ()
+{
+    slice_a other_slices(1);
+
+    if (iszero()) {
+        _sign = false;
+        _slices.clear();
+        _slices.push_back(1);
+    }
+    else if (!_sign) {      // this is larger than 0
+        absaddto(other_slices);
+    }
+    else {                  // this is less than 0
+        int cmp = abscmp(_slices, other_slices);
+        if (cmp == 0) { // this is equal to -1
+            _sign = false;
+            _slices.clear();
+        }
+        else {          // this is less than -1
+            abssubfrom(other_slices);
+        }
+    }
+
+    return *this;
+}
+
+// bi++
+BigInt BigInt::operator++ (int)
+{
+   BigInt temp = *this;
+   ++*this;
+   return temp;
+}
+
+// --bi
+BigInt& BigInt::operator-- ()
+{
+    slice_a other_slices(1);
+
+    if (iszero()) {
+        _sign = true;
+        _slices.clear();
+        _slices.push_back(1);
+    }
+    else if (_sign) {           // this is less than 0
+        absaddto(other_slices);
+    }
+    else {                      // this is larger than 0
+        int cmp = abscmp(_slices, other_slices);
+        if (cmp == 0) {         // this is equal to 1
+            _sign = false;
+            _slices.clear();
+        }
+        else {                  // this is larger than or equal to 1
+            abssubfrom(other_slices);
+        }
+    }
+
+    return *this;
+}
+
+// bi--
+BigInt BigInt::operator-- (int)
+{
+   BigInt temp = *this;
+   --*this;
+   return temp;
+}
+
 bool BigInt::operator== (const BigInt& other) const
 {
     if (_sign == other._sign && abscmp(_slices, other._slices) == 0)
@@ -701,13 +839,11 @@ bool BigInt::operator> (const BigInt& other) const
     if (_sign && !other._sign)
         return false;
 
-    int r = abscmp(_slices, other._slices);
-
     // same sign
+    int cmp = abscmp(_slices, other._slices);
     if (!_sign)
-        return r > 0;
-
-    return r < 0;
+        return cmp > 0;
+    return cmp < 0;
 }
 
 bool BigInt::operator>= (const BigInt& other) const
@@ -719,10 +855,10 @@ bool BigInt::operator>= (const BigInt& other) const
         return false;
 
     // same sign
+    int cmp = abscmp(_slices, other._slices);
     if (!_sign)
-        return abscmp(_slices, other._slices) >= 0;
-
-    return abscmp(_slices, other._slices) <= 0;
+        return cmp >= 0;
+    return cmp <= 0;
 }
 
 bool BigInt::operator< (const BigInt& other) const
@@ -734,10 +870,10 @@ bool BigInt::operator< (const BigInt& other) const
         return true;
 
     // same sign
+    int cmp = abscmp(_slices, other._slices);
     if (!_sign)
-        return abscmp(_slices, other._slices) < 0;
-
-    return abscmp(_slices, other._slices) > 0;
+        return cmp < 0;
+    return cmp > 0;
 }
 
 bool BigInt::operator<= (const BigInt& other) const
@@ -749,10 +885,104 @@ bool BigInt::operator<= (const BigInt& other) const
         return true;
 
     // same sign
+    int cmp = abscmp(_slices, other._slices);
     if (!_sign)
-        return abscmp(_slices, other._slices) <= 0;
+        return cmp <= 0;
+    return cmp >= 0;
+}
 
-    return abscmp(_slices, other._slices) >= 0;
+bool BigInt::operator== (intmax_t other) const
+{
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    if (_sign == (other < 0) && abscmp(_slices, other_slices) == 0)
+        return true;
+
+    return false;
+}
+
+bool BigInt::operator!= (intmax_t other) const
+{
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    if (_sign == (other < 0) && abscmp(_slices, other_slices) == 0)
+        return false;
+
+    return true;
+}
+
+bool BigInt::operator> (intmax_t other) const
+{
+    if (!_sign && (other < 0))
+        return true;
+
+    if (_sign && !(other < 0))
+        return false;
+
+    // same sign
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    int cmp = abscmp(_slices, other_slices);
+    if (!_sign)
+        return cmp > 0;
+    return cmp < 0;
+}
+
+bool BigInt::operator>= (intmax_t other) const
+{
+    if (!_sign && (other < 0))
+        return true;
+
+    if (_sign && !(other < 0))
+        return false;
+
+    // same sign
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    int cmp = abscmp(_slices, other_slices);
+    if (!_sign)
+        return cmp >= 0;
+    return cmp <= 0;
+}
+
+bool BigInt::operator< (intmax_t other) const
+{
+    if (!_sign && (other < 0))
+        return false;
+
+    if (_sign && !(other < 0))
+        return true;
+
+    // same sign
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    int cmp = abscmp(_slices, other_slices);
+    if (!_sign)
+        return cmp < 0;
+    return cmp > 0;
+}
+
+bool BigInt::operator<= (intmax_t other) const
+{
+    if (!_sign && (other < 0))
+        return false;
+
+    if (_sign && !(other < 0))
+        return true;
+
+    // same sign
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    int cmp = abscmp(_slices, other_slices);
+    if (!_sign)
+        return cmp <= 0;
+    return cmp >= 0;
 }
 
 #include <sstream>
@@ -827,6 +1057,30 @@ int main()
             act_r = (big_a <= big_b);
             assert(exp_r == act_r);
 
+            exp_r = (ntv_a == ntv_b);
+            act_r = (big_a == ntv_b);
+            assert(exp_r == act_r);
+
+            exp_r = (ntv_a != ntv_b);
+            act_r = (big_a != ntv_b);
+            assert(exp_r == act_r);
+
+            exp_r = (ntv_a > ntv_b);
+            act_r = (big_a > ntv_b);
+            assert(exp_r == act_r);
+
+            exp_r = (ntv_a >= ntv_b);
+            act_r = (big_a >= ntv_b);
+            assert(exp_r == act_r);
+
+            exp_r = (ntv_a < ntv_b);
+            act_r = (big_a < ntv_b);
+            assert(exp_r == act_r);
+
+            exp_r = (ntv_a <= ntv_b);
+            act_r = (big_a <= ntv_b);
+            assert(exp_r == act_r);
+
             string str_ntv_r;
 
             oss.str("");
@@ -871,6 +1125,72 @@ int main()
             oss.str("");
             oss << big_aa;
             str_ntv_r = to_string(ntv_aa);
+            assert(oss.str() == str_ntv_r);
+
+            big_a = big_a + ntv_b;
+            ntv_a = ntv_a + ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            cout << oss.str() << endl;
+            cout << str_ntv_r << endl;
+            assert(oss.str() == str_ntv_r);
+
+            big_a += ntv_b;
+            ntv_a += ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            assert(oss.str() == str_ntv_r);
+
+            big_a = big_a - ntv_b;
+            ntv_a = ntv_a - ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            assert(oss.str() == str_ntv_r);
+
+            big_a -= ntv_b;
+            ntv_a -= ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            assert(oss.str() == str_ntv_r);
+
+            big_a++;
+            ntv_a++;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            assert(oss.str() == str_ntv_r);
+
+            big_a = ++big_b;
+            ntv_a = ++ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            assert(oss.str() == str_ntv_r);
+
+            big_a--;
+            ntv_a--;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
+            assert(oss.str() == str_ntv_r);
+
+            big_a = --big_b;
+            ntv_a = --ntv_b;
+
+            oss.str("");
+            oss << big_a;
+            str_ntv_r = to_string(ntv_a);
             assert(oss.str() == str_ntv_r);
         }
     }
