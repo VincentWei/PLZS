@@ -380,30 +380,35 @@ class BigInt {
     vector<int8_t> _bytes;
 
   public:
-    // 默认构造器
     BigInt() {
         _sign = false;
     }
 
-    // 构造器
     BigInt(intmax_t native_int);
     BigInt(const std::string& str);
-    BigInt(const BigInt &other);            // copy constructor
+    BigInt(const BigInt& other);            // copy constructor
+    BigInt(BigInt&& other);                 // move constructor
 
-    // 属性获取器
+    // getters
     bool sign() const { return _sign; }
     const vector<int8_t>& bytes() const { return _bytes; }
 
-    // 重载运算符
-    BigInt& operator= (const BigInt& other);
-    BigInt& operator= (intmax_t native_int);
+    // customized operators
+    BigInt& operator= (const BigInt& other);    // copy assignment operator
+    BigInt& operator= (BigInt&& other);         // move assignment operator
+    BigInt& operator= (intmax_t other);
 
-    BigInt& operator+ (const BigInt& other) const;
+    BigInt  operator+  (const BigInt& other) const;
     BigInt& operator+= (const BigInt& other);
+    BigInt  operator+  (intmax_t other) const;
+    BigInt& operator+= (intmax_t other);
 
-    BigInt& operator- (const BigInt& other) const;
+    BigInt  operator-  () const;             // -bi
+
+    BigInt  operator-  (const BigInt& other) const;
     BigInt& operator-= (const BigInt& other);
-    BigInt& operator- () const;             // -bi
+    BigInt  operator-  (intmax_t other) const;
+    BigInt& operator-= (intmax_t other);
 
     BigInt& operator++ ();                  // ++bi
     BigInt& operator++ (int);               // bi++
@@ -411,26 +416,40 @@ class BigInt {
     BigInt& operator-- ();                  // --bi
     BigInt& operator-- (int);               // bi--
 
-    BigInt& operator* (const BigInt& other) const;
+    BigInt  operator*  (const BigInt& other) const;
     BigInt& operator*= (const BigInt& other);
+    BigInt  operator*  (intmax_t other) const;
+    BigInt& operator*= (intmax_t other);
 
-    BigInt& operator/ (const BigInt& other) const;
+    BigInt  operator/  (const BigInt& other) const;
     BigInt& operator/= (const BigInt& other);
+    BigInt  operator/  (intmax_t other) const;
+    BigInt& operator/= (intmax_t other);
 
-    BigInt& operator% (const BigInt& other) const;
+    BigInt  operator%  (const BigInt& other) const;
     BigInt& operator%= (const BigInt& other);
+    BigInt  operator%  (intmax_t other) const;
+    BigInt& operator%= (intmax_t other);
 
     bool operator== (const BigInt& other) const;
     bool operator!= (const BigInt& other) const;
-    bool operator> (const BigInt& other) const;
+    bool operator>  (const BigInt& other) const;
     bool operator>= (const BigInt& other) const;
-    bool operator< (const BigInt& other) const;
+    bool operator<  (const BigInt& other) const;
     bool operator<= (const BigInt& other) const;
+
+    bool operator== (intmax_t other) const;
+    bool operator!= (intmax_t other) const;
+    bool operator>  (intmax_t other) const;
+    bool operator>= (intmax_t other) const;
+    bool operator<  (intmax_t other) const;
+    bool operator<= (intmax_t other) const;
 
   private:
     BigInt absadd(const BigInt& other) const;
     void   absaddto(const BigInt& other);
     int    abscmp(const BigInt& other) const;
+    ...
 };
 
     BigInt a(1234567890);

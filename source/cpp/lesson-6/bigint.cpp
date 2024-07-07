@@ -24,22 +24,29 @@ class BigInt {
 
     BigInt(intmax_t native_int);
     BigInt(const std::string& str);
-    BigInt(const BigInt &other);            // copy constructor
-    BigInt(BigInt &&other);                 // move constructor
+    BigInt(const BigInt& other);            // copy constructor
+    BigInt(BigInt&& other);                 // move constructor
 
+    // some getters
     bool sign() const { return _sign; }
     const std::vector<int8_t>& bytes() const { return _bytes; }
 
+    // overloaded operators
     BigInt& operator= (const BigInt& other);        // copy assignment operator
     BigInt& operator= (BigInt&& other) noexcept;    // move assignment operator
-    BigInt& operator= (intmax_t native_int);
+    BigInt& operator= (intmax_t other);
 
-    BigInt operator+ (const BigInt& other) const;
+    BigInt  operator+  (const BigInt& other) const;
     BigInt& operator+= (const BigInt& other);
+    BigInt  operator+  (intmax_t other) const;
+    BigInt& operator+= (intmax_t other);
 
-    BigInt operator- () const;             // -bi
-    BigInt operator- (const BigInt& other) const;
+    BigInt  operator-  () const;             // -bi
+
+    BigInt  operator-  (const BigInt& other) const;
     BigInt& operator-= (const BigInt& other);
+    BigInt  operator-  (intmax_t other) const;
+    BigInt& operator-= (intmax_t other);
 
     BigInt& operator++ ();                  // ++bi
     BigInt& operator++ (int);               // bi++
@@ -47,21 +54,34 @@ class BigInt {
     BigInt& operator-- ();                  // --bi
     BigInt& operator-- (int);               // bi--
 
-    BigInt& operator* (const BigInt& other) const;
+    BigInt  operator*  (const BigInt& other) const;
     BigInt& operator*= (const BigInt& other);
+    BigInt  operator*  (intmax_t other) const;
+    BigInt& operator*= (intmax_t other);
 
-    BigInt& operator/ (const BigInt& other) const;
+    BigInt  operator/  (const BigInt& other) const;
     BigInt& operator/= (const BigInt& other);
+    BigInt  operator/  (intmax_t other) const;
+    BigInt& operator/= (intmax_t other);
 
-    BigInt& operator% (const BigInt& other) const;
+    BigInt  operator%  (const BigInt& other) const;
     BigInt& operator%= (const BigInt& other);
+    BigInt  operator%  (intmax_t other) const;
+    BigInt& operator%= (intmax_t other);
 
     bool operator== (const BigInt& other) const;
     bool operator!= (const BigInt& other) const;
-    bool operator> (const BigInt& other) const;
+    bool operator>  (const BigInt& other) const;
     bool operator>= (const BigInt& other) const;
-    bool operator< (const BigInt& other) const;
+    bool operator<  (const BigInt& other) const;
     bool operator<= (const BigInt& other) const;
+
+    bool operator== (intmax_t other) const;
+    bool operator!= (intmax_t other) const;
+    bool operator>  (intmax_t other) const;
+    bool operator>= (intmax_t other) const;
+    bool operator<  (intmax_t other) const;
+    bool operator<= (intmax_t other) const;
 
   private:
     void normalize();
