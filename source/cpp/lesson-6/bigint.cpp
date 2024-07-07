@@ -18,6 +18,7 @@
 class BigInt {
   public:
     using slice_t = int8_t;
+    using twin_t  = int16_t;
     using slice_v = std::vector<slice_t>;
     static const int slice_width_k = 2;
     static const int max_slice_nint_k = 99;
@@ -139,6 +140,8 @@ class BigInt {
     static int  abscmp(const Ta& one, const Tb& other);
     template <class Ta, class Tb>
     static void abssub(const Ta& one, const Tb& other, BigInt& result);
+    template <class Ta, class Tb>
+    static void absmul(const Ta& one, const Tb& other, BigInt& result);
 
     template <class T>
     void abssubfrom(const T& other);
@@ -431,6 +434,59 @@ void BigInt::abssub(const Ta& one, const Tb& other, BigInt &result)
 
     assert(borrow == 0);
     result.normalize();
+}
+
+/* this must be larger than other */
+template <class Ta, class Tb>
+void BigInt::absmul(const Ta& one, const Tb& other, BigInt &result)
+{
+    size_t len_a = one.size();
+    size_t len_b = other.size();
+    size_t len_r = 0;   // length of result
+
+    result._slices.clear();
+
+    for (size_t i = 0; i < len_a; i++) {
+        twin_t slice_a = one[i];
+
+        twin_t carry = 0;
+        for (size_t j = 0; j < len_b; j++) {
+            twin_t slice_b = other[j];
+
+            twin_t p = slice_a * slice_b + carry;
+            if (p >= slice_divisor_k) {
+                carry = p / slice_divisor_k;
+                p %= slice_divisor_k;
+            }
+            else {
+                carry = 0;
+            }
+
+            size_t k = j + i;
+            if (k >= len_r) {
+                result._slices.push_back(p);
+                len_r++;
+            }
+            else {
+                twin_t slice_r = result._slices[k];
+                slice_r += p;
+                if (slice_r >= slice_divisor_k) {
+                    carry++;
+                    slice_r -= slice_divisor_k;
+                }
+
+                result._slices[k] = slice_r;
+            }
+        }
+
+        if (carry > 0) {
+            result._slices.push_back(carry);
+            len_r++;
+            carry = 0;
+        }
+
+        assert(len_r == result._slices.size());
+    }
 }
 
 /* this must be larger than other */
@@ -985,11 +1041,100 @@ bool BigInt::operator<= (intmax_t other) const
     return cmp >= 0;
 }
 
+BigInt  BigInt::operator*  (const BigInt& other) const
+{
+    BigInt result;
+
+    if (iszero() || other.iszero()) {
+        return result;
+    }
+
+    absmul(_slices, other._slices, result);
+    if (_sign == other._sign) {
+        result._sign = false;
+    }
+    else {
+        result._sign = true;
+    }
+
+    return result;
+}
+
+BigInt& BigInt::operator*= (const BigInt& other)
+{
+    if (iszero() || other.iszero()) {
+        _sign = false;
+        _slices.clear();
+        _slices.shrink_to_fit();
+        return *this;
+    }
+
+    BigInt result;
+    absmul(_slices, other._slices, result);
+    if (_sign == other._sign) {
+        _sign = false;
+    }
+    else {
+        _sign = true;
+    }
+    _slices = std::move(result._slices);
+
+    return *this;
+}
+
+BigInt  BigInt::operator*  (intmax_t other) const
+{
+    BigInt result;
+
+    if (iszero() || other == 0) {
+        return result;
+    }
+
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    absmul(_slices, other_slices, result);
+    if (_sign == (other < 0)) {
+        result._sign = false;
+    }
+    else {
+        result._sign = true;
+    }
+
+    return result;
+}
+
+BigInt& BigInt::operator*= (intmax_t other)
+{
+    if (iszero() || other == 0) {
+        _sign = false;
+        _slices.clear();
+        _slices.shrink_to_fit();
+        return *this;
+    }
+
+    BigInt result;
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    absmul(_slices, other_slices, result);
+    if (_sign == (other < 0)) {
+        _sign = false;
+    }
+    else {
+        _sign = true;
+    }
+    _slices = std::move(result._slices);
+
+    return *this;
+}
+
 #include <sstream>
 
-int main()
+void test_bigint(void)
 {
     static intmax_t cases[] = {
+        INT32_MAX,
         1234567890,
         1204507800,
         123456789,
@@ -1011,6 +1156,7 @@ int main()
         -123456789,
         -1204507800,
         -1234567890,
+        INT32_MIN,
     };
 
     for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
@@ -1195,6 +1341,45 @@ int main()
         }
     }
 
+    /* test operators: *, *=, /, /=, %, and %= */
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        intmax_t ntv_a = cases[i];
+        BigInt   big_a(ntv_a);
+
+        ostringstream oss;
+        string str_ntv_r;
+        for (size_t j = 0; j < sizeof(cases)/sizeof(cases[0]); j++) {
+            intmax_t ntv_b = cases[j];
+            BigInt   big_b(cases[j]);
+
+            cout << "native integers: " << ntv_a << " and " << ntv_b << endl;
+            cout << "   big integers: " << big_a << " and " << big_b << endl;
+
+            oss.str("");
+            oss << big_a * big_b;
+            str_ntv_r = to_string(ntv_a * ntv_b);
+            cout << ntv_a * ntv_b << endl;
+            cout << big_a * big_b << endl;
+            assert(oss.str() == str_ntv_r);
+
+            oss.str("");
+            oss << big_a * ntv_b;
+            str_ntv_r = to_string(ntv_a * ntv_b);
+            assert(oss.str() == str_ntv_r);
+
+            BigInt big_r(big_a);
+            intmax_t ntv_r = ntv_a;
+
+            big_r *= ntv_b;
+            ntv_r *= ntv_b;
+
+            oss.str("");
+            oss << big_r;
+            str_ntv_r = to_string(ntv_r);
+            assert(oss.str() == str_ntv_r);
+        }
+    }
+
     cout << "sizeof(intmax_t): " << sizeof(intmax_t) << endl;
     cout << "sizeof(slice_t): " << sizeof(BigInt::slice_t) << endl;
 
@@ -1202,5 +1387,42 @@ int main()
     cout << "max_slice_nint_k: " << BigInt::max_slice_nint_k << endl;
     cout << "slice_divisor_k: " << BigInt::slice_divisor_k << endl;
     cout << "max_nint_slices: " << BigInt::max_nint_slices() << endl;
+}
+
+void factorial(BigInt& result, unsigned n)
+{
+    if (n > 1) {
+        factorial(result, n - 1);
+        result *= n;
+    }
+    else
+        result = 1;
+}
+
+void summary_of_factorials(BigInt& result, unsigned max)
+{
+    result = 0;
+
+    unsigned n = 0;
+    while (n <= max) {
+        BigInt tmp;
+        factorial(tmp, n);
+        result += tmp;
+        n++;
+    }
+}
+
+int main()
+{
+    test_bigint();
+
+    BigInt result;
+    factorial(result, 5);
+    assert(result == 120);
+
+    unsigned max;
+    cin >> max;
+    summary_of_factorials(result, max);
+    cout << result << endl;
 }
 
