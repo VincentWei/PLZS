@@ -25,13 +25,13 @@ class BigInt {
     BigInt(intmax_t native_int);
     BigInt(const std::string& str);
     BigInt(const BigInt &other);            // copy constructor
-    BigInt(const BigInt &&other);           // move constructor
+    BigInt(BigInt &&other);                 // move constructor
 
     bool sign() const { return _sign; }
     const std::vector<int8_t>& bytes() const { return _bytes; }
 
-    BigInt& operator= (const BigInt& other);
-    // BigInt& operator= (const BigInt&& other);
+    BigInt& operator= (const BigInt& other);        // copy assignment operator
+    BigInt& operator= (BigInt&& other) noexcept;    // move assignment operator
     BigInt& operator= (intmax_t native_int);
 
     BigInt operator+ (const BigInt& other) const;
@@ -167,32 +167,41 @@ BigInt::BigInt(const string& str)
 
 BigInt::BigInt(const BigInt &other)
 {
+    clog << "copy constructor called\n";
     _sign = other.sign();
     _bytes = other.bytes();
 }
 
-BigInt::BigInt(const BigInt &&other)
+BigInt::BigInt(BigInt &&other)
 {
-    cout << "move constructor called\n";
+    clog << "move constructor called\n";
     _sign = other._sign;
+    _bytes.clear();
     _bytes = std::move(other._bytes);
 }
 
 BigInt& BigInt::operator= (const BigInt& other)
 {
+    clog << "copy assignment operator called\n";
+
     _sign = other._sign;
     _bytes = other._bytes;
     return *this;
 }
 
-#if 0
-BigInt& BigInt::operator= (const BigInt&& other)
+// move assignment operator
+BigInt& BigInt::operator= (BigInt&& other) noexcept
 {
-    _sign = other._sign;
-    _bytes = std::move(other._bytes);
+    clog << "move assignment operator called\n";
+
+    if (this != &other) {
+        _sign = other._sign;
+        _bytes.clear();
+        _bytes = std::move(other._bytes);
+    }
+
     return *this;
 }
-#endif
 
 BigInt& BigInt::operator= (intmax_t native_int)
 {
@@ -349,12 +358,12 @@ void BigInt::abssubfrom(const BigInt& other)
 
 BigInt BigInt::operator+ (const BigInt& other) const
 {
+    BigInt result;
+
     if (other.iszero()) {
         return *this;
     }
-
-    BigInt result;
-    if (_sign == other._sign) {
+    else if (_sign == other._sign) {
         absadd(other, result);
         result._sign = _sign;
     }
@@ -478,14 +487,18 @@ int BigInt::abscmp(const BigInt& other) const
 {
     size_t len_a = this->_bytes.size();
     size_t len_b = other._bytes.size();
-    size_t len_max = (len_a > len_b) ? len_a : len_b;
 
-    size_t i = len_max;
+    if (len_a > len_b) {
+        return _bytes[len_a - 1];
+    }
+    else if (len_a < len_b) {
+        return -other._bytes[len_b - 1];
+    }
+
+    // same size
+    size_t i = len_a;
     while (i > 0) {
-        int n_a = (i - 1 < len_a) ? this->_bytes[i - 1] : 0;
-        int n_b = (i - 1 < len_b) ? other._bytes[i - 1] : 0;
-
-        int cmp = n_a - n_b;
+        int cmp = _bytes[i - 1] - other._bytes[i - 1];
         if (cmp != 0)
             return cmp;
 
@@ -520,7 +533,6 @@ bool BigInt::operator> (const BigInt& other) const
         return false;
 
     int r = abscmp(other);
-    cout << r << endl;
 
     // same sign
     if (!_sign)
@@ -604,9 +616,10 @@ int main()
 
     for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
         intmax_t ntv_a = cases[i];
+        intmax_t ntv_aa = cases[i];
         string   str_a = to_string(ntv_a);
         BigInt   big_a(ntv_a);
-        BigInt   big_aa(str_a);
+        BigInt   big_aa = BigInt(str_a);
 
         ostringstream oss;
         oss << big_a;
@@ -683,6 +696,13 @@ int main()
             cout << str_ntv_r << endl;
             assert(oss.str() == str_ntv_r);
 
+            big_aa = big_a + big_b;
+            ntv_aa = ntv_a + ntv_b;
+
+            oss.str("");
+            oss << big_aa;
+            str_ntv_r = to_string(ntv_aa);
+            assert(oss.str() == str_ntv_r);
         }
     }
 }
