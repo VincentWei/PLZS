@@ -20,8 +20,8 @@ class BigInt {
     using slice_t = int8_t;
     using twin_t  = int16_t;
     using slice_v = std::vector<slice_t>;
-    static const int slice_width_k = 2;
-    static const int max_slice_nint_k = 99;
+    static const int slice_width_k = 2;         // int32: 9
+    static const int max_slice_nint_k = 99;     // int32: 999999999
     static const int slice_divisor_k = (max_slice_nint_k + 1);
     static const int max_nint_slices_k = 10;
 
@@ -183,8 +183,14 @@ ostream& operator<< (ostream& os, const BigInt& bi)
                 os << r;
             }
             else {
-                if (r < 10)
-                    os << "0";
+                intmax_t tens = 10;
+                for (int i = 0; i < BigInt::slice_width_k - 1; i++) {
+                    if (r < tens)
+                        os << "0";
+
+                    tens *= 10;
+                }
+
                 os << r;
             }
 
@@ -239,30 +245,31 @@ BigInt::BigInt(const string& str)
         return;
     }
 
-    if (str[0] == '-')
+    const char *digits = str.c_str();
+    if (str[0] == '-') {
         _sign = true;
-    else
+        digits++;
+        len--;
+    }
+    else {
         _sign = false;
+    }
 
     size_t left = len;
-    size_t two_digits = _sign ? 2 : 1;
-    size_t one_digit = _sign ? 1 : 0;
     while (left > 0) {
-        string digits;
-        if (left > two_digits) {
-            digits = str.substr(left - 2, 2);
-            left -= 2;
+        string slice;
+        if (left > slice_width_k) {
+            slice = string(digits + left - slice_width_k, slice_width_k);
+            left -= slice_width_k;
         }
-        else if (left > one_digit) {
-            digits = str.substr(left - 1, 1);
-            left -= 1;
-        }
-
-        if (digits.empty()) {
-            break;
+        else {
+            slice = string(digits, left);
+            left = 0;
         }
 
-        int r = stoi(digits);
+        assert(!slice.empty());
+
+        int r = stoi(slice);
         _slices.push_back(r);
     }
 }
@@ -270,6 +277,7 @@ BigInt::BigInt(const string& str)
 BigInt::BigInt(const BigInt &other)
 {
     clog << "copy constructor called\n";
+
     _sign = other.sign();
     _slices = other.slices();
 }
@@ -277,6 +285,7 @@ BigInt::BigInt(const BigInt &other)
 BigInt::BigInt(BigInt &&other)
 {
     clog << "move constructor called\n";
+
     _sign = other._sign;
     _slices.clear();
     _slices = std::move(other._slices);
