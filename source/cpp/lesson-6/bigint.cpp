@@ -14,22 +14,28 @@
 #include <cassert>
 
 class BigInt {
-    bool _sign;
-    std::vector<int8_t> _bytes;
-
   public:
+    using slice_t = int8_t;
+    using slice_v = std::vector<slice_t>;
+    static const int slice_width_k = 2;
+    static const int max_slice_nint_k = 99;
+    static const int slice_divisor_k = (max_slice_nint_k + 1);
+
     BigInt() {
         _sign = false;
     }
 
-    BigInt(intmax_t native_int);
+    BigInt(intmax_t nint);
     BigInt(const std::string& str);
     BigInt(const BigInt& other);            // copy constructor
     BigInt(BigInt&& other);                 // move constructor
 
     // some getters
     bool sign() const { return _sign; }
-    const std::vector<int8_t>& bytes() const { return _bytes; }
+    const slice_v& slices() const { return _slices; }
+
+    // getter or setter for max number of slices for native integer
+    static int max_nint_slices();
 
     // overloaded operators
     BigInt& operator= (const BigInt& other);        // copy assignment operator
@@ -84,19 +90,38 @@ class BigInt {
     bool operator<= (intmax_t other) const;
 
   private:
+    static int _max_nint_slices;
+    static void initfrom(intmax_t other, slice_v& result);
+
+    bool _sign;
+    slice_v _slices;
+
+    void initfrom(intmax_t other);
     void normalize();
     bool iszero() const;
-    void absadd(const BigInt& other, BigInt& result) const;
-    void absaddto(const BigInt& other);
-    int  abscmp(const BigInt& other) const;
+    void absadd(const slice_v& other, BigInt& result) const;
+    void absaddto(const slice_v& other);
+    int  abscmp(const slice_v& other) const;
 
-    void abssub(const BigInt& other, BigInt& result) const;
-    void abssubfrom(const BigInt& other);
+    void abssub(const slice_v& other, BigInt& result) const;
+    void abssubfrom(const slice_v& other);
 };
 
 #include <iostream>
 
 using namespace std;
+
+int BigInt::_max_nint_slices;
+
+int BigInt::max_nint_slices()
+{
+    if (_max_nint_slices == 0) {
+        std::string max_nint = std::to_string(INTMAX_MAX);
+        _max_nint_slices = (max_nint.length() + 1)/slice_width_k;
+    }
+
+    return _max_nint_slices;
+}
 
 ostream& operator<< (ostream& os, const BigInt& bi)
 {
@@ -104,14 +129,14 @@ ostream& operator<< (ostream& os, const BigInt& bi)
         os << "-";
     }
 
-    auto bytes = bi.bytes();
-    size_t len = bytes.size();
+    auto slices = bi.slices();
+    size_t len = slices.size();
     if (len == 0) {
         os << "0";
     }
     else {
         for (size_t i = len - 1; ; i--) {
-            int r = (int)bytes[i];
+            int r = (int)slices[i];
             if (i == len - 1) {
                 os << r;
             }
@@ -129,23 +154,35 @@ ostream& operator<< (ostream& os, const BigInt& bi)
     return os;
 }
 
-BigInt::BigInt(intmax_t native_int)
+void BigInt::initfrom(intmax_t nint, slice_v& slices)
 {
-    if (native_int < 0) {
+    assert(slices.size() == 0);
+
+    for (size_t i = 0; i < sizeof(intmax_t); i++) {
+        if (nint == 0)
+            break;
+
+        slice_t r = nint % slice_divisor_k;
+        slices.push_back(r);
+        nint /= slice_divisor_k;
+    }
+}
+
+void BigInt::initfrom(intmax_t nint)
+{
+    if (nint < 0) {
         _sign = true;
-        native_int = -native_int;
+        nint = -nint;
     }
     else
         _sign = false;
 
-    for (size_t i = 0; i < sizeof(intmax_t); i++) {
-        if (native_int == 0)
-            break;
+    initfrom(nint, _slices);
+}
 
-        int8_t r = native_int % 100;
-        _bytes.push_back(r);
-        native_int /= 100;
-    }
+BigInt::BigInt(intmax_t nint)
+{
+    initfrom(nint);
 }
 
 BigInt::BigInt(const string& str)
@@ -153,7 +190,7 @@ BigInt::BigInt(const string& str)
     size_t len = str.length();
     if (len == 0) {
         _sign = false;
-        _bytes.clear();
+        _slices.clear();
         return;
     }
 
@@ -181,7 +218,7 @@ BigInt::BigInt(const string& str)
         }
 
         int r = stoi(digits);
-        _bytes.push_back(r);
+        _slices.push_back(r);
     }
 }
 
@@ -189,23 +226,24 @@ BigInt::BigInt(const BigInt &other)
 {
     clog << "copy constructor called\n";
     _sign = other.sign();
-    _bytes = other.bytes();
+    _slices = other.slices();
 }
 
 BigInt::BigInt(BigInt &&other)
 {
     clog << "move constructor called\n";
     _sign = other._sign;
-    _bytes.clear();
-    _bytes = std::move(other._bytes);
+    _slices.clear();
+    _slices = std::move(other._slices);
 }
 
+// copy assignment operator
 BigInt& BigInt::operator= (const BigInt& other)
 {
     clog << "copy assignment operator called\n";
 
     _sign = other._sign;
-    _bytes = other._bytes;
+    _slices = other._slices;
     return *this;
 }
 
@@ -216,120 +254,122 @@ BigInt& BigInt::operator= (BigInt&& other) noexcept
 
     if (this != &other) {
         _sign = other._sign;
-        _bytes.clear();
-        _bytes = std::move(other._bytes);
+        _slices.clear();
+        _slices = std::move(other._slices);
     }
 
     return *this;
 }
 
-BigInt& BigInt::operator= (intmax_t native_int)
+BigInt& BigInt::operator= (intmax_t other)
 {
-    BigInt tmp(native_int);
-    _sign = tmp._sign;
-    _bytes = std::move(tmp._bytes);
+    _slices.clear();
+    initfrom(other);
+    _slices.shrink_to_fit();
     return *this;
 }
 
 bool BigInt::iszero() const
 {
-    if (_bytes.size() == 0 ||
-            (_bytes.size() == 1 && _bytes[0] == 0))
+    if (_slices.size() == 0 ||
+            (_slices.size() == 1 && _slices[0] == 0))
         return true;
 
     return false;
 }
 
-void BigInt::absadd(const BigInt& other, BigInt &result) const
+void BigInt::absadd(const slice_v& other, BigInt &result) const
 {
-    size_t len_a = this->_bytes.size();
-    size_t len_b = other._bytes.size();
+    size_t len_a = _slices.size();
+    size_t len_b = other.size();
     size_t len_max = (len_a > len_b) ? len_a : len_b;
 
-    result._bytes.clear();
+    result._slices.clear();
 
     int carry = 0;
     for (size_t i = 0; i < len_max; i++) {
-        int n_a = (i < len_a) ? this->_bytes[i] : 0;
-        int n_b = (i < len_b) ? other._bytes[i] : 0;
+        int n_a = (i < len_a) ? _slices[i] : 0;
+        int n_b = (i < len_b) ? other[i] : 0;
 
         int r = n_a + n_b + carry;
-        if (r >= 100) {
+        if (r >= slice_divisor_k) {
             carry = 1;
-            r -= 100;
+            r -= slice_divisor_k;
         }
         else
             carry = 0;
 
-        result._bytes.push_back(r);
+        result._slices.push_back(r);
     }
 
     if (carry > 0) {
-        result._bytes.push_back(carry);
+        result._slices.push_back(carry);
     }
 }
 
-void BigInt::absaddto(const BigInt& other)
+void BigInt::absaddto(const slice_v& other)
 {
-    size_t len_a = this->_bytes.size();
-    size_t len_b = other._bytes.size();
+    size_t len_a = _slices.size();
+    size_t len_b = other.size();
     size_t len_max = (len_a > len_b) ? len_a : len_b;
 
     int carry = 0;
     for (size_t i = 0; i < len_max; i++) {
-        int n_a = (i < len_a) ? this->_bytes[i] : 0;
-        int n_b = (i < len_b) ? other._bytes[i] : 0;
+        int n_a = (i < len_a) ? _slices[i] : 0;
+        int n_b = (i < len_b) ? other[i] : 0;
 
         int r = n_a + n_b + carry;
-        if (r >= 100) {
+        if (r >= slice_divisor_k) {
             carry = 1;
-            r -= 100;
+            r -= slice_divisor_k;
         }
         else
             carry = 0;
 
         if (i >= len_a)
-            _bytes.push_back(r);
+            _slices.push_back(r);
         else
-            _bytes[i] = r;
+            _slices[i] = r;
     }
 
     if (carry > 0) {
-        _bytes.push_back(carry);
+        _slices.push_back(carry);
     }
 }
 
 void BigInt::normalize()
 {
-    auto it = end(_bytes);
-    while (it != begin(_bytes)) {
+    auto it = end(_slices);
+    while (it != begin(_slices)) {
         it--;
 
         int n = *it;
         if (n == 0)
-            _bytes.pop_back();
+            _slices.pop_back();
         else
             break;
     }
 
     /* check if it is zero */
-    if (it == begin(_bytes) && *it == 0)
+    if (it == begin(_slices) && *it == 0)
         _sign = false;
+
+    _slices.shrink_to_fit();
 }
 
-/* this must be large than other */
-void BigInt::abssub(const BigInt& other, BigInt &result) const
+/* this must be larger than other */
+void BigInt::abssub(const slice_v& other, BigInt &result) const
 {
-    size_t len_a = this->_bytes.size();
-    size_t len_b = other._bytes.size();
+    size_t len_a = _slices.size();
+    size_t len_b = other.size();
     size_t len_max = (len_a > len_b) ? len_a : len_b;
 
-    result._bytes.clear();
+    result._slices.clear();
 
     int borrow = 0;
     for (size_t i = 0; i < len_max; i++) {
-        int n_a = (i < len_a) ? this->_bytes[i] : 0;
-        int n_b = (i < len_b) ? other._bytes[i] : 0;
+        int n_a = (i < len_a) ? _slices[i] : 0;
+        int n_b = (i < len_b) ? other[i] : 0;
 
         int r;
         if (n_a - borrow >= n_b) {
@@ -337,27 +377,27 @@ void BigInt::abssub(const BigInt& other, BigInt &result) const
             borrow = 0;
         }
         else {
-            r = n_a - borrow + 100 - n_b;
+            r = n_a - borrow + slice_divisor_k - n_b;
             borrow = 1;
         }
 
-        result._bytes.push_back(r);
+        result._slices.push_back(r);
     }
 
     assert(borrow == 0);
     result.normalize();
 }
 
-/* this must be large than other */
-void BigInt::abssubfrom(const BigInt& other)
+/* this must be larger than other */
+void BigInt::abssubfrom(const slice_v& other)
 {
-    size_t len_a = this->_bytes.size();
-    size_t len_b = other._bytes.size();
+    size_t len_a = _slices.size();
+    size_t len_b = other.size();
     size_t len_max = (len_a > len_b) ? len_a : len_b;
 
     for (size_t i = 0; i < len_max; i++) {
-        int n_a = (i < len_a) ? this->_bytes[i] : 0;
-        int n_b = (i < len_b) ? other._bytes[i] : 0;
+        int n_a = (i < len_a) ? _slices[i] : 0;
+        int n_b = (i < len_b) ? other[i] : 0;
 
         int r;
         if (n_a >= n_b) {
@@ -366,11 +406,11 @@ void BigInt::abssubfrom(const BigInt& other)
         else {
             assert(i + 1 < len_a);
 
-            r = n_a + 100 - n_b;
-            _bytes[i + 1] -= 1;
+            r = n_a + slice_divisor_k - n_b;
+            _slices[i + 1] -= 1;
         }
 
-        _bytes[i] = r;
+        _slices[i] = r;
     }
 
     normalize();
@@ -384,20 +424,20 @@ BigInt BigInt::operator+ (const BigInt& other) const
         return *this;
     }
     else if (_sign == other._sign) {
-        absadd(other, result);
+        absadd(other._slices, result);
         result._sign = _sign;
     }
     else {
-        int cmp = abscmp(other);
+        int cmp = abscmp(other._slices);
         if (cmp == 0) {
             return result;
         }
         else if (cmp > 0) {
-            abssub(other, result);
+            abssub(other._slices, result);
             result._sign = _sign;
         }
         else {      // cmp < 0
-            other.abssub(*this, result);
+            other.abssub(_slices, result);
             result._sign = other._sign;
         }
     }
@@ -412,23 +452,23 @@ BigInt& BigInt::operator+= (const BigInt& other)
     }
 
     if (_sign == other._sign) {
-        absaddto(other);
+        absaddto(other._slices);
     }
     else {
-        int cmp = abscmp(other);
+        int cmp = abscmp(other._slices);
         if (cmp == 0) {
             _sign = false;
-            _bytes.clear();
+            _slices.clear();
             return *this;
         }
         else if (cmp > 0) {
-            abssubfrom(other);
+            abssubfrom(other._slices);
         }
         else {      // cmp < 0
             BigInt result;
-            other.abssub(*this, result);
+            other.abssub(_slices, result);
             _sign = other._sign;
-            _bytes = std::move(result._bytes);
+            _slices = std::move(result._slices);
         }
     }
 
@@ -453,20 +493,20 @@ BigInt BigInt::operator- (const BigInt& other) const
 
     BigInt result;
     if (_sign != other._sign) {
-        absadd(other, result);
+        absadd(other._slices, result);
         result._sign = _sign;
     }
     else {
-        int cmp = abscmp(other);
+        int cmp = abscmp(other._slices);
         if (cmp == 0) {
             return result;
         }
         else if (cmp > 0) {
-            abssub(other, result);
+            abssub(other._slices, result);
             result._sign = _sign;
         }
         else {      // cmp < 0
-            other.abssub(*this, result);
+            other.abssub(_slices, result);
             result._sign = !_sign;
         }
     }
@@ -481,44 +521,44 @@ BigInt& BigInt::operator-= (const BigInt& other)
     }
 
     if (_sign != other._sign) {
-        absaddto(other);
+        absaddto(other._slices);
     }
     else {
-        int cmp = abscmp(other);
+        int cmp = abscmp(other._slices);
         if (cmp == 0) {
             _sign = false;
-            _bytes.clear();
+            _slices.clear();
         }
         else if (cmp > 0) {
-            abssubfrom(other);
+            abssubfrom(other._slices);
         }
         else {      // cmp < 0
             BigInt result;
-            other.abssub(*this, result);
+            other.abssub(_slices, result);
             _sign = !_sign;
-            _bytes = std::move(result._bytes);
+            _slices = std::move(result._slices);
         }
     }
 
     return *this;
 }
 
-int BigInt::abscmp(const BigInt& other) const
+int BigInt::abscmp(const slice_v& other) const
 {
-    size_t len_a = this->_bytes.size();
-    size_t len_b = other._bytes.size();
+    size_t len_a = _slices.size();
+    size_t len_b = other.size();
 
     if (len_a > len_b) {
-        return _bytes[len_a - 1];
+        return _slices[len_a - 1];
     }
     else if (len_a < len_b) {
-        return -other._bytes[len_b - 1];
+        return -other[len_b - 1];
     }
 
     // same size
     size_t i = len_a;
     while (i > 0) {
-        int cmp = _bytes[i - 1] - other._bytes[i - 1];
+        int cmp = _slices[i - 1] - other[i - 1];
         if (cmp != 0)
             return cmp;
 
@@ -530,7 +570,7 @@ int BigInt::abscmp(const BigInt& other) const
 
 bool BigInt::operator== (const BigInt& other) const
 {
-    if (_sign == other._sign && abscmp(other) == 0)
+    if (_sign == other._sign && abscmp(other._slices) == 0)
         return true;
 
     return false;
@@ -538,7 +578,7 @@ bool BigInt::operator== (const BigInt& other) const
 
 bool BigInt::operator!= (const BigInt& other) const
 {
-    if (_sign == other._sign && abscmp(other) == 0)
+    if (_sign == other._sign && abscmp(other._slices) == 0)
         return false;
 
     return true;
@@ -552,7 +592,7 @@ bool BigInt::operator> (const BigInt& other) const
     if (_sign && !other._sign)
         return false;
 
-    int r = abscmp(other);
+    int r = abscmp(other._slices);
 
     // same sign
     if (!_sign)
@@ -571,9 +611,9 @@ bool BigInt::operator>= (const BigInt& other) const
 
     // same sign
     if (!_sign)
-        return abscmp(other) >= 0;
+        return abscmp(other._slices) >= 0;
 
-    return abscmp(other) <= 0;
+    return abscmp(other._slices) <= 0;
 }
 
 bool BigInt::operator< (const BigInt& other) const
@@ -586,9 +626,9 @@ bool BigInt::operator< (const BigInt& other) const
 
     // same sign
     if (!_sign)
-        return abscmp(other) < 0;
+        return abscmp(other._slices) < 0;
 
-    return abscmp(other) > 0;
+    return abscmp(other._slices) > 0;
 }
 
 bool BigInt::operator<= (const BigInt& other) const
@@ -601,9 +641,9 @@ bool BigInt::operator<= (const BigInt& other) const
 
     // same sign
     if (!_sign)
-        return abscmp(other) <= 0;
+        return abscmp(other._slices) <= 0;
 
-    return abscmp(other) >= 0;
+    return abscmp(other._slices) >= 0;
 }
 
 #include <sstream>
@@ -725,5 +765,13 @@ int main()
             assert(oss.str() == str_ntv_r);
         }
     }
+
+    cout << "sizeof(intmax_t): " << sizeof(intmax_t) << endl;
+    cout << "sizeof(slice_t): " << sizeof(BigInt::slice_t) << endl;
+
+    cout << "slice_width_k: " << BigInt::slice_width_k << endl;
+    cout << "max_slice_nint_k: " << BigInt::max_slice_nint_k << endl;
+    cout << "slice_divisor_k: " << BigInt::slice_divisor_k << endl;
+    cout << "max_nint_slices: " << BigInt::max_nint_slices() << endl;
 }
 
