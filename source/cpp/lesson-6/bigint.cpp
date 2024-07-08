@@ -11,19 +11,25 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <algorithm>
+#include <cstdlib>
 #include <cstdint>
 #include <cstring>
 #include <cassert>
+#include <cinttypes>
 
 class BigInt {
   public:
     using slice_t = int8_t;
     using twin_t  = int16_t;
-    using slice_v = std::vector<slice_t>;
+    using slice_v = std::vector<BigInt::slice_t>;
     static const int slice_width_k = 2;         // int32: 9
     static const int max_slice_nint_k = 99;     // int32: 999999999
-    static const int slice_divisor_k = (max_slice_nint_k + 1);
-    static const int max_nint_slices_k = 10;
+    static const int slice_base_k = (max_slice_nint_k + 1);
+    static const int max_nint_slices_k = 10;    // 9223372036854775807
+    static const int max_group_slices_k = 4;
+    static const int group_base_k = 100000000;
+        // slice_base_k ^ max_group_slices_k
 
   private:
     class slice_a {
@@ -121,6 +127,11 @@ class BigInt {
     BigInt  operator%  (intmax_t other) const;
     BigInt& operator%= (intmax_t other);
 
+    static bool divmod(const BigInt& dividend, const BigInt& divisor,
+            BigInt& quotient, BigInt& remainder);
+    static bool divmod(const BigInt& dividend, intmax_t divisor,
+            BigInt& quotient, BigInt& remainder);
+
   private:
     static int _max_nint_slices;
 
@@ -132,7 +143,18 @@ class BigInt {
 
     void initfrom(intmax_t nint);
     void normalize();
-    bool iszero() const;
+    bool iszero() const {
+        if (_slices.size() == 0 ||
+                (_slices.size() == 1 and _slices[0] == 0))
+            return true;
+        return false;
+    }
+
+    bool isone() const {
+        if (_slices.size() == 1 and _slices[0] == 0)
+            return true;
+        return false;
+    }
 
     template <class Ta, class Tb>
     static void absadd(const Ta& one, const Tb& other, BigInt& result);
@@ -142,6 +164,18 @@ class BigInt {
     static void abssub(const Ta& one, const Tb& other, BigInt& result);
     template <class Ta, class Tb>
     static void absmul(const Ta& one, const Tb& other, BigInt& result);
+    template <class T>
+    static void absdiv_slice(const T& dividend, slice_t denominator,
+            BigInt& quotient, BigInt& remainder);
+    template <class T>
+    static void absdiv_nint(const T& dividend, intmax_t denominator,
+            BigInt& quotient, BigInt& remainder);
+    template <class Ta, class Tb>
+    static void absdiv(const Ta& dividend, const Tb& divisor,
+            BigInt& quotient, BigInt& remainder);
+    template <class T>
+    static intmax_t makenint(const T& slices, size_t off = 0,
+            size_t len = max_group_slices_k);
 
     template <class T>
     void abssubfrom(const T& other);
@@ -214,9 +248,9 @@ void BigInt::initfrom(intmax_t nint, T& slices)
         if (nint == 0)
             break;
 
-        slice_t r = nint % slice_divisor_k;
+        slice_t r = nint % slice_base_k;
         slices.push_back(r);
-        nint /= slice_divisor_k;
+        nint /= slice_base_k;
     }
 }
 
@@ -343,15 +377,6 @@ void BigInt::normalize()
     _slices.shrink_to_fit();
 }
 
-bool BigInt::iszero() const
-{
-    if (_slices.size() == 0 ||
-            (_slices.size() == 1 && _slices[0] == 0))
-        return true;
-
-    return false;
-}
-
 template <class Ta, class Tb>
 void BigInt::absadd(const Ta& one, const Tb& other, BigInt &result)
 {
@@ -367,9 +392,9 @@ void BigInt::absadd(const Ta& one, const Tb& other, BigInt &result)
         int n_b = (i < len_b) ? other[i] : 0;
 
         int r = n_a + n_b + carry;
-        if (r >= slice_divisor_k) {
+        if (r >= slice_base_k) {
             carry = 1;
-            r -= slice_divisor_k;
+            r -= slice_base_k;
         }
         else
             carry = 0;
@@ -395,9 +420,9 @@ void BigInt::absaddto(const T& other)
         int n_b = (i < len_b) ? other[i] : 0;
 
         int r = n_a + n_b + carry;
-        if (r >= slice_divisor_k) {
+        if (r >= slice_base_k) {
             carry = 1;
-            r -= slice_divisor_k;
+            r -= slice_base_k;
         }
         else
             carry = 0;
@@ -434,7 +459,7 @@ void BigInt::abssub(const Ta& one, const Tb& other, BigInt &result)
             borrow = 0;
         }
         else {
-            r = n_a - borrow + slice_divisor_k - n_b;
+            r = n_a - borrow + slice_base_k - n_b;
             borrow = 1;
         }
 
@@ -463,9 +488,9 @@ void BigInt::absmul(const Ta& one, const Tb& other, BigInt &result)
             twin_t slice_b = other[j];
 
             twin_t p = slice_a * slice_b + carry;
-            if (p >= slice_divisor_k) {
-                carry = p / slice_divisor_k;
-                p %= slice_divisor_k;
+            if (p >= slice_base_k) {
+                carry = p / slice_base_k;
+                p %= slice_base_k;
             }
             else {
                 carry = 0;
@@ -479,9 +504,9 @@ void BigInt::absmul(const Ta& one, const Tb& other, BigInt &result)
             else {
                 twin_t slice_r = result._slices[k];
                 slice_r += p;
-                if (slice_r >= slice_divisor_k) {
+                if (slice_r >= slice_base_k) {
                     carry++;
-                    slice_r -= slice_divisor_k;
+                    slice_r -= slice_base_k;
                 }
 
                 result._slices[k] = slice_r;
@@ -517,7 +542,7 @@ void BigInt::abssubfrom(const T& other)
         else {
             assert(i + 1 < len_a);
 
-            r = n_a + slice_divisor_k - n_b;
+            r = n_a + slice_base_k - n_b;
             _slices[i + 1] -= 1;
         }
 
@@ -1138,6 +1163,188 @@ BigInt& BigInt::operator*= (intmax_t other)
     return *this;
 }
 
+template <class T>
+void BigInt::absdiv_slice(const T& dividend, slice_t denominator,
+        BigInt& quotient, BigInt& remainder)
+{
+    size_t pos = dividend.size() - 1;
+
+    quotient._slices.clear();
+
+    slice_t rem = 0;
+    while (true) {
+        twin_t numerator = dividend[pos] + rem * slice_base_k;
+        ldiv_t div = ldiv(numerator, denominator);
+
+        slice_t quot = (slice_t)div.quot;
+        quotient._slices.push_back(quot);
+        rem = (slice_t)div.rem;
+
+        if (pos == 0)
+            break;
+        pos--;
+    }
+
+    std::reverse(quotient._slices.begin(), quotient._slices.end());
+    quotient.normalize();
+
+    remainder._slices.clear();
+    remainder._slices.push_back(rem);
+}
+
+template <class T>
+intmax_t BigInt::makenint(const T& slices, size_t off, size_t len)
+{
+    size_t size = slices.size();
+    intmax_t nint = 0, base = 1;
+
+    for (size_t i = off, n = 0; i < size && n < len; i++, n++) {
+        nint += slices[i] * base;
+        base *= slice_base_k;
+    }
+
+    return nint;
+}
+
+template <class T>
+void BigInt::absdiv_nint(const T& dividend, intmax_t denominator,
+        BigInt& quotient, BigInt& remainder)
+{
+    intmax_t rem = 0;
+    size_t left = dividend.size();
+    while (left > 0) {
+        size_t len;
+        if (left < max_group_slices_k) {
+            len = left;
+        }
+        else {
+            len = max_group_slices_k;
+        }
+
+        size_t pos = left - len;
+        intmax_t numerator = makenint(dividend, pos, len);
+        intmax_t scale = 1;
+        if (len == max_group_slices_k) {
+            scale = group_base_k;
+        }
+        else if (len > 0) {
+            size_t n = len;
+            while (n > 0) {
+                scale *= slice_base_k;
+                n--;
+            }
+        }
+
+        numerator += rem * scale;
+        imaxdiv_t div = imaxdiv(numerator, denominator);
+
+        quotient *= scale;
+        quotient += div.quot;
+        rem = div.rem;
+
+        left -= len;
+    }
+
+    remainder = rem;
+}
+
+template <class Ta, class Tb>
+void BigInt::absdiv(const Ta& dividend, const Tb& divisor,
+        BigInt& quotient, BigInt& remainder)
+{
+    assert(divisor.size() > 0);
+
+    if (dividend.size() < divisor.size()) {         /* 99 / 9999 = 0 ... 99 */
+        /* The quotient is eqaul to zero,
+           and the remainder is equal to divisor. */
+        quotient._sign = false;
+        quotient._slices.clear();
+
+        remainder._slices.clear();
+        for (size_t i = 0; i < dividend.size(); i++) {
+            remainder._slices.push_back(dividend[i]);
+        }
+    }
+    else if (divisor.size() == 1) {
+        absdiv_slice(dividend, divisor[0], quotient, remainder);
+    }
+    else if (divisor.size() <= max_group_slices_k) {
+        intmax_t denominator = makenint(divisor);
+        absdiv_nint(dividend, denominator, quotient, remainder);
+    }
+    else {
+        /* TODO */
+    }
+}
+
+bool BigInt::divmod(const BigInt& dividend, const BigInt& divisor,
+            BigInt& quotient, BigInt& remainder)
+{
+    if (divisor.iszero()) {
+        return false;
+    }
+
+    if (dividend.iszero() == 0) {                   /* 0 / 9999 = 0 */
+        quotient._sign = false;
+        quotient._slices.clear();
+
+        remainder._sign = false;
+        remainder._slices.clear();
+    }
+    else if (divisor.isone()) {                     /* 99 / 1 = 99 ... 0 */
+        quotient._sign = (dividend._sign != divisor._sign);
+        quotient._slices = dividend._slices;
+
+        remainder._sign = false;
+        remainder._slices.clear();
+    }
+
+    absdiv(dividend._slices, divisor._slices, quotient, remainder);
+
+    /* adjust sign */
+    if (!quotient.iszero())
+        quotient._sign = (dividend._sign != divisor._sign);
+    if (!remainder.iszero())
+        remainder._sign = dividend._sign;
+
+    return true;
+}
+
+bool BigInt::divmod(const BigInt& dividend, intmax_t divisor,
+            BigInt& quotient, BigInt& remainder)
+{
+    if (divisor ==  0) {
+        return false;
+    }
+
+    if (dividend.iszero() == 0) {                   /* 0 / 9999 = 0 */
+        quotient._sign = false;
+        quotient._slices.clear();
+
+        remainder._sign = false;
+        remainder._slices.clear();
+    }
+    else if (divisor == 1 || divisor == -1) {       /* 99 / 1 = 99 ... 0 */
+        quotient._sign = (dividend._sign != (divisor < 0));
+        quotient._slices = dividend._slices;
+
+        remainder._sign = false;
+        remainder._slices.clear();
+    }
+
+    slice_a divisor_slices;
+    initfrom(divisor, divisor_slices);
+    absdiv(dividend._slices, divisor_slices, quotient, remainder);
+
+    /* adjust sign */
+    if (!quotient.iszero())
+        quotient._sign = (dividend._sign != (divisor < 0));
+    if (!remainder.iszero())
+        remainder._sign = dividend._sign;
+
+    return true;
+}
+
 #include <sstream>
 
 void test_bigint(void)
@@ -1350,7 +1557,7 @@ void test_bigint(void)
         }
     }
 
-    /* test operators: *, *=, /, /=, %, and %= */
+    /* test operators: * and *= */
     for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
         intmax_t ntv_a = cases[i];
         BigInt   big_a(ntv_a);
@@ -1389,12 +1596,66 @@ void test_bigint(void)
         }
     }
 
+    cout << "C/C++ mod result: " << -5 % 3 << endl;
+
+    /* test divmod() */
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        intmax_t ntv_a = cases[i];
+        BigInt   big_a(ntv_a);
+
+        ostringstream oss;
+        string str_ntv_r;
+        for (size_t j = 0; j < sizeof(cases)/sizeof(cases[0]); j++) {
+            intmax_t ntv_b = cases[j];
+            BigInt   big_b(cases[j]);
+
+            // XXX: only small integer for now. */
+            if (big_b.slices().size() > BigInt::max_group_slices_k) {
+                continue;
+            }
+
+            cout << "native integers: " << ntv_a << " and " << ntv_b << endl;
+            cout << "   big integers: " << big_a << " and " << big_b << endl;
+
+            BigInt quotient, remainder;
+            if (BigInt::divmod(big_a, big_b, quotient, remainder)) {
+                imaxdiv_t div = imaxdiv(ntv_a, ntv_b);
+
+                oss.str("");
+                oss << quotient << " ... " << remainder;
+                str_ntv_r = to_string(div.quot);
+                str_ntv_r += " ... ";
+                str_ntv_r += to_string(div.rem);
+                clog << oss.str() << " vs " << str_ntv_r << endl;
+                assert(oss.str() == str_ntv_r);
+            }
+            else {
+                clog << "Failed division: " << big_a << " / " << big_b << endl;
+            }
+
+            if (BigInt::divmod(big_a, ntv_b, quotient, remainder)) {
+                imaxdiv_t div = imaxdiv(ntv_a, ntv_b);
+
+                oss.str("");
+                oss << quotient << " ... " << remainder;
+                str_ntv_r = to_string(div.quot);
+                str_ntv_r += " ... ";
+                str_ntv_r += to_string(div.rem);
+                clog << oss.str() << " vs " << str_ntv_r << endl;
+                assert(oss.str() == str_ntv_r);
+            }
+            else {
+                clog << "Failed division: " << big_a << " / " << big_b << endl;
+            }
+        }
+    }
+
     cout << "sizeof(intmax_t): " << sizeof(intmax_t) << endl;
     cout << "sizeof(slice_t): " << sizeof(BigInt::slice_t) << endl;
 
     cout << "slice_width_k: " << BigInt::slice_width_k << endl;
     cout << "max_slice_nint_k: " << BigInt::max_slice_nint_k << endl;
-    cout << "slice_divisor_k: " << BigInt::slice_divisor_k << endl;
+    cout << "slice_base_k: " << BigInt::slice_base_k << endl;
     cout << "max_nint_slices: " << BigInt::max_nint_slices() << endl;
 }
 
