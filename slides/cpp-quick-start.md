@@ -248,7 +248,7 @@ using namespace std;
 
 int main ()
 {
-    string mystring ("This is a string");
+    string mystring("This is a string");
     cout << mystring << endl;
     return 0;
 }
@@ -261,7 +261,7 @@ int main ()
 1. 用双引号定义字符串字面量：  
 `"This is a string"`
 1. 使用构造器初始化 `string` 类：  
-`string mystring ("This is a string");`
+`string mystring("This is a string");`
 
 	
 ### 算术运算表达式
@@ -306,7 +306,7 @@ int main ()
 - 使用小括号指定算术运算的优先级。
 - 混合运算中的隐式（implicit）类型转换：低精度数据转为高精度数据，整数转为浮点数。
 - 使用 `(int)a` 或者 `(double)i` 这种写法可执行显式（explicit）类型转换。
-- 整数运算中，若除数为零会产生被零除错误。
+- 在整数的算术运算中，若除数为零会产生被零除错误。
 
 	
 ### C/C++ 的取模规则
@@ -325,7 +325,7 @@ int main ()
 
 （十分钟内完成）
 
-1. 试试对浮点数执行 `++` 运算、零作为除数时的编译和执行效果。
+1. 试试在浮点数算术运算表达式中，将零作为除数时的编译和执行效果。
 1. 编写计算圆面积的程序 `circle-area.cpp`。该程序接受一个用户输入的浮点数或整数作为半径，计算对应的圆面积，然后输出计算结果。
 1. 编译成可执行程序并运行。
 1. 测试正常后，将 `circle-area.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
