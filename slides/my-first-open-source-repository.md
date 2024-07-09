@@ -69,6 +69,17 @@ $ git remote add origin git@github.com:<YourAccountName>/plzs-homework.git
 $ git push -u origin main
 ```
 
+	
+## 常用 Git 命令
+
+1. `git add <filename>`：添加文件到 Git 仓库中；Git 将跟踪 `<filename>` 文件的修改情况。
+1. `git mv <old-filename> <new-filename>`：修改已纳入 Git 管理的文件名称。
+1. `git rm <filename>`：移除已纳入 Git 管理的 `<filename>` 文件（注意：工作目录中的文件也将被删除）。
+1. `git commit <filename> -m "<log-words>"`：向仓库中提交（commit）`<filename>` 文件的更改/变化；`<log words>` 表示日志内容。
+1. `git commit -a -m "<log words>"`：向仓库提交所有有变化的文件；`<log-words>` 表示日志内容。
+1. `git push`：向远程仓库推送（push）本地仓库的更改信息。
+1. `git pull`：从远程仓库拉取（pull）更改信息并合并（merge）到本地仓库。
+
 		
 ## Markdown 语法创建格式化文本文件
 
