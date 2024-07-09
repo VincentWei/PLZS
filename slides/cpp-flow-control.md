@@ -493,33 +493,6 @@ No solution
 		
 ## 作业回顾
 
-### 使用 `Makefile` 方便 C++ 程序的构建
-
-```makefile
-TARGETS = can-make-a-triangle power-recursively
-
-CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
-
-ifeq ($(CXX), g++)
-    CXXFLAGS += -fmax-errors=10
-else ifeq ($(CXX), clang++)
-    CXXFLAGS += -ferror-limit=10
-endif
-
-all:$(TARGETS)
-
-$(TARGETS):%:%.o
-	$(CXX) -o $@ $<
-
-%.o:%.cpp
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-.PHONY: clean
-
-clean:
-	rm -f *.o $(TARGETS)
-```
-
 	
 ### 巧用 `assert()` 函数协助调试
 
