@@ -215,7 +215,7 @@ string day_of_week(int weekday)
         case 6:
             return "Saturday";
         default:
-            return "<Wrong Weekday Value>";
+            return "<Wrong weekday value>";
     }
 
     return "<NeverGetHere>";
@@ -318,7 +318,7 @@ void list_even_numbers_less_than_v5(unsigned n)
 
 （十分钟内完成）
 
-1. 编写程序判断给定的三个浮点数是否可以构成一个三角形；命名为 `can-make-a-triangle.cpp`，并保存在自己的 `plzs-homework` 仓库中（`source/cpp/lesson-2/` 目录下）。
+1. 编写程序判断给定的三个浮点数是否可以构成一个三角形；命名为 `can-make-a-triangle.cpp`，并保存在自己的作业仓库中（`source/cpp/lesson-2/` 目录下，下同）。
 1. 使用上面的命令行（可复制）编译成可执行程序并运行。
 1. 运行正常后，将 `can-make-a-triangle.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
 
@@ -405,18 +405,9 @@ double power(double f, unsigned n)
 
 （十分钟内完成）
 
-1. 递归实现阶乘程序，命名为 `factorial-recursively.cpp`，并保存在自己的 `plzs-homework` 仓库中（`source/cpp/lesson-2/` 目录下）。
+1. 递归实现阶乘程序，命名为 `factorial-recursively.cpp`，并保存在自己的作业仓库中。
 1. 使用上面的命令行（可复制）编译成可执行程序并运行。
 1. 运行正常后，将 `factorial-recursively.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
-
-		
-## 要点回顾
-
-1. 布尔运算的基本概念。
-1. C++ 布尔类型及运算符。
-1. C++ 的逻辑表达式和逻辑运算符。
-1. C++ 的流程控制语句。
-1. 函数的递归调用。
 
 		
 ## 作业
@@ -485,10 +476,9 @@ No solution
 	
 ### 参考链接
 
-- [信奥生的数学素养课第二讲“数系上的运算和进制”]()
-- [信奥生的数学素养课第三讲“数论基础：整数的性质”]()
-- [信奥生的数学素养课第四讲“质数的有趣性质及初等数论四大定理”]()
-- [信奥生的数学素养课第五、六讲“初等数论主要定理及应用”]()
+- 信奥生的数学素养课第二讲到第六讲
+- [最大公约数](https://oi-wiki.org/math/number-theory/gcd/)
+- [素数的判定](https://oi-wiki.org/math/number-theory/prime/)
 
 		
 ## 作业回顾
