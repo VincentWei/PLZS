@@ -1,4 +1,4 @@
-TARGETS = arithmetic-operators hello-world ull-mode function numeric-types variables errors
+TARGETS = arithmetic-operators hello-world ull-mode function numeric-types variables rounded-addition errors
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

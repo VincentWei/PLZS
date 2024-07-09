@@ -145,7 +145,7 @@ $ clang++ -std=c++14 -Wall hello-world.cpp -o hello-world
    1. 字符（`char`）、无符号字符（`unsigned char`）
    1. 整数（`int`）、无符号整数（`unsigned int`）
    1. 长整数（`long`）、无符号长整数（`unsigned long`）
-   1. 长长整数（`long long`）、无符号长长整数（`unsigned long`）
+   1. 长长整数（`long long`）、无符号长长整数（`unsigned long long`）
    1. 单精度浮点数（`float`）
    1. 双精度浮点数（`double`）
    1. 长双精度浮点数（`long double`）
@@ -224,7 +224,7 @@ int main()
     unsigned ul = 0x80000000UL;     // 后缀：U、L，顺序和大小写无关
 
     long long ll = 0x8000000000000000LL;
-    unsinged long long ull = 0x8000000000000000ULL;
+    unsigned long long ull = 0x8000000000000000ULL;
 ```
 
 	
@@ -375,7 +375,12 @@ using namespace std;
 - 全局变量、静态变量以及局部变量。
 
 	
-### 实例
+### 课堂练习
+
+（五分钟内完成）
+
+1. 复制下面的代码保存为 `rounded-addition.cpp` 文件。
+1. 编译执行正常后提交到自己的远程 Gitee 仓库上。
 
 ```cpp
 #include <iostream>
@@ -396,10 +401,17 @@ int rounded_addition(double a, double b = 0)
 
 int main()
 {
-    auto rz = rounded_addition(5, 3);
+    int a, b;
+    cout << "Please input two integers:";
+    cin >> a >> b;
+
+    auto rz = rounded_addition(a, b);
     cout << "The result is " << rz << endl;
 
-    auto rf = rounded_addition(5.4, (double)3.6);
+    double c, d;
+    cout << "Please input two floats:";
+    cin >> c >> d;
+    auto rf = rounded_addition(c, d);
     cout << "The result is " << rf << endl;
 }
 ```
@@ -409,6 +421,7 @@ int main()
 
 （十分钟内完成）
 
+1. 复制上面的代码保存为 `rounded-addition.cpp`，编译执行正常后提交到自己的远程 Gitee 仓库上。
 1. 将 `circle-area.cpp` 改造为调用函数 `calc_circle_area()` 函数的形式。
 1. 编译成可执行程序并运行。
 1. 测试正常后，将 `circle-area.cpp` 的改进版提交到 Git 仓库，并推送到自己的远程 Gitee 仓库上。
