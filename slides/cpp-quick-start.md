@@ -576,9 +576,14 @@ const double pi = 3.14159265;
 	
 #### 使用 `Makefile` 方便 C++ 程序的批量构建
 
+- 安装 `make`
+
 ```console
 $ sudo apt install make
 ```
+
+- `Makefile` 文件
+- 注意修改四个空格为 `\t` 字符
 
 ```makefile
 TARGETS = hello-world
