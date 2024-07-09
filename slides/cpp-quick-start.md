@@ -4,8 +4,8 @@
 1. 最简单的 C++ 程序
 1. C++ 编译器和 C++ 程序的构建
 1. 变量、数值和算术运算表达式
-1. 函数、形参和实参
 1. 基本输入输出
+1. 函数、形参和实参
 1. C++ 标准库和常用接口
 1. C++ 和 Python 的异同
 
@@ -320,6 +320,40 @@ int main ()
 -5 % -3 == -2;
 ```
 
+		
+## 基本输入输出
+
+- `std::cout`：标准输出，默认为屏幕（终端）。
+
+```cpp
+using namespace std;
+
+    int x = 230;
+
+    cout << "Hello, world!";    // prints `Hello, world!` on screen
+    cout << 120;                // prints number 120 on screen
+    cout << x;                  // prints the value of x on screen 
+
+    cout << "First sentence." << endl;
+    cout << "Second sentence." << endl;
+
+    cout << "First sentence.\n" << "Second sentence.\n";
+```
+
+	
+- `std::cin`：标准输入，默认为键盘。
+
+```cpp
+    int age;
+    cin >> age;
+
+    double a, b;
+    cin >> a >> b;
+
+    string mystring;
+    cin >> mystring;
+```
+
 	
 ### 课堂练习
 
@@ -378,40 +412,6 @@ int main()
 1. 将 `circle-area.cpp` 改造为调用函数 `calc_circle_area()` 函数的形式。
 1. 编译成可执行程序并运行。
 1. 测试正常后，将 `circle-area.cpp` 的改进版提交到 Git 仓库，并推送到自己的远程 Gitee 仓库上。
-
-		
-## 基本输入输出
-
-- `std::cout`：标准输出，默认为屏幕（终端）。
-
-```cpp
-using namespace std;
-
-    int x = 230;
-
-    cout << "Hello, world!";    // prints `Hello, world!` on screen
-    cout << 120;                // prints number 120 on screen
-    cout << x;                  // prints the value of x on screen 
-
-    cout << "First sentence." << endl;
-    cout << "Second sentence." << endl;
-
-    cout << "First sentence.\n" << "Second sentence.\n";
-```
-
-	
-- `std::cin`：标准输入，默认为键盘。
-
-```cpp
-    int age;
-    cin >> age;
-
-    double a, b;
-    cin >> a >> b;
-
-    string mystring;
-    cin >> mystring;
-```
 
 		
 ## C++ 标准库和常用接口
