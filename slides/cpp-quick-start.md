@@ -581,7 +581,7 @@ $ sudo apt install make
 ```
 
 ```makefile
-TARGETS = can-make-a-triangle power-recursively
+TARGETS = hello-world
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
