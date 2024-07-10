@@ -590,7 +590,7 @@ $ wget https://gitee.com/vincentwei7/PLZS/raw/main/source/cpp/lesson-1/Makefile
 
 	
 - `Makefile` 文件
-- 注意修改四个空格为 `\t` 字符
+- 如果从页面中复制内容，请注意命令前的修改四个空格为 `\t` 字符
 
 ```makefile
 TARGETS = hello-world
