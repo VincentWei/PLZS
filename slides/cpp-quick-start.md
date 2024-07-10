@@ -554,8 +554,8 @@ area_of_triangle(3, 4, 5): 6
 1. [大质数表](https://www.cnblogs.com/ljxtt/p/13514346.html)
 1. [C++标准库参考](https://cplusplus.com/reference/)
 
-	
-### 作业回顾
+		
+## 作业回顾
 
 - 为常用常量定义一个宏可防止键入错误，同时提高代码的可读性。
 
@@ -574,7 +574,7 @@ const double pi = 3.14159265;
 ```
 
 	
-#### 使用 `Makefile` 方便 C++ 程序的批量构建
+### 使用 `Makefile` 方便 C++ 程序的批量构建
 
 - 安装 `make`
 
