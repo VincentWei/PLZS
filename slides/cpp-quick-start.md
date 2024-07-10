@@ -582,6 +582,13 @@ const double pi = 3.14159265;
 $ sudo apt install make
 ```
 
+- 下载 `Makefile` 模板文件
+
+```console
+$ wget https://gitee.com/vincentwei7/PLZS/raw/main/source/cpp/lesson-1/Makefile
+```
+
+	
 - `Makefile` 文件
 - 注意修改四个空格为 `\t` 字符
 
