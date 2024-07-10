@@ -80,7 +80,7 @@ $ git push -u origin main
 
 	
 1. `git mv <old-filename> <new-filename>`：修改已纳入 Git 管理的文件名称。
-1. `git mv <old-filename> dir/<new-filename>`：将已纳入 Git 管理的文件转移到 `dir/` 目录下（支持同时修改名称）。
+1. `git mv <old-filename> <dir>/<new-filename>`：将已纳入 Git 管理的文件转移到 `<dir>/` 目录下（支持同时修改名称）。
 1. `git rm <filename>`：移除已纳入 Git 管理的 `<filename>` 文件（注意：工作目录中的文件也将被删除）。
 1. `git pull`：从远程仓库拉取（pull）更改信息并合并（merge）到本地仓库。
 
