@@ -4,7 +4,6 @@
 1. 数组和指针
 1. 引用
 1. 字符串
-1. 类型别名
 1. 实用技巧
 
 		
@@ -22,7 +21,7 @@
 ### 字符
 
 - C++ 字符类型（`char`）来自 C 语言，主要用于表达 ASCII 字符，本质上是单字节数值，取值范围 `-127 ~ 128`。
-- 命令 `man ascii` 可获得 ASCII 字符的定义；ASCII 码的取值范围：0x00 ~ 0x7F。
+- 命令 `man ascii` 可获得 ASCII 字符的定义；ASCII 码的取值范围：`0x00 ~ 0x7F`。
 
 	
 - ASCII 字符的分类：
@@ -397,7 +396,7 @@ long long int llroundl(long double x);
 	
 ### 浮点数比较的折中方案
 
-1. 将浮点数比较转换为为整数比较。
+1. 将浮点数比较转换为整数比较。
 1. 使用 `<cstdint>` 头文件中定义的 `uint64_t` 类型以及 `UINT32_MAX` 等常量宏。
 
 ```cpp
@@ -535,6 +534,9 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 - 定义引用变量时，使用 `<typename>&` 的语法。
 - 通过引用，可将变量传递给函数；在函数中修改引用的值，将直接修改实参的值。
 
+	
+- 引用的用法
+
 ```cpp
 #include <iostream>
 
@@ -623,7 +625,7 @@ int &addition(const int &a, const int &b)
 ```
 
 	
-- `<cstring>` 中定义了操作 C 字符串的常用接口：
+- `<cstring>` 中声明了操作 C 字符串的常用接口：
 
 ```cpp
 #include <string.h>
@@ -713,13 +715,16 @@ char *strstr(const char *haystack, const char *needle);
 2) 保存为 `test-string.cpp`，调试通过后提交到自己的作业仓库。
 
 		
-## 类型别名
+## 实用技巧
 
-- 在 C/C++ 代码中，可以为数据类型取个别名。
+		
+### 类型别名
+
+- 在 C/C++ 代码中，可以为数据类型取个别名（aliase）。
 - 类型别名主要用于方便代码的书写。
 
 	
-### 使用 `typedef`
+- 使用 `typedef`（C 语言也支持）
 
 ```cpp
 typedef char BYTE;
@@ -728,7 +733,7 @@ typedef unsigned long long ULL;
 ```
 
 	
-### 使用 `using`
+- 使用 `using`
 
 ```cpp
 using BYTE = char;
@@ -737,16 +742,13 @@ using ULL = unsigned long long;
 ```
 
 	
-### 使用预处理宏（不推荐）
+- 使用预处理宏（不推荐）
 
 ```cpp
 #define BYTE unsigned char
 #define WORD unsigned short
 #define ULL  unsigned long long
 ```
-
-		
-## 实用技巧
 
 		
 ## 作业

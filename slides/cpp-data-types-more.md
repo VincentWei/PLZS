@@ -1,7 +1,6 @@
 # C++ 数据类型（下）
 
 1. 深入理解函数调用
-1. 函数指针
 1. 结构体
 1. 多维数组
 1. 联合体
@@ -122,11 +121,6 @@ string make_indent(unsigned n)
 1) 复制上面的示例代码，保存为 `recursive-calls.cpp`，
 2) 编译运行，注意观察程序的输出。
 3) 通过后提交到自己的作业仓库（`source/cpp/lesson-4/` 目录下，下同）。
-
-		
-## 函数指针
-
-TODO
 
 		
 ## 结构体
@@ -292,6 +286,96 @@ const char *rainbow_color_name(rainbow_color_k c)
 		
 ## 实用技巧
 
+	
+### 编程的中层境界：解耦数据和代码
+
+- 使用恰当的数据结构来表达现实中的事物和对象，可以让程序的逻辑结构更加清晰，也能获得更好的运行性能。
+- 在编程中，将立即数、字符串字面值等数据混合在代码中，不利于代码的维护，也容易引入缺陷（bug）。
+- 将数据和代码解耦将获得意想不到的好处。
+
+	
+- 使用数组定义单元测试用例
+
+```cpp
+    /* 原始代码
+    assert(check_prime(2));
+    assert(check_prime(3));
+    assert(!check_prime(4));
+    assert(check_prime(5));
+    assert(!check_prime(9));
+    assert(check_prime(1973));
+    assert(check_prime(2024));
+    */
+
+    // 将数据和代码解耦
+    static struct test_case {
+        int     n;
+        bool    expected;
+    } cases = {
+        {2, true},
+        {3, true},
+        {4, talse},
+        {5, true},
+        {9, false},
+        {1973, true},
+        {2024, false},
+    };
+
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        bool result = check_prime(cases[i].n);
+        assert(result == cases[i].expected);
+    }
+```
+
+	
+### 综合示例
+
+```cpp
+enum shape_type {
+    st_circle,
+    st_square,
+    st_rectangle,
+    st_triangle,
+};
+
+struct shape {
+    enum shape_type type;
+    union {
+        double one_param;
+        double two_sides[2];
+        double three_sides3];
+    };
+};
+
+void prompt_for_triangle(struct shap &shap)
+{
+    ...
+}
+
+double calc_perimeter_triangle(const struct shap &shap)
+{
+    ...
+}
+
+double calc_area_triangle(const struct shap &shap)
+{
+    ...
+}
+
+static struct formula {
+    const char *name;
+
+    void (*prompt_f)(struct shap &);             // a function pointer.
+    double (*calc_perimeter_f)(const struct shap &);    // a function pointer.
+    double (*calc_area_f)(const struct shap &);         // a function pointer.
+} formulas[] = {
+    { "Circle",     prompt_for_circle, calc_perimeter_triangle, calc_area_triangle },
+    { "Square",     prompt_for_square, calc_perimeter_triangle, calc_area_triangle },
+    { "Rectangle",  prompt_for_rectangle, calc_perimeter_rectangle, calc_area_rectangle },
+    { "Triangle",   prompt_for_triangle, calc_perimeter_triangle, calc_area_triangle },
+};
+```
+
 		
 ## 作业
 
@@ -362,10 +446,10 @@ No solution
 ```
 
 	
-5) 使用结构体定义一个二维几何形状（三角形、正方形、圆），其中包含几何形状名称、构造该几何形状的参数数量、通过函数指针定义的面积计算函数等，最终实现 `calc-areas.cpp` 程序。运行效果如下：
+5) 使用结构体定义一个二维几何形状（三角形、正方形、圆），其中包含几何形状类型、名称、通过函数指针定义的初始化函数、周长和面积计算函数等，最终实现 `areas-refactored.cpp` 程序。运行效果如下：
 
 ```console
-$ ./calc-area
+$ ./areas-refactored
 To calculate the area, please choose a geometrical shape:
 1. Triange
 2. Square
