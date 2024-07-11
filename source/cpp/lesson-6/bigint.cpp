@@ -204,7 +204,7 @@ int BigInt::max_nint_slices()
 
 ostream& operator<< (ostream& os, const BigInt& bi)
 {
-    if (bi.sign()) {
+    if (bi.sign() && bi.slices().size() > 0) {
         os << "-";
     }
 
@@ -1784,7 +1784,6 @@ int main()
     factorial(r1, 50);
     factorial(r2, 51);
     result = r2 / r1;
-    cout << result << endl;
     assert(result == 51);
 
     unsigned max;
