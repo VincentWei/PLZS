@@ -371,14 +371,6 @@ bool isclosel(long double a, long double b)
 }
 ```
 
-	
-### 课堂练习
-
-（十分钟内完成）
-
-1) 使用上页的 `isclose()` 函数完成程序 `check-triangle.cpp`，判断输入的三角形三边是否可以构成一个三角形。
-2) 提交到自己的作业仓库（`source/cpp/lesson-3/` 目录下）。
-
 		
 ## 数组和指针
 
@@ -606,70 +598,6 @@ char *strstr(const char *haystack, const char *needle);
 ```
 
 	
-### 课堂练习
-
-（十五分钟内完成）
-
-1) 尝试实现如下三个函数，调试通过后，将其保存为 `strings.cpp` 文件并提交到自己的作业仓库（`source/cpp/lesson-3/` 目录下）。
-
-```cpp
-/* Copy a string from src to dest, returning a pointer to
-   the end of the resulting string at dest. */
-char *mystpcpy(char *dest, const char *src);
-
-/* Compare the strings s1 and s2 ignoring case. */
-int mystrcasecmp(const char *s1, const char *s2);
-
-/* Compare the first n bytes of the strings s1 and s2 ignoring case. */
-int mystrncasecmp(const char *s1, const char *s2, size_t n);
-```
-
-	
-2) 测试用代码：
-
-```cpp
-#include <cctype>
-#include <cassert>
-#include <cstring>
-#include <strings.h>
-
-/* Copy a string from src to dest, returning a pointer to
-   the end of the resulting string at dest. */
-char *mystpcpy(char *dest, const char *src)
-{
-    ...
-}
-
-/* Compare the strings s1 and s2 ignoring case. */
-int mystrcasecmp(const char *s1, const char *s2)
-{
-    ...
-}
-
-/* Compare the first n bytes of the strings s1 and s2 ignoring case. */
-int mystrncasecmp(const char *s1, const char *s2, size_t n)
-{
-    ...
-}
-
-int main()
-{
-    char buf[100];
-    const char *hello1 = "Hello, world!";
-
-    char *result = mystpcpy(buf, hello1);
-    char *expected = ::stpcpy(buf, hello1);
-
-    assert(result == expected);
-    assert(::strcmp(result, expected) == 0);
-
-    const char *hello2 = "hello, world.";
-    assert(mystrcasecmp(hello1, hello2) == ::strcasecmp(hello1, hello2));
-    assert(mystrncasecmp(hello1, hello2, 5) == ::strncasecmp(hello1, hello2, 5));
-}
-```
-
-	
 ### C++ 标准库字符串
 
 - C++ 标准库定义的字符串是一个类（`string`），可通过 C 字符串来初始化。
@@ -720,10 +648,12 @@ int main()
 	
 ### 课堂练习
 
+（十分钟内完成）
+
 1) 复制并修改上面的示例代码，要求：
    - 名字 `Vincent` 使用 `cin` 读入。
    - 将字符串中的字符全部转换为小写。
-2) 保存为 `string.cpp` 并提交到自己的作业仓库。
+2) 保存为 `test-string.cpp`，调试通过后提交到自己的作业仓库。
 
 		
 ## 类型别名
@@ -761,7 +691,63 @@ using ULL = unsigned long long;
 		
 ## 作业
 
-1) 生成个数等于用户指定的正整数的斐波那契（Fibonacci）数列（使用数组保存），然后计算相邻两个数的比值。运行效果如下：
+1) 使用本讲提到的 `isclose()` 函数完成程序 `check-triangle.cpp`，判断用户输入的三角形三个边是否可以构成一个三角形，并确认是否彻底绕开了浮点数对比的陷阱。运行效果如下：
+
+```console
+$ ./check-triangle
+<3.0 4.0 5.0>
+True
+<1.0 2.0 3.0>
+False
+```
+
+	
+2) 实现如下程序中空白的三个函数，保存为 `strings.cpp`。
+
+```cpp
+#include <cctype>
+#include <cassert>
+#include <cstring>
+#include <strings.h>
+
+/* Copy a string from src to dest, returning a pointer to
+   the end of the resulting string at dest. */
+char *mystpcpy(char *dest, const char *src)
+{
+    ...
+}
+
+/* Compare the strings s1 and s2 ignoring case. */
+int mystrcasecmp(const char *s1, const char *s2)
+{
+    ...
+}
+
+/* Compare the first n bytes of the strings s1 and s2 ignoring case. */
+int mystrncasecmp(const char *s1, const char *s2, size_t n)
+{
+    ...
+}
+
+int main()
+{
+    char buf[100];
+    const char *hello1 = "Hello, world!";
+
+    char *result = mystpcpy(buf, hello1);
+    char *expected = ::stpcpy(buf, hello1);
+
+    assert(result == expected);
+    assert(::strcmp(result, expected) == 0);
+
+    const char *hello2 = "hello, world.";
+    assert(mystrcasecmp(hello1, hello2) == ::strcasecmp(hello1, hello2));
+    assert(mystrncasecmp(hello1, hello2, 5) == ::strncasecmp(hello1, hello2, 5));
+}
+```
+
+	
+3) 生成个数等于用户指定的正整数的斐波那契（Fibonacci）数列（使用数组保存），然后计算相邻两个数的比值。运行效果如下：
 
 ```console
 $ ./fibonacci-improved
@@ -774,7 +760,7 @@ $ ./fibonacci-improved
 ```
 
 	
-2) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 的进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
+4) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 的进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
 
 ```console
 $ ./show-number-in-different-bases
@@ -783,7 +769,7 @@ $ ./show-number-in-different-bases
 ```
 
 	
-3) 编写一个函数，该函数可以将用户输入的一个特定进制的数用十进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
+5) 编写一个函数，该函数可以将用户输入的一个特定进制的数用十进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
 
 ```console
 $ ./strtoll
@@ -791,7 +777,7 @@ $ ./strtoll
 852232
 ```
 
-4) 给定任意长度的十进制自然数，给出其补数。运行效果如下：
+6) 给定任意长度的十进制自然数，给出其补数。运行效果如下：
 
 ```console
 $ ./decimal-complement
@@ -800,32 +786,9 @@ $ ./decimal-complement
 ```
 
 	
-5) 判定形如 `ax + by = d` 的不定方程是否有整数解，若有，给出至少十个解。运行效果如下：
-
-```console
-$ ./bezout
-<23 7 1>            # 三个数，分别是 ax + by = d 不定方程中的 a, b, d
--3 10
-4  -23
-11 -36
-18 -59
-25 -82
-32 -105
-39 -128
-46 -151
-53 -174
-60 -197
-$ ./bezout
-<12 15 4>
-No solution
-```
-
-	
 ### 参考链接
 
-- 信奥生的数学素养课第二讲到第六讲
-- [扩展欧几里得算法](https://www.cnblogs.com/fusiwei/p/11775503.html)
-- [线性同余方程](https://oi-wiki.org/math/number-theory/linear-equation/)
+- 信奥生的数学素养课第二讲“数系上的运算及进制”
 
 		
 ## 作业回顾
