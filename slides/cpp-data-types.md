@@ -325,10 +325,43 @@ int isinf(x);
 ```
 
 	
-- 浮点数和整数间的转换：
-   1. 64 位的双精度浮点数只能精确表达 32 位整数。
-   1. 长长整数在转换为浮点数时，将丢失精度。
-   1. `<cmath>` 中的接口提供了将浮点数圆整为整数的接口：
+### 浮点数大小的比较
+
+- 对比两个浮点数的大小时，应考虑表达误差。
+   1. 使用单精度浮点数表示十进制 `0.1`，实际得到：`0.100000001490116119384765625`。
+   1. `0.1` 的平方 `0.01`：`0.010000000298023226097399174250313080847263336181640625`。
+   1. `<cfloat>` 中包含有浮点数表达相关的常数。`xxx_EPSILON` 常量定义了对应类型的两个浮点数之间的最小间歇值。
+
+	
+```cpp
+#include <cmath>
+#include <cfloat>
+
+bool isclose(double a, double b)
+{
+    double max_val = fabs(a) > fabs(b) ? fabs(a) : fabs(b);
+    return (fabs(a - b) <= max_val * DBL_EPSILON);
+}
+
+bool isclosef(float a, float b)
+{
+    float max_val = fabsf(a) > fabsf(b) ? fabsf(a) : fabsf(b);
+    return (fabs(a - b) <= max_val * FLT_EPSILON);
+}
+
+bool isclosel(long double a, long double b)
+{
+    long double max_val = fabsl(a) > fabsl(b) ? fabsl(a) : fabsl(b);
+    return (fabsl(a - b) <= max_val * LDBL_EPSILON);
+}
+```
+
+	
+### 浮点数和整数间的转换
+
+- 64 位的双精度浮点数只能精确表达 32 位整数。
+- 长长整数在转换为浮点数时，将丢失精度。
+- `<cmath>` 中的接口提供了将浮点数圆整为整数的接口：
 
 	
 ```cpp
@@ -362,32 +395,34 @@ long long int llroundl(long double x);
 ```
 
 	
-- 对比两个浮点数的大小时，应考虑表达误差。
-   1. 使用单精度浮点数表示十进制 `0.1`，实际得到：`0.100000001490116119384765625`。
-   1. `0.1` 的平方 `0.01`：`0.010000000298023226097399174250313080847263336181640625`。
-   1. `<cfloat>` 中包含有浮点数表达相关的常数。`xxx_EPSILON` 常量定义了对应类型的两个浮点数之间的最小间歇值。
+### 浮点数比较的折中方案
 
-	
+1. 将浮点数比较转换为为整数比较。
+1. 使用 `<cstdint>` 头文件中定义的 `uint64_t` 类型以及 `UINT32_MAX` 等常量宏。
+
 ```cpp
-#include <cmath>
-#include <cfloat>
+#include <cstdint>
 
-bool isclose(double a, double b)
+bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 {
-    double max_val = fabs(a) > fabs(b) ? fabs(a) : fabs(b);
-    return (fabs(a - b) <= max_val * DBL_EPSILON);
-}
+    if (d1 <= 0 or d2 <= 0 or d3 <= 0)
+        return false;
 
-bool isclosef(float a, float b)
-{
-    float max_val = fabsf(a) > fabsf(b) ? fabsf(a) : fabsf(b);
-    return (fabs(a - b) <= max_val * FLT_EPSILON);
-}
+    if (d1 > UINT32_MAX or d2 > UINT32_MAX or d3 > UINT32_MAX) {
+        d1 -= UINT32_MAX;
+        d2 -= UINT32_MAX;
+        d3 -= UINT32_MAX;
+    }
 
-bool isclosel(long double a, long double b)
-{
-    long double max_val = fabsl(a) > fabsl(b) ? fabsl(a) : fabsl(b);
-    return (fabsl(a - b) <= max_val * LDBL_EPSILON);
+    uint64_t ull1 = uint64_t(d1 * UINT32_MAX);
+    uint64_t ull2 = uint64_t(d2 * UINT32_MAX);
+    uint64_t ull3 = uint64_t(d3 * UINT32_MAX);
+
+    if (((ull1 + ull2) > ull3) and ((ull1 + ull3) > ull2) and
+            ((ull2 + ull3) > ull1))
+        return true;
+
+    return false;
 }
 ```
 

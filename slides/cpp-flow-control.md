@@ -343,36 +343,6 @@ bool can_make_a_triangle_bad(double d1, double d2, double d3)
 }
 ```
 
-	
-### 浮点数比较的折中方案
-
-1. 将浮点数比较转换为为整数比较。
-1. 使用 `<cstdint>` 头文件中定义的 `uint64_t` 类型以及 `UINT32_MAX` 等常量宏。
-
-```cpp
-#include <cstdint>
-
-bool can_make_a_triangle_workaround(double d1, double d2, double d3)
-{
-    if (d1 > UINT32_MAX or d2 > UINT32_MAX or d3 > UINT32_MAX) {
-        return false;
-    }
-
-    if (d1 <= 0 or d2 <= 0 or d3 <= 0)
-        return false;
-
-    uint64_t ull1 = uint64_t(d1 * UINT32_MAX);
-    uint64_t ull2 = uint64_t(d2 * UINT32_MAX);
-    uint64_t ull3 = uint64_t(d3 * UINT32_MAX);
-
-    if (((ull1 + ull2) > ull3) and ((ull1 + ull3) > ull2) and
-            ((ull2 + ull3) > ull1))
-        return true;
-
-    return false;
-}
-```
-
 		
 ## 函数的递归调用
 
