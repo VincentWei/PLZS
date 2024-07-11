@@ -5,6 +5,7 @@
 1. 多维数组
 1. 联合体
 1. 枚举量
+1. 综合示例
 1. 实用技巧
 
 		
@@ -284,9 +285,83 @@ const char *rainbow_color_name(rainbow_color_k c)
 ```
 
 		
+## 综合示例
+
+- 将常见二维几何形状封装（encapsulate）为单个数据结构。
+- 为这些形状的周长和面积计算函数使用统一的原型。
+
+```cpp
+using namespace std;
+
+enum shape_type {
+    st_circle,
+    st_square,
+    st_rectangle,
+    st_triangle,
+};
+
+struct shape {
+    enum shape_type type;
+    const char *name;
+    union {
+        double one;
+        double two[2];
+        double three[3];
+    };
+};
+
+bool prompt_for_circle(struct shape &shape)
+{
+    cout << "Please input the radius of a circle:";
+    cin >> shape.one;
+
+    if (shape.one < 0)
+        return false;
+
+    shape.type = st_circle;
+    return true;
+}
+
+double calc_perimeter_circle(const struct shape &shape)
+{
+    return 2 * M_PI * shape.one;
+}
+
+double calc_area_circle(const struct shape &shape)
+{
+    return M_PI * shape.one * shape.one;
+}
+
+/* functions for square, rectangle, and triangle here */
+...
+
+static struct formula {
+    const char *name;
+
+    bool (*prompt_f)(struct shape &);
+    double (*calc_perimeter_f)(const struct shape &);
+    double (*calc_area_f)(const struct shape &);
+} formulas[] = {
+    { "Circle",     prompt_for_circle, calc_perimeter_circle, calc_area_circle },
+    { "Square",     prompt_for_square, calc_perimeter_square, calc_area_square },
+    { "Rectangle",  prompt_for_rectangle, calc_perimeter_rectangle, calc_area_rectangle },
+    { "Triangle",   prompt_for_triangle, calc_perimeter_triangle, calc_area_triangle },
+};
+
+int main()
+{
+    struct shape shape;
+    struct formula &formula = formulas[st_circle];
+
+    formula.prompt_f(shape);
+    cout << "Perimeter: " << formula.calc_perimeter_f(shape) << endl;
+    cout << "Area: " << formula.calc_area_f(shape) << endl;
+}
+```
+
+		
 ## 实用技巧
 
-	
 ### 编程的中层境界：解耦数据和代码
 
 - 使用恰当的数据结构来表达现实中的事物和对象，可以让程序的逻辑结构更加清晰，也能获得更好的运行性能。
@@ -325,55 +400,6 @@ const char *rainbow_color_name(rainbow_color_k c)
         bool result = check_prime(cases[i].n);
         assert(result == cases[i].expected);
     }
-```
-
-	
-### 综合示例
-
-```cpp
-enum shape_type {
-    st_circle,
-    st_square,
-    st_rectangle,
-    st_triangle,
-};
-
-struct shape {
-    enum shape_type type;
-    union {
-        double one_param;
-        double two_sides[2];
-        double three_sides3];
-    };
-};
-
-void prompt_for_triangle(struct shap &shap)
-{
-    ...
-}
-
-double calc_perimeter_triangle(const struct shap &shap)
-{
-    ...
-}
-
-double calc_area_triangle(const struct shap &shap)
-{
-    ...
-}
-
-static struct formula {
-    const char *name;
-
-    void (*prompt_f)(struct shap &);             // a function pointer.
-    double (*calc_perimeter_f)(const struct shap &);    // a function pointer.
-    double (*calc_area_f)(const struct shap &);         // a function pointer.
-} formulas[] = {
-    { "Circle",     prompt_for_circle, calc_perimeter_triangle, calc_area_triangle },
-    { "Square",     prompt_for_square, calc_perimeter_triangle, calc_area_triangle },
-    { "Rectangle",  prompt_for_rectangle, calc_perimeter_rectangle, calc_area_rectangle },
-    { "Triangle",   prompt_for_triangle, calc_perimeter_triangle, calc_area_triangle },
-};
 ```
 
 		
