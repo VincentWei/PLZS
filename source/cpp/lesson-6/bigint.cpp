@@ -171,11 +171,14 @@ class BigInt {
     static void absdiv_nint(const T& dividend, intmax_t denominator,
             BigInt& quotient, BigInt& remainder);
     template <class Ta, class Tb>
-    static void absdiv(const Ta& dividend, const Tb& divisor,
+    static bool absdiv_fast(const Ta& dividend, const Tb& divisor,
             BigInt& quotient, BigInt& remainder);
     template <class T>
     static intmax_t makenint(const T& slices, size_t off = 0,
             size_t len = max_group_slices_k);
+
+    static void absdiv_slow(const slice_v& dividend, const slice_v& divisor,
+            BigInt& quotient, BigInt& remainder);
 
     template <class T>
     void abssubfrom(const T& other);
@@ -1249,7 +1252,7 @@ void BigInt::absdiv_nint(const T& dividend, intmax_t denominator,
 }
 
 template <class Ta, class Tb>
-void BigInt::absdiv(const Ta& dividend, const Tb& divisor,
+bool BigInt::absdiv_fast(const Ta& dividend, const Tb& divisor,
         BigInt& quotient, BigInt& remainder)
 {
     assert(divisor.size() > 0);
@@ -1273,7 +1276,28 @@ void BigInt::absdiv(const Ta& dividend, const Tb& divisor,
         absdiv_nint(dividend, denominator, quotient, remainder);
     }
     else {
-        /* TODO */
+        return false;
+    }
+
+    return true;
+}
+
+void BigInt::absdiv_slow(const slice_v& numerator, const slice_v& denominator,
+        BigInt& quotient, BigInt& remainder)
+{
+    remainder._sign = false;
+    remainder._slices = numerator;
+
+    quotient._sign = false;
+    quotient._slices.clear();
+
+    size_t len_n = numerator.size();
+    size_t len_d = denominator.size();
+    assert(len_n >= len_d);
+
+    while (abscmp(remainder._slices, denominator) >= 0) {
+        remainder.abssubfrom(denominator);
+        quotient++;
     }
 }
 
@@ -1299,7 +1323,9 @@ bool BigInt::divmod(const BigInt& dividend, const BigInt& divisor,
         remainder._slices.clear();
     }
 
-    absdiv(dividend._slices, divisor._slices, quotient, remainder);
+    if (!absdiv_fast(dividend._slices, divisor._slices, quotient, remainder)) {
+        absdiv_slow(dividend._slices, divisor._slices, quotient, remainder);
+    }
 
     /* adjust sign */
     if (!quotient.iszero())
@@ -1334,7 +1360,7 @@ bool BigInt::divmod(const BigInt& dividend, intmax_t divisor,
 
     slice_a divisor_slices;
     initfrom(divisor, divisor_slices);
-    absdiv(dividend._slices, divisor_slices, quotient, remainder);
+    absdiv_fast(dividend._slices, divisor_slices, quotient, remainder);
 
     /* adjust sign */
     if (!quotient.iszero())
@@ -1343,6 +1369,70 @@ bool BigInt::divmod(const BigInt& dividend, intmax_t divisor,
         remainder._sign = dividend._sign;
 
     return true;
+}
+
+BigInt  BigInt::operator/  (const BigInt& other) const
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    return quotient;
+}
+
+BigInt& BigInt::operator/= (const BigInt& other)
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    _sign = quotient._sign;
+    _slices = std::move(quotient._slices);
+    return *this;
+}
+
+BigInt  BigInt::operator/  (intmax_t other) const
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    return quotient;
+}
+
+BigInt& BigInt::operator/= (intmax_t other)
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    _sign = quotient._sign;
+    _slices = std::move(quotient._slices);
+    return *this;
+}
+
+BigInt  BigInt::operator%  (const BigInt& other) const
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    return remainder;
+}
+
+BigInt& BigInt::operator%= (const BigInt& other)
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    _sign = remainder._sign;
+    _slices = std::move(remainder._slices);
+    return *this;
+}
+
+BigInt  BigInt::operator%  (intmax_t other) const
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    return remainder;
+}
+
+BigInt& BigInt::operator%= (intmax_t other)
+{
+    BigInt quotient, remainder;
+    divmod(*this, other, quotient, remainder);
+    _sign = remainder._sign;
+    _slices = std::move(remainder._slices);
+    return *this;
 }
 
 #include <sstream>
@@ -1609,7 +1699,7 @@ void test_bigint(void)
             intmax_t ntv_b = cases[j];
             BigInt   big_b(cases[j]);
 
-            // XXX: only small integer for now. */
+            // XXX: only small integer for this test method. */
             if (big_b.slices().size() > BigInt::max_group_slices_k) {
                 continue;
             }
@@ -1689,6 +1779,13 @@ int main()
     BigInt result;
     factorial(result, 5);
     assert(result == 120);
+
+    BigInt r1, r2;
+    factorial(r1, 50);
+    factorial(r2, 51);
+    result = r2 / r1;
+    cout << result << endl;
+    assert(result == 51);
 
     unsigned max;
     cin >> max;
