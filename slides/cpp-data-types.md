@@ -407,10 +407,14 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
     if (d1 <= 0 or d2 <= 0 or d3 <= 0)
         return false;
 
-    if (d1 > UINT32_MAX or d2 > UINT32_MAX or d3 > UINT32_MAX) {
+    if (d1 > UINT32_MAX and d2 > UINT32_MAX and d3 > UINT32_MAX) {
         d1 -= UINT32_MAX;
         d2 -= UINT32_MAX;
         d3 -= UINT32_MAX;
+    }
+    else if (d1 > UINT32_MAX or d2 > UINT32_MAX or d3 > UINT32_MAX) {
+        return (((d1 + d2) > d3) and ((d1 + d3) > d2) and
+            ((d2 + d3) > d1));
     }
 
     uint64_t ull1 = uint64_t(d1 * UINT32_MAX);
@@ -423,6 +427,7 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 
     return false;
 }
+
 ```
 
 		
