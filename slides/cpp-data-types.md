@@ -284,6 +284,25 @@ long double sqrtl(long double x);
 # define M_2_SQRTPI 1.12837916709551257390  /* 2/sqrt(pi) */
 # define M_SQRT2    1.41421356237309504880  /* sqrt(2) */
 # define M_SQRT1_2  0.70710678118654752440  /* 1/sqrt(2) */
+
+/* The above constants are not adequate for computation using `long double's.
+   Therefore we provide as an extension constants with similar names as a
+   GNU extension.  Provide enough digits for the 128-bit IEEE quad.  */
+#ifdef __USE_GNU
+# define M_El       2.718281828459045235360287471352662498L /* e */
+# define M_LOG2El   1.442695040888963407359924681001892137L /* log_2 e */
+# define M_LOG10El  0.434294481903251827651128918916605082L /* log_10 e */
+# define M_LN2l     0.693147180559945309417232121458176568L /* log_e 2 */
+# define M_LN10l    2.302585092994045684017991454684364208L /* log_e 10 */
+# define M_PI       3.141592653589793238462643383279502884L /* pi */
+# define M_PI_2l    1.570796326794896619231321691639751442L /* pi/2 */
+# define M_PI_4l    0.785398163397448309615660845819875721L /* pi/4 */
+# define M_1_PIl    0.318309886183790671537767526745028724L /* 1/pi */
+# define M_2_PIl    0.636619772367581343075535053490057448L /* 2/pi */
+# define M_2_SQRTPIl    1.128379167095512573896158903121545172L /* 2/sqrt(pi) */
+# define M_SQRT2l   1.414213562373095048801688724209698079L /* sqrt(2) */
+# define M_SQRT1_2l 0.707106781186547524400844362104849039L /* 1/sqrt(2) */
+#endif
 ```
 
 	
@@ -450,7 +469,7 @@ bool isclosel(long double a, long double b)
 ```cpp
     int fibonacci[20] = { 1, 1, 2, 3, 5, 8 };
 
-    int *p = fibonacci;
+    int* p = fibonacci;
     for (size_t i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
         if (p[i] == 0) {
             p[i] = p[i - 1] + p[i - 2];
@@ -459,7 +478,7 @@ bool isclosel(long double a, long double b)
         cout << p[i] << endl;
     }
 
-    const int *cp = fibonacci;
+    const int* cp = fibonacci;
     for (size_t i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
         cout << *cp << endl;
         cp++;
@@ -478,8 +497,8 @@ bool isclosel(long double a, long double b)
 ## 引用
 
 - 引用（reference）是 C++ 引入的数据类型，可以理解为给一个已有的变量取个别名。
-- 定义引用变量时，使用 `<typename> &` 的语法。
-- 通过引用，可将变量传递给函数。
+- 定义引用变量时，使用 `<typename>&` 的语法。
+- 通过引用，可将变量传递给函数；在函数中修改引用的值，将直接修改实参的值。
 
 ```cpp
 #include <iostream>
@@ -512,16 +531,17 @@ int main()
     cout << a << endl;
     cout << c << endl;
 }
-
 ```
 
 	
 - 不能在立即数上定义引用。
 - 不能以引用的方式返回局部变量。
+- 不能给使用 `const` 限定词的引用赋值。
 
 ```cpp
 int &addition(const int &a, const int &b)
 {
+    a = 5;
     int &c = 4;
     int r = a + b;
     return r;
