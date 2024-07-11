@@ -387,6 +387,7 @@ bool isclosel(long double a, long double b)
 1. C/C++ 数组中的数据项具有相同的数据类型。
 1. 初始化数组时，使用 `{}` 包围数组单元，各个单元之间使用逗号（comma，`,`）分隔。
 
+	
 ```cpp
     // 未明确初始化的单元将默认初始化为 0
     uint64_t fibonacci[100] = { 1, 1, 2, 3, 5, 8 };
