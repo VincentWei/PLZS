@@ -9,6 +9,7 @@
 1. C++ 标准库和常用接口
 1. C++ 常见编译错误
 1. C++ 和 Python 的异同
+1. 实用技巧
 
 		
 ## C++ 的发展历史及现状
@@ -522,11 +523,30 @@ square_area(r)
 1. Python 中进行浮点数计算的功能由解释器调用 C 的函数实现，C++ 中可直接调用 C 函数。
 
 		
+## 实用技巧
+
+- 为常用常量定义一个宏可防止键入错误，同时提高代码的可读性。
+
+```cpp
+#define PI 3.14159265
+
+    area = PI * r * r;
+```
+
+- 或者使用 `const` 修饰词（modifier）定义一个变量作为常量（通常为全局变量）。
+
+```cpp
+const double pi = 3.14159265;
+
+    area = pi * r * r;
+```
+
+		
 ## 作业
 
 1) 复制本节课程中的示例代码并编辑为完整的 C++ 程序（一段示例代码对应一个程序）。要求使用 Vim 编译源文件，使用命令行编译。
 
-2) 编写一个 C++ 程序，该程序可计算给定无符号长长整数对质数 `2^31 - 1` 的模。要求使用 Vim 编辑源文件，使用命令行编译。运行效果如下所示：
+2) 编写一个 C++ 程序，该程序可计算给定无符号长长整数对质数 <code>2<sup>31</sup> - 1</code> 的模。要求使用 Vim 编辑源文件，使用命令行编译。运行效果如下所示：
 
 ```console
 % ./ull-mode
@@ -553,67 +573,4 @@ area_of_triangle(3, 4, 5): 6
 1. [根据三条边计算三角形面积的海伦公式](https://www.cnblogs.com/jiahuafu/p/4596962.html)
 1. [大质数表](https://www.cnblogs.com/ljxtt/p/13514346.html)
 1. [C++标准库参考](https://cplusplus.com/reference/)
-
-		
-## 作业回顾
-
-- 为常用常量定义一个宏可防止键入错误，同时提高代码的可读性。
-
-```cpp
-#define PI 3.14159265
-
-    area = PI * r * r;
-```
-
-- 或者使用 `const` 修饰词（modifier）定义一个变量作为常量（通常为全局变量）。
-
-```cpp
-const double pi = 3.14159265;
-
-    area = pi * r * r;
-```
-
-	
-### 使用 `Makefile` 方便 C++ 程序的批量构建
-
-- 安装 `make`
-
-```console
-$ sudo apt install make
-```
-
-- 下载 `Makefile` 模板文件
-
-```console
-$ wget https://gitee.com/vincentwei7/PLZS/raw/main/source/cpp/lesson-1/Makefile
-```
-
-	
-- 如果从页面中复制内容，请注意修改命令前的四个空格为 `\t` 字符。
-- 修改 `TARGETS` 为目标可执行程序的名称；多个目标程序用空格分隔；确保目标程序有对应的 C++ 源文件存在。
-
-```makefile
-TARGETS = hello-world
-
-CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
-
-ifeq ($(CXX), g++)
-    CXXFLAGS += -fmax-errors=10
-else ifeq ($(CXX), clang++)
-    CXXFLAGS += -ferror-limit=10
-endif
-
-all:$(TARGETS)
-
-$(TARGETS):%:%.o
-	$(CXX) -o $@ $<
-
-%.o:%.cpp
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-.PHONY: clean
-
-clean:
-	rm -f *.o $(TARGETS)
-```
 

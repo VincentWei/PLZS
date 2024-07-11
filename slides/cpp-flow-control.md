@@ -5,6 +5,7 @@
 1. C++ 的逻辑表达式和逻辑运算符
 1. C++ 的流程控制语句
 1. 函数的递归调用
+1. 使用技巧
 
 		
 ## 流程控制的来由
@@ -242,6 +243,8 @@ bool is_prime_less_than_10(unsigned n)
 ### `while` 或 `for` 循环
 
 ```cpp
+using namespace std;
+
 void list_even_numbers_less_than_v0(unsigned n)
 {
     unsigned a = 0;
@@ -386,14 +389,14 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 ### 整数次幂函数的递归实现
 
 ```cpp
-double power(double f, unsigned n)
+int power(int base, unsigned exponent)
 {
-    double r;
+    int r;
 
-    if (n == 0)
-        r = 1.0;
+    if (exponent == 0)
+        r = 1;
     else
-        r = f * power(f, n - 1);
+        r = base * power(base, exponent - 1);
 
     return r;
 }
@@ -408,11 +411,89 @@ double power(double f, unsigned n)
 1. 使用上面的命令行（可复制）编译成可执行程序并运行。
 1. 运行正常后，将 `factorial-recursively.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
 
+
+		
+## 实用技巧
+
+### 巧用 `assert()` 函数协助调试
+
+- 使用 `<cassert>` 中定义的宏 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
+
+```cpp
+#include <iostream>
+#include <cassert>
+
+using namespace std;
+
+int power(int base, unsigned exponent)
+{
+    int r;
+
+    if (exponent == 0)
+        r = 1.0;
+    else
+        r = base * power(base, exponent - 1);
+
+    return r;
+}
+
+
+int main()
+{
+    assert(power(3, 0) == 1);
+    assert(power(3, 2) == 9);
+    assert(power(-1, 3) == -1);
+}
+```
+
+	
+### 使用 `Makefile` 方便 C++ 程序的批量构建
+
+- 安装 `make`
+
+```console
+$ sudo apt install make
+```
+
+- 下载 `Makefile` 模板文件
+
+```console
+$ wget https://gitee.com/vincentwei7/PLZS/raw/main/source/cpp/lesson-1/Makefile
+```
+
+	
+- 如果从页面中复制内容，请注意修改命令前的四个空格为 `\t` 字符。
+- 修改 `TARGETS` 为目标可执行程序的名称；多个目标程序用空格分隔；确保目标程序有对应的 C++ 源文件存在。
+
+```makefile
+TARGETS = hello-world
+
+CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
+
+ifeq ($(CXX), g++)
+    CXXFLAGS += -fmax-errors=10
+else ifeq ($(CXX), clang++)
+    CXXFLAGS += -ferror-limit=10
+endif
+
+all:$(TARGETS)
+
+$(TARGETS):%:%.o
+	$(CXX) -o $@ $<
+
+%.o:%.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+.PHONY: clean
+
+clean:
+	rm -f *.o $(TARGETS)
+```
+
 		
 ## 作业
 
-1) 从本讲开始，要求使用 `Makefile` 批量构建 C++ 程序。
-   - [使用 `Makefile` 方便 C++ 程序的批量构建](https://courses.fmsoft.cn/plzs/cpp-quick-start.html#/12/1)
+1) 从本讲开始，要求使用 `Makefile` 批量构建 C++ 程序；要将对应的 `Makefile` 提交到代码仓库中。
 
 2) 使用循环输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
 
@@ -460,37 +541,4 @@ False
 - [最大公约数](https://oi-wiki.org/math/number-theory/gcd/)
 - [素数的判定](https://oi-wiki.org/math/number-theory/prime/)
 - 信奥生的数学素养课第二讲到第六讲
-
-		
-## 作业回顾
-
-	
-### 巧用 `assert()` 函数协助调试
-
-- 使用 `<cassert>` 中定义的宏 `assert()` 可在参数的求值（evaluate）结果为非真时终止（abort）程序的运行，方便调试。
-
-```cpp
-#include <iostream>
-#include <cassert>
-
-using namespace std;
-
-double power(double f, unsigned n)
-{
-    double r;
-
-    if (n == 0)
-        r = 1.0;
-    else
-        r = f * power(f, n - 1);
-
-    return r;
-}
-
-
-int main()
-{
-    assert((unsigned)power(3, 2) == 9);
-}
-```
 

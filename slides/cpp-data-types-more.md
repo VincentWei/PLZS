@@ -6,6 +6,7 @@
 1. 多维数组
 1. 联合体
 1. 枚举量
+1. 实用技巧
 
 		
 ## 深入理解函数调用
@@ -289,6 +290,9 @@ const char *rainbow_color_name(rainbow_color_k c)
 ```
 
 		
+## 实用技巧
+
+		
 ## 作业
 
 1) 求解给定的线性同余方程组，要求给出至少十个解。运行效果如下：
@@ -386,7 +390,4 @@ The area of your square is: 16.0
 - 信奥生的数学素养课第六讲“初等数论主要定理及应用（续）”
 - [扩展欧几里得算法](https://www.cnblogs.com/fusiwei/p/11775503.html)
 - [线性同余方程](https://oi-wiki.org/math/number-theory/linear-equation/)
-
-	
-### 作业回顾
 
