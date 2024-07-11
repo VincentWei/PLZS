@@ -761,11 +761,11 @@ using ULL = unsigned long long;
 		
 ## 作业
 
-1) 生成小于用户指定的正整数的斐波那契（Fibonacci）数列，然后计算相邻两个数的比值。运行效果如下：
+1) 生成个数等于用户指定的正整数的斐波那契（Fibonacci）数列（使用数组保存），然后计算相邻两个数的比值。运行效果如下：
 
 ```console
 $ ./fibonacci-improved
-<11>
+<5>
 1 / 1: 1.0
 1 / 2: 0.5
 2 / 3: 0.6666666666666666
@@ -800,5 +800,33 @@ $ ./decimal-complement
 ```
 
 	
-### 作业回顾
+5) 判定形如 `ax + by = d` 的不定方程是否有整数解，若有，给出至少十个解。运行效果如下：
+
+```console
+$ ./bezout
+<23 7 1>            # 三个数，分别是 ax + by = d 不定方程中的 a, b, d
+-3 10
+4  -23
+11 -36
+18 -59
+25 -82
+32 -105
+39 -128
+46 -151
+53 -174
+60 -197
+$ ./bezout
+<12 15 4>
+No solution
+```
+
+	
+### 参考链接
+
+- 信奥生的数学素养课第二讲到第六讲
+- [扩展欧几里得算法](https://www.cnblogs.com/fusiwei/p/11775503.html)
+- [线性同余方程](https://oi-wiki.org/math/number-theory/linear-equation/)
+
+		
+## 作业回顾
 

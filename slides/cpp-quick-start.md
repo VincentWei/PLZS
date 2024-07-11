@@ -589,8 +589,8 @@ $ wget https://gitee.com/vincentwei7/PLZS/raw/main/source/cpp/lesson-1/Makefile
 ```
 
 	
-- 如果从页面中复制内容，请注意修改命令前的四个空格为 `\t` 字符
-- 修改 `TARGETS` 为目标程序名称；多个目标程序用空格分隔
+- 如果从页面中复制内容，请注意修改命令前的四个空格为 `\t` 字符。
+- 修改 `TARGETS` 为目标可执行程序的名称；多个目标程序用空格分隔；确保目标程序有对应的 C++ 源文件存在。
 
 ```makefile
 TARGETS = hello-world

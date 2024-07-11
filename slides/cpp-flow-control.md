@@ -319,8 +319,7 @@ void list_even_numbers_less_than_v5(unsigned n)
 （十分钟内完成）
 
 1. 编写程序判断给定的三个浮点数是否可以构成一个三角形；命名为 `can-make-a-triangle.cpp`，并保存在自己的作业仓库中（`source/cpp/lesson-2/` 目录下，下同）。
-1. 使用上面的命令行（可复制）编译成可执行程序并运行。
-1. 运行正常后，将 `can-make-a-triangle.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
+1. 编译调试通过后，将 `can-make-a-triangle.cpp` 添加到 Git 仓库中进行管理，并推送到自己的远程 Gitee 仓库上。
 
 	
 ### 浮点数比较陷阱
@@ -342,7 +341,7 @@ bool can_make_a_triangle_bad(double d1, double d2, double d3)
 ```
 
 	
-折中方案
+### 浮点数比较的折中方案
 
 1. 将浮点数比较转换为为整数比较。
 1. 使用 `<cstdint>` 头文件中定义的 `uint64_t` 类型以及 `UINT32_MAX` 等常量宏。
@@ -381,10 +380,10 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 - 类似的还有阶乘：
    1. `n! = n * (n - 1)!`；
    1. 当 n 为 0 时递推终止：`0! = 1`。
-- 故而我们可以编写调用自己的函数，也就是递归（recursively）调用。
+- 在程序中，我们可以编写调用自己的函数，也就是递归（recursively）调用。
 
 	
-整数次幂函数的递归实现：
+### 整数次幂函数的递归实现
 
 ```cpp
 double power(double f, unsigned n)
@@ -412,7 +411,10 @@ double power(double f, unsigned n)
 		
 ## 作业
 
-1) 使用循环输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
+1) 从本讲开始，要求使用 `Makefile` 批量构建 C++ 程序。
+   - [使用 `Makefile` 方便 C++ 程序的批量构建](https://courses.fmsoft.cn/plzs/cpp-quick-start.html#/12/1)
+
+2) 使用循环输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
 
 ```console
 $ ./fibonacci
@@ -420,7 +422,7 @@ $ ./fibonacci
 1, 1, 2, 3, 5, 8.
 ```
 
-2) 使用递归输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
+3) 使用递归输出小于指定正整数的斐波那契（Fibonacci）数列。运行效果如下：
 
 ```console
 $ ./fibonacci-recursively
@@ -429,7 +431,7 @@ $ ./fibonacci-recursively
 ```
 
 	
-2) 用辗转相除法求两个正整数的最大公约数以及最小公倍数。运行效果如下：
+4) 用辗转相除法求两个正整数的最大公约数以及最小公倍数。运行效果如下：
 
 ```console
 $ ./gcd-lcm
@@ -441,7 +443,7 @@ $ ./gcd-lcm
 ```
 
 	
-3) 判断给定正整数是否为一个质数。运行效果如下：
+5) 判断给定正整数是否为一个质数。运行效果如下：
 
 ```console
 $ ./check-prime
@@ -453,32 +455,11 @@ False
 ```
 
 	
-4) 判定形如 `ax + by = d` 的不定方程是否有整数解，若有，给出至少十个解。运行效果如下：
-
-```console
-$ ./bezout
-<23 7 1>
--3 10
-4  -23
-11 -36
-18 -59
-25 -82
-32 -105
-39 -128
-46 -151
-53 -174
-60 -197
-$ ./bezout
-<12 15 4>
-No solution
-```
-
-	
 ### 参考链接
 
-- 信奥生的数学素养课第二讲到第六讲
 - [最大公约数](https://oi-wiki.org/math/number-theory/gcd/)
 - [素数的判定](https://oi-wiki.org/math/number-theory/prime/)
+- 信奥生的数学素养课第二讲到第六讲
 
 		
 ## 作业回顾
@@ -509,7 +490,7 @@ double power(double f, unsigned n)
 
 int main()
 {
-    assert(power(3, 2) == 9);
+    assert((unsigned)power(3, 2) == 9);
 }
 ```
 
