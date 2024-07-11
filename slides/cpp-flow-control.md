@@ -508,7 +508,7 @@ False
 	
 ### 参考链接
 
+- 信奥生的数学素养课第三讲“整数论基础：整数的性质”
 - [最大公约数](https://oi-wiki.org/math/number-theory/gcd/)
 - [素数的判定](https://oi-wiki.org/math/number-theory/prime/)
-- 信奥生的数学素养课第二讲到第六讲
 

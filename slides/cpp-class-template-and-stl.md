@@ -580,7 +580,7 @@ int main()
 
     while (!str.empty()) {
         unsigned long long ull = stoull(str, &sz, 0);
-        cout << str.substr(0,sz) << " interpreted as " << ull << '\n';
+        cout << str.substr(0, sz) << " interpreted as " << ull << '\n';
         str = str.substr(sz);
     }
 }
