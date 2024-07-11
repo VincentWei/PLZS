@@ -17,7 +17,7 @@
 - 任意精度或者高精度计算是信奥或者编程比赛的常见题型。
 
 	
-### 求阶乘
+### 低精度计算的问题：以阶乘为例
 
 ```cpp
 #include <iostream>
@@ -96,8 +96,7 @@ int main()
 	
 ### 挑战
 
-- 需要自行实现各种算术基本运算功能。
-- 负数、减法和除法的实现更为复杂。
+- 需要自行实现各种基本的算术运算功能（加、减、乘、除、模）。
 - 性能无法和基于基本数据类型的计算比较；但第二种方法可充分利用基于基本数据类型的运算，性能更好。
 
 		
@@ -362,7 +361,7 @@ done:
 		
 ## 基于 `vector` 的实现
 
-- 用一个 `int8_t` 表示十进制的两位数字。
+- 用一个 `int8_t` 表示十进制的两位数字（相当于提供基于 100 进制的整数运算）。
 - 使用 `vector<int8_t>` 从数值的低位开始存储，每个单元表示两位十进制数字。
 - 设计为 `BigInt` 类，以方便提供多种构造方法以及运算符重载等能力。
 
@@ -453,11 +452,25 @@ class BigInt {
     ...
 };
 
+void factorial(BigInt& result, unsigned n)
+{
+    if (n > 1) {
+        factorial(result, n - 1);
+        result *= n;
+    }
+    else
+        result = 1;
+}
+
     BigInt a(1234567890);
     BigInt b("2345");
 
     a += b;
     cout << a / b << endl;
+
+    BigInt fact;
+    factorial(fact, 100);       // 100!
+    cout << fact << endl;
 ```
 
 		
@@ -602,7 +615,6 @@ bool BigInt::operator== (const BigInt& other) const
 
     return false;
 }
-
 ```
 
 		
@@ -620,7 +632,7 @@ $ ./summary-of-factorials-nap
 ```
 
 	
-2) 给定两个任意长度的两个正整数，计算相除的结果（整数商及余数）。运行效果如下：
+2) 给定两个任意长度的正整数，计算相除的结果（整数商及余数）。运行效果如下：
 
 ```console
 $ ./nap-divide
@@ -648,7 +660,16 @@ $ ./rational-number-to-fraction
 ```
 
 	
-4) 尝试实现 `BigInt` 类的 `+`、`+=`、`++`、`*` 和 `*=` 运算符，并使用 `BigInt` 实现阶乘之和。运行效果如下：
+4) 给定任意自然数 `a` 和 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
+
+```console
+$ ./binary-power
+<23 50>
+122008981252869411022491112993141891091036959856659100591281395343249
+```
+
+	
+5) 实现 `BigInt` 类的 `+`、`+=`、`++`、`*` 和 `*=` 运算符，并使用 `BigInt` 实现阶乘之和。运行效果如下：
 
 ```console
 $ ./summary-of-factorials-bigint
@@ -659,4 +680,6 @@ $ ./summary-of-factorials-bigint
 	
 ### 参考链接
 
+- [高精度计算](https://oi-wiki.org/math/bignum/)
+- [快速幂](https://oi-wiki.org/math/binary-exponentiation/)
 
