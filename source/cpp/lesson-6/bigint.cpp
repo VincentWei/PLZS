@@ -1,5 +1,5 @@
 /*
- * This program implements arbitrary arithmetic for integer numbers.
+ * This program implements arbitrary precision arithmetic for integer numbers.
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
@@ -23,7 +23,7 @@ class BigInt {
     using slice_t = int8_t;
     using twin_t  = int16_t;
     using slice_v = std::vector<BigInt::slice_t>;
-    static const int slice_width_k = 2;         // int32: 9
+    static const int slice_width_k = 2;         // 99
     static const int max_slice_nint_k = 99;     // int32: 999999999
     static const int slice_base_k = (max_slice_nint_k + 1);
     static const int max_nint_slices_k = 10;    // 9223372036854775807
