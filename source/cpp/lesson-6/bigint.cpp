@@ -1783,9 +1783,11 @@ int main()
     BigInt r1, r2;
     factorial(r1, 50);
     factorial(r2, 51);
+    assert(r1 == (r2 / 51));
     result = r2 / r1;
     assert(result == 51);
 
+    cout << "An integer needed to calculate the summary of factorials:";
     unsigned max;
     cin >> max;
     summary_of_factorials(result, max);
