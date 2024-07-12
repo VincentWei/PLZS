@@ -343,7 +343,9 @@ BigInt::BigInt(const string& str)
 
 BigInt::BigInt(const BigInt &other)
 {
+#ifndef NDEBUG
     clog << "copy constructor called\n";
+#endif
 
     _sign = other.sign();
     _slices = other.slices();
@@ -351,7 +353,9 @@ BigInt::BigInt(const BigInt &other)
 
 BigInt::BigInt(BigInt &&other)
 {
+#ifndef NDEBUG
     clog << "move constructor called\n";
+#endif
 
     _sign = other._sign;
     _slices.clear();
@@ -361,7 +365,9 @@ BigInt::BigInt(BigInt &&other)
 // copy assignment operator
 BigInt& BigInt::operator= (const BigInt& other)
 {
+#ifndef NDEBUG
     clog << "copy assignment operator called\n";
+#endif
 
     _sign = other._sign;
     _slices = other._slices;
@@ -371,7 +377,9 @@ BigInt& BigInt::operator= (const BigInt& other)
 // move assignment operator
 BigInt& BigInt::operator= (BigInt&& other) noexcept
 {
+#ifndef NDEBUG
     clog << "move assignment operator called\n";
+#endif
 
     if (this != &other) {
         _sign = other._sign;
@@ -1823,3 +1831,4 @@ int main()
     summary_of_factorials(result, max);
     cout << result << endl;
 }
+
