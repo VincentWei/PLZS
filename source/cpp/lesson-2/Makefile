@@ -1,4 +1,4 @@
-TARGETS = flow-control float-trap power-recursively
+TARGETS = flow-control float-trap power-recursively can-make-a-triangle factorial-recursively
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
