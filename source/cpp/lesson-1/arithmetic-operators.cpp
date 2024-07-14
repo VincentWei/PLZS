@@ -11,7 +11,7 @@ int main()
     auto f1 = 0.0f;
     decltype(f1) f2 = f1++;
 
-    auto d = 50.0 / 0;
+    auto d = 50.0 / 0.0;
 
     cout << i << ": " << sizeof(i) << endl;
     cout << u << ": " << sizeof(u) << endl;
