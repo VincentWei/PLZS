@@ -755,6 +755,23 @@ using ULL = unsigned long long;
 #define ULL  unsigned long long
 ```
 
+	
+### Vim 默认设置
+
+编辑 `~/.vimrc` 文件，添加如下设置：
+
+```vim
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set cindent
+set list
+set listchars=tab:▷⋯,trail:◇
+set cc=80
+set ruler
+syntax on
+```
+
 		
 ## 作业
 
