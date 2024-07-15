@@ -19,6 +19,9 @@ int main()
     double a, b, c;
     cin >> a >> b >> c;
 
+    cout << (can_make_a_triangle(a, b, c) ? "True" : "False") << endl;
+
+    /* 以上使用 ? 运算符的简化写法相当于如下代码：
     if (can_make_a_triangle(a, b, c)) {
         cout << "True";
     }
@@ -26,5 +29,5 @@ int main()
         cout << "False";
     }
 
-    cout << endl;
+    cout << endl; */
 }

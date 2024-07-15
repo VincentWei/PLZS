@@ -407,7 +407,6 @@ int power(int base, unsigned exponent)
     return r;
 }
 
-
 int main()
 {
     assert(power(3, 0) == 1);

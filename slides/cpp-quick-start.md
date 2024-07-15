@@ -561,7 +561,7 @@ const double pi = 3.14159265;
 $ ./areas
 To calculate the area of a square, please input the length of one side: <11>
 area_of_square(11): 121
-To calculate the area of a circle, please input the length of the radio: <10>
+To calculate the area of a circle, please input the length of the radius: <10>
 area_of_circle(10): 31.415926
 To calculate the area of a triangle, please input the lengthes of three sides (separated with space): <3> <4> <5>
 area_of_triangle(3, 4, 5): 6

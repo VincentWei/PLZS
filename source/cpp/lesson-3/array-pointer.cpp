@@ -23,7 +23,7 @@ void test_array()
 
 void test_pointer()
 {
-    int a;
+    int a = 2;
     int *p = &a;
 
     cout << p << endl;
@@ -70,3 +70,4 @@ int main()
         cp++;
     }
 }
+

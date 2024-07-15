@@ -12,15 +12,14 @@
 1) 数据类型（data type）：编程语言用来表达（represent）现实世界中不同种类数据的方法。
 2) 我们已经接触过若干种 C++ 基础数据类型：
    - 布尔型（`bool`）
-   - 字符型（`char`）
-   - 各种长度/有无符号的整型（`int`）
-   - 三种精度的浮点数（`float`）
+   - 各种长度/有无符号的整型（`int`、`unsigned int`）
+   - 三种精度的浮点数（`float`、`double`、`long double`）
 3) 本质上，所有的 C++ 基础数据类型为单字节、双字节、四字节、八字节的二进制数据。
 
 	
 ### 字符
 
-- C++ 字符类型（`char`）来自 C 语言，主要用于表达 ASCII 字符，本质上是单字节数值，取值范围 `-127 ~ 128`。
+- C++ 字符类型（`char`）来自 C 语言，主要用于表达 ASCII 字符，本质上是单字节数值，默认为带有符号位，取值范围 `-127 ~ 128`。
 - 命令 `man ascii` 可获得 ASCII 字符的定义；ASCII 码的取值范围：`0x00 ~ 0x7F`。
 
 	
@@ -150,7 +149,71 @@ int count_one_bits(unsigned char byte)
    1. `sizeof` 运算符的返回值类型为 `size_t`。
 
 	
-- 可使用 `<cstdint>` 中定义的具有确定位宽（bit-width）的整数类型：
+- 可使用 `<climits>` 中定义的整数类型位宽以及极值：
+
+```cpp
+/* Number of bits in a `char'.    */
+#  define CHAR_BIT    8
+
+/* Minimum and maximum values a `signed char' can hold.  */
+#  define SCHAR_MIN    (-128)
+#  define SCHAR_MAX    127
+
+/* Maximum value an `unsigned char' can hold.  (Minimum is 0.)  */
+#  define UCHAR_MAX    255
+
+/* Minimum and maximum values a `char' can hold.  */
+#  ifdef __CHAR_UNSIGNED__
+#   define CHAR_MIN    0
+#   define CHAR_MAX    UCHAR_MAX
+#  else
+#   define CHAR_MIN    SCHAR_MIN
+#   define CHAR_MAX    SCHAR_MAX
+#  endif
+
+/* Minimum and maximum values a `signed short int' can hold.  */
+#  define SHRT_MIN    (-32768)
+#  define SHRT_MAX    32767
+
+/* Maximum value an `unsigned short int' can hold.  (Minimum is 0.)  */
+#  define USHRT_MAX    65535
+
+/* Minimum and maximum values a `signed int' can hold.  */
+#  define INT_MIN    (-INT_MAX - 1)
+#  define INT_MAX    2147483647
+
+/* Maximum value an `unsigned int' can hold.  (Minimum is 0.)  */
+#  define UINT_MAX    4294967295U
+
+/* Minimum and maximum values a `signed long int' can hold.  */
+#  if __WORDSIZE == 64
+#   define LONG_MAX    9223372036854775807L
+#  else
+#   define LONG_MAX    2147483647L
+#  endif
+#  define LONG_MIN    (-LONG_MAX - 1L)
+
+/* Maximum value an `unsigned long int' can hold.  (Minimum is 0.)  */
+#  if __WORDSIZE == 64
+#   define ULONG_MAX    18446744073709551615UL
+#  else
+#   define ULONG_MAX    4294967295UL
+#  endif
+
+#  ifdef __USE_ISOC99
+
+/* Minimum and maximum values a `signed long long int' can hold.  */
+#   define LLONG_MAX    9223372036854775807LL
+#   define LLONG_MIN    (-LLONG_MAX - 1LL)
+
+/* Maximum value an `unsigned long long int' can hold.  (Minimum is 0.)  */
+#   define ULLONG_MAX    18446744073709551615ULL
+
+#  endif /* ISO C99 */
+```
+
+	
+- 亦可使用 `<cstdint>` 中定义的具有确定位宽（bit-width）的整数类型：
    1. `int8_t/uint8_t`：8 位整数。
    1. `int16_t/uint16_t`：16 位整数。
    1. `int32_t/uint32_t`：32 位整数。
@@ -197,14 +260,14 @@ int count_one_bits(unsigned char byte)
     u = 100;                        // 十进制
     u = 0124;                       // 0 作为前缀，八进制
     u = 0x80000000U;                // 0x 作为前缀，十六进制
-    u = (unsigned int)-1;           // 0xFFFFFFFF
-    u = (unsigned int)-2;           // 0xFFFFFFFE
+    u = (unsigned int)-1;           // 强制转换为无符号整数使用：0xFFFFFFFF
+    u = (unsigned int)-2;           // 强制转换为无符号整数使用：0xFFFFFFFE
 
     long l = 0x80000000L;           // 后缀：l/L
-    unsigned ul = 0x80000000UL;     // 后缀：U、L，顺序和大小写无关
+    unsigned ul = 0x80000000UL;     // 后缀：U、L，后缀的顺序和大小写无关
 
     long long ll = 0x8000000000000000LL;
-    unsinged long long ull = 0x8000000000000000ULL;
+    unsinged long long ull = 0x8000000000000000ull;
 ```
 
 	
@@ -215,7 +278,36 @@ int count_one_bits(unsigned char byte)
    1. 表示字符；ASCII 只能用于表达 128 个字符，当用于表达中文等复杂语言的字符时，使用 16 位或者 32 位整数。
    1. 表示颜色。
    1. 表示定点数。
-   1. 表示标识符（identifier）。
+   1. 表示标识符（identifier），如学号。
+
+	
+- 无符号整数类型用于循环计数时，要特别小心向下溢出（underflow）现象。
+
+```cpp
+    // 当 i 等于 0 时，执行 i-- 后，i 的值将变成 UINT_MAX (4294967295U)，
+    // 从而导致死循环。
+    for (unsigned i = 100; i >= 0; i--) {
+        cout << i << endl;
+    }
+
+    // 正确写法
+    for (unsigned i = 100; i > 0; i--) {
+        cout << i << endl;
+    }
+
+    // 或者
+    unsigned i = 100;
+    while (true) {
+        i--;
+
+        // 此处正常使用 i
+        cout << i << endl;
+
+        // 若 i 等于 0，跳出循环
+        if (i == 0)
+            break;
+    }
+```
 
 	
 ### 浮点数
@@ -427,7 +519,6 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 
     return false;
 }
-
 ```
 
 		
@@ -468,21 +559,22 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
 	
 ### 指针
 
-- 指针（pointer）用于指代某项数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机架构位宽相等。
+- 指针（pointer）用于指代某项数据在进程地址空间中的地址值，本质上是一个无符号整数，其位宽通常和计算机架构的位宽相等。
 - 指针变量使用 `<typename> *` 的方式定义，亦可使用 `void *` 定义不和具体类型关联的指针。
 - 对指针变量做加减运算，其值将按照指针类型的字节数成倍增减；但 `void *` 指针上的算术运算，其行为不确定。
 - C++ 使用 `nullptr` 关键词指代一个空（NULL）指针，而 C 使用 `NULL` 宏；访问空指针将导致程序异常终止，大部分情况下，函数返回空指针表示错误或失败的情形。
 
 ```cpp
-    int a;
+    int a = 2;
     int *p = &a;
 
-    cout << p << endl;
-    cout << p + 1 << endl;
+    cout << p << endl;      // 输出 p 指针中包含的地址值。
+    cout << p + 1 << endl;  // 如果上面的 p 输出值为 0x10000，则 p + 1 是多少？
+    cout << *p << endl;     // 输出 p 指向的地址处的整数值。
 
-    *p = 3;
-    cout << sizeof(p) << endl;
-    cout << a << endl;
+    *p = 3;                     // 修改 p 指向的地址处的整数值。
+    cout << sizeof(p) << endl;  // 这行将输出多少？
+    cout << a << endl;          // 这行将输出多少？
 ```
 
 	
@@ -517,9 +609,16 @@ bool can_make_a_triangle_workaround(double d1, double d2, double d3)
         cout << p[i] << endl;
     }
 
-    const int* cp = fibonacci;
+    // 添加 const 限定词之后，不能通过 cp 修改对应地址中的内容。
+    int a = 3;
+    const int *cp = &a;
+    *cp = 5;                    // 将报编译错误。
+
+    cp = fibonacci;
+    assert(cp == p);            // assert 会否报错？
+
     for (size_t i = 0; i < sizeof(fibonacci)/sizeof(int); i++) {
-        cout << *cp << endl;
+        cout << *cp << endl;    // 将报编译错误。
         cp++;
     }
 ```
@@ -583,8 +682,8 @@ int main()
 ```cpp
 int &addition(const int &a, const int &b)
 {
-    a = 5;
-    int &c = 4;
+    a = 5;              // 将报编译错误。
+    int &c = 4;         // 将报编译错误。
     int r = a + b;
     return r;
 }
@@ -606,6 +705,7 @@ int &addition(const int &a, const int &b)
 
 - C 字符串本质上是一个字符数组。
 - C 字符串的尾部始终包含一个空字符（`\0`）表示字符串的结尾。
+- C 字符串字面量本质上具有 `const char *` 类型，且不可更改该指针指向地址处的内容。
 
 ```cpp
     char hello1[200] = { 'H', 'e', 'l', 'l', 'o', ',', 'w', 'o', 'r', 'l', 'd', '!', '\0' };
@@ -614,18 +714,21 @@ int &addition(const int &a, const int &b)
     cout << sizeof(hello1) << endl;
     cout << sizeof("0123456789") << endl;
 
+    // 使用字符串字面量初始化字符数组（包括空字符在内）
+    // 字符数组的尺寸为字符串长度加 1）。
     char hello2[] = "Hello, world!";
     cout << hello2 << endl;
+    cout << sizeof(hello2)  << endl;
 
     hello1[100] = 'M';
-    cout << hello1 << endl;
+    cout << hello1 << endl;     // 将输出什么内容？
 
-    hello2[100] = 'M';
+    hello2[100] = 'M';          // 将会导致什么结果？
     cout << hello2 << endl;
 
     const char *hello3 = "Hello, world!";
 
-    hello3[0] = 'h';
+    hello3[0] = 'h';            // 编译报错。
     cout << hello3 << endl;
 ```
 
@@ -674,8 +777,8 @@ char *strstr(const char *haystack, const char *needle);
 #include <cctype>
 
     string str("Hello, world!");
-    str += '\n';
-    str += "-- By Vincent";
+    str += '\n';                    // 串接（concatenate）一个换行符
+    str += "-- By Vincent";         // 串接一个字符串
 
     cout << str << endl;
     cout << str.c_str() << endl;
@@ -697,12 +800,12 @@ char *strstr(const char *haystack, const char *needle);
   1. `size_t length()`：获取字符串长度。
   1. `void clear()` ：清空字符串内容。
   1. `bool empty()`：测试是否为空字符串。
-  1. `char &operator[]`：返回给定索引位置的单元之引用，可用于左值或右值。
+  1. `char &operator[]`：返回给定索引位置的单元之引用，可用于左值（lvalue）或右值（rvalue）。
   1. `char &at(size_t pos)`：返回给定索引位置的单元之引用。
   1. `char &back()`：返回最后面字符之引用。
   1. `char &front()`：返回最前面字符之引用。
   1. `string &operator+= ()`：追加内容到字符串。
-  1. `string &append()`：追加内容到字符串。
+  1. `string &append()`：追加内容（单个字符、C 字符串、另一个 `string` 对象内容）到字符串。
   1. `string &insert()`：插入内容到字符串的指定位置（长度变长）。
   1. `string &erase()`：擦除字符串内的指定内容（长度变短）。
   1. `const char *c_str()`：返回只读的 C 字符串等价指针。
@@ -722,7 +825,6 @@ char *strstr(const char *haystack, const char *needle);
 		
 ## 实用技巧
 
-		
 ### 类型别名
 
 - 在 C/C++ 代码中，可以为数据类型取个别名（aliase）。
@@ -772,6 +874,30 @@ set ruler
 syntax on
 ```
 
+	
+### 使用 `?` 运算符
+
+- `?` 运算符和 `:` 运算符一起构成了一个非此即彼的表达式。
+- `<condition> ? <expression if condition is true> : <expression if condition is false>`。
+- 和其他运算符混合时，最好用小括号包围起来。
+
+```cpp
+    double a, b, c;
+    cin >> a >> b >> c;
+
+    cout << (can_make_a_triangle(a, b, c) ? "True" : "False") << endl;
+
+    /* 以上使用 ? 运算符的简化写法相当于如下代码：
+    if (can_make_a_triangle(a, b, c)) {
+        cout << "True";
+    }
+    else {
+        cout << "False";
+    }
+
+    cout << endl; */
+```
+
 		
 ## 作业
 
@@ -781,12 +907,26 @@ syntax on
 $ ./check-triangle
 <3.0 4.0 5.0>
 True
+
+$ ./check-triangle
 <1.0 2.0 3.0>
 False
 ```
 
 	
-2) 实现如下程序中空白的三个函数，保存为 `strings.cpp`。
+2) 生成个数等于用户指定的正整数（不大于 30）的斐波那契（Fibonacci）数列（使用数组保存），然后计算相邻两个数的比值。运行效果如下：
+
+```console
+$ ./fibonacci-improved
+<5>
+1 / 1: 1.0
+1 / 2: 0.5
+2 / 3: 0.6666666666666666
+3 / 5: 0.6
+5 / 8: 0.625
+```
+	
+3) 实现如下程序中空白的三个函数，保存为 `strings.cpp`。
 
 ```cpp
 #include <cctype>
@@ -831,37 +971,15 @@ int main()
 ```
 
 	
-3) 生成个数等于用户指定的正整数的斐波那契（Fibonacci）数列（使用数组保存），然后计算相邻两个数的比值。运行效果如下：
+4) 某人发明了一种简单的文本加密方法，将 `a-z`、`A-Z` 字母循环转移七个顺序，比如 `a` 转换为 `g`，`z` 转换为 `f`，以此类推。请编写程序用于解密对应的密文，运行效果如下：
 
 ```console
-$ ./fibonacci-improved
-<5>
-1 / 1: 1.0
-1 / 2: 0.5
-2 / 3: 0.6666666666666666
-3 / 5: 0.6
-5 / 8: 0.625
+$ ./decrypt
+<P Svcl Fvb!>
+I Love You!
 ```
 
-	
-4) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 的进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
-
-```console
-$ ./show-number-in-different-bases
-<15 2>      # 第一个数值指定一个十进制的一个正整数，第二个数字指定进制，两者用空格分隔。
-1111
-```
-
-	
-5) 编写一个函数，该函数可以将用户输入的一个特定进制的数用十进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
-
-```console
-$ ./strtoll
-<56ABC 20>  # 第一个数值指定一个字符串，第二个数字指定该数值的进制，两者用空格分隔。
-852232
-```
-
-6) 给定任意长度的十进制自然数，给出其补数。运行效果如下：
+5) 给定任意长度的十进制自然数，给出其补数。运行效果如下：
 
 ```console
 $ ./decimal-complement
@@ -870,7 +988,25 @@ $ ./decimal-complement
 ```
 
 	
+6) 编写一个函数，该函数可以将用户输入的一个特定进制的数用十进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
+
+```console
+$ ./strtoll
+<56ABC 20>  # 第一个数值指定一个字符串，第二个数字指定该数值的进制，两者用空格分隔。
+852232
+```
+
+	
+7) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 的进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
+
+```console
+$ ./show-number-in-different-bases
+<15 2>      # 第一个数值指定一个十进制的一个正整数，第二个数字指定进制，两者用空格分隔。
+1111
+```
+
+	
 ### 参考链接
 
 - 信奥生的数学素养课第二讲“数系上的运算及进制”
-
+- [进位制](https://oi-wiki.org/math/number-theory/basic/base/)

@@ -1,11 +1,18 @@
+#include <iostream>
+#include <cmath>
 
-main()
-{
-    cin >> r
-    cout << circle_area(r);
-}
+using namespace std;
 
-square_area(r)
+double circle_area(double r)
 {
     return M_PI * r * r;
 }
+
+int main()
+{
+    double r;
+
+    cin >> r;
+    cout << circle_area(r);
+}
+

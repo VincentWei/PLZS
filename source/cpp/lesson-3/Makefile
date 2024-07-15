@@ -1,4 +1,4 @@
-TARGETS = check-triangle array-pointer reference strings
+TARGETS = check-triangle array-pointer reference encrypt strings
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
