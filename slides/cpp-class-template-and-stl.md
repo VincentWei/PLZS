@@ -179,8 +179,8 @@ int main()
 	
 ### 重载 `<<` 运算符
 
-- 自定义左值类型为 `ostream` 右值类型为 `Rectangle` 的 `<<` 运算符，可实现 `Rectangle` 类的定制输出。
-- `ostream` 是全局对象 `cout` 的类名称。
+- 自定义左值（lvalue）类型为 `ostream&` 右值（rvalue）类型为 `Rectangle&` 的 `<<` 运算符，可实现 `Rectangle` 类的定制输出。
+- `ostream` 是全局对象 `cout` 的类名。
 
 ```cpp
 ostream &operator<< (ostream &os, Rectangle &rc) {
@@ -196,7 +196,7 @@ ostream &operator<< (ostream &os, Rectangle &rc) {
 	
 ### 重载 `>>` 运算符
 
-- 类似地，自定义左值类型为 `istream`，右值类型为 `Rectangle` 的 `>>` 运算符，可实现 `Rectangle` 类的定制输入。
+- 类似地，自定义左值类型为 `istream&`，右值类型为 `Rectangle&` 的 `>>` 运算符，可实现 `Rectangle` 类的定制输入。
 - `istream` 是全局对象 `cin` 的类名称。
 
 ```cpp
@@ -350,7 +350,7 @@ class Circle: public Basic2DShape {
 ## C++ 模板
 
 - C++ 引入的模板，可用来实现代码的类型无关（泛型编程），从而大幅提高开发效率。
-- 在 C++ 中，可使用模板定义函数、类等。
+- 在 C++ 中，可使用模板定义函数、类，分别称为函数模板、类模板。
 
 ```cpp
 int summary(int a, int b)
@@ -459,7 +459,7 @@ T Pair<T>::min()
 ### `ostream` 类的接口
 
 - 格式化输出：通过运算符 `<<` 提供。
-- 无格式化输出：通过 `put()` 方法和 `write()` 方式提供。
+- 无格式化输出：通过 `put()` 方法和 `write()` 方法提供。
 - 定位：通过 `tellp()` 和 `seekp()` 方法提供。
 - 同步（刷新缓冲）：通过 `flush()` 方法提供。
 - 控制格式化输出的行为：通过基类 `ios_base` 的方法提供，如 `flags()`、`setf()`、`precision()`、`width()` 等。
