@@ -144,7 +144,7 @@ int count_one_bits(unsigned char byte)
    1. 长整数（`long`）、无符号长整数（`unsigned long`）：32 位/64 位二进制（具体位数和架构、编译器相关）。
    1. 长长整数（`long long`）、无符号长长整数（`unsigned long long`）：64 位二进制。
 - 专用于表示大小的整数类型：`size_t` 和 `ssize_t`：
-   1. 其位宽通常和计算机架构的自然位宽相同，可用来表示系统支持的最大内存块、文件长度等。
+   1. 其位宽（bit-width）通常和计算机架构的自然位宽相同，可用来表示系统支持的最大内存块、文件长度等。
    1. `ssize_t` 是带有符号的，其值小于零时通常表示错误。
    1. `sizeof` 运算符的返回值类型为 `size_t`。
 
@@ -213,12 +213,12 @@ int count_one_bits(unsigned char byte)
 ```
 
 	
-- 亦可使用 `<cstdint>` 中定义的具有确定位宽（bit-width）的整数类型：
-   1. `int8_t/uint8_t`：8 位整数。
-   1. `int16_t/uint16_t`：16 位整数。
-   1. `int32_t/uint32_t`：32 位整数。
-   1. `int64_t/uint64_t`：64 位整数。
-   1. `intmax_t/uintmax_t`：当前架构支持的最大位宽整数。
+- 亦可使用 `<cstdint>` 中定义的具有确定位宽的整数类型：
+   1. `int8_t`/`uint8_t`：8 位整数。
+   1. `int16_t`/`uint16_t`：16 位整数。
+   1. `int32_t`/`uint32_t`：32 位整数。
+   1. `int64_t`/`uint64_t`：64 位整数。
+   1. `intmax_t`/`uintmax_t`：当前架构支持的最大位宽整数。
 
 	
 - `<cstdint>` 中还定义了这些固定位宽整型数的最大值和最小值：
@@ -291,12 +291,12 @@ int count_one_bits(unsigned char byte)
     }
 
     // 正确写法
-    for (unsigned i = 100; i > 0; i--) {
-        cout << i << endl;
+    for (unsigned i = 101; i > 0; i--) {
+        cout << (i - 1) << endl;
     }
 
     // 或者
-    unsigned i = 100;
+    unsigned i = 101;
     while (true) {
         i--;
 
@@ -339,10 +339,10 @@ int count_one_bits(unsigned char byte)
    1. 浮点数立即数的默认精度为双精度；使用 `f/F` 后缀时为单精度，使用 `l/L` 后缀时为长双精度。
 
 ```cpp
-    float f1 = 0.1F;
+    float f1 = 0.1F;                // 使用 F/f 后缀定义单精度浮点数。
     double f2 = 0.1;                // 没有后缀！
     double f3 = 2.99E10;            // 科学记数法
-    long double f4 = 0.1L;
+    long double f4 = 0.1L;          // 使用 L/l 后缀定义长双精度浮点数。
 ```
 
 	
