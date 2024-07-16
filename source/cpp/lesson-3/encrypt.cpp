@@ -25,6 +25,9 @@ int main()
             en %= 26;
             en += 'A';
         }
+        else if (*p == ' ') {
+            en = '&';
+        }
         else {
             en = *p;
         }
