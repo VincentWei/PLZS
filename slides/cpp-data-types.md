@@ -797,7 +797,7 @@ char *strstr(const char *haystack, const char *needle);
 
 	
 - C++ 标准库字符串通过 `<string>` 头文件暴露了常用接口，如：
-  1. `size_t length()`：获取字符串长度。
+  1. `size_t length()` 或 `size_t size()`：获取字符串长度（不包括结尾的空字符）。
   1. `void clear()` ：清空字符串内容。
   1. `bool empty()`：测试是否为空字符串。
   1. `char &operator[]`：返回给定索引位置的单元之引用，可用于左值（lvalue）或右值（rvalue）。
@@ -809,7 +809,6 @@ char *strstr(const char *haystack, const char *needle);
   1. `string &insert()`：插入内容到字符串的指定位置（长度变长）。
   1. `string &erase()`：擦除字符串内的指定内容（长度变短）。
   1. `const char *c_str()`：返回只读的 C 字符串等价指针。
-  1. ...
 - [参考链接](https://cplusplus.com/reference/string/string/)
 
 	
@@ -925,6 +924,7 @@ $ ./fibonacci-improved
 3 / 5: 0.6
 5 / 8: 0.625
 ```
+
 	
 3) 实现如下程序中空白的三个函数，保存为 `strings.cpp`。
 
