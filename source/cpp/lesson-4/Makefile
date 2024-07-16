@@ -1,4 +1,4 @@
-TARGETS = function-calls pointer-array shapes
+TARGETS = recursive-calls pointer-array shapes
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

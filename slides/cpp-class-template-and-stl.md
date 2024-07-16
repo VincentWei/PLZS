@@ -851,3 +851,8 @@ $ ./primes
 F T T T T F
 ```
 
+	
+### 参考链接
+
+- [素数筛](https://oi-wiki.org/math/number-theory/sieve/)
+

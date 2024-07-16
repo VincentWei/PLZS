@@ -1013,6 +1013,7 @@ $ ./show-number-in-different-bases
 ### 参考链接
 
 - 信奥生的数学素养课第二讲“数系上的运算及进制”
+- [进位制](https://oi-wiki.org/math/base/)
 - [进制转换原理](https://blog.51cto.com/u_16579730/10163127)
 - [负进制](https://baike.baidu.com/item/%E8%B4%9F%E8%BF%9B%E5%88%B6%E6%95%B0/3054702)
 

@@ -54,6 +54,32 @@ int main()
 ```
 
 	
+### 执行结果
+
+```console
+$ ./recursive-calls
+Call #0 my_power(2, 8)
+ Call #1 my_power(2, 7)
+  Call #2 my_power(2, 6)
+   Call #3 my_power(2, 5)
+    Call #4 my_power(2, 4)
+     Call #5 my_power(2, 3)
+      Call #6 my_power(2, 2)
+       Call #7 my_power(2, 1)
+        Call #8 my_power(2, 0)
+        Return 1 for Call #8.
+       Return 2 for Call #7.
+      Return 4 for Call #6.
+     Return 8 for Call #5.
+    Return 16 for Call #4.
+   Return 32 for Call #3.
+  Return 64 for Call #2.
+ Return 128 for Call #1.
+Return 256 for Call #0.
+The value of 2 raised to the power of 8 is 256
+```
+
+	
 ### 函数参数的传递：值、指针和引用
 
 - 当函数参数中包括数组或者大型结构体、类的实例时，传递值将导致栈帧过大且需要参数值的复制过程。
@@ -84,11 +110,13 @@ void strtoupper(char *dst)
 - C++ 的引用本质上通过指针实现，但提供了更好的代码书写效果。
 
 ```cpp
-void make_indent(string &indent, unsigned n)
+string& make_indent(string &indent, unsigned n)
 {
     for (unsigned i = 0; i < n; i++) {
         indent += ' ';
     }
+
+    return indent;
 }
 ```
 
@@ -102,12 +130,16 @@ void make_indent(string *indent, unsigned n)
         *indent += ' ';         // 或者 indent->push_back(' ');
     }
 }
+```
 
+- 如果返回对象，上述代码将变成：
+
+```cpp
 string make_indent(unsigned n)
 {
     string indent;
     while (n--) {
-        indent += ' ';
+        indent += ' ';          // 或者 indent->push_back(' ');
     }
 
     return indent;
@@ -119,7 +151,7 @@ string make_indent(unsigned n)
 
 （十分钟内完成）
 
-1) 复制上面的示例代码，保存为 `recursive-calls.cpp`，
+1) 基于上面的示例代码编写 `recursive-calls.cpp` 程序。
 2) 编译运行，注意观察程序的输出。
 3) 通过后提交到自己的作业仓库（`source/cpp/lesson-4/` 目录下，下同）。
 
@@ -164,8 +196,8 @@ struct student {
 
 （十分钟内完成）
 
-1) 复制上面的示例代码，使用指针遍历 `students` 数组。
-2) 保存为 `students.cpp` 并提交到自己的作业仓库。
+1) 基于上面的示例代码编写完整的 `students.cpp` 程序，并使用指针遍历 `students` 数组。
+2) 调试通过后提交到自己的作业仓库。
 
 		
 ## 多维数组
@@ -288,7 +320,7 @@ const char *rainbow_color_name(rainbow_color_k c)
 ## 综合示例
 
 - 将常见二维几何形状封装（encapsulate）为单个数据结构。
-- 为这些形状的周长和面积计算函数使用统一的原型。
+- 为这些形状的周长和面积计算函数定义统一的原型。
 
 ```cpp
 using namespace std;
@@ -405,7 +437,20 @@ int main()
 		
 ## 作业
 
-1) 求解给定的线性同余方程组，要求给出至少十个解。运行效果如下：
+1) 杨辉三角是一个由数字排列成的三角形表。编写一个程序，输入一个正整数 `n`，表示杨慧三角的行数，输出对应的杨辉三角。运行效果如下：
+
+```console
+$ ./yanghui-triangle
+<5>
+1
+1 1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+```
+
+	
+2) 求解给定的线性同余方程组，要求给出至少十个解。运行效果如下：
 
 ```console
 $ ./crt
@@ -426,7 +471,7 @@ $ ./crt
 ```
 
 	
-2) 给定任意正整数，给出其所有质因子（重复的质因子只保留一个）。运行效果如下：
+3) 给定任意正整数，给出其所有质因子（重复的质因子只保留一个）。运行效果如下：
 
 ```console
 $ ./prime-factors
@@ -438,20 +483,7 @@ $ ./prime-factors
 ```
 
 	
-3) 给定任意整数 `n`，列出用于计算 `D(n)` 和 `O(n)` 的所有可能形式。运行效果如下：
-
-```console
-$ ./dn-on
-<3>
-3
-2 1
----
-3
-1 1 1
-```
-
-	
-4) 判定形如 `ax + by = d` 的不定方程是否有整数解，若有，给出至少十个解。运行效果如下：
+5) 判定形如 `ax + by = d` 的不定方程是否有整数解，若有，给出至少十个解。运行效果如下：
 
 ```console
 $ ./bezout
@@ -472,7 +504,7 @@ No solution
 ```
 
 	
-5) 使用结构体定义一个二维几何形状（三角形、正方形、圆），其中包含几何形状类型、名称、通过函数指针定义的初始化函数、周长和面积计算函数等，最终实现 `areas-refactored.cpp` 程序。运行效果如下：
+6) 使用结构体定义一个二维几何形状（三角形、正方形、圆），其中包含几何形状类型、名称、通过函数指针定义的初始化函数、周长和面积计算函数等，最终实现 `areas-refactored.cpp` 程序。运行效果如下：
 
 ```console
 $ ./areas-refactored
