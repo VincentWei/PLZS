@@ -772,6 +772,7 @@ char *strstr(const char *haystack, const char *needle);
 - `string` 类的对象上可使用 `+`、`+=` 等运算符。
 - 通过 `string` 类的 `.c_str()` 方法，可将 `string` 类对象转换为 C 字符串进行只读访问。
 
+	
 ```cpp
 #include <string>
 #include <cctype>
@@ -804,6 +805,9 @@ char *strstr(const char *haystack, const char *needle);
   1. `char &at(size_t pos)`：返回给定索引位置的单元之引用。
   1. `char &back()`：返回最后面字符之引用。
   1. `char &front()`：返回最前面字符之引用。
+
+	
+- C++ 标准库字符串通过 `<string>` 头文件暴露的常用接口（续）：
   1. `string &operator+= ()`：追加内容到字符串。
   1. `string &append()`：追加内容（单个字符、C 字符串、另一个 `string` 对象内容）到字符串。
   1. `string &insert()`：插入内容到字符串的指定位置（长度变长）。
