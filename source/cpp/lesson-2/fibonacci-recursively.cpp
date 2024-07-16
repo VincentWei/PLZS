@@ -17,7 +17,7 @@ int main()
     cin >> max;                     // Gets the maximal integer from user.
 
     cout << "1, 1";                 // Prints the first two Fibonacci numbers.
-    unsigned n = 3;                 // Starts from the 3rd Fibonacci numbers.
+    unsigned n = 2;                 // Starts from the 2nd Fibonacci numbers.
     while (true) {
         unsigned c = fibonacci(n);  // Gets the nth Fibonacci number.
         if (c >= max)               // Breaks the loop if the number
