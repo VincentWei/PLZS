@@ -139,7 +139,7 @@ string make_indent(unsigned n)
 {
     string indent;
     while (n--) {
-        indent += ' ';          // 或者 indent->push_back(' ');
+        indent += ' ';          // 或者 indent.push_back(' ');
     }
 
     return indent;
@@ -151,7 +151,7 @@ string make_indent(unsigned n)
 
 （十分钟内完成）
 
-1) 基于上面的示例代码编写 `recursive-calls.cpp` 程序。
+1) 基于上面的示例代码选择一个自己喜欢的 `make_indent()` 函数编写 `recursive-calls.cpp` 程序。
 2) 编译运行，注意观察程序的输出。
 3) 通过后提交到自己的作业仓库（`source/cpp/lesson-4/` 目录下，下同）。
 
@@ -180,11 +180,11 @@ struct student {
     cout << p->id << endl;
 
     /* 定义结构体数组 */
-    struct student students = [
+    struct student students[] = {
         { "20240101", "Julia", "2010-09-03", 'F', 160, 50.3f },
         { "20240102", "Lisa",  "2010-08-15", 'F', 158, 45.5f },
         { "20240103", "Tom",   "2010-07-10", 'M', 166, 65.5f },
-    ];
+    };
 
     for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
         cout << "Student " << students[i].id << ": " << students[i].name << endl;
@@ -202,19 +202,30 @@ struct student {
 		
 ## 多维数组
 
-- 用于数学上的矩阵运算（二维数组）。
+- 二维数组较为常用，更多维的数组很少使用。
+- 二维数组可以视作矩阵，其中的数据项按先行再列的顺序保存。
 
 ```cpp
+    // 定义一个 4 行、5 列的矩阵（二维数组）
     double matrix[4][5] = {
-        {1., 2., 3., 4.},
-        {2., 3., 4., 1.},
-        {3., 4., 1., 2.},
-        {4., 1., 2., 3.},
+        {1., 2., 3., 4., 5.},
+        {2., 3., 4., 5., 1.},
+        {3., 4., 5., 1., 2.},
+        {4., 5., 1., 2., 3.},
     };
 
+    // 使用双重循环遍历二维数组中的每个单元
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 5; j++) {
             matrix[i][j] *= 100.0;
+        }
+    }
+
+    // 获取行指针并按照一维数组访问行内每个单元
+    for (int i = 0; i < 4; i++) {
+        double *row = matrix[i];
+        for (int j = 0; j < 5; j++) {
+            row[j] *= 100.0;
         }
     }
 ```
@@ -483,7 +494,7 @@ $ ./prime-factors
 ```
 
 	
-5) 判定形如 `ax + by = d` 的不定方程是否有整数解，若有，给出至少十个解。运行效果如下：
+4) 判定形如 `ax + by = d` 的不定方程是否有整数解，若有，用二维数组保存 10 个解，并验证是否满足该不定方程。运行效果如下：
 
 ```console
 $ ./bezout
@@ -504,7 +515,7 @@ No solution
 ```
 
 	
-6) 使用结构体定义一个二维几何形状（三角形、正方形、圆），其中包含几何形状类型、名称、通过函数指针定义的初始化函数、周长和面积计算函数等，最终实现 `areas-refactored.cpp` 程序。运行效果如下：
+5) 使用结构体定义一个二维几何形状（三角形、正方形、圆），其中包含几何形状类型、名称、通过函数指针定义的初始化函数、周长和面积计算函数等，最终实现 `areas-refactored.cpp` 程序。运行效果如下：
 
 ```console
 $ ./areas-refactored
@@ -531,5 +542,6 @@ The area of your square is: 16.0
 
 - 信奥生的数学素养课第六讲“初等数论主要定理及应用（续）”
 - [扩展欧几里得算法](https://www.cnblogs.com/fusiwei/p/11775503.html)
+- [乘法逆元](https://oi-wiki.org/math/number-theory/inverse/)
 - [线性同余方程](https://oi-wiki.org/math/number-theory/linear-equation/)
 

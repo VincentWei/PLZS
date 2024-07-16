@@ -471,8 +471,10 @@ T Pair<T>::min()
 using namespace std;
 
 int main() {
-    cout.flags(ios::right | ios::hex | ios::showbase);
-    cout.width(10);
+    cout.flags(ios::right           // 右对齐
+            | ios::hex              // 十六进制
+            | ios::showbase);       // 显示 `0x` 前缀
+    cout.width(10);                 // 设定输出宽度，不足时添加空格为前缀或后缀
     cout << 255 << '\n';
 }
 ```
@@ -493,15 +495,18 @@ using namespace std;
 
 int main()
 {
-    char first_name[256], last_name[256];
+    char title[256], name[256];
 
-    cout << "Please enter your first name: ";
-    cin.getline(first_name, 256);
+    cout << "Please enter your title: ";
 
-    cout << "Please enter your last name: ";
-    cin.getline(last_name, 256);
+    // 一直读取直到 '\n' 为止；会自动追加 '\0' 字符。
+    // 如果输入超过 256，则会截断；防止缓冲区溢出。
+    cin.getline(title, 256);
 
-    cout << "Hello, " << first_name << " " << last_name << endl;
+    cout << "Please enter your name: ";
+    cin.getline(name, 256);
+
+    cout << "Hello, " << title << " " << name << endl;
 }
 ```
 
@@ -779,16 +784,12 @@ int main()
 1) 使用层次化的类重构上一讲中的 `calc-areas.cpp` 程序。运行效果不变。
 
 	
-2) 给定任意整数 `n`，列出用于计算 `D(n)` 和 `O(n)` 的所有可能形式（提示：使用 `vector` 保存分解后的整数）。运行效果如下：
+2) 输入一行英文句子（最长 4096 个字符），找出其中最长的单词并输出其长度（提示：使用 `string` 类的 `.substr()` 方法分割句子中的一个个单词，并使用 `vector` 保存分割后的单词）。运行效果如下：
 
 ```console
-$ ./dn-on
-<3>
-3
-2 1
----
-3
-1 1 1
+$ ./find-longest-word
+<I Love China.>
+China 5
 ```
 
 	
@@ -843,12 +844,25 @@ $ ./amicable-pairs
 ```
 
 	
-4) 使用素数筛算法找出小于 `UINT64_MAX` 的所有素数，然后使用 `<algorithm>` 中的 `binary_search()` 函数快速判断给定的正整数是否为素数。运行效果如下：
+4) 使用埃氏素数筛算法找出小于 `UINT64_MAX` 的所有素数，然后使用 `<algorithm>` 中的 `binary_search()` 函数快速判断给定的正整数是否为素数。运行效果如下：
 
 ```console
 $ ./primes
 <12 3 1979 2 5 99>
 F T T T T F
+```
+
+	
+5) 给定任意整数 `n`，列出用于计算 `D(n)` 和 `O(n)` 的所有可能形式（提示：使用 `vector` 保存分解后的整数）。运行效果如下：
+
+```console
+$ ./dn-on
+<3>
+3
+2 1
+---
+3
+1 1 1
 ```
 
 	
