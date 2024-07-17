@@ -3,6 +3,21 @@
 #include <cstring>
 #include <strings.h>
 
+char *mystrcpy(char dest[], const char src[])
+{
+    int i = 0;
+    char *p = dest;
+
+    while (src[i]) {
+        p[i] = src[i];
+        i++;
+    }
+
+    // write the terminating ‘\0’ character.
+    p[i] = '\0';
+    return dest;
+}
+
 /* Copy a string from src to dest, returning a pointer to
    the end of the resulting string at dest. */
 char *mystpcpy(char *dest, const char *src)
@@ -56,14 +71,15 @@ int mystrncasecmp(const char *s1, const char *s2, size_t n)
 
 int main()
 {
-    char buf[100];
+    char buf1[100], buf2[100];
     const char *hello1 = "Hello, world!";
 
-    char *result = mystpcpy(buf, hello1);
-    char *expected = ::stpcpy(buf, hello1);
+    char *result = mystpcpy(buf1, hello1);
+    char *expected = ::stpcpy(buf2, hello1);
 
-    assert(result == expected);
-    assert(::strcmp(result, expected) == 0);
+    assert(result == (buf1 + strlen(hello1)));
+    assert(expected == (buf2 + strlen(hello1)));
+    assert(::strcmp(buf1, buf2) == 0);
 
     const char *hello2 = "hello, world.";
     assert(mystrcasecmp(hello1, hello2) == ::strcasecmp(hello1, hello2));

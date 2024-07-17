@@ -959,14 +959,15 @@ int mystrncasecmp(const char *s1, const char *s2, size_t n)
 
 int main()
 {
-    char buf[100];
+    char buf1[100], buf2[100];
     const char *hello1 = "Hello, world!";
 
-    char *result = mystpcpy(buf, hello1);
-    char *expected = ::stpcpy(buf, hello1);
+    char *result = mystpcpy(buf1, hello1);
+    char *expected = ::stpcpy(buf2, hello1);
 
-    assert(result == expected);
-    assert(::strcmp(result, expected) == 0);
+    assert(result == (buf1 + strlen(hello1)));
+    assert(expected == (buf2 + strlen(hello1)));
+    assert(::strcmp(buf1, buf2) == 0);
 
     const char *hello2 = "hello, world.";
     assert(mystrcasecmp(hello1, hello2) == ::strcasecmp(hello1, hello2));
