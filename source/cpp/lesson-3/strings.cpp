@@ -13,6 +13,8 @@ char *mystpcpy(char *dest, const char *src)
         src++;
     }
 
+    // write the terminating ‘\0’ character.
+    *dest = '\0';
     return dest;
 }
 
