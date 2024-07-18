@@ -298,6 +298,9 @@ ostream& flush(ostream& os);
    - `setw(int n)`：设置输出宽度（输出字符不足设定的宽度时，使用填充字符）。
    - [参考链接](https://cplusplus.com/reference/iomanip/)
 
+	
+- 操作器的使用
+
 ```cpp
 #include <iostream>     // std::cout, std::fixed
 #include <iomanip>      // std::setprecision
