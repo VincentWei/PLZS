@@ -6,12 +6,16 @@ class Rectangle {
     double _w, _h;
 
   public:
-    Rectangle() {
-        _w = 0; _h = 0;
+    Rectangle(): _w(0), _h(0) {
+        std::cout << "The default constructor called" << endl;
     }
 
     Rectangle(double w, double h) {
         _w = w; _h = h;
+    }
+
+    ~Rectangle() {
+        std::cout << "The destructor called" << endl;
     }
 
     void setWidth(double w) {
@@ -56,8 +60,23 @@ istream &operator>> (istream &is, Rectangle &rc)
     return is;
 }
 
+Rectangle global_rc;
+
+int foo()
+{
+    Rectangle rc;
+
+    {
+        Rectangle rc;
+    }
+
+    return 0;
+}
+
 int main()
 {
+    foo();
+
     Rectangle rc {20.0, 30.0};
     cout << "Perimter: " << rc.perimeter() << endl;
     cout << "Area: " << rc.area() << endl;
@@ -75,5 +94,8 @@ int main()
     cin >> rc_c;
     cout << "Perimter of " << rc_c << ": " << rc_c.perimeter() << endl;
     cout << "Area of " << rc_c << ": " << rc_c.area() << endl;
+
+    std::cout << "The program is exiting..." << endl;
+    return 0;
 }
 

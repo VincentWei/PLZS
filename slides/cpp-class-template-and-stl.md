@@ -12,9 +12,9 @@
 
 - 类（class）是结构体（structure）的一个扩展，其中不仅仅包括数据，同时也包括基于这些数据完成特定功能的函数。
 - 类中定义的数据称作“数据成员”，也称为“属性（property）”。
-- 类中定义的函数称作“函数成员”；根据用途的不同，可进一步区分为设置器（setter）、获取器（getter）或者方法（method）。
-- 对象（object）是类的一个实例（instance），每个类的对象有自己的实例数据。
-- C++ 中，可使用 `struct` 或者 `class` 关键词定义一个类。
+- 类中定义的函数称作“函数成员”；根据用途的不同，可进一步区分为构造器（constructor）、析构器（destructor）、设置器（setter）、获取器（getter）或者方法（method）。
+- 对象（object）是类的一个实例（instance），每个类的对象有自己的实例数据。类的对象在实例化时，会自动调用其构造器。
+- C++ 中，`class` 关键词定义一个类；
 - 在正式项目中，C++ 类的定义通常置于独立的头文件中，以方便其他模块引用。
 
 	
@@ -107,6 +107,56 @@ class Rectangle {
 
     cout << "Perimter: " << rc.perimeter() << endl;
     cout << "Area: " << rc.area() << endl;
+```
+
+	
+### 类对象的生命周期
+
+- 在局部范围（scope）内定义的类对象，其生命周期在程序执行跳出对应范围时终止。
+- 在全局范围内定义的类对象，其生命周期在整个程序执行结束时终止。
+- 当类对象的生命周期结束时，将自动调用其析构器。
+
+```cpp
+#include <iostream>
+
+class Rectangle {
+    double width, height;
+
+  public:
+    // Rectangle 类的默认构造器（constructor)
+    Rectangle(): width(0), height(0) {
+        std::cout << "Constructor called" << std::endl;
+    }
+
+    // Rectangle 类的构造器（constructor)
+    Rectangle(double w, double h) {
+        width = w; height = h;
+    }
+
+    // Rectangle 类的析构器（destructor)
+    ~Rectangle() {
+        std::cout << "Destructor called" << std::endl;
+    }
+    ...
+};
+
+// global_rc 对象生命周期在整个程序运行时有效。
+Rectangle global_rc;
+
+int foo()
+{
+    Rectangle rc;       // rc 对象生命周期在整个 foo 函数中有效。
+                        // 每进入一次 foo() 函数，将新构造一个 rc 对象。
+
+    {                           // 花括号定义了一个新的（匿名）名字空间
+        Rectangle another_rc;   // another_rc 甚至可以用 rc 这个名称。
+        ...
+                                // 名字空间结束，another_rc 对象的生命周期结束。
+    }
+
+    return 0;           // 函数返回时，rc 对象的生命周期结束。
+                        // 析构器将被调用。
+}
 ```
 
 		
@@ -215,6 +265,53 @@ istream &operator>> (istream &is, Rectangle &rc)
     cin >> rc_c;
     cout << "Perimter of " << rc_c << ": " << rc_c.perimeter() << endl;
     cout << "Area of " << rc_c << ": " << rc_c.area() << endl;
+```
+
+	
+### `std::endl` 到底是个啥？
+
+- `std::endl` 不是字符串字面量（`"\n"`），而是一个函数。
+- `ostream` 类的 `<<` 运算符允许其右值为一个特定类型的函数指针；对应的运算符效果是调用对应的函数。
+- 而 `std::endl` 和 `std::flush` 就是这类函数。
+
+```cpp
+ostream& operator<< (ostream& (*pf)(ostream&));
+
+ostream& endl(ostream& os);
+ostream& flush(ostream& os);
+```
+
+- 因此，以下两行代码的执行效果是相同的：
+
+```cpp
+    std::cout << "Hello" << std::endl;
+    std::cout << "Hello"; std::cout.endl();
+```
+
+	
+- 在 C++ 语言中，`std::endl` 等可用于运算符右值的函数，有一个特别的名字，称作 `操作器（manipulator）`。
+- 操作器可方便地被内嵌于串接在一起的多个运算符中。
+- `<iomanip>` 头文件中定义了大量操作器：
+   - `setprecision(int n)`：设置浮点数的输出精度（小数点位数）。
+   - `setbase(int base)`：设置整数的输出进制（8、10、16）。
+   - `setfill(char_type c)`：设置填充字符。
+   - `setw(int n)`：设置输出宽度（输出字符不足设定的宽度时，使用填充字符）。
+   - [参考链接](https://cplusplus.com/reference/iomanip/)
+
+```cpp
+#include <iostream>     // std::cout, std::fixed
+#include <iomanip>      // std::setprecision
+
+  double f = 3.14159;
+  std::cout << std::setprecision(2) << f << std::endl;
+  // Output: 3.14
+
+  std::cout << std::setbase(16) << std::setfill('*') << std::setw(5)
+        << 255 << std::endl;
+  // Output: ***ff
+
+  return 0;
+}
 ```
 
 	
@@ -777,6 +874,41 @@ int main()
 
 		
 ## 实用技巧
+
+### 条件编译
+
+利用预处理指令 `#if`、`#ifdef`、`#ifndef` 等按指定的条件过滤语句块。
+
+- `NDEBUG` 通常由编译器定义，表明正在编译程序的发布（Release）版本。可在程序中使用这个宏包含调试用代码：
+
+```cpp
+#ifndef NDEBUG
+    // 仅用于发布版本的代码。
+#else
+    // 包含用于调试版本的代码，比如测试用代码。
+    assert(...);
+#endif
+```
+
+	
+
+- 利用 `#if 0`可以屏蔽代码块，其效果和块注释相同，但看起来更加简洁。
+
+```cpp
+    char en;
+
+#if 0
+    en = (*p + 7);
+    if (en > 'z') {
+        en = 'a' + en - 'z' - 1;
+    }
+#else
+    en = *p - 'A';
+    en += 7;
+    en %= 26;
+    en += 'A';
+#endif
+```
 
 		
 ## 作业
