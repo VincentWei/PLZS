@@ -295,7 +295,7 @@ struct student {
     }
 
     // 获取首个单元的指针并按照一维数组访问二维数组中的每个单元
-    double *unit = &matrix[0]][0];
+    double *unit = &matrix[0][0];
     for (int i = 0; i < 4; i++) {
         double *row = unit + i * 5;
         for (int j = 0; j < 5; j++) {
@@ -340,13 +340,16 @@ union natural {
     unsigned char   bytes[4];
 };
 
-cout << sizeof(union natural) << endl;
+    cout << sizeof(union natural) << endl;
 
-union natural n;
+    union natural n;
 
-n.natural = 0x13141314u;
-cout << n.half[0] << ", " << n.half[1] << endl;
-cout << n.bytes[0] << ", " << n.bytes[1] << ", " << n.bytes[2] << ", " << n.bytes[3] << endl;
+    n.natural = 0x12345678;
+
+    cout.setf (ios::hex, ios::basefield);       // 设置以十六进制输出整数
+    cout.setf (ios::showbase);                  // 设置显示 `0x` 前缀
+    cout << n.half[0] << ", " << n.half[1] << endl;
+    cout << (int)n.bytes[0] << ", " << (int)n.bytes[1] << ", " << (int)n.bytes[2] << ", " << (int)n.bytes[3] << endl;
 ```
 
 		
@@ -357,8 +360,8 @@ cout << n.bytes[0] << ", " << n.bytes[1] << ", " << n.bytes[2] << ", " << n.byte
 
 ```cpp
 enum rainbow_color {
-    red,            // 第一个枚举量的默认值为 0，亦可赋值改变其初始值。
-    orange,
+    red = 1,        // 第一个枚举值默认取 0，亦可赋值改变其初始值。
+    orange,         // 其后的依次确定其值。
     yellow,
     green,
     cyan,
@@ -373,6 +376,7 @@ const char *rainbow_color_name(rainbow_color_k c)
 {
     const char *name = nullptr;
 
+    /* 警告：green 未被 switch 语句处理。 */
     switch (c) {
     case red:
         name = "red";
