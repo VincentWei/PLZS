@@ -287,6 +287,15 @@ struct student {
             row[j] *= 100.0;
         }
     }
+
+    // 获取首个单元的指针并按照一维数组访问二维数组中的每个单元
+    double *unit = &matrix[0]][0];
+    for (int i = 0; i < 4; i++) {
+        double *row = unit + i * 5;
+        for (int j = 0; j < 5; j++) {
+            row[j] *= 100.0;
+        }
+    }
 ```
 
 	
