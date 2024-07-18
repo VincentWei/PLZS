@@ -160,6 +160,32 @@ int foo()
 ```
 
 		
+## 类的其他特性
+
+### 成员的可访问性
+
+- 为什么要定义类成员的可访问性（accessibility）？
+- C++ 通过声明符（declarator） `public`、`private` 等定义类成员的可访问性。
+- 类成员的默认可访问性为 `private`，表示该等成员数据或者成员函数，只能在该类的成员函数中访问。
+- 可访问性为 `public` 的成员，可在非该类的成员函数中访问。通常，不降成员数据设定为 `public`。
+- C++ 中，也可以使用 `struct` 定义类，但其成员函数和成员数据默认均具有 `public` 的可访问性。
+
+	
+### 成员函数的说明符
+
+- 成员函数的说明符（specifier）用于修改函数的某些特性，置于函数参数列表之后，函数体之前。
+- `const` 说明符：表示该成员函数不会修改该类对象的成员数据；类的获取器通常具有 `const` 属性。
+- 不包含 `const` 说明符的成员函数，被认为可能修改类对象的成员数据，故而不能被具有 `const` 修饰词的类指针使用。
+
+```cpp
+Rectangle rc;
+const Rectangle *p = &rc;
+
+p->width();             // width() 获取器具有 const 说明符
+p->setWidth(10);        // 报编译错误
+```
+
+		
 ## 重载
 
 - 重载（overload）是面向对象编程中一个重要的方法。
@@ -330,9 +356,10 @@ ostream& flush(ostream& os);
 		
 ## 构建类的层次结构
 
-- 将不同的公共接口归纳到基类中定义，并在子类中按需要重载。
-- C++ 中可被子类重载的成员函数称为“虚函数”。
-- 在子类中重载虚函数，实现面向对象当中的多态（polymorphism）。
+- 将不同的公共接口归纳到基类（base class）中定义，并在子类（派生类，derived class）中按需要重载。
+- 虚函数是可在派生类中重新定义的成员函数；尤其是，在基类中标记为 `= 0` 的虚函数必须在派生类中定义，否则无法实例化。
+- 在派生类中重载虚函数，实现面向对象当中的多态（polymorphism）。
+- 当使用基类的指针或对基类的引用来引用派生的类对象时，为该对象调用虚函数时，C++ 将调用真实对象对应的派生类定义的虚函数版本。
 
 ```cpp
 class Basic2DShape {
@@ -388,19 +415,19 @@ class Rectangle: public Basic2DShape {
 
     ...
 
-    virtual double perimeter(void) {
+    virtual double perimeter(void) override {
         return (_w + _h) * 2.0;
     }
 
-    virtual double area(void) {
+    virtual double area(void) override {
         return _w * _h;
     }
 
-    virtual void write(ostream &os) {
+    virtual void write(ostream &os) override {
         os << "Rectangle (" << _w << " x " << _h << ")";
     }
 
-    virtual void read(istream &is) {
+    virtual void read(istream &is) override {
         is >> _w >> _h;
     }
 };
@@ -430,19 +457,19 @@ class Circle: public Basic2DShape {
         return _r;
     }
 
-    virtual double perimeter(void) {
+    virtual double perimeter(void) override {
         return 2.0 * M_PI * _r;
     }
 
-    virtual double area(void) {
+    virtual double area(void) override {
         return M_PI * _r * _r;
     }
 
-    virtual void write(ostream &os) {
+    virtual void write(ostream &os) override {
         os << "Circle (" << _r << ")";
     }
 
-    virtual void read(istream &is) {
+    virtual void read(istream &is) override {
         is >> _r;
     }
 };
