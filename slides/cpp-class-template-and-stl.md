@@ -289,6 +289,8 @@ ostream& flush(ostream& os);
 ```
 
 	
+### 操作器
+
 - 在 C++ 语言中，`std::endl` 等可用于运算符右值的函数，有一个特别的名字，称作 `操作器（manipulator）`。
 - 操作器可方便地被内嵌于串接在一起的多个运算符中。
 - `<iomanip>` 头文件中定义了大量操作器：
@@ -299,7 +301,7 @@ ostream& flush(ostream& os);
    - [参考链接](https://cplusplus.com/reference/iomanip/)
 
 	
-- 操作器的使用
+### 操作器的使用
 
 ```cpp
 #include <iostream>     // std::cout, std::fixed

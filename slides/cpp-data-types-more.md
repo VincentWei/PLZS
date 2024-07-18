@@ -1,6 +1,7 @@
 # C++ 数据类型（下）
 
 1. 深入理解函数调用
+1. 函数指针
 1. 结构体
 1. 多维数组
 1. 联合体
@@ -154,6 +155,64 @@ string make_indent(unsigned n)
 1) 基于上面的示例代码选择一个自己喜欢的 `make_indent()` 函数编写 `recursive-calls.cpp` 程序。
 2) 编译运行，注意观察程序的输出。
 3) 通过后提交到自己的作业仓库（`source/cpp/lesson-4/` 目录下，下同）。
+
+		
+## 函数指针
+
+- 函数指针一种特殊的指针数据，C/C++ 支持将函数指针当做普通函数一样去调用。
+- 函数指针是 C++ 实现面向对象编程能力的关键特性。
+
+```cpp
+bool largerthan(int a, int b)
+{
+    return a > b;
+}
+
+bool lessthan(int a, int b)
+{
+    return a < b;
+}
+
+bool equalto(int a, int b)
+{
+    return a == b;
+}
+
+bool compare(char symbol, int a, int b)
+{
+    // 声明 op 变量为一个函数指针；该函数有两个整型参数，返回值类型为 bool。
+    bool (*op)(int, int);
+
+    // 根据 symbol 选择一个已有的对比函数
+    switch (symbol) {
+        case '>':
+            op = largerthan;
+            break;
+        case '<':
+            op = lessthan;
+            break;
+        case '=':
+            op = equalto;
+            break;
+        default:
+            op = nullptr;
+            break;
+    }
+
+
+    // 调用对比函数
+    if (op)
+        return op(a, b);
+
+    return false;
+}
+
+    char symbol;
+    int a, b;
+
+    cin >> symbol >> a >> b;
+    cout << (compare(symbol, a, b) ? "true" : "false") << endl;
+```
 
 		
 ## 结构体
