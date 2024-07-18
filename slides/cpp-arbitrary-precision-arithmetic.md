@@ -3,7 +3,8 @@
 1. 任意精度计算要解决的问题
 1. 实现原理和方法
 1. 基于 `string` 的实现
-1. 基于 `vector` 实现的压位高精度 `BigInt` 类
+1. 基于 `vector` 实现的压位高精度 `bigint` 类
+1. 实用技巧
 
 		
 ## 任意精度计算要解决的问题
@@ -360,11 +361,11 @@ done:
 2) 编译调试通过后提交到自己的作业仓库。
 
 		
-## 基于 `vector` 的压位高精度 `BigInt` 类实现
+## 基于 `vector` 的压位高精度 `bigint` 类实现
 
 - 用一个 `int8_t` 表示十进制的两位数字（相当于提供基于 100 进制的整数运算）。
 - 使用 `vector<int8_t>` 从数值的低位开始存储，每个单元表示两位十进制数字。
-- 设计为 `BigInt` 类，以方便提供多种构造方法以及运算符重载等能力。
+- 设计为 `bigint` 类，以方便提供多种构造方法以及运算符重载等能力。
 
 		
 ### 类的定义
@@ -376,68 +377,68 @@ done:
 
 using namespace std;
 
-class BigInt {
+class bigint {
     bool _sign;
     vector<int8_t> _bytes;
 
   public:
-    BigInt() {
+    bigint() {
         _sign = false;
     }
 
-    BigInt(intmax_t native_int);
-    BigInt(const std::string& str);
-    BigInt(const BigInt& other);            // copy constructor
-    BigInt(BigInt&& other);                 // move constructor
+    bigint(intmax_t native_int);
+    bigint(const std::string& str);
+    bigint(const bigint& other);            // copy constructor
+    bigint(bigint&& other);                 // move constructor
 
     // getters
     bool sign() const { return _sign; }
     const vector<int8_t>& bytes() const { return _bytes; }
 
     // customized operators
-    BigInt& operator= (const BigInt& other);    // copy assignment operator
-    BigInt& operator= (BigInt&& other);         // move assignment operator
-    BigInt& operator= (intmax_t other);
+    bigint& operator= (const bigint& other);    // copy assignment operator
+    bigint& operator= (bigint&& other);         // move assignment operator
+    bigint& operator= (intmax_t other);
 
-    BigInt  operator+  (const BigInt& other) const;
-    BigInt& operator+= (const BigInt& other);
-    BigInt  operator+  (intmax_t other) const;
-    BigInt& operator+= (intmax_t other);
+    bigint  operator+  (const bigint& other) const;
+    bigint& operator+= (const bigint& other);
+    bigint  operator+  (intmax_t other) const;
+    bigint& operator+= (intmax_t other);
 
-    BigInt  operator-  () const;             // -bi
+    bigint  operator-  () const;             // -bi
 
-    BigInt  operator-  (const BigInt& other) const;
-    BigInt& operator-= (const BigInt& other);
-    BigInt  operator-  (intmax_t other) const;
-    BigInt& operator-= (intmax_t other);
+    bigint  operator-  (const bigint& other) const;
+    bigint& operator-= (const bigint& other);
+    bigint  operator-  (intmax_t other) const;
+    bigint& operator-= (intmax_t other);
 
-    BigInt& operator++ ();                  // ++bi
-    BigInt& operator++ (int);               // bi++
+    bigint& operator++ ();                  // ++bi
+    bigint& operator++ (int);               // bi++
 
-    BigInt& operator-- ();                  // --bi
-    BigInt& operator-- (int);               // bi--
+    bigint& operator-- ();                  // --bi
+    bigint& operator-- (int);               // bi--
 
-    BigInt  operator*  (const BigInt& other) const;
-    BigInt& operator*= (const BigInt& other);
-    BigInt  operator*  (intmax_t other) const;
-    BigInt& operator*= (intmax_t other);
+    bigint  operator*  (const bigint& other) const;
+    bigint& operator*= (const bigint& other);
+    bigint  operator*  (intmax_t other) const;
+    bigint& operator*= (intmax_t other);
 
-    BigInt  operator/  (const BigInt& other) const;
-    BigInt& operator/= (const BigInt& other);
-    BigInt  operator/  (intmax_t other) const;
-    BigInt& operator/= (intmax_t other);
+    bigint  operator/  (const bigint& other) const;
+    bigint& operator/= (const bigint& other);
+    bigint  operator/  (intmax_t other) const;
+    bigint& operator/= (intmax_t other);
 
-    BigInt  operator%  (const BigInt& other) const;
-    BigInt& operator%= (const BigInt& other);
-    BigInt  operator%  (intmax_t other) const;
-    BigInt& operator%= (intmax_t other);
+    bigint  operator%  (const bigint& other) const;
+    bigint& operator%= (const bigint& other);
+    bigint  operator%  (intmax_t other) const;
+    bigint& operator%= (intmax_t other);
 
-    bool operator== (const BigInt& other) const;
-    bool operator!= (const BigInt& other) const;
-    bool operator>  (const BigInt& other) const;
-    bool operator>= (const BigInt& other) const;
-    bool operator<  (const BigInt& other) const;
-    bool operator<= (const BigInt& other) const;
+    bool operator== (const bigint& other) const;
+    bool operator!= (const bigint& other) const;
+    bool operator>  (const bigint& other) const;
+    bool operator>= (const bigint& other) const;
+    bool operator<  (const bigint& other) const;
+    bool operator<= (const bigint& other) const;
 
     bool operator== (intmax_t other) const;
     bool operator!= (intmax_t other) const;
@@ -447,13 +448,13 @@ class BigInt {
     bool operator<= (intmax_t other) const;
 
   private:
-    BigInt absadd(const BigInt& other) const;
-    void   absaddto(const BigInt& other);
-    int    abscmp(const BigInt& other) const;
+    bigint absadd(const bigint& other) const;
+    void   absaddto(const bigint& other);
+    int    abscmp(const bigint& other) const;
     ...
 };
 
-void factorial(BigInt& result, unsigned n)
+void factorial(bigint& result, unsigned n)
 {
     if (n > 1) {
         factorial(result, n - 1);
@@ -463,13 +464,13 @@ void factorial(BigInt& result, unsigned n)
         result = 1;
 }
 
-    BigInt a(1234567890);
-    BigInt b("2345");
+    bigint a(1234567890);
+    bigint b("2345");
 
     a += b;
     cout << a / b << endl;
 
-    BigInt fact;
+    bigint fact;
     factorial(fact, 100);       // 100!
     cout << fact << endl;
 ```
@@ -478,7 +479,7 @@ void factorial(BigInt& result, unsigned n)
 ### 构造器
 
 ```cpp
-BigInt::BigInt(intmax_t native_int)
+bigint::bigint(intmax_t native_int)
 {
     if (native_int < 0) {
         _sign = true;
@@ -497,7 +498,7 @@ BigInt::BigInt(intmax_t native_int)
     }
 }
 
-BigInt::BigInt(const string& str)
+bigint::bigint(const string& str)
 {
     size_t len = str.length();
     if (len == 0) {
@@ -534,7 +535,7 @@ BigInt::BigInt(const string& str)
     }
 }
 
-BigInt::BigInt(const BigInt &other)
+bigint::bigint(const bigint &other)
 {
     _sign = other.sign();
     _bytes = other.bytes();
@@ -545,7 +546,7 @@ BigInt::BigInt(const BigInt &other)
 ### 重载 `<<` 运算符
 
 ```cpp
-ostream& operator<< (ostream& os, const BigInt& bi) {
+ostream& operator<< (ostream& os, const bigint& bi) {
     if (bi.sign()) {
         os << "-";
     }
@@ -568,16 +569,16 @@ ostream& operator<< (ostream& os, const BigInt& bi) {
 ### 重载 `=` 运算符
 
 ```cpp
-BigInt& BigInt::operator= (const BigInt& other)
+bigint& bigint::operator= (const bigint& other)
 {
     _sign = other._sign;
     _bytes = other._bytes;
     return *this;
 }
 
-BigInt& BigInt::operator= (intmax_t native_int)
+bigint& bigint::operator= (intmax_t native_int)
 {
-    BigInt tmp(native_int);
+    bigint tmp(native_int);
     _sign = tmp._sign;
     _bytes = std::move(tmp._bytes);
     return *this;
@@ -588,7 +589,7 @@ BigInt& BigInt::operator= (intmax_t native_int)
 ### 重载 `==` 运算符
 
 ```cpp
-int BigInt::abscmp(const BigInt& other) const
+int bigint::abscmp(const bigint& other) const
 {
     size_t len_a = this->_bytes.size();
     size_t len_b = other._bytes.size();
@@ -609,7 +610,7 @@ int BigInt::abscmp(const BigInt& other) const
     return 0;
 }
 
-bool BigInt::operator== (const BigInt& other) const
+bool bigint::operator== (const bigint& other) const
 {
     if (_sign == other._sign && abscmp(other) == 0)
         return true;
@@ -618,14 +619,40 @@ bool BigInt::operator== (const BigInt& other) const
 }
 ```
 
-	
-### `static` 关键词
+		
+## 实用技巧
+
+### 巧用 `static` 关键词
 
 - 在 C++ 中，不同场合下的 `static` 关键词扮演着不同的角色。
 - 类中的 `static` 成员数据，对所有该类的对象，共用同一个副本，也就是说，程序中只有一个实例。
 - 类中的 `static` 成员函数，是全局可用的成员函数，不对应任何类成员，故而不能在其中使用 `this` 指针。
-- 函数或者使用花括号定义的局部范围中的 `static` 数据，称为静态数据，只有一个全局的副本，相当于全局变量，但其名称仅在该函数或范围内有效。
+- 函数或者使用花括号定义的局部范围中的 `static` 数据，称为静态数据，只有一个全局的副本，相当于全局变量，只会被初始化一次，其名称仅在该函数或范围内有效。
 - 全局范围内的普通函数或者变量使用 `static` 修饰时，该函数或变量仅能被同一源文件中的代码引用；也就是说，其他源文件无法访问该函数或变量。
+
+	
+### 使用自定义头文件
+
+- 将类的定义放到独立的头文件（通常具有 `.hpp` 后缀名）中，方便其他源文件引用这个类的接口，此时，将其实现放到单独的 `.cpp` 源文件中。
+- 通过 `#include` 预处理指令包含自定义头文件；如 `#include "bigint.hpp"`。
+- 基于多个源文件构建单个可执行程序时，应在编译命令行指定所有源文件（空格分隔），但只能有一个 `main()` 函数。
+
+	
+### 使用编译器命令行宏控制是否包含测试代码
+
+- 源代码中
+
+```cpp
+#ifndef NTEST
+    // code for test
+#endif
+```
+
+- 命令行
+
+```console
+$ g++ -DNTEST -c bigint.cpp -o bigint.o
+```
 
 		
 ## 作业
@@ -676,7 +703,7 @@ $ ./binary-power
 ```
 
 	
-5) 基于 `BigInt` 类提供的接口实现任意精度整数的常见计算功能，比如计算最大公约数、阶乘之和等。运行效果如下：
+5) 基于 `bigint` 类提供的接口实现任意精度整数的常见计算功能，比如计算最大公约数、阶乘之和等。运行效果如下：
 
 ```console
 $ ./summary-of-factorials-bigint

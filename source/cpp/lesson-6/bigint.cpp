@@ -8,221 +8,14 @@
  * Copyright (C) 2024 FMSoft <https://www.fmsoft.cn>.
  * License: GPLv3
  */
-#include <array>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <cstdlib>
-#include <cstdint>
-#include <cstring>
-#include <cassert>
-#include <cinttypes>
 
-/* Choose one of the following macros */
-// #define USE_INT8_AS_SLICE   1
-// #define USE_INT16_AS_SLICE  1
-#define USE_INT32_AS_SLICE  1
-
-class BigInt {
-  public:
-#if defined(USE_INT32_AS_SLICE)
-    using slice_t = int32_t;
-    using twin_t  = int64_t;
-    using slice_v = std::vector<BigInt::slice_t>;
-    static const int slice_width_k = 8;             //    9999 9999
-    static const int max_slice_nint_k = 99999999;   // 21 4748 3647 (int32max)
-    static const int slice_base_k = (max_slice_nint_k + 1); // 1 00000000
-    static const int max_nint_slices_k = 2;    // 922 33720368 54775807
-    static const int max_group_slices_k = 1;
-    static const int group_base_k = 100000000;
-        // slice_base_k ^ max_group_slices_k
-
-#elif defined(USE_INT16_AS_SLICE)
-    using slice_t = int16_t;
-    using twin_t  = int32_t;
-    using slice_v = std::vector<BigInt::slice_t>;
-    static const int slice_width_k = 4;             //   9999
-    static const int max_slice_nint_k = 9999;       // 3 2767 (int16max)
-    static const int slice_base_k = (max_slice_nint_k + 1); // 1 0000
-    static const int max_nint_slices_k = 4;    // 922 3372 0368 5477 5807
-    static const int max_group_slices_k = 2;
-    static const int group_base_k = 100000000;
-        // slice_base_k ^ max_group_slices_k */
-#elif defined(USE_INT8_AS_SLICE)
-    using slice_t = int8_t;
-    using twin_t  = int16_t;
-    using slice_v = std::vector<BigInt::slice_t>;
-    static const int slice_width_k = 2;             //   99
-    static const int max_slice_nint_k = 99;         // 1 27 (int8max)
-    static const int slice_base_k = (max_slice_nint_k + 1); // 1 00
-    static const int max_nint_slices_k = 9;    // 922 33 72 03 68 54 77 58 07
-    static const int max_group_slices_k = 4;
-    static const int group_base_k = 1000000000;
-        // slice_base_k ^ max_group_slices_k
-#endif
-
-  private:
-    class slice_a {
-       size_t  _size;
-       slice_t _slices[max_nint_slices_k];
-
-    public:
-       slice_a(): _size(0) { }
-
-       slice_a(slice_t slice) {
-           _size = 1;
-           _slices[0] = slice;
-       }
-
-       size_t size() const { return _size; };
-
-       void clear() { _size = 0; }
-
-       void push_back(slice_t val) {
-           assert(_size < max_nint_slices_k);
-           _slices[_size] = val;
-           _size++;
-       }
-
-       slice_t operator[](size_t i) const {
-           assert(i < _size);
-           return _slices[i];
-       }
-    };
-
-  public:
-    BigInt(): _sign(false) { }
-
-    BigInt(intmax_t nint);
-    BigInt(const std::string& str);
-    BigInt(const BigInt& other);            // copy constructor
-    BigInt(BigInt&& other);                 // move constructor
-
-    // some getters
-    bool sign() const { return _sign; }
-    const slice_v& slices() const { return _slices; }
-
-    // getter or setter for max number of slices for native integer
-    static int max_nint_slices();
-
-    // overloaded operators
-    BigInt& operator= (const BigInt& other);        // copy assignment operator
-    BigInt& operator= (BigInt&& other) noexcept;    // move assignment operator
-    BigInt& operator= (intmax_t other);
-
-    BigInt  operator+  (const BigInt& other) const;
-    BigInt& operator+= (const BigInt& other);
-    BigInt  operator+  (intmax_t other) const;
-    BigInt& operator+= (intmax_t other);
-
-    BigInt  operator-  () const;             // -bi
-
-    BigInt  operator-  (const BigInt& other) const;
-    BigInt& operator-= (const BigInt& other);
-    BigInt  operator-  (intmax_t other) const;
-    BigInt& operator-= (intmax_t other);
-
-    BigInt& operator++ ();                  // ++bi
-    BigInt  operator++ (int);               // bi++
-
-    BigInt& operator-- ();                  // --bi
-    BigInt  operator-- (int);               // bi--
-
-    bool operator== (const BigInt& other) const;
-    bool operator!= (const BigInt& other) const;
-    bool operator>  (const BigInt& other) const;
-    bool operator>= (const BigInt& other) const;
-    bool operator<  (const BigInt& other) const;
-    bool operator<= (const BigInt& other) const;
-
-    bool operator== (intmax_t other) const;
-    bool operator!= (intmax_t other) const;
-    bool operator>  (intmax_t other) const;
-    bool operator>= (intmax_t other) const;
-    bool operator<  (intmax_t other) const;
-    bool operator<= (intmax_t other) const;
-
-    BigInt  operator*  (const BigInt& other) const;
-    BigInt& operator*= (const BigInt& other);
-    BigInt  operator*  (intmax_t other) const;
-    BigInt& operator*= (intmax_t other);
-
-    BigInt  operator/  (const BigInt& other) const;
-    BigInt& operator/= (const BigInt& other);
-    BigInt  operator/  (intmax_t other) const;
-    BigInt& operator/= (intmax_t other);
-
-    BigInt  operator%  (const BigInt& other) const;
-    BigInt& operator%= (const BigInt& other);
-    BigInt  operator%  (intmax_t other) const;
-    BigInt& operator%= (intmax_t other);
-
-    static bool divmod(const BigInt& dividend, const BigInt& divisor,
-            BigInt& quotient, BigInt& remainder);
-    static bool divmod(const BigInt& dividend, intmax_t divisor,
-            BigInt& quotient, BigInt& remainder);
-
-  private:
-    static int _max_nint_slices;
-
-    template <class T>
-    static void initfrom(intmax_t nint, T& slices);
-
-    bool _sign;
-    slice_v _slices;
-
-    void initfrom(intmax_t nint);
-    void normalize();
-    bool iszero() const {
-        if (_slices.size() == 0 ||
-                (_slices.size() == 1 and _slices[0] == 0))
-            return true;
-        return false;
-    }
-
-    bool isone() const {
-        if (_slices.size() == 1 and _slices[0] == 0)
-            return true;
-        return false;
-    }
-
-    template <class Ta, class Tb>
-    static void absadd(const Ta& one, const Tb& other, BigInt& result);
-    template <class Ta, class Tb>
-    static int  abscmp(const Ta& one, const Tb& other);
-    template <class Ta, class Tb>
-    static void abssub(const Ta& one, const Tb& other, BigInt& result);
-    template <class Ta, class Tb>
-    static void absmul(const Ta& one, const Tb& other, BigInt& result);
-    template <class T>
-    static void absdiv_slice(const T& dividend, slice_t denominator,
-            BigInt& quotient, BigInt& remainder);
-    template <class T>
-    static void absdiv_nint(const T& dividend, intmax_t denominator,
-            BigInt& quotient, BigInt& remainder);
-    template <class Ta, class Tb>
-    static bool absdiv_fast(const Ta& dividend, const Tb& divisor,
-            BigInt& quotient, BigInt& remainder);
-    template <class T>
-    static intmax_t makenint(const T& slices, size_t off = 0,
-            size_t len = max_group_slices_k);
-
-    static void absdiv_slow(const slice_v& dividend, const slice_v& divisor,
-            BigInt& quotient, BigInt& remainder);
-
-    template <class T>
-    void abssubfrom(const T& other);
-    template <class T>
-    void absaddto(const T& other);
-};
-
-#include <iostream>
+#include "bigint.hpp"
 
 using namespace std;
 
-int BigInt::_max_nint_slices;
+int bigint::_max_nint_slices;
 
-int BigInt::max_nint_slices()
+int bigint::max_nint_slices()
 {
     if (_max_nint_slices == 0) {
         std::string max_nint = std::to_string(INTMAX_MAX);
@@ -232,7 +25,7 @@ int BigInt::max_nint_slices()
     return _max_nint_slices;
 }
 
-ostream& operator<< (ostream& os, const BigInt& bi)
+ostream& operator<< (ostream& os, const bigint& bi)
 {
     if (bi.sign() && bi.slices().size() > 0) {
         os << "-";
@@ -251,7 +44,7 @@ ostream& operator<< (ostream& os, const BigInt& bi)
             }
             else {
                 intmax_t tens = 10;
-                for (int i = 0; i < BigInt::slice_width_k - 1; i++) {
+                for (int i = 0; i < bigint::slice_width_k - 1; i++) {
                     if (r < tens)
                         os << "0";
 
@@ -270,7 +63,7 @@ ostream& operator<< (ostream& os, const BigInt& bi)
 }
 
 template <class T>
-void BigInt::initfrom(intmax_t nint, T& slices)
+void bigint::initfrom(intmax_t nint, T& slices)
 {
     assert(slices.size() == 0);
 
@@ -287,7 +80,7 @@ void BigInt::initfrom(intmax_t nint, T& slices)
     }
 }
 
-void BigInt::initfrom(intmax_t nint)
+void bigint::initfrom(intmax_t nint)
 {
     if (nint < 0) {
         _sign = true;
@@ -298,12 +91,12 @@ void BigInt::initfrom(intmax_t nint)
     initfrom(nint, _slices);
 }
 
-BigInt::BigInt(intmax_t nint)
+bigint::bigint(intmax_t nint)
 {
     initfrom(nint);
 }
 
-BigInt::BigInt(const string& str)
+bigint::bigint(const string& str)
 {
     size_t len = str.length();
     if (len == 0) {
@@ -341,7 +134,7 @@ BigInt::BigInt(const string& str)
     }
 }
 
-BigInt::BigInt(const BigInt &other)
+bigint::bigint(const bigint &other)
 {
 #ifndef NDEBUG
     clog << "copy constructor called\n";
@@ -351,7 +144,7 @@ BigInt::BigInt(const BigInt &other)
     _slices = other.slices();
 }
 
-BigInt::BigInt(BigInt &&other)
+bigint::bigint(bigint &&other)
 {
 #ifndef NDEBUG
     clog << "move constructor called\n";
@@ -363,7 +156,7 @@ BigInt::BigInt(BigInt &&other)
 }
 
 // copy assignment operator
-BigInt& BigInt::operator= (const BigInt& other)
+bigint& bigint::operator= (const bigint& other)
 {
 #ifndef NDEBUG
     clog << "copy assignment operator called\n";
@@ -375,7 +168,7 @@ BigInt& BigInt::operator= (const BigInt& other)
 }
 
 // move assignment operator
-BigInt& BigInt::operator= (BigInt&& other) noexcept
+bigint& bigint::operator= (bigint&& other) noexcept
 {
 #ifndef NDEBUG
     clog << "move assignment operator called\n";
@@ -390,7 +183,7 @@ BigInt& BigInt::operator= (BigInt&& other) noexcept
     return *this;
 }
 
-BigInt& BigInt::operator= (intmax_t other)
+bigint& bigint::operator= (intmax_t other)
 {
     _slices.clear();
     initfrom(other);
@@ -398,7 +191,7 @@ BigInt& BigInt::operator= (intmax_t other)
     return *this;
 }
 
-void BigInt::normalize()
+void bigint::normalize()
 {
     auto it = end(_slices);
     while (it != begin(_slices)) {
@@ -419,7 +212,7 @@ void BigInt::normalize()
 }
 
 template <class Ta, class Tb>
-void BigInt::absadd(const Ta& one, const Tb& other, BigInt &result)
+void bigint::absadd(const Ta& one, const Tb& other, bigint &result)
 {
     size_t len_a = one.size();
     size_t len_b = other.size();
@@ -449,7 +242,7 @@ void BigInt::absadd(const Ta& one, const Tb& other, BigInt &result)
 }
 
 template <class T>
-void BigInt::absaddto(const T& other)
+void bigint::absaddto(const T& other)
 {
     size_t len_a = _slices.size();
     size_t len_b = other.size();
@@ -481,7 +274,7 @@ void BigInt::absaddto(const T& other)
 
 /* this must be larger than other */
 template <class Ta, class Tb>
-void BigInt::abssub(const Ta& one, const Tb& other, BigInt &result)
+void bigint::abssub(const Ta& one, const Tb& other, bigint &result)
 {
     size_t len_a = one.size();
     size_t len_b = other.size();
@@ -513,7 +306,7 @@ void BigInt::abssub(const Ta& one, const Tb& other, BigInt &result)
 
 /* this must be larger than other */
 template <class Ta, class Tb>
-void BigInt::absmul(const Ta& one, const Tb& other, BigInt &result)
+void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
 {
     size_t len_a = one.size();
     size_t len_b = other.size();
@@ -566,7 +359,7 @@ void BigInt::absmul(const Ta& one, const Tb& other, BigInt &result)
 
 /* this must be larger than other */
 template <class T>
-void BigInt::abssubfrom(const T& other)
+void bigint::abssubfrom(const T& other)
 {
     size_t len_a = _slices.size();
     size_t len_b = other.size();
@@ -594,7 +387,7 @@ void BigInt::abssubfrom(const T& other)
 }
 
 template <class Ta, class Tb>
-int BigInt::abscmp(const Ta& one, const Tb& other)
+int bigint::abscmp(const Ta& one, const Tb& other)
 {
     size_t len_a = one.size();
     size_t len_b = other.size();
@@ -619,9 +412,9 @@ int BigInt::abscmp(const Ta& one, const Tb& other)
     return 0;
 }
 
-BigInt BigInt::operator+ (const BigInt& other) const
+bigint bigint::operator+ (const bigint& other) const
 {
-    BigInt result;
+    bigint result;
 
     if (other.iszero()) {
         return *this;
@@ -648,7 +441,7 @@ BigInt BigInt::operator+ (const BigInt& other) const
     return result;
 }
 
-BigInt& BigInt::operator+= (const BigInt& other)
+bigint& bigint::operator+= (const bigint& other)
 {
     if (other.iszero()) {
         return *this;
@@ -668,7 +461,7 @@ BigInt& BigInt::operator+= (const BigInt& other)
             abssubfrom(other._slices);
         }
         else {      // cmp < 0
-            BigInt result;
+            bigint result;
             abssub(other._slices, _slices, result);
             _sign = other._sign;
             _slices = std::move(result._slices);
@@ -678,13 +471,13 @@ BigInt& BigInt::operator+= (const BigInt& other)
     return *this;
 }
 
-BigInt BigInt::operator+ (intmax_t other) const
+bigint bigint::operator+ (intmax_t other) const
 {
     if (other == 0) {
         return *this;
     }
 
-    BigInt result;
+    bigint result;
 
     slice_a other_slices;
     initfrom(other, other_slices);
@@ -711,7 +504,7 @@ BigInt BigInt::operator+ (intmax_t other) const
     return result;
 }
 
-BigInt& BigInt::operator+= (intmax_t other)
+bigint& bigint::operator+= (intmax_t other)
 {
     if (other == 0) {
         return *this;
@@ -733,7 +526,7 @@ BigInt& BigInt::operator+= (intmax_t other)
             abssubfrom(other_slices);
         }
         else {      // cmp < 0
-            BigInt result;
+            bigint result;
             abssub(other_slices, _slices, result);
             _sign = (other < 0);
             _slices = std::move(result._slices);
@@ -743,23 +536,23 @@ BigInt& BigInt::operator+= (intmax_t other)
     return *this;
 }
 
-BigInt BigInt::operator- () const
+bigint bigint::operator- () const
 {
     if (iszero())
         return *this;
 
-    BigInt result(*this);
+    bigint result(*this);
     result._sign = !_sign;
     return result;
 }
 
-BigInt BigInt::operator- (const BigInt& other) const
+bigint bigint::operator- (const bigint& other) const
 {
     if (other.iszero()) {
         return *this;
     }
 
-    BigInt result;
+    bigint result;
     if (_sign != other._sign) {
         absadd(_slices, other._slices, result);
         result._sign = _sign;
@@ -782,7 +575,7 @@ BigInt BigInt::operator- (const BigInt& other) const
     return result;
 }
 
-BigInt& BigInt::operator-= (const BigInt& other)
+bigint& bigint::operator-= (const bigint& other)
 {
     if (other.iszero()) {
         return *this;
@@ -801,7 +594,7 @@ BigInt& BigInt::operator-= (const BigInt& other)
             abssubfrom(other._slices);
         }
         else {      // cmp < 0
-            BigInt result;
+            bigint result;
             abssub(other._slices, _slices, result);
             _sign = !_sign;
             _slices = std::move(result._slices);
@@ -811,13 +604,13 @@ BigInt& BigInt::operator-= (const BigInt& other)
     return *this;
 }
 
-BigInt BigInt::operator- (intmax_t other) const
+bigint bigint::operator- (intmax_t other) const
 {
     if (other == 0) {
         return *this;
     }
 
-    BigInt result;
+    bigint result;
 
     slice_a other_slices;
     initfrom(other, other_slices);
@@ -844,7 +637,7 @@ BigInt BigInt::operator- (intmax_t other) const
     return result;
 }
 
-BigInt& BigInt::operator-= (intmax_t other)
+bigint& bigint::operator-= (intmax_t other)
 {
     if (other == 0) {
         return *this;
@@ -866,7 +659,7 @@ BigInt& BigInt::operator-= (intmax_t other)
             abssubfrom(other_slices);
         }
         else {      // cmp < 0
-            BigInt result;
+            bigint result;
             abssub(other_slices, _slices, result);
             _sign = !_sign;
             _slices = std::move(result._slices);
@@ -877,7 +670,7 @@ BigInt& BigInt::operator-= (intmax_t other)
 }
 
 // ++bi
-BigInt& BigInt::operator++ ()
+bigint& bigint::operator++ ()
 {
     slice_a other_slices(1);
 
@@ -904,15 +697,15 @@ BigInt& BigInt::operator++ ()
 }
 
 // bi++
-BigInt BigInt::operator++ (int)
+bigint bigint::operator++ (int)
 {
-   BigInt temp = *this;
+   bigint temp = *this;
    ++*this;
    return temp;
 }
 
 // --bi
-BigInt& BigInt::operator-- ()
+bigint& bigint::operator-- ()
 {
     slice_a other_slices(1);
 
@@ -939,14 +732,14 @@ BigInt& BigInt::operator-- ()
 }
 
 // bi--
-BigInt BigInt::operator-- (int)
+bigint bigint::operator-- (int)
 {
-   BigInt temp = *this;
+   bigint temp = *this;
    --*this;
    return temp;
 }
 
-bool BigInt::operator== (const BigInt& other) const
+bool bigint::operator== (const bigint& other) const
 {
     if (_sign == other._sign && abscmp(_slices, other._slices) == 0)
         return true;
@@ -954,7 +747,7 @@ bool BigInt::operator== (const BigInt& other) const
     return false;
 }
 
-bool BigInt::operator!= (const BigInt& other) const
+bool bigint::operator!= (const bigint& other) const
 {
     if (_sign == other._sign && abscmp(_slices, other._slices) == 0)
         return false;
@@ -962,7 +755,7 @@ bool BigInt::operator!= (const BigInt& other) const
     return true;
 }
 
-bool BigInt::operator> (const BigInt& other) const
+bool bigint::operator> (const bigint& other) const
 {
     if (!_sign && other._sign)
         return true;
@@ -977,7 +770,7 @@ bool BigInt::operator> (const BigInt& other) const
     return cmp < 0;
 }
 
-bool BigInt::operator>= (const BigInt& other) const
+bool bigint::operator>= (const bigint& other) const
 {
     if (!_sign && other._sign)
         return true;
@@ -992,7 +785,7 @@ bool BigInt::operator>= (const BigInt& other) const
     return cmp <= 0;
 }
 
-bool BigInt::operator< (const BigInt& other) const
+bool bigint::operator< (const bigint& other) const
 {
     if (!_sign && other._sign)
         return false;
@@ -1007,7 +800,7 @@ bool BigInt::operator< (const BigInt& other) const
     return cmp > 0;
 }
 
-bool BigInt::operator<= (const BigInt& other) const
+bool bigint::operator<= (const bigint& other) const
 {
     if (!_sign && other._sign)
         return false;
@@ -1022,7 +815,7 @@ bool BigInt::operator<= (const BigInt& other) const
     return cmp >= 0;
 }
 
-bool BigInt::operator== (intmax_t other) const
+bool bigint::operator== (intmax_t other) const
 {
     slice_a other_slices;
     initfrom(other, other_slices);
@@ -1033,7 +826,7 @@ bool BigInt::operator== (intmax_t other) const
     return false;
 }
 
-bool BigInt::operator!= (intmax_t other) const
+bool bigint::operator!= (intmax_t other) const
 {
     slice_a other_slices;
     initfrom(other, other_slices);
@@ -1044,7 +837,7 @@ bool BigInt::operator!= (intmax_t other) const
     return true;
 }
 
-bool BigInt::operator> (intmax_t other) const
+bool bigint::operator> (intmax_t other) const
 {
     if (!_sign && (other < 0))
         return true;
@@ -1062,7 +855,7 @@ bool BigInt::operator> (intmax_t other) const
     return cmp < 0;
 }
 
-bool BigInt::operator>= (intmax_t other) const
+bool bigint::operator>= (intmax_t other) const
 {
     if (!_sign && (other < 0))
         return true;
@@ -1080,7 +873,7 @@ bool BigInt::operator>= (intmax_t other) const
     return cmp <= 0;
 }
 
-bool BigInt::operator< (intmax_t other) const
+bool bigint::operator< (intmax_t other) const
 {
     if (!_sign && (other < 0))
         return false;
@@ -1098,7 +891,7 @@ bool BigInt::operator< (intmax_t other) const
     return cmp > 0;
 }
 
-bool BigInt::operator<= (intmax_t other) const
+bool bigint::operator<= (intmax_t other) const
 {
     if (!_sign && (other < 0))
         return false;
@@ -1116,9 +909,9 @@ bool BigInt::operator<= (intmax_t other) const
     return cmp >= 0;
 }
 
-BigInt  BigInt::operator*  (const BigInt& other) const
+bigint  bigint::operator*  (const bigint& other) const
 {
-    BigInt result;
+    bigint result;
 
     if (iszero() || other.iszero()) {
         return result;
@@ -1135,7 +928,7 @@ BigInt  BigInt::operator*  (const BigInt& other) const
     return result;
 }
 
-BigInt& BigInt::operator*= (const BigInt& other)
+bigint& bigint::operator*= (const bigint& other)
 {
     if (iszero() || other.iszero()) {
         _sign = false;
@@ -1144,7 +937,7 @@ BigInt& BigInt::operator*= (const BigInt& other)
         return *this;
     }
 
-    BigInt result;
+    bigint result;
     absmul(_slices, other._slices, result);
     if (_sign == other._sign) {
         _sign = false;
@@ -1157,9 +950,9 @@ BigInt& BigInt::operator*= (const BigInt& other)
     return *this;
 }
 
-BigInt  BigInt::operator*  (intmax_t other) const
+bigint  bigint::operator*  (intmax_t other) const
 {
-    BigInt result;
+    bigint result;
 
     if (iszero() || other == 0) {
         return result;
@@ -1179,7 +972,7 @@ BigInt  BigInt::operator*  (intmax_t other) const
     return result;
 }
 
-BigInt& BigInt::operator*= (intmax_t other)
+bigint& bigint::operator*= (intmax_t other)
 {
     if (iszero() || other == 0) {
         _sign = false;
@@ -1188,7 +981,7 @@ BigInt& BigInt::operator*= (intmax_t other)
         return *this;
     }
 
-    BigInt result;
+    bigint result;
     slice_a other_slices;
     initfrom(other, other_slices);
 
@@ -1205,8 +998,8 @@ BigInt& BigInt::operator*= (intmax_t other)
 }
 
 template <class T>
-void BigInt::absdiv_slice(const T& dividend, slice_t denominator,
-        BigInt& quotient, BigInt& remainder)
+void bigint::absdiv_slice(const T& dividend, slice_t denominator,
+        bigint& quotient, bigint& remainder)
 {
     size_t pos = dividend.size() - 1;
 
@@ -1234,7 +1027,7 @@ void BigInt::absdiv_slice(const T& dividend, slice_t denominator,
 }
 
 template <class T>
-intmax_t BigInt::makenint(const T& slices, size_t off, size_t len)
+intmax_t bigint::makenint(const T& slices, size_t off, size_t len)
 {
     size_t size = slices.size();
     intmax_t nint = 0, base = 1;
@@ -1248,8 +1041,8 @@ intmax_t BigInt::makenint(const T& slices, size_t off, size_t len)
 }
 
 template <class T>
-void BigInt::absdiv_nint(const T& dividend, intmax_t denominator,
-        BigInt& quotient, BigInt& remainder)
+void bigint::absdiv_nint(const T& dividend, intmax_t denominator,
+        bigint& quotient, bigint& remainder)
 {
     intmax_t rem = 0;
     size_t left = dividend.size();
@@ -1290,8 +1083,8 @@ void BigInt::absdiv_nint(const T& dividend, intmax_t denominator,
 }
 
 template <class Ta, class Tb>
-bool BigInt::absdiv_fast(const Ta& dividend, const Tb& divisor,
-        BigInt& quotient, BigInt& remainder)
+bool bigint::absdiv_fast(const Ta& dividend, const Tb& divisor,
+        bigint& quotient, bigint& remainder)
 {
     assert(divisor.size() > 0);
 
@@ -1320,8 +1113,8 @@ bool BigInt::absdiv_fast(const Ta& dividend, const Tb& divisor,
     return true;
 }
 
-void BigInt::absdiv_slow(const slice_v& numerator, const slice_v& denominator,
-        BigInt& quotient, BigInt& remainder)
+void bigint::absdiv_slow(const slice_v& numerator, const slice_v& denominator,
+        bigint& quotient, bigint& remainder)
 {
     remainder._sign = false;
     remainder._slices = numerator;
@@ -1339,8 +1132,8 @@ void BigInt::absdiv_slow(const slice_v& numerator, const slice_v& denominator,
     }
 }
 
-bool BigInt::divmod(const BigInt& dividend, const BigInt& divisor,
-            BigInt& quotient, BigInt& remainder)
+bool bigint::divmod(const bigint& dividend, const bigint& divisor,
+            bigint& quotient, bigint& remainder)
 {
     if (divisor.iszero()) {
         return false;
@@ -1374,8 +1167,8 @@ bool BigInt::divmod(const BigInt& dividend, const BigInt& divisor,
     return true;
 }
 
-bool BigInt::divmod(const BigInt& dividend, intmax_t divisor,
-            BigInt& quotient, BigInt& remainder)
+bool bigint::divmod(const bigint& dividend, intmax_t divisor,
+            bigint& quotient, bigint& remainder)
 {
     if (divisor ==  0) {
         return false;
@@ -1409,69 +1202,71 @@ bool BigInt::divmod(const BigInt& dividend, intmax_t divisor,
     return true;
 }
 
-BigInt  BigInt::operator/  (const BigInt& other) const
+bigint  bigint::operator/  (const bigint& other) const
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     return quotient;
 }
 
-BigInt& BigInt::operator/= (const BigInt& other)
+bigint& bigint::operator/= (const bigint& other)
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     _sign = quotient._sign;
     _slices = std::move(quotient._slices);
     return *this;
 }
 
-BigInt  BigInt::operator/  (intmax_t other) const
+bigint  bigint::operator/  (intmax_t other) const
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     return quotient;
 }
 
-BigInt& BigInt::operator/= (intmax_t other)
+bigint& bigint::operator/= (intmax_t other)
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     _sign = quotient._sign;
     _slices = std::move(quotient._slices);
     return *this;
 }
 
-BigInt  BigInt::operator%  (const BigInt& other) const
+bigint  bigint::operator%  (const bigint& other) const
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     return remainder;
 }
 
-BigInt& BigInt::operator%= (const BigInt& other)
+bigint& bigint::operator%= (const bigint& other)
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     _sign = remainder._sign;
     _slices = std::move(remainder._slices);
     return *this;
 }
 
-BigInt  BigInt::operator%  (intmax_t other) const
+bigint  bigint::operator%  (intmax_t other) const
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     return remainder;
 }
 
-BigInt& BigInt::operator%= (intmax_t other)
+bigint& bigint::operator%= (intmax_t other)
 {
-    BigInt quotient, remainder;
+    bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
     _sign = remainder._sign;
     _slices = std::move(remainder._slices);
     return *this;
 }
+
+#ifndef NTEST
 
 #include <sstream>
 
@@ -1507,8 +1302,8 @@ void test_bigint(void)
         intmax_t ntv_a = cases[i];
         intmax_t ntv_aa = cases[i];
         string   str_a = to_string(ntv_a);
-        BigInt   big_a(ntv_a);
-        BigInt   big_aa = BigInt(str_a);
+        bigint   big_a(ntv_a);
+        bigint   big_aa = bigint(str_a);
 
         ostringstream oss;
         oss << big_a;
@@ -1517,7 +1312,7 @@ void test_bigint(void)
 
         for (size_t j = 0; j < sizeof(cases)/sizeof(cases[0]); j++) {
             intmax_t ntv_b = cases[j];
-            BigInt   big_b(cases[j]);
+            bigint   big_b(cases[j]);
 
             cout << "native integers: " << ntv_a << " and " << ntv_b << endl;
             cout << "   big integers: " << big_a << " and " << big_b << endl;
@@ -1688,13 +1483,13 @@ void test_bigint(void)
     /* test operators: * and *= */
     for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
         intmax_t ntv_a = cases[i];
-        BigInt   big_a(ntv_a);
+        bigint   big_a(ntv_a);
 
         ostringstream oss;
         string str_ntv_r;
         for (size_t j = 0; j < sizeof(cases)/sizeof(cases[0]); j++) {
             intmax_t ntv_b = cases[j];
-            BigInt   big_b(cases[j]);
+            bigint   big_b(cases[j]);
 
             cout << "native integers: " << ntv_a << " and " << ntv_b << endl;
             cout << "   big integers: " << big_a << " and " << big_b << endl;
@@ -1711,7 +1506,7 @@ void test_bigint(void)
             str_ntv_r = to_string(ntv_a * ntv_b);
             assert(oss.str() == str_ntv_r);
 
-            BigInt big_r(big_a);
+            bigint big_r(big_a);
             intmax_t ntv_r = ntv_a;
 
             big_r *= ntv_b;
@@ -1729,24 +1524,24 @@ void test_bigint(void)
     /* test divmod() */
     for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
         intmax_t ntv_a = cases[i];
-        BigInt   big_a(ntv_a);
+        bigint   big_a(ntv_a);
 
         ostringstream oss;
         string str_ntv_r;
         for (size_t j = 0; j < sizeof(cases)/sizeof(cases[0]); j++) {
             intmax_t ntv_b = cases[j];
-            BigInt   big_b(cases[j]);
+            bigint   big_b(cases[j]);
 
             // XXX: only small integer for this test method. */
-            if (big_b.slices().size() > BigInt::max_group_slices_k) {
+            if (big_b.slices().size() > bigint::max_group_slices_k) {
                 continue;
             }
 
             cout << "native integers: " << ntv_a << " and " << ntv_b << endl;
             cout << "   big integers: " << big_a << " and " << big_b << endl;
 
-            BigInt quotient, remainder;
-            if (BigInt::divmod(big_a, big_b, quotient, remainder)) {
+            bigint quotient, remainder;
+            if (bigint::divmod(big_a, big_b, quotient, remainder)) {
                 imaxdiv_t div = imaxdiv(ntv_a, ntv_b);
 
                 oss.str("");
@@ -1761,7 +1556,7 @@ void test_bigint(void)
                 clog << "Failed division: " << big_a << " / " << big_b << endl;
             }
 
-            if (BigInt::divmod(big_a, ntv_b, quotient, remainder)) {
+            if (bigint::divmod(big_a, ntv_b, quotient, remainder)) {
                 imaxdiv_t div = imaxdiv(ntv_a, ntv_b);
 
                 oss.str("");
@@ -1779,15 +1574,15 @@ void test_bigint(void)
     }
 
     cout << "sizeof(intmax_t): " << sizeof(intmax_t) << endl;
-    cout << "sizeof(slice_t): " << sizeof(BigInt::slice_t) << endl;
+    cout << "sizeof(slice_t): " << sizeof(bigint::slice_t) << endl;
 
-    cout << "slice_width_k: " << BigInt::slice_width_k << endl;
-    cout << "max_slice_nint_k: " << BigInt::max_slice_nint_k << endl;
-    cout << "slice_base_k: " << BigInt::slice_base_k << endl;
-    cout << "max_nint_slices: " << BigInt::max_nint_slices() << endl;
+    cout << "slice_width_k: " << bigint::slice_width_k << endl;
+    cout << "max_slice_nint_k: " << bigint::max_slice_nint_k << endl;
+    cout << "slice_base_k: " << bigint::slice_base_k << endl;
+    cout << "max_nint_slices: " << bigint::max_nint_slices() << endl;
 }
 
-void factorial(BigInt& result, unsigned n)
+void factorial(bigint& result, unsigned n)
 {
     if (n > 1) {
         factorial(result, n - 1);
@@ -1797,13 +1592,13 @@ void factorial(BigInt& result, unsigned n)
         result = 1;
 }
 
-void summary_of_factorials(BigInt& result, unsigned max)
+void summary_of_factorials(bigint& result, unsigned max)
 {
     result = 0;
 
     unsigned n = 0;
     while (n <= max) {
-        BigInt tmp;
+        bigint tmp;
         factorial(tmp, n);
         result += tmp;
         n++;
@@ -1814,11 +1609,11 @@ int main()
 {
     test_bigint();
 
-    BigInt result;
+    bigint result;
     factorial(result, 5);
     assert(result == 120);
 
-    BigInt r1, r2;
+    bigint r1, r2;
     factorial(r1, 50);
     factorial(r2, 51);
     assert(r1 == (r2 / 51));
@@ -1831,4 +1626,5 @@ int main()
     summary_of_factorials(result, max);
     cout << result << endl;
 }
+#endif /* not defined(NTEST) */
 
