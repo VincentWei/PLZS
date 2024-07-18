@@ -424,6 +424,8 @@ enum class Colors : char {black, blue, green, cyan, red, purple, yellow, white};
 - 为这些形状的周长和面积计算函数定义统一的原型。
 
 ```cpp
+#include <iostream>
+
 using namespace std;
 
 enum shape_type {
