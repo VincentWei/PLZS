@@ -352,7 +352,7 @@ cout << n.bytes[0] << ", " << n.bytes[1] << ", " << n.bytes[2] << ", " << n.byte
 		
 ## 枚举量
 
-- C 的枚举量本质上是整数；相当于给一组整数取了一个符号化的名称，以方便代码的编写。
+- C 的枚举量本质上是整数（`int`）；相当于给一组整数取了一个符号化的名称，以方便代码的编写。
 - 在枚举量上执行赋值、对比、`switch` 等操作时，编译器可对其取值进行一些逻辑上的判断。
 
 ```cpp
@@ -398,6 +398,19 @@ const char *rainbow_color_name(rainbow_color_k c)
 
     return name;
 }
+```
+
+	
+- C++ 对 C 的枚举量做了扩展，可定义用于表达枚举量的内部数据类型。
+- 使用 `enum class` 定义的枚举量，需要使用自己的名字空间来引用其中的枚举值。
+
+```cpp
+enum class Colors : char {black, blue, green, cyan, red, purple, yellow, white};
+
+    Colors mycolor;
+
+    mycolor = Colors::blue;
+    if (mycolor == Colors::green) mycolor = Colors::red;
 ```
 
 		
