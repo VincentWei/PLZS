@@ -178,10 +178,16 @@ bool equalto(int a, int b)
     return a == b;
 }
 
+// 定义一个函数指针类型
+typedef bool (*cmp_op_f)(int, int);
+
 bool compare(char symbol, int a, int b)
 {
     // 声明 op 变量为一个函数指针；该函数有两个整型参数，返回值类型为 bool。
     bool (*op)(int, int);
+
+    // 亦可使用函数指针类型声明 op。
+    // cmp_op_f op;
 
     // 根据 symbol 选择一个已有的对比函数
     switch (symbol) {
@@ -324,8 +330,8 @@ struct student {
 		
 ## 联合体
 
-- 联合体（union）在 C/C++ 中有妙用。
-- 相当于给某个变量取个不同位宽数据类型的别名。
+- 联合体（union）将不同类型的数据放置在一起，相当于为访问同一内存区域提供了多个变量名称。
+- 联合体在 C/C++ 中有妙用，比如给某个变量取不同位宽的数据类型别名。
 
 ```cpp
 union natural {
@@ -347,12 +353,11 @@ cout << n.bytes[0] << ", " << n.bytes[1] << ", " << n.bytes[2] << ", " << n.byte
 ## 枚举量
 
 - C 的枚举量本质上是整数；相当于给一组整数取了一个符号化的名称，以方便代码的编写。
-- 在枚举量上执行 `switch` 语句时，编译器可对 `case` 的取值进行一些逻辑上的判断。
+- 在枚举量上执行赋值、对比、`switch` 等操作时，编译器可对其取值进行一些逻辑上的判断。
 
 ```cpp
-
 enum rainbow_color {
-    red = 1,
+    red,            // 第一个枚举量的默认值为 0，亦可赋值改变其初始值。
     orange,
     yellow,
     green,
@@ -414,6 +419,8 @@ enum shape_type {
 struct shape {
     enum shape_type type;
     const char *name;
+
+    // 将不同形状的参数打包为联合体，从而降低内存使用。
     union {
         double one;
         double two[2];
