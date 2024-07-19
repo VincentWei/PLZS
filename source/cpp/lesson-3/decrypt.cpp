@@ -13,7 +13,7 @@ int main()
     for (size_t i = 0; i < ciphertext.length(); i++) {
         char c = ciphertext[i];
 
-        // decrpt here.
+        // decrypt here.
         // ...
 
         decrypted.push_back(c);
@@ -27,7 +27,7 @@ int main()
     while (*p) {
         char c = *p;
 
-        // decrpt here.
+        // decrypt here.
         // ...
 
         decrypted.push_back(c);
