@@ -1,4 +1,4 @@
-TARGETS = recursive-calls pointer-array shapes function-pointer union enum
+TARGETS = recursive-calls pointer-array students shapes function-pointer union enum
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
