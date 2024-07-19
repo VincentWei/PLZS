@@ -593,10 +593,10 @@ $ ./crt
 ```console
 $ ./prime-factors
 <12>
-12: 2 3
+2 3
 $ ./prime-factors
 <11>
-11: 11
+1
 ```
 
 	
