@@ -34,7 +34,7 @@ int main()
     for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
 #if 1
         cout << "Student " << p->id << ": " << p->name << endl;
-	p++;
+        p++;
 #else
         cout << "Student " << p[i].id << ": " << p[i].name << endl;
 #endif
