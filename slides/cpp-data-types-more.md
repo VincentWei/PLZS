@@ -628,5 +628,5 @@ The area of your square is: 16.0
 - 信奥生的数学素养课第六讲“初等数论主要定理及应用（续）”
 - [扩展欧几里得算法](https://www.cnblogs.com/fusiwei/p/11775503.html)
 - [乘法逆元](https://oi-wiki.org/math/number-theory/inverse/)
-- [线性同余方程](https://oi-wiki.org/math/number-theory/linear-equation/)
+- [中国剩余定理](https://oi-wiki.org/math/number-theory/crt/)
 
