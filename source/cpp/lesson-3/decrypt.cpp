@@ -10,7 +10,7 @@ int main()
     cin >> ciphertext;
 
     // Method 1: use C++ STL string.
-    for (size_t i = 0; i < ciphertext.length(); i++) {
+    for (size_t i = 0; i < ciphertext.size(); i++) {
         char c = ciphertext[i];
 
         // decrpt here.
