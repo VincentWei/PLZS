@@ -296,7 +296,7 @@ string nap_mul_alt(const string &a, const string &b)
 ### 阶乘
 
 ```cpp
-// Use vector<string> to cache the factorial result
+// Use cached_factorial to cache the factorial result
 static vector<string> cached_factorial(50);
 
 string nap_factorial(const string &n)
@@ -364,8 +364,8 @@ done:
 ## 基于 `vector` 的压位高精度 `bigint` 类实现
 
 - 用一个 `int8_t` 表示十进制的两位数字（相当于提供基于 100 进制的整数运算）。
-- 使用 `vector<int8_t>` 从数值的低位开始存储，每个单元表示两位十进制数字。
-- 设计为 `bigint` 类，以方便提供多种构造方法以及运算符重载等能力。
+- 使用 `vector<int8_t>` 从数值的低位开始存储，每个矢量单元表示两位十进制数字。
+- 封装为 `bigint` 类，以方便提供多种构造方法以及运算符重载等能力。
 
 		
 ### 类的定义
@@ -546,7 +546,8 @@ bigint::bigint(const bigint &other)
 ### 重载 `<<` 运算符
 
 ```cpp
-ostream& operator<< (ostream& os, const bigint& bi) {
+ostream& operator<< (ostream& os, const bigint& bi)
+{
     if (bi.sign()) {
         os << "-";
     }
