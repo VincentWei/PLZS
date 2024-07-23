@@ -39,5 +39,4 @@ int main()
         cout << "Student " << p[i].id << ": " << p[i].name << endl;
 #endif
     }
-
 }
