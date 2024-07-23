@@ -75,6 +75,8 @@ int foo()
 
 int main()
 {
+    cout << "Start of main()" << endl;
+
     foo();
 
     Rectangle rc {20.0, 30.0};
