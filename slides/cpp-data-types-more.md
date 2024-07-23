@@ -596,7 +596,7 @@ $ ./prime-factors
 2 3
 $ ./prime-factors
 <11>
-1
+11
 ```
 
 	
