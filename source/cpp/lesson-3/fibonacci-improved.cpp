@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib>
+#include <cstring>
 
 using namespace std;
 
@@ -11,7 +11,13 @@ int main()
     if (n < 2)
         return 1;
 
+#if 0
+    // Only works when using g++
     uint64_t fibonacci[n] = {};
+#else
+    uint64_t fibonacci[n];
+    memset(fibonacci, 0, sizeof(fibonacci));
+#endif
     fibonacci[0] = 1;
     fibonacci[1] = 1;
 
