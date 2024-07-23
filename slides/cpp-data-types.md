@@ -1005,7 +1005,7 @@ $ ./strtoll
 7) 编写一个程序，该程序可以将用户输入的一个自然数转换为 -36 到 36 的进制展示出来，并使用 `<cstdlib>` 中的 `strtoll()` 接口进行对比测试。运行效果如下：
 
 ```console
-$ ./show-number-in-different-bases
+$ ./show-number-in-different-base
 <15 2>      # 第一个数值指定一个十进制的一个自然数，第二个数字指定进制，两者用空格分隔。
 1111
 ```

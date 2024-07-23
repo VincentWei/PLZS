@@ -1,4 +1,5 @@
-TARGETS = check-triangle array-pointer reference encrypt decrypt strings fibonacci-improved decimal-complement strtoll
+TARGETS = check-triangle array-pointer reference encrypt decrypt strings fibonacci-improved decimal-complement strtoll show-number-in-different-base
+
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
