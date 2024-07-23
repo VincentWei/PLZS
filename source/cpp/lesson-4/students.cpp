@@ -30,14 +30,9 @@ int main()
         { "20240103", "Tom",   "2010-07-10", 'M', 166, 65.5f },
     };
 
-    p = students;
+    p = students; 	// p = &students[0];
     for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
-#if 1
-        cout << "Student " << p->id << ": " << p->name << endl;
-	p++;
-#else
         cout << "Student " << p[i].id << ": " << p[i].name << endl;
-#endif
+	p++;
     }
-
 }
