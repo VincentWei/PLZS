@@ -362,6 +362,7 @@ ostream& flush(ostream& os);
 - 在派生类中重载虚函数，实现面向对象当中的多态（polymorphism）。
 - 当使用基类的指针或对基类的引用来引用派生的类对象时，为该对象调用虚函数时，C++ 将调用真实对象对应的派生类定义的虚函数版本。
 
+	
 ```cpp
 class Basic2DShape {
   public:
