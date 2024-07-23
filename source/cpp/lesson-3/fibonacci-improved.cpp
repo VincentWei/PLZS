@@ -11,8 +11,7 @@ int main()
     if (n < 2)
         return 1;
 
-    uint64_t fibonacci[n];
-    memset(fibonacci, 0, sizeof(fibonacci));
+    uint64_t fibonacci[n] = {};
     fibonacci[0] = 1;
     fibonacci[1] = 1;
 
