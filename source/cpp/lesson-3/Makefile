@@ -1,4 +1,4 @@
-TARGETS = check-triangle array-pointer reference encrypt decrypt strings
+TARGETS = check-triangle array-pointer reference encrypt decrypt strings fibonacci-improved
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
