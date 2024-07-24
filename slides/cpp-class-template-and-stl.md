@@ -1010,7 +1010,7 @@ $ ./amicable-pairs
 ```
 
 	
-4) 使用埃氏素数筛算法找出小于 <code>10<sup>8</sup></code> 的所有素数，然后使用 `<algorithm>` 中的 `binary_search()` 函数快速判断给定的正整数（均小于等于 <code>10<sup>8</sup></code>）是否为素数。运行效果如下：
+4) 使用埃氏素数筛算法找出小于等于 <code>10<sup>8</sup></code> 的所有素数，然后使用 `<algorithm>` 中的 `binary_search()` 函数快速判断给定的正整数（均小于等于 <code>10<sup>8</sup></code>）是否为素数。运行效果如下：
 
 ```console
 $ ./primes
