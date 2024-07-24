@@ -1,5 +1,16 @@
+/*
+ * The answer key for Problem 2 of CPP Lesson 3:
+ * https://courses.fmsoft.cn/plzs/cpp-data-types.html#/6/1
+ *
+ * Author: Vincent Wei
+ *  - <https://github.com/VincentWei>
+ *  - <https://gitee.com/vincentwei7>
+ *
+ * Copyright (C) 2024 FMSoft <https://www.fmsoft.cn>.
+ * License: GPLv3
+ */
 #include <iostream>
-#include <cstring>
+#include <cstring>      // for memset()
 
 using namespace std;
 
@@ -18,9 +29,9 @@ int main()
     uint64_t fibonacci[n];
     memset(fibonacci, 0, sizeof(fibonacci));
 #endif
+
     fibonacci[0] = 1;
     fibonacci[1] = 1;
-
     for (size_t i = 0; i < sizeof(fibonacci)/sizeof(fibonacci[0]); i++) {
         if (fibonacci[i] == 0) {
             fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
@@ -32,3 +43,4 @@ int main()
         cout << fibonacci[i - 1] << " / " << fibonacci[i] << ": " << ratio << endl;
     }
 }
+

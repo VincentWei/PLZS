@@ -1,6 +1,18 @@
-#include <iostream>
-#include <cctype>
-#include <cassert>
+/*
+ * The answer key for Problem 4 of CPP Lesson 3:
+ * https://courses.fmsoft.cn/plzs/cpp-data-types.html#/6/3
+ *
+ * Author: Vincent Wei
+ *  - <https://github.com/VincentWei>
+ *  - <https://gitee.com/vincentwei7>
+ *
+ * Copyright (C) 2024 FMSoft <https://www.fmsoft.cn>.
+ * License: GPLv3
+ */
+#include <iostream>     // for cin and cout
+#include <string>       // for string
+#include <cctype>       // for islower() and isuppper()
+#include <cassert>      // for assert()
 
 using namespace std;
 
