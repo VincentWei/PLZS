@@ -21,10 +21,10 @@ using uint64_v = vector<uint64_t>;
 
 bool check_prime(uint64_t number, const uint64_v& primes)
 {
-    uint64_t sqrtNumber = llroundl(sqrtl(number));
+    uint64_t mid = llroundl(sqrtl(number));
 
     for (uint64_t prime: primes) {
-        if (prime > sqrtNumber) {
+        if (prime > mid) {
             break;
         }
 
@@ -44,7 +44,7 @@ uint64_v prime_sieve(uint64_t n)
         goto done;
 
     result.push_back(2);
-    for (uint64_t number =3; number <= n; number += 2) {
+    for (uint64_t number = 3; number <= n; number += 2) {
         if (check_prime(number, result)) {
             result.push_back(number);
         }

@@ -1,4 +1,4 @@
-TARGETS = rectangle shapes template overload cout-flags cin-getline fstream strtoull array vector iterator transform sort
+TARGETS = rectangle shapes template overload cout-flags cin-getline fstream strtoull array vector iterator transform sort primes amicable-pairs
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
