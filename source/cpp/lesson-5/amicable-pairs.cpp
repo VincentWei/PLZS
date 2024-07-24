@@ -75,6 +75,7 @@ int main()
                     cout << n << " " << other << endl;
                     found.push_back(n);
                     found.push_back(other);
+                    sort(found.begin(), found.end());
                 }
             }
         }
