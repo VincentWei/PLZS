@@ -610,7 +610,7 @@ To calculate the area, please choose a geometrical shape:
 3. Circle
 0. Exit
 Your choice:<1>
-Please input the lengthes of three sides of a triangle: <3 4 5>
+Please input the lengths of three sides of a triangle: <3 4 5>
 The area of your triangle is: 6.0
 To calculate the area, please choose a geometrical shape:
 1. Triange
@@ -618,7 +618,7 @@ To calculate the area, please choose a geometrical shape:
 3. Circle
 0. Exit
 Your choice:<2>
-Please input the side of your square: <4>
+Please input the length for a side of your square: <4>
 The area of your square is: 16.0
 ```
 
