@@ -39,7 +39,8 @@ const char *rainbow_color_name(rainbow_color_k c)
     case purple:
         name = "purple";
         break;
-    case 10:    /* 警告：10 不是 rainbow_color 的有效取值。 */
+    // case 10:    /* 警告：10 不是 rainbow_color 的有效取值。 */
+    default:
         break;
     }
 
