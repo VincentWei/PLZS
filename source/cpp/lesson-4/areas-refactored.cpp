@@ -67,7 +67,7 @@ bool can_make_a_triangle(double d1, double d2, double d3)
 
 bool prompt_for_triangle(struct shape &shape)
 {
-    cout << "Please input length for three sides of a triangle:";
+    cout << "Please input the lengths for three sides of a triangle:";
     cin >> shape.three[0] >> shape.three[1] >> shape.three[2];
 
     if (can_make_a_triangle(shape.three[0], shape.three[1], shape.three[2])) {
