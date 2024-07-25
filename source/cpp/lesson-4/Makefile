@@ -1,4 +1,4 @@
-TARGETS = recursive-calls pointer-array students shapes function-pointer union enum average-score yanghui-triangle crt-plain crt-formula
+TARGETS = recursive-calls pointer-array students shapes function-pointer union enum average-score yanghui-triangle crt-plain crt-formula prime-factors
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
