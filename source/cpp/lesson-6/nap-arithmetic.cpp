@@ -82,21 +82,21 @@ void nap_add_to(string &r, const string &a)
 
     int carry = 0;
     for (size_t i = 0; i < len_max; i++) {
-        int digit_r = ((i < len_r) ? r[len_r - i - 1] : '0') - '0';
-        int digit_a = ((i < len_a) ? a[len_a - i - 1] : '0') - '0';
+        int value_r = ((i < len_r) ? r[len_r - i - 1] : '0') - '0';
+        int value_a = ((i < len_a) ? a[len_a - i - 1] : '0') - '0';
 
-        digit_r += digit_a + carry;
-        if (digit_r >= 10) {
+        value_r += value_a + carry;
+        if (value_r >= 10) {
             carry = 1;
-            digit_r -= 10;
+            value_r -= 10;
         }
         else
             carry = 0;
 
         if (i >= len_r)
-            r.insert(0, 1, '0' + digit_r);
+            r.insert(0, 1, '0' + value_r);
         else
-            r[len_r - i - 1] = '0' + digit_r;
+            r[len_r - i - 1] = '0' + value_r;
     }
 
     if (carry > 0) {
@@ -165,13 +165,13 @@ string nap_mul_alt(const string &a, const string &b)
     size_t len_r = 0;
 
     for (size_t i = 0; i < len_a; i++) {
-        int digit_a = a[len_a - i - 1] - '0';
+        int value_a = a[len_a - i - 1] - '0';
 
         int carry = 0;
         for (size_t j = 0; j < len_b; j++) {
-            int digit_b = b[len_b - j - 1]  - '0';
+            int value_b = b[len_b - j - 1]  - '0';
 
-            int p = digit_a * digit_b + carry;
+            int p = value_a * value_b + carry;
             if (p >= 10) {
                 carry = p / 10;
                 p %= 10;
@@ -186,14 +186,14 @@ string nap_mul_alt(const string &a, const string &b)
                 len_r++;
             }
             else {
-                int digit_r = r[len_r - k - 1]  - '0';
-                digit_r += p;
-                if (digit_r >= 10) {
+                int value_r = r[len_r - k - 1]  - '0';
+                value_r += p;
+                if (value_r >= 10) {
                     carry++;
-                    digit_r -= 10;
+                    value_r -= 10;
                 }
 
-                r[len_r - k - 1] = '0' + digit_r;
+                r[len_r - k - 1] = '0' + value_r;
             }
         }
 
@@ -206,45 +206,6 @@ string nap_mul_alt(const string &a, const string &b)
         assert(len_r == r.length());
     }
 
-    return r;
-}
-
-static vector<string> cached_factorial(50);
-
-string nap_factorial(const string &n)
-{
-    string r;
-    size_t native_n;
-    string times = "1";
-
-    native_n = (size_t)stoul(n);
-    if (native_n < cached_factorial.size() &&
-            cached_factorial[native_n] != "") {
-        r = cached_factorial[native_n];
-        goto done;
-    }
-
-    if (n.empty() or n == "0") {
-        r = "1";
-        goto done;
-    }
-
-    r = n;
-    while (n != times) {
-        r = nap_mul_alt(r, times);
-        nap_add_to(times, "1");
-    }
-
-    // cached the result
-    if (native_n < cached_factorial.size()) {
-        cached_factorial[native_n] = r;
-    }
-    else {
-        cached_factorial.resize(native_n + 1, "");
-        cached_factorial[native_n] = r;
-    }
-
-done:
     return r;
 }
 
@@ -283,59 +244,7 @@ void nap_dec(string &n)
         n.erase(0, 1);
 }
 
-string nap_factorial_recursive(const string &n)
-{
-    string r;
-    size_t native_n;
-    string prev_n = n;
-
-    if (n.empty() or n == "0") {
-        r = "1";
-        goto done;
-    }
-
-    native_n = (size_t)stoul(n);
-    if (native_n < cached_factorial.size() &&
-            cached_factorial[native_n] != "") {
-        r = cached_factorial[native_n];
-        goto done;
-    }
-
-    nap_dec(prev_n);
-
-    r = nap_factorial_recursive(prev_n);
-    r = nap_mul_alt(r, n);
-
-    // cached the result
-    if (native_n < cached_factorial.size()) {
-        cached_factorial[native_n] = r;
-    }
-    else {
-        cached_factorial.resize(native_n + 1, "");
-        cached_factorial[native_n] = r;
-    }
-
-done:
-    return r;
-}
-
-string summary_of_factorials(const string &n)
-{
-    string result("0");
-    string times("0");
-
-    while (true) {
-        string factorial = nap_factorial_recursive(times);
-        nap_add_to(result, factorial);
-
-        if (n == times)
-            break;
-        nap_add_to(times, "1");
-    }
-
-    return result;
-}
-
+#ifndef NTEST
 int main()
 {
     string r;
@@ -349,7 +258,7 @@ int main()
     assert(r == "101");
     nap_add(r, "101", "99");
     assert(r == "200");
-    cout << "test for nap_add() passed\n";
+    clog << "test for nap_add() passed\n";
 
     // test nap_add_alt()
     r = nap_add("0", "1");
@@ -360,7 +269,7 @@ int main()
     assert(r == "101");
     r = nap_add("101", "99");
     assert(r == "200");
-    cout << "test for nap_add_alt() passed\n";
+    clog << "test for nap_add_alt() passed\n";
 
     // test nap_add_to()
     r = "0";
@@ -372,7 +281,7 @@ int main()
     assert(r == "101");
     nap_add_to(r, "99");
     assert(r == "200");
-    cout << "test for nap_add_to() passed\n";
+    clog << "test for nap_add_to() passed\n";
 
     // test nap_dec()
     r = "1";
@@ -382,7 +291,7 @@ int main()
     r = "10";
     nap_dec(r);
     assert(r == "9");
-    // cout << "test for nap_dec() passed\n";
+    clog << "test for nap_dec() passed\n";
 
     // test nap_mul_op()
     r = nap_mul_op("2", "2");
@@ -406,43 +315,8 @@ int main()
     assert(r == "400");
     r = nap_mul_alt("11", "11");
     assert(r == "121");
+    cout << "test for nap_mul_alt() passed\n";
 
-    // test for nap_factorial()
-    r = nap_factorial("0");
-    assert(r == "1");
-    r = nap_factorial("1");
-    assert(r == "1");
-    r = nap_factorial("2");
-    assert(r == "2");
-    r = nap_factorial("3");
-    assert(r == "6");
-    r = nap_factorial("4");
-    assert(r == "24");
-    r = nap_factorial("5");
-    assert(r == "120");
-    cout << "test for nap_factorial() passed\n";
-
-    // test for nap_factorial_recursive()
-    r = nap_factorial_recursive("0");
-    assert(r == "1");
-    r = nap_factorial_recursive("1");
-    assert(r == "1");
-    r = nap_factorial_recursive("2");
-    assert(r == "2");
-    r = nap_factorial_recursive("3");
-    assert(r == "6");
-    r = nap_factorial_recursive("4");
-    assert(r == "24");
-    r = nap_factorial_recursive("5");
-    assert(r == "120");
-    cout << "test for nap_factorial_recursive() passed\n";
-
-    // the real code for P1009
-    string n;
-    cin >> n;
-
-    string summary;
-    summary = summary_of_factorials(n);
-    cout << summary << endl;
-    return 0;
 }
+
+#endif /* not defined NTEST */

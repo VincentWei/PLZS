@@ -1,4 +1,4 @@
-TARGETS = factorial nap-arithmetic bigint
+TARGETS = factorial nap-arithmetic bigint summary-of-factorials-nap nap-divide
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
