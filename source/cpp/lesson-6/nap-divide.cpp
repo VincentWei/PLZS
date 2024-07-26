@@ -1,6 +1,6 @@
 /*
- * The answer key for Problem 1 of CPP Lesson 6:
- *  <https://courses.fmsoft.cn/plzs/cpp-arbitrary-precision-arithmetic.html#/8>
+ * The answer key for Problem 2 of CPP Lesson 6:
+ *  <https://courses.fmsoft.cn/plzs/cpp-arbitrary-precision-arithmetic.html#/8/1>
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
