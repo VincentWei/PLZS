@@ -24,8 +24,12 @@ int main()
         return 1;
 
     // 用于存储各学生各科目成绩的二维数组
+#ifdef LINUX
+    unsigned scores[nr_students][nr_courses] = { };
+#else
     unsigned scores[nr_students][nr_courses];
     memset(scores, 0, sizeof(scores));      // 初始化二维数组 scores 为全零
+#endif
 
     // 读取各学生各科目成绩
     for (unsigned i = 0; i < nr_students; i++) {

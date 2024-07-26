@@ -22,7 +22,7 @@ int main()
     if (n < 2)
         return 1;
 
-#if 0
+#ifdef LINUX
     // Only works when using g++
     uint64_t fibonacci[n] = {};
 #else

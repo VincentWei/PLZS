@@ -23,7 +23,7 @@ int main()
     if (nr_rows == 0)
         return 1;
 
-#if 0
+#ifdef LINUX
     unsigned yang_numbers[nr_rows][nr_rows] = {};
 #else
     // workaround for clang++
