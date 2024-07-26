@@ -726,11 +726,11 @@ $ ./nap-divide
 18 11
 $ ./nap-divide
 <100 0>
-Bad
+NO SOLUTION
 ```
 
 	
-3) 给定任意小数（正值），给出其最简分数表达。运行效果如下：
+3) 基于 `bigint` 类提供的接口实现：给定任意小数（正值），给出其最简分数表达。运行效果如下：
 
 ```console
 $ ./rational-number-to-fraction
@@ -743,7 +743,7 @@ $ ./rational-number-to-fraction
 ```
 
 	
-4) 给定任意自然数 `a` 和 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
+4) 基于 `bigint` 类提供的接口实现：给定任意自然数 `a` 和 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
 
 ```console
 $ ./binary-power
@@ -752,7 +752,7 @@ $ ./binary-power
 ```
 
 	
-5) 基于 `bigint` 类提供的接口实现任意精度整数的常见计算功能，比如计算最大公约数、阶乘之和等。运行效果如下：
+5) 基于 `bigint` 类提供的接口实现阶乘之和。运行效果如下：
 
 ```console
 $ ./summary-of-factorials-bigint
