@@ -38,7 +38,7 @@ ostream& operator<< (ostream& os, const bigint& bi)
     }
     else {
         for (size_t i = len - 1; ; i--) {
-            int r = (int)slices[i];
+            intmax_t r = slices[i];
             if (i == len - 1) {
                 os << r;
             }
@@ -1007,8 +1007,11 @@ void bigint::absdiv_slice(const T& dividend, slice_t denominator,
 
     slice_t rem = 0;
     while (true) {
-        twin_t numerator = dividend[pos] + rem * slice_base_k;
-        ldiv_t div = ldiv(numerator, denominator);
+        twin_t numerator = dividend[pos] + rem * (twin_t)slice_base_k;
+        imaxdiv_t div = imaxdiv(numerator, denominator);
+
+        // clog << numerator << " / " << denominator << ": "
+        //      << div.quot << "..." << div.rem << endl;
 
         slice_t quot = (slice_t)div.quot;
         quotient._slices.push_back(quot);
