@@ -374,7 +374,7 @@ done:
 - 使用 `vector<int8_t>` 从数值的低位开始存储，每个矢量单元表示两位十进制数字。
 - 封装为 `bigint` 类，以方便提供多种构造方法以及运算符重载等能力。
 
-		
+	
 ### 类的定义
 
 ```cpp
@@ -482,7 +482,7 @@ void factorial(bigint& result, unsigned n)
     cout << fact << endl;
 ```
 
-		
+	
 ### 构造器
 
 ```cpp
