@@ -360,6 +360,54 @@ done:
 ```
 
 	
+### 自然数自减
+
+```cpp
+void nap_dec(string &n)
+{
+    assert(n != "0" && n != "");
+
+    size_t nr_digits = n.length();
+
+    int digit0 = n[nr_digits - 1] - '0';
+    int r = digit0 - 1;
+    int borrow = 0;
+    if (r < 0) {
+        borrow = 1;
+        r += 10;
+    }
+    n[nr_digits - 1] = '0' + r;
+
+    size_t i = 1;
+    while (borrow > 0) {
+        int digit = n[nr_digits - i - 1] - '0';
+        int r = digit - borrow;
+
+        if (r < 0) {
+            borrow = 1;
+            r += 10;
+        }
+        else
+            borrow = 0;
+
+        n[nr_digits - i - 1] = '0' + r;
+        i++;
+    }
+
+    if (n[0] == '0' && nr_digits > 1)
+        n.erase(0, 1);
+}
+
+    string r = "1";
+    nap_dec(r);
+    assert(r == "0");
+
+    r = "10";
+    nap_dec(r);
+    assert(r == "9");
+```
+
+	
 ### 课堂练习
 
 （十分钟内完成）
