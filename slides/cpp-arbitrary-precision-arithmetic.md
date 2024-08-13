@@ -651,39 +651,28 @@ bool bigint::operator== (const bigint& other) const
 - 基于多个源文件构建单个可执行程序时，应在编译命令行指定所有源文件（空格分隔），但只能定义一个 `main()` 函数。
 
 	
-### 条件编译
+### 在 C++ 源文件中直接包含另一个 C++ 源文件
 
-利用预处理指令 `#if`、`#else`、`#elif`、`#ifdef`、`#ifndef` 等按指定的条件过滤语句块。
-
-- `NDEBUG` 通常由编译器或者在命令行显式定义，表明正在编译程序的发布（Release）版本。可在程序中使用这个宏包含调试用代码：
+- 若被包含的 C++ 源文件中已经定义有 `main()` 函数，可使用条件编译屏蔽相关代码。
 
 ```cpp
-#ifdef NDEBUG
-    // 仅用于发布版本的代码。
-#else
-    // 包含用于调试版本的代码，比如测试用代码。
-    assert(...);
+#include "bigint.hpp"
+
+...
+
+#ifndef NTEST
+int main()
+{
+    ...
+}
 #endif
 ```
 
-	
-
-- 利用 `#if 0`可以屏蔽代码块，其效果和块注释相同，但看起来更加简洁。
+- 包含之前定义 `NTEST` 宏：
 
 ```cpp
-    char en;
-
-#if 0
-    en = (*p + 7);
-    if (en > 'z') {
-        en = 'a' + en - 'z' - 1;
-    }
-#else
-    en = *p - 'A';
-    en += 7;
-    en %= 26;
-    en += 'A';
-#endif
+#define NTEST
+#include "bigint.cpp"
 ```
 
 	
