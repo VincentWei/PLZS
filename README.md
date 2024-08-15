@@ -11,7 +11,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 本系列课程基于魏永明三十年的基础软件开发经验以及工程师培训经验，强调通过编程提升孩子们的抽象思维、逻辑思维和发散思维能力，培养孩子们的工程管理思想以及团队协作能力。
 
 **助力升学深造**  
-本系列课程强调实战的同时，注重提升孩子们的数学思维能力，通过将计算机科学中的各种算法和数据结构融合到真实案例中，帮助孩子们掌握信息技术奥林匹克竞赛初级及提高阶段的各个知识点，从而助力升学和深造。
+本系列课程强调实战的同时，注重提升孩子们的数学思维能力，通过将信息科学中的各种算法和数据结构融合到真实案例中，帮助孩子们掌握信息技术奥林匹克竞赛初级及提高阶段的各个知识点，从而助力升学和深造。
 
 ### 主讲人
 
@@ -21,44 +21,37 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 本系列课程面向对编程有强烈兴趣的大中小学生（年龄在 10 到 22 周岁；小学五年级到大学毕业前）。整个系列课程的内容和产业界热门技术、国际前沿技术接轨，会涉及到 Linux、Git、Python、C++、JavaScript、开源 AI 大模型等开发环境、开发工具、编程语言以及算法和数据结构；下分五门课程：
    - 零基础普及班：针对零基础学生的课程，内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 系统命令、Vim 编辑器、Git 使用及 Python 编程入门。学生最终写出自己的第一个 Python 程序并创建自己的第一个开源代码仓库。
-   - AI 筑基班：针对已入门学生开设，课程讲述 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
-   - AI 实战班：针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 编程语言、JavaScript 编程语言、网页前后端编程、数据库以及开源 AI 模型等，五人一组协作开发一个联网的具有人工智能元素的网页游戏。
-   - 信奥筑基班：针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，课程讲述 C++ 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个四则运算计算器。
+   - Python 实战班：针对已入门学生开设，课程讲述 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
+   - 信奥筑基班：针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，课程主要讲述 C++ 编程语言基础语法、数据类型、流程控制、类和模板等。
    - 信奥初级班：针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握信奥筑基班的内容。课程内容围绕 C++ 编程语言和常见解析器的实现进行，通过将 NOI 大纲（初级）中所列知识点融入解析器的开发加深学生对相关知识的理解和掌握。
    - 信奥提高班：针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握信奥初级班的内容。课程内容围绕 C++ 编程语言和一个脚本语言的解释器开展，通过将 NOI 大纲（提高级）中所列知识点融入脚本语言的解释器加深学生对相关知识的理解和掌握。
-1. 授课方式：
-   - 普及班为录播课，外加作业点评及答疑直播。
-   - AI 筑基班、AI 实战班、信奥筑基班、信奥初级班、信奥提高班均为直播课，外加作业点评及答疑直播。
-   - 作业点评和答疑直播每周至少安排两场。
+   - 程序员信奥生的数学素养课：内容涵盖初等数论、微积分基础、离散数学、编解码等，旨在提高程序员的数学素养，并帮助信息学科技特长生提前补充必要的数学知识。
 1. 学习周期：
-   - 普及班：4讲8课时；周末班2周；暑期班1周。
-   - AI 筑基班：5讲20课时；周末班6周；暑期班3周。
-   - AI 实战班：10讲40课时；周末班10周；暑期班5周。
-   - 信奥筑基班：6讲24课时；周末班7周；暑期班4周。
-   - 信奥初级班：10讲40课时；周末班10周；暑期班5周。
-   - 信奥提高班：10讲40课时；周末班10周；暑期班5周。
-1. 建议学习路线：
-   - 零基础想学习全栈 AI 开发技术的学生：普及班 ➜ AI 筑基班 ➜ AI 实战班
-   - 零基础要参加信奥竞赛的学生： 普及班 ➜ 信奥筑基班 ➜ 信奥初级班 ➜ AI 筑基班 ➜ AI 实战班 ➜ 信奥提高班
-   - 已学习 Python 转信奥赛道的学生：普及班 ➜ 信奥筑基班 ➜ 信奥初级班 ➜ AI 实战班 ➜ 信奥提高班
-   - 已通过信奥提高级要参加 NOIP 竞赛的学生：AI 筑基班 ➜ AI 实战班
+   - 零基础普及班：共四讲。
+   - Python 实战班：共五讲。
+   - 信奥筑基班：共六讲。
+   - 信奥初级班：共十讲。
+   - 信奥提高班：共十讲。
+   - 程序员信奥生的数学素养课：持续更新。
+1. 建议学习路线及学习周期
+   - 零基础普及班 ➜ Python 实战班 ➜ 信奥筑基班 ➜ 信奥初级班 ➜ 信奥提高班。
+   - 数学素养课中的内容，可以利用周末闲暇时间学习。在进入信奥筑基班课程的学习之前，要同步学习数学素养课中的初等数论部分内容，在进入信奥提高班学习之前，要同步学习数学素养课中的离散数学结构相关内容。如果孩子已经学习过 Python 编程语言，也应该了解和掌握零基础普及班、Python 实战班中有关 Linux 使用、Vim 以及 Git 使用等的相关知识。
+   - 如果是四年级或五年级开始学习，建议学习周期两年；第一年学习《零基础普及版》、《Python 实战班》的课程；第二年学习《数学素养课》中初等数论以及离散数学结构相关内容以及信奥相关的三门课程。如果是六年级开始学习，建议的学习周期是一年半；前半年学习《零基础普及版》以及《Python 实战班》的课程；之后一年内完成信奥相关的三门课程，主要通过学习《数学素养课》的初等数论以及离散数学结构部分补充相关数学知识。
 
-![课程体系](slides/plzs-course-framework.svg)
 
 各课程涉及技术如下表所示：
 
 | 课程          | 编程语言                  | 其他技术                                              |
 | --            | --                        | --                                                    |
-| 普及班        | Python                    | Linux, Vim, Git, Markdown                             |
-| AI 筑基班     | Python                    | Linux, Vim, Git                                       |
-| AI 实战班     | Python, JavaScript, Bash  | Linux, HTML, CSS, HTTP, WebSocket, Nginx, MySQL, AI   |
+| 零基础普及班  | Python                    | Linux, Vim, Git, Markdown                             |
+| Python 实战班 | Python                    | Linux, Vim, Git                                       |
 | 信奥筑基班    | C++                       | Linux, GCC, Make/Makefile                             |
 | 信奥初级班    | C++                       | Linux, GCC, CMake, JSON, CSP-J                        |
 | 信奥提高班    | C++                       | Linux, GCC, CMake, RegEx, CSP-S                       |
 
 对学生的要求：
 
-1. 小学五年级及以上。
+1. 小学四年级及以上。
 1. 学有余力且对编程有强烈的兴趣。
 1. 做好“听课一小时，实践三小时”的投入准备。
 
@@ -69,10 +62,10 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 ## 详情
 
-### 普及班
+### 零基础普及班
 
 - 商品名称  
-学生编程课普及班
+学生编程课零基础普及班
 - 简介  
 本课程面向零基础但对编程有强烈兴趣的大中小学生（年龄在 10 到 22 周岁；小学五年级到大学毕业前）。内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 系统命令、Vim 编辑器、Git 使用及 Python 编程入门。学生最终写出自己的第一个 Python 程序并创建自己的第一个开源代码仓库。
 
@@ -105,7 +98,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 1. 掌握人工智能最流行编程语言 Python 的入门语法。
 1. 编写自己的第一个 Python 程序并创建自己的第一个开源代码仓库。
 1. 基于开源协作平台的作业批改，培养孩子基于开源平台的协作能力。
-1. 主讲老师亲自在线答疑，专业辅导。
+1. 提供一个小时的在线一对一辅导。
 
 课程目录：
 
@@ -141,10 +134,10 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 课程须知：
 
 问：主要授课形式如何？  
-答：本课程提供录播课程、在线课件及答疑直播。
+答：本课程以录播课为主，同时提供在线课件以及线上一对一课后服务。
 
 问：提供哪些课后服务？  
-答：请家长或学生及时扫码加班主任的企业微信，班主任会将学生组织到班级微信群中，以方便交流。学生可在班级群中提问，亦可添加主讲老师的微信提问。主讲老师每周提供至少两次共四个小时的答疑直播，学生可按需参加。
+答：请家长或学生及时扫码加班主任的企业微信，并和班主任协调安排在线一对一辅导的具体时间。
 
 问：购买后如何上课?  
 答：购课成功后，请按照发货短信中的内容做课前准备并开始学习，如有疑问请及时联系班主任。
@@ -158,10 +151,10 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 问：如何联系客服?  
 答：如有其他疑问，在视频号主页点击客服按钮，即可咨询客服。
 
-### AI 筑基班
+### Python 实战班
 
 - 商品名称  
-学生编程课AI筑基班
+学生编程课 Python 实战班
 - 简介  
 本课程针对已入门学生开设，课程内容涉及 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
 
@@ -175,9 +168,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 适宜人群：
 
-- 十岁及以上学生（小学五年级到大学毕业前），已完成普及班的课程内容。
+- 十岁及以上学生（小学五年级到大学毕业前），已完成零基础普及班的课程内容。
 - 对编程有强烈兴趣的学生。
-- 科技特长生。
+- 信息学科技特长生。
 
 课程特点：
 
@@ -194,11 +187,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 1. 掌握函数、递归调用、面向对象等的编程思想。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何解耦代码和数据。
 1. 基于开源协作平台的作业批改，培养孩子基于开源平台的协作能力。
-1. 主讲老师亲自在线答疑，提供专业辅导。
-
-赠送课程：
-
-直接购买 AI 筑基班课程的，同时赠送普及班课程；详情请联系客服或班主任。
+1. 提供两次一对一在线辅导，每次一个小时。
 
 课程目录：
 
@@ -250,16 +239,16 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 课程须知：
 
 问：主要授课形式如何？  
-答：本课程以教学直播为主，错过直播可观看回放，同时提供实操视频、在线课件及答疑直播。
+答：本课程以录播课为主，同时提供在线课件以及线上一对一课后服务。
 
 问：提供哪些课后服务？  
-答：请家长或学生及时扫码加班主任的企业微信，班主任会将学生组织到班级微信群中，以方便交流。学生可在班级群中提问，亦可添加主讲老师的微信提问。主讲老师每周提供至少两次共四个小时的答疑直播，学生可按需参加。
+答：请家长或学生及时扫码加班主任的企业微信，并根据孩子的学习情况和班主任协调两次一对一在线辅导的时间。
 
 问：购买后如何上课?  
 答：购课成功后，请按照发货短信中的内容做课前准备，并根据课表参与课程直播，如有疑问请及时联系班主任。
 
 问：课程有效期多长?  
-答：购买后，课程内容（直播回放、实操视频、在线课件等）三年有效；请按课表学习并及时提交作业给主讲老师，以便可以顺利进入下个阶段的学习。
+答：购买后，课程内容（课程视频、在线课件等）三年有效；请按课表学习并及时提交作业给主讲老师，以便可以顺利进入下个阶段的学习。
 
 问：购买后是否支持退换货?  
 答：虚拟商品，购课后不支持退换货，请理解。
@@ -268,6 +257,8 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 答：如有其他疑问，在视频号主页点击客服按钮，即可咨询客服。
 
 ### AI 实战班
+
+（暂不上线）
 
 - 商品名称  
 学生编程课 AI 实战班
@@ -306,7 +297,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 1. 掌握 Web 后端开发中的数据库操作、服务器网管程序开发等技术。
 1. 学习大型软件系统的架构设计方法，掌握基本的接口设计能力。
 1. 掌握软件开发过程中基于分布式代码仓库的协作方法。
-1. 主讲老师亲自在线答疑，提供专业辅导。
+1. 提供
 
 优惠活动：
 
@@ -380,18 +371,19 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 - 商品名称  
 学生编程课信奥筑基班
 - 简介  
-本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面系统的使用。课程内容涉及 C++ 编程语言和 Linux 环境编程，学生通过学习要完成一个四则运算计算器的两个版本：命令行及全屏操控。
+本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已完成零基础普及班及 Python 实战班的学习。课程内容涉及 C++ 编程语言和 Linux 环境编程，学生通过学习掌握 C++ 的基本语法和 STL 常用接口，学会使用 C++ 完成高精度自然数算术的实现。
 
 主要学习内容：
 
 1. C++ 编程语言的基本语法
-1. GCC，Make 及 Makefile
-1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
+1. G++，Make 及 Makefile
+1. C++ 类和模板
+1. C++ STL 常用接口
 
 适宜人群：
 
-- 小高、初一阶段；学习过 Python 等编程语言的更好。
-- 科技特长生。
+- 小高、初一阶段
+- 信息学科技特长生。
 - 信息学奥林匹克竞赛。
 
 课程特点：
@@ -409,65 +401,71 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 1. 掌握函数、递归调用、面向对象等的编程思想。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何解耦代码和数据。
 1. 基于开源协作平台的作业批改，培养孩子基于开源平台的协作能力。
-1. 主讲老师亲自在线答疑，提供专业辅导。
-
-优惠活动：
-
-直接购买本课程的，可获赠普及班课程；详情请联系客服。
+1. 提供三次一对一在线辅导，每次一个小时。
 
 课程目录：
 
 1. C++ 快速入门
+   - C++ 的发展历史及现状
    - 最简单的 C++ 程序
-   - G++ 和 C++ 程序的构建
-   - 整数、浮点数和四则运算表达式
-   - 函数的概念
-   - 标准库常用接口
+   - C++ 编译器和 C++ 程序的构建
+   - 变量、数值和算术运算表达式
+   - 基本输入输出
+   - 函数、形参和实参
+   - C++ 标准库和常用接口
+   - C++ 常见编译错误
+   - C++ 和 Python 的异同
+   - 实用技巧
 1. C++ 流程控制
    - 流程控制的来由
    - 布尔运算快速入门
    - C++ 的逻辑表达式和逻辑运算符
    - C++ 的流程控制语句
-   - C++ 异常处理
-   - 深入理解递归调用
-1. C++ 数据类型
-   - 字符、字符集及编码
+   - 函数的递归调用
+   - 实用技巧
+1. C++ 数据类型（上）
+   - C++ 基础数据类型
+   - 数组和指针
+   - 引用
    - 字符串
-   - 数组
-   - 指针和引用
-   - 编程的中层境界：解耦数据和代码
-1. C++ 面向对象编程
-   - 类和对象
-   - 类的继承
-   - 运算符重载
-1. C++ 大作业及相关知识点
-   - 大作业可选项目
-   - 时间的获取和转换
-   - 终端编程
-   - 伪随机数
-   - 大作业注意事项
-1. C++ 大作业辅导
-   - C++ 程序的模块化管理及 Makefile
-   - C++ 程序的调试方法及 GDB
-   - 架构设计：如何划分模块
-   - 可阅读性：为何要注重编码风格
-   - 可测试性：如何测试基本功能
-   - 可扩展性：解耦代码和数据
-   - 示例代码分析
+   - 实用技巧
+1. C++ 数据类型（下）
+   - 深入理解函数调用
+   - 函数指针
+   - 结构体
+   - 多维数组
+   - 联合体
+   - 枚举量
+   - 综合示例
+   - 实用技巧
+1. C++ 类、模板和 STL
+   - C++ 类和对象
+   - 重载
+   - 构建类的层次结构
+   - C++ 模板
+   - C++ STL（标准模板库）
+   - 实用技巧
+1. 任意精度算术的 C++ 实现
+   - 任意精度算术要解决的问题
+   - 实现原理和方法
+   - 基于 `string` 的实现
+   - 基于 `vector` 的压位高精度实现
+   - 实用技巧
+
 
 课程须知：
 
 问：主要授课形式如何？  
-答：本课程以教学直播为主，错过直播可观看回放，同时提供在线课件及答疑直播。
+答：本课程以录播课为主，同时提供在线课件以及答疑、作业辅导等课后辅导。
 
 问：提供哪些课后服务？  
-答：请家长或学生及时扫码加班主任的企业微信，班主任会将学生组织到班级微信群中，以方便交流。学生可在班级群中提问，亦可添加主讲老师的微信提问。主讲老师每周提供至少两次共四个小时的答疑直播，学生可按需参加。
+答：请家长或学生及时扫码加班主任的企业微信，并根据孩子的学习情况和班主任协调三次一对一课后辅导的时间。
 
 问：购买后如何上课?  
-答：购课成功后，请按照发货短信中的内容做课前准备，并根据课表参与课程直播，如有疑问请及时联系班主任。
+答：购课成功后，请按照发货短信中的内容做课前准备，并根据孩子的时间安排学习，如有疑问请及时联系班主任。
 
 问：课程有效期多长?  
-答：购买后，课程内容（直播回放、在线课件等）三年有效；请按课表学习并及时提交作业给主讲老师，以便可以顺利进入下个阶段的学习。
+答：购买后，课程内容（课程视频、在线课件等）三年有效；请按课表学习并及时完成作业，以便可以顺利进入下个阶段的学习。
 
 问：购买后是否支持退换货?  
 答：虚拟商品，购课后不支持退换货，请理解。
@@ -484,8 +482,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 主要学习内容：
 
-1. C++ 编程语言的高级特性，如标准模板库
-1. GCC 和 CMake 构建系统生成器
+1. C++ 编程语言的高级特性，动态内存分配
 1. CSP-J 重要考点，包括各基础算法和数据结构
 1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
 1. CSP-J 真题演练及辅导
@@ -510,33 +507,28 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 1. 通过具有实际意义的大作业加深的 CSP-J 重要考点的理解。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何提高代码的可维护性、可扩展性和可测试性。
 1. 基于开源协作平台的作业批改，培养孩子基于开源平台的协作能力。
-1. 主讲老师亲自在线答疑，提供专业辅导。
-
-优惠活动：
-
-直接购买本课程的，可获赠普及班课程；详情请联系客服。
+1. 包含五次一对一线上辅导；每次一个小时。
 
 课程目录：
 
-1. C++ 编程语言的高级特性
-   - C++ 模板
-   - C++ 标准模板库
-   - CMake 构建系统生成器
 1. 基础算法
-   - 递归、二分法、倍增法
-   - 排序算法
-   - 基础算法作业辅导
+   - 算法复杂度
+   - 递归
+   - 二分法
+   - 倍增法
+1. 排序算法
+   - 冒泡排序
+   - 选择排序
+   - 插入排序
 1. 线性数据结构
    - 队列和栈
    - 单向链表
    - 双向链表
    - 循环链表
-   - 线性数据结构作业辅导
 1. 树型数据结构
    - 一般树
    - 二叉树
    - 特殊树
-   - 树型数据结构作业辅导
 1. 中期大作业
    - 四则运算解析器
    - 中期大作业辅导
@@ -544,33 +536,31 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 线性结构中的搜索
    - 子字符串搜索
    - 树型结构中的搜索
-   - 搜索算法作业辅导
 1. 图及图论算法
    - 图
    - 图论算法
-   - 图论算法作业辅导
 1. 其他算法和数据结构
    - 动态规划
    - 初等数论
    - 离散与组合数学
+1. CSP-J 真题讲解
 1. 结业大作业
    - 无限精度整数运算
    - JSON 解析器
-1. CSP-J 真题演练
 
 课程须知：
 
 问：主要授课形式如何？  
-答：本课程以教学直播为主，错过直播可观看回放，同时提供在线课件及答疑直播。
+答：本课程以录播课为主，同时提供在线课件以及答疑、作业辅导等课后辅导。
 
 问：提供哪些课后服务？  
-答：请家长或学生及时扫码加班主任的企业微信，班主任会将学生组织到班级微信群中，以方便交流。学生可在班级群中提问，亦可添加主讲老师的微信提问。主讲老师每周提供至少两次共四个小时的答疑直播，学生可按需参加。
+答：请家长或学生及时扫码加班主任的企业微信，并根据孩子的学习情况和班主任协调五次一对一课后辅导的时间。
 
 问：购买后如何上课?  
-答：购课成功后，请按照发货短信中的内容做课前准备，并根据课表参与课程直播，如有疑问请及时联系班主任。
+答：购课成功后，请按照发货短信中的内容做课前准备，并根据孩子的时间安排学习，如有疑问请及时联系班主任。
 
 问：课程有效期多长?  
-答：购买后，课程内容（直播回放、在线课件等）三年有效；请按课表学习并及时提交作业给主讲老师，以便可以顺利进入下个阶段的学习。
+答：购买后，课程内容（课程视频、在线课件等）三年有效；请按课表学习并及时完成作业，以便可以顺利进入下个阶段的学习。
 
 问：购买后是否支持退换货?  
 答：虚拟商品，购课后不支持退换货，请理解。
@@ -612,7 +602,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 1. 通过具有实际意义的大作业加深的 CSP-S 重要考点的理解。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何提高代码的可维护性、可扩展性和可测试性。
 1. 基于开源协作平台的作业批改，培养孩子基于开源平台的协作能力。
-1. 主讲老师亲自在线答疑，提供专业辅导。
+1. 含五次一对一线上辅导，每次一个小时。
 
 课程目录：
 
@@ -647,29 +637,30 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 初等数论
    - 线性代数
    - 离散及组合数学
+1. CSP-S 真题讲解
 1. 结业大作业
    - Lua 或简化的 Python 解释器
-1. CSP-S 真题演练
 
 课程须知：
 
 问：主要授课形式如何？  
-答：本课程以教学直播为主，错过直播可观看回放，同时提供在线课件及答疑直播。
+答：本课程以录播课为主，同时提供在线课件以及答疑、作业辅导等课后服务。
 
 问：提供哪些课后服务？  
-答：请家长或学生及时扫码加班主任的企业微信，班主任会将学生组织到班级微信群中，以方便交流。学生可在班级群中提问，亦可添加主讲老师的微信提问。主讲老师每周提供至少两次共四个小时的答疑直播，学生可按需参加。
+答：请家长或学生及时扫码加班主任的企业微信，并根据孩子的学习情况和班主任协调五次一对一课后辅导的时间。
 
 问：购买后如何上课?  
-答：购课成功后，请按照发货短信中的内容做课前准备，并根据课表参与课程直播，如有疑问请及时联系班主任。
+答：购课成功后，请按照发货短信中的内容做课前准备，并根据孩子的时间安排学习，如有疑问请及时联系班主任。
 
 问：课程有效期多长?  
-答：购买后，课程内容（直播回放、在线课件等）三年有效；请按课表学习并及时提交作业给主讲老师，以便可以顺利进入下个阶段的学习。
+答：购买后，课程内容（课程视频、在线课件等）三年有效；请按课表学习并及时完成作业，以便可以顺利进入下个阶段的学习。
 
 问：购买后是否支持退换货?  
 答：虚拟商品，购课后不支持退换货，请理解。
 
 问：如何联系客服?  
 答：如有其他疑问，在视频号主页点击客服按钮，即可咨询客服。
+
 
 ## 直播平台及报名
 
@@ -685,19 +676,81 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 各课程的课件幻灯片入口：
 
-- 普及班：
+- 零基础普及班：
    1. [准备开发环境](https://courses.fmsoft.cn/plzs/preparing-ubuntu-linux.html)
    1. [使用 Linux 桌面系统](https://courses.fmsoft.cn/plzs/using-linux-desktop-system.html)
    1. [我的第一个 Python 程序](https://courses.fmsoft.cn/plzs/my-first-python-program.html)
    1. [我的第一个开源仓库](https://courses.fmsoft.cn/plzs/my-first-open-source-repository.html)
-- AI 筑基班：
+- Python 实战班：
    1. [Python 流程控制](https://courses.fmsoft.cn/plzs/python-flow-control.html)
    1. [Python 数据类型](https://courses.fmsoft.cn/plzs/python-data-types.html)
    1. [Python 标准库](https://courses.fmsoft.cn/plzs/python-standard-library.html)
    1. [Python 大作业及相关知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
    1. [Python 大作业辅导](https://courses.fmsoft.cn/plzs/python-project-coaching.html)
+- 信奥筑基班：
+   1. [C++ 快速入门](cpp-quick-start.html)
+   1. [C++ 流程控制](cpp-flow-control.html)
+   1. [C++ 数据类型（上）](cpp-data-types.html)
+   1. [C++ 数据类型（下）](cpp-data-types-more.html)
+   1. [C++ 类、模板和 STL](cpp-class-template-and-stl.html)
+   1. [任意精度算术的 C++ 实现](cpp-arbitrary-precision-arithmetic.html)
+- 信奥初级班：
+   1. [基础算法](noijunior-basic-algorithms.html)
+   1. [排序算法](noijunior-sort-algorithms.html)
+   1. [线性数据结构](noijunior-linear-data-structures.html)
+   1. [树型数据结构](noijunior-tree-data-structures.html)
+   1. [中期大作业](noijunior-midterm-project.html)
+   1. [搜索算法](noijunior-search-algorithms.html)
+   1. [图及图论算法](noijunior-graph-and-graph-theory.html)
+   1. [其他算法和数据结构](noijunior-other-data-structures.html)
+   1. [CSP-J 真题讲解](noijunior-csp-exercises.html)
+   1. [结业大作业](noijunior-term-project.html)
+- 信奥提高班：
+   1. [C++ 编程语言的高级特性](noisenior-cpp-advanced-features.html)
+   1. [字符串相关算法](noisenior-string-algorithms.html)
+   1. [通用操作系统的内存管理](noisenior-memory-management.html)
+   1. [高级树型数据结构](noisenior-tree-data-structures.html)
+   1. [中期大作业](noisenior-midterm-project.html)
+   1. [高级搜索算法](noisenior-search-algorithms.html)
+   1. [动态规划](noisenior-dynamic-programming.html)
+   1. [其他理论知识](noisenior-other-theories.html)
+   1. [CSP-S 真题讲解](noisenior-csp-exercises.html)
+   1. [结业大作业](noisenior-term-project.html)
+- 程序员/信奥生的数学素养课：数系及计算
+   1. [数系——从自然数到复数](math-number-system.html)
+   1. [数系上的运算和进制](math-end-on-system.html)
+   1. [数论基础：整数的性质](math-integers.html)
+   1. [质数的有趣性质及初等数论四大定理](math-primes.html)
+   1. [初等数论主要定理及其应用](math-number-theory.html)
+   1. [微积分基础](math-calculus.html)
+   1. [中值定理、泰勒公式及无穷级数](math-infinite-series.html)
+   1. [代数无理数的计算](math-algebraic-irrational-numbers.html)
+   1. [黄金分割比和斐波那契数列](math-golden-ratio-and-fibonacci-numbers.html)
+   1. [圆周率、自然常数及其计算](math-irrational-numbers-pi-and-e.html)
+- 程序员/信奥生的数学素养课：离散数学结构
+   1. [离散数学基础](math-discrete-fundamentals.html)
+   1. [逻辑](math-discrete-logic.html)
+   1. [计数：排列、组合及概率](math-discrete-counting.html)
+   1. [关系及有向图](math-discrete-relation-and-digraphs.html)
+   1. [函数](math-discrete-functions.html)
+   1. [图论基础](math-discrete-graphy-theory.html)
+   1. [有序关系及结构](math-discrete-order-relations-structures.html)
+   1. [树型结构](math-discrete-tree.html)
+   1. [半群和群](math-discrete-semigroups-and-groups.html)
+   1. [语言和有限状态机](math-discrete-languages-and-finite-state-machine.html)
+- 程序员/信奥生的数学素养课：编解码
+   1. [二进制运算及数值的计算机表达](math-binary-arithmetic.html)
+   1. [任意精度算术](math-arbitrary-precision-arithmetic.html)
+   1. [字符集及文字的编码](math-charset-and-text-encoding.html)
+   1. [差分编码及哈夫曼码](math-differential-encoding-huffman-coding.html)
+   1. [二进制数据的编解码及错误校验](math-error-detection.html)
+   1. [数据的压缩和解压](math-compression-and-decompression.html)
+   1. [有损压缩和解压](math-lossy-compression-and-decompression.html)
+   1. [数据的摘要及签名](math-digest-and-signature.html)
+   1. [对称加解密](math-symmetric-encryption-and-decryption.html)
+   1. [非对称加解密](math-asymmetric-encryption-and-decryption.html)
 - 番外
-   1. [其他编程语言长什么样？](https://courses.fmsoft.cn/plzs/other-programming-languages.html)
+   1. [其他编程语言长什么样？](https://courses.fmsoft.cn/plzs/icsm-other-programming-languages.html)
    1. [为什么选择二进制？](https://courses.fmsoft.cn/plzs/icsm-why-choose-binary.html)
    1. [二进制运算](https://courses.fmsoft.cn/plzs/icsm-binary-arithmetic.html)
    1. [数值：整数和实数](https://courses.fmsoft.cn/plzs/icsm-numbers.html)
