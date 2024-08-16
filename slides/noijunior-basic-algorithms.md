@@ -203,6 +203,7 @@ int clock_gettime(clockid_t clockid, struct timespec *tp);
 ```
 
 	
+- `clock_gettime()` 的用法：
 
 ```c
 #include <time.h>
@@ -216,7 +217,7 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
     long dns;
 
     if (ts_to == NULL) {
-        clock_gettime(CLOCK_MONOTONIC, &ts_curr);
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts_curr);
         ts_to = &ts_curr;
     }
 
