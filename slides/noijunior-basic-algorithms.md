@@ -264,6 +264,7 @@ double min(double a, double b)
 	
 - 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
+- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-pair.cpp)
 
 ```cpp
 template <class T>
@@ -330,7 +331,7 @@ double min(const double* arr, size_t nr)
 	
 - 泛型版本（函数模板）
 - 时间复杂度：`O(N)`
-- [完整源代码]()
+- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-array.cpp)
 
 ```cpp
 template <class T>
@@ -339,11 +340,9 @@ const T& max(const T* arr, size_t nr)
     assert(nr > 0);
 
     const T* max = arr;
-    if (nr > 1) {
-        for (size_t i = 1; i < nr; i++) {
-            if (arr[i] > *max) {
-                max = arr + i;
-            }
+    for (size_t i = 1; i < nr; i++) {
+        if (arr[i] > *max) {
+            max = arr + i;
         }
     }
 
@@ -356,20 +355,105 @@ const T& min(const T* arr, size_t nr)
     assert(nr > 0);
 
     const T* min = arr;
-    if (nr > 1) {
-        for (size_t i = 1; i < nr; i++) {
-            if (*min > arr[i]) {
-                min = arr + i;
-            }
+    for (size_t i = 1; i < nr; i++) {
+        if (*min > arr[i]) {
+            min = arr + i;
         }
     }
 
     return *min;
 }
+
+    double a[5];
+    cin >> a[0] >> a[1] >> a[2] >> a[3] >> a[4];
+
+    cout << max(a, 5) << endl;
+    cout << min(a, 5) << endl;
 ```
 
 	
 ### 求和
+
+#### 一般数组求和
+
+- 泛型版本（函数模板）
+- 时间复杂度：`O(N)`
+- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-array.cpp)
+
+```cpp
+template <class T>
+T sum(const T* arr, size_t nr)
+{
+    T sum = 0;
+    for (size_t i = 0; i < nr; i++) {
+        sum += arr[i];
+    }
+
+    return sum;
+}
+
+    double a[5];
+    cin >> a[0] >> a[1] >> a[2] >> a[3] >> a[4];
+
+    cout << sum(a, 5) << endl;
+```
+
+	
+#### 等差数列求和
+
+- 泛型版本（函数模板）
+- 时间复杂度：`O(1)`
+- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-arithmetic-sequence.cpp)
+
+```cpp
+template <class T>
+T as_sum(const T& first, const T& diff, size_t n)
+{
+    assert(n > 0);
+
+    T last = first + (n - 1) * diff;
+    return (first + last) * n / 2;
+}
+
+    double first, diff;
+    size_t n;
+    cin >> first >> diff >> n;
+
+    cout << as_sum(first, diff, n) << endl;
+```
+
+	
+#### 等比数列求和
+
+- 泛型版本（函数模板）
+- 时间复杂度：`O(1)`
+- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-geometric-sequence.cpp)
+
+```cpp
+#include <cmath>
+
+template <class T>
+T gs_sum(const T& first, const T& ratio, size_t n)
+{
+    assert(n > 0 && ratio != 0);
+
+    T denominator = static_cast<T>(ratio - 1.0);
+    if (fpclassify(denominator) != FP_NORMAL) {
+        return first * n;
+    }
+
+    return first * (1.0 - pow(radio, static_cast<T>(n))) / denominator;
+}
+
+    double first, ratio;
+    size_t n;
+    cin >> first >> ratio >> n;
+
+    cout << gs_sum(first, ratio, n) << endl;
+```
+
+	
+### 翻转数组
 
 		
 ## 递归

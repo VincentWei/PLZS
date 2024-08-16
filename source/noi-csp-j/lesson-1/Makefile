@@ -1,4 +1,4 @@
-TARGETS = check-prime extrema-in-pair extrema-in-triple extrema-in-array
+TARGETS = check-prime extrema-in-pair extrema-in-triple extrema-in-array summary-of-array
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
