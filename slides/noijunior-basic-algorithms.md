@@ -1,7 +1,7 @@
 # 基础算法
 
 1. 算法的重要性
-1. 算法复杂度的横量
+1. 算法复杂度的衡量
 1. 常用简单算法
 1. 递归
 1. 二分法
@@ -106,7 +106,7 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
 		
 ## 算法复杂度的衡量
 
-- 两个维度。
+- 衡量算法复杂度的两个维度：
    1. 时间复杂度（complexity）：用于衡量执行效率。
    1. 空间复杂度：用于衡量内存等资源的消耗。
 - 大 O 时间复杂度表示法：用于表示代码执行时间随数据规模增长的变化趋势。
@@ -114,7 +114,6 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
    1. `O(N)`：表示时间复杂度与数据项的个数 `n` 线性相关。比如素性判定的普通版本。
    1. `O(sqrt(N))`：表示时间复杂度与数据项的个数之算术平方根 `sqrt(N)` 线性相关。比如素性判定的优化版本。
    1. `O(log(N))`：表示时间复杂度与数据项的个数之对数 `log(N)` 线性相关（无关对数的底到底是多少）。比如在事先筛好的素数矢量中查找给定的数，从而判定是否为素数的算法。
-- 我们通常可以通过提高空间复杂度来降低时间复杂度，俗称“空间换时间”。
 
 	
 ### 程序运行时间的测量
@@ -192,7 +191,7 @@ $ /usr/bin/time -v ./check-prime
    1. `CLOCK_PROCESS_CPUTIME_ID`：当前进程占用的 CPU 时间；可精确计算当前进程真正用于代码执行的时间。
    1. `CLOCK_THREAD_CPUTIME_ID`：当前线程占用的 CPU 时间；可精确计算当前线程真正用于代码执行的时间。
 
-```cpp
+```c
 #include <time.h>
 
 struct timespec {
@@ -201,7 +200,12 @@ struct timespec {
 };
 
 int clock_gettime(clockid_t clockid, struct timespec *tp);
+```
 
+	
+
+```c
+#include <time.h>
 
 /* 计算间隔时间，以秒为单位。 */
 double calc_elapsed_seconds(const struct timespec *ts_from,
