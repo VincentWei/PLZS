@@ -244,7 +244,25 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 	
 ### 找最值
 
-- 两个值中找最大、最小值
+#### 两个值中找最大、最小值
+
+- 朴素版本
+- 时间复杂度：`O(1)`
+
+```cpp
+double max(double a, double b)
+{
+    return (a > b) ? b : a;
+}
+
+double min(double a, double b)
+{
+    return (a < b) ? b : a;
+}
+```
+
+	
+- 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
 
 ```cpp
@@ -266,8 +284,89 @@ const T& min(const T& a, const T& b)
 
 （十分钟内完成）
 
-1. 实现从三个值中找最大、最小值的两个函数模板，并调用该函数模板实现一个完整的程序 `extremums-in-triple.cpp`。
-1. 将 `extremums-in-triple.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-1` 目录中，并推送到远程仓库。
+1. 实现从三个值中找最大、最小值的两个函数模板，并调用该函数模板实现一个完整的程序 `extrema-in-triple.cpp`。
+1. 将 `extrema-in-triple.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-1` 目录中，并推送到远程仓库（下同）。
+
+	
+#### 无序数组中找最大、最小值
+
+- 朴素版本
+- 时间复杂度：`O(N)`
+
+```cpp
+double max(const double* arr, size_t nr)
+{
+    assert(nr > 0);
+
+    double max = arr[0];
+    if (nr > 1) {
+        for (size_t i = 1; i < nr; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+    }
+
+    return max;
+}
+
+double min(const double* arr, size_t nr)
+{
+    assert(nr > 0);
+
+    double min = arr[0];
+    if (nr > 1) {
+        for (size_t i = 1; i < nr; i++) {
+            if (min > arr[i]) {
+                min = arr[i];
+            }
+        }
+    }
+
+    return min;
+}
+```
+
+	
+- 泛型版本（函数模板）
+- 时间复杂度：`O(N)`
+- [完整源代码]()
+
+```cpp
+template <class T>
+const T& max(const T* arr, size_t nr)
+{
+    assert(nr > 0);
+
+    const T* max = arr;
+    if (nr > 1) {
+        for (size_t i = 1; i < nr; i++) {
+            if (arr[i] > *max) {
+                max = arr + i;
+            }
+        }
+    }
+
+    return *max;
+}
+
+template <class T>
+const T& min(const T* arr, size_t nr)
+{
+    assert(nr > 0);
+
+    const T* min = arr;
+    if (nr > 1) {
+        for (size_t i = 1; i < nr; i++) {
+            if (*min > arr[i]) {
+                min = arr + i;
+            }
+        }
+    }
+
+    return *min;
+}
+```
 
 	
 ### 求和
