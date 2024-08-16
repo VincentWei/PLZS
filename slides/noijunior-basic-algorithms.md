@@ -244,6 +244,31 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 	
 ### 找最值
 
+- 两个值中找最大、最小值
+- 时间复杂度：`O(1)`
+
+```cpp
+template <class T>
+const T& max(const T& a, const T& b)
+{
+    return (a > b) ? b : a;
+}
+
+template <class T>
+const T& min(const T& a, const T& b)
+{
+    return (a < b) ? b : a;
+}
+```
+
+	
+#### 课堂练习
+
+（十分钟内完成）
+
+1. 实现从三个值中找最大、最小值的两个函数模板，并调用该函数模板实现一个完整的程序 `extremums-in-triple.cpp`。
+1. 将 `extremums-in-triple.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-1` 目录中，并推送到远程仓库。
+
 	
 ### 求和
 
