@@ -54,7 +54,7 @@ bool check_prime_opt(uint64_t n)
 - 自然数的素性判定（素数筛）
 
 ```cpp
-bool check_prime_sieved(uint64_t n, const uint64_v& primes_sieved)
+bool is_next_prime(uint64_t n, const uint64_v& primes_sieved)
 {
     uint64_t mid = llroundl(sqrtl(n));
 
@@ -78,22 +78,28 @@ uint64_v sieve_primes(uint64_t max)
     if (max < 2)
         goto done;
 
-    result.push_back(2);
-    for (uint64_t n = 3; n <= max; max += 2) {
-        if (check_prime_sieved(n, prime_sieved)) {
-            result.push_back(number);
+    primes_sieved.push_back(2);
+    for (uint64_t n = 3; n <= max; n += 2) {
+        if (is_next_prime(n, primes_sieved)) {
+            primes_sieved.push_back(n);
         }
     }
 
 done:
-    return result;
+    return primes_sieved;
 }
 
-    uint64_v primes = prime_sieve(UINT32_MAX);
+bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
+{
+    return binary_search(primes_sieved.begin(), primes_sieved.end(), n);
+}
+
+
+    uint64_v primes_sieved = sieve_primes(UINT32_MAX);
 
     uint64_t n;
     cin >> n;
-    cout << (binary_search(primes.begin(), primes.end(), n) ? 'True' : 'False') << endl;
+    cout << (check_prime_sieved(primes_sieved, n) ? "True" : "False") << endl;
 ```
 
 		
