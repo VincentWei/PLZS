@@ -313,7 +313,7 @@ const T& min(const T& a, const T& b)
 （十分钟内完成）
 
 1. 实现从三个值中找最大、最小值的两个函数模板，并调用该函数模板实现一个完整的程序 `extrema-in-triple.cpp`。
-1. 将 `extrema-in-triple.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-1` 目录中，并推送到远程仓库（下同）。
+1. 将 `extrema-in-triple.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-1/` 目录（下同），并推送到远程仓库。
 
 	
 #### 无序数组中找最大、最小值
@@ -486,14 +486,173 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 （十五分钟内完成）
 
-1. 实现两个函数模板，分别用于初始化一个等差数列构成的数组和等比数列构成的数组，并构成一个完整程序 `init-two-sequences.cpp`。
-1. 将 `init-two-sequences.cpp` 文件添加到 `plzs-homework` 仓库，并推送到远程仓库。
+1. 实现两个函数模板，分别用于初始化一个等差数列构成的数组和等比数列构成的数组，并构成一个完整的程序 `init-two-sequences.cpp`；该程序根据用户输入的第一项、公差或公比以及项数，生成两个数组，并依次输出数组中的各项。
+1. 调试通过后，将 `init-two-sequences.cpp` 文件添加到 `plzs-homework` 仓库，并推送到远程仓库。
 
 	
-### 翻转数组
+### 翻转数组元素
+
+- 将数组中的元素执行翻转（reverse）操作；比如将数组 `[1, 2, 3, 4, 5]` 翻转后 `[5, 4, 3, 2, 1]`。
+- 时间复杂度：`O(N)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/reverse-array.cpp)
+
+```cpp
+```
+
+	
+### 轮转数组元素
+
+- 将数组中的元素执行轮换（rotate）操作；比如将数组 `[1, 2, 3, 4, 5]` 轮转 2 次后 `[4, 5, 1, 2, 3]`。
+- 时间复杂度：`O(N)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/rotate-array.cpp)
+
+```cpp
+```
+
+	
+### 打乱数组元素
+
+- 打乱（shuffle）数组中的元素顺序；比如将数组 `[1, 2, 3, 4, 5]` 打乱后 `[4, 3, 1, 5, 2]`。
+- 时间复杂度：`O(N)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/shuffle-array.cpp)
+
+```cpp
+```
+
+	
+### 在矢量的尾部追加元素
+
+- 在矢量的尾部追加一个元素（push back)；比如在矢量 `[1, 2, 3, 4, 5]` 尾部追加 `6`：`[1, 2, 3, 4, 5, 6]`。
+- 时间复杂度：`O(1)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/push-back-element.cpp)
+
+```cpp
+```
+
+	
+### 移除矢量尾部的元素
+
+- 将矢量尾部的元素移除（pop back）；比如将矢量 `[1, 2, 3, 4, 5]` 尾部的 `5` 移除：`[0, 1, 2, 3, 4]`。
+- 时间复杂度：`O(1)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/pop-back-element.cpp)
+
+```cpp
+```
+
+	
+### 在矢量的指定位置插入元素
+
+- 在矢量的指定位置插入（insert）元素；比如在矢量 `[1, 2, 3, 4, 5]` 的第 0 个索引位置处插入元素 `0`：`[0, 1, 2, 3, 4, 5]`。
+- 时间复杂度：`O(N)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/insert-element.cpp)
+
+```cpp
+```
+
+	
+### 移除指定位置的矢量元素
+
+- 将指定位置的元素从矢量中移除（erase）；比如将矢量 `[1, 2, 3, 4, 5]` 的第 0 个元素移除后 `[2, 3, 4, 5]`。
+- 时间复杂度：`O(N)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/erase-element.cpp)
+
+```cpp
+```
+
+	
+### 计算 C 字符串长度
+
+- 计算 C 字符串长度（count）；比如字符串 `"Hello"` 的长度为 `5`。
+- 时间复杂度：`O(N)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/string-length.cpp)
+
+```cpp
+```
 
 		
 ## 递归
+
+	
+### 在筑基班接触过的递归算法
+
+1) 自然数次幂的递归实现
+
+```cpp
+```
+
+	
+2) 阶乘的递归实现
+
+```cpp
+```
+
+	
+3) 斐波那契数列的递归实现
+
+```cpp
+```
+
+	
+4) 欧几里得算法的递归实现
+
+```cpp
+```
+
+	
+5) 扩展欧几里得算法的递归实现
+
+```cpp
+```
+
+	
+5) 快速幂算法的递归实现
+
+```cpp
+```
+
+	
+### 递归好处和坏处
+
+- 易于理解，实现简单。
+- 但时间复杂度较高，通常具有 `O(N)` 或以上的时间复杂度。
+- 递归调用产生大量栈帧，空间复杂度也较高。
+- 所有的递归实现都可以转为非递归实现。
+
+	
+1) 自然数次幂的非递归实现
+
+```cpp
+```
+
+	
+2) 阶乘的非递归实现
+
+```cpp
+```
+
+	
+3) 斐波那契数列的非递归实现
+
+```cpp
+```
+
+	
+4) 欧几里得算法的非递归实现
+
+```cpp
+```
+
+	
+5) 扩展欧几里得算法的非递归实现
+
+```cpp
+```
+
+	
+5) 快速幂算法的非递归实现
+
+```cpp
+```
 
 		
 ## 二分法
@@ -506,6 +665,24 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 		
 ## 作业
+
+	
+1) 构造一个等差数列数组，然后使用二分法寻找给定数值是否存在于该数列中。运行效果如下所示：
+
+```console
+% ./find-value-in-arithmetic-sequence
+<1 3 5>     # 三个浮点数，分别为等差数列初始值、公差以及要寻找的数值。
+False
+```
+
+	
+2) 
+
+```console
+% ./ull-mode
+<100000000000000000000>
+3
+```
 
 	
 ### 参考链接
