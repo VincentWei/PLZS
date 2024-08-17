@@ -780,7 +780,7 @@ $ ./rational-number-to-fraction
 ```
 
 	
-4) 基于 `bigint` 类提供的接口实现：给定任意自然数 `a` 和 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
+4) 基于 `bigint` 类提供的接口实现：给定任意自然数 `a` 和 <code>n (0 <= n < 2<sup>32</sup>)</code>，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
 
 ```console
 $ ./binary-power

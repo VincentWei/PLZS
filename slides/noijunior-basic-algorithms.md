@@ -774,7 +774,7 @@ const T* binary_search(const T* arr, const T& needle, size_t start, size_t end)
 ```cpp
 double estimate_square_root(double a, unsigned scale)
 {
-    assert(a >= 0);
+    assert(a >= 1.0);
 }
 ```
 
@@ -887,7 +887,7 @@ False: using formula in 0.0001s.
 
 ```console
 % ./nth-fibonacii-number
-<20 31 500>     # 前两个数值为任意精度的正整数，第三个数值为索引值 N (0 < N < 2^16)
+<20 31 500>     # 前两个数值为任意精度的正整数，第三个数值为索引值 N (0 <= N < 2^16)
 ```
 
 	
@@ -906,25 +906,31 @@ $ ./nap-multiple
 ```
 
 	
-4) 基于 `bigint` 类提供的接口实现：给定任意自然数 `a` 和 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
+4) 基于 `bigint` 类提供的接口实现：给定任意非零整数，求出其最大公约数和最小公倍数。运行效果如下：
 
 ```console
-$ ./binary-power
+$ ./bigint-gcd-lcm
+<1111 3333>        # 均为任意精度非零整数。
+1111
+3333
+```
+
+	
+5) 基于 `bigint` 类提供的接口实现：给定任意精度整数 `a` 和 任意精度自然数 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
+
+```console
+$ ./bigint-binary-power
 <23 50>
 122008981252869411022491112993141891091036959856659100591281395343249
 ```
 
 	
-5) 基于 `bigint` 类提供的接口实现：给定任意小数（正值），给出其最简分数表达。运行效果如下：
+6) 给定任意浮点数以及精度（按十进制小数部分位数给出），估算其立方根。运行效果如下：
 
 ```console
-$ ./rational-number-to-fraction
-<0.3 1>        # 第二个数字表示循环位；指小数部分循环位的位数。
-1/3
-
-$ ./rational-number-to-fraction
-<48.8260869565217391304347 22>
-1123/23
+$ ./estimate-cubic-root
+<21 20>     # 第一个数是一个大于等于 1.0 的浮点数，第二个数给定了结果小数部分的位数 K（0 < K < 20）
+2.75889617783466134816
 ```
 
 	
