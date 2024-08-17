@@ -141,7 +141,7 @@ bool check_prime_linear(uint64_t n)
 - 大 O 复杂度表示法：用于表示代码执行时间或者内存占用随数据规模增长的变化趋势。
    1. `O(N)`：表示复杂度与数据项的个数 `n` 线性相关。比如素性判定的普通版本之时间复杂度。
    1. `O(sqrt(N))`：表示复杂度与数据项的个数之算术平方根 `sqrt(N)` 线性相关。比如素性判定的优化版本之时间复杂度。
-   1. `O(log(N))`：表示复杂度与数据项的个数之对数 `log(N)` 线性相关（无关对数的底到底是多少）。比如在事先筛好的素数矢量中查找给定的数，从而判定是否为素数的算法之时间复杂度。
+   1. `O(log(N))`：表示复杂度与数据项的个数之对数 `log(N)` 线性相关（无关对数的底到底是多少）。比如在事先筛好的有序素数矢量中用二分查找法查找给定的数，从而判定是否为素数的算法之时间复杂度。
    1. `O(1)`：表示常量级的复杂度，比如基本的四则运算、取地址、反引用、访问数组中给定的单元等。比如将给定范围的自然数素性保存为数组，以给定自然数为数组下标直接返回对应的素性真假值的时间复杂度。
 
 	
@@ -878,10 +878,12 @@ double binary_power_i(double base, unsigned exp)
 ```console
 % ./find-value-in-arithmetic-sequence
 <0 3 500>     # 三个浮点数，分别为等差数列初始值、公差以及要寻找的数值。
-False: compared sequentially in 0.001s.
-False: using my binary search implementation in 0.001s.
-False: using binary_search() in 0.001s.
-False: using formula in 0.0001s.
+False
+
+0.001s consumed when comparing sequentially.
+0.001s consumed when using my binary search implementation.
+0.001s consumed when using binary_search().
+0.001s consumed when using formula.
 ```
 
 	
@@ -898,13 +900,19 @@ False: using formula in 0.0001s.
 ```console
 $ ./nap-multiple
 <11 11>
-121: using summation in 0.001s.
-121: using vertical multiplication in 0.001s.
-121: using binary lifting summary in 0.001s.
+121
+
+0.001s consumed when using summation.
+0.001s consumed when using vertical multiplication.
+0.001s consumed when using binary lifting summation.
 
 $ ./nap-multiple
 <78260869565217391304347826086956521 * 4347826086956521739130434782608695>
 340264650283553875236294896030245692438563327032136105860113421550095
+
+0.001s consumed when using summation.
+0.001s consumed when using vertical multiplication.
+0.001s consumed when using binary lifting summation.
 ```
 
 	
