@@ -465,14 +465,10 @@ T as_sum(const T& first, const T& diff, size_t n)
 template <class T>
 T gs_sum(const T& first, const T& ratio, size_t n)
 {
-    assert(n > 0 && ratio != 0);
+    assert(n > 0);
 
     T denominator = static_cast<T>(1.0 - ratio);
-    if (fpclassify(denominator) != FP_NORMAL) {
-        return first * n;
-    }
-
-    return first * (1.0 - pow(radio, static_cast<T>(n))) / denominator;
+    return first * (1.0 - pow(ratio, static_cast<T>(n))) / denominator;
 }
 
     assert(gs_sum(1, 1, 5) == 5);
@@ -484,6 +480,14 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
     cout << gs_sum(first, ratio, n) << endl;
 ```
+
+	
+#### 课堂练习
+
+（十五分钟内完成）
+
+1. 实现两个函数模板，分别用于初始化一个等差数列构成的数组和等比数列构成的数组，并构成一个完整程序 `init-two-sequences.cpp`。
+1. 将 `init-two-sequences.cpp` 文件添加到 `plzs-homework` 仓库，并推送到远程仓库。
 
 	
 ### 翻转数组
