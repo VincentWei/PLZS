@@ -592,8 +592,10 @@ T gs_sum(const T& first, const T& ratio, size_t n)
    1. 左移 N 位相当于乘以 <code>2<sup>N</sup></code>：`x << N`
    1. 右移 N 位相当于除以 <code>2<sup>N</sup></code>：`x >> N`
 - 判断 `n` 是否是 2 的正整数幂：`(~(n & (n - 1)))`
-- 圆整为大于等于 `n` 的最小的 2 的正整数（N）幂：`x = ((n + (N - 1)) & -N)`
-- 求中间值（防止溢出）：`mid = start + ((end - start) >> 1)`
+- 圆整为大于等于 `n` 的最小的 2 的正整数（N）幂：  
+`x = ((n + (N - 1)) & -N)`
+- 求中间值（防止溢出）：  
+`mid = start + ((end - start) >> 1)`
 - 最简单的加解密：`x ^ y ^ y = x`
 
 		
@@ -605,83 +607,182 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 1) 自然数次幂的递归实现
 
 ```cpp
+double power_r(double f, unsigned long n)
+{
+    double r;
+    if (n == 0)
+        r = 1.0;
+    else
+        r = f * power_r(f, n - 1);
+    return r;
+}
 ```
 
 	
 2) 阶乘的递归实现
 
 ```cpp
+unsigned long long factorial_r(unsigned long long n)
+{
+    if (n == 0)
+        return 1;
+    else
+        return n * factorial_r(n - 1);
+}
 ```
 
 	
 3) 斐波那契数列的递归实现
 
 ```cpp
+unsigned long long fibonacci_nth_r(unsigned n)
+{
+    if (n < 2)
+        return 1;
+    return fibonacci_nth_r(n - 1) + fibonacci_nth_r(n - 2);
+}
 ```
 
 	
 4) 欧几里得算法的递归实现
 
 ```cpp
+long long gcd_r(long long a, long long b)
+{
+    if (b == 0)
+        return a;
+    return gcd_r(b, a % b);
+}
 ```
 
 	
-5) 扩展欧几里得算法的递归实现
-
-```cpp
-```
-
-	
-### 递归好处和坏处
+### 递归的好处和坏处
 
 - 易于理解，实现简单。
 - 但时间复杂度较高，通常具有 `O(N)` 或以上的时间复杂度。
 - 递归调用产生大量栈帧，空间复杂度也较高，通常具有 `O(N)` 或以上的空间复杂度。
-- 所有的递归实现都可以转为非递归实现。
+- 所有的递归实现都可以转为非递归（迭代）实现。
 
 	
-1) 自然数次幂的非递归实现
+1) 自然数次幂的迭代实现
 
 ```cpp
+double power_i(double f, unsigned long n)
+{
+    double r = 1.0;
+    for (unsigned long i = 0; i < n; i++) {
+        r *= f;
+    }
+
+    return r;
+}
 ```
 
 	
-2) 阶乘的非递归实现
+2) 阶乘的迭代实现
 
 ```cpp
+unsigned long long factorial_i(unsigned long long n)
+{
+    unsigned long long r = 1ULL;
+    for (unsigned long i = 2; i <= n; i++) {
+        r *= i;
+    }
+
+    return r;
+}
 ```
 
 	
-3) 斐波那契数列的非递归实现
+3) 斐波那契数列的迭代实现
 
 ```cpp
+unsigned long long fibonacci_nth_i(unsigned n)
+{
+    if (n == 0)
+        return 1;
+    else if (n == 1)
+        return 1;
+
+    unsigned long long a = 1, b = 1;
+    unsigned long long r = a + b;
+    for (unsigned i = 2; i < n - 2; i++) {
+        r = a + b;  // 2, 3
+        a = b;      // 1, 2
+        b = r;      // 2, 3
+    }
+
+    return r;
+}
 ```
 
 	
-4) 欧几里得算法的非递归实现
+4) 欧几里得算法的迭代实现
 
 ```cpp
-```
-
-	
-5) 扩展欧几里得算法的非递归实现
-
-```cpp
+long long gcd_i(long long a, long long b)
+{
+    while (b != 0) {
+        unsigned tmp = a;
+        a = b;
+        b = tmp % b;
+    }
+    return a;
+}
 ```
 
 		
 ## 二分法
 
 - 二分法的基本思想
+- 时间复杂度：`O(log(N))`
 
 	
 ### 二分查找
 
+- 必须在有序数组上执行
+- 示例代码仅可用于从小到大排序（升序，ascending sorted order）的数组
+
+```cpp
+template <class T>
+const T* binary_search(const T* arr, const T& needle, size_t start, size_t end)
+{
+    const T* found = nullptr;
+
+    size_t mid;
+    while (start <= end) {
+        mid = start + ((end - start) >> 1);
+        if (arr[mid] < needle)
+            start = mid + 1;
+        else if (arr[mid] > key)
+            end = mid - 1;
+        else {
+            found = arr + mid;
+            break;
+        }
+    }
+
+    return found;
+}
+```
+
 	
 ### 二分逼近
 
+- 只能在单调增长或下降的数学函数上使用该算法
+
+```cpp
+double estimate_square_root(double a, unsigned scale)
+{
+    assert(a >= 0);
+}
+```
+
 		
 ## 倍增法
+
+- 倍增法（binary lifting）的基本思想
+- 时间复杂度：`O(log(N))`
 
 	
 ### 快速幂
@@ -690,12 +791,36 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 1) 快速幂算法的递归实现
 
 ```cpp
+double binary_power_r(double base, unsigned exp)
+{
+    if (exp == 0)
+        return 1.0;
+
+    double res = binary_power_r(base, exp >> 1);
+    if (exp % 2)
+        return res * res * base;
+
+    return res * res;
+}
 ```
 
 	
 2) 快速幂算法的非递归实现
 
 ```cpp
+double binary_power_i(double base, unsigned exp)
+{
+    double res = 1.0;
+
+    while (exp > 0) {
+        if (exp & 1)
+            res = res * base;
+        base = base * base;
+        exp >>= 1;
+    }
+
+    return res;
+}
 ```
 
 	
@@ -717,7 +842,19 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 ## 实用技巧
 
 	
-### C++ STL 中的二分查找接口
+### C++ STL 提供的简单算法接口
+
+- `#include <algorithm>`
+- 函数模板 `std::max()` 返回两个值中较大的那个。
+- 函数模板 `std::min()`，返回两个值中较小的那个。
+- 函数模板 `std::max_element(first, last)`，返回给定范围 `[first, last)` 内指向最小元素的迭代器。
+- 函数模板 `std::min_element(first, last)`，返回给定范围 `[first, last)` 内指向最大元素的迭代器。
+- 函数模板 `std::reverse(first, last)`，翻转给定范围 `[first, last)` 内的元素。
+- 函数模板 `std::rotate(first, middle, last)`，轮转给定范围 `[first, last)` 内的元素，使 `middle` 成为该范围内的第一个元素。
+- [更多接口](https://cplusplus.com/reference/algorithm/)
+
+	
+### C++ STL 提供的二分查找接口
 
 - `#include <algorithm>`
 - 函数模板 `std::lower_bound()` 用于在有序容器中查找首个不小于给定值的元素。
