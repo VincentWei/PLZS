@@ -136,11 +136,11 @@ bool check_prime_linear(uint64_t n)
 - 衡量算法复杂度（complexity）的两个维度：
    1. 时间复杂度：用于衡量执行效率。
    1. 空间复杂度：用于衡量内存等资源的消耗。
-- 大 O 时间复杂度表示法：用于表示代码执行时间随数据规模增长的变化趋势。
-   1. `O(N)`：表示时间复杂度与数据项的个数 `n` 线性相关。比如素性判定的普通版本。
-   1. `O(sqrt(N))`：表示时间复杂度与数据项的个数之算术平方根 `sqrt(N)` 线性相关。比如素性判定的优化版本。
-   1. `O(log(N))`：表示时间复杂度与数据项的个数之对数 `log(N)` 线性相关（无关对数的底到底是多少）。比如在事先筛好的素数矢量中查找给定的数，从而判定是否为素数的算法。
-   1. `O(1)`：表示常量级的时间复杂度，比如基本的四则运算、取地址、反引用、访问数组中给定的单元等。比如将给定范围的自然数素性保存为数组，以给定自然数为数组下标直接返回对应的素性真假值。
+- 大 O 复杂度表示法：用于表示代码执行时间或者内存占用随数据规模增长的变化趋势。
+   1. `O(N)`：表示复杂度与数据项的个数 `n` 线性相关。比如素性判定的普通版本之时间复杂度。
+   1. `O(sqrt(N))`：表示复杂度与数据项的个数之算术平方根 `sqrt(N)` 线性相关。比如素性判定的优化版本之时间复杂度。
+   1. `O(log(N))`：表示复杂度与数据项的个数之对数 `log(N)` 线性相关（无关对数的底到底是多少）。比如在事先筛好的素数矢量中查找给定的数，从而判定是否为素数的算法之时间复杂度。
+   1. `O(1)`：表示常量级的复杂度，比如基本的四则运算、取地址、反引用、访问数组中给定的单元等。比如将给定范围的自然数素性保存为数组，以给定自然数为数组下标直接返回对应的素性真假值的时间复杂度。
 
 	
 ### 程序运行时间的测量
@@ -275,6 +275,7 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 
 - 朴素版本
 - 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
 
 ```cpp
 double max(double a, double b)
@@ -291,6 +292,7 @@ double min(double a, double b)
 	
 - 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-pair.cpp)
 
 ```cpp
@@ -320,6 +322,7 @@ const T& min(const T& a, const T& b)
 
 - 朴素版本
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 
 ```cpp
 double max(const double* arr, size_t nr)
@@ -358,6 +361,7 @@ double min(const double* arr, size_t nr)
 	
 - 泛型版本（函数模板）
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-array.cpp)
 
 ```cpp
@@ -405,6 +409,7 @@ const T& min(const T* arr, size_t nr)
 
 - 泛型版本（函数模板）
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-array.cpp)
 
 ```cpp
@@ -430,6 +435,7 @@ T sum(const T* arr, size_t nr)
 
 - 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-arithmetic-sequence.cpp)
 
 ```cpp
@@ -457,6 +463,7 @@ T as_sum(const T& first, const T& diff, size_t n)
 
 - 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-geometric-sequence.cpp)
 
 ```cpp
@@ -494,6 +501,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 将数组中的元素执行翻转（reverse）操作；比如将数组 `[1, 2, 3, 4, 5]` 翻转后 `[5, 4, 3, 2, 1]`。
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/reverse-array.cpp)
 
 ```cpp
@@ -504,6 +512,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 将数组中的元素执行轮换（rotate）操作；比如将数组 `[1, 2, 3, 4, 5]` 轮转 2 次后 `[4, 5, 1, 2, 3]`。
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/rotate-array.cpp)
 
 ```cpp
@@ -514,6 +523,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 打乱（shuffle）数组中的元素顺序；比如将数组 `[1, 2, 3, 4, 5]` 打乱后 `[4, 3, 1, 5, 2]`。
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/shuffle-array.cpp)
 
 ```cpp
@@ -524,6 +534,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 在矢量的尾部追加一个元素（push back)；比如在矢量 `[1, 2, 3, 4, 5]` 尾部追加 `6`：`[1, 2, 3, 4, 5, 6]`。
 - 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/push-back-element.cpp)
 
 ```cpp
@@ -534,6 +545,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 将矢量尾部的元素移除（pop back）；比如将矢量 `[1, 2, 3, 4, 5]` 尾部的 `5` 移除：`[0, 1, 2, 3, 4]`。
 - 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/pop-back-element.cpp)
 
 ```cpp
@@ -544,6 +556,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 在矢量的指定位置插入（insert）元素；比如在矢量 `[1, 2, 3, 4, 5]` 的第 0 个索引位置处插入元素 `0`：`[0, 1, 2, 3, 4, 5]`。
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/insert-element.cpp)
 
 ```cpp
@@ -554,6 +567,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 将指定位置的元素从矢量中移除（erase）；比如将矢量 `[1, 2, 3, 4, 5]` 的第 0 个元素移除后 `[2, 3, 4, 5]`。
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/erase-element.cpp)
 
 ```cpp
@@ -564,6 +578,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 - 计算 C 字符串长度（count）；比如字符串 `"Hello"` 的长度为 `5`。
 - 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/string-length.cpp)
 
 ```cpp
@@ -605,17 +620,11 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 ```
 
 	
-5) 快速幂算法的递归实现
-
-```cpp
-```
-
-	
 ### 递归好处和坏处
 
 - 易于理解，实现简单。
 - 但时间复杂度较高，通常具有 `O(N)` 或以上的时间复杂度。
-- 递归调用产生大量栈帧，空间复杂度也较高。
+- 递归调用产生大量栈帧，空间复杂度也较高，通常具有 `O(N)` 或以上的空间复杂度。
 - 所有的递归实现都可以转为非递归实现。
 
 	
@@ -648,17 +657,49 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 ```cpp
 ```
 
+		
+## 二分法
+
+- 二分法的基本思想
+
 	
-5) 快速幂算法的非递归实现
+### 二分查找
+
+	
+### 二分逼近
+
+		
+## 倍增法
+
+	
+### 快速幂
+
+	
+1) 快速幂算法的递归实现
 
 ```cpp
 ```
 
-		
-## 二分法
+	
+2) 快速幂算法的非递归实现
 
-		
-## 倍增法
+```cpp
+```
+
+	
+### 快速乘
+
+	
+1) 快速乘算法的递归实现
+
+```cpp
+```
+
+	
+2) 快速乘算法的非递归实现
+
+```cpp
+```
 
 		
 ## 实用技巧
@@ -667,21 +708,60 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 ## 作业
 
 	
-1) 构造一个等差数列数组，然后使用二分法寻找给定数值是否存在于该数列中。运行效果如下所示：
+1) 构造一个浮点数构成的等差数列数组，然后使用逐项匹配法、二分搜索法（自己的实现）、二分搜索法（调用 `<algorithm>` 中定义的 `binary_search()`）、通项公式法寻找给定数值是否存在于该数列中，并给出各方法的执行时间。运行效果如下所示：
 
 ```console
 % ./find-value-in-arithmetic-sequence
-<1 3 5>     # 三个浮点数，分别为等差数列初始值、公差以及要寻找的数值。
-False
+<0 3 500>     # 三个浮点数，分别为等差数列初始值、公差以及要寻找的数值。
+False: compared sequentially in 0.001s.
+False: using my binary search implementation in 0.001s.
+False: using binary_search() in 0.001s.
+False: using formula in 0.0001s.
 ```
 
 	
-2) 
+2) 使用十进制字符串表示任意精度自然数，给定两个初始的正整数以及一个索引值 `N`，给出以这两个整数开始的广义斐波那契数列数列的第 `N` 个自然数。
 
 ```console
-% ./ull-mode
-<100000000000000000000>
-3
+% ./nth-fibonacii-number
+<20 31 500>     # 前两个数值为任意精度的正整数，第三个数值为索引值 N (0 < N < 2^16)
+```
+
+	
+3) 使用十进制字符串表示任意精度自然数，分别使用连加、竖式乘和快速乘算法实现乘法运算。运行效果如下：
+
+```console
+$ ./nap-multiple
+<11 11>
+121: using summation in 0.001s.
+121: using vertical multiplication in 0.001s.
+121: using binary lifting summary in 0.001s.
+
+$ ./nap-multiple
+<78260869565217391304347826086956521 * 4347826086956521739130434782608695>
+340264650283553875236294896030245692438563327032136105860113421550095
+```
+
+	
+4) 基于 `bigint` 类提供的接口实现：给定任意自然数 `a` 和 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
+
+```console
+$ ./binary-power
+<23 50>
+122008981252869411022491112993141891091036959856659100591281395343249
+```
+
+	
+5) 基于 `bigint` 类提供的接口实现：给定任意小数（正值），给出其最简分数表达。运行效果如下：
+
+```console
+$ ./rational-number-to-fraction
+<0.3 1>        # 第二个数字表示循环位；指小数部分循环位的位数。
+1/3
+
+$ ./rational-number-to-fraction
+<48.8260869565217391304347 22>
+1123/23
 ```
 
 	
