@@ -584,6 +584,18 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 ```cpp
 ```
 
+	
+### 巧用二进制运算
+
+- 判断 `x` 的奇偶性：`(x & 1)`
+- 使用移位优化乘除法：
+   1. 左移 N 位相当于乘以 <code>2<sup>N</sup></code>：`x << N`
+   1. 右移 N 位相当于除以 <code>2<sup>N</sup></code>：`x >> N`
+- 判断 `n` 是否是 2 的正整数幂：`(~(n & (n - 1)))`
+- 圆整为大于等于 `n` 的最小的 2 的正整数（N）幂：`x = ((n + (N - 1)) & -N)`
+- 求中间值（防止溢出）：`mid = start + ((end - start) >> 1)`
+- 最简单的加解密：`x ^ y ^ y = x`
+
 		
 ## 递归
 
@@ -703,6 +715,20 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 
 		
 ## 实用技巧
+
+	
+### C++ STL 中的二分查找接口
+
+- `#include <algorithm>`
+- 函数模板 `std::lower_bound()` 用于在有序容器中查找首个不小于给定值的元素。
+- 函数模板 `std::upper_bound()`，用于在有序容器中查找首个大于给定值的元素。
+- 函数模板 `std::binary_search()`，用于测试有序容器中是否存在给定的值。
+
+	
+### C 标准库实现的二分查找接口
+
+- `#include <cstdlib>`
+- 函数 `bsearch()` 用于在有序数组中查找给定的值，若匹配，则返回对应元素的地址（`void *`）。
 
 		
 ## 作业
