@@ -916,7 +916,7 @@ $ ./bigint-gcd-lcm
 ```
 
 	
-5) 基于 `bigint` 类提供的接口实现：给定任意精度整数 `a` 和 任意精度自然数 `n`，使用快速幂（二进制取幂，Binary Exponentiation）算法计算 <code>a<sup>n</sup></code>。运行效果如下：
+5) 基于 `bigint` 类提供的接口实现：给定任意精度整数 `a` 和 任意精度自然数 `n`，使用快速幂算法计算 <code>a<sup>n</sup></code>。运行效果如下：
 
 ```console
 $ ./bigint-binary-power
@@ -929,7 +929,7 @@ $ ./bigint-binary-power
 
 ```console
 $ ./estimate-cubic-root
-<21 20>     # 第一个数是一个大于等于 1.0 的浮点数，第二个数给定了结果小数部分的位数 K（0 < K < 20）
+<21 20>     # 第一个数是一个浮点数，第二个数给定了结果小数部分的位数 K（0 < K < 20）
 2.75889617783466134816
 ```
 
