@@ -95,10 +95,37 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
     return binary_search(primes_sieved.begin(), primes_sieved.end(), n);
 }
 
+    // 作为示例，仅筛出 UINT16_MAX 及以下的素数。
+    uint64_v primes_sieved = sieve_primes(UINT16_MAX);
 
-    uint64_v primes_sieved = sieve_primes(UINT32_MAX);
+    uint16_t n;
+    cin >> n;
+    cout << (check_prime_sieved(primes_sieved, n) ? "True" : "False") << endl;
+```
 
-    uint64_t n;
+	
+- 自然数的素性判定（事先准备的自然数素性数组）
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/check-prime.cpp)
+
+```cpp
+// 作为示例，仅给出 UINT16_MAX 及以下自然数的素性值。
+static bool primalities[UINT16_MAX + 1];
+
+bool check_prime_linear(uint64_t n)
+{
+    if (n > UINT16_MAX) {
+        assert(0);
+    }
+
+    return primalities[n];
+}
+
+    /* 使用素数筛中的素数初始化素性数组 */
+    for (uint64_t prime: primes_sieved) {
+        primalities[prime] = true;
+    }
+
+    uint16_t n;
     cin >> n;
     cout << (check_prime_sieved(primes_sieved, n) ? "True" : "False") << endl;
 ```
@@ -110,10 +137,10 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
    1. 时间复杂度：用于衡量执行效率。
    1. 空间复杂度：用于衡量内存等资源的消耗。
 - 大 O 时间复杂度表示法：用于表示代码执行时间随数据规模增长的变化趋势。
-   1. `O(1)`：表示常量级的时间复杂度，比如基本的四则运算、取地址、反引用、访问数组中给定的单元等。
    1. `O(N)`：表示时间复杂度与数据项的个数 `n` 线性相关。比如素性判定的普通版本。
    1. `O(sqrt(N))`：表示时间复杂度与数据项的个数之算术平方根 `sqrt(N)` 线性相关。比如素性判定的优化版本。
    1. `O(log(N))`：表示时间复杂度与数据项的个数之对数 `log(N)` 线性相关（无关对数的底到底是多少）。比如在事先筛好的素数矢量中查找给定的数，从而判定是否为素数的算法。
+   1. `O(1)`：表示常量级的时间复杂度，比如基本的四则运算、取地址、反引用、访问数组中给定的单元等。比如将给定范围的自然数素性保存为数组，以给定自然数为数组下标直接返回对应的素性真假值。
 
 	
 ### 程序运行时间的测量
@@ -264,7 +291,7 @@ double min(double a, double b)
 	
 - 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
-- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-pair.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-pair.cpp)
 
 ```cpp
 template <class T>
@@ -331,7 +358,7 @@ double min(const double* arr, size_t nr)
 	
 - 泛型版本（函数模板）
 - 时间复杂度：`O(N)`
-- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-array.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-array.cpp)
 
 ```cpp
 template <class T>
@@ -378,7 +405,7 @@ const T& min(const T* arr, size_t nr)
 
 - 泛型版本（函数模板）
 - 时间复杂度：`O(N)`
-- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-array.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-array.cpp)
 
 ```cpp
 template <class T>
@@ -403,7 +430,7 @@ T sum(const T* arr, size_t nr)
 
 - 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
-- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-arithmetic-sequence.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-arithmetic-sequence.cpp)
 
 ```cpp
 template <class T>
@@ -414,6 +441,9 @@ T as_sum(const T& first, const T& diff, size_t n)
     T last = first + (n - 1) * diff;
     return (first + last) * n / 2;
 }
+
+    assert(as_sum(1, 1, 1) == 1);
+    assert(as_sum(1.0, 2.0, 10.0) == 100.0);
 
     double first, diff;
     size_t n;
@@ -427,23 +457,26 @@ T as_sum(const T& first, const T& diff, size_t n)
 
 - 泛型版本（函数模板）
 - 时间复杂度：`O(1)`
-- [完整源代码](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-geometric-sequence.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-geometric-sequence.cpp)
 
 ```cpp
-#include <cmath>
+#include <cmath>        // for pow() and fpclassify()
 
 template <class T>
 T gs_sum(const T& first, const T& ratio, size_t n)
 {
     assert(n > 0 && ratio != 0);
 
-    T denominator = static_cast<T>(ratio - 1.0);
+    T denominator = static_cast<T>(1.0 - ratio);
     if (fpclassify(denominator) != FP_NORMAL) {
         return first * n;
     }
 
     return first * (1.0 - pow(radio, static_cast<T>(n))) / denominator;
 }
+
+    assert(gs_sum(1, 1, 5) == 5);
+    assert(gs_sum(1.0, 2.0, 2) == 3.0);
 
     double first, ratio;
     size_t n;
