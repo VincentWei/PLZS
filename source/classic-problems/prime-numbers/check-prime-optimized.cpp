@@ -9,6 +9,7 @@
  * License: GPLv3
  */
 #include <iostream>     // for cin and cout
+#include <cmath>        // for sqrtl() and llroundl()
 #include <cassert>      // for assert()
 
 using namespace std;
@@ -18,7 +19,8 @@ bool check_prime(uint64_t n)
     if (n < 2)
         return false;
 
-    for (unsigned i = 2; i * i <= n; i++) {
+    uint64_t max = llroundl(sqrtl(n));
+    for (unsigned i = 2; i <= max; i++) {
         if (n % i == 0)
             return false;
     }

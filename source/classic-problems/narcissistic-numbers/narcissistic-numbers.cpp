@@ -1,50 +1,62 @@
+/*
+ * The plain version for narcissistic numbers:
+ *
+ * Author: Vincent Wei
+ *  - <https://github.com/VincentWei>
+ *  - <https://gitee.com/vincentwei7>
+ *
+ * Copyright (C) 2024 FMSoft <https://www.fmsoft.cn>.
+ * License: GPLv3
+ */
 #include <iostream>
+#include <vector>
 #include <cassert>
 
-bool is_narcissus(unsigned candidant, int n)
+using namespace std;
+
+bool is_narcissistic(uintmax_t n)
 {
-    unsigned int t = candidant;
-    unsigned int sum = 0;
+    vector<unsigned> digits;
 
+    uintmax_t t = n;
     do {
-        unsigned int d = t % 10;
-        unsigned power = d;
+        unsigned d = t % 10;
+        digits.push_back(d);
+        t /= 10;
+    } while (t > 0);
 
-        int j = 1;
-        while (j < n) {
-            power *= d;
+    size_t nr_digits = digits.size();
+    unsigned int sum = 0;
+    for (unsigned digit: digits) {
+
+        uintmax_t power = digit;
+        size_t j = 1;
+        while (j < nr_digits) {
+            power *= digit;
             j++;
         }
 
         sum += power;
-        t /= 10;
-    } while (t > 0);
+    }
 
-    if (sum == candidant) {
+    if (sum == n) {
         return true;
     }
 
     return false;
 }
 
-using namespace std;
-
 int main()
 {
-    assert(is_narcissus(153, 3));
+    assert(is_narcissistic(153));
 
-    unsigned nr_digits;
-    cin >> nr_digits;
-
-    unsigned start_number = 1;
-    for (unsigned i = 1; i < nr_digits; i++) {
-        start_number *= 10;
-    }
-
-    for (unsigned n = start_number; n < start_number * 10; n++) {
-        if (is_narcissus(n, nr_digits)) {
+    uintmax_t n = 150;
+    while (true) {
+        if (is_narcissistic(n)) {
             cout << n << endl;
         }
+
+        n++;
     }
 }
 
