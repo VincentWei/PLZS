@@ -725,7 +725,7 @@ unsigned long long fibonacci_nth_i(unsigned n)
 long long gcd_i(long long a, long long b)
 {
     while (b != 0) {
-        unsigned tmp = a;
+        long long tmp = a;
         a = b;
         b = tmp % b;
     }

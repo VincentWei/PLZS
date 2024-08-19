@@ -21,12 +21,14 @@ using intmax_v = vector<intmax_t>;
 intmax_t summary_of_true_factors(intmax_t n)
 {
     intmax_t summary = 1;
-    for (intmax_t i = 2; i * i <= n; i++) {
+    int64_t max = llroundl(sqrtl(n));
+
+    for (intmax_t i = 2; i <= max; i++) {
         imaxdiv_t div = imaxdiv(n, i);
 
         if (div.rem == 0) {
             summary += i;
-            if (i != n)
+            if (i != max)
                 summary += div.quot;
         }
     }

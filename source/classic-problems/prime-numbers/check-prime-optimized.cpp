@@ -20,7 +20,7 @@ bool check_prime(uint64_t n)
         return false;
 
     uint64_t max = llroundl(sqrtl(n));
-    for (unsigned i = 2; i <= max; i++) {
+    for (uint64_t i = 2; i <= max; i++) {
         if (n % i == 0)
             return false;
     }

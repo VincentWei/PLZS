@@ -1,4 +1,4 @@
-TARGETS = amicable-pairs-plain amicable-pairs-optimized
+TARGETS = amicable-pairs-plain amicable-pairs-optimized amicable-pairs-euler
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
