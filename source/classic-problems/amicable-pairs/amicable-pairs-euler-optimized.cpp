@@ -18,6 +18,8 @@
 
 using namespace std;
 
+using ordered_pairs = map<uint64_t, uint64_t>;
+
 /*
  * Calculates the sigma of a given natural number.
  * Teturns -1 if overflow occurred.
@@ -174,7 +176,7 @@ failed:
     return false;
 }
 
-unsigned daughter_pairs(int64_t M, int64_t N)
+unsigned daughter_pairs(int64_t M, int64_t N, bool nocout = true)
 {
     int64_t a = gcd(M, N);
     int64_t p = N / a;
@@ -205,10 +207,11 @@ unsigned daughter_pairs(int64_t M, int64_t N)
 
                 M = a * u * q;
                 N = a * r * s;
-                // clog << "Trying: " << M << " and " << N << endl;
                 if (sigma(M) == M + N) {
                     assert(sigma(N) == M + N);
-                    cout << "\t(daughter):\t" << M << " " << N << endl;
+                    if (!nocout) {
+                        cout << "\t(daughter):\t" << M << " " << N << endl;
+                    }
                     nr++;
                 }
             }
@@ -236,20 +239,18 @@ int main()
         int64_t p, q, r;
         bool ret;
         ret = look_for_three_primes(4, 1, p, q, r);
-        clog << ret << " " << p << " " << q << " " << r << endl;
+        // clog << ret << " " << p << " " << q << " " << r << endl;
         assert(ret == true && p == 5 && q == 11 && r == 71);
 
         int64_t M, N;
         ret = euler(4, M, N);
-        clog << ret << " " << M << " " << N << endl;
+        // clog << ret << " " << M << " " << N << endl;
         assert(ret == true && M == 220 && N == 284);
 
         M = 3 * 3 * 5 * 5 * 5 * 13 * 11 * 59LL;
         N = 3 * 3 * 5 * 13 * 18719LL;
         assert(daughter_pairs(M, N) == 2);
     }
-
-    using ordered_pairs = map<uint64_t, uint64_t>;
 
     clog << "Please input the number of amicable pairs to find by using Euler method: " << endl;
     unsigned max_nr;
@@ -277,7 +278,7 @@ int main()
         cout << "No. " << nr << ":\t\t" << M << " " << N << endl;
         nr++;
 
-        nr += daughter_pairs(M, N);
+        nr += daughter_pairs(M, N, false);
     }
 }
 
