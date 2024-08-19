@@ -115,7 +115,7 @@ bool look_for_three_primes(int64_t b, int64_t c,
             continue;
         }
 
-        y = square_b/factor  + b;
+        y = square_b / factor + b;
         if (y % c) {
             // clog << "Failed in " << __func__ << "(): cannot get an integral result for y." << endl;
             continue;
@@ -205,7 +205,7 @@ unsigned daughter_pairs(int64_t M, int64_t N)
                 M = a * u * q;
                 N = a * r * s;
                 clog << "Trying: " << M << " and " << N << endl;
-                if (sigma(M) == M + N && sigma(N) == M + N) {
+                if (sigma(M) == M + N) {
                     cout << "\t(daughter):\t" << M << " " << N << endl;
                     nr++;
                 }
