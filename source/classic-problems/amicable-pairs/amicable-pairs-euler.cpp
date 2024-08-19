@@ -23,7 +23,8 @@ using namespace std;
  */
 int64_t sigma(int64_t n)
 {
-    assert(n > 1);
+    if (n <= 1)
+        return -1;
 
     int64_t max = llroundl(sqrtl(n));
 
@@ -172,6 +173,49 @@ failed:
     return false;
 }
 
+unsigned daughter_pairs(int64_t M, int64_t N)
+{
+    int64_t a = gcd(M, N);
+    int64_t p = N / a;
+
+    if (!check_prime(p))
+        return 0;
+
+    assert(a % p != 0);
+
+    int64_t u = M / a;
+    int64_t right = (p + 1) * (p + u);
+    if (right < (p + 1) || right < (p + u)) {
+        // overflowed
+        return 0;
+    }
+
+    unsigned nr = 0;
+    int64_t max = llroundl(sqrtl(right));
+    for (int64_t i = 2; i <= max; i++) {
+        if (right % i == 0) {
+            int64_t r = i + p;
+            int64_t s = right / i + p;
+            if (r != s and check_prime(r) and check_prime(s)) {
+                if (gcd(a, r * s) != 1)
+                    continue;
+
+                int64_t q = r + s + u;
+
+                M = a * u * q;
+                N = a * r * s;
+                clog << "Trying: " << M << " and " << N << endl;
+                if (sigma(M) == M + N && sigma(N) == M + N) {
+                    cout << "\t(daughter):\t" << M << " " << N << endl;
+                    nr++;
+                }
+            }
+        }
+    }
+
+    return nr;
+}
+
 int main()
 {
     {
@@ -197,17 +241,23 @@ int main()
         ret = euler(4, M, N);
         clog << ret << " " << M << " " << N << endl;
         assert(ret == true && M == 220 && N == 284);
+
+        M = 3 * 3 * 5 * 5 * 5 * 13 * 11 * 59LL;
+        N = 3 * 3 * 5 * 13 * 18719LL;
+        assert(daughter_pairs(M, N) == 2);
     }
 
     int64_t a = 2;
-    unsigned nr = 0;
+    unsigned nr = 1;
     while (a < INT32_MAX) {
         int64_t M, N;
 
         clog << "Trying " << a << endl;
         if (euler(a, M, N)) {
-            cout << nr << ":(" << a << ")\t" << M << " " << N << endl;
+            cout << "No. " << nr << " (" << a << "):\t\t" << M << " " << N << endl;
             nr++;
+
+            nr += daughter_pairs(M, N);
         }
 
         a++;
