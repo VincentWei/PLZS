@@ -176,7 +176,7 @@ failed:
     return false;
 }
 
-unsigned daughter_pairs(int64_t M, int64_t N, bool nocout = true)
+unsigned daughter_pairs(ordered_pairs* pairs, int64_t M, int64_t N)
 {
     int64_t a = gcd(M, N);
     int64_t p = N / a;
@@ -209,8 +209,9 @@ unsigned daughter_pairs(int64_t M, int64_t N, bool nocout = true)
                 N = a * r * s;
                 if (sigma(M) == M + N) {
                     assert(sigma(N) == M + N);
-                    if (!nocout) {
+                    if (pairs) {
                         cout << "\t(daughter):\t" << M << " " << N << endl;
+                        (*pairs)[M] = N;
                     }
                     nr++;
                 }
@@ -249,13 +250,14 @@ int main()
 
         M = 3 * 3 * 5 * 5 * 5 * 13 * 11 * 59LL;
         N = 3 * 3 * 5 * 13 * 18719LL;
-        assert(daughter_pairs(M, N) == 2);
+        assert(daughter_pairs(nullptr, M, N) == 2);
     }
 
     clog << "Please input the number of amicable pairs to find by using Euler method: " << endl;
     unsigned max_nr;
     cin >> max_nr;
 
+    ordered_pairs initials;
     ordered_pairs pairs;
     int64_t a = 2;
     unsigned nr = 0;
@@ -263,6 +265,7 @@ int main()
         int64_t M, N;
 
         if (euler(a, M, N)) {
+            initials[M] = a;
             pairs[M] = N;
             nr++;
         }
@@ -270,15 +273,29 @@ int main()
         a++;
     }
 
+    if (nr == 0)
+        return 0;
+
+    nr = 1;
+    for (auto& initial: initials) {
+        auto a = initial.second;
+        auto M = initial.first;
+        auto N = pairs[M];
+
+        cout << "No. " << nr << " (" << a << "):\t\t" << M << " " << N << endl;
+        nr++;
+
+        nr += daughter_pairs(&pairs, M, N);
+    }
+
+    clog << "Totally " << (nr - 1) << " amicable pairs found:" << endl;
     nr = 1;
     for (auto& pair: pairs) {
         auto M = pair.first;
         auto N = pair.second;
 
-        cout << "No. " << nr << ":\t\t" << M << " " << N << endl;
+        cout << "No. " << nr << ":\t" << M << " " << N << endl;
         nr++;
-
-        nr += daughter_pairs(M, N, false);
     }
 }
 
