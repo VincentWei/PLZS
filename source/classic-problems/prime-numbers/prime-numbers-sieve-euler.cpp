@@ -1,5 +1,5 @@
 /*
- * The sieve version for checking prime.
+ * The Euler sieve prime numbers.
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
@@ -59,32 +59,47 @@ bool check_prime(const uint64_v& primes, uint64_t n)
     return binary_search(primes.begin(), primes.end(), n);
 }
 
+#include <ctime>
+
+/* 计算间隔时间，以秒为单位。 */
+double calc_elapsed_seconds(const struct timespec *ts_from,
+        const struct timespec *ts_to)
+{
+    struct timespec ts_curr;
+    time_t ds;
+    long dns;
+
+    if (ts_to == NULL) {
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts_curr);
+        ts_to = &ts_curr;
+    }
+
+    ds = ts_to->tv_sec - ts_from->tv_sec;
+    dns = ts_to->tv_nsec - ts_from->tv_nsec;
+    return ds + dns * 1.0E-9;
+}
+
 int main()
 {
-    string buf;
-    getline(cin, buf, '\n');
+    struct timespec t1;
+    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    uint64_v integers;
-    while (!buf.empty()) {
-        size_t sz;
-        unsigned long long ull = stoull(buf, &sz, 0);
-        buf = buf.substr(sz);
-        integers.push_back(ull);
+    uint64_v primes = sieve_primes(UINT16_MAX);
+
+    assert(check_prime(primes, 0) == false);
+    assert(check_prime(primes, 1) == false);
+    assert(check_prime(primes, 2) == true);
+    assert(check_prime(primes, 3) == true);
+    assert(check_prime(primes, 5) == true);
+    assert(check_prime(primes, 1973) == true);
+    assert(check_prime(primes, 1974) == false);
+
+    for (auto prime: primes) {
+        cout << prime << endl;
     }
 
-    uint64_t max = 0;
-    for (uint64_t n: integers) {
-        if (n > max)
-            max = n;
-    }
-
-    uint64_v primes = sieve_primes(max);
-    clog << "Got " << primes.size() << " primes which are less than " << max << "." << endl;
-
-    for (uint64_t n: integers) {
-        cout << (check_prime(primes, n) ? "True" : "False") << ' ';
-    }
-
-    cout << endl;
+    double duration = calc_elapsed_seconds(&t1, NULL);
+    cout << "Totally " << primes.size() << " primes ("
+        << duration << " seconds consumed)." << endl;
 }
 

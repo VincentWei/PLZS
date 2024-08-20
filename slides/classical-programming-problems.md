@@ -81,7 +81,10 @@ $ ./prime-numbers-sieve
 7
 11
 ...
-Totally xxx prime numbers.
+65497
+65519
+65521
+Totally 6542 primes (0.00880987 seconds consumed).
 ```
 
 		

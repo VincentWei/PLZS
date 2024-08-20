@@ -235,7 +235,7 @@ int clock_gettime(clockid_t clockid, struct timespec *tp);
 - `clock_gettime()` 的用法：
 
 ```c
-#include <time.h>
+#include <ctime>
 
 /* 计算间隔时间，以秒为单位。 */
 double calc_elapsed_seconds(const struct timespec *ts_from,

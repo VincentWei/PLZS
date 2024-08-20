@@ -1,4 +1,4 @@
-TARGETS = check-prime-plain check-prime-optimized check-prime-eratosthenes-sieve check-prime-euler-sieve
+TARGETS = check-prime-plain check-prime-optimized prime-numbers-sieve-eratosthenes prime-numbers-sieve-euler
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
