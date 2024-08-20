@@ -44,7 +44,7 @@ bool is_narcissistic(uintmax_t n)
     } while (t > 0);
 
     size_t nr_digits = digits.size();
-    unsigned int sum = 0;
+    uintmax_t sum = 0;
     for (unsigned digit: digits) {
         uintmax_t power = binary_power(digit, nr_digits);
         sum += power;
@@ -59,6 +59,8 @@ bool is_narcissistic(uintmax_t n)
 
 int main()
 {
+    assert(binary_power(1, 2) == 1);
+    assert(binary_power(2, 3) == 8);
     assert(is_narcissistic(153));
 
     uintmax_t n = 150;
