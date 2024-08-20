@@ -253,20 +253,20 @@ int main()
         assert(daughter_pairs(nullptr, M, N) == 2);
     }
 
-    clog << "Please input the number of amicable pairs to find by using exhaustion method and Euler method: " << endl;
-    unsigned max_nr;
-    cin >> max_nr;
+    clog << "Please input two numbers of amicable pairs to find by using exhaustion method and Euler method: " << endl;
+    unsigned max_one, max_two;
+    cin >> max_one >> max_two;
 
-    if (max_nr == 0)
+    if (max_one == 0 || max_two == 0)
         return 1;
 
     ordered_pairs initials;
     ordered_pairs pairs;
 
-    clog << "Seeking " << max_nr << " amicable pairs by using exhaustion method..." << endl;
+    clog << "Seeking " << max_one << " amicable pairs by using exhaustion method..." << endl;
     int64_t n = 200;
     unsigned nr = 0;
-    while (nr < max_nr) {
+    while (nr < max_one) {
         if (pairs.count(n) == 0) {
             intmax_t other = summary_of_true_factors(n);
             if (other > n && summary_of_true_factors(other) == n) {
@@ -280,10 +280,10 @@ int main()
         n++;
     }
 
-    clog << "Seeking " << max_nr << " amicable pairs by using Euler method..." << endl;
+    clog << "Seeking " << max_two << " amicable pairs by using Euler method..." << endl;
     int64_t a = 2;
     nr = 0;
-    while (nr < max_nr) {
+    while (nr < max_two) {
         int64_t M, N;
 
         if (euler(a, M, N) && initials.count(M) == 0) {

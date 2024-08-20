@@ -85,7 +85,7 @@ int main()
     assert(check_prime(primes, 1974) == false);
 
     for (auto prime: primes) {
-        cout << prime << endl;
+        clog << prime << endl;
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);

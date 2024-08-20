@@ -36,22 +36,40 @@ bool is_next_prime(uint64_t number, const uint64_v& primes)
     return true;
 }
 
-uint64_v sieve_primes(uint64_t max)
+uint64_v euler_sieve(uint64_t max)
 {
-    uint64_v result;
+    uint64_v primes;
 
     if (max < 2)
         goto done;
+#if 0
+    static bool not_primalities[UINT16_MAX];
 
-    result.push_back(2);
-    for (uint64_t n = 3; n <= max; n += 2) {
-        if (is_next_prime(n, result)) {
-            result.push_back(n);
+    for (uint64_t n = 2; n <= max; n++) {
+        if (!not_primalities[n]) {
+            primes.push_back(n);
+        }
+
+        for (uint64_t prime: primes) {
+            if (n * prime > max)
+                break;
+            not_primalities[n * prime] = true;
+            if (n % prime == 0) {
+                break;
+            }
         }
     }
+#else
+    primes.push_back(2);
+    for (uint64_t n = 3; n <= max; n += 2) {
+        if (is_next_prime(n, primes)) {
+            primes.push_back(n);
+        }
+    }
+#endif
 
 done:
-    return result;
+    return primes;
 }
 
 bool check_prime(const uint64_v& primes, uint64_t n)
@@ -84,7 +102,7 @@ int main()
     struct timespec t1;
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    uint64_v primes = sieve_primes(UINT16_MAX);
+    uint64_v primes = euler_sieve(UINT16_MAX);
 
     assert(check_prime(primes, 0) == false);
     assert(check_prime(primes, 1) == false);
@@ -95,7 +113,7 @@ int main()
     assert(check_prime(primes, 1974) == false);
 
     for (auto prime: primes) {
-        cout << prime << endl;
+        clog << prime << endl;
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);
