@@ -12,7 +12,6 @@
 #include <string>       // for string
 #include <vector>       // for vector
 #include <algorithm>    // for binary_search()
-#include <cmath>        // for sqrtl() and llroundl()
 #include <cstdint>      // for uint16_t and UINT16_MAX
 #include <cstring>      // for memset()
 #include <cassert>      // for assert()

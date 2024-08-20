@@ -37,7 +37,7 @@ int64_t sigma(int64_t n)
 
         if (div.rem == 0) {
             ans += i;
-            if (i != max)
+            if (i != div.quot)
                 ans += div.quot;
         }
     }
@@ -86,7 +86,7 @@ int64_t summary_of_true_factors(int64_t n)
 
         if (div.rem == 0) {
             summary += i;
-            if (i != max)
+            if (i != div.quot)
                 summary += div.quot;
         }
     }
@@ -253,29 +253,50 @@ int main()
         assert(daughter_pairs(nullptr, M, N) == 2);
     }
 
-    clog << "Please input the number of amicable pairs to find by using Euler method: " << endl;
+    clog << "Please input the number of amicable pairs to find by using exhaustion method and Euler method: " << endl;
     unsigned max_nr;
     cin >> max_nr;
 
+    if (max_nr == 0)
+        return 1;
+
     ordered_pairs initials;
     ordered_pairs pairs;
-    int64_t a = 2;
+
+    clog << "Seeking " << max_nr << " amicable pairs by using exhaustion method..." << endl;
+    int64_t n = 200;
     unsigned nr = 0;
+    while (nr < max_nr) {
+        if (pairs.count(n) == 0) {
+            intmax_t other = summary_of_true_factors(n);
+            if (other > n && summary_of_true_factors(other) == n) {
+                initials[n] = 0;
+                pairs[n] = other;
+                cout << nr << ":\t" << n << " " << other << endl;
+                nr++;
+            }
+        }
+
+        n++;
+    }
+
+    clog << "Seeking " << max_nr << " amicable pairs by using Euler method..." << endl;
+    int64_t a = 2;
+    nr = 0;
     while (nr < max_nr) {
         int64_t M, N;
 
-        if (euler(a, M, N)) {
+        if (euler(a, M, N) && initials.count(M) == 0) {
             initials[M] = a;
             pairs[M] = N;
+            cout << nr << ":\t" << M << " " << N << endl;
             nr++;
         }
 
         a++;
     }
 
-    if (nr == 0)
-        return 0;
-
+    clog << "Seeking daughter amicable pairs by using Euler method..." << endl;
     nr = 1;
     for (auto& initial: initials) {
         auto a = initial.second;
@@ -288,14 +309,13 @@ int main()
         nr += daughter_pairs(&pairs, M, N);
     }
 
-    clog << "Totally " << (nr - 1) << " amicable pairs found:" << endl;
-    nr = 1;
     for (auto& pair: pairs) {
         auto M = pair.first;
         auto N = pair.second;
 
-        cout << "No. " << nr << ":\t" << M << " " << N << endl;
-        nr++;
+        cout << M << " " << N << endl;
     }
+
+    clog << "Totally " << pairs.size() << " amicable pairs found." << endl;
 }
 
