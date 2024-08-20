@@ -1,5 +1,5 @@
 /*
- * The Euler sieve prime numbers.
+ * The optimized Eratosthenes sieve for prime numbers.
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
@@ -11,65 +11,37 @@
 #include <iostream>     // for cout and cin
 #include <string>       // for string
 #include <vector>       // for vector
+#include <bitset>       // for bitset
 #include <algorithm>    // for binary_search()
-#include <cmath>        // for sqrt() and lround()
-#include <cstdint>      // for uint16_t and UINT64_MAX
+#include <cstdint>      // for uint16_t and UINT16_MAX
+#include <cstring>      // for memset()
 #include <cassert>      // for assert()
 
 using namespace std;
 using uint16_v = vector<uint16_t>;
 
-bool is_next_prime(uint16_t n, const uint16_v& primes)
+void eratosthenes_sieve(uint16_v& primes)
 {
-    uint16_t mid = lround(sqrt(n));
+    // 保存所有 UINT16 范围内自然数的素性。
+    static bitset<UINT16_MAX + 1> primalities;
 
-    for (uint16_t prime: primes) {
-        if (prime > mid) {
-            break;
-        }
+    // 假定所有数值都是素数。
+    primalities.set();
 
-        if (n % prime == 0) {
-            return false;
-        }
-    }
+    // 从 2 筛起。
+    for (uint32_t i = 2; i <= UINT16_MAX; i++) {
+        if (primalities[i]) {
+            primes.push_back(i);
 
-    return true;
-}
+            // 若 i 的平方超过 UINT16_MAX 则无需继续检查素性。
+            if (i * i > UINT16_MAX)
+                continue;
 
-uint16_v euler_sieve(uint16_t max)
-{
-    uint16_v primes;
-
-    if (max < 2)
-        goto done;
-#if 0
-    static bool not_primalities[UINT16_MAX];
-
-    for (uint16_t n = 2; n <= max; n++) {
-        if (!not_primalities[n]) {
-            primes.push_back(n);
-        }
-
-        for (uint16_t prime: primes) {
-            if (n * prime > max)
-                break;
-            not_primalities[n * prime] = true;
-            if (n % prime == 0) {
-                break;
-            }
+            // i 的倍数均不是素数。
+            for (uint32_t j = i * i; j <= UINT16_MAX; j += i)
+                primalities[j] = false;
         }
     }
-#else
-    primes.push_back(2);
-    for (uint32_t n = 3; n <= max; n += 2) {
-        if (is_next_prime(n, primes)) {
-            primes.push_back(n);
-        }
-    }
-#endif
-
-done:
-    return primes;
 }
 
 bool check_prime(const uint16_v& primes, uint16_t n)
@@ -102,7 +74,8 @@ int main()
     struct timespec t1;
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    uint16_v primes = euler_sieve(UINT16_MAX);
+    uint16_v primes;
+    eratosthenes_sieve(primes);
 
     assert(check_prime(primes, 0) == false);
     assert(check_prime(primes, 1) == false);
@@ -117,7 +90,7 @@ int main()
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);
-    cout << "Totally " << primes.size() << " primes ("
-        << duration << " seconds consumed)." << endl;
+    cout << "Totally " << primes.size() << " primes (" << duration
+        << " seconds consumed)." << endl;
 }
 

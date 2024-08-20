@@ -22,7 +22,7 @@ using uint16_v = vector<uint16_t>;
 void eratosthenes_sieve(uint16_v& primes)
 {
     // 保存所有 UINT16 范围内自然数的素性。
-    static bool primalities[UINT16_MAX];
+    static bool primalities[UINT16_MAX + 1];
 
     // 假定所有数值都是素数。
     memset(primalities, 1, sizeof(primalities));

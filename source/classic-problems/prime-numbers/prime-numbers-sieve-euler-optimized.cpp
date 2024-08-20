@@ -11,6 +11,7 @@
 #include <iostream>     // for cout and cin
 #include <string>       // for string
 #include <vector>       // for vector
+#include <bitset>       // for bitset
 #include <algorithm>    // for binary_search()
 #include <cmath>        // for sqrt() and lround()
 #include <cstdint>      // for uint16_t and UINT64_MAX
@@ -19,16 +20,16 @@
 using namespace std;
 using uint16_v = vector<uint16_t>;
 
-bool is_next_prime(uint16_t n, const uint16_v& primes)
+bool is_next_prime(uint16_t number, const uint16_v& primes)
 {
-    uint16_t mid = lround(sqrt(n));
+    uint16_t mid = lround(sqrt(number));
 
     for (uint16_t prime: primes) {
         if (prime > mid) {
             break;
         }
 
-        if (n % prime == 0) {
+        if (number % prime == 0) {
             return false;
         }
     }
@@ -42,10 +43,10 @@ uint16_v euler_sieve(uint16_t max)
 
     if (max < 2)
         goto done;
-#if 0
-    static bool not_primalities[UINT16_MAX];
+#if 1
+    static bitset<UINT16_MAX + 1> not_primalities;
 
-    for (uint16_t n = 2; n <= max; n++) {
+    for (uint32_t n = 2; n <= max; n++) {
         if (!not_primalities[n]) {
             primes.push_back(n);
         }
