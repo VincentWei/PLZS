@@ -1,4 +1,4 @@
-TARGETS = narcissistic-numbers
+TARGETS = narcissistic-numbers-plain narcissistic-numbers-optimized
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
