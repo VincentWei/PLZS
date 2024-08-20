@@ -11,6 +11,7 @@
  */
 #include <iostream>     // for cout and cin
 #include <vector>       // for vector
+#include <algorithm>    // for binary_search() and sort()
 #include <cmath>        // for sqrtl() and llroundl()
 #include <cassert>      // for assert()
 

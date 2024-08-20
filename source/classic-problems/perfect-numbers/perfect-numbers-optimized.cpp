@@ -26,7 +26,7 @@ intmax_t summary_of_true_factors(intmax_t n)
 
         if (div.rem == 0) {
             summary += i;
-            if (i != n)
+            if (i != div.quot)
                 summary += div.quot;
         }
     }
