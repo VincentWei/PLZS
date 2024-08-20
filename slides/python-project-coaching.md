@@ -16,7 +16,7 @@
 	
 - Android 架构图
 
-<img class="r-frame" style="height:auto;width:100%;" src="assets/android-framework.svg" />
+<img class="r-frame" style="height:300px;width:auto;" src="assets/android-framework.svg" />
 
 	
 ### 看 Python 3.10 标准库的目录结构
@@ -45,8 +45,8 @@ curses/
 	
 ### `import` 语句
 
-- `import x`：装载模块 `x`，或包 `x` 中的 `__init__.py` 模块。
-- `from x import y`：从包 `x` 装载指定的模块。
+- `import x`：装载模块 `x.py`，或包 `x` 中的 `__init__.py` 模块。
+- `from x import y`：从包 `x` 装载 `y.py` 模块。
 - 模块通常被实现为类；一个模块一个类。
 - 包则是多个相关类的合集，被置于同一目录中维护。
 
@@ -280,16 +280,10 @@ if __name__ == '__main__':
 - `q`：退出调试器。
 
 		
-## AI 实战班内容介绍
+## 后面学什么？
 
-1. JavaScript 及 Web 开发基础
-1. Web 前端编程基础
-1. 流行 Web 前端框架
-1. JavaScript 大作业
-1. 基于 Git 的协作式软件开发
-1. 实战项目需求分析及架构设计
-1. 用户账号管理及登录界面
-1. WebSocket 服务器及客户端
-1. 架设开源 AI 大模型
-1. Bash Shell 编程及服务器运维
+1. 《信奥筑基班》：C++ 编程语言，掌握高精度自然数算术的 C++ 实现。
+1. 《信奥初级班》：信息学奥林匹克（入门级）竞赛大纲规定的算法及数据结构。
+1. 《信奥提高班》：信息学奥林匹克（提高级）竞赛大纲规定的算法及数据结构。
+1. 《数学素养课》：初等数论、离散数学结构等信息学奥林匹克竞赛大纲规定的数学知识。
 
