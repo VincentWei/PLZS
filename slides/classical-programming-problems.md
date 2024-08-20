@@ -70,16 +70,18 @@ $ ./amicable-numbers
 # 素数筛
 
 - 素数（prime number）是指一个大于 1 的正整数，除了 1 和自身之外，没有第二个正整数可以整除它。最小的质数是 2。
-- 埃氏筛法和欧拉筛法的数学原理。
-- 使用素数筛算法编程找出尽可能多的质数。运行效果如下：
+- 埃氏（Eratosthenes）筛法和欧拉筛法的数学原理。
+- 使用素数筛算法编程找出 16 位无符号整数范围内的质数。运行效果如下：
 
 ```console
-$ ./prime-numbers
+$ ./prime-numbers-sieve
 2
 3
 5
 7
 11
+...
+Totally xxx prime numbers.
 ```
 
 		
@@ -90,7 +92,7 @@ $ ./prime-numbers
 - 使用欧拉方法编程找出尽可能多的亲和数。运行效果如下：
 
 ```console
-$ ./amicable-numbers
+$ ./amicable-numbers-euler
 220 284
 1184 1210
 2620 2924
@@ -133,7 +135,6 @@ $ ./amicable-numbers
 898216 980984
 947835 1125765
 ```
-
 
 		
 ## 完美数
