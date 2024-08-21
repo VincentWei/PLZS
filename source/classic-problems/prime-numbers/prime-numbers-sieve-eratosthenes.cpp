@@ -84,8 +84,20 @@ int main()
     assert(check_prime(primes, 1973) == true);
     assert(check_prime(primes, 1974) == false);
 
-    for (auto prime: primes) {
-        clog << prime << endl;
+    unsigned nr = 10;
+    auto it = primes.begin();
+    while (nr--) {
+        clog << *it << endl;
+        it = next(it);
+    }
+
+    clog << "..." << endl;
+
+    nr = 10;
+    auto rit = primes.rbegin();
+    while (nr--) {
+        clog << *rit << endl;
+        rit = next(rit);
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);

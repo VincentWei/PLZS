@@ -1,5 +1,5 @@
 /*
- * The optimized Euler sieve for prime numbers.
+ * The plain sieve for prime numbers.
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
@@ -11,74 +11,50 @@
 #include <iostream>     // for cout and cin
 #include <string>       // for string
 #include <vector>       // for vector
-#include <bitset>       // for bitset
 #include <algorithm>    // for binary_search()
-#include <cstdint>      // for uint32_t, uint64_t and UINT64_MAX
+#include <cmath>        // for sqrt() and lround()
+#include <cstdint>      // for uint16_t and UINT64_MAX
 #include <cassert>      // for assert()
 
 using namespace std;
-using natural_t = uint32_t;
-using wider_t = uint64_t;
-using natural_v = vector<natural_t>;
+using uint16_v = vector<uint16_t>;
 
-natural_v euler_sieve(natural_t max)
+bool is_next_prime(uint16_t n, const uint16_v& primes)
 {
-    natural_v primes;
+    uint16_t mid = lround(sqrt(n));
+
+    for (uint16_t prime: primes) {
+        if (prime > mid) {
+            break;
+        }
+
+        if (n % prime == 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+uint16_v plain_sieve(uint16_t max)
+{
+    uint16_v primes;
 
     if (max < 2)
         goto done;
 
-    static bitset<UINT32_MAX + 1ULL> not_primalities;
-
-    for (wider_t n = 2; n <= max; n++) {
-        // 如果 n 尚未被标记为合数，则一定是质数。
-        if (!not_primalities[n]) {
+    primes.push_back(2);
+    for (uint32_t n = 3; n <= max; n += 2) {
+        if (is_next_prime(n, primes)) {
             primes.push_back(n);
         }
-
-        // 标记任意已知质数 p * n 为合数。
-        for (natural_t prime: primes) {
-            // 测试 p * n 是否超过最大值 max
-            if (n * prime > max)
-                break;
-
-            // p * n 为合数。
-            not_primalities[n * prime] = true;
-
-            // 测试 n 是否可以被任意已知质数整除，
-            // 若真，则表明 p * n 可能被多次标记，
-            // 为确保只标记一次，故而在此处 break，从而将此机会留给更大的 n。
-            if (n % prime == 0) {
-                break;
-            }
-        }
     }
-
-    /* 流程说明：
-
-       n = 2:
-       primes: [2]，not primes: 4
-
-       n = 3:
-       primes: [2, 3], not primes: 4, +6, +9
-
-       n = 4:
-       primes: [2, 3], not primes: 4, 6, +8, 9
-                                (break on p = 2, skip 12)
-
-       n = 5:
-       primes: [2, 3, 5], not primes: 4, 6, 8, 9, +10, +15, +25
-
-       n = 6:
-       primes: [2, 3, 5], not primes: 4, 6, 8, 9, 10, +12, 15, 25
-                                (break on p = 2, skip 18, 30)
-    */
 
 done:
     return primes;
 }
 
-bool check_prime(const natural_v& primes, natural_t n)
+bool check_prime(const uint16_v& primes, uint16_t n)
 {
     return binary_search(primes.begin(), primes.end(), n);
 }
@@ -108,7 +84,7 @@ int main()
     struct timespec t1;
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    natural_v primes = euler_sieve(UINT32_MAX);
+    uint16_v primes = plain_sieve(UINT16_MAX);
 
     assert(check_prime(primes, 0) == false);
     assert(check_prime(primes, 1) == false);
