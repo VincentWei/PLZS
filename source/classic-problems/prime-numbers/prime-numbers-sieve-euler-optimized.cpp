@@ -53,15 +53,39 @@ natural_v euler_sieve(natural_t max)
             primes.push_back(n);
         }
 
+        // 标记任意已知质数 p * n 为合数。
         for (natural_t prime: primes) {
+            // 测试是否超过最大值 max
             if (n * prime > max)
                 break;
+
             not_primalities[n * prime] = true;
+
+            // 测试 n 是否可以被任意已知质数整除。
+            // 若真，则表明 n * prime 可能被多次标记，
+            // 为确保只标记一次，故而在此处 break，从而将此机会留给更大的 n。
             if (n % prime == 0) {
                 break;
             }
         }
     }
+
+    /*
+       n = 2:
+       primes: [2]，not primes: 4
+
+       n = 3:
+       primes: [2, 3], not primes: 4, +6, +9
+
+       n = 4:
+       primes: [2, 3], not primes: 4, 6, +8, 9 (break before +12)
+
+       n = 5:
+       primes: [2, 3, 5], not primes: 4, 6, 8, 9, +10, +15, +25
+
+       n = 6:
+       primes: [2, 3, 5], not primes: 4, 6, 8, 9, 10, +12, 15, 25
+    */
 #else
     primes.push_back(2);
     for (wider_t n = 3; n <= max; n += 2) {
