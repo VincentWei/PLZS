@@ -499,15 +499,20 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 1. 调试通过后，将 `init-two-sequences.cpp` 文件添加到 `plzs-homework` 仓库，并推送到远程仓库。
 
 	
+### 进制转换
+
+- 特定进制数值的表达方式：<code>(ABCD)<sub>n</sub></code>
+- [求给定进制字符串对应的数值](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-3/strtoll.cpp#L39)
+- [将特定数值转为给定进制的字符串](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-3/show-number-in-different-base.cpp#L20)
+
+	
 ### 翻转数组元素
 
 - 将数组中的元素执行翻转（reverse）操作；比如将数组 `[1, 2, 3, 4, 5]` 翻转后 `[5, 4, 3, 2, 1]`。
 - 时间复杂度：`O(N)`
 - 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/reverse-array.cpp)
+- [实现示例](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-3/show-number-in-different-base.cpp#L98)
 
-```cpp
-```
 
 	
 ### 轮转数组元素
@@ -581,9 +586,36 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 - 计算 C 字符串长度（count）；比如字符串 `"Hello"` 的长度为 `5`。
 - 时间复杂度：`O(N)`
 - 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/string-length.cpp)
 
 ```cpp
+size_t length_of_string(const char* str)
+{
+    size_t len = 0;
+    while (*str) {
+        str++;
+        len++;
+    }
+
+    return len;
+}
+```
+
+	
+### 找到 C 字符串的尾部
+
+- 计算 C 字符串的尾部指针
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
+
+```cpp
+const char* end_of_string(const char* str)
+{
+    while (*str) {
+        str++;
+    }
+
+    return --str;
+}
 ```
 
 	
@@ -663,7 +695,8 @@ long long gcd_r(long long a, long long b)
 - 易于理解，实现简单。
 - 但时间复杂度较高，通常具有 `O(N)` 或以上的时间复杂度。
 - 递归调用产生大量栈帧，空间复杂度也较高，通常具有 `O(N)` 或以上的空间复杂度。
-- 所有的递归实现都可以转为非递归（迭代）实现。
+- 几乎所有的递归实现都可以转为非递归（迭代）实现。
+- 很多递推关系可以从数学上找到对应的通项公式。
 
 	
 1) 自然数次幂的迭代实现
@@ -742,7 +775,7 @@ long long gcd_i(long long a, long long b)
 	
 ### 二分查找
 
-- 必须在有序数组上执行
+- 必须在有序容器上执行
 - 示例代码仅可用于从小到大排序（升序，ascending sorted order）的数组
 
 ```cpp
