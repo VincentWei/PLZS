@@ -37,7 +37,7 @@ void eratosthenes_sieve(uint16_v& primes)
                 continue;
 
             // i 的倍数均不是素数。
-            for (int j = i * i; j <= UINT16_MAX; j += i)
+            for (uint32_t j = i * i; j <= UINT16_MAX; j += i)
                 primalities[j] = false;
         }
     }

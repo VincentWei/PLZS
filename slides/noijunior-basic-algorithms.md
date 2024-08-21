@@ -511,18 +511,47 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 - 将数组中的元素执行翻转（reverse）操作；比如将数组 `[1, 2, 3, 4, 5]` 翻转后 `[5, 4, 3, 2, 1]`。
 - 时间复杂度：`O(N)`
 - 空间复杂度：`O(1)`
-- [实现示例](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-3/show-number-in-different-base.cpp#L98)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/reverse-array.cpp)
 
+```cpp
+template <class T>
+void reverse_array(T* arr, size_t n)
+{
+    for (size_t i = 0; i < n / 2; i++) {
+        T tmp = arr[i];
+        arr[i] = arr[n - i - 1];
+        arr[n - i - 1] = tmp;
+    }
+}
+```
 
 	
 ### 轮转数组元素
 
 - 将数组中的元素执行轮换（rotate）操作；比如将数组 `[1, 2, 3, 4, 5]` 轮转 2 次后 `[4, 5, 1, 2, 3]`。
 - 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 空间复杂度：`O(N)`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/rotate-array.cpp)
 
 ```cpp
+template <class T>
+void rotate_array(T* arr, size_t n, size_t m)
+{
+    assert(n > 0);
+    if (m % n == 0)
+        return;
+
+    T tmp[n];
+    for (size_t i = 0; i < n; i++) {
+        tmp[i] = arr[i];
+    }
+
+    for (size_t i = 0; i < n; i++) {
+        size_t j = (i + m) % n;
+        arr[j] = tmp[i];
+    }
+}
+
 ```
 
 	
@@ -534,6 +563,24 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/shuffle-array.cpp)
 
 ```cpp
+#include <ctime>        // for time()
+#include <cstdlib>      // for srandom() and random()
+
+template <class T>
+void shuffle_array(T* arr, size_t n)
+{
+    assert(sizeof(size_t) == sizeof(long));
+
+    srandom(time(NULL));
+    for (size_t i = 0; i < n; i++) {
+        size_t a = static_cast<size_t>(random());
+        size_t j = a % n;
+
+        T tmp = arr[0];
+        arr[0] = arr[j];
+        arr[j] = tmp;
+    }
+}
 ```
 
 	
