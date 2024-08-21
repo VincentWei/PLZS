@@ -13,38 +13,40 @@
 #include <vector>       // for vector
 #include <bitset>       // for bitset
 #include <algorithm>    // for binary_search()
-#include <cstdint>      // for uint16_t and UINT16_MAX
+#include <cstdint>      // for uint32_t, uint64_t and UINT32_MAX
 #include <cstring>      // for memset()
 #include <cassert>      // for assert()
 
 using namespace std;
-using uint16_v = vector<uint16_t>;
+using natural_t = uint32_t;
+using wider_t = uint64_t;
+using natural_v = vector<natural_t>;
 
-void eratosthenes_sieve(uint16_v& primes)
+void eratosthenes_sieve(natural_v& primes)
 {
-    // 保存所有 UINT16 范围内自然数的素性。
-    static bitset<UINT16_MAX + 1> primalities;
+    // 保存所有 UINT32 范围内自然数的素性。
+    static bitset<UINT32_MAX + 1ULL> primalities;
 
     // 假定所有数值都是素数。
     primalities.set();
 
     // 从 2 筛起。
-    for (uint32_t i = 2; i <= UINT16_MAX; i++) {
+    for (wider_t i = 2; i <= UINT32_MAX; i++) {
         if (primalities[i]) {
             primes.push_back(i);
 
-            // 若 i 的平方超过 UINT16_MAX 则无需继续检查素性。
-            if (i * i > UINT16_MAX)
+            // 若 i 的平方超过 UINT32_MAX 则无需继续检查素性。
+            if (i * i > UINT32_MAX)
                 continue;
 
             // i 的倍数均不是素数。
-            for (uint32_t j = i * i; j <= UINT16_MAX; j += i)
+            for (wider_t j = i * i; j <= UINT32_MAX; j += i)
                 primalities[j] = false;
         }
     }
 }
 
-bool check_prime(const uint16_v& primes, uint16_t n)
+bool check_prime(const natural_v& primes, natural_t n)
 {
     return binary_search(primes.begin(), primes.end(), n);
 }
@@ -74,7 +76,7 @@ int main()
     struct timespec t1;
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    uint16_v primes;
+    natural_v primes;
     eratosthenes_sieve(primes);
 
     assert(check_prime(primes, 0) == false);
@@ -85,8 +87,20 @@ int main()
     assert(check_prime(primes, 1973) == true);
     assert(check_prime(primes, 1974) == false);
 
-    for (auto prime: primes) {
-        clog << prime << endl;
+    unsigned nr = 10;
+    auto it = primes.begin();
+    while (nr--) {
+        clog << *it << endl;
+        it = next(it);
+    }
+
+    clog << "..." << endl;
+
+    nr = 10;
+    auto rit = primes.rbegin();
+    while (nr--) {
+        clog << *rit << endl;
+        rit = next(rit);
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);

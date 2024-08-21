@@ -1,5 +1,5 @@
 /*
- * The Euler sieve prime numbers.
+ * The optimized Euler sieve for prime numbers.
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
@@ -14,22 +14,24 @@
 #include <bitset>       // for bitset
 #include <algorithm>    // for binary_search()
 #include <cmath>        // for sqrt() and lround()
-#include <cstdint>      // for uint16_t and UINT64_MAX
+#include <cstdint>      // for uint32_t, uint64_t and UINT64_MAX
 #include <cassert>      // for assert()
 
 using namespace std;
-using uint16_v = vector<uint16_t>;
+using natural_t = uint32_t;
+using wider_t = uint64_t;
+using natural_v = vector<natural_t>;
 
-bool is_next_prime(uint16_t number, const uint16_v& primes)
+bool is_next_prime(natural_t n, const natural_v& primes)
 {
-    uint16_t mid = lround(sqrt(number));
+    natural_t mid = lround(sqrt(n));
 
-    for (uint16_t prime: primes) {
+    for (natural_t prime: primes) {
         if (prime > mid) {
             break;
         }
 
-        if (number % prime == 0) {
+        if (n % prime == 0) {
             return false;
         }
     }
@@ -37,21 +39,21 @@ bool is_next_prime(uint16_t number, const uint16_v& primes)
     return true;
 }
 
-uint16_v euler_sieve(uint16_t max)
+natural_v euler_sieve(natural_t max)
 {
-    uint16_v primes;
+    natural_v primes;
 
     if (max < 2)
         goto done;
 #if 1
-    static bitset<UINT16_MAX + 1> not_primalities;
+    static bitset<UINT32_MAX + 1ULL> not_primalities;
 
-    for (uint32_t n = 2; n <= max; n++) {
+    for (wider_t n = 2; n <= max; n++) {
         if (!not_primalities[n]) {
             primes.push_back(n);
         }
 
-        for (uint16_t prime: primes) {
+        for (natural_t prime: primes) {
             if (n * prime > max)
                 break;
             not_primalities[n * prime] = true;
@@ -62,9 +64,10 @@ uint16_v euler_sieve(uint16_t max)
     }
 #else
     primes.push_back(2);
-    for (uint32_t n = 3; n <= max; n += 2) {
+    for (wider_t n = 3; n <= max; n += 2) {
         if (is_next_prime(n, primes)) {
             primes.push_back(n);
+            cout << n << endl;
         }
     }
 #endif
@@ -73,7 +76,7 @@ done:
     return primes;
 }
 
-bool check_prime(const uint16_v& primes, uint16_t n)
+bool check_prime(const natural_v& primes, natural_t n)
 {
     return binary_search(primes.begin(), primes.end(), n);
 }
@@ -103,7 +106,7 @@ int main()
     struct timespec t1;
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    uint16_v primes = euler_sieve(UINT16_MAX);
+    natural_v primes = euler_sieve(UINT32_MAX);
 
     assert(check_prime(primes, 0) == false);
     assert(check_prime(primes, 1) == false);
@@ -113,8 +116,20 @@ int main()
     assert(check_prime(primes, 1973) == true);
     assert(check_prime(primes, 1974) == false);
 
-    for (auto prime: primes) {
-        clog << prime << endl;
+    unsigned nr = 10;
+    auto it = primes.begin();
+    while (nr--) {
+        clog << *it << endl;
+        it = next(it);
+    }
+
+    clog << "..." << endl;
+
+    nr = 10;
+    auto rit = primes.rbegin();
+    while (nr--) {
+        clog << *rit << endl;
+        rit = next(rit);
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);
