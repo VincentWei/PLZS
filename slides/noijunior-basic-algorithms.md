@@ -1,7 +1,8 @@
-# 基础算法
+# 基础算法和线性表数据结构
 
 1. 算法的重要性
 1. 算法复杂度的衡量
+1. 线性表数据结构及其操作
 1. 常用简单算法
 1. 递归
 1. 二分法
@@ -268,7 +269,258 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 ```
 
 		
+## 线性表数据结构
+
+- 线性表数据结构中的元素是顺序存放的，可通过索引值随机访问。
+- 数组（array）、矢量（vector）、字符串（string）和 C 字符串是常见的几种线性数据结构。
+- 数组具有固定的大小，而矢量的大小可变。
+
+	
+### 翻转数组元素
+
+- 将数组中的元素执行翻转（reverse）操作；比如将数组 `[1, 2, 3, 4, 5]` 翻转后 `[5, 4, 3, 2, 1]`。
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/reverse-array.cpp)
+
+```cpp
+template <class T>
+void reverse_array(T* arr, size_t n)
+{
+    for (size_t i = 0; i < n / 2; i++) {
+        T tmp = arr[i];
+        arr[i] = arr[n - i - 1];
+        arr[n - i - 1] = tmp;
+    }
+}
+```
+
+	
+### 轮转数组元素
+
+- 将数组中的元素执行轮换（rotate）操作；比如将数组 `[1, 2, 3, 4, 5]` 轮转 2 次后 `[4, 5, 1, 2, 3]`。
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(N)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/rotate-array.cpp)
+
+```cpp
+template <class T>
+void rotate_array(T* arr, size_t n, size_t m)
+{
+    assert(n > 0);
+    if (m % n == 0)
+        return;
+
+    T tmp[n];
+    for (size_t i = 0; i < n; i++) {
+        tmp[i] = arr[i];
+    }
+
+    for (size_t i = 0; i < n; i++) {
+        size_t j = (i + m) % n;
+        arr[j] = tmp[i];
+    }
+}
+
+```
+
+	
+### 打乱数组元素
+
+- 打乱（shuffle）数组中的元素顺序；比如将数组 `[1, 2, 3, 4, 5]` 打乱后 `[4, 3, 1, 5, 2]`。
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/shuffle-array.cpp)
+
+```cpp
+#include <ctime>        // for time()
+#include <cstdlib>      // for srandom() and random()
+
+template <class T>
+void shuffle_array(T* arr, size_t n)
+{
+    assert(sizeof(size_t) == sizeof(long));
+
+    srandom(time(NULL));
+    for (size_t i = 0; i < n; i++) {
+        size_t a = static_cast<size_t>(random());
+        size_t j = a % n;
+
+        T tmp = arr[0];
+        arr[0] = arr[j];
+        arr[j] = tmp;
+    }
+}
+```
+
+	
+### 伪矢量类模板
+
+- 使用数组模拟矢量，可用空间有确定的上限。
+- 使用数据成员跟踪大小的变化。
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/pseudo-vector.cpp)
+
+```cpp
+#include <iostream>     // for cin and cout
+#include <string>       // for stod()
+#include <stdexcept>    // for std::out_of_range
+#include <cassert>      // for assert()
+
+#define PVSZ_MAX 100
+
+template <class T>
+struct pseudo_vector {
+    T _buf[PVSZ_MAX];
+    size_t _sz;
+
+    pseudo_vector() {
+        _sz = 0;
+    }
+
+    /* 根据索引值随机访问其中的元素。 */
+    T& operator[] (size_t n) {
+        if (n < _sz) {
+            return _buf[n];
+        }
+
+        throw std::out_of_range("Out of range!");
+    }
+
+    /* 根据索引值随机访问其中的元素（const 版本）。 */
+    const T& operator[] (size_t n) const {
+        if (n < _sz) {
+            return _buf[n];
+        }
+
+        throw std::out_of_range("Out of range!");
+    }
+
+    ...
+};
+```
+
+	
+### 在矢量的尾部追加元素
+
+- 在矢量的尾部追加一个元素（push back)；比如在矢量 `[1, 2, 3, 4, 5]` 尾部追加 `6`：`[1, 2, 3, 4, 5, 6]`。
+- 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
+
+```cpp
+    void push_back(const T& elem) {
+        if (_sz < PVSZ_MAX) {
+            _buf[_sz] = elem;
+            _sz++;
+        }
+        else {
+            throw std::overflow_error("Reached space limit.");
+        }
+    }
+```
+
+	
+### 移除矢量尾部的元素
+
+- 将矢量尾部的元素移除（pop back）；比如将矢量 `[1, 2, 3, 4, 5]` 尾部的 `5` 移除：`[0, 1, 2, 3, 4]`。
+- 时间复杂度：`O(1)`
+- 空间复杂度：`O(1)`
+
+```cpp
+    void pop_back() {
+        if (_sz > 0) {
+            _sz--;
+        }
+    }
+```
+
+	
+### 在矢量的指定位置插入元素
+
+- 在矢量的指定位置插入（insert）元素；比如在矢量 `[1, 2, 3, 4, 5]` 的第 0 个索引位置处插入元素 `0`：`[0, 1, 2, 3, 4, 5]`。
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
+
+```cpp
+    void insert(const T& elem, size_t pos) {
+        if (_sz == PVSZ_MAX) {
+            throw std::overflow_error("Reached space limit.");
+        }
+
+        if (pos < _sz) {
+            for (size_t i = _sz; i > pos; i--) {
+                _buf[i] = _buf[i - 1];
+            }
+
+            _buf[pos] = elem;
+            _sz++;
+        }
+        else {
+            throw std::out_of_range("Out of range!");
+        }
+    }
+```
+
+	
+### 移除指定位置的矢量元素
+
+- 将指定位置的元素从矢量中移除（erase）；比如将矢量 `[1, 2, 3, 4, 5]` 的第 0 个元素移除后 `[2, 3, 4, 5]`。
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
+
+```cpp
+    void erase(size_t pos) {
+        if (pos < _sz) {
+            for (size_t i = pos + 1; i < _sz; i++) {
+                _buf[i - 1] = _buf[i];
+            }
+            _sz--;
+        }
+        else {
+            throw std::out_of_range("Out of range!");
+        }
+    }
+```
+
+		
 ## 常用简单算法
+
+	
+### 计算 C 字符串长度
+
+- 计算 C 字符串长度（count）；比如字符串 `"Hello"` 的长度为 `5`。
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
+
+```cpp
+size_t length_of_string(const char* str)
+{
+    size_t len = 0;
+    while (*str) {
+        str++;
+        len++;
+    }
+
+    return len;
+}
+```
+
+	
+### 找到 C 字符串的尾部
+
+- 计算 C 字符串的尾部指针
+- 时间复杂度：`O(N)`
+- 空间复杂度：`O(1)`
+
+```cpp
+const char* end_of_string(const char* str)
+{
+    while (*str) {
+        str++;
+    }
+
+    return --str;
+}
+```
 
 	
 ### 找最值
@@ -506,166 +758,6 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 - [将特定数值转为给定进制的字符串](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-3/show-number-in-different-base.cpp#L20)
 
 	
-### 翻转数组元素
-
-- 将数组中的元素执行翻转（reverse）操作；比如将数组 `[1, 2, 3, 4, 5]` 翻转后 `[5, 4, 3, 2, 1]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/reverse-array.cpp)
-
-```cpp
-template <class T>
-void reverse_array(T* arr, size_t n)
-{
-    for (size_t i = 0; i < n / 2; i++) {
-        T tmp = arr[i];
-        arr[i] = arr[n - i - 1];
-        arr[n - i - 1] = tmp;
-    }
-}
-```
-
-	
-### 轮转数组元素
-
-- 将数组中的元素执行轮换（rotate）操作；比如将数组 `[1, 2, 3, 4, 5]` 轮转 2 次后 `[4, 5, 1, 2, 3]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(N)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/rotate-array.cpp)
-
-```cpp
-template <class T>
-void rotate_array(T* arr, size_t n, size_t m)
-{
-    assert(n > 0);
-    if (m % n == 0)
-        return;
-
-    T tmp[n];
-    for (size_t i = 0; i < n; i++) {
-        tmp[i] = arr[i];
-    }
-
-    for (size_t i = 0; i < n; i++) {
-        size_t j = (i + m) % n;
-        arr[j] = tmp[i];
-    }
-}
-
-```
-
-	
-### 打乱数组元素
-
-- 打乱（shuffle）数组中的元素顺序；比如将数组 `[1, 2, 3, 4, 5]` 打乱后 `[4, 3, 1, 5, 2]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/shuffle-array.cpp)
-
-```cpp
-#include <ctime>        // for time()
-#include <cstdlib>      // for srandom() and random()
-
-template <class T>
-void shuffle_array(T* arr, size_t n)
-{
-    assert(sizeof(size_t) == sizeof(long));
-
-    srandom(time(NULL));
-    for (size_t i = 0; i < n; i++) {
-        size_t a = static_cast<size_t>(random());
-        size_t j = a % n;
-
-        T tmp = arr[0];
-        arr[0] = arr[j];
-        arr[j] = tmp;
-    }
-}
-```
-
-	
-### 在矢量的尾部追加元素
-
-- 在矢量的尾部追加一个元素（push back)；比如在矢量 `[1, 2, 3, 4, 5]` 尾部追加 `6`：`[1, 2, 3, 4, 5, 6]`。
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/push-back-element.cpp)
-
-```cpp
-```
-
-	
-### 移除矢量尾部的元素
-
-- 将矢量尾部的元素移除（pop back）；比如将矢量 `[1, 2, 3, 4, 5]` 尾部的 `5` 移除：`[0, 1, 2, 3, 4]`。
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/pop-back-element.cpp)
-
-```cpp
-```
-
-	
-### 在矢量的指定位置插入元素
-
-- 在矢量的指定位置插入（insert）元素；比如在矢量 `[1, 2, 3, 4, 5]` 的第 0 个索引位置处插入元素 `0`：`[0, 1, 2, 3, 4, 5]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/insert-element.cpp)
-
-```cpp
-```
-
-	
-### 移除指定位置的矢量元素
-
-- 将指定位置的元素从矢量中移除（erase）；比如将矢量 `[1, 2, 3, 4, 5]` 的第 0 个元素移除后 `[2, 3, 4, 5]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/erase-element.cpp)
-
-```cpp
-```
-
-	
-### 计算 C 字符串长度
-
-- 计算 C 字符串长度（count）；比如字符串 `"Hello"` 的长度为 `5`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
-
-```cpp
-size_t length_of_string(const char* str)
-{
-    size_t len = 0;
-    while (*str) {
-        str++;
-        len++;
-    }
-
-    return len;
-}
-```
-
-	
-### 找到 C 字符串的尾部
-
-- 计算 C 字符串的尾部指针
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
-
-```cpp
-const char* end_of_string(const char* str)
-{
-    while (*str) {
-        str++;
-    }
-
-    return --str;
-}
-```
-
-	
 ### 巧用二进制运算
 
 - 判断 `x` 的奇偶性：`(x & 1)`
@@ -681,6 +773,9 @@ const char* end_of_string(const char* str)
 
 		
 ## 递归
+
+- 递推（recurrent）关系和递归（recursive）调用
+- 递推的通项公式
 
 	
 ### 在筑基班接触过的递归算法
@@ -816,7 +911,7 @@ long long gcd_i(long long a, long long b)
 		
 ## 二分法
 
-- 二分法的基本思想
+- 二分法（dichotomy）的基本思想
 - 时间复杂度：`O(log(N))`
 
 	
@@ -869,7 +964,6 @@ double estimate_square_root(double a, unsigned scale)
 	
 ### 快速幂
 
-	
 1) 快速幂算法的递归实现
 
 ```cpp
@@ -908,16 +1002,48 @@ double binary_power_i(double base, unsigned exp)
 	
 ### 快速乘
 
-	
 1) 快速乘算法的递归实现
 
 ```cpp
+intmax_t binary_mul_r(intmax_t a, intmax_t b)
+{
+    assert(b >= 0);
+
+    if (b == 0)
+        return 0;
+
+    intmax_t res = binary_mul_r(a, b >> 1);
+    if (b % 2)
+        return res + res + a;
+
+    return res + res;
+}
+
 ```
 
 	
 2) 快速乘算法的非递归实现
 
 ```cpp
+intmax_t binary_mul_i(intmax_t a, intmax_t b)
+{
+    int sign = 1;
+    if (b < 0) {
+        b = -b;
+        sign = -1;
+    }
+
+    intmax_t res = 0;
+
+    while (b > 0) {
+        if (b & 1)
+            res += a;
+        a += a;
+        b >>= 1;
+    }
+
+    return sign * res;
+}
 ```
 
 		
