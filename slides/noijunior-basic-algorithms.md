@@ -12,7 +12,11 @@
 		
 ## 算法的重要性
 
-- 自然数的素性判定（朴素版本）
+- 以自然数的素性判定为例。
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/check-prime.cpp)
+
+	
+### 自然数的素性判定（朴素版本）
 
 ```cpp
 bool check_prime_plain(uint64_t n)
@@ -30,7 +34,7 @@ bool check_prime_plain(uint64_t n)
 ```
 
 	
-- 自然数的素性判定（优化版本）
+### 自然数的素性判定（优化版本）
 
 
 ```cpp
@@ -53,7 +57,7 @@ bool check_prime_opt(uint64_t n)
 ```
 
 	
-- 自然数的素性判定（素数筛）
+### 自然数的素性判定（朴素素数筛）
 
 ```cpp
 bool is_next_prime(uint64_t n, const uint64_v& primes_sieved)
@@ -105,8 +109,7 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
 ```
 
 	
-- 自然数的素性判定（事先准备的自然数素性数组）
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/check-prime.cpp)
+### 自然数的素性判定（事先准备的自然数素性数组）
 
 ```cpp
 // 作为示例，仅给出 UINT16_MAX 及以下自然数的素性值。
@@ -274,6 +277,7 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 - 线性表数据结构中的元素是顺序存放的，可通过索引值随机访问。
 - 数组（array）、矢量（vector）、字符串（string）和 C 字符串是常见的几种线性数据结构。
 - 数组具有固定的大小，而矢量的大小可变。
+- 复习 STL array 和 vector 的区别。
 
 	
 ### 翻转数组元素
@@ -357,7 +361,7 @@ void shuffle_array(T* arr, size_t n)
 ### 伪矢量类模板
 
 - 使用数组模拟矢量，可用空间有确定的上限。
-- 使用数据成员跟踪大小的变化。
+- 使用成员变量跟踪矢量大小的变化。
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/pseudo-vector.cpp)
 
 ```cpp
