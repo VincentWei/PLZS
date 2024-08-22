@@ -12,6 +12,7 @@
 #include <iostream>     // for cout and cin
 #include <string>       // for string
 #include <vector>       // for vector
+#include <algorithm>    // for binary_search()
 #include <cmath>        // for sqrtl() and llroundl()
 #include <cstdint>      // for uint64_t and UINT32_MAX
 #include <cassert>      // for assert()

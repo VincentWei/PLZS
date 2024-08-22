@@ -44,7 +44,7 @@ void nap_normalize(string &a)
         a = "0";
 }
 
-/* one must be larger or equal to other. */
+/* a must be larger or equal to b. */
 string nap_subtract(const string &a, const string &b)
 {
     size_t len_a = a.size();
