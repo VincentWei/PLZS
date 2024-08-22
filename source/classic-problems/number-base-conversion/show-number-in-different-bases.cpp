@@ -10,6 +10,7 @@
  */
 #include <iostream>     // for cout and cin
 #include <string>       // for string
+#include <algorithm>    // for reverse()
 #include <cstdlib>      // for strtoll()
 #include <cassert>      // for assert()
 #include <cinttypes>    // for imaxdiv()

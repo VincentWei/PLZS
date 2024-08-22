@@ -9,7 +9,7 @@
  * License: GPLv3
  */
 #include <iostream>
-#include <cstdlib>
+#include <climits>      // for UINT_MAX
 
 using namespace std;
 
