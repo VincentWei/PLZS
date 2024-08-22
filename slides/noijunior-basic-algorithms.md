@@ -16,7 +16,8 @@
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/check-prime.cpp)
 
 	
-### 自然数的素性判定（朴素版本）
+### 自然数的素性判定  
+朴素版本
 
 ```cpp
 bool check_prime_plain(uint64_t n)
@@ -34,7 +35,8 @@ bool check_prime_plain(uint64_t n)
 ```
 
 	
-### 自然数的素性判定（优化版本）
+### 自然数的素性判定  
+优化版本
 
 
 ```cpp
@@ -57,7 +59,8 @@ bool check_prime_opt(uint64_t n)
 ```
 
 	
-### 自然数的素性判定（朴素素数筛）
+### 自然数的素性判定  
+朴素素数筛
 
 ```cpp
 bool is_next_prime(uint64_t n, const uint64_v& primes_sieved)
@@ -109,7 +112,8 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
 ```
 
 	
-### 自然数的素性判定（事先准备的自然数素性数组）
+### 自然数的素性判定  
+事先准备的自然数素性数组
 
 ```cpp
 // 作为示例，仅给出 UINT16_MAX 及以下自然数的素性值。
