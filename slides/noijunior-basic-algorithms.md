@@ -1201,4 +1201,31 @@ $ ./estimate-cubic-root
 	
 ### 参考链接
 
-- 
+- [bigint.hpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-6/bigint.hpp)
+- [bigint.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-6/bigint.cpp)
+- 基本用法：
+
+```cpp
+#define NTEST
+#include "bigint.cpp"
+
+/*
+ * bigint_power:
+ *
+ * @base: the base in bigint.
+ * @exp: the exponent in unsigned.
+ *
+ * returns: The power of @base raised to @exp.
+ */
+bigint bigint_power(bigint &base, unsigned exp)
+{
+    bigint r(1);
+
+    while (exp--) {
+        r *= base;
+    }
+
+    return r;
+}
+```
+
