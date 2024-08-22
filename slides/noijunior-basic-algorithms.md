@@ -922,13 +922,13 @@ long long gcd_i(long long a, long long b)
 		
 ## 二分法
 
-- 二分法（dichotomy）的基本思想
+- 二分法的基本思想
 - 时间复杂度：`O(log(N))`
 
 	
 ### 二分查找
 
-- 必须在有序容器上执行
+- 只能在有序容器上执行二分查找（binary search）算法
 - 示例代码仅可用于从小到大排序（升序，ascending sorted order）的数组
 
 ```cpp
@@ -957,8 +957,8 @@ const T* binary_search(const T* arr, const T& needle, size_t start, size_t end)
 	
 ### 二分逼近
 
-- 只能在单调增长或下降的数学函数上使用该算法
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/check-prime.cpp)
+- 只能在单调增长或下降的数学函数上使用二分逼近法（bisection method）
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/estimate-square-root.cpp)
 
 ```cpp
 double estimate_square_root(double a, unsigned scale)
@@ -1068,7 +1068,6 @@ intmax_t binary_mul_r(intmax_t a, intmax_t b)
 
     return res + res;
 }
-
 ```
 
 	
@@ -1129,7 +1128,7 @@ intmax_t binary_mul_i(intmax_t a, intmax_t b)
 ## 作业
 
 	
-1) 构造一个浮点数构成的等差数列数组，然后使用逐项匹配法、二分搜索法（自己的实现）、二分搜索法（调用 `<algorithm>` 中定义的 `binary_search()`）、通项公式法寻找给定数值是否存在于该数列中，并给出各方法的执行时间。运行效果如下所示：
+1) 构造一个足够长的浮点数构成的等差数列数组，然后使用逐项匹配法、二分搜索法（自己的实现）、二分搜索法（调用 `<algorithm>` 中定义的 `binary_search()`）、二分逼近法（使用通项公式）寻找给定的数值是否存在于该数列中，并给出各方法的执行时间。运行效果如下所示：
 
 ```console
 % ./find-value-in-arithmetic-sequence
@@ -1139,7 +1138,7 @@ False
 0.001s consumed when comparing sequentially.
 0.001s consumed when using my binary search implementation.
 0.001s consumed when using binary_search().
-0.001s consumed when using formula.
+0.001s consumed when using bisection method.
 ```
 
 	
@@ -1202,3 +1201,4 @@ $ ./estimate-cubic-root
 	
 ### 参考链接
 
+- 
