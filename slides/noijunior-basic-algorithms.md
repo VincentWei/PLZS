@@ -16,7 +16,8 @@
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/check-prime.cpp)
 
 	
-### 自然数的素性判定  
+### 自然数的素性判定
+
 朴素版本
 
 ```cpp
@@ -35,9 +36,9 @@ bool check_prime_plain(uint64_t n)
 ```
 
 	
-### 自然数的素性判定  
-优化版本
+### 自然数的素性判定
 
+优化版本
 
 ```cpp
 bool check_prime_opt(uint64_t n)
@@ -59,7 +60,8 @@ bool check_prime_opt(uint64_t n)
 ```
 
 	
-### 自然数的素性判定  
+### 自然数的素性判定
+
 朴素素数筛
 
 ```cpp
@@ -112,7 +114,8 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
 ```
 
 	
-### 自然数的素性判定  
+### 自然数的素性判定
+
 事先准备的自然数素性数组
 
 ```cpp
@@ -939,7 +942,7 @@ const T* binary_search(const T* arr, const T& needle, size_t start, size_t end)
         mid = start + ((end - start) >> 1);
         if (arr[mid] < needle)
             start = mid + 1;
-        else if (arr[mid] > key)
+        else if (arr[mid] > needle)
             end = mid - 1;
         else {
             found = arr + mid;
@@ -955,11 +958,50 @@ const T* binary_search(const T* arr, const T& needle, size_t start, size_t end)
 ### 二分逼近
 
 - 只能在单调增长或下降的数学函数上使用该算法
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/check-prime.cpp)
 
 ```cpp
 double estimate_square_root(double a, unsigned scale)
 {
-    assert(a >= 1.0);
+    if (a < 0)
+        return NAN;
+
+    double tolerance = 1;
+    while (scale != 0) {
+        tolerance *= 0.1;
+        scale--;
+    }
+
+    double start, end;
+    if (a >= 1.0) {
+        start = 1.0;
+        end = a;
+    }
+    else {
+        start = 0;
+        end = 1.0;
+    }
+
+    double mid = NAN;
+    while (start <= end) {
+        mid = start + ((end - start) / 2.0);
+
+        if (isclose(start, end))
+            break;
+
+        double errors = mid * mid - a;
+        if (fabs(errors) <= tolerance) {
+            break;
+        }
+        else if (errors < 0) {
+            start = mid;
+        }
+        else {
+            end = mid;
+        }
+    }
+
+    return mid;
 }
 ```
 
