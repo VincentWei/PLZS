@@ -1199,6 +1199,14 @@ $ ./estimate-cubic-root
 ```
 
 	
+7) 经典比赛题（思考）
+
+- [Luogu P1873/砍树](https://www.luogu.com.cn/problem/P1873)
+- [Luogu P2440/木材加工](https://www.luogu.com.cn/problem/P2440)
+- [Luogu P1168/中位数](https://www.luogu.com.cn/problem/P1168)
+- [Luogu P2005/A/B Problem II](https://www.luogu.com.cn/problem/P2005)
+
+	
 ### 参考链接
 
 - [bigint.hpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/cpp/lesson-6/bigint.hpp)
