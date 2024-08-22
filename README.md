@@ -61,7 +61,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 ### 零基础普及班
 
 - 商品名称  
-学生编程课零基础普及班
+零基础普及班
 - 简介  
 本课程面向零基础但对编程有强烈兴趣的大中小学生（年龄在 10 到 22 周岁；小学四年级到大学毕业前）。内容包括虚拟机的安装、Linux 桌面系统的安装和使用、常用 Linux 系统命令、Vim 编辑器、Git 使用及 Python 编程入门。学生最终写出自己的第一个 Python 程序并创建自己的第一个开源代码仓库。
 
@@ -76,8 +76,10 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 适宜人群：
 
-- 十岁及以上学生（小学四年级到大学毕业前）。
-- 对编程有强烈兴趣的学生。
+- 十岁及以上学生（小学四年级以上）。
+- 对编程有强烈兴趣的学生或成年人。
+- 理工科各专业大学生、研究生。
+- 计划参加信息学奥林匹克竞赛的科技特长生。
 
 课程特点：
 
@@ -150,23 +152,24 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 ### Python 实战班
 
 - 商品名称  
-学生编程课 Python 实战班
+Python 实战班（编程思维训练）
 - 简介  
-本课程针对已入门学生开设，课程内容涉及 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
+本课程针对已入门学生开设，课程内容涉及 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏，从而训练学生掌握基本的编程思维。
 
 主要学习内容：
 
 1. Python 流程控制
 1. Python 数据类型
 1. Python 标准库
-1. Python 大作业
-1. Python 大作业辅导
+1. Python 综合练习
+1. Python 综合练习辅导
 
 适宜人群：
 
-- 十岁及以上学生（小学四年级到大学毕业前），已完成零基础普及班的课程内容。
-- 对编程有强烈兴趣的学生。
-- 信息学科技特长生。
+- 已完成零基础普及班课程内容。
+- 对编程有强烈兴趣的学生或成年人。
+- 理工科各专业大学生、研究生。
+- 计划参加“蓝桥杯”编程比赛的信息学科技特长生。
 
 课程特点：
 
@@ -215,15 +218,15 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 深入理解递归调用
    - 要点回顾
    - 作业
-1. Python 大作业及相关知识点
+1. Python 综合练习及相关知识点
    - 作业回顾
-   - 大作业可选项目
+   - 综合练习可选项目
    - 时间的获取和转换
    - 终端编程
    - 伪随机数
    - 要点回顾
-   - 大作业注意事项
-1. Python 大作业辅导
+   - 综合练习注意事项
+1. Python 综合练习辅导
    - Python 程序的模块化管理
    - Python 程序的调试方法
    - 架构设计：如何划分模块
@@ -257,9 +260,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 （暂不上线）
 
 - 商品名称  
-学生编程课 AI 实战班
+AI 实战班
 - 简介  
-本课程针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 和 JavaScript 编程语言、网页前后端技术、数据库以及开源 AI 模型等。在进入大作业阶段时，将五人一组协作开发一个联网的具有人工智能元素的网页游戏。
+本课程针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 和 JavaScript 编程语言、网页前后端技术、数据库以及开源 AI 模型等。在进入实战项目阶段时，将五人一组协作开发一个联网的具有人工智能元素的网页游戏。
 
 主要学习内容：
 
@@ -327,11 +330,11 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 1. 开源 AI 大模型
    - 流行的开源 AI 大模型
    - 在 Python 中调用 AI 开源大模型
-1. 大作业需求分析及架构设计
+1. 实战项目需求分析及架构设计
    - 模块划分及接口、协议设计
    - 后台数据库设计
    - 网页端调用 AI 功能
-1. 大作业专题辅导
+1. 实战项目专题辅导
    - 用户账号管理
    - 数据的散列处理及加解密
    - 文件的上传和下载
@@ -364,7 +367,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 ### 信奥筑基班
 
 - 商品名称  
-学生编程课信奥筑基班
+信奥筑基班（C++ 编程语言）
 - 简介  
 本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已完成零基础普及班及 Python 实战班的学习。课程内容涉及 C++ 编程语言和 Linux 环境编程，学生通过学习掌握 C++ 的基本语法和 STL 常用接口，学会使用 C++ 完成高精度自然数算术的实现。
 
@@ -377,9 +380,11 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 适宜人群：
 
-- 小高、初一阶段
-- 信息学科技特长生。
-- 信息学奥林匹克竞赛。
+- 已完成 Python 实战班课程内容。
+- 小高、初一阶段的信息学科技特长生。
+- 对编程有强烈兴趣的中小学生或成年人。
+- 理工科各专业大学生、研究生。
+- 计划参加信息学奥林匹克竞赛的科技特长生。
 
 课程特点：
 
@@ -471,21 +476,24 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 ### 信奥初级班
 
 - 商品名称  
-学生编程课信奥初级班
+信奥初级班（CSP-J 算法和数据结构）
 - 简介  
-本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面系统的使用以及 C++ 编程语言。课程内容围绕四则运算表达式、JSON 解析器和任意精度整数运算几个大作业进行，通过将 NOI 大纲（初级）中所列知识点融入解析器的开发加深学生对相关知识的理解和掌握。
+本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面系统的使用以及 C++ 编程语言。课程内容围绕四则运算表达式、JSON 解析器和任意精度整数运算等几个综合练习进行，通过将 NOI 大纲（初级）中所列知识点融入解析器的开发加深学生对相关知识的理解和掌握。
 
 主要学习内容：
 
 1. C++ 编程语言的高级特性，动态内存分配
 1. CSP-J 重要考点，包括各基础算法和数据结构
-1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
-1. CSP-J 真题演练及辅导
+1. 通过具有实际意义的综合练习加深对所学知识的理解和掌握
+1. CSP-J 真题讲解
 
 适宜人群：
 
-- 已完成信奥筑基班课程内容的学生。
-- 计划参加信息学奥林匹克竞赛（初级）的科技特长生。
+- 已完成信奥筑基班课程内容。
+- 小高、初一阶段的信息学科技特长生。
+- 对编程有强烈兴趣的中小学生或成年人。
+- 理工科各专业大学生、研究生。
+- 计划参加信息学奥林匹克入门组竞赛的科技特长生。
 
 课程特点：
 
@@ -499,7 +507,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 1. 掌握 C++ 编程语言中模板、迭代器等抽象工具的概念及用法。
 1. 覆盖 CSP-J 重要考点，结合数学问题讲解，强化训练学生的抽象思维、逻辑思维和发散思维。
-1. 通过具有实际意义的大作业加深的 CSP-J 重要考点的理解。
+1. 通过具有实际意义的综合练习加深对 CSP-J 重要考点的理解。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何提高代码的可维护性、可扩展性和可测试性。
 1. 基于开源协作平台的作业提交，培养学生基于开源平台的协作能力。
 1. 提供五次一对一在线答疑及作业辅导，每次一个小时（可选）。
@@ -524,9 +532,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 一般树
    - 二叉树
    - 特殊树
-1. 中期大作业
+1. 中期综合练习
    - 四则运算解析器
-   - 中期大作业辅导
+   - 综合练习相关知识点
 1. 搜索算法
    - 线性结构中的搜索
    - 子字符串搜索
@@ -539,9 +547,10 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 初等数论
    - 离散与组合数学
 1. CSP-J 真题讲解
-1. 结业大作业
-   - 无限精度整数运算
+1. 结业综合练习
+   - 无限精度整数运算（压位实现）
    - JSON 解析器
+   - 综合练习相关知识点
 
 课程须知：
 
@@ -566,7 +575,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 ### 信奥提高班
 
 - 商品名称  
-学生编程课信奥提高班
+信奥提高班（CSP-S 算法和数据结构）
 - 简介  
 本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）提高组的学生准备，要求已掌握信奥初级班的内容。课程内容围绕正则表达式以及一个脚本语言的解释器开展，通过将 NOI 大纲（提高级）中所列知识点融入脚本语言的解释器加深学生对相关知识的理解和掌握。通过本课程的学习，学生将掌握 NOI 大纲（提高级）中提及的各种算法和数据结构，并使用 C++ 编程语言完成一个脚本语言的解释器。
 
@@ -574,13 +583,16 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 1. C++ 编程语言的高级用法
 1. CSP-S 重要考点，包括各进阶算法和高级数据结构
-1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
-1. CSP-S 真题演练及辅导
+1. 通过具有实际意义的综合练习加深对所学知识的理解和掌握
+1. CSP-S 真题讲解
 
 适宜人群：
 
-- 初中阶段或高中阶段，已完成信奥初级班课程内容的学生。
-- 计划参加信息学奥林匹克竞赛（提高组）的科技特长生。
+- 已完成信奥初级班课程内容。
+- 初中阶段或高中阶段的信息学科技特长生。
+- 对编程有强烈兴趣的中小学生或成年人。
+- 理工科各专业大学生、研究生。
+- 计划参加信息学奥林匹克提高组竞赛的科技特长生。
 
 课程特点：
 
@@ -594,7 +606,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 1. 快速掌握现代 C++ 编程语言的高级功能。
 1. 覆盖 CSP-S 重要考点，结合数学问题讲解，强化训练学生的抽象思维、逻辑思维和发散思维。
-1. 通过具有实际意义的大作业加深的 CSP-S 重要考点的理解。
+1. 通过具有实际意义的综合练习加深对 CSP-S 重要考点的理解。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何提高代码的可维护性、可扩展性和可测试性。
 1. 基于开源协作平台的作业提交，培养学生基于开源平台的协作能力。
 1. 提供五次一对一在线答疑及作业辅导，每次一个小时（可选）。
@@ -618,9 +630,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 最小生成树及树上操作
    - 树链剖分
    - 动态树 LCT
-1. 中期大作业
+1. 中期综合练习
    - 正则表达式的解析及匹配
-   - 中期大作业辅导
+   - 综合练习相关知识点
 1. 搜索算法
    - 搜索算法的优化
    - 最短路径
@@ -633,8 +645,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 线性代数
    - 离散及组合数学
 1. CSP-S 真题讲解
-1. 结业大作业
+1. 结业综合练习
    - Lua 或简化的 Python 解释器
+   - 综合练习相关知识点
 
 课程须知：
 
@@ -649,6 +662,68 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 
 问：课程有效期多长?  
 答：购买后，课程内容（课程视频、在线课件等）三年有效；请按课表学习并及时完成作业，以便可以顺利进入下个阶段的学习。
+
+问：购买后是否支持退换货?  
+答：虚拟商品，购课后不支持退换货，请理解。
+
+问：如何联系客服?  
+答：如有其他疑问，在视频号主页点击客服按钮，即可咨询客服。
+
+### 程序员的数学素养课之数系及计算
+
+- 商品名称  
+程序员的数学素养课第一篇（数系及计算）
+- 简介  
+本系列课程面向程序员准备，旨在帮助程序员快速了解和掌握计算机科学中的数学基础知识。本课程为该系列的第一篇，主要讲述数系及计算。
+
+主要学习内容：
+
+1. 数系的概念、数系上的运算、进制
+1. 整数、质数及初等数论主要定理
+1. 微积分基础及其初步应用
+1. 函数逼近法
+1. 特殊无理数（黄金分割比、圆周率、自然常数）
+
+适宜人群：
+
+- 程序员、计算机软件工程师。
+- 信息科学相关专业大学生、研究生。
+- 计划参加信息学奥林匹克竞赛的科技特长生。
+
+课程特点：
+
+- 寓教于乐：趣味历史故事，提高学习兴趣
+- 能力培养：强化抽象思维，提升数学能力
+
+课程收获：
+
+1. 强化训练学生的抽象思维、逻辑思维和发散思维。
+1. 掌握进制转换、素性判断、经典数论问题的数学基础。
+1. 掌握微积分的典型应用，函数逼近法的典型应用。
+
+课程目录：
+
+1. 数系——从自然数到复数
+1. 数系上的运算和进制
+1. 数论基础：整数的性质
+1. 质数的有趣性质及初等数论四大定理
+1. 初等数论主要定理及其应用
+1. 微积分基础
+1. 微积分的初步应用
+1. 函数逼近法
+1. 黄金分割比和斐波那契数列
+1. 圆周率、自然常数及其计算
+
+课程须知：
+
+问：主要授课形式如何？  
+答：本课程以录播视频为主，同时提供在线课件。
+
+问：购买后如何上课?  
+答：购课成功后，请按照发货短信中的内容做课前准备，并请及时扫码加班主任的企业微信并加入班级交流群，如有疑问请及时联系班主任。
+
+问：课程有效期多长?  
+答：购买后，课程内容（课程视频、在线课件等）三年有效。
 
 问：购买后是否支持退换货?  
 答：虚拟商品，购课后不支持退换货，请理解。
@@ -693,70 +768,70 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    1. [Python 流程控制](https://courses.fmsoft.cn/plzs/python-flow-control.html)
    1. [Python 数据类型](https://courses.fmsoft.cn/plzs/python-data-types.html)
    1. [Python 标准库](https://courses.fmsoft.cn/plzs/python-standard-library.html)
-   1. [Python 大作业及相关知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
-   1. [Python 大作业辅导](https://courses.fmsoft.cn/plzs/python-project-coaching.html)
+   1. [Python 综合练习及相关知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
+   1. [Python 综合练习辅导](https://courses.fmsoft.cn/plzs/python-project-coaching.html)
 - 信奥筑基班：
-   1. [C++ 快速入门](cpp-quick-start.html)
-   1. [C++ 流程控制](cpp-flow-control.html)
-   1. [C++ 数据类型（上）](cpp-data-types.html)
-   1. [C++ 数据类型（下）](cpp-data-types-more.html)
-   1. [C++ 类、模板和 STL](cpp-class-template-and-stl.html)
-   1. [任意精度算术的 C++ 实现](cpp-arbitrary-precision-arithmetic.html)
+   1. [C++ 快速入门](https://courses.fmsoft.cn/plzs/cpp-quick-start.html)
+   1. [C++ 流程控制](https://courses.fmsoft.cn/plzs/cpp-flow-control.html)
+   1. [C++ 数据类型（上）](https://courses.fmsoft.cn/plzs/cpp-data-types.html)
+   1. [C++ 数据类型（下）](https://courses.fmsoft.cn/plzs/cpp-data-types-more.html)
+   1. [C++ 类、模板和 STL](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html)
+   1. [任意精度算术的 C++ 实现](https://courses.fmsoft.cn/plzs/cpp-arbitrary-precision-arithmetic.html)
 - 信奥初级班：
-   1. [基础算法](noijunior-basic-algorithms.html)
-   1. [排序算法](noijunior-sort-algorithms.html)
-   1. [线性数据结构](noijunior-linear-data-structures.html)
-   1. [树型数据结构](noijunior-tree-data-structures.html)
-   1. [中期大作业](noijunior-midterm-project.html)
-   1. [搜索算法](noijunior-search-algorithms.html)
-   1. [图及图论算法](noijunior-graph-and-graph-theory.html)
-   1. [其他算法和数据结构](noijunior-other-data-structures.html)
-   1. [CSP-J 真题讲解](noijunior-csp-exercises.html)
-   1. [结业大作业](noijunior-term-project.html)
+   1. [基础算法](https://courses.fmsoft.cn/plzs/noijunior-basic-algorithms.html)
+   1. [排序算法](https://courses.fmsoft.cn/plzs/noijunior-sort-algorithms.html)
+   1. [线性数据结构](https://courses.fmsoft.cn/plzs/noijunior-linear-data-structures.html)
+   1. [树型数据结构](https://courses.fmsoft.cn/plzs/noijunior-tree-data-structures.html)
+   1. [中期综合练习](https://courses.fmsoft.cn/plzs/noijunior-midterm-project.html)
+   1. [搜索算法](https://courses.fmsoft.cn/plzs/noijunior-search-algorithms.html)
+   1. [图及图论算法](https://courses.fmsoft.cn/plzs/noijunior-graph-and-graph-theory.html)
+   1. [其他算法和数据结构](https://courses.fmsoft.cn/plzs/noijunior-other-data-structures.html)
+   1. [CSP-J 真题讲解](https://courses.fmsoft.cn/plzs/noijunior-csp-exercises.html)
+   1. [结业综合练习](https://courses.fmsoft.cn/plzs/noijunior-term-project.html)
 - 信奥提高班：
-   1. [C++ 编程语言的高级特性](noisenior-cpp-advanced-features.html)
-   1. [字符串相关算法](noisenior-string-algorithms.html)
-   1. [通用操作系统的内存管理](noisenior-memory-management.html)
-   1. [高级树型数据结构](noisenior-tree-data-structures.html)
-   1. [中期大作业](noisenior-midterm-project.html)
-   1. [高级搜索算法](noisenior-search-algorithms.html)
-   1. [动态规划](noisenior-dynamic-programming.html)
-   1. [其他理论知识](noisenior-other-theories.html)
-   1. [CSP-S 真题讲解](noisenior-csp-exercises.html)
-   1. [结业大作业](noisenior-term-project.html)
+   1. [C++ 编程语言的高级特性](https://courses.fmsoft.cn/plzs/noisenior-cpp-advanced-features.html)
+   1. [字符串相关算法](https://courses.fmsoft.cn/plzs/noisenior-string-algorithms.html)
+   1. [通用操作系统的内存管理](https://courses.fmsoft.cn/plzs/noisenior-memory-management.html)
+   1. [高级树型数据结构](https://courses.fmsoft.cn/plzs/noisenior-tree-data-structures.html)
+   1. [中期综合练习](https://courses.fmsoft.cn/plzs/noisenior-midterm-project.html)
+   1. [高级搜索算法](https://courses.fmsoft.cn/plzs/noisenior-search-algorithms.html)
+   1. [动态规划](https://courses.fmsoft.cn/plzs/noisenior-dynamic-programming.html)
+   1. [其他理论知识](https://courses.fmsoft.cn/plzs/noisenior-other-theories.html)
+   1. [CSP-S 真题讲解](https://courses.fmsoft.cn/plzs/noisenior-csp-exercises.html)
+   1. [结业综合练习](https://courses.fmsoft.cn/plzs/noisenior-term-project.html)
 - 程序员/信奥生的数学素养课：数系及计算
-   1. [数系——从自然数到复数](math-number-system.html)
-   1. [数系上的运算和进制](math-end-on-system.html)
-   1. [数论基础：整数的性质](math-integers.html)
-   1. [质数的有趣性质及初等数论四大定理](math-primes.html)
-   1. [初等数论主要定理及其应用](math-number-theory.html)
-   1. [微积分基础](math-calculus.html)
-   1. [中值定理、泰勒公式及无穷级数](math-infinite-series.html)
-   1. [代数无理数的计算](math-algebraic-irrational-numbers.html)
-   1. [黄金分割比和斐波那契数列](math-golden-ratio-and-fibonacci-numbers.html)
-   1. [圆周率、自然常数及其计算](math-irrational-numbers-pi-and-e.html)
+   1. [数系——从自然数到复数](https://courses.fmsoft.cn/plzs/math-number-system.html)
+   1. [数系上的运算和进制](https://courses.fmsoft.cn/plzs/math-end-on-system.html)
+   1. [数论基础：整数的性质](https://courses.fmsoft.cn/plzs/math-integers.html)
+   1. [质数的有趣性质及初等数论四大定理](https://courses.fmsoft.cn/plzs/math-primes.html)
+   1. [初等数论主要定理及其应用](https://courses.fmsoft.cn/plzs/math-number-theory.html)
+   1. [微积分基础](https://courses.fmsoft.cn/plzs/math-calculus.html)
+   1. [微积分的初步应用](https://courses.fmsoft.cn/plzs/math-preliminary-applications-of-caculus.html)
+   1. [函数逼近法](https://courses.fmsoft.cn/plzs/math-function-approximation-method.html)
+   1. [黄金分割比和斐波那契数列](https://courses.fmsoft.cn/plzs/math-golden-ratio-and-fibonacci-numbers.html)
+   1. [圆周率、自然常数及其计算](https://courses.fmsoft.cn/plzs/math-irrational-numbers-pi-and-e.html)
 - 程序员/信奥生的数学素养课：离散数学结构
-   1. [离散数学基础](math-discrete-fundamentals.html)
-   1. [逻辑](math-discrete-logic.html)
-   1. [计数：排列、组合及概率](math-discrete-counting.html)
-   1. [关系及有向图](math-discrete-relation-and-digraphs.html)
-   1. [函数](math-discrete-functions.html)
-   1. [图论基础](math-discrete-graphy-theory.html)
-   1. [有序关系及结构](math-discrete-order-relations-structures.html)
-   1. [树型结构](math-discrete-tree.html)
-   1. [半群和群](math-discrete-semigroups-and-groups.html)
-   1. [语言和有限状态机](math-discrete-languages-and-finite-state-machine.html)
+   1. [离散数学基础](https://courses.fmsoft.cn/plzs/math-discrete-fundamentals.html)
+   1. [逻辑](https://courses.fmsoft.cn/plzs/math-discrete-logic.html)
+   1. [计数：排列、组合及概率](https://courses.fmsoft.cn/plzs/math-discrete-counting.html)
+   1. [关系及有向图](https://courses.fmsoft.cn/plzs/math-discrete-relation-and-digraphs.html)
+   1. [函数](https://courses.fmsoft.cn/plzs/math-discrete-functions.html)
+   1. [图论基础](https://courses.fmsoft.cn/plzs/math-discrete-graphy-theory.html)
+   1. [有序关系及结构](https://courses.fmsoft.cn/plzs/math-discrete-order-relations-structures.html)
+   1. [树型结构](https://courses.fmsoft.cn/plzs/math-discrete-tree.html)
+   1. [半群和群](https://courses.fmsoft.cn/plzs/math-discrete-semigroups-and-groups.html)
+   1. [语言和有限状态机](https://courses.fmsoft.cn/plzs/math-discrete-languages-and-finite-state-machine.html)
 - 程序员/信奥生的数学素养课：编解码
-   1. [二进制运算及数值的计算机表达](math-binary-arithmetic.html)
-   1. [任意精度算术](math-arbitrary-precision-arithmetic.html)
-   1. [字符集及文字的编码](math-charset-and-text-encoding.html)
-   1. [差分编码及哈夫曼码](math-differential-encoding-huffman-coding.html)
-   1. [二进制数据的编解码及错误校验](math-error-detection.html)
-   1. [数据的压缩和解压](math-compression-and-decompression.html)
-   1. [有损压缩和解压](math-lossy-compression-and-decompression.html)
-   1. [数据的摘要及签名](math-digest-and-signature.html)
-   1. [对称加解密](math-symmetric-encryption-and-decryption.html)
-   1. [非对称加解密](math-asymmetric-encryption-and-decryption.html)
+   1. [二进制运算及数值的计算机表达](https://courses.fmsoft.cn/plzs/math-binary-arithmetic.html)
+   1. [任意精度算术](https://courses.fmsoft.cn/plzs/math-arbitrary-precision-arithmetic.html)
+   1. [字符集及文字的编码](https://courses.fmsoft.cn/plzs/math-charset-and-text-encoding.html)
+   1. [差分编码及哈夫曼码](https://courses.fmsoft.cn/plzs/math-differential-encoding-huffman-coding.html)
+   1. [二进制数据的编解码及错误校验](https://courses.fmsoft.cn/plzs/math-error-detection.html)
+   1. [数据的压缩和解压](https://courses.fmsoft.cn/plzs/math-compression-and-decompression.html)
+   1. [有损压缩和解压](https://courses.fmsoft.cn/plzs/math-lossy-compression-and-decompression.html)
+   1. [数据的摘要及签名](https://courses.fmsoft.cn/plzs/math-digest-and-signature.html)
+   1. [对称加解密](https://courses.fmsoft.cn/plzs/math-symmetric-encryption-and-decryption.html)
+   1. [非对称加解密](https://courses.fmsoft.cn/plzs/math-asymmetric-encryption-and-decryption.html)
 - 番外
    1. [其他编程语言长什么样？](https://courses.fmsoft.cn/plzs/icsm-other-programming-languages.html)
    1. [为什么选择二进制？](https://courses.fmsoft.cn/plzs/icsm-why-choose-binary.html)

@@ -1,5 +1,5 @@
 /*
- * The example 1 of NOI CSP-J Lesson 1:
+ * One example for NOI CSP-J Lesson 1:
  * <https://courses.fmsoft.cn/plzs/noijunior-basic-algorithms.html>
  *
  * Author: Vincent Wei
@@ -90,6 +90,18 @@ bool check_prime_sieved(const uint64_v& primes_sieved, uint64_t n)
     return binary_search(primes_sieved.begin(), primes_sieved.end(), n);
 }
 
+// 作为示例，仅给出 UINT16_MAX 及以下自然数的素性值。
+static bool primalities[UINT16_MAX + 1];
+
+bool check_prime_linear(uint64_t n)
+{
+    if (n > UINT16_MAX) {
+        assert(0);
+    }
+
+    return primalities[n];
+}
+
 int main()
 {
     struct test_case {
@@ -118,10 +130,21 @@ int main()
         assert(result == cases[i].expected);
     }
 
+    // 作为示例，仅筛出 UINT16_MAX 及以下的素数。
     uint64_v primes_sieved = sieve_primes(UINT16_MAX);
 
     for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
         bool result = check_prime_sieved(primes_sieved, cases[i].n);
+        assert(result == cases[i].expected);
+    }
+
+    // 使用素数筛中的素数初始化素性数组。
+    for (uint64_t prime: primes_sieved) {
+        primalities[prime] = true;
+    }
+
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        bool result = check_prime_linear(cases[i].n);
         assert(result == cases[i].expected);
     }
 }

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>程序员的数学素养 - 无理数：自然常数</title>
+		<title>面向十岁及以上学生的编程实战系列课程：CSP-J 2023 真题</title>
 		<link rel="stylesheet" href="/dist/reset.css">
 		<link rel="stylesheet" href="/dist/reveal.css">
 		<link rel="stylesheet" href="/dist/theme/solarized.css">
@@ -14,11 +14,11 @@
 	<body>
 		<div class="reveal">
 			<header class="mytitle">
-				<p><a href="/plzs">考鼎<span>&reg;</span>学堂：PLZS</a> / <a href="#/0">无理数：自然常数</a></p>
+				<p><a href="/plzs">考鼎<span>&reg;</span>学堂：PLZS</a> / <a href="#/0">CSP-J 2023 真题</a></p>
 				<p><a href="https://work.weixin.qq.com/ca/cawcde42325deca4ec" target="_blank">客服</a></p>
 			</header>
-			<div class="slides">
-				<section data-markdown="gitlab/math-irrational-numbers-natural-constant.html.md"
+			<div class="slides move-left">
+				<section data-markdown="gitlab/exam-explanation-csp-j-2023.md"
 						 data-separator="^\t\t\n"
 						 data-separator-vertical="^\t\n"
 						 data-separator-notes="^Note:"
@@ -36,6 +36,7 @@
 		<script src="/plugin/notes/notes.js"></script>
 		<script src="/plugin/markdown/markdown.js"></script>
 		<script src="/plugin/highlight/highlight.js"></script>
+		<script src="/plugin/math/math.js"></script>
 		<script src="/js/utils/code-copy.js"></script>
 		<script>
 			// More info about initialization & config:
@@ -43,12 +44,12 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				width: 1024,
-				height: 768,
+				height: 1024,
 				margin: 0.04,
 				hash: true,
 				slideNumber: true,
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
 			}).then(() => initCodeCopy());
 		</script>
 	</body>

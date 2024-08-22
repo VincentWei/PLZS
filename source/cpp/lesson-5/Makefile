@@ -1,4 +1,4 @@
-TARGETS = rectangle shapes template overload cout-flags cin-getline fstream strtoull array vector iterator transform sort areas-refactored find-longest-word primes amicable-pairs dn-on
+TARGETS = rectangle shapes template overload cout-flags cin-getline fstream strtoull array vector iterator transform sort areas-refactored find-longest-word primes amicable-pairs dn-on dn-on-optimized
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

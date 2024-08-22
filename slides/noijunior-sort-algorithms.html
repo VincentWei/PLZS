@@ -17,7 +17,7 @@
 				<p><a href="/plzs">考鼎<span>&reg;</span>学堂：PLZS</a> / <a href="#/0">排序算法</a></p>
 				<p><a href="https://work.weixin.qq.com/ca/cawcde42325deca4ec" target="_blank">客服</a></p>
 			</header>
-			<div class="slides">
+			<div class="slides move-left">
 				<section data-markdown="gitlab/noijunior-sort-algorithms.md"
 						 data-separator="^\t\t\n"
 						 data-separator-vertical="^\t\n"
@@ -36,6 +36,7 @@
 		<script src="/plugin/notes/notes.js"></script>
 		<script src="/plugin/markdown/markdown.js"></script>
 		<script src="/plugin/highlight/highlight.js"></script>
+		<script src="/plugin/math/math.js"></script>
 		<script src="/js/utils/code-copy.js"></script>
 		<script>
 			// More info about initialization & config:
@@ -43,12 +44,12 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				width: 1024,
-				height: 768,
+				height: 1024,
 				margin: 0.04,
 				hash: true,
 				slideNumber: true,
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
 			}).then(() => initCodeCopy());
 		</script>
 	</body>

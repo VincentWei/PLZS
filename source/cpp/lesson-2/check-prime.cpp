@@ -28,6 +28,12 @@ int main()
     unsigned n;
     cin >> n;
 
-    cout << (check_prime(n) ? "True" : "False") << endl;
+    if (check_prime(n)) {
+        cout << "True" << endl;
+    }
+    else {
+        cout << "False" << endl;
+    }
+    // cout << (check_prime(n) ? "True" : "False") << endl;
 }
 
