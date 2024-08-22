@@ -1,6 +1,5 @@
 /*
- * The answer key for Problem 3 of CPP Lesson 4:
- * <https://courses.fmsoft.cn/plzs/cpp-data-types-more.html#/9/2>
+ * The formula version for Chinese Remainder Theroem.
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
