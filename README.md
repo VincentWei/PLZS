@@ -152,9 +152,9 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
 ### Python 实战班
 
 - 商品名称  
-Python 实战班
+Python 实战班（编程思维训练）
 - 简介  
-本课程针对已入门学生开设，课程内容涉及 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏。
+本课程针对已入门学生开设，课程内容涉及 Python 编程语言和 Linux 环境编程，最终实现学生的第一个软件作品：一个单机益智游戏，从而训练学生掌握基本的编程思维。
 
 主要学习内容：
 
