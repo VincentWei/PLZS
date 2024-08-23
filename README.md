@@ -680,9 +680,9 @@ AI 实战班
 
 1. 数系的概念、数系上的运算、进制
 1. 整数、质数及初等数论主要定理
-1. 微积分基础及无穷级数
-1. 代数无理数的计算
-1. 超越无理数（圆周率、自然常数）的计算
+1. 微积分基础及其初步应用
+1. 函数逼近法
+1. 特殊无理数（黄金分割比、圆周率、自然常数）
 
 适宜人群：
 
@@ -710,7 +710,7 @@ AI 实战班
 1. 初等数论主要定理及其应用
 1. 微积分基础
 1. 微积分的初步应用
-1. 代数无理数的计算
+1. 函数逼近法
 1. 黄金分割比和斐波那契数列
 1. 圆周率、自然常数及其计算
 
@@ -807,7 +807,7 @@ AI 实战班
    1. [初等数论主要定理及其应用](https://courses.fmsoft.cn/plzs/math-number-theory.html)
    1. [微积分基础](https://courses.fmsoft.cn/plzs/math-calculus.html)
    1. [微积分的初步应用](https://courses.fmsoft.cn/plzs/math-preliminary-applications-of-caculus.html)
-   1. [代数无理数的计算](https://courses.fmsoft.cn/plzs/math-algebraic-irrational-numbers.html)
+   1. [函数逼近法](https://courses.fmsoft.cn/plzs/math-function-approximation-method.html)
    1. [黄金分割比和斐波那契数列](https://courses.fmsoft.cn/plzs/math-golden-ratio-and-fibonacci-numbers.html)
    1. [圆周率、自然常数及其计算](https://courses.fmsoft.cn/plzs/math-irrational-numbers-pi-and-e.html)
 - 程序员/信奥生的数学素养课：离散数学结构
