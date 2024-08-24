@@ -196,7 +196,7 @@ $ /usr/bin/time -v ./check-prime
 	
 - 代码中，使用 STL `<chrono>` 头文件提供的接口：
    1. `std::chrono::system_clock`：系统时钟（墙钟）。
-   1. `std::chrono::steady_clock`：单调增长时钟，更适合用来计算执行某段代码的时长，但会包含当前线程的休眠时间。
+   1. `std::chrono::steady_clock`：单调增长时钟，更适合用来计算执行某段代码的执行时长，但会包含当前线程的休眠时间。
 
 ```cpp
 #include <iostream>
@@ -1200,11 +1200,10 @@ $ ./estimate-cubic-root
 
 	
 7) 经典比赛题（思考）
-
-- [Luogu P1873/砍树](https://www.luogu.com.cn/problem/P1873)
-- [Luogu P2440/木材加工](https://www.luogu.com.cn/problem/P2440)
-- [Luogu P1168/中位数](https://www.luogu.com.cn/problem/P1168)
-- [Luogu P2005/A/B Problem II](https://www.luogu.com.cn/problem/P2005)
+   - [Luogu P1873/砍树](https://www.luogu.com.cn/problem/P1873)
+   - [Luogu P2440/木材加工](https://www.luogu.com.cn/problem/P2440)
+   - [Luogu P1168/中位数](https://www.luogu.com.cn/problem/P1168)
+   - [Luogu P2005/A/B Problem II](https://www.luogu.com.cn/problem/P2005)
 
 	
 ### 参考链接
