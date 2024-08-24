@@ -785,6 +785,7 @@ T gs_sum(const T& first, const T& ratio, size_t n)
 		
 ## 递归
 
+- 汉诺塔
 - 递推（recurrent）关系和递归（recursive）调用
 - 递推的通项公式
 
