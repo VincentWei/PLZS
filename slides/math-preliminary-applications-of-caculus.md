@@ -13,13 +13,16 @@
 `$ \Delta y \approx f'(x) \Delta x $`
 
 		
-## 泰勒公式
+## 逼近函数
+
+		
+### 泰勒公式
 
 `$$
 \begin{align}
     f(x)  \approx f(a) & + f'(a)(x -a ) + \frac{f''(a)}{2}(x - a)^2 \\
                        & + \frac{f^{(3)}(a)}{3!}(x-a)^3 \\
-                       & + \frac{f^{(4)}(a)}{3!}(x-a)^4
+                       & + \frac{f^{(4)}(a)}{4!}(x-a)^4
 \end{align}
 $$`
 
@@ -34,6 +37,12 @@ $$`
 
 		
 ## 泰勒级数
+
+某些函数满足：
+
+`$$
+f(x) =\sum^{\infty}_{k=0}\frac{f^{(k)}(a)}{k!}(x-a)^{k}
+$$`
 
 		
 ## 无穷级数
