@@ -11,8 +11,8 @@
 ### 柯西中值定理
 
 若函数 `$ \phi(x) $` 和 `$ \psi(x) $` 在区间 `$ [a, b] $` 上可微，  
-且 `$ \psi'(x) \not\equiv 0 $`，则必存在一个点 `$ \xi \in (a, b) $`，  
-使得下式成立：  
+且在区间 `$ (a, b) $` 上 `$ \psi'(x) \not\equiv 0 $`，则必存在一个点  
+`$ \xi \in (a, b) $`，使得下式成立：  
 `$ \frac{\phi(b)-\phi(a)}{\psi(b) - \psi(a)} = \frac{\phi'(\xi)}{\psi'(\xi)} $`
 
 		
