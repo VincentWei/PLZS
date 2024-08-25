@@ -1,5 +1,7 @@
 # 常见无理数及其计算
 
+<section data-markdown>`$$ J(\theta_0,\theta_1) = \sum_{i=0} $$`</section>
+
 		
 ## 根号二
 
