@@ -5,7 +5,15 @@
 
 若函数 `$ f(x) $` 在区间 `$ [a, b] $` 上可微，  
 则必存在一个点 `$ \xi \in (a, b) $`，使得下式成立：  
-`$ f(b)-f(a)=f^{\prime}(\xi)(b-a), \quad  $`
+`$ f(b)-f(a)=f^{\prime}(\xi)(b-a) $`
+
+	
+### 柯西中值定理
+
+若函数 `$ \phi(x) $` 和 `$ \psi(x) $` 在区间 `$ [a, b] $` 上可微，  
+且 `$ \psi(x) \not\equiv 0 $`，则必存在一个点 `$ \xi \in (a, b) $`，  
+使得下式成立：  
+`$ \frac{\phi(b)-\phi(a)}{\psi(b) - \psi(a)} = \frac{\phi'(\xi)}{\psi(\xi)} $`
 
 		
 ## 函数的微分
