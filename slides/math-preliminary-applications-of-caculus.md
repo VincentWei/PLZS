@@ -16,13 +16,18 @@
 ## 泰勒公式
 
 `$$
-    f(x)  \approx f(a) + f'(a)(x -a ) + \frac{f''(a)}{2}(x - a) +\\
-        \frac{f^{(3)}(a)}{3!}(x-a)
+\begin{align}
+    f(x)  \approx f(a) & + f'(a)(x -a ) + \frac{f''(a)}{2}(x - a)^2 \\
+                       & + \frac{f^{(3)}(a)}{3!}(x-a)^3 \\
+                       & + \frac{f^{(4)}(a)}{3!}(x-a)^4
+\end{align}
 $$`
 
 `$$
+\begin{align}
     f(x)   & =\sum^{n}_{k=0}\frac{f^{(k)}(a)}{k!}(x-a)^{k}+R_{n}\\
     R_{n}  & =\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1} & (a < \xi < x)
+\end{align}
 $$`
 
 		
