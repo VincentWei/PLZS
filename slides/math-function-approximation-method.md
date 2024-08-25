@@ -9,7 +9,7 @@
 ## 线性逼近法
 
 中值定理  
-`$ f(b)-f(a)=f^{\prime}(\xi)(b-a), \quad (a < \xi < x) $`
+`$ f(b)-f(a)=f^{\prime}(\xi)(b-a), \quad (a < \xi < b) $`
 
 		
 ## 泰勒公式
