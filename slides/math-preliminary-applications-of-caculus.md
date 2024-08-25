@@ -23,6 +23,8 @@
 \end{align}
 $$`
 
+且有，
+
 `$$
 \begin{align}
     f(x)   & =\sum^{n}_{k=0}\frac{f^{(k)}(a)}{k!}(x-a)^{k}+R_{n}\\
