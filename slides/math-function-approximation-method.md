@@ -1,6 +1,10 @@
 # 常见无理数及其计算
 
-`$$ J(\theta_0,\theta_1) = \sum_{i=0} $$`
+`$$
+\f\relax{x} = \int_{-\infty}^\infty
+    \f\hat\xi\,e^{2 \pi i \xi x}
+    \,d\xi
+$$`
 
 		
 ## 根号二
