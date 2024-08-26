@@ -119,7 +119,7 @@ void sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp);
 ```
 
 	
-1) 用于内置数组并使用回调函数
+#### 用于内置数组并使用回调函数
 
 - 注意：STL 迭代器无法在可变长度数组（variable length array）上工作
 
@@ -130,7 +130,7 @@ void sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp);
 
 using namespace std;
 
-bool my_compare(double a, double b)
+bool my_compare_desc(double a, double b)
 {
     return (a > b);
 }
@@ -152,7 +152,7 @@ int main()
     }
     cout << endl;
 
-    sort(begin(a), end(a), my_compare);
+    sort(begin(a), end(a), my_compare_desc);
 
     cout << "Descending order:" << endl;
     for (size_t i = 0; i < NR_REALS; i++) {
@@ -164,7 +164,7 @@ int main()
 ```
 
 	
-2) 用于矢量并使用函数对象
+#### 用于 STL 矢量并使用函数对象
 
 ```cpp
 #include <iostream>     // for cin and cout
@@ -174,7 +174,7 @@ int main()
 
 using namespace std;
 
-struct my_compare_class {
+struct my_greater_function {
     bool operator() (double a, double b) {
         return a > b;
     }
@@ -199,8 +199,8 @@ int main()
     }
     cout << endl;
 
-    my_compare_class my_compare;
-    sort(begin(a), end(a), my_compare);
+    my_greater_function my_compare_desc;
+    sort(begin(a), end(a), my_compare_desc);
 
     cout << "Descending order:" << endl;
     for (size_t i = 0; i < NR_REALS; i++) {
@@ -208,7 +208,6 @@ int main()
     }
     cout << endl;
 }
-
 ```
 
 	
@@ -219,14 +218,66 @@ int main()
 
 void qsort(void *base, size_t nmemb, size_t size,
         int (*compar)(const void *, const void *));
-
-void qsort_r(void *base, size_t nmemb, size_t size,
-        int (*compar)(const void *, const void *, void *),
-        void *arg);
 ```
 
 	
-### 比较回调函数
+#### 对可变长度数组排序
+
+```c
+#include <iostream>     // for cin and cout
+#include <cstdlib>      // for assert()
+#include <cassert>      // for assert()
+
+using namespace std;
+
+int my_compare_asc(const void* a, const void* b)
+{
+    const double* pa = static_cast<const double *>(a);
+    const double* pb = static_cast<const double *>(b);
+    return (int)(*pa - *pb);
+}
+
+int my_compare_desc(const void* a, const void* b)
+{
+    const double* pa = static_cast<const double *>(a);
+    const double* pb = static_cast<const double *>(b);
+    return (int)(*pb - *pa);
+}
+
+int main()
+{
+    size_t n;
+    cin >> n;
+
+    if (n == 0)
+        return 1;
+
+    double a[n];
+    for (size_t i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    qsort(a, n, sizeof(double), my_compare_asc);
+
+    cout << "Ascending order:" << endl;
+    for (size_t i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    qsort(a, n, sizeof(double), my_compare_desc);
+
+    cout << "Descending order:" << endl;
+    for (size_t i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+
+```
+
+	
+### STL 函数对象
 
 		
 ## 作业

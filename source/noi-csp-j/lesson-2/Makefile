@@ -1,4 +1,4 @@
-TARGETS = stl-sort-for-native-array stl-sort-for-stl-vector
+TARGETS = stl-sort-for-native-array stl-sort-for-stl-vector std-qsort-for-native-array
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

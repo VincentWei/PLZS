@@ -15,7 +15,7 @@
 
 using namespace std;
 
-bool my_compare(double a, double b)
+bool my_compare_desc(double a, double b)
 {
     return (a > b);
 }
@@ -37,7 +37,7 @@ int main()
     }
     cout << endl;
 
-    sort(begin(a), end(a), my_compare);
+    sort(begin(a), end(a), my_compare_desc);
 
     cout << "Descending order:" << endl;
     for (size_t i = 0; i < NR_REALS; i++) {

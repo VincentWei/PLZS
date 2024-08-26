@@ -16,7 +16,7 @@
 
 using namespace std;
 
-struct my_compare_class {
+struct my_greater_function {
     bool operator() (double a, double b) {
         return a > b;
     }
@@ -41,8 +41,8 @@ int main()
     }
     cout << endl;
 
-    my_compare_class my_compare;
-    sort(begin(a), end(a), my_compare);
+    my_greater_function my_compare_desc;
+    sort(begin(a), end(a), my_compare_desc);
 
     cout << "Descending order:" << endl;
     for (size_t i = 0; i < NR_REALS; i++) {
