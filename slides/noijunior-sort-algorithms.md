@@ -219,6 +219,49 @@ int main()
 ```
 
 	
+### STL 函数对象
+
+- C++ STL 通过 `<functional>` 头文件提供了针对常见运算的函数对象（类模板）；在需要传递简单回调函数的场合，可利用这些函数对象。
+- 这些运算包括算术运算、比较运算、逻辑运算等。
+- [参考链接](https://cplusplus.com/reference/functional/)。
+
+```cpp
+#include <iostream>     // for cin and cout
+#include <algorithm>    // for sort()
+#include <functional>   // for greater()
+#include <cassert>      // for assert()
+
+using namespace std;
+
+int main()
+{
+    size_t n;
+    cin >> n;
+
+    double a[n];
+    for (size_t i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    sort(a, a + n);
+
+    cout << "Ascending order:" << endl;
+    for (size_t i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    sort(a, a + n, greater<double>());
+
+    cout << "Descending order:" << endl;
+    for (size_t i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+```
+
+	
 ### C 标准库提供的排序接口
 
 ```c
@@ -229,7 +272,7 @@ void qsort(void *base, size_t nmemb, size_t size,
 ```
 
 	
-#### 对可变长度数组排序
+#### 对元素具有固定尺寸且连续存储的数组排序
 
 ```c
 #include <iostream>     // for cin and cout
@@ -274,49 +317,6 @@ int main()
     cout << endl;
 
     qsort(a, n, sizeof(double), my_compare_desc);
-
-    cout << "Descending order:" << endl;
-    for (size_t i = 0; i < n; i++) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-}
-```
-
-	
-### STL 函数对象
-
-- C++ STL 通过 `<functional>` 头文件提供了针对常见运算的函数对象（类模板）；在需要传递简单回调函数的场合，可利用这些函数对象。
-- 这些运算包括算术运算、比较运算、逻辑运算等。
-- [参考链接](https://cplusplus.com/reference/functional/)。
-
-```cpp
-#include <iostream>     // for cin and cout
-#include <algorithm>    // for sort()
-#include <functional>   // for greater()
-#include <cassert>      // for assert()
-
-using namespace std;
-
-int main()
-{
-    size_t n;
-    cin >> n;
-
-    double a[n];
-    for (size_t i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-
-    sort(a, a + n);
-
-    cout << "Ascending order:" << endl;
-    for (size_t i = 0; i < n; i++) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-
-    sort(a, a + n, greater<double>());
 
     cout << "Descending order:" << endl;
     for (size_t i = 0; i < n; i++) {
