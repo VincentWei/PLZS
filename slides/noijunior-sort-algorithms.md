@@ -13,40 +13,41 @@
 
 - 排序（sort）是各类软件的基本功能：
    1. 按顺序处理（比如展现）数据结构中的各元素。
-   1. 在排序后的线性表数据结构中执行快速搜索（search）。
+   1. 在已排序（sorted）的线性表数据结构中执行快速搜索（search）。
 - 常见的排序需求：
    1. 对已有的线性表数据结构进行排序。
-   1. 对已有数据结构中的元素进行排序并生成一个新的已排序（sorted）线性数据结构。
+   1. 对已有数据结构中的元素进行排序并生成一个新的已排序线性数据结构。
+   1. 将生成的数据插入数据结构时执行排序操作，以确保数据结构内的元素始终是已排序的。
 
 		
 ## 选择排序
 
-Selection Sort
+`Selection Sort`
 
 		
 ## 冒泡排序
 
-Bubble Sort
+`Bubble Sort`
 
 		
 ## 插入排序
 
-Insertion Sort
+`Insertion Sort`
 
 		
 ## 归并排序
 
-Merge Sort
+`Merge Sort`
 
 		
 ## 快速排序
 
-Quick Sort
+`Quick Sort`
 
 		
 ## 分治法
 
-Divide and Conquer
+`Divide and Conquer`
 
 		
 ## 作业
