@@ -17,6 +17,12 @@
 using namespace std;
 
 struct my_greater_function {
+    // 支持函数对象的类通过重载 () 运算符实现像函数一样使用这个类的对象的效果：
+    //
+    //  my_greater_function func_obj;
+    //  assert(func_obj(0.1, 0.2) == false);
+    //
+    // 当在该类的实例 func_obj 上使用 () 运算符时，将调用下面这个函数。
     bool operator() (double a, double b) {
         return a > b;
     }

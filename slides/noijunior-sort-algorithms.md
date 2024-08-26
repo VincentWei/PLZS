@@ -166,6 +166,8 @@ int main()
 	
 #### 用于 STL 矢量并使用函数对象
 
+- 函数对象的目的是，像使用函数一样使用某个类对象。
+
 ```cpp
 #include <iostream>     // for cin and cout
 #include <vector>       // for vector
@@ -175,6 +177,12 @@ int main()
 using namespace std;
 
 struct my_greater_function {
+    // 支持函数对象的类通过重载 () 运算符实现像函数一样使用这个类的对象的效果：
+    //
+    //  my_greater_function func_obj;
+    //  assert(func_obj(0.1, 0.2) == false);
+    //
+    // 当在该类的实例 func_obj 上使用 () 运算符时，将调用下面这个函数。
     bool operator() (double a, double b) {
         return a > b;
     }
@@ -278,6 +286,45 @@ int main()
 
 	
 ### STL 函数对象
+
+- C++ STL 通过 `<functional>` 头文件提供了大量针对常见运算的函数对象（类模板）；在需要传递简单回调函数的场合，可利用这些函数对象。
+- [参考链接](https://cplusplus.com/reference/functional/)。
+
+```cpp
+#include <iostream>     // for cin and cout
+#include <algorithm>    // for sort()
+#include <functional>   // for greater()
+#include <cassert>      // for assert()
+
+using namespace std;
+
+int main()
+{
+    size_t n;
+    cin >> n;
+
+    double a[n];
+    for (size_t i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    sort(a, a + n);
+
+    cout << "Ascending order:" << endl;
+    for (size_t i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    sort(a, a + n, greater<double>());
+
+    cout << "Descending order:" << endl;
+    for (size_t i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+```
 
 		
 ## 作业
