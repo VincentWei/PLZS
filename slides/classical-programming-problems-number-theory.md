@@ -295,7 +295,7 @@ NO SOLUTION
 
 `$$
 \left{ (m_0 x_0 + \frac{kb}{d}, m_0 y_0 = \frac{ka}{d} | k \in \mathbb{Z} \right}
-`$$
+$$`
 
 	
 - 扩展欧几里得算法求 `$ x_0, y_0 $`。
