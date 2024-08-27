@@ -294,7 +294,7 @@ NO SOLUTION
 - 设其中一个解是 `$ x_0, y_0 $`，且，`$ m_0 = \frac{m}{d} $`，则上述方程的解集为：
 
 `$$
-\left \{ \left \( m_0 x_0 + \frac{kb}{d}, m_0 y_0 + \frac{ka}{d} \right \) \vert k \in \mathbb{Z} \right \}
+\left \{ \left( m_0 x_0 + \frac{kb}{d}, m_0 y_0 + \frac{ka}{d} \right) \vert k \in \mathbb{Z} \right \}
 $$`
 
 	
