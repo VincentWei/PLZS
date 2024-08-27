@@ -36,7 +36,7 @@ string nap_factorial(const string &n)
 
     r = n;
     while (n != times) {
-        r = nap_mul_alt(r, times);
+        r = nap_mul_vert(r, times);
         nap_add_to(times, "1");
     }
 
@@ -74,7 +74,7 @@ string nap_factorial_recursive(const string &n)
     nap_dec(prev_n);
 
     r = nap_factorial_recursive(prev_n);
-    r = nap_mul_alt(r, n);
+    r = nap_mul_vert(r, n);
 
     // cached the result
     if (native_n < cached_factorial.size()) {

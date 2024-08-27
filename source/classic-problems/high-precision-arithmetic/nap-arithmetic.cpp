@@ -143,7 +143,7 @@ string nap_mul(const string &a, const string &b)
     return result;
 }
 
-string nap_mul_op(const string &a, const string &b)
+string nap_mul_alt(const string &a, const string &b)
 {
     string times("0");
     string result("0");
@@ -155,7 +155,7 @@ string nap_mul_op(const string &a, const string &b)
     return result;
 }
 
-string nap_mul_op(const string &a, unsigned b)
+string nap_mul_alt(const string &a, unsigned b)
 {
     unsigned times = 0;
     string result("0");
@@ -168,7 +168,7 @@ string nap_mul_op(const string &a, unsigned b)
 }
 
 /* Use vertical multiplication method */
-string nap_mul_alt(const string &a, const string &b)
+string nap_mul_vert(const string &a, const string &b)
 {
     string r;
 
@@ -305,30 +305,30 @@ int main()
     assert(r == "9");
     clog << "test for nap_dec() passed\n";
 
-    // test nap_mul_op()
-    r = nap_mul_op("2", "2");
-    assert(r == "4");
-    r = nap_mul_op("2", "10");
-    assert(r == "20");
-    r = nap_mul_op("20", "20");
-    assert(r == "400");
-    r= nap_mul_op("11", "11");
-    assert(r == "121");
-    cout << "test for nap_mul_op() passed\n";
-
     // test nap_mul_alt()
-    r = nap_mul_alt("33", "77");
-    assert(r == "2541");
     r = nap_mul_alt("2", "2");
     assert(r == "4");
     r = nap_mul_alt("2", "10");
     assert(r == "20");
     r = nap_mul_alt("20", "20");
     assert(r == "400");
-    r = nap_mul_alt("11", "11");
+    r= nap_mul_alt("11", "11");
     assert(r == "121");
     cout << "test for nap_mul_alt() passed\n";
 
-}
+    // test nap_mul_vert()
+    r = nap_mul_vert("33", "77");
+    assert(r == "2541");
+    r = nap_mul_vert("2", "2");
+    assert(r == "4");
+    r = nap_mul_vert("2", "10");
+    assert(r == "20");
+    r = nap_mul_vert("20", "20");
+    assert(r == "400");
+    r = nap_mul_vert("11", "11");
+    assert(r == "121");
+    cout << "test for nap_mul_vert() passed\n";
 
+}
 #endif /* not defined NTEST */
+
