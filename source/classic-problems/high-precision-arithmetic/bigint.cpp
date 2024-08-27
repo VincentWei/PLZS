@@ -1125,9 +1125,7 @@ void bigint::absdiv_slow(const slice_v& numerator, const slice_v& denominator,
     quotient._sign = false;
     quotient._slices.clear();
 
-    size_t len_n = numerator.size();
-    size_t len_d = denominator.size();
-    assert(len_n >= len_d);
+    assert(numerator.size() >= denominator.size());
 
     while (abscmp(remainder._slices, denominator) >= 0) {
         remainder.abssubfrom(denominator);

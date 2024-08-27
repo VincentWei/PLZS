@@ -9,6 +9,7 @@
  * License: GPLv3
  */
 
+#define NDEBUG
 #define NTEST
 #include "bigint.cpp"
 
