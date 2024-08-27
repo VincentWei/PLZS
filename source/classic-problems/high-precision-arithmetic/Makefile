@@ -1,4 +1,4 @@
-TARGETS = rational-number-to-fraction-native rational-number-to-fraction-bigint
+TARGETS = rational-number-to-fraction-native rational-number-to-fraction-bigint summary-of-factorials-plain summary-of-factorials-trick
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
