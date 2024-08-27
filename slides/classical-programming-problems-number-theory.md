@@ -294,11 +294,28 @@ NO SOLUTION
 - 设其中一个解是 `$ x_0, y_0 $`，且，`$ m_0 = \frac{m}{d} $`，则上述方程的解集为：
 
 `$$
-\left \{ \left( m_0 x_0 + \frac{kb}{d}, m_0 y_0 + \frac{ka}{d} \right) \vert k \in \mathbb{Z} \right \}
+\left \{ \left( m_0 x_0 + \frac{kb}{d}, m_0 y_0 - \frac{ka}{d} \right) \vert k \in \mathbb{Z} \right \}
 $$`
 
 	
-- 扩展欧几里得算法求 `$ x_0, y_0 $`。
+- 利用扩展欧几里得算法，在求最大公约数的同时求出 `$ x_0, y_0 $`：
+
+```cpp
+intmax_t ex_gcd(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
+{
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+
+    intmax_t gcd = ex_gcd(b, a % b, x, y);
+    intmax_t temp = x;
+    x = y;
+    y = temp - a / b * y;
+    return gcd;
+}
+```
 
 		
 ## 进制转换
