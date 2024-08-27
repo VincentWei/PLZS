@@ -415,7 +415,7 @@ $ ./show-number-in-different-bases
 		
 ## 高精度算术：求阶乘之和
 
-- 给定自然数 `$ n (0 \ge n \le 2^{32}-1) $`，给出 `$ 0! + 1! + 2! + \cdots + n! $` 的结果（阶乘之和）。运行效果如下：
+- 给定自然数 `$ n (0 \le n \le 2^{32}-1) $`，给出 `$ 0! + 1! + 2! + \cdots + n! $` 的结果（阶乘之和）。运行效果如下：
 
 ```console
 $ ./summary-of-factorials
