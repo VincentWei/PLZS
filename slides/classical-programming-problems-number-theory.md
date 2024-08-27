@@ -69,7 +69,7 @@ $ ./amicable-numbers
 ```
 
 		
-# 素数筛
+## 素数筛
 
 - 素数（prime number）是指一个大于 1 的正整数，除了 1 和自身之外，没有第二个正整数可以整除它。最小的质数是 2。
 - 素数筛（朴素筛、Eratosthenes 筛和 Euler 筛）的数学原理。
