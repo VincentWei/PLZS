@@ -161,8 +161,8 @@ Python 实战班（编程思维训练）
 1. Python 流程控制
 1. Python 数据类型
 1. Python 标准库
-1. Python 大作业
-1. Python 大作业辅导
+1. Python 综合练习
+1. Python 综合练习辅导
 
 适宜人群：
 
@@ -218,15 +218,15 @@ Python 实战班（编程思维训练）
    - 深入理解递归调用
    - 要点回顾
    - 作业
-1. Python 大作业及相关知识点
+1. Python 综合练习及相关知识点
    - 作业回顾
-   - 大作业可选项目
+   - 综合练习可选项目
    - 时间的获取和转换
    - 终端编程
    - 伪随机数
    - 要点回顾
-   - 大作业注意事项
-1. Python 大作业辅导
+   - 综合练习注意事项
+1. Python 综合练习辅导
    - Python 程序的模块化管理
    - Python 程序的调试方法
    - 架构设计：如何划分模块
@@ -262,7 +262,7 @@ Python 实战班（编程思维训练）
 - 商品名称  
 AI 实战班
 - 简介  
-本课程针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 和 JavaScript 编程语言、网页前后端技术、数据库以及开源 AI 模型等。在进入大作业阶段时，将五人一组协作开发一个联网的具有人工智能元素的网页游戏。
+本课程针对已掌握 Python 编程语言的学生开设。课程内容涉及 Python 和 JavaScript 编程语言、网页前后端技术、数据库以及开源 AI 模型等。在进入实战项目阶段时，将五人一组协作开发一个联网的具有人工智能元素的网页游戏。
 
 主要学习内容：
 
@@ -330,11 +330,11 @@ AI 实战班
 1. 开源 AI 大模型
    - 流行的开源 AI 大模型
    - 在 Python 中调用 AI 开源大模型
-1. 大作业需求分析及架构设计
+1. 实战项目需求分析及架构设计
    - 模块划分及接口、协议设计
    - 后台数据库设计
    - 网页端调用 AI 功能
-1. 大作业专题辅导
+1. 实战项目专题辅导
    - 用户账号管理
    - 数据的散列处理及加解密
    - 文件的上传和下载
@@ -478,13 +478,13 @@ AI 实战班
 - 商品名称  
 信奥初级班（CSP-J 算法和数据结构）
 - 简介  
-本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面系统的使用以及 C++ 编程语言。课程内容围绕四则运算表达式、JSON 解析器和任意精度整数运算几个大作业进行，通过将 NOI 大纲（初级）中所列知识点融入解析器的开发加深学生对相关知识的理解和掌握。
+本课程针对计划参加 NOI（全国青少年信息学奥林匹克竞赛）的学生准备，要求已掌握 Linux 桌面系统的使用以及 C++ 编程语言。课程内容围绕四则运算表达式、JSON 解析器和任意精度整数运算等几个综合练习进行，通过将 NOI 大纲（初级）中所列知识点融入解析器的开发加深学生对相关知识的理解和掌握。
 
 主要学习内容：
 
 1. C++ 编程语言的高级特性，动态内存分配
 1. CSP-J 重要考点，包括各基础算法和数据结构
-1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
+1. 通过具有实际意义的综合练习加深对所学知识的理解和掌握
 1. CSP-J 真题讲解
 
 适宜人群：
@@ -507,7 +507,7 @@ AI 实战班
 
 1. 掌握 C++ 编程语言中模板、迭代器等抽象工具的概念及用法。
 1. 覆盖 CSP-J 重要考点，结合数学问题讲解，强化训练学生的抽象思维、逻辑思维和发散思维。
-1. 通过具有实际意义的大作业加深的 CSP-J 重要考点的理解。
+1. 通过具有实际意义的综合练习加深对 CSP-J 重要考点的理解。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何提高代码的可维护性、可扩展性和可测试性。
 1. 基于开源协作平台的作业提交，培养学生基于开源平台的协作能力。
 1. 提供五次一对一在线答疑及作业辅导，每次一个小时（可选）。
@@ -532,9 +532,9 @@ AI 实战班
    - 一般树
    - 二叉树
    - 特殊树
-1. 中期大作业
+1. 中期综合练习
    - 四则运算解析器
-   - 大作业相关知识点
+   - 综合练习相关知识点
 1. 搜索算法
    - 线性结构中的搜索
    - 子字符串搜索
@@ -547,10 +547,10 @@ AI 实战班
    - 初等数论
    - 离散与组合数学
 1. CSP-J 真题讲解
-1. 结业大作业
+1. 结业综合练习
    - 无限精度整数运算（压位实现）
    - JSON 解析器
-   - 大作业相关知识点
+   - 综合练习相关知识点
 
 课程须知：
 
@@ -583,7 +583,7 @@ AI 实战班
 
 1. C++ 编程语言的高级用法
 1. CSP-S 重要考点，包括各进阶算法和高级数据结构
-1. 通过具有实际意义的大作业加深对所学知识的理解和掌握
+1. 通过具有实际意义的综合练习加深对所学知识的理解和掌握
 1. CSP-S 真题讲解
 
 适宜人群：
@@ -606,7 +606,7 @@ AI 实战班
 
 1. 快速掌握现代 C++ 编程语言的高级功能。
 1. 覆盖 CSP-S 重要考点，结合数学问题讲解，强化训练学生的抽象思维、逻辑思维和发散思维。
-1. 通过具有实际意义的大作业加深的 CSP-S 重要考点的理解。
+1. 通过具有实际意义的综合练习加深对 CSP-S 重要考点的理解。
 1. 掌握程序开发过程中的基本工程管理方法，学习如何提高代码的可维护性、可扩展性和可测试性。
 1. 基于开源协作平台的作业提交，培养学生基于开源平台的协作能力。
 1. 提供五次一对一在线答疑及作业辅导，每次一个小时（可选）。
@@ -630,9 +630,9 @@ AI 实战班
    - 最小生成树及树上操作
    - 树链剖分
    - 动态树 LCT
-1. 中期大作业
+1. 中期综合练习
    - 正则表达式的解析及匹配
-   - 大作业相关知识点
+   - 综合练习相关知识点
 1. 搜索算法
    - 搜索算法的优化
    - 最短路径
@@ -645,9 +645,9 @@ AI 实战班
    - 线性代数
    - 离散及组合数学
 1. CSP-S 真题讲解
-1. 结业大作业
+1. 结业综合练习
    - Lua 或简化的 Python 解释器
-   - 大作业相关知识点
+   - 综合练习相关知识点
 
 课程须知：
 
@@ -768,8 +768,8 @@ AI 实战班
    1. [Python 流程控制](https://courses.fmsoft.cn/plzs/python-flow-control.html)
    1. [Python 数据类型](https://courses.fmsoft.cn/plzs/python-data-types.html)
    1. [Python 标准库](https://courses.fmsoft.cn/plzs/python-standard-library.html)
-   1. [Python 大作业及相关知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
-   1. [Python 大作业辅导](https://courses.fmsoft.cn/plzs/python-project-coaching.html)
+   1. [Python 综合练习及相关知识点](https://courses.fmsoft.cn/plzs/python-comprehensive-exercise.html)
+   1. [Python 综合练习辅导](https://courses.fmsoft.cn/plzs/python-project-coaching.html)
 - 信奥筑基班：
    1. [C++ 快速入门](https://courses.fmsoft.cn/plzs/cpp-quick-start.html)
    1. [C++ 流程控制](https://courses.fmsoft.cn/plzs/cpp-flow-control.html)
@@ -782,23 +782,23 @@ AI 实战班
    1. [排序算法](https://courses.fmsoft.cn/plzs/noijunior-sort-algorithms.html)
    1. [线性数据结构](https://courses.fmsoft.cn/plzs/noijunior-linear-data-structures.html)
    1. [树型数据结构](https://courses.fmsoft.cn/plzs/noijunior-tree-data-structures.html)
-   1. [中期大作业](https://courses.fmsoft.cn/plzs/noijunior-midterm-project.html)
+   1. [中期综合练习](https://courses.fmsoft.cn/plzs/noijunior-midterm-project.html)
    1. [搜索算法](https://courses.fmsoft.cn/plzs/noijunior-search-algorithms.html)
    1. [图及图论算法](https://courses.fmsoft.cn/plzs/noijunior-graph-and-graph-theory.html)
    1. [其他算法和数据结构](https://courses.fmsoft.cn/plzs/noijunior-other-data-structures.html)
    1. [CSP-J 真题讲解](https://courses.fmsoft.cn/plzs/noijunior-csp-exercises.html)
-   1. [结业大作业](https://courses.fmsoft.cn/plzs/noijunior-term-project.html)
+   1. [结业综合练习](https://courses.fmsoft.cn/plzs/noijunior-term-project.html)
 - 信奥提高班：
    1. [C++ 编程语言的高级特性](https://courses.fmsoft.cn/plzs/noisenior-cpp-advanced-features.html)
    1. [字符串相关算法](https://courses.fmsoft.cn/plzs/noisenior-string-algorithms.html)
    1. [通用操作系统的内存管理](https://courses.fmsoft.cn/plzs/noisenior-memory-management.html)
    1. [高级树型数据结构](https://courses.fmsoft.cn/plzs/noisenior-tree-data-structures.html)
-   1. [中期大作业](https://courses.fmsoft.cn/plzs/noisenior-midterm-project.html)
+   1. [中期综合练习](https://courses.fmsoft.cn/plzs/noisenior-midterm-project.html)
    1. [高级搜索算法](https://courses.fmsoft.cn/plzs/noisenior-search-algorithms.html)
    1. [动态规划](https://courses.fmsoft.cn/plzs/noisenior-dynamic-programming.html)
    1. [其他理论知识](https://courses.fmsoft.cn/plzs/noisenior-other-theories.html)
    1. [CSP-S 真题讲解](https://courses.fmsoft.cn/plzs/noisenior-csp-exercises.html)
-   1. [结业大作业](https://courses.fmsoft.cn/plzs/noisenior-term-project.html)
+   1. [结业综合练习](https://courses.fmsoft.cn/plzs/noisenior-term-project.html)
 - 程序员/信奥生的数学素养课：数系及计算
    1. [数系——从自然数到复数](https://courses.fmsoft.cn/plzs/math-number-system.html)
    1. [数系上的运算和进制](https://courses.fmsoft.cn/plzs/math-end-on-system.html)
