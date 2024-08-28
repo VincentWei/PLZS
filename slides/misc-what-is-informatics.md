@@ -51,7 +51,7 @@ $$`
   算法和数据结构
   \begin{cases}
    \mbox{入门（NOI CSP-J）} \\
-   \mbox{提高（NOI CSP-S）}
+   \mbox{提高（NOI CSP-S）} \\
    经典编程题讲解
      \begin{cases}
       \mbox{数论主题} \\
@@ -64,12 +64,12 @@ $$`
   \begin{cases}
    \mbox{Python} \ 实战 \\
    \mbox{C++} \ 基础 \\
-   \mbox{\color{Yellow}{C\ 语言最佳实践}}
+   \color{Yellow}{\mbox{C 语言最佳实践}}
   \end{cases} \\
   平台
   \begin{cases}
    \mbox{零基础普及} \\
-   \mbox{color{Yellow}{Linux\ 环境高级编程}}
+   \color{Yellow}{\mbox{Linux\ 环境高级编程}}
   \end{cases}
 \end{cases}
 $$`
