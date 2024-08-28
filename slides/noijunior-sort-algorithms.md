@@ -40,9 +40,9 @@
 1. 重复步骤 2 直到只剩一个元素。
 
 	
-### 动画效果
+### 动画演示
 
-<img class="r-frame" style="height:auto;width:100%;" src="assets/selection-sort-animation.svg" />
+<img style="height:70%;width:auto;" src="assets/selection-sort-animation.svg" />
 
 	
 ### 参考实现
@@ -111,9 +111,9 @@
 - 一个与插入排序相同的操作是打扑克牌时，从牌桌上抓一张牌，按牌面大小插到手牌后，再抓下一张牌。
 
 	
-### 动画效果
+### 动画演示
 
-<img class="r-frame" style="height:auto;width:100%;" src="assets/insertion-sort-animation.svg" />
+<img style="height:auto;width:100%;" src="assets/insertion-sort-animation.svg" />
 
 	
 ### 参考实现
