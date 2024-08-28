@@ -50,8 +50,8 @@ $$`
   \end{cases} \\
   算法和数据结构
   \begin{cases}
-   入门 \\
-   提高 \\
+   入门（NOI CSP-J）\\
+   提高（NOI CSP-S）\\
    经典编程题讲解
      \begin{cases}
       数论主题 \\
@@ -62,8 +62,8 @@ $$`
   \end{cases} \\
   编程语言
   \begin{cases}
-   Python 实战 \\
-   C++ 基础 \\
+   Python\ 实战 \\
+   C++ \ 基础 \\
    \color{Yellow}{C\ 语言最佳实践}
   \end{cases} \\
   平台
