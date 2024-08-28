@@ -25,7 +25,7 @@
    \mbox{C/C++} \\
    \cdots
   \end{cases} \\
-  \mbox{平台}
+  \mbox{平台及工具}
   \begin{cases}
    \mbox{操作系统} \\
    \mbox{数据库} \\
@@ -67,7 +67,7 @@ $$`
    \mbox{C++ 基础} \\
    \color{Yellow}{\mbox{C 语言最佳实践}}
   \end{cases} \\
-  \mbox{平台}
+  \mbox{平台及工具}
   \begin{cases}
    \mbox{零基础普及} \\
    \color{Yellow}{\mbox{Linux 环境高级编程}}
