@@ -134,6 +134,9 @@ int check(const string& mid, const string& n)
 
 string maximum_le_sqrt(const string& n)
 {
+    if (nap_less(n, "2"))
+        return string(n);
+
     string start = "0";
     string end = n;
     string mid = "0";
@@ -197,6 +200,7 @@ int main()
     assert(check("4", "9") == 1);
 
     assert(maximum_le_sqrt("0") == "0");
+    assert(maximum_le_sqrt("1") == "1");
     assert(maximum_le_sqrt("2") == "1");
     assert(maximum_le_sqrt("9") == "3");
     assert(maximum_le_sqrt("100") == "10");
