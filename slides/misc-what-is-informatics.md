@@ -16,8 +16,8 @@
   \end{cases} \\
   算法
   \begin{cases}
-   二分 \\
-   倍增 \\
+   二分、倍增 \\
+   搜索、查找 \\
    分治 \\
    \cdots
   \end{cases}  \\
@@ -32,6 +32,43 @@
   \begin{cases}
    Python \\
    C/C++
+  \end{cases} \\
+  平台
+  \begin{cases}
+   操作系统 \\
+   数据库 \\
+   Web \\
+   AI \\
+   \cdots
+  \end{cases}
+\end{cases}
+$$`
+
+		
+## 我的课程体系
+
+`$$
+清华老魏信息学
+\begin{cases}
+  信息学的数学基础
+  \begin{cases}
+   数系及其运算 \\
+   离散数学结构 \\
+   编解码  \\
+   \cdots
+  \end{cases} \\
+  算法和数据结构入门 \\
+  算法和数据结构提高 \\
+  编程语言
+  \begin{cases}
+   Python 实战 \\
+   C++ 基础 \\
+   C 语言最佳实践
+  \end{cases} \\
+  平台
+  \begin{cases}
+   Linux 环境高级编程 \\
+   零基础普及
   \end{cases}
 \end{cases}
 $$`
