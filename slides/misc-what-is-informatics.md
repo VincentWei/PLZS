@@ -45,7 +45,7 @@ $$`
   \begin{cases}
    数系及其运算 \\
    离散数学结构 \\
-   \textcolor{brown}{编解码}  \\
+   \color{Brown}{编解码}  \\
    \cdots
   \end{cases} \\
   算法和数据结构
