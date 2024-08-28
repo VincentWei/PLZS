@@ -155,18 +155,6 @@ string nap_mul_alt(const string &a, const string &b)
     return result;
 }
 
-string nap_mul_alt(const string &a, unsigned b)
-{
-    unsigned times = 0;
-    string result("0");
-    while (b != times) {
-        nap_add_to(result, a);
-        times++;
-    }
-
-    return result;
-}
-
 /* Use vertical multiplication method */
 string nap_mul_vert(const string &a, const string &b)
 {

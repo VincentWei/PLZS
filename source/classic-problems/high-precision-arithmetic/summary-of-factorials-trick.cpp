@@ -13,6 +13,18 @@
 
 #include "nap-arithmetic.cpp"
 
+string nap_mul_alt(const string &a, unsigned b)
+{
+    unsigned times = 0;
+    string result("0");
+    while (b != times) {
+        nap_add_to(result, a);
+        times++;
+    }
+
+    return result;
+}
+
 int main()
 {
     unsigned n;
