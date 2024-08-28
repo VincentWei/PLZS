@@ -45,24 +45,25 @@ $$`
   \begin{cases}
    数系及其运算 \\
    离散数学结构 \\
-   \color{Brown}{编解码}  \\
+   \color{Yellow}{编解码}  \\
    \cdots
   \end{cases} \\
   算法和数据结构
   \begin{cases}
    入门 \\
    提高 \\
+   经典编程题讲解
   \end{cases} \\
   编程语言
   \begin{cases}
    Python 实战 \\
    C++ 基础 \\
-   C 语言最佳实践
+   \color{Yellow}{C\ 语言最佳实践}
   \end{cases} \\
   平台
   \begin{cases}
    零基础普及 \\
-   Linux 环境高级编程
+   \color{Yellow}{Linux\ 环境高级编程}
   \end{cases}
 \end{cases}
 $$`
