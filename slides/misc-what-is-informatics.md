@@ -50,13 +50,13 @@ $$`
   \end{cases} \\
   算法和数据结构
   \begin{cases}
-   入门（NOI\ CSP\mbox{-}J）\\
-   提高（NOI\ CSP\mbox{-}S）\\
+   \mbox{入门（NOI CSP-J）} \\
+   \mbox{提高（NOI CSP-S）}
    经典编程题讲解
      \begin{cases}
-      数论主题 \\
-      解析器主题 \\
-      加解密主题 \\
+      \mbox{数论主题} \\
+      \mbox{解析器主题} \\
+      \mbox{加解密主题} \\
       \cdots
      \end{cases}
   \end{cases} \\
@@ -64,12 +64,12 @@ $$`
   \begin{cases}
    \mbox{Python} \ 实战 \\
    \mbox{C++} \ 基础 \\
-   \color{Yellow}{C\ 语言最佳实践}
+   \mbox{\color{Yellow}{C\ 语言最佳实践}}
   \end{cases} \\
   平台
   \begin{cases}
-   零基础普及 \\
-   \color{Yellow}{Linux\ 环境高级编程}
+   \mbox{零基础普及} \\
+   \mbox{color{Yellow}{Linux\ 环境高级编程}}
   \end{cases}
 \end{cases}
 $$`

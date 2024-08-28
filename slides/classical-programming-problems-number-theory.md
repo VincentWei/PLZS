@@ -424,6 +424,41 @@ $ ./summary-of-factorials
 ```
 
 		
+## 高精度算术（字符串实现）：求和
+
+```cpp
+void nap_add_to(string &r, const string &a)
+{
+    size_t len_r = r.length();
+    size_t len_a = a.length();
+    size_t len_max = (len_r > len_a) ? len_r : len_a;
+
+    int carry = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int value_r = ((i < len_r) ? r[len_r - i - 1] : '0') - '0';
+        int value_a = ((i < len_a) ? a[len_a - i - 1] : '0') - '0';
+
+        value_r += value_a + carry;
+        if (value_r >= 10) {
+            carry = 1;
+            value_r -= 10;
+        }
+        else
+            carry = 0;
+
+        if (i >= len_r)
+            r.insert(0, 1, '0' + value_r);
+        else
+            r[len_r - i - 1] = '0' + value_r;
+    }
+
+    if (carry > 0) {
+        r.insert(0, 1, '1');
+    }
+}
+```
+
+		
 ## 高精度算术：求小于平方根的最大整数
 
 - 给定一个任意长度的自然数，求小于等于其平方根的最大整数。运行效果如下：
@@ -438,6 +473,32 @@ $ ./maximum-le-sqrt
 $ ./maximum-le-sqrt
 <123456789098765432101234567890123456789>
 11111111064999999904
+```
+
+		
+## 二分搜索的典型实现
+
+```cpp
+template <class T>
+const T* binary_search(const T* arr, const T& needle, size_t start, size_t end)
+{
+    const T* found = nullptr;
+
+    size_t mid;
+    while (start <= end) {
+        mid = start + ((end - start) >> 1);
+        if (arr[mid] < needle)
+            start = mid + 1;
+        else if (arr[mid] > needle)
+            end = mid - 1;
+        else {
+            found = arr + mid;
+            break;
+        }
+    }
+
+    return found;
+}
 ```
 
 		
