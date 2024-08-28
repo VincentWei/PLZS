@@ -62,8 +62,8 @@ $$`
   \end{cases} \\
   编程语言
   \begin{cases}
-   Python\ 实战 \\
-   C\mbox{++} \ 基础 \\
+   \mbox{Python} \ 实战 \\
+   \mbox{C++} \ 基础 \\
    \color{Yellow}{C\ 语言最佳实践}
   \end{cases} \\
   平台
