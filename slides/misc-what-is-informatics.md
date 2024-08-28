@@ -1,14 +1,43 @@
 # 什么是信息学
 
 		
-## 
+## 信息学的内容
 
-若函数 `$ f(x) $` 在区间 `$ \left[ a, b \right] $` 上可微，  
-则必存在一个点 `$ \xi \in \left( a, b \right) $`，使得下式成立：  
-`$ f(b)-f(a)=f^{\prime}(\xi)(b-a) $`
+`$$
+信息学
+\begin{cases}
+  数学
+  \begin{cases}
+   初等数论 \\
+   微积分 \\
+   离散数学 \\
+   编解码  \\
+   \cdots
+  \end{cases} \\
+  算法
+  \begin{cases}
+   二分 \\
+   倍增 \\
+   分治 \\
+   \cdots
+  \end{cases}  \\
+  数据结构
+  \begin{cases}
+   线性数据结构 \\
+   树型数据结构 \\
+   哈希表 \\
+   \cdots
+  \end{cases}  \\
+  编程语言
+  \begin{cases}
+   Python \\
+   C/C++
+  \end{cases}
+\end{cases}
+$$`
 
 	
-### 柯西中值定理
+### 
 
 若函数 `$ \phi(x) $` 和 `$ \psi(x) $` 在区间 `$ \left[ a, b \right] $` 上可微，  
 且 `$ \forall x \in (a, b) $` 有 `$ \psi'(x) \neq 0 $`，则必存在一个点  
