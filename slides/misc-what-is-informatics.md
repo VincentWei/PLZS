@@ -55,8 +55,8 @@ $$`
    经典编程题讲解
      \begin{cases}
       数论主题 \\
-      \color{Gray}{解析器主题} \\
-      \color{Gray}{加解密主题} \\
+      解析器主题 \\
+      加解密主题 \\
       \cdots
      \end{cases}
   \end{cases} \\
