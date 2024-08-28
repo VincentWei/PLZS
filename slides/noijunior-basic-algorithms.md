@@ -150,10 +150,10 @@ bool check_prime_linear(uint64_t n)
 
 	
 - 大 O 复杂度表示法：用于表示代码执行时间或者内存占用随数据规模增长的变化趋势。
-   1. `O(N)`：表示复杂度与数据项的个数 `n` 线性相关。比如素性判定的普通版本之时间复杂度。
-   1. `O(sqrt(N))`：表示复杂度与数据项的个数之算术平方根 `sqrt(N)` 线性相关。比如素性判定的优化版本之时间复杂度。
-   1. `O(log(N))`：表示复杂度与数据项的个数之对数 `log(N)` 线性相关（无关对数的底到底是多少）。比如在事先筛好的有序素数矢量中用二分查找法查找给定的数，从而判定是否为素数的算法之时间复杂度。
-   1. `O(1)`：表示常量级的复杂度，比如基本的四则运算、取地址、反引用、访问数组中给定的单元等。比如将给定范围的自然数素性保存为数组，以给定自然数为数组下标直接返回对应的素性真假值的时间复杂度。
+   1. `$ O(n) $`：表示复杂度与数据项的个数 `$ n $` 线性相关。比如素性判定的普通版本之时间复杂度。
+   1. `$ O(\sqrt{n}) $`：表示复杂度与数据项的个数之算术平方根 `$ \sqrt{n} $` 线性相关。比如素性判定的优化版本之时间复杂度。
+   1. `$ O(\log{n}) $`：表示复杂度与数据项的个数之对数 `$ \log{n} $` 线性相关（无关对数的底到底是多少）。比如在事先筛好的有序素数矢量中用二分查找法查找给定的数，从而判定是否为素数的算法之时间复杂度。
+   1. `$ O(1) $`：表示常量级的复杂度，比如基本的四则运算、取地址、反引用、访问数组中给定的单元等。比如将给定范围的自然数素性保存为数组，以给定自然数为数组下标直接返回对应的素性真假值的时间复杂度。
 
 	
 ### 程序运行时间的测量
@@ -290,8 +290,8 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 ### 翻转数组元素
 
 - 将数组中的元素执行翻转（reverse）操作；比如将数组 `[1, 2, 3, 4, 5]` 翻转后 `[5, 4, 3, 2, 1]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/reverse-array.cpp)
 
 ```cpp
@@ -310,8 +310,8 @@ void reverse_array(T* arr, size_t n)
 ### 轮转数组元素
 
 - 将数组中的元素执行轮换（rotate）操作；比如将数组 `[1, 2, 3, 4, 5]` 轮转 2 次后 `[4, 5, 1, 2, 3]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(N)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(n) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/rotate-array.cpp)
 
 ```cpp
@@ -332,15 +332,14 @@ void rotate_array(T* arr, size_t n, size_t m)
         arr[j] = tmp[i];
     }
 }
-
 ```
 
 	
 ### 打乱数组元素
 
 - 打乱（shuffle）数组中的元素顺序；比如将数组 `[1, 2, 3, 4, 5]` 打乱后 `[4, 3, 1, 5, 2]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/shuffle-array.cpp)
 
 ```cpp
@@ -414,8 +413,8 @@ struct pseudo_vector {
 ### 在矢量的尾部追加元素
 
 - 在矢量的尾部追加一个元素（push back)；比如在矢量 `[1, 2, 3, 4, 5]` 尾部追加 `6`：`[1, 2, 3, 4, 5, 6]`。
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(1) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
     void push_back(const T& elem) {
@@ -433,8 +432,8 @@ struct pseudo_vector {
 ### 移除矢量尾部的元素
 
 - 将矢量尾部的元素移除（pop back）；比如将矢量 `[1, 2, 3, 4, 5]` 尾部的 `5` 移除：`[1, 2, 3, 4]`。
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(1) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
     void pop_back() {
@@ -448,8 +447,8 @@ struct pseudo_vector {
 ### 在矢量的指定位置插入元素
 
 - 在矢量的指定位置插入（insert）元素；比如在矢量 `[1, 2, 3, 4, 5]` 的第 0 个索引位置处插入元素 `0`：`[0, 1, 2, 3, 4, 5]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
     void insert(const T& elem, size_t pos) {
@@ -475,8 +474,8 @@ struct pseudo_vector {
 ### 移除指定位置的矢量元素
 
 - 将指定位置的元素从矢量中移除（erase）；比如将矢量 `[1, 2, 3, 4, 5]` 的第 0 个元素移除后 `[2, 3, 4, 5]`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
     void erase(size_t pos) {
@@ -499,8 +498,8 @@ struct pseudo_vector {
 ### 计算 C 字符串长度
 
 - 计算 C 字符串长度（count）；比如字符串 `"Hello"` 的长度为 `5`。
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
 size_t length_of_string(const char* str)
@@ -519,8 +518,8 @@ size_t length_of_string(const char* str)
 ### 找到 C 字符串的尾部
 
 - 计算 C 字符串的尾部指针
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
 const char* end_of_string(const char* str)
@@ -539,8 +538,8 @@ const char* end_of_string(const char* str)
 #### 两个值中找最大、最小值
 
 - 朴素版本
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(1) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
 double max(double a, double b)
@@ -556,8 +555,8 @@ double min(double a, double b)
 
 	
 - 泛型版本（函数模板）
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(1) $`
+- 空间复杂度：`$ O(1) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-pair.cpp)
 
 ```cpp
@@ -586,8 +585,8 @@ const T& min(const T& a, const T& b)
 #### 无序数组中找最大、最小值
 
 - 朴素版本
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 
 ```cpp
 double max(const double* arr, size_t nr)
@@ -625,8 +624,8 @@ double min(const double* arr, size_t nr)
 
 	
 - 泛型版本（函数模板）
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/extrema-in-array.cpp)
 
 ```cpp
@@ -673,8 +672,8 @@ const T& min(const T* arr, size_t nr)
 #### 一般数组求和
 
 - 泛型版本（函数模板）
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(n) $`
+- 空间复杂度：`$ O(1) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-array.cpp)
 
 ```cpp
@@ -699,8 +698,8 @@ T sum(const T* arr, size_t nr)
 #### 等差数列求和
 
 - 泛型版本（函数模板）
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(1) $`
+- 空间复杂度：`$ O(1) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-arithmetic-sequence.cpp)
 
 ```cpp
@@ -727,8 +726,8 @@ T as_sum(const T& first, const T& diff, size_t n)
 #### 等比数列求和
 
 - 泛型版本（函数模板）
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：`$ O(1) $`
+- 空间复杂度：`$ O(1) $`
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-1/summary-of-geometric-sequence.cpp)
 
 ```cpp
@@ -847,8 +846,8 @@ long long gcd_r(long long a, long long b)
 ### 递归的好处和坏处
 
 - 易于理解，实现简单。
-- 但时间复杂度较高，通常具有 `O(N)` 或以上的时间复杂度。
-- 递归调用产生大量栈帧，空间复杂度也较高，通常具有 `O(N)` 或以上的空间复杂度。
+- 但时间复杂度较高，通常具有 `$ O(N) $` 或以上的时间复杂度。
+- 递归调用产生大量栈帧，空间复杂度也较高，通常具有 `$ O(N) $` 或以上的空间复杂度。
 - 几乎所有的递归实现都可以转为非递归（迭代）实现。
 - 很多递推关系可以从数学上找到对应的通项公式。
 
@@ -924,7 +923,7 @@ long long gcd_i(long long a, long long b)
 ## 二分法
 
 - 二分法的基本思想
-- 时间复杂度：`O(log(N))`
+- 时间复杂度：`$ O(\log{N}) $`
 
 	
 ### 二分查找
@@ -1010,7 +1009,7 @@ double estimate_square_root(double a, unsigned scale)
 ## 倍增法
 
 - 倍增法（binary lifting）的基本思想
-- 时间复杂度：`O(log(N))`
+- 时间复杂度：`$ O(\log{N}) $`
 
 	
 ### 快速幂
