@@ -14,19 +14,10 @@
    编解码  \\
    \cdots
   \end{cases} \\
-  算法
+  算法和数据结构
   \begin{cases}
-   二分、倍增 \\
-   搜索、查找 \\
-   分治 \\
-   \cdots
-  \end{cases}  \\
-  数据结构
-  \begin{cases}
-   线性数据结构 \\
-   树型数据结构 \\
-   哈希表 \\
-   \cdots
+   二分、倍增、排序、搜索\cdots
+   线性数据结构、树型数据结构、哈希表\cdots
   \end{cases}  \\
   编程语言
   \begin{cases}
