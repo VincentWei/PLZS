@@ -50,8 +50,8 @@ $$`
   \end{cases} \\
   算法和数据结构
   \begin{cases}
-   入门（NOI\ CSP\-J）\\
-   提高（NOI\ CSP\-S）\\
+   入门（NOI\ CSP\mbox{-}J）\\
+   提高（NOI\ CSP\mbox{-}S）\\
    经典编程题讲解
      \begin{cases}
       数论主题 \\
