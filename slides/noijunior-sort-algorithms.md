@@ -40,6 +40,11 @@
 1. 重复步骤 2 直到只剩一个元素。
 
 	
+### 动画效果
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/selection-sort-animation.svg" />
+
+	
 ### 参考实现
 
 ```cpp
@@ -102,6 +107,14 @@
 	
 ### 原理
 
+- 将待排列元素划分为「已排序」和「未排序」两部分，每次从「未排序的」元素中选择一个插入到「已排序的」元素中的正确位置。
+- 一个与插入排序相同的操作是打扑克牌时，从牌桌上抓一张牌，按牌面大小插到手牌后，再抓下一张牌。
+
+	
+### 动画效果
+
+<img class="r-frame" style="height:auto;width:100%;" src="assets/insertion-sort-animation.svg" />
+
 	
 ### 参考实现
 
@@ -132,8 +145,12 @@
 	
 ### 原理
 
+- 合并两个已经排好序的数组很容易实现，而且速度很快。
+- 基于以上思路，按二分思路递归执行较小部分的排序，然后合并成较大部分。
+- 但需要额外的空间，所以该算法适合异地排序。
+
 	
-### 参考实现
+### 参考实现（递归版本）
 
 ```cpp
 ```
@@ -154,10 +171,50 @@
 	
 ### 原理
 
+- 快速排序由东尼·霍尔（Tony Hoare）发明，本质上是一种对冒泡排序的改进。
+- 执行步骤：
+   1. 将表划分为两部分，保证前一个子表中的元素都小于后一个子表中的元素；可随机选取或者选表中第一个元素作为比较“基准（pivot）”。
+   1. 递归到两个子表中分别进行快速排序；直到子表长度为零。
+   1. 无需合并，终止时表已经完全有序。
+- 又称分区交换排序（partition-exchange sort）。
+
 	
 ### 参考实现
 
+- 递归版本
+
 ```cpp
+template <typename T>
+size_t paritition(T A[], size_t low, size_t high)
+{
+    size_t pivot = A[low];
+    while (low < high) {
+        while (low < high && pivot <= A[high])
+            --high;
+        A[low] = A[high];
+        while (low < high && A[low] <= pivot)
+            ++low;
+        A[high] = A[low];
+    }
+    A[low] = pivot;
+    return low;
+}
+
+template <typename T>
+void quick_sort(T A[], size_t low, size_t high)
+{
+    if (low < high) {
+        size_t pivot = partition(A, low, high);
+        quick_sort(A, low, pivot - 1);
+        quick_sort(A, pivot + 1, high);
+    }
+}
+
+template <typename T>
+void quick_sort(T A[], size_t len)
+{
+    quick_sort(A, 0, len - 1);
+}
 ```
 
 	
@@ -176,12 +233,14 @@
 	
 ### 原理
 
-1. 分而治之
+分而治之
+
+- 把一个复杂的问题分成两个或更多的相同或相似的子问题，直到最后子问题可以简单地直接求解，原问题的解即子问题的解的合并。
+- 归并排序和快速排序体现了分治思想的精髓。
 
 	
-### 实例
+### 其他应用
 
-1. 分而治之
 
 		
 ## 实用技巧
@@ -409,6 +468,24 @@ int main()
 
 		
 ## 作业
+
+	
+1) 使用函数模板实现归并排序算法的迭代版本。运行效果如下：
+
+```console
+$ ./merge-sort-iteration
+<11 -9 10 -13 14 15 9 -7 5>
+-13 -9 -7 5 10 11 14 15
+```
+
+	
+2) 使用函数模板实现快速排序算法的迭代版本。运行效果如下：
+
+```console
+$ ./quick-sort-iteration
+<11 -9 10 -13 14 15 9 -7 5>
+-13 -9 -7 5 10 11 14 15
+```
 
 	
 ### 参考链接
