@@ -291,7 +291,7 @@ NO SOLUTION
 裴蜀（Bezout）定理
 
 - 若 `$ a, b $` 是不全为零的整数，且 `$ gcd(a, b) = d $`，则 `$ ax + by = m $` 有正整数解，当且仅当 `$ m $` 是 `$ d $` 的整数倍；若有解，则有无穷多个解。
-- 设其中一个解是 `$ x_0, y_0 $`，且，`$ m_0 = \frac{m}{d} $`，则上述方程的解集为：
+- 设 `$ ax + by = d $` 的一个解是 `$ x_0, y_0 $`，且，`$ m_0 = \frac{m}{d} $`，则上述方程的解集为：
 
 `$$
 \left \{ \left( m_0 x_0 + \frac{kb}{d}, m_0 y_0 - \frac{ka}{d} \right) \vert k \in \mathbb{Z} \right \}
