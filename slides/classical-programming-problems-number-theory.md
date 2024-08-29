@@ -586,7 +586,6 @@ factor_v prime_factors(uintmax_t n)
 - 斐波那契数列（Fibonacci sequence）的神奇性质。
 - 挑战：性能和溢出
 - 实现方法：递归、迭代、倍增法、通项公式
-- 倍增法利用如下性质：
 - 计算指定序号（第一个的序号为 0）的斐波那契数值。运行效果如下：
 
 ```console
@@ -606,10 +605,9 @@ OVERFLOWED
 
 `$$
 \begin{align}
-  F_{2k} & = F_k(2F_{k+1} - F{k}) \\
+  F_{2k}   & = F_k(2F_{k+1} - F{k}) \\
   F_{2k+1} & = F^2_k + F^2_k
 \end{align}
-
 $$`
 
 	
