@@ -1,5 +1,5 @@
 /*
- * The plain version to factor a natural number.
+ * The plain version to factor an integer number.
  *
  * Author: Vincent Wei
  *  - <https://github.com/VincentWei>
