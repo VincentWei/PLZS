@@ -1,4 +1,4 @@
-TARGETS = ratio-of-two-adjucent-fibonacci-numbers
+TARGETS = ratio-of-two-adjucent-fibonacci-numbers nth-fibonacci-number-iteration nth-fibonacci-number-recursion nth-fibonacci-number-binary-lifting
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

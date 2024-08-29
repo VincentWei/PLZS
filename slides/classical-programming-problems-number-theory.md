@@ -583,13 +583,49 @@ factor_v prime_factors(uintmax_t n)
 		
 ## 斐波那契数列
 
-- 斐波那契（Fibonacci）数列的神奇性质。
+- 斐波那契数列（Fibonacci sequence）的神奇性质。
+- 挑战：性能和溢出
+- 实现方法：递归、迭代、倍增法、通项公式
+- 倍增法利用如下性质：
 - 计算指定序号（第一个的序号为 0）的斐波那契数值。运行效果如下：
 
 ```console
 $ ./nth-fibonacci-number
-<5>
+<50>
+12586269025
+
+$ ./nth-fibonacci-number
+<100>
+OVERFLOWED
 ```
+
+	
+### 倍增法
+
+- 倍增法利用如下斐波那契数列的性质：
+
+`$$
+\begin{align}
+  F_{2k} & = F_k(2F_{k+1} - F{k}) \\
+  F_{2k+1} & = F^2_k + F^2_k
+\end{align}
+
+$$`
+
+	
+### 通项公式
+
+- 通项公式（Binet's Formula）
+
+`$$
+F_{n} = \frac{\left( \frac{1 + \sqrt{5}}{2} \right)^n - \left( \frac{1 - \sqrt{5}}{2} \right)^n}{\sqrt{5}}
+$$`
+
+- 或，
+
+`$$
+F_{n} = \left[ \frac{\left( \frac{1 + \sqrt{5}}{2} \right)^n}{\sqrt{5}} \right]
+$$`
 
 		
 ## 有理数的最简分数表达
