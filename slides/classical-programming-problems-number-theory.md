@@ -536,9 +536,9 @@ $ ./dn-on
 		
 ## 整数的因子分解
 
-- 整数的因子分解在计算机技术中有至关重要的意义。
+- 整数的因子分解（factorization）在计算机技术中有至关重要的意义。
 - 挑战：性能和溢出
-- 实现方法：朴素算法、Pollard Rho 算法及其优化版本
+- 实现方法：朴素算法及其优化版本、Pollard Rho 算法及其优化版本
 - 给定任意大于 1 的正整数，给出其所有质因子（重复的质因子只保留一个）。运行效果如下：
 
 ```console
@@ -554,28 +554,7 @@ $ ./prime-factors
 ### 朴素算法
 
 - 类似质数判定的试除法，在 `$ \left[ 2, \sqrt{n} \right] $` 中遍历。
-
-```cpp
-using namespace std;
-using factor_v = vector<uintmax_t>;
-
-factor_v prime_factors(uintmax_t n)
-{
-    factor_v factors;
-
-    for (uintmax_t i = 2; i <= n; i++) {
-        if (n % i == 0) {
-            do {
-                n = n / i;
-            } while (n % i == 0);
-
-            factors.push_back(i);
-        }
-    }
-
-    return factors;
-}
-```
+- 找到一个因子再判断是否是质数？
 
 	
 ### Pollard Rho 算法

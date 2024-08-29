@@ -1,5 +1,5 @@
 /*
- * The plain version to factor an integer number.
+ * The optimized version to factor an integer number.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.
@@ -15,7 +15,6 @@
  */
 #include <iostream>
 #include <vector>
-#include <cmath>
 #include <cstdlib>
 #include <cstdint>
 #include <cassert>
@@ -23,33 +22,19 @@
 using namespace std;
 using factor_v = vector<uintmax_t>;
 
-bool check_prime(uintmax_t n)
-{
-    if (n < 2)
-        return false;
-
-    uintmax_t max = llroundl(sqrtl(n));
-    for (uintmax_t i = 2; i <= max; i++) {
-        if (n % i == 0)
-            return false;
-    }
-
-    return true;
-}
-
 factor_v prime_factors(uintmax_t n)
 {
     factor_v factors;
 
-    uintmax_t max = llroundl(sqrtl(n));
-    for (uintmax_t i = 2; i <= max; i++) {
-        if (n % i == 0 && check_prime(i)) {
+    for (uintmax_t i = 2; i <= n; i++) {
+        if (n % i == 0) {
+            do {
+                n = n / i;
+            } while (n % i == 0);
+
             factors.push_back(i);
         }
     }
-
-    if (factors.empty())
-        factors.push_back(n);
 
     return factors;
 }

@@ -1,4 +1,4 @@
-TARGETS = prime-factors-plain
+TARGETS = prime-factors-plain prime-factors-optimized
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
