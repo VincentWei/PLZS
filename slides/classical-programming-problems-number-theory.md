@@ -605,8 +605,8 @@ OVERFLOWED
 
 `$$
 \begin{align}
-  F_{2k}   & = F_k(2F_{k+1} - F{k}) \\
-  F_{2k+1} & = F^2_k + F^2_k
+  F_{2k}   & = F_k(2F_{k+1} - F_{k}) \\
+  F_{2k+1} & = F^2_{k+1} + F^2_k
 \end{align}
 $$`
 
