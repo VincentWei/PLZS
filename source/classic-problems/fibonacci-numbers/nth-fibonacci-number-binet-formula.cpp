@@ -1,5 +1,5 @@
 /*
- * The iteration version to calculate the nth Fibonacci number.
+ * The Binet's formula version to calculate the nth Fibonacci number.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.
@@ -14,26 +14,20 @@
  * License: GPLv3
  */
 #include <iostream>
+#include <cmath>        // for sqrtl(), powl(), and llroundl()
 
 using namespace std;
 
 intmax_t nth_fibonacci_number(unsigned n)
 {
-    intmax_t a = 0;
-    intmax_t b = 1;
+    static long double sqrt_5;
+    if (sqrt_5 == 0)
+        sqrt_5 = sqrtl(5.0L);
 
-    unsigned i = 0;
-    while (i++ != n) {
-        auto tmp = a;
-        a = b;
-        b = tmp + b;
-
-        if (b < a) {
-            return -1;
-        }
-    }
-
-    return a;
+    long double fib = powl((1.0L + sqrt_5)/2.0L, n) / sqrt_5;
+    if (fib > INTMAX_MAX)
+        return -1;
+    return llroundl(fib);
 }
 
 int main()

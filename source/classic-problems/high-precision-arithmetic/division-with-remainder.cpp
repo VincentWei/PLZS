@@ -1,10 +1,14 @@
 /*
- * The answer key for Problem 2 of CPP Lesson 6:
- *  <https://courses.fmsoft.cn/plzs/cpp-arbitrary-precision-arithmetic.html#/8/1>
+ * The program implementation the high precision division with remainder.
+ *
+ * This program is a part of PLZS (the Programming Lessons for
+ * Zero-based Students Aged 10+) project.
+ * For more information about PLZS, please visit:
+ *
+ *  - <https://github.com/VincentWei/PLZS>
+ *  - <https://gitee.com/vincentwei7/PLZS>
  *
  * Author: Vincent Wei
- *  - <https://github.com/VincentWei>
- *  - <https://gitee.com/vincentwei7>
  *
  * Copyright (C) 2024 FMSoft <https://www.fmsoft.cn>.
  * License: GPLv3
