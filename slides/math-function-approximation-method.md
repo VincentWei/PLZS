@@ -107,8 +107,8 @@ $$`
 
 `$$
 \begin{align}
-   & \because \xi^{\frac{1 - 2(n + 1)}{2}} \lt 1 \quad (\xi \in (1, x) or (x, 1) 且 x \ge 0 \\
-   & \therefore \left| R_{n} \right| \lt \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{2-1}{2} \times \cdots \times \frac{2(n-1)-1}{2} \times \left| (x - 1) \right|
+   & \because \xi^{\frac{1 - 2(n + 1)}{2}} \lt 1 ; \quad \xi \in (1, x) \quad or \quad (x, 1) \quad 且 \quad x \ge 0 \\
+   & \therefore \left| R_{n} \right| \lt \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{2-1}{2} \times \cdots \times \frac{2(n-1)-1}{2} \times \left| x - 1 \right|
 \end{align}
 $$`
 
