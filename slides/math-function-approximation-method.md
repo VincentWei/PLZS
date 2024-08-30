@@ -67,10 +67,10 @@ $$`
 `$$
 \begin{align}
   f(x) & = \sqrt{x} = x^{\frac{1}{2}} \\
-  f'(x) & = \frac{1}{2} \times x^{\frac{1 - 2}{2}} \\
-  f''(x) & = \frac{1}{2} \times \frac{1-2}{2} \times x^{\frac{1 - 2 - 2}{2}} \\
+  f'(x) & = \frac{1}{2} x^{\frac{1}{2}} \frac{1}{x^1} \\
+  f''(x) & = \frac{1}{2} \times \frac{1-2}{2} x^{\frac{1}{2}} \frac{1}{x^2} \\
   \cdots \\
-  f^{(n)}(x) & = \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \times x^{\frac{1 - 2n}{2}} \\
+  f^{(n)}(x) & = \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} x^{\frac{1}{2}} \frac{1}{x^n} \\
 \end{align}
 $$`
 
@@ -112,7 +112,9 @@ $$`
 \end{align}
 $$`
 
-若要求 `$ \sqrt{2} \$` 的近似值，精确到小数点后 10 位，也就是要让 `$ \left| R_{n} \right| \lt 10^{-10} $`，则很容易获得对应的 `n` 值，然后累加 `n` 次即可求得。
+- 挑战来了：`$ R_{n} $` 并不能随着 `$ n $` 的变大迅速降低。
+- 解决方案：通过找到一个接近 `$ x $` 的已知其平方根的数作为 `$ a $` 并使用确定阶的泰勒展开求估计值。
+- 比如要求 `$ \sqrt{2} \$` 的近似值，可选择 `$ a = 1.96 $`。
 
 		
 ## 线性插值法
