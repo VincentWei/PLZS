@@ -69,7 +69,7 @@ double estimate_square_root(double a, unsigned scale)
         double last = x1;
         x1 = x0 - (x0 * x0 - a) / (x0 * 2);
         double errors = fabs(last - x1);
-        cout << "Iteration #" << i << ":\tx = " << x1 << "; errors: " << errors << endl;
+        cout << "Iteration #" << i << ":\tx_i = " << x1 << "; errors: " << errors << endl;
         if (errors < tolerance or isclose(errors, tolerance)) {
             break;
         }
