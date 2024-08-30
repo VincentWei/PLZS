@@ -67,10 +67,10 @@ $$`
 `$$
 \begin{align}
   f(x) & = \sqrt{x} = x^{\frac{1}{2}} \\
-  f'(x) & = \frac{1}{2} x^{\frac{1 - 2}{2}} \\
-  f''(x) & = \frac{1}{2} \times \frac{1-2}{2} x^{\frac{1 - 2 - 2}{2}} \\
+  f'(x) & = \frac{1}{2} \times x^{\frac{1 - 2}{2}} \\
+  f''(x) & = \frac{1}{2} \times \frac{1-2}{2} \times x^{\frac{1 - 2 - 2}{2}} \\
   \cdots \\
-  f^{(n)}(x) & = \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} x^{-\frac{1 + 2n}{2}} \\
+  f^{(n)}(x) & = \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \times x^{\frac{1 - 2n}{2}} \\
 \end{align}
 $$`
 
