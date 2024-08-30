@@ -56,6 +56,7 @@ double estimate_square_root(double a, unsigned scale)
     }
 
     double mid = NAN;
+    unsigned i = 0;
     while (start <= end) {
         mid = start + ((end - start) / 2.0);
 
@@ -63,6 +64,8 @@ double estimate_square_root(double a, unsigned scale)
             break;
 
         double errors = mid * mid - a;
+
+        cout << "Iteration #" << i++ << ":\tx = " << mid << "; errors: " << errors << endl;
         if (fabs(errors) <= tolerance) {
             break;
         }
@@ -84,5 +87,6 @@ int main()
     cin >> a >> scale;
 
     cout.precision(scale);
+    cout.setf(ios::fixed, ios::floatfield);
     cout << estimate_square_root(a, scale) << endl;
 }
