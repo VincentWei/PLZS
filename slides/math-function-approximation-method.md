@@ -67,10 +67,10 @@ $$`
 `$$
 \begin{align}
   f(x) & = \sqrt{x} = x^{\frac{1}{2}} \\
-  f'(x) & = \frac{1}{2} x^{\frac{1}{2}} \frac{1}{x^1} \\
-  f''(x) & = \frac{1}{2} \times \frac{1-2}{2} x^{\frac{1}{2}} \frac{1}{x^2} \\
+  f'(x) & = \frac{1}{2} \frac{x^{\frac{1}{2}}}{x^1} \\
+  f''(x) & = \frac{1}{2} \times \frac{1-2}{2} \frac{x^{\frac{1}{2}}}{x^2} \\
   \cdots \\
-  f^{(n)}(x) & = \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} x^{\frac{1}{2}} \frac{1}{x^n} \\
+  f^{(n)}(x) & = \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \frac{x^{\frac{1}{2}}}{x^n} \\
 \end{align}
 $$`
 
@@ -112,9 +112,11 @@ $$`
 \end{align}
 $$`
 
-- 挑战来了：`$ R_{n} $` 并不能随着 `$ n $` 的变大迅速降低。
-- 解决方案：通过找到一个接近 `$ x $` 的已知其平方根的数作为 `$ a $` 并使用确定阶的泰勒展开求估计值。
-- 比如要求 `$ \sqrt{2} \$` 的近似值，可选择 `$ a = 1.96 $`。
+- 挑战来了：`$ \left| R_{n} \right| $` 并不能随着 `$ n $` 的变大迅速降低，甚至越来越大。
+- 解决方案：多次迭代求得更加接近的一个值，然后继续迭代。
+
+	
+
 
 		
 ## 线性插值法
