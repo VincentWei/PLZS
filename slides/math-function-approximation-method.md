@@ -67,8 +67,8 @@ $$`
 `$$
 \begin{align}
   f(x) & = \sqrt{x} = x^{\frac{1}{2}} \\
-  f'(x) & = \frac{1}{2} x^{-\frac{1}{2}} \\
-  f''(x) & = \frac{1}{2}\frac{1-2}{2} x^{-\frac{1 + 2}{2}} \\
+  f'(x) & = \frac{1}{2} x^{\frac{1 - 2}{2}} \\
+  f''(x) & = \frac{1}{2}\frac{1-2}{2} x^{\frac{1 - 2 - 2}{2}} \\
   \cdots \\
   f^{(n)}(x) & = \frac{1}{2}\frac{1-2}{2}\cdots\frac{1-2(n-1)}{2} x^{-\frac{1 + 2n}{2}} \\
 \end{align}
