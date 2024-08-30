@@ -99,7 +99,7 @@ $$`
 其中，
 
 `$$
-    R_{n} = \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \xi^{-\frac{1 - 2(n + 1)}{2}} (x - 1) \quad (1 < \xi < x)
+    R_{n} = \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \xi^{\frac{1 - 2(n + 1)}{2}} (x - 1) \quad (1 < \xi < x)
 $$`
 
 	
@@ -107,8 +107,8 @@ $$`
 
 `$$
 \begin{align}
-   & \because \xi^{-\frac{1 + 2(n + 1)}{2}} (x - 1) \lt 1 \quad (1 < \xi < x) \\
-   & \therefore R_{n} \lt  \frac{1}{2^{n + 1}(n+1)!} (x - 1)
+   & \because \xi^{\frac{1 - 2(n + 1)}{2}} (x - 1) \lt 1 \quad (1 < \xi < x) \\
+   & \therefore R_{n} \lt \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2}
 \end{align}
 $$`
 
