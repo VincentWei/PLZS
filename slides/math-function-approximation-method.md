@@ -67,18 +67,19 @@ $$`
 `$$
 \begin{align}
   f(x) & = x^{\frac{1}{2}} \\
-  f'(x) & = \frac{1}{2} x^{-\frac{1}{2}} \\
+  f'(x) & = -\frac{1}{2} x^{-\frac{1}{2}} \\
   f''(x) & = \frac{1}{2^2} x^{-\frac{1 + 2}{2}} \\
   \cdots \\
   f^{n}(x) & = \frac{1}{2^n} x^{-\frac{1 + 2n}{2}} \\
 \end{align}
 $$`
 
+	
 取 `$ a = 1 $` 逼近，则有：
 
 `$$
 \begin{align}
-    \sqrt(x)  = 1 & + (x - 1) + \frac{1}{2}(x - 1)^2 \\
+    \sqrt{x}  = 1 & + (x - 1) + \frac{1}{2}(x - 1)^2 \\
                   & + \frac{1}{3!}(x - 1)^3 + \frac{1}{4!}(x - 1)^4 \\
                   & ... \\
                   & + \frac{1}{n!}(x - 1)^n +  R_{n}
@@ -91,7 +92,8 @@ $$`
     R_{n} = \frac{1}{(n+1)!} \times \frac{1}{2^{n + 1}} \xi^{-\frac{1 + 2(n + 1)}{2}} (x - 1) \quad (1 < \xi < x)
 $$`
 
-有，
+	
+于是，
 
 `$$
 \begin{align}
