@@ -74,10 +74,13 @@ $$`
 \end{align}
 $$`
 
-若 `$ a = 1 $` 则始终有：
+若 `$ a = 1 $` 则有：
 
 `$$
-f^{(n)}(a) = 1 \qquad (n \ge 0)
+\begin{align}
+  f(1) & = 1 \\
+  f^{(n)}(1) & = \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \qquad (n \gt 0)
+\end{align}
 $$`
 
 
@@ -86,17 +89,17 @@ $$`
 
 `$$
 \begin{align}
-    \sqrt{x}  = 1 & + (x - 1) + \frac{1}{2}(x - 1)^2 \\
-                  & + \frac{1}{3!}(x - 1)^3 + \frac{1}{4!}(x - 1)^4 \\
+    \sqrt{x}  = 1 & + f'(1) (x - 1) + \frac{1}{2}f''(1)(x - 1)^2 \\
+                  & + \frac{1}{3!}f^{(3)}(1)(x - 1)^3 + \frac{1}{4!}f^{(3)}(1)(x - 1)^4 \\
                   & ... \\
-                  & + \frac{1}{n!}(x - 1)^n +  R_{n}
+                  & + \frac{1}{n!}f^{(n)}(1)(x - 1)^n +  R_{n}
 \end{align}
 $$`
 
 其中，
 
 `$$
-    R_{n} = \frac{1}{(n+1)!} \times \frac{1}{2^{n + 1}} \xi^{-\frac{1 + 2(n + 1)}{2}} (x - 1) \quad (1 < \xi < x)
+    R_{n} = \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \xi^{-\frac{1 - 2(n + 1)}{2}} (x - 1) \quad (1 < \xi < x)
 $$`
 
 	
