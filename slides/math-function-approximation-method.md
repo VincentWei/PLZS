@@ -90,7 +90,7 @@ $$`
 `$$
 \begin{align}
     \sqrt{x}  = 1 & + f'(1) (x - 1) + \frac{1}{2}f''(1)(x - 1)^2 \\
-                  & + \frac{1}{3!}f^{(3)}(1)(x - 1)^3 + \frac{1}{4!}f^{(3)}(1)(x - 1)^4 \\
+                  & + \frac{1}{3!}f^{(3)}(1)(x - 1)^3 + \frac{1}{4!}f^{(4)}(1)(x - 1)^4 \\
                   & ... \\
                   & + \frac{1}{n!}f^{(n)}(1)(x - 1)^n +  R_{n}
 \end{align}
@@ -99,7 +99,7 @@ $$`
 其中，
 
 `$$
-    R_{n} = \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2(n-1)}{2} \xi^{\frac{1 - 2(n + 1)}{2}} (x - 1) \quad (1 < \xi < x)
+    R_{n} = \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{1-2}{2} \times \cdots \times \frac{1-2n)}{2} \times \xi^{\frac{1 - 2(n + 1)}{2}} \times (x - 1) \quad (1 < \xi < x)
 $$`
 
 	
@@ -107,10 +107,12 @@ $$`
 
 `$$
 \begin{align}
-   & \because \xi^{\frac{1 - 2(n + 1)}{2}} (x - 1) \lt 1 \quad (1 < \xi < x) \\
-   & \therefore \left| R_{n} \right| \lt \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{2-1}{2} \times \cdots \times \frac{2(n-1)-1}{2}
+   & \because \xi^{\frac{1 - 2(n + 1)}{2}} \lt 1 \quad (1 < \xi < x) \\
+   & \therefore \left| R_{n} \right| \lt \frac{1}{(n+1)!} \times \frac{1}{2} \times \frac{2-1}{2} \times \cdots \times \frac{2(n-1)-1}{2} \times (x - 1)
 \end{align}
 $$`
+
+若要求根号二的近似值，精确到 `$ 10^{-9} $`，则取 `$ n = 5 $` 即可。
 
 		
 ## 线性插值法
