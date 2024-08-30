@@ -1,4 +1,4 @@
-TARGETS = estimate-square-root-binary-approximation-method estimate-square-root-taylor-formula
+TARGETS = estimate-square-root-binary-approximation-method estimate-square-root-taylor-formula estimate-square-root-newton-approximation-method
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
