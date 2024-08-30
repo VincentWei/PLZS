@@ -124,7 +124,6 @@ int check(const string& mid, const string& n)
         return 0;
 
     if (nap_less(square_mid, n)) {
-        string tmp = square_mid;
         nap_add_to(square_mid, nap_mul_vert(mid, "2"));
         nap_add_to(square_mid, "1");
         if (nap_larger(square_mid, n)) {

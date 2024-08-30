@@ -39,15 +39,15 @@ bool isclosel(long double a, long double b)
     return (fabsl(a - b) <= max_val * LDBL_EPSILON);
 }
 
-unsigned determine_number_of_round(double x, double tolerance)
+unsigned determine_number_of_round(long double x, long double tolerance)
 {
-    double factorial = 1.0;
+    long double factorial = 1.0;
     unsigned n = 1;
 
     while (n < 20) {
-        double r = 1.0 / factorial;
+        long double r = 1.0 / factorial;
 
-        double numerator = 1.0, denominator = 2.0;
+        long double numerator = 1.0, denominator = 2.0;
         for (unsigned i = 1; i < n; i++) {
             numerator *= 2.0 * i - 1;
             denominator *= 2.0;
@@ -66,15 +66,15 @@ unsigned determine_number_of_round(double x, double tolerance)
     return n;
 }
 
-double sqrt_by_taylor_formula(double x, double a, double sqrt_a)
+long double sqrt_by_taylor_formula(long double x, long double a, long double sqrt_a)
 {
-    double ret = sqrt_a;
-    double factorial = 1.0;
-    double factor = 0.5;
-    double power_delta = x - a;
-    double power_x = x;
+    long double ret = sqrt_a;
+    long double factorial = 1.0;
+    long double factor = 0.5;
+    long double power_delta = x - a;
+    long double power_x = x;
 
-    for (unsigned i = 1; i < 3; i++) {
+    for (unsigned i = 1; i < 5; i++) {
         factorial *= i;
 
         if (i >= 2) {
@@ -89,35 +89,84 @@ double sqrt_by_taylor_formula(double x, double a, double sqrt_a)
     return ret;
 }
 
-double estimate_square_root(double x, unsigned scale)
+int check(uint64_t mid, uint64_t n)
 {
-    if (x < 0)
-        return NAN;
+    if (mid > UINT32_MAX)
+        return 1;
 
-    if (isclose(x, 0) || isclose(x, 1.0))
+    uint64_t square_mid = mid * mid;
+    if (square_mid == n)
+        return 0;
+
+    if (square_mid < n) {
+        square_mid += mid << 1;
+        square_mid += 1;
+        if (square_mid > n) {
+            return 0;
+        }
+
+        return -1;
+    }
+
+    return 1;
+}
+
+uint64_t maximum_le_sqrt(uint64_t n)
+{
+    if (n < 2)
+        return n;
+
+    uint64_t start = 0;
+    uint64_t end = n;
+    uint64_t mid = n / 2;
+
+    while (start <= end) {
+        mid = (start >> 1) + (end >> 1);
+        if (mid == 0)
+            break;
+
+        int r = check(mid, n);
+        if (r == 0) {
+            break;
+        }
+        else if (r > 0) {
+            end = mid;
+        }
+        else {
+            start = mid;
+        }
+    }
+
+    return mid;
+}
+
+long double estimate_square_root(uint64_t x, unsigned scale)
+{
+    if (x < 2)
         return x;
 
-    double tolerance = 1;
+    uint64_t tmp = maximum_le_sqrt(x);
+    long double sqrt_a = (long double)maximum_le_sqrt(tmp);
+    long double a = sqrt_a * sqrt_a;
+
+    long double tolerance = 1;
     while (scale != 0) {
         tolerance *= 0.1;
         scale--;
     }
 
-    double sqrt_a = 1.0;
-    double a = sqrt_a * sqrt_a;
-
-    double ans = sqrt_a;
+    long double ans = sqrt_a;
     unsigned i = 0;
     while (true) {
         ans = sqrt_by_taylor_formula(x, a, sqrt_a);
 
-        double errors = ans * ans - x;
+        long double errors = x - ans * ans;
         cout << "Iteration #" << i << ":\ta = " << a << "; x = " << ans << "; errors: " << errors << endl;
         if (fabs(errors) < tolerance or isclose(fabs(errors), tolerance)) {
             break;
         }
 
-        if (i++ > 100) {
+        if (++i > 100) {
             break;
         }
 
@@ -130,12 +179,12 @@ double estimate_square_root(double x, unsigned scale)
 
 int main()
 {
-    double a;
+    unsigned a;
     unsigned scale;
     cin >> a >> scale;
 
     cout.precision(scale);
     cout.setf(ios::fixed, ios::floatfield);
-    cout << estimate_square_root(a, scale) 
+    cout << estimate_square_root((long double)a, scale) 
         << " while sqrt() gives: " << sqrt(a) << endl;
 }
