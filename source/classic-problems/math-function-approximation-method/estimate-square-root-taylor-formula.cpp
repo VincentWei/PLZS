@@ -186,5 +186,5 @@ int main()
     cout.precision(scale);
     cout.setf(ios::fixed, ios::floatfield);
     cout << estimate_square_root((long double)a, scale) 
-        << " while sqrt() gives: " << sqrt(a) << endl;
+        << " while sqrt() gives: " << sqrtl((long double)a) << endl;
 }
