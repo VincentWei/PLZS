@@ -635,22 +635,14 @@ $ ./rational-number-to-fraction
 ```
 
 		
-## 求正整数的平方根
+## 平方根
 
-- 初级：给定正整数 `N`，求解其平方根，精确到小数点后 10 位。运行效果如下：
-
-```console
-$ ./sqrt-of-positive-integer
-<0.3 1>
-1/3
-```
-
-- 高级：给定任意长度的正整数 `N`，给出其平方根小数点后 `M` 位上的数字。运行效果如下：
+- 给定正实数 `d`，给出其平方根小数点后 `n` 位上的数字。运行效果如下：
 
 ```console
-$ ./sqrt-of-positive-integer
-<0.3 1>
-1/3
+$ ./nth-digit-after-decimal-point-of-sqrt
+4 1000
+0
 ```
 
 		
