@@ -87,8 +87,8 @@ Totally 6542 primes (0.000330209 seconds consumed).
 
 1. 依据费马小定理
 
-若 `$ p $` 为素数，且 `$ gcd(a,p)=1 $`，则 `$ a^{p-1} \equiv 1 \ (\mod p) $`。  
-或者，若 `$ p $` 为素数，对于任意整数 `$ a $`，有 `$ a^p \equiv a \ (\mod p) $`。
+若 `$ p $` 为素数，且 `$ \gcd (a, p) = 1 $`，则 `$ a^{p-1} \equiv 1 \ \pmod{p} $`。  
+或者，若 `$ p $` 为素数，对于任意整数 `$ a $`，有 `$ a^p \equiv a \ \pmod{p} $`。
 
 	
 ### Miller–Rabin 素性测试
@@ -633,4 +633,26 @@ $ ./rational-number-to-fraction
 <48.8260869565217391304347 22>
 1123/23
 ```
+
+		
+## 求正整数的平方根
+
+- 初级：给定正整数 `N`，求解其平方根，精确到小数点后 10 位。运行效果如下：
+
+```console
+$ ./sqrt-of-positive-integer
+<0.3 1>
+1/3
+```
+
+- 高级：给定任意长度的正整数 `N`，给出其平方根小数点后 `M` 位上的数字。运行效果如下：
+
+```console
+$ ./sqrt-of-positive-integer
+<0.3 1>
+1/3
+```
+
+		
+## 彻底搞懂扩展欧几里得算法
 
