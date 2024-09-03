@@ -6,7 +6,7 @@
 	
 ### 第 1 题
 
-在 C++ 中，下面哪个关键字用于声明一个变量，其值不能被修改？（  ）<!-- .element: style="text-align:left" -->
+- 在 C++ 中，下面哪个关键字用于声明一个变量，其值不能被修改？（  ）
 
    - A. `unsigned`
    - B. `const`
@@ -16,7 +16,7 @@
 	
 ### 第 2 题
 
-八进制数 <code>(12345670)<sub>8</sub></code> 和 <code>(07654321)<sub>8</sub></code> 的和为（  ）。<!-- .element: style="text-align:left" -->
+- 八进制数 <code>(12345670)<sub>8</sub></code> 和 <code>(07654321)<sub>8</sub></code> 的和为（  ）。
 
    - А. <code>(22222221)<sub>8</sub></code>
    - B. <code>(21111111)<sub>8</sub></code>
@@ -26,7 +26,7 @@
 	
 ### 第 3 题
 
-阅读下述代码，请问修改 `data` 的 `value` 成员以存储 `3.14`，正确的方式是（  ）。<!-- .element: style="text-align:left" -->
+- 阅读下述代码，请问修改 `data` 的 `value` 成员以存储 `3.14`，正确的方式是（  ）。
 
 ```cpp
 union Data {
@@ -103,7 +103,7 @@ struct Node {
 	
 ### 第 9 题
 
-数 <code>(101010)<sub>2</sub><code> 和 <code>166<sub>8</sub></code> 的和为（  ）。<!-- .element: style="text-align:left" -->
+数 <code>(101010)<sub>2</sub></code> 和 <code>(166)<sub>8</sub></code> 的和为（  ）。<!-- .element: style="text-align:left" -->
 
    - А. <code>(10110000)<sub>2</sub><code>
    - В. <code>(236)<sub>8</sub><code>
