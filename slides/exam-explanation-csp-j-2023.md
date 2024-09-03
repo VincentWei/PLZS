@@ -6,7 +6,7 @@
 	
 ### 第 1 题
 
-1) 在 C++ 中，下面哪个关键字用于声明一个变量，其值不能被修改？（  ）
+在 C++ 中，下面哪个关键字用于声明一个变量，其值不能被修改？（  ）<!-- .element: style="text-align:left" -->
    - A. `unsigned`
    - B. `const`
    - C. `static`
