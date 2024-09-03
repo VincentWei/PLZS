@@ -18,6 +18,7 @@ Copyright (C) 2024 FMSoft
 
 	
 1) C++ 编程语言的发明人是（ ）
+
    - A) Bjarne Stroustrup
    - B) Guido van Rossum
    - C) Linus Torvalds
@@ -25,6 +26,7 @@ Copyright (C) 2024 FMSoft
 
 	
 2) C++ 编程语言的标准由（ ）制定
+
    - A) NASA（美国国家航天局）
    - B) ISO（国际标准化组织）
    - C) ANSI（美国国家标准学会）
@@ -172,6 +174,7 @@ Copyright (C) 2024 FMSoft
 
 	
 23) 要使用 `std::cout` 对象向标准输出写入一个字符串（`std::string name`）以及一个换行符，正确的用法是（ ）
+
    - A) `std::cout >> name >> std::endl;`
    - B) `std::cout << name << std::endl;`
    - C) `std::cout << name + std::endl;`
@@ -179,6 +182,7 @@ Copyright (C) 2024 FMSoft
 
 	
 24) 要使用 `std::cin` 对象从标准输入中完整读取一行中可能包含空格的姓名（如 `Linus Torvalds`）时，不正确的用法是（ ）
+
    - A) `string name; std::getline(std::cin, name);`
    - B) `string name; std::getline(std::cin, name, '\n');`
    - C) `char buf[100]; std::cin.getline(buf, 100); string name = buf;`
@@ -186,6 +190,7 @@ Copyright (C) 2024 FMSoft
 
 	
 25) 要判断一个 `std::string` 类的对象 `str` 是否为空（不包含任何内容），不正确的逻辑表达式是（ ）
+
    - A) `(str.empty())`
    - B) `(str == nullptr)`
    - C) `(str.size() == 0)`
@@ -193,6 +198,7 @@ Copyright (C) 2024 FMSoft
 
 	
 26) C++ 中不能被重载的运算符是（ ）
+
    - A) `sizeof`
    - B) `+`
    - C) `>>`
