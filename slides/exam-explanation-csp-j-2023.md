@@ -8,25 +8,25 @@
 
 在 C++ 中，下面哪个关键字用于声明一个变量，其值不能被修改？（  ）<!-- .element: style="text-align:left" -->
 
-- A. `unsigned`
-- B. `const`
-- C. `static`
-- D. `mutable`
+   - A. `unsigned`
+   - B. `const`
+   - C. `static`
+   - D. `mutable`
 
 	
 ### 第 2 题
 
-八进制数 `$ (12345670)_8 $` 和 `$ (07654321)_8 $` 的和为（  ）。<!-- .element: style="text-align:left" -->
+八进制数 <code>(12345670<sub>8</sub></code> 和 <code>(07654321)<sub>8</sub></code> 的和为（  ）。<!-- .element: style="text-align:left" -->
 
    - А. <code>(22222221)<sub>8</sub></code>
-   - B. `$ (21111111)_8 $`
-   - C. `$ (22111111)_8 $`
-   - D. `$ (22222211)_8 $`
+   - B. <code>(21111111)<sub>8</sub></code>
+   - C. <code>(22111111)<sub>8</sub></code>
+   - D. <code>(22222211)<sub>8</sub></code>
 
 	
 ### 第 3 题
 
-3) 阅读下述代码，请问修改 `data` 的 `value` 成员以存储 `3.14`，正确的方式是（  ）。
+阅读下述代码，请问修改 `data` 的 `value` 成员以存储 `3.14`，正确的方式是（  ）。<!-- .element: style="text-align:left" -->
 
 ```cpp
 union Data {
