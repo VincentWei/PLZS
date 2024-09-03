@@ -105,10 +105,10 @@ struct Node {
 
 - 数 <code>(101010)<sub>2</sub></code> 和 <code>(166)<sub>8</sub></code> 的和为（  ）。
 
-   - А. <code>(10110000)<sub>2</sub><code>
-   - В. <code>(236)<sub>8</sub><code>
-   - C. <code>(158)<sub>10</sub><code>
-   - D. <code>(AO)<sub>16</sub><code>
+   - А. <code>(10110000)<sub>2</sub></code>
+   - В. <code>(236)<sub>8</sub></code>
+   - C. <code>(158)<sub>10</sub></code>
+   - D. <code>(AO)<sub>16</sub></code>
 
 	
 ### 第 10 题
