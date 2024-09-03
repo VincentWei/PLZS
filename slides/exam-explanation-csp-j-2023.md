@@ -46,7 +46,7 @@ union Data data;
 	
 ### 第 4 题
 
-假设有一个链表的节点定义如下：<!-- .element: style="text-align:left" -->
+假设有一个链表节点的定义如下所示。现在有一个指向链表头部的指针：`Node* head`。如果想要在链表中插入一个新节点，其成员 `data` 的值 `42`，并使新节点成链表的第一个节点，下面哪个操作是正确的？（ ）<!-- .element: style="text-align:left" -->
 
 ```cpp
 struct Node {
@@ -55,10 +55,18 @@ struct Node {
 };
 ```
 
-现在有一个指向链表头部的指针：`Node* head`。如果想要在链表中插入一个新节点，其成员 `data` 的值 `42`，并使新节点成链表的第一个节点，下面哪个操作是正确的？（ ）<!-- .element: style="text-align:left" -->
-
-   - A. `Node* newNode = new Node; newNode->data = 42; newNode-> next = head; head = newNode;`
-   - B. `Node* newNode = new Node; head-> data = 42; newNode->next = head; head = newNode;`
+   - A. `Node* newNode = new Node; newNode->data = 42; newNode->next = head; head = newNode;`
+   - B. `Node* newNode = new Node; head->data = 42; newNode->next = head; head = newNode;`
    - C. `Node* newNode = new Node; newNode->data = 42; head->next = newNode;`
-   - D. `Node* newNode = new Node; newNode-> data = 42; newNode-> next = head;`
+   - D. `Node* newNode = new Node; newNode->data = 42; newNode->next = head;`
+
+	
+### 第 5 题
+
+根节点的高度为 `1`，一根拥有 `2023` 个节点的三叉树高度至少 （  ）。<!-- .element: style="text-align:left" -->
+
+   - A. `6`
+   - B. `7`
+   - C. `8`
+   - D. `9`
 
