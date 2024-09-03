@@ -16,7 +16,7 @@
 	
 ### 第 2 题
 
-八进制数 <code>(12345670<sub>8</sub></code> 和 <code>(07654321)<sub>8</sub></code> 的和为（  ）。<!-- .element: style="text-align:left" -->
+八进制数 <code>(12345670)<sub>8</sub></code> 和 <code>(07654321)<sub>8</sub></code> 的和为（  ）。<!-- .element: style="text-align:left" -->
 
    - А. <code>(22222221)<sub>8</sub></code>
    - B. <code>(21111111)<sub>8</sub></code>
@@ -33,7 +33,7 @@ union Data {
     int num;
     float value;
     char symbol;
-;
+};
 union Data data;
 ```
 
@@ -44,9 +44,9 @@ union Data data;
 
 
 		
-## CSP-J 2023 真题解析之单项选择题
+## 第 4 题
 
-4) 假设有一个链表的节点定义如下：
+假设有一个链表的节点定义如下：<!-- .element: style="text-align:left" -->
 
 ```cpp
 struct Node {
@@ -56,9 +56,10 @@ struct Node {
 ```
 
 现在有一个指向链表头部的指针：`Node* head`。如果想要在链表中插入一个新节点，
-其成员 `data` 的值 `42`，并使新节点成链表的第一个节点，下面哪个操作是正确的？（ ）
+其成员 `data` 的值 `42`，并使新节点成链表的第一个节点，下面哪个操作是正确的？（ ）<!-- .element: style="text-align:left" -->
 
-A. `Node* newNode = new Node; newNode->data = 42; newNode-> next = head; head = newNode;`  
-B. `Node* newNode = new Node; head-> data = 42; newNode->next = head; head = newNode;`  
-C. `Node* newNode = new Node; newNode->data = 42; head->next = newNode;`  
-D. `Node* newNode = new Node; newNode-> data = 42; newNode-> next = head;`
+   - A. `Node* newNode = new Node; newNode->data = 42; newNode-> next = head; head = newNode;`
+   - B. `Node* newNode = new Node; head-> data = 42; newNode->next = head; head = newNode;`
+   - C. `Node* newNode = new Node; newNode->data = 42; head->next = newNode;`
+   - D. `Node* newNode = new Node; newNode-> data = 42; newNode-> next = head;`
+
