@@ -8,10 +8,10 @@
 
 在 C++ 中，下面哪个关键字用于声明一个变量，其值不能被修改？（  ）<!-- .element: style="text-align:left" -->
 
-    - A. `unsigned`
-    - B. `const`
-    - C. `static`
-    - D. `mutable`
+- A. `unsigned`
+- B. `const`
+- C. `static`
+- D. `mutable`
 
 	
 ### 第 2 题
