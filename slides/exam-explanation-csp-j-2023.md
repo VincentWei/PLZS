@@ -46,7 +46,12 @@ union Data data;
 	
 ### 第 4 题
 
-- 假设有一个链表节点的定义如下所示。现在有一个指向链表头部的指针：`Node* head`。如果想要在链表中插入一个新节点，其成员 `data` 的值 `42`，并使新节点成链表的第一个节点，下面哪个操作是正确的？（ ）
+- 假设有一个链表节点的定义后附代码片段所示。现在有一个指向链表头部的指针：`Node* head`。如果想要在链表中插入一个新节点，其成员 `data` 的值 `42`，并使新节点成链表的第一个节点，下面哪个操作是正确的？（ ）
+
+   - A. `Node* newNode = new Node; newNode->data = 42; newNode->next = head; head = newNode;`
+   - B. `Node* newNode = new Node; head->data = 42; newNode->next = head; head = newNode;`
+   - C. `Node* newNode = new Node; newNode->data = 42; head->next = newNode;`
+   - D. `Node* newNode = new Node; newNode->data = 42; newNode->next = head;`
 
 ```cpp
 struct Node {
@@ -54,12 +59,6 @@ struct Node {
     Node* next;
 };
 ```
-
-   - A. `Node* newNode = new Node; newNode->data = 42; newNode->next = head; head = newNode;`
-   - B. `Node* newNode = new Node; head->data = 42; newNode->next = head; head = newNode;`
-   - C. `Node* newNode = new Node; newNode->data = 42; head->next = newNode;`
-   - D. `Node* newNode = new Node; newNode->data = 42; newNode->next = head;`
-
 	
 ### 第 5 题
 
