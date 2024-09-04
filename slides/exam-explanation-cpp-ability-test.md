@@ -420,6 +420,7 @@ int main()
    - C) `24 1`
    - D) `3 1`
 
+	
 ```cpp
 #include <iostream>
 

@@ -648,3 +648,39 @@ $ ./nth-digit-after-decimal-point-of-sqrt
 		
 ## 彻底搞懂扩展欧几里得算法
 
+- 扩展欧几里得算法的主要用途：
+   1. 求 `ax + by = m` 不定方程之整数解。
+   1. 求乘法逆元。
+- 扩展欧几里得算法的递归实现：
+
+```cpp
+intmax_t ex_gcd(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
+{
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+
+    intmax_t gcd = ex_gcd(b, a % b, x, y);
+    intmax_t temp = x;
+    x = y;
+    y = temp - a / b * y;
+    return gcd;
+}
+```
+
+	
+### 扩展欧几里得算法的数学基础
+
+- 裴蜀（Bezout）定理
+   1. 若 `$ a, b $` 是不全为零的整数，且 `$ gcd(a, b) = d $`，则 `$ ax + by = m $` 有正整数解，当且仅当 `$ m $` 是 `$ d $` 的整数倍；若有解，则有无穷多个解。
+   1. 设 `$ ax + by = d $` 的一个解是 `$ x_0, y_0 $`，且，`$ m_0 = \frac{m}{d} $`，则上述方程的解集为：
+
+`$$
+\left \{ \left( m_0 x_0 + \frac{kb}{d}, m_0 y_0 - \frac{ka}{d} \right) \vert k \in \mathbb{Z} \right \}
+$$`
+
+- 裴蜀定理的几个推论
+   1. 若 `$ ax + by = d $` 方程中，`$ b | a $`，亦即 `$ a \mod b = 0 $`，则 `x = 1, y = \frac{d-a}{b}` 是该方程的一个解。
+
