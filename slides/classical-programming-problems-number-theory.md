@@ -698,7 +698,16 @@ $$`
 - 数学基础：`$ \gcd (a, b) = \gcd (b, b \bmod a) $`
 
 ```cpp
-intmax_t gcd_l(intmax_t a, intmax_t b)
+intmax_t gcd_r(intmax_t a, intmax_t b)
+{
+    if (b == 0) {
+        return a;
+    }
+
+    return gcd_r(b, a % b);
+}
+
+intmax_t gcd_i(intmax_t a, intmax_t b)
 {
     while (b != 0) {
         intmax_t tmp = a;
