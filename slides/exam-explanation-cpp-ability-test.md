@@ -364,7 +364,8 @@ long int rounded_addition(double a, double b = 0)
 
 int main()
 {
-    std::cout << std::rounded_addition(1) << " " << std::rounded_addition(1.7, 2.6) << std::endl;
+    std::cout << std::rounded_addition(1) << " "
+        << std::rounded_addition(1.7, 2.6) << std::endl;
 }
 ```
 
@@ -378,6 +379,7 @@ int main()
    - C) `j l t`
    - D) `Julia Lisa Tom`
 
+	
 ```cpp
 #include <iostream>
 #include <ctype>
@@ -450,6 +452,7 @@ int main()
    - C) `20240101: Julia; 20240103: Tom; 20240102: Lisa; `
    - D) 输出 `20240101: Julia; 20240103: Tom; `后程序会崩溃退出或者死循环。
 
+	
 ```cpp
 #include <iostream>
 #include <string>
@@ -493,6 +496,7 @@ int main()
    - C) `True`
    - D) `False`
 
+	
 ```cpp
 #include <iostream>
 #include <iostream>
@@ -562,6 +566,7 @@ int main()
    - C) `HELLO,&WORLD!`
    - D) `olleH,&dlrow!`
 
+	
 ```cpp
 #include <iostream>
 #include <cctype>
@@ -615,6 +620,7 @@ int main()
    - C) `5`
    - D) 不确定。
 
+	
 ```cpp
 #include <iostream>
 
@@ -677,6 +683,7 @@ int main()
    - C) `16`
    - D) 以上都不正确。
 
+	
 ```cpp
 #include <iostream>
 #include <cassert>
