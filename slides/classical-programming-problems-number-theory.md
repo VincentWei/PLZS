@@ -736,8 +736,8 @@ intmax_t ex_gcd_r(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 	
 ### 扩展欧几里得算法的迭代实现
 
-- 辗转相除法的每个步骤，确保了方程 `$ ax + by = \left( a \bmod b \right) $` 有一对整数解，即 `$ \left( q, -1 \right) $`。其中 `$ q = \left[ \frac{a}/{b} \right] $`。
-- 辗转相除法的每个步骤，都在为下一步确定一个新的余数（`$ \dot{r} $`），使得前一步的余数（`$ \bar{r} $`）和当前步骤的余数`$ r $`）满足：`$ \bar{r} = qr + \dot{r} $`。
+- 辗转相除法的每个步骤，确保了方程 `$ ax + by = \left( a \bmod b \right) $` 有一对整数解，即 `$ \left( q, -1 \right) $`。其中 `$ q = \left[ \frac{a}{b} \right] $`。
+- 辗转相除法的每个步骤，都在为下一步确定一个新的余数（`$ \dot{r} $`），使得前一步的余数（`$ \bar{r} $`）和当前步骤的余数（`$ r $`）满足：`$ \bar{r} = qr + \dot{r} $`。
 - 因此有：`$ \dot{x} = x − q\bar{x}; \dot{y} = y − q\bar{y} $`
 - 而方程 `$ ax + by = a $` 始终有一对整数解 `$ (1, 0) $`；而方程 `$ ax + by = b $` 始终有一对整数解 `$ (0, 1) $`，可作为前一步骤的解和当前步骤的解。
 
