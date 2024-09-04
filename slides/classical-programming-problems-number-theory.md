@@ -691,3 +691,75 @@ $$`
    1. 若方程 `$ ax + by = d $` 有整数解，且 `$ b \mid a $`，亦即 `$ a \bmod b = 0 $`，则有 `$ b = d $`，且 `$ \left( x = 1, y = 1 - \frac{a}{b} \right) $` 是该方程的一个解。
    1. 若对方程 `$ bx + \left( a \bmod b \right) y = d $` 可求得一个整数解 `$ \left(\phi, \psi \right) $`，且 `$ \left( a \bmod b \right) = \left( a - qb \right) $`，则 `$ \left( \psi, (\phi - q\psi) \right) $` 是方程 `$ ax + by = d $` 的一个整数解。
 
+	
+### 欧几里得算法
+
+- 欧几里得算法求最大公约数的数学基础：`$ \gcd (a, b) = \gcd (b, b % a) $`
+
+```cpp
+intmax_t gcd_l(intmax_t a, intmax_t b)
+{
+    while (b != 0) {
+        intmax_t tmp = a;
+        a = b;
+        b = tmp % b;
+    }
+
+    return a;
+}
+```
+
+	
+### 扩展欧几里得算法的递归实现
+
+- 按推论 2，在欧几里得算法的递归终止时，可求得最大公约数 `$ d $`，且可针对方程 `$ ax + by = d $`，求得在 `$ b \mid a $`，亦即 `$ a \bmod b = 0 $` 时的一对解：`$ \left( x = 1, y = 1 - \frac{a}{b} \right) $` 是该方程的一对解。
+- 按推论 3，在欧几里得算法递归的过程中，根据上一轮迭代的结构，可求得本一轮方程 `$ ax + by = d $` 的一对解。
+- 欧几里得算法最终返回时，就求得了 `$ ax + by = d $` 的基础解：`$ \left( x_0, y_0 \right) $`。
+
+```cpp
+intmax_t ex_gcd_r(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
+{
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+
+    intmax_t gcd = ex_gcd_r(b, a % b, x, y);
+    intmax_t temp = x;
+    x = y;
+    y = temp - a / b * y;
+    return gcd;
+}
+```
+
+	
+### 扩展欧几里得算法的迭代实现
+
+- 辗转相除法的每个步骤，确保了方程 `$ ax + by = \left( a \bmod b \right) $` 有一对整数解，即 `$ \left( q, -1 \right) $`。其中 `$ q = \left[ \frac{a}/{b} \right] $`。
+- 辗转相除法的每个步骤，都在为下一步确定一个新的余数（`$ \dot{r} $`），使得前一步的余数（`$ \bar{r} $`）和当前步骤的余数`$ r $`）满足：`$ \bar{r} = qr + \dot{r} $`。
+- 因此有：`$ \dot{x} = x − q\bar{x}; \dot{y} = y − q\bar{y} $`
+- 而方程 `$ ax + by = a $` 始终有一对整数解 `$ (1, 0) $`；而方程 `$ ax + by = b $` 始终有一对整数解 `$ (0, 1) $`，可作为前一步骤的解和当前步骤的解。
+
+```cpp
+intmax_t ex_gcd_i(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
+{
+    intmax_t prev_x, prev_y;
+
+    prev_x = 0; prev_y = 1;
+    x = 1; y = 0;
+    while (b != 0) {
+        intmax_t q = a / b;
+
+        intmax_t tmp;
+        tmp = prev_x; prev_x = prev_x - q * x; prev_x = x;
+        tmp = prev_y; prev_y = prev_y - q * y; prev_y = y;
+
+        tmp = b; b = a % b; a = tmp;
+    }
+
+    x = prev_x; y = prev_y;
+    return a;
+}
+```
+
