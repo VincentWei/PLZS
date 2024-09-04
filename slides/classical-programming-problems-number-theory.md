@@ -741,10 +741,10 @@ intmax_t ex_gcd_r(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 
 `$$
 \begin{align}
-x_{i+1} & = x_{i} − qx_{i-1}; \\
+x_{i+1} & = x_{i} − qx_{i-1} \\
 y_{i+1} & = y_{i} − qy_{i-1}
 \end{align}
-$$`。
+$$`
 
 - 辗转相除法终止时，即可求得最大公约数 `$ d $` 以及满足 `$ ax + by = d $` 的一对解。
 - 而方程 `$ ax + by = a $` 始终有一对整数解 `$ (1, 0) $`；而方程 `$ ax + by = b $` 始终有一对整数解 `$ (0, 1) $`，可作为前一步骤的解和当前步骤的解。
