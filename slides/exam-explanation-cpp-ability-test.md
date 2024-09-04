@@ -345,6 +345,7 @@ int main()
    - C) `2 5`
    - D) `1 5`
 
+	
 ```cpp
 #include <iostream>
 #include <cmath>
