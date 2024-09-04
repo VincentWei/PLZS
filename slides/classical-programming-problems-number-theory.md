@@ -654,7 +654,7 @@ $ ./nth-digit-after-decimal-point-of-sqrt
 ## 彻底搞懂扩展欧几里得算法
 
 - 扩展欧几里得算法的主要用途：
-   1. 求 `ax + by = m` 不定方程之整数解。
+   1. 求 `ax + by = m` 不定方程之基础解。
    1. 求乘法逆元。
 - 扩展欧几里得算法的递归实现：
 
@@ -689,12 +689,13 @@ $$`
 - 裴蜀定理的几个推论
    1. 若方程 `$ ax + by = m $` 有整数解，则 `$ bx + \left( a \bmod b \right)y = m $` 亦有整数解。
    1. 若方程 `$ ax + by = d $` 有整数解，且 `$ b \mid a $`，亦即 `$ a \bmod b = 0 $`，则有 `$ b = d $`，且 `$ \left( x = 1, y = 1 - \frac{a}{b} \right) $` 是该方程的一个解。
-   1. 若对方程 `$ bx + \left( a \bmod b \right) y = d $` 可求得一个整数解 `$ \left(\phi, \psi \right) $`，且 `$ \left( a \bmod b \right) = \left( a - qb \right) $`，则 `$ \left( \psi, (\phi - q\psi) \right) $` 是方程 `$ ax + by = d $` 的一个整数解。
+   1. 若对方程 `$ bx + \left( a \bmod b \right) y = d $` 可求得一个整数解 `$ \left(\phi, \psi \right) $`，且 `$ \left( a \bmod b \right) = \left( a - qb \right) $`，则 `$ \left( \psi, (\phi - q\psi) \right) $` 是方程 `$ ax + by = d $` 的一对整数解。
 
 	
 ### 欧几里得算法
 
-- 欧几里得算法求最大公约数的数学基础：`$ \gcd (a, b) = \gcd (b, b \bmod a) $`
+- 欧几里得算法（辗转相除法）可用来求最大公约数。
+- 数学基础：`$ \gcd (a, b) = \gcd (b, b \bmod a) $`
 
 ```cpp
 intmax_t gcd_l(intmax_t a, intmax_t b)
@@ -736,7 +737,7 @@ intmax_t ex_gcd_r(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 	
 ### 扩展欧几里得算法的迭代实现
 
-- 辗转相除法的每个步骤，确保了对当前步骤下的 `a, b` 构成的方程 `$ ax + by = \left( a \bmod b \right) $` 有一对整数解，即 `$ \left( 1, -q \right) $`。其中 `$ q = \left[ \frac{a}{b} \right] $`。
+- 辗转相除法的每个步骤，确保了对方程 `$ ax + by = \left( a \bmod b \right) $` 有一对整数解，即 `$ \left( 1, -q \right) $`。其中 `$ q = \left[ \frac{a}{b} \right] $`。
 - 辗转相除法的每个步骤，都在为下一步确定一个新的余数（`$ r_{i+1} $`），使得前一步的余数（`$ r_{i-1} $`）和当前步骤的余数（`$ r_{i} $`）满足：`$ r_{i+1} = qr_{i} + r_{i-1} $`。因此有：
 
 `$$
@@ -746,7 +747,7 @@ y_{i+1} & = y_{i} − qy_{i-1}
 \end{align}
 $$`
 
-- 辗转相除法终止时，即可求得最大公约数 `$ d $` 以及满足 `$ ax + by = d $` 的一对解。
+- 辗转相除法终止时，即可求得最大公约数 `$ \gcd(a, b) $` 以及满足 `$ ax + by = d $` 的一对解。
 - 而方程 `$ ax + by = a $` 始终有一对整数解 `$ (1, 0) $`；而方程 `$ ax + by = b $` 始终有一对整数解 `$ (0, 1) $`，可作为前一步骤的解和当前步骤的解。
 
 	
