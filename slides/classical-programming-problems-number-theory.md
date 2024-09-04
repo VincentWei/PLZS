@@ -762,7 +762,6 @@ intmax_t ex_gcd_i(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
         intmax_t q = a / b;
 
         intmax_t tmp;
-
         tmp = prev_x; prev_x = prev_x - q * x; prev_x = x;
         tmp = prev_y; prev_y = prev_y - q * y; prev_y = y;
         tmp = b; b = a % b; a = tmp;
