@@ -3,7 +3,7 @@
 数论相关
 
 		
-# 质数
+## 质数
 
 - 质数（prime number）是指一个大于 1 的正整数，除了 1 和自身之外，没有第二个正整数可以整除它。最小的质数是 2。
 - 编程找出尽可能多的质数。运行效果如下：
@@ -24,6 +24,7 @@ $ ./prime-numbers
 - 素数筛（朴素筛、Eratosthenes 筛和 Euler 筛）的数学原理。
 - 使用素数筛算法编程找出 16 位或 32 位无符号整数范围内的质数。运行效果如下：
 
+	
 ```console
 $ ./prime-numbers-sieve
 2
@@ -56,6 +57,7 @@ Totally 6542 primes (0.000330209 seconds consumed).
 - 素性测试算法尝试在不分解给定自然数的情况下，确定给定的自然数是否为素数。分为确定性测试和概率测试两类。
 - 使用特定的素性测试算法找出 64 位无符号整数范围内的所有质数。运行效果如下：
 
+	
 ```console
 $ ./primality-test
 2
@@ -101,6 +103,7 @@ Totally 6542 primes (0.000330209 seconds consumed).
 - 亲和数（amicable pair）是指一对正整数，第一个正整数的所有真因子之和等于第二个正整数，而第二个正整数的所有真因子之和等于第一个正整数。
 - 编程找出尽可能多的亲和数。运行效果如下：
 
+	
 ```console
 $ ./amicable-numbers
 220 284
@@ -153,6 +156,7 @@ $ ./amicable-numbers
 - 欧拉方法的数学原理。
 - 使用欧拉方法编程找出尽可能多的亲和数。运行效果如下：
 
+	
 ```console
 $ ./amicable-numbers-euler
 220 284
@@ -337,6 +341,7 @@ $ ./convert-string-in-specific-base
 	
 - 编程将用户输入的一个自然数转换为 -36 到 36 的进制展示出来。运行效果如下：
 
+	
 ```console
 $ ./show-number-in-different-bases
 <1900>
@@ -682,5 +687,5 @@ intmax_t ex_gcd(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 $$`
 
 - 裴蜀定理的几个推论
-   1. 若 `$ ax + by = d $` 方程中，`$ b | a $`，亦即 `$ a \mod b = 0 $`，则 `x = 1, y = \frac{d-a}{b}` 是该方程的一个解。
+   1. 若 `$ ax + by = d $` 方程中，`$ b \mid a $`，亦即 `$ a \bmod b = 0 $`，则 `x = 1, y = \frac{d-a}{b}` 是该方程的一个解。
 
