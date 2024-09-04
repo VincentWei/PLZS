@@ -737,7 +737,7 @@ intmax_t ex_gcd_r(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 	
 ### 扩展欧几里得算法的迭代实现
 
-- 辗转相除法的每个步骤，确保了对方程 `$ ax + by = \left( a \bmod b \right) $` 有一对整数解，即 `$ \left( 1, -q \right) $`。其中 `$ q = \left[ \frac{a}{b} \right] $`。
+- 辗转相除法的每个步骤，确保了方程 `$ ax + by = r_{i} $` 有一对整数解，直到 `$ r_{i} $` 等于 `$ \gcd(a, b) $` 为止。比如对第一步有整数解 `$ \left( 1, -q \right) $`，其中 `$ q = \left[ \frac{a}{b} \right] $`。
 - 辗转相除法的每个步骤，都在为下一步确定一个新的余数（`$ r_{i+1} $`），使得前一步的余数（`$ r_{i-1} $`）和当前步骤的余数（`$ r_{i} $`）满足：`$ r_{i+1} = qr_{i} + r_{i-1} $`。因此有：
 
 `$$
