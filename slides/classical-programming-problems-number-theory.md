@@ -694,7 +694,7 @@ $$`
 	
 ### 欧几里得算法
 
-- 欧几里得算法求最大公约数的数学基础：`$ \gcd (a, b) = \gcd (b, b % a) $`
+- 欧几里得算法求最大公约数的数学基础：`$ \gcd (a, b) = \gcd (b, b \bmod a) $`
 
 ```cpp
 intmax_t gcd_l(intmax_t a, intmax_t b)
@@ -741,6 +741,8 @@ intmax_t ex_gcd_r(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 - 因此有：`$ \dot{x} = x − q\bar{x}; \dot{y} = y − q\bar{y} $`
 - 而方程 `$ ax + by = a $` 始终有一对整数解 `$ (1, 0) $`；而方程 `$ ax + by = b $` 始终有一对整数解 `$ (0, 1) $`，可作为前一步骤的解和当前步骤的解。
 
+	
+
 ```cpp
 intmax_t ex_gcd_i(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 {
@@ -752,9 +754,9 @@ intmax_t ex_gcd_i(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
         intmax_t q = a / b;
 
         intmax_t tmp;
+
         tmp = prev_x; prev_x = prev_x - q * x; prev_x = x;
         tmp = prev_y; prev_y = prev_y - q * y; prev_y = y;
-
         tmp = b; b = a % b; a = tmp;
     }
 
