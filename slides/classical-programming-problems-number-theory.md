@@ -687,7 +687,7 @@ intmax_t ex_gcd(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 $$`
 
 - 裴蜀定理的几个推论
-   1. 若方程 `$ ax + by = d $` 中，`$ b \mid a $`，亦即 `$ a \bmod b = 0 $`，则 `$ \left( x = 1, y = \frac{d-a}{b} \right) $` 是该方程的一个解。
-   1. 若方程 `$ ax + by = m $` 有解，则 `$ bx + \left( a \bmod b \right)y = m $` 亦有解。
+   1. 若方程 `$ ax + by = m $` 有整数解，则 `$ bx + \left( a \bmod b \right)y = m $` 亦有整数解。
+   1. 若方程 `$ ax + by = d $` 中，`$ b \mid a $`，亦即 `$ a \bmod b = 0 $`，且有整数解，则有 `$ b = d $`，且 `$ \left( x = 1, y = 1 - \frac{a}{b} \right) $` 是该方程的一个解。
    1. 若对方程 `$ bx + \left( a \bmod b \right) y = d $` 可求得一个解 `$ \left(\phi, \psi \right) $`，且 `$ \left( a \bmod b \right) = \left( a - qb \right) $`，则 `$ \left( \psi, (\phi - q\psi) \right) $` 是方程 `$ ax + by = d $` 的一个解。
 
