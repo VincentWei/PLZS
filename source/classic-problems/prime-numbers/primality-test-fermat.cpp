@@ -49,8 +49,8 @@ uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 
     while (exp) {
         if (exp & 1)
-            ret = (ret * base) % modulus;
-        base = (base * base) % modulus;
+            ret = ((ret % modulus) * (base % modulus)) % modulus;
+        base = ((base % modulus) * (base % modulus)) % modulus;
         exp >>= 1;
     }
 

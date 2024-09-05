@@ -126,8 +126,8 @@ uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 
     while (exp) {
         if (exp & 1)
-            ret = (ret * base) % modulus;
-        base = (base * base) % modulus;
+            ret = ((ret % modulus) * (base % modulus)) % modulus;
+        base = ((base % modulus) * (base % modulus)) % modulus;
         exp >>= 1;
     }
 
@@ -142,6 +142,8 @@ uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
    - 如果`$ a^{n−1} \equiv 1 \pmod n $` 但 `$ n $` 不是素数，则 `$ n $` 被称为以 `$ a $` 为底的 `伪素数`。比如 `$ n = 341 $` 且 `$ a = 2 $` 时，满足 `$ 2^{340}\equiv 1 {\pmod {341}} $`，但 `$ 341 = 11 \times 31 $` 是个合数。事实上，`$ 341 $` 是底最小的伪素数。
    - 甚至有些合数 `$ n $`，对任意满足 `$ a\perp n $` 的整数 `$ a $`，均有 `$ a^{n−1} \equiv 1 \pmod n $`，这样的数称为卡迈克尔（Carmichael）数。最小的卡迈克尔数是 `$ 561 = 3 \times 11 \times 17 $`。
 1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进。
+1. 二次探测定理：如果 `$ p $` 是奇素数，则 `$ x^2 \equiv 1 \pmod p $` 的解为 `$ x \equiv 1 \pmod p $` 或者 `$ x \equiv p - 1 \pmod p $`。
+1. 提示：`$ x^2 \equiv 1 \pmod p $` 等价于 `$ (x+1)(x-1) \equiv 0 \bmod p $`。
 
 		
 ## 亲和数
