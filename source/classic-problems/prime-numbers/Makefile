@@ -1,4 +1,4 @@
-TARGETS = check-prime-plain check-prime-optimized prime-numbers-sieve-plain prime-numbers-sieve-eratosthenes prime-numbers-sieve-eratosthenes-optimized prime-numbers-sieve-euler prime-numbers-sieve-euler-optimized
+TARGETS = check-prime-plain check-prime-optimized prime-numbers-sieve-plain prime-numbers-sieve-eratosthenes prime-numbers-sieve-eratosthenes-optimized prime-numbers-sieve-euler prime-numbers-sieve-euler-optimized primality-test-fermat
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
