@@ -143,9 +143,9 @@ uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
 1. 费马素性测试存在的问题：费马小定理的逆定理并不成立。
    - 如果`$ a^{n−1} \equiv 1 \pmod n $` 但 `$ n $` 不是素数，则 `$ n $` 被称为以 `$ a $` 为底的 `伪素数`。比如 `$ n = 341 $` 且 `$ a = 2 $` 时，满足 `$ 2^{340}\equiv 1 {\pmod {341}} $`，但 `$ 341 = 11 \times 31 $` 是个合数。事实上，`$ 341 $` 是底最小的伪素数。
    - 甚至有些合数 `$ n $`，对任意满足 `$ a\perp n $` 的整数 `$ a $`，均有 `$ a^{n−1} \equiv 1 \pmod n $`，这样的数称为卡迈克尔（Carmichael）数。最小的卡迈克尔数是 `$ 561 = 3 \times 11 \times 17 $`。
-1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进。
-1. 二次探测定理：如果 `$ p $` 是奇素数，则 `$ x^2 \equiv 1 \pmod p $` 的解为 `$ x \equiv 1 \pmod p $` 或者 `$ x \equiv p - 1 \pmod p $`。
-1. 提示：`$ x^2 \equiv 1 \pmod p $` 等价于 `$ (x+1)(x-1) \equiv 0 \bmod p $`。
+1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进，使用了二次探测定理：  
+如果 `$ p $` 是奇素数，则 `$ x^2 \equiv 1 \pmod p $` 的解为 `$ x \equiv 1 \pmod p $` 或者 `$ x \equiv p - 1 \pmod p $`。
+1. 提示：`$ x^2 \equiv 1 \pmod p $` 等价于 `$ (x+1)(x-1) \equiv 0 \bmod p $`。同余方程 `$ x^2 \equiv 1 \pmod n $` 除 `$ x \equiv 1 \bmod n $` 的任何根称为以 `n` 为模的 `1` 的非平凡平方根；若 `n` 存在以 `n` 为模的 `1` 的非平凡平方根，则 `n` 是合数。
 
 	
 - 实现原理：将 `$ a^{n-1} \equiv 1 \pmod n $` 中的指数 `$ n−1 $` 分解为 `$ n−1=u \times 2^t $`，在每轮测试中对随机出来的 `$ a $` 先求出 `$ v = a^{u} \bmod n $`，之后对这个值执行最多 `$ t $` 次平方操作，若发现非平凡平方根时即可判断出其不是素数，否则再使用费马素性测试判断。
