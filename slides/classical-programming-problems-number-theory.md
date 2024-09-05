@@ -138,7 +138,7 @@ uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 	
 ### 米勒-拉宾素性测试
 
-1. 费马素性测试存在的问题：费马小定理的逆定理并不成立。甚至有些合数 `$ n $`，对任意满足 `$ a\perp n $` 的整数 `$ a $`，均有 `$ a^{n−1} \equiv 1 \pmod n $`，这样的数称为卡迈克尔（Carmichael）数。
+1. 费马素性测试存在的问题：费马小定理的逆定理并不成立。甚至有些合数 `$ n $`，对任意满足 `$ a\perp n $` 的整数 `$ a $`，均有 `$ a^{n−1} \equiv 1 \pmod n $`，这样的数称为卡迈克尔（Carmichael）数。最小的卡迈克尔数是 `$ 561 = 3 \times 11 \times 17 $`。
 1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进。
 
 		
