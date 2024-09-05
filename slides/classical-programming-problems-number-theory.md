@@ -146,6 +146,7 @@ uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
 1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进，使用了二次探测定理：  
 如果 `$ p $` 是奇素数，则 `$ x^2 \equiv 1 \pmod p $` 的解为 `$ x \equiv 1 \pmod p $` 或者 `$ x \equiv p - 1 \pmod p $`。
 1. 提示：`$ x^2 \equiv 1 \pmod p $` 等价于 `$ (x+1)(x-1) \equiv 0 \bmod p $`。同余方程 `$ x^2 \equiv 1 \pmod n $` 除 `$ x \equiv 1 \bmod n $` 的任何根称为以 `n` 为模的 `1` 的非平凡平方根；若 `n` 存在以 `n` 为模的 `1` 的非平凡平方根，则 `n` 是合数。
+1. 费马素性测试通常用于测试 32 位自然数，而米勒-拉宾素性测试可用于 64 位自然数和大整数。
 
 	
 - 实现原理：将 `$ a^{n-1} \equiv 1 \pmod n $` 中的指数 `$ n−1 $` 分解为 `$ n−1=u \times 2^t $`，在每轮测试中对随机选择的 `$ a $` 先求出 `$ v = a^{u} \bmod n $`，之后对这个值执行最多 `$ t $` 次平方操作，若发现非平凡平方根时即可判断出其不是素数，否则再使用费马素性测试判断。
