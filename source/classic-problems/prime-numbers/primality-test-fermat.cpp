@@ -24,13 +24,13 @@ using namespace std;
 
 #define NR_TESTS        9
 
-bool check_prime(uint64_t n)
+bool check_prime(uint32_t n)
 {
     if (n < 2)
         return false;
 
-    uint64_t max = llroundl(sqrtl(n));
-    for (uint64_t i = 2; i <= max; i++) {
+    uint32_t max = llroundl(sqrtl(n));
+    for (uint32_t i = 2; i <= max; i++) {
         if (n % i == 0)
             return false;
     }
@@ -43,30 +43,30 @@ long long pi(uint64_t n)
     return llroundl(n / logl((long double)n));
 }
 
-uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
+uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
 {
     uint64_t ret = 1;
+    uint64_t base_64 = base;
 
     while (exp) {
         if (exp & 1)
-            ret = ((ret % modulus) * (base % modulus)) % modulus;
-        base = ((base % modulus) * (base % modulus)) % modulus;
+            ret = (ret * base_64) % modulus;
+        base_64 = (base_64 * base_64) % modulus;
         exp >>= 1;
     }
 
-    return ret;
+    return static_cast<uint32_t>(ret);
 }
 
-bool primality(uint64_t n)
+bool primality_fermat(uint32_t n)
 {
-    if (n <= UINT16_MAX)
-        return check_prime(n);
-
-    if ((n & 1) == 0)
-        return false;
+    if (n < 3 || n % 2 == 0)
+        return n == 2;
+    if (n % 3 == 0)
+        return n == 3;
 
     for (int i = 0; i < NR_TESTS; i++) {
-        uint64_t base = static_cast<uint64_t>(random()) % (n - 2) + 2;
+        uint32_t base = static_cast<uint32_t>(random()) % (n - 2) + 2;
         if (quick_power_modulo(base, n - 1, n) != 1)
             return false;
     }
@@ -93,18 +93,21 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 
 int main()
 {
-    assert(check_prime(0) == false);
-    assert(check_prime(1) == false);
-    assert(check_prime(2) == true);
-    assert(check_prime(3) == true);
-    assert(check_prime(5) == true);
-    assert(check_prime(6) == false);
+    assert(primality_fermat(0) == false);
+    assert(primality_fermat(1) == false);
+    assert(primality_fermat(2) == true);
+    assert(primality_fermat(3) == true);
+    assert(primality_fermat(1973) == true);
+    assert(primality_fermat(1975) == false);
+    assert(primality_fermat(1979) == true);
+    assert(primality_fermat(4294967029) == true);
+    assert(primality_fermat(UINT32_MAX) == false);
 
     long long nr_all_primes = pi(UINT64_MAX);
     cout << "According to the Prime Numbers Theorem, there are approximately "
         << nr_all_primes << " prime numbers less than " << UINT64_MAX << "."
         << endl;
-    cout << "It will take " << nr_all_primes * sizeof(uint64_t) / 1024 / 1024 / 1024
+    cout << "It will take " << nr_all_primes * sizeof(uint32_t) / 1024 / 1024 / 1024
         << " GB memory." << endl;
 
     unsigned nr_primes;
@@ -114,22 +117,22 @@ int main()
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
     srandom(time(NULL));
-    uint64_t n = UINT32_MAX + 1ULL;
+    uint32_t n = UINT32_MAX;
     unsigned i = 0;
     while (true) {
         if (i == nr_primes)
             break;
         clog << "testing " << n << endl;
-        if (primality(n)) {
+        if (primality_fermat(n)) {
             cout << n << endl;
             i++;
         }
 
-        n++;
+        n--;
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);
-    cout << "Totally " << (n - UINT32_MAX - 1) << " natural numbers tested (" << duration
+    cout << "Totally " << (UINT32_MAX - n) << " natural numbers tested (" << duration
         << " seconds consumed)." << endl;
 }
 

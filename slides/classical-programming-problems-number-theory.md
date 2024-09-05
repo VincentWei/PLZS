@@ -62,22 +62,23 @@ Totally 6542 primes (0.000330209 seconds consumed).
 - 概率性测试的主要原理是利用质数的一些性质来测试给定自然数可能是质数的概率，当概率足够小时便认为其为质数。
 
 	
-- 问题：使用某种素性测试算法找出大于 `$ 2^{32} $` 的前 `N` 个质数。运行效果如下：
+- 问题：使用某种素性测试算法找出小于 `$ 2^{32} $` 或 `$ 2^{64} $` 的前 `N` 个质数。运行效果如下：
 
 ```console
 $ ./primality-test
-<100>               # 指定要列出的质数数量
-4294967311
-4294967357
-4294967371
-4294967377
-4294967387
-4294967389
-4294967459
-4294967477
-4294967497
-4294967513
-Totally 218 natural numbers tested (0.00142375 seconds consumed).
+<10>               # 指定要列出的质数数量
+10
+4294967291
+4294967279
+4294967231
+4294967197
+4294967189
+4294967161
+4294967143
+4294967111
+4294967087
+4294967029
+Totally 267 natural numbers tested (0.00195938 seconds consumed).
 ```
 
 	
@@ -95,7 +96,7 @@ Totally 218 natural numbers tested (0.00142375 seconds consumed).
 ```cpp
 #define NR_TESTS        9
 
-bool primality(uint64_t n)
+bool primality_fermat(uint32_t n)
 {
     if (n <= UINT16_MAX)
         return check_prime(n);
@@ -106,7 +107,7 @@ bool primality(uint64_t n)
     // NR_TESTS 通常取 8 或以上。
     for (int i = 0; i < NR_TESTS; i++) {
         // 在 [2, n - 2] 中随机取某个值作为底进行测试。
-        uint64_t base = static_cast<uint64_t>(random()) % (n - 2) + 2;
+        uint32_t base = static_cast<uint32_t>(random()) % (n - 2) + 2;
         if (quick_power_modulo(base, n - 1, n) != 1)
             return false;
     }
@@ -116,8 +117,106 @@ bool primality(uint64_t n)
 ```
 
 	
-- `quick_power_modulo()` 函数利用快速幂算法计算幂，但同时执行取模操作，在确保正确的前提下，可有效避免溢出风险。
+- `quick_power_modulo()` 函数利用快速幂算法计算幂，为避免溢出，可同时执行取模操作，但需要使用更宽的整数类型。
 - 其数学原理为：`$ ab \bmod p = \left( (a \bmod p) (b \bmod p) \right) \bmod p $`
+
+```cpp
+uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
+{
+    uint64_t ret = 1;
+    uint64_t base_64 = base;
+
+    while (exp) {
+        if (exp & 1)
+            ret = (ret * base_64) % modulus;
+        base_64 = (base_64 * base_64) % modulus;
+        exp >>= 1;
+    }
+
+    return static_cast<uint32_t>(ret);
+}
+```
+
+	
+### 米勒-拉宾素性测试
+
+1. 费马素性测试存在的问题：费马小定理的逆定理并不成立。
+   - 如果`$ a^{n−1} \equiv 1 \pmod n $` 但 `$ n $` 不是素数，则 `$ n $` 被称为以 `$ a $` 为底的 `伪素数`。比如 `$ n = 341 $` 且 `$ a = 2 $` 时，满足 `$ 2^{340}\equiv 1 {\pmod {341}} $`，但 `$ 341 = 11 \times 31 $` 是个合数。事实上，`$ 341 $` 是底最小的伪素数。
+   - 甚至有些合数 `$ n $`，对任意满足 `$ a\perp n $` 的整数 `$ a $`，均有 `$ a^{n−1} \equiv 1 \pmod n $`，这样的数称为卡迈克尔（Carmichael）数。最小的卡迈克尔数是 `$ 561 = 3 \times 11 \times 17 $`。
+1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进。
+1. 二次探测定理：如果 `$ p $` 是奇素数，则 `$ x^2 \equiv 1 \pmod p $` 的解为 `$ x \equiv 1 \pmod p $` 或者 `$ x \equiv p - 1 \pmod p $`。
+1. 提示：`$ x^2 \equiv 1 \pmod p $` 等价于 `$ (x+1)(x-1) \equiv 0 \bmod p $`。
+
+	
+- 实现原理：将 `$ a^{n-1} \equiv 1 \pmod n $` 中的指数 `$ n−1 $` 分解为 `$ n−1=u \times 2^t $`，在每轮测试中对随机出来的 `$ a $` 先求出 `$ v = a^{u} \bmod n $`，之后对这个值执行最多 `$ t $` 次平方操作，若发现非平凡平方根时即可判断出其不是素数，否则再使用费马素性测试判断。
+- 几个实现细节：
+   1. 对于一轮测试，如果某一时刻 `$ a^{u \times 2^s} \equiv n-1 \pmod n $`，则之后的平方操作全都会得到 `$ 1 $`，则可以直接通过本轮测试。
+   1. 如果找出了一个非平凡平方根 `$ a^{u \times 2^s} \not\equiv n-1 \pmod n $`，则之后的平方操作全都会得到 `$ 1 $`。可以选择直接返回 `false`，也可以放到 `$ t $`次平方操作后再返回 `false`。
+   1. 通常使用米勒-拉宾素性测试对 `$ [1, 2^{64}) $` 范围内的数进行素性检验。对于 `$ [1, 2^{32}) $` 范围内的数，课选取 `$ \{2, 7, 61\} $` 三个数作为基底进行素性检验就可以确定素性；对于 `$ [1, 2^{64}) `$ 范围内的数，选取 `$ \{2, 325, 9375, 28178, 450775, 9780504, 1795265022\} $` 七个数作为基底进行素性检验就可以确定素性。
+   1. 也可以选取 `$ \{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37\} $`（即前 12 个素数）检验 `$ [1, 2^{64}) $` 范围内的素数。
+
+	
+
+```cpp
+bool primality_miller_rabin(uint64_t n)
+{
+    static const uint64_t bases_32[] = {
+        2, 7, 61,
+    };
+
+    static const uint64_t bases_64[] = {
+        2, 325, 9375, 28178, 450775, 9780504, 1795265022ULL,
+    };
+
+
+    if (n < 3 || (n & 1) == 0)
+        return n == 2;
+
+    if (n % 3 == 0)
+        return n == 3;
+
+    uint64_t u = n - 1, t = 0;
+    while (u % 2 == 0) {
+        u /= 2, ++t;
+    }
+
+    const uint64_t *bases;
+    int nr_tests;
+    if (n <= UINT32_MAX) {
+        bases = bases_32;
+        nr_tests = sizeof(bases_32)/sizeof(bases_32[0]);
+    }
+    else {
+        bases = bases_64;
+        nr_tests = sizeof(bases_64)/sizeof(bases_64[0]);
+    }
+
+    for (int i = 0; i < nr_tests; i++) {
+        uint64_t a = bases[i];
+        uint64_t v = quick_power_modulo(a, u, n);
+        if (v == 1)
+            continue;
+
+        uint64_t s;
+        for (s = 0; s < t; ++s) {
+            // 若得到平凡平方根 n-1，则通过此轮测试
+            if (v == n - 1)
+                break;
+            v = v * v % n;
+        }
+
+        // 如果找到了非平凡平方根，则会由于无法提前 break; 而运行到 s == t
+        // 如果费马素性测试无法通过，则一直运行到 s == t 前 v 都不会等于 -1
+        if (s == t)
+            return false;
+    }
+
+    return true;
+}
+```
+
+	
+- 选择较小的基数，溢出风险降低，但仍存在，故而需要改进 `quick_power_modulo()` 函数的实现。
 
 ```cpp
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
@@ -133,17 +232,8 @@ uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 
     return ret;
 }
+
 ```
-
-	
-### 米勒-拉宾素性测试
-
-1. 费马素性测试存在的问题：费马小定理的逆定理并不成立。
-   - 如果`$ a^{n−1} \equiv 1 \pmod n $` 但 `$ n $` 不是素数，则 `$ n $` 被称为以 `$ a $` 为底的 `伪素数`。比如 `$ n = 341 $` 且 `$ a = 2 $` 时，满足 `$ 2^{340}\equiv 1 {\pmod {341}} $`，但 `$ 341 = 11 \times 31 $` 是个合数。事实上，`$ 341 $` 是底最小的伪素数。
-   - 甚至有些合数 `$ n $`，对任意满足 `$ a\perp n $` 的整数 `$ a $`，均有 `$ a^{n−1} \equiv 1 \pmod n $`，这样的数称为卡迈克尔（Carmichael）数。最小的卡迈克尔数是 `$ 561 = 3 \times 11 \times 17 $`。
-1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进。
-1. 二次探测定理：如果 `$ p $` 是奇素数，则 `$ x^2 \equiv 1 \pmod p $` 的解为 `$ x \equiv 1 \pmod p $` 或者 `$ x \equiv p - 1 \pmod p $`。
-1. 提示：`$ x^2 \equiv 1 \pmod p $` 等价于 `$ (x+1)(x-1) \equiv 0 \bmod p $`。
 
 		
 ## 亲和数
