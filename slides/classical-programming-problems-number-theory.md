@@ -88,23 +88,12 @@ Totally 218 natural numbers tested (0.00142375 seconds consumed).
 - 关键代码（下页）
 
 	
-- `quick_power_modulo()` 函数利用快速幂算法计算幂，但同时执行取模操作，在确保正确的前提下，可有效避免溢出风险。
-- 其数学原理为：`$ ab \bmod p = ((a \bmod p) * (b \bmod p)) \bmod p) $`
+- `primality()` 函数对给定的自然数 `n` 执行费马素性测试。
+- 在 `[2, n - 2]` 中随机取某个值作为底，然后调用 `quick_power_modulo()` 函数测试取模结果是否为 `1`。
+- 执行至少 8 次测试，若任意一次不满足，则认为是合数，若都满足，则认为是素数。
 
 ```cpp
-uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
-{
-    uint64_t ret = 1;
-
-    while (exp) {
-        if (exp & 1)
-            ret = (ret * base) % modulus;
-        base = (base * base) % modulus;
-        exp >>= 1;
-    }
-
-    return ret;
-}
+#define NR_TESTS        9
 
 bool primality(uint64_t n)
 {
@@ -124,13 +113,33 @@ bool primality(uint64_t n)
 
     return true;
 }
-
 ```
 
 	
-### Miller–Rabin 素性测试
+- `quick_power_modulo()` 函数利用快速幂算法计算幂，但同时执行取模操作，在确保正确的前提下，可有效避免溢出风险。
+- 其数学原理为：`$ ab \bmod p = \left[ (a \bmod p) (b \bmod p) \right] \bmod p $`
 
-1. 是对 Fermat 素性测试的改进，依据另一个有关质数的定理：在假设广义黎曼猜想成立的前提下，只需检查
+```cpp
+uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
+{
+    uint64_t ret = 1;
+
+    while (exp) {
+        if (exp & 1)
+            ret = (ret * base) % modulus;
+        base = (base * base) % modulus;
+        exp >>= 1;
+    }
+
+    return ret;
+}
+```
+
+	
+### 米勒-拉宾素性测试
+
+1. 费马素性测试存在的问题：费马小定理的逆定理并不成立。甚至有些合数 `$ n $`，对任意满足 `$ a\perp n $` 的整数 `$ a $`，均有 `$ a^{n−1} \equiv 1 \pmod n $`，这样的数称为卡迈克尔（Carmichael）数。
+1. 米勒-拉宾（Miller–Rabin）素性测试是对费马素性测试的改进。
 
 		
 ## 亲和数
