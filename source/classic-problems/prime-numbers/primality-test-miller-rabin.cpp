@@ -142,7 +142,7 @@ int main()
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
     srandom(time(NULL));
-    uint64_t n = UINT64_MAX;
+    uint64_t n = UINT32_MAX + 1ULL;
     unsigned i = 0;
     while (true) {
         if (i == nr_primes)
@@ -153,11 +153,11 @@ int main()
             i++;
         }
 
-        n--;
+        n++;
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);
-    cout << "Totally " << (UINT64_MAX - n) << " natural numbers tested (" << duration
+    cout << "Totally " << (n - UINT32_MAX - 1) << " natural numbers tested (" << duration
         << " seconds consumed)." << endl;
 }
 
