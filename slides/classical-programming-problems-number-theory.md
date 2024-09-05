@@ -218,7 +218,7 @@ bool primality_miller_rabin(uint64_t n)
 
 	
 - 选择固定的素数作为基数，溢出风险降低，但仍存在，故而需要改进 `quick_power_modulo()` 函数的实现。
-- 使用了 G++ 和 Clang++ 在 64 位平台上的 `__int128` 非标准类型。
+- 使用了 G++ 和 Clang++ 在 64 位平台上的 `__int128` 非标准整数类型。
 
 ```cpp
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
