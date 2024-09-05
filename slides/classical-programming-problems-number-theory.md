@@ -778,17 +778,6 @@ $ ./rational-number-to-fraction
 ```
 
 		
-## 平方根
-
-- 给定正实数 `d`，给出其平方根小数点后 `n` 位上的数字。运行效果如下：
-
-```console
-$ ./nth-digit-after-decimal-point-of-sqrt
-4 1000
-0
-```
-
-		
 ## 彻底搞懂扩展欧几里得算法
 
 - 扩展欧几里得算法的主要用途：
@@ -918,5 +907,16 @@ intmax_t ex_gcd_i(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
     x = prev_x; y = prev_y;
     return a;
 }
+```
+
+		
+## 高精度有理数计算：平方根
+
+- 问题：给定一个十进制小数 `d`，给出其平方根（要求精确到小数点后 `n` 位）。运行效果如下：
+
+```console
+$ ./sqrt-of-rational-number
+<4.15 0 10>  # 第一个数字为一个小数，第二个数表示小数的循环位长度，第三个数字为结果的输出精度。
+2.0371548787
 ```
 
