@@ -58,31 +58,69 @@ Totally 6542 primes (0.000330209 seconds consumed).
    1. 根据质数分布定理 `$ \pi(n) \approx \frac{n}{\ln{n}} $`，在 64 位无符号整数范围内大致有 `415,828,534,307,635,072` 个素数，需要 `3,098,164,009` GB 存储空间。
    1. 在个人电脑上，试除法和素数筛算法都无法处理如此庞大数量的质数。
 - 素性测试算法尝试在不分解给定自然数的情况下，确定给定的自然数是否为素数。分为确定性测试和概率测试两类。
-- 问题：使用某种素性测试算法找出 64 位无符号整数范围内后十个质数。运行效果如下：
+- 确定性测试首先要找出合数的素因子，故而不具有编程实现的意义。
+- 概率性测试的主要原理是利用质数的一些性质来测试给定自然数可能是质数的概率，当概率足够小时便认为其为质数。
 
 	
+- 问题：使用某种素性测试算法找出大于 `$ 2^32 $` 的前 `N` 个质数。运行效果如下：
+
 ```console
 $ ./primality-test
-65521
-65519
-65497
-65479
-65449
-65447
-65437
-65423
-65419
-65413
-123456 natural numbers tested (0.000330209 seconds consumed).
+<100>               # 指定要列出的质数数量
+4294967311
+4294967357
+4294967371
+4294967377
+4294967387
+4294967389
+4294967459
+4294967477
+4294967497
+4294967513
+Totally 218 natural numbers tested (0.00142375 seconds consumed).
 ```
 
 	
 ### 费马素性测试
 
-1. 依据费马（Fermat）小定理
-
-若 `$ p $` 为素数，且 `$ \gcd (a, p) = 1 $`，则 `$ a^{p-1} \equiv 1 \ \pmod{p} $`。  
+依据费马（Fermat）小定理：若 `$ p $` 为素数，且 `$ \gcd (a, p) = 1 $`，则 `$ a^{p-1} \equiv 1 \ \pmod{p} $`。
 或者，若 `$ p $` 为素数，对于任意整数 `$ a $`，有 `$ a^p \equiv a \ \pmod{p} $`。
+
+```cpp
+uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
+{
+    uint64_t ret = 1;
+
+    while (exp) {
+        if (exp & 1)
+            ret = (ret * base) % modulus;
+        base = (base * base) % modulus;
+        exp >>= 1;
+    }
+
+    return ret;
+}
+
+bool primality(uint64_t n)
+{
+    if (n <= UINT16_MAX)
+        return check_prime(n);
+
+    if ((n & 1) == 0)
+        return false;
+
+    // NR_TESTS 通常取 8 或以上。
+    for (int i = 0; i < NR_TESTS; i++) {
+        // 在 [2, n - 2] 中随机取某个值作为底进行测试。
+        uint64_t base = static_cast<uint64_t>(random()) % (n - 2) + 2;
+        if (quick_power_modulo(base, n - 1, n) != 1)
+            return false;
+    }
+
+    return true;
+}
+
+```
 
 	
 ### Miller–Rabin 素性测试
