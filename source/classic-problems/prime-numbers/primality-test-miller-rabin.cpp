@@ -52,12 +52,17 @@ bool primality_miller_rabin(uint64_t n)
         2, 325, 9375, 28178, 450775, 9780504, 1795265022ULL,
     };
 
+    static const unsigned little_primes[] = {
+        2, 3, 5, 7
+    };
 
-    if (n < 3 || (n & 1) == 0)
+    if (n < 3)
         return n == 2;
 
-    if (n % 3 == 0)
-        return n == 3;
+    for (size_t i = 0; i < sizeof(little_primes)/sizeof(little_primes[0]); i++) {
+        if (n % little_primes[i] == 0)
+            return n == little_primes[i];
+    }
 
     uint64_t u = n - 1, t = 0;
     while (u % 2 == 0) {
@@ -142,7 +147,13 @@ int main()
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
     srandom(time(NULL));
+
+#define FROM_TOP  1
+#if FROM_TOP
+    uint64_t n = UINT64_MAX;
+#else
     uint64_t n = UINT32_MAX + 1ULL;
+#endif
     unsigned i = 0;
     while (true) {
         if (i == nr_primes)
@@ -153,11 +164,19 @@ int main()
             i++;
         }
 
+#if FROM_TOP
+        n--;
+#else
         n++;
+#endif
     }
 
     double duration = calc_elapsed_seconds(&t1, NULL);
+#if FROM_TOP
+    cout << "Totally " << (UINT64_MAX - n) << " natural numbers tested (" << duration
+#else
     cout << "Totally " << (n - UINT32_MAX - 1) << " natural numbers tested (" << duration
+#endif
         << " seconds consumed)." << endl;
 }
 

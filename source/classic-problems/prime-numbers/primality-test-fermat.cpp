@@ -60,10 +60,17 @@ uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
 
 bool primality_fermat(uint32_t n)
 {
-    if (n < 3 || n % 2 == 0)
+    static const unsigned little_primes[] = {
+        2, 3, 5, 7
+    };
+
+    if (n < 3)
         return n == 2;
-    if (n % 3 == 0)
-        return n == 3;
+
+    for (size_t i = 0; i < sizeof(little_primes)/sizeof(little_primes[0]); i++) {
+        if (n % little_primes[i] == 0)
+            return n == little_primes[i];
+    }
 
     for (int i = 0; i < NR_TESTS; i++) {
         uint32_t base = static_cast<uint32_t>(random()) % (n - 2) + 2;
