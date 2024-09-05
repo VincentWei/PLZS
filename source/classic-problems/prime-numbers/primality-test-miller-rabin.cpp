@@ -29,7 +29,7 @@ long long pi(uint64_t n)
 
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 {
-    uint64_t ret = 1;
+    __int128 ret = 1;
     __int128 base_128 = base;
 
     while (exp) {
@@ -39,7 +39,7 @@ uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
         exp >>= 1;
     }
 
-    return ret;
+    return static_cast<uint64_t>(ret);
 }
 
 bool primality_miller_rabin(uint64_t n)
