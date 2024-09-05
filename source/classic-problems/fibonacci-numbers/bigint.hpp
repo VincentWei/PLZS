@@ -109,6 +109,10 @@ class bigint {
     // getter or setter for max number of slices for native integer
     static int max_nint_slices();
 
+    // some setters
+    void sign(bool sign) { _sign = sign; }
+    void reverse() { _sign = !_sign; }
+
     // overloaded operators
     bigint& operator= (const bigint& other);        // copy assignment operator
     bigint& operator= (bigint&& other) noexcept;    // move assignment operator

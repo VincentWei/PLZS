@@ -14,7 +14,6 @@
  * License: GPLv3
  */
 
-#define NDEBUG
 #define NTEST
 #include "bigint.cpp"
 
@@ -53,6 +52,7 @@ bigint bigint_gcd(const bigint &_a, const bigint &_b)
     while (b != 0) {
         bigint tmp(a);
         a = b;
+        cout << "modulo: " << tmp << " % " << b << endl;
         b = tmp % b;
     }
 
@@ -167,6 +167,19 @@ bool rn_is_nan(const rational_t q)
 rational_t rn_from_int(intmax_t n)
 {
     return rational_t {bigint {n}, bigint {1}};
+}
+
+rational_t rn_from_int(intmax_t n, intmax_t m)
+{
+    if (n <= 0 && m < 0) {
+        return rational_t {bigint {abs(n)}, bigint {abs(m)}};
+    }
+    else if ((n < 0 && m > 0) || (n > 0 && m < 0)) {
+        return rational_t {bigint {-abs(n)}, bigint {abs(m)}};
+    }
+    else {
+        return rational_t {bigint {n}, bigint {m}};
+    }
 }
 
 rational_t rn_from_reciprocal(intmax_t n)
@@ -290,9 +303,79 @@ bool operator < (const rational_t& q, intmax_t n)
     }
 }
 
+bool operator < (const rational_t& q1, const rational_t& q2)
+{
+    if (q1.first.sign() != q2.first.sign())
+        return q1.first < q2.first;
+
+    bigint num1 = q1.first * q2.second;
+    bigint num2 = q2.first * q1.second;
+
+    return num1 < num2;
+}
+
+bool operator > (const rational_t& q1, const rational_t& q2)
+{
+    if (q1.first.sign() != q2.first.sign())
+        return q1.first > q2.first;
+
+    bigint num1 = q1.first * q2.second;
+    bigint num2 = q2.first * q1.second;
+
+    return num1 > num2;
+}
+
+ostream& operator<< (ostream& os, const rational_t& q)
+{
+    if (rn_is_nan(q)) {
+        os << "NAN";
+        return os;
+    }
+
+    bigint numerator = q.first;
+    const bigint& denominator = q.second;
+
+    if (numerator.sign()) {
+        numerator.reverse();
+        os << "-";
+    }
+
+    bigint quot, rem;
+    bigint::divmod(numerator, denominator, quot, rem);
+    os << quot;
+    if (rem != 0) {
+        os << ".";
+
+        bigint last_quot;
+        numerator = rem * 10;
+        size_t precision = os.precision() + 1;
+        while (precision--) {
+            last_quot = quot;
+            bigint::divmod(numerator, denominator, quot, rem);
+            if (precision > 1)
+                os << quot;
+            if (rem == 0) {
+                break;
+            }
+
+            numerator = rem * 10;
+        }
+
+        if (rem != 0) {
+            if (quot > 4)
+                last_quot++;
+            os << last_quot;
+        }
+    }
+
+    return os;
+}
+
 rational_t rn_estimate_square_root(const rational_t& q, unsigned scale)
 {
-    if (q.first < 0 || q.second > 0)
+    clog << "rational number: " << q << endl;
+
+    if (q.first < 0)
         return rn_nan();
 
     if (q.first == 0) {
@@ -307,6 +390,8 @@ rational_t rn_estimate_square_root(const rational_t& q, unsigned scale)
         tolerance /= 10;
         scale--;
     }
+
+    cout << "tolerance: " << tolerance << endl;
 
     rational_t x0;
     if (q > 1)
@@ -323,7 +408,8 @@ rational_t rn_estimate_square_root(const rational_t& q, unsigned scale)
         rational_t last = x1;
         x1 = x0 - (x0 * x0 - q) / (x0 * 2);
         rational_t errors = rn_abs(last - x1);
-        // cout << "Iteration #" << i << ":\tx_i = " << x1 << "; errors: " << errors << endl;
+        cout << "Iteration #" << i << ":\tx_i = " << x1 << "; errors: "
+            << errors << endl;
         if (errors < tolerance) {
             break;
         }
@@ -335,17 +421,64 @@ rational_t rn_estimate_square_root(const rational_t& q, unsigned scale)
     return x1;
 }
 
+#include <sstream>
+
+void test_rational()
+{
+    rational_t a;
+    ostringstream oss;
+
+    a = rn_nan();
+    oss << a;
+    clog << oss.str() << endl;
+    assert(oss.str() == "NAN");
+
+    a = rn_from_int(4);
+    oss.str("");
+    oss << a;
+    clog << oss.str() << endl;
+    assert(oss.str() == "4");
+
+    a = rn_from_reciprocal(4);
+    oss.str("");
+    oss << a;
+    clog << oss.str() << endl;
+    assert(oss.str() == "0.25");
+
+    oss.precision(10);
+    a = rn_from_reciprocal(-3);
+    oss.str("");
+    oss << a;
+    clog << oss.str() << endl;
+    assert(oss.str() == "-0.3333333333");
+
+    a = rn_from_int(2, 3);
+    oss.str("");
+    oss << a;
+    clog << oss.str() << endl;
+    assert(oss.str() == "0.6666666667");
+
+    a = rn_from_int(2, -3);
+    oss.str("");
+    oss << a;
+    clog << oss.str() << endl;
+    assert(oss.str() == "-0.6666666667");
+}
+
 int main()
 {
+    test_rational();
+
     string rational;
-    unsigned recurring_len, n;
-    cin >> rational >> recurring_len >> n;
+    unsigned recurring_len, scale;
+    cin >> rational >> recurring_len >> scale;
 
     rational_t q = string_to_rational(rational, recurring_len);
     rn_normalize(q);
 
-    rational_t r = rn_estimate_square_root(q, n);
-    cout << r.first << "/" << r.second << endl;
+    cout.precision(scale);
+    rational_t r = rn_estimate_square_root(q, scale);
+    cout << r << endl;
     return 0;
 }
 

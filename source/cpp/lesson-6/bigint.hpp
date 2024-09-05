@@ -1,9 +1,14 @@
 /*
  * This program implements arbitrary precision arithmetic for integer numbers.
  *
+ * This program is a part of PLZS (the Programming Lessons for
+ * Zero-based Students Aged 10+) project.
+ * For more information about PLZS, please visit:
+ *
+ *  - <https://github.com/VincentWei/PLZS>
+ *  - <https://gitee.com/vincentwei7/PLZS>
+ *
  * Author: Vincent Wei
- *  - <https://github.com/VincentWei>
- *  - <https://gitee.com/vincentwei7>
  *
  * Copyright (C) 2024 FMSoft <https://www.fmsoft.cn>.
  * License: GPLv3
@@ -103,6 +108,10 @@ class bigint {
 
     // getter or setter for max number of slices for native integer
     static int max_nint_slices();
+
+    // some setters
+    void sign(bool sign) { _sign = sign; }
+    void reverse() { _sign = !_sign; }
 
     // overloaded operators
     bigint& operator= (const bigint& other);        // copy assignment operator

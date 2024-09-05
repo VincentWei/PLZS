@@ -76,12 +76,12 @@ void bigint::initfrom(intmax_t nint, T& slices)
         nint = -nint;
 
     for (size_t i = 0; i < sizeof(intmax_t); i++) {
-        if (nint == 0)
-            break;
-
         slice_t r = nint % slice_base_k;
         slices.push_back(r);
         nint /= slice_base_k;
+
+        if (nint == 0)
+            break;
     }
 }
 
@@ -141,7 +141,7 @@ bigint::bigint(const string& str)
 
 bigint::bigint(const bigint &other)
 {
-#ifndef NDEBUG
+#ifndef NTEST
     clog << "copy constructor called\n";
 #endif
 
@@ -151,7 +151,7 @@ bigint::bigint(const bigint &other)
 
 bigint::bigint(bigint &&other)
 {
-#ifndef NDEBUG
+#ifndef NTEST
     clog << "move constructor called\n";
 #endif
 
@@ -163,7 +163,7 @@ bigint::bigint(bigint &&other)
 // copy assignment operator
 bigint& bigint::operator= (const bigint& other)
 {
-#ifndef NDEBUG
+#ifndef NTEST
     clog << "copy assignment operator called\n";
 #endif
 
@@ -175,7 +175,7 @@ bigint& bigint::operator= (const bigint& other)
 // move assignment operator
 bigint& bigint::operator= (bigint&& other) noexcept
 {
-#ifndef NDEBUG
+#ifndef NTEST
     clog << "move assignment operator called\n";
 #endif
 
@@ -370,24 +370,27 @@ void bigint::abssubfrom(const T& other)
     size_t len_b = other.size();
     size_t len_max = (len_a > len_b) ? len_a : len_b;
 
+    int borrow = 0;
     for (size_t i = 0; i < len_max; i++) {
         int n_a = (i < len_a) ? _slices[i] : 0;
         int n_b = (i < len_b) ? other[i] : 0;
 
         int r;
-        if (n_a >= n_b) {
-            r = n_a - n_b;
+        if (n_a - borrow >= n_b) {
+            r = n_a - borrow - n_b;
+            borrow = 0;
         }
         else {
             assert(i + 1 < len_a);
 
-            r = n_a + slice_base_k - n_b;
-            _slices[i + 1] -= 1;
+            r = n_a - borrow + slice_base_k - n_b;
+            borrow = 1;
         }
 
         _slices[i] = r;
     }
 
+    assert(borrow == 0);
     normalize();
 }
 
