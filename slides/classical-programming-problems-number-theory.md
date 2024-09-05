@@ -117,7 +117,7 @@ bool primality(uint64_t n)
 
 	
 - `quick_power_modulo()` 函数利用快速幂算法计算幂，但同时执行取模操作，在确保正确的前提下，可有效避免溢出风险。
-- 其数学原理为：`$ ab \bmod p = \left[ (a \bmod p) (b \bmod p) \right] \bmod p $`
+- 其数学原理为：`$ ab \bmod p = \left( (a \bmod p) (b \bmod p) \right) \bmod p $`
 
 ```cpp
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
