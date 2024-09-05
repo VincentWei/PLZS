@@ -62,7 +62,7 @@ Totally 6542 primes (0.000330209 seconds consumed).
 - 概率性测试的主要原理是利用质数的一些性质来测试给定自然数可能是质数的概率，当概率足够小时便认为其为质数。
 
 	
-- 问题：使用某种素性测试算法找出大于 `$ 2^32 $` 的前 `N` 个质数。运行效果如下：
+- 问题：使用某种素性测试算法找出大于 `$ 2^{32} $` 的前 `N` 个质数。运行效果如下：
 
 ```console
 $ ./primality-test
@@ -83,8 +83,13 @@ Totally 218 natural numbers tested (0.00142375 seconds consumed).
 	
 ### 费马素性测试
 
-依据费马（Fermat）小定理：若 `$ p $` 为素数，且 `$ \gcd (a, p) = 1 $`，则 `$ a^{p-1} \equiv 1 \ \pmod{p} $`。
+- 依据费马（Fermat）小定理：若 `$ p $` 为素数，且 `$ \gcd (a, p) = 1 $`，则 `$ a^{p-1} \equiv 1 \ \pmod{p} $`。
 或者，若 `$ p $` 为素数，对于任意整数 `$ a $`，有 `$ a^p \equiv a \ \pmod{p} $`。
+- 关键代码（下页）
+
+	
+- `quick_power_modulo()` 函数利用快速幂算法计算幂，但同时执行取模操作，在确保正确的前提下，可有效避免溢出风险。
+- 其数学原理为：`$ ab \bmod p = ((a \bmod p) * (b \bmod p)) \bmod p) $`
 
 ```cpp
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
