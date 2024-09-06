@@ -89,8 +89,8 @@ Totally 267 natural numbers tested (0.00195938 seconds consumed).
 - 关键代码（下页）
 
 	
-- `primality()` 函数对给定的自然数 `n` 执行费马素性测试。
-- 在 `[2, n - 2]` 中随机取某个值作为底，然后调用 `quick_power_modulo()` 函数测试取模结果是否为 `1`。
+- `primality_fermat()` 函数对给定的自然数 `n` 执行费马素性测试。
+- 在 `[2, n)` 中随机取某个值作为底，然后调用 `quick_power_modulo()` 函数测试取模结果是否为 `1`。
 - 执行至少 8 次测试，若任意一次不满足，则认为是合数，若都满足，则认为是素数。
 
 ```cpp
