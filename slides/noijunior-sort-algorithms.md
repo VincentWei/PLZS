@@ -446,6 +446,7 @@ void quick_sort_asc(T t[], size_t low, size_t high)
 ### 使用动态内存优化归并排序
 
 - 在归并排序的递归实现中，若使用变长数组分配临时归并用数组，将导致空间复杂度极大提高。
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/merge-sort-asc-alloc.cpp)
 
 ```cpp
 template <class T>
