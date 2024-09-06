@@ -103,7 +103,7 @@ size_t minimum_index(T* t, size_t len)
 
 （十五分钟内完成）
 
-1. 实现一个函数模板 `selection_sort()` 可用于内置数组的升序或降序排序，并完成展示该函数模板功能的完整程序 `selection-sort.cpp`。
+1. 实现一个函数模板 `selection_sort()` 可用于内置数组的降序或升序排序，并完成展示该函数模板功能的完整程序 `selection-sort.cpp`。
 1. 将 `selection-sort.cpp` 文件提交到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-2/` 目录（下同），并推送到远程仓库。
 
 		
