@@ -100,10 +100,10 @@ size_t minimum_index(T* t, size_t len)
 	
 ### 课堂练习
 
-（十分钟内完成）
+（十五分钟内完成）
 
-1. 实现一个函数模板 `selection_sort_desc()` 可用于内置数组的降序排序，并完成展示该函数模板功能的完整程序 `selection-sort-desc.cpp`。
-1. 将 `selection-sort-desc.cpp` 文件提交到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-2/` 目录（下同），并推送到远程仓库。
+1. 实现一个函数模板 `selection_sort()` 可用于内置数组的升序或降序排序，并完成展示该函数模板功能的完整程序 `selection-sort.cpp`。
+1. 将 `selection-sort.cpp` 文件提交到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-2/` 目录（下同），并推送到远程仓库。
 
 		
 ## 冒泡排序
@@ -149,8 +149,8 @@ void bubble_sort_asc(T* t, size_t len)
 
 （十分钟内完成）
 
-1. 实现一个函数模板 `bubble_sort_desc()` 可用于内置数组的降序排序，并完成展示该函数模板功能的完整程序 `bubble-sort-desc.cpp`。
-1. 将 `bubble-sort-desc.cpp` 文件提交到作业仓库并推送到远程仓库。
+1. 实现一个函数模板 `bubble_sort()` 可用于内置数组的降序或升序排序，并完成展示该函数模板功能的完整程序 `bubble-sort.cpp`。
+1. 将 `bubble-sort.cpp` 文件提交到作业仓库并推送到远程仓库。
 
 		
 ## 插入排序
@@ -213,8 +213,8 @@ void insertion_sort_asc(T* t, size_t len)
 
 （十分钟内完成）
 
-1. 实现一个函数模板 `insertion_sort_desc()` 可用于内置数组的降序排序，并完成展示该函数模板功能的完整程序 `insertion-sort-desc.cpp`。
-1. 将 `insertion-sort-desc.cpp` 文件提交到作业仓库并推送到远程仓库。
+1. 实现一个函数模板 `insertion_sort()` 可用于内置数组的降序或升序排序，并完成展示该函数模板功能的完整程序 `insertion-sort.cpp`。
+1. 将 `insertion-sort.cpp` 文件提交到作业仓库并推送到远程仓库。
 
 		
 ## 归并排序

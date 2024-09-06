@@ -1,4 +1,4 @@
-TARGETS = selection-sort-asc bubble-sort-asc insertion-sort-asc stl-sort-for-native-array stl-sort-for-stl-vector std-qsort-for-native-array stl-sort-for-variable-length-array
+TARGETS = selection-sort-asc bubble-sort-asc insertion-sort-asc merge-sort-asc stl-sort-for-native-array stl-sort-for-stl-vector std-qsort-for-native-array stl-sort-for-variable-length-array
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
