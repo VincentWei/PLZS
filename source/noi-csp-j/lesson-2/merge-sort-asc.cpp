@@ -16,28 +16,28 @@
 using namespace std;
 
 template <class T>
-void merge(const T* a, size_t len_a, const T* b, size_t len_b, T* c)
+void merge(const T* src_a, size_t len_a, const T* src_b, size_t len_b, T* dst)
 {
     size_t i = 0, j = 0, k = 0;
 
     while (i < len_a && j < len_b) {
-        // XXX 先判断 b[j] < a[i]，保证稳定性
-        if (b[j] < a[i]) {
-            c[k] = b[j];
+        // XXX 先判断 src_b[j] < src_a[i]，保证稳定性
+        if (src_b[j] < src_a[i]) {
+            dst[k] = src_b[j];
             ++j;
         }
         else {
-            c[k] = a[i];
+            dst[k] = src_a[i];
             ++i;
         }
         ++k;
     }
 
-    // 此时一个数组已空，另一个数组非空，将非空的数组并入 c 中
+    // 此时可能有一个数组已空，而另一个数组非空，将非空的数组直接并入 dst 中
     for (; i < len_a; ++i, ++k)
-        c[k] = a[i];
+        dst[k] = src_a[i];
     for (; j < len_b; ++j, ++k)
-        c[k] = b[j];
+        dst[k] = src_b[j];
 }
 
 template <class T>
