@@ -604,8 +604,7 @@ int main()
 ### STL 函数对象
 
 - C++ STL 通过 `<functional>` 头文件提供了针对常见运算的函数对象（类模板）；在需要传递简单回调函数的场合，可利用这些函数对象。
-- 这些运算包括算术运算、比较运算、逻辑运算等。
-- [参考链接](https://cplusplus.com/reference/functional/)。
+- 这些运算包括算术运算、比较运算、逻辑运算等。[参考链接](https://cplusplus.com/reference/functional/)。
 
 ```cpp
 #include <iostream>     // for cin and cout
