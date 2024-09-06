@@ -53,20 +53,6 @@
 
 ```cpp
 template <class T>
-size_t minimum_index(T* t, size_t len)
-{
-    assert(len > 0);
-
-    size_t min = 0;
-    for (size_t i = 1; i < len; i++) {
-        if (t[i] < t[min])
-            min = i;
-    }
-
-    return min;
-}
-
-template <class T>
 void selection_sort_asc(T* t, size_t len)
 {
     size_t start = 0;
@@ -81,6 +67,25 @@ void selection_sort_asc(T* t, size_t len)
 
         start++;
     }
+}
+```
+
+	
+- `minimum_index()` 函数模板。
+
+```cpp
+template <class T>
+size_t minimum_index(T* t, size_t len)
+{
+    assert(len > 0);
+
+    size_t min = 0;
+    for (size_t i = 1; i < len; i++) {
+        if (t[i] < t[min])
+            min = i;
+    }
+
+    return min;
 }
 ```
 
