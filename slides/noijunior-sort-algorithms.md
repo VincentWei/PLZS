@@ -48,7 +48,8 @@
 	
 ### 参考实现
 
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/selection-sort.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/selection-sort-asc.cpp)
+- 注意 `std::swap()` 的使用；该函数模板用于交换两个对象，需引入 `<utility>` 头文件。
 
 ```cpp
 template <class T>
@@ -113,6 +114,8 @@ void selection_sort_asc(T* t, size_t len)
 	
 ### 参考实现
 
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/bubble-sort-asc.cpp)
+
 ```cpp
 template <class T>
 void bubble_sort_asc(T* t, size_t len)
@@ -163,7 +166,33 @@ void bubble_sort_asc(T* t, size_t len)
 	
 ### 参考实现
 
+- 注意代码中的注释。
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/insertion-sort-asc.cpp)
+
 ```cpp
+template <class T>
+void insertion_sort_asc(T* t, size_t len)
+{
+    // i 的左侧是已经排好序的部分，右侧是未排好序的部分。
+    // i 从 1 开始，此时左侧只有一个元素，无需排序。
+    for (size_t i = 1; i < len; i++) {
+
+        // 要将 i 右侧的第一个元素插入到左侧，
+        // 但插入操作将覆盖该位置，故而先保存起来。
+        T key = t[i];
+
+        // 接下来在 i 的左侧寻找用来插入 key 位置。
+        // XXX: j 可能会变为 -1，故而使用 ssize_t 类型。
+        ssize_t j = i - 1;
+        while (j >= 0 and key < t[j]) {
+            t[j + 1] = t[j];
+            j--;
+        }
+
+        // 找到了插入位置，将 key 存入。
+        t[j + 1] = key;
+    }
+}
 ```
 
 	
