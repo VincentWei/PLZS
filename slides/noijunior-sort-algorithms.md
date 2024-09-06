@@ -400,9 +400,13 @@ size_t partition(T t[], size_t low, size_t high)
 - 把一个复杂的问题分成两个或更多的相同或相似的子问题，直到最后子问题可以简单地直接求解，原问题的解即子问题的解的合并。
 - 归并排序和快速排序体现了分治思想的精髓。
 
+```cpp
+```
+
 	
 ### 分治法在生活中的应用
 
+<img class="r-frame" style="height:auto;width:100%;" src="assets/noijunior-divide-and-conquer.svg" />
 
 		
 ## 动态内存管理
