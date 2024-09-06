@@ -26,6 +26,7 @@
 - 升序（ascending order）：将各元素按从小到大的顺序排列。
 - 降序（descending order）：将各元素按从大到小的顺序排列。
 - 比较（compare）：用于对比元素大小的动作。
+- 稳定性（stability）：排序中的稳定性是指，排序算法是否会影响多个大小相同元素的原本顺序。
 
 		
 ## 选择排序
@@ -47,7 +48,39 @@
 	
 ### 参考实现
 
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/selection-sort.cpp)
+
 ```cpp
+template <class T>
+size_t minimum_index(T* t, size_t len)
+{
+    assert(len > 0);
+
+    size_t min = 0;
+    for (size_t i = 1; i < len; i++) {
+        if (t[i] < t[min])
+            min = i;
+    }
+
+    return min;
+}
+
+template <class T>
+void selection_sort_asc(T* t, size_t len)
+{
+    size_t start = 0;
+    while (true) {
+        if (start + 1 == len)
+            break;
+        size_t min = minimum_index(t + start, len - start);
+        min += start;       // XXX
+        if (min != start) {
+            swap(t[start], t[min]);
+        }
+
+        start++;
+    }
+}
 ```
 
 	
@@ -74,13 +107,25 @@
 	
 ### 原理
 
-1. 依次对比线性表数据结构中的两个相邻元素，若不满足顺序要求，则交换这两个元素，并记录交换次数。
+1. 依次对比线性表数据结构中的两个相邻元素，若不满足顺序要求，则交换这两个元素。
 1. 重复步骤 1，交换次数为 0。
 
 	
 ### 参考实现
 
 ```cpp
+template <class T>
+void bubble_sort_asc(T* t, size_t len)
+{
+    size_t i, j;
+    for (i = 0; i < len - 1; i++) {
+        for (j = 0; j < len - 1 - i; j++) {
+            if (t[j] > t[j + 1])
+                swap(t[j], t[j + 1]);
+        }
+    }
+}
+
 ```
 
 	
