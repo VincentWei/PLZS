@@ -209,14 +209,6 @@ void insertion_sort_asc(T* t, size_t len)
 - 排序方式：原地（in-place）
 - 稳定性：稳定
 
-	
-### 课堂练习
-
-（十分钟内完成）
-
-1. 实现一个函数模板 `insertion_sort()` 可用于内置数组的降序或升序排序，并完成展示该函数模板功能的完整程序 `insertion-sort.cpp`。
-1. 将 `insertion-sort.cpp` 文件提交到作业仓库并推送到远程仓库。
-
 		
 ## 归并排序
 
@@ -725,7 +717,19 @@ int main()
 ## 作业
 
 	
-1) 使用函数模板实现归并排序算法的迭代版本。运行效果如下：
+1) 实现一个函数模板 `insertion_sort()` ，该函数使用外部对比函数实现内置数组的降序或升序排序，并完成展示该函数模板功能的完整程序 `insertion-sort.cpp`。运行效果如下：
+
+```console
+% ./insertion-sort
+<12 344 8 234 23>
+Ascending order:
+8 12 23 234 344
+Descending order:
+344 234 23 12 8
+```
+
+	
+2) 使用函数模板实现归并排序算法的迭代版本。运行效果如下：
 
 ```console
 $ ./merge-sort-iteration
@@ -734,7 +738,7 @@ $ ./merge-sort-iteration
 ```
 
 	
-2) 使用函数模板实现快速排序算法的迭代版本。运行效果如下：
+3) 使用函数模板实现快速排序算法的迭代版本。运行效果如下：
 
 ```console
 $ ./quick-sort-iteration
@@ -743,7 +747,7 @@ $ ./quick-sort-iteration
 ```
 
 	
-3) 生成一个给定长度的随机数组，分别使用本讲学过的排序算法之迭代实现进行排序，使用 `assert()` 测试正确性并测量各算法的实际运行时间。运行效果如下：
+4) 生成一个给定长度的随机数组，分别使用本讲学过的排序算法之迭代实现进行排序，使用 `assert()` 测试正确性并测量各算法的实际运行时间。运行效果如下：
 
 ```console
 $ ./compare-five-sort-algorithms
@@ -756,7 +760,7 @@ $ ./compare-five-sort-algorithms
 ```
 
 	
-4) 经典比赛题（思考）
+5) 经典比赛题（思考）
    - [Luogu B3968/成绩排序](https://www.luogu.com.cn/problem/B3968)
    - [Luogu P1628/合并序列](https://www.luogu.com.cn/problem/P1628)
    - [Luogu P1716/双调序列](https://www.luogu.com.cn/problem/P1716)
