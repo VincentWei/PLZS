@@ -119,6 +119,8 @@ def my_print(*args, sep=' ', end='\n', file=None, flush=False):
 - 可迭代对象可用于 `for` 循环以及支持可迭代对象的函数或方法。
 - 注意：可迭代对象本身可作为迭代器使用。
 
+	
+
 ```ptyon
 #!/usr/bin/python3
 
