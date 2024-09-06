@@ -7,6 +7,7 @@
 1. 归并排序
 1. 快速排序
 1. 分治法
+1. 动态内存管理
 1. 实用技巧
 
 		
@@ -400,8 +401,88 @@ size_t partition(T t[], size_t low, size_t high)
 - 归并排序和快速排序体现了分治思想的精髓。
 
 	
-### 其他应用
+### 分治法在生活中的应用
 
+
+		
+## 动态内存管理
+
+- 动态分配内存的需求
+- 堆和栈的区别
+
+	
+- C++ 使用 `new/delete` 或者 `new[]/delete[]` 语句在堆中分配/释放内存。
+- C 使用 `malloc()/calloc()/realloc()` 或者 `free()` 语句在堆中分配/释放内存。
+
+```cpp
+    string* str_a = new string;
+    delete str_a;
+
+    // XXX 这种方式分配的类对象未被初始化，不能使用。
+    string* str_b = static_cast<string *>(malloc(sizeof(string)));
+    free(str_b);
+
+    int* b = new int[20];
+    // XXX 必须用 delete[] 释放。
+    delete[] b;
+
+    // 要使用 static_cast<> 执行指针类型转换
+    int* c = static_cast<int *>(malloc(sizeof(*c) * 20));
+    free(c);
+
+    // 使用 calloc() 可初始化分配后的内存区域为全零。
+    int* d = static_cast<int *>(calloc(20, sizeof(*d)));
+    d = static_cast<int *>(realloc(c, sizeof(*d) * 40));
+    free(d);
+```
+
+	
+### 使用动态内存优化归并排序
+
+- 在归并排序的递归实现中，若使用变长数组分配临时归并用数组，将导致空间复杂度极大提高。
+
+```cpp
+template <class T>
+void merge_sort_asc(T *t, size_t start, size_t stop, T* buf)
+{
+    // 递归终止条件：只有一个元素或者没有元素时终止
+    if (stop - start <= 1)
+        return;
+
+    // 将数组从中间分开，然后递归对两个分区执行合并排序。
+    size_t mid = start + ((stop - start) >> 1);
+    merge_sort_asc(t, start, mid, buf);
+    merge_sort_asc(t, mid, stop, buf);
+
+    // 合并到 tmp 数组中。
+    merge(t + start, mid - start, t + mid, stop - mid, buf + start);
+
+    // 将合并后的 buf 放到 t 中。
+    for (size_t i = start; i < stop; ++i)
+        t[i] = buf[i];
+}
+
+#define NR_REALS 5
+
+    double a[NR_REALS];
+    for (size_t i = 0; i < NR_REALS; i++) {
+        cin >> a[i];
+    }
+
+    double* buf = new double[NR_REALS];
+    merge_sort_asc(a, 0, sizeof(a)/sizeof(a[0]), buf);
+    delete[] buf;
+```
+
+	
+### C++ 和 C 的在动态内存管理上的异同
+
+- 用于基础类型时，`new` 等同于 `malloc()`，`delete` 等同于 `free()`。
+- 用于基础类型时，`new[]` 等同于 `calloc()`，会负责初始化为全零，`delete[]` 等同于 `free()`。
+- 若使用 `malloc()/calloc()/realloc()` 分配 C++ 类对象，则只会分配成员变量（类似结构体一样处理），而不会主动调用对应的构造函数。
+- 使用 `new` 分配的类对象，会调用构造函数，只能使用 `delete` 释放，且在释放时，会调用类的析构函数。
+- 使用 `new[]` 分配的类对象数组，会依次调用其中所有元素的构造函数，且只能使用 `delete[]` 释放，且在释放时，会对每个元素调用类的析构函数。
+- C++ 的 `new/new[]` 和 `delete/delete[]` 运算符可被重载。
 
 		
 ## 实用技巧
@@ -649,5 +730,26 @@ $ ./quick-sort-iteration
 ```
 
 	
+3) 生成一个给定长度的随机数组，分别使用本讲学过的排序算法之迭代实现进行排序，使用 `assert()` 测试正确性并测量各算法的实际运行时间。运行效果如下：
+
+```console
+$ ./compare-five-sort-algorithms
+<1000>      # 指定数组长度
+0.001s consumed when using selection sort.
+0.001s consumed when using bubble sort.
+0.001s consumed when using insertion sort.
+0.001s consumed when using merge sort
+0.001s consumed when using quick sort.
+```
+
+	
+4) 经典比赛题（思考）
+   - [Luogu B3968/成绩排序](https://www.luogu.com.cn/problem/B3968)
+   - [Luogu P1628/合并序列](https://www.luogu.com.cn/problem/P1628)
+   - [Luogu P1716/双调序列](https://www.luogu.com.cn/problem/P1716)
+   - [Luogu B3630/排队顺序](https://www.luogu.com.cn/problem/B3630)
+
+	
 ### 参考链接
 
+（无）
