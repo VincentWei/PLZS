@@ -401,6 +401,16 @@ size_t partition(T t[], size_t low, size_t high)
 - 归并排序和快速排序体现了分治思想的精髓。
 
 ```cpp
+template <class T>
+void quick_sort_asc(T t[], size_t low, size_t high)
+{
+    if (low < high) {
+        // 以分区找到的 pivot 位置将数组一分为二，然后递归执行快速排序。
+        size_t pos_pivot = partition(t, low, high);
+        quick_sort_asc(t, low, pos_pivot - 1);
+        quick_sort_asc(t, pos_pivot + 1, high);
+    }
+}
 ```
 
 	
