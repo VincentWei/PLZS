@@ -231,7 +231,64 @@ void insertion_sort_asc(T* t, size_t len)
 	
 ### 参考实现（递归版本）
 
+- `merge_sort_asc()` 执行递归处理；注意代码中的注释。
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/merge-sort-asc.cpp)
+
+
 ```cpp
+template <class T>
+void merge_sort_asc(T *t, size_t start, size_t stop)
+{
+    // 递归终止条件：只有一个元素或者没有元素时终止
+    if (stop - start <= 1)
+        return;
+
+    // 将数组从中间分开，然后递归对两个分区执行合并排序。
+    size_t mid = start + ((stop - start) >> 1);
+    merge_sort_asc(t, start, mid);
+    merge_sort_asc(t, mid, stop);
+
+    // 临时空间，用于保存合并结果
+    T tmp[stop - start];
+
+    // 合并到 tmp 数组中。
+    merge(t + start, mid - start, t + mid, stop - mid, tmp);
+
+    // 将合并后的 tmp 放到 t 中。
+    for (size_t i = start; i < stop; ++i)
+        t[i] = tmp[i - start];
+}
+```
+
+	
+
+- `merge()` 是真正完成排序功能的地方。
+
+```cpp
+template <class T>
+void merge(const T* src_a, size_t len_a, const T* src_b, size_t len_b, T* dst)
+{
+    size_t i = 0, j = 0, k = 0;
+
+    while (i < len_a && j < len_b) {
+        // XXX 先判断 src_b[j] < src_a[i]，保证稳定性
+        if (src_b[j] < src_a[i]) {
+            dst[k] = src_b[j];
+            ++j;
+        }
+        else {
+            dst[k] = src_a[i];
+            ++i;
+        }
+        ++k;
+    }
+
+    // 此时可能有一个数组已空，而另一个数组非空，将非空的数组直接并入 dst 中
+    for (; i < len_a; ++i, ++k)
+        dst[k] = src_a[i];
+    for (; j < len_b; ++j, ++k)
+        dst[k] = src_b[j];
+}
 ```
 
 	
@@ -252,7 +309,7 @@ void insertion_sort_asc(T* t, size_t len)
 
 - 快速排序由东尼·霍尔（Tony Hoare）发明，本质上是一种对冒泡排序的改进。
 - 执行步骤：
-   1. 将表划分为两部分，保证前一个子表中的元素都小于后一个子表中的元素；可随机选取或者选表中第一个元素作为比较“基准（pivot）”。
+   1. 将表划分为两部分，保证前一个子表中的元素都小于后一个子表中的元素；可随机选取或者选表中第一个元素作为比较`基准（pivot）`。
    1. 递归到两个子表中分别进行快速排序；直到子表长度为零。
    1. 无需合并，终止时表已经完全有序。
 - 又称分区交换排序（partition-exchange sort）。
@@ -260,40 +317,65 @@ void insertion_sort_asc(T* t, size_t len)
 	
 ### 参考实现
 
-- 递归版本
+- `quick_sort_asc()` 执行递归处理；注意代码中的注释。
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/quick-sort-asc.cpp)
+
 
 ```cpp
-template <typename T>
-size_t paritition(T A[], size_t low, size_t high)
+template <class T>
+void quick_sort_asc(T t[], size_t low, size_t high)
 {
-    size_t pivot = A[low];
-    while (low < high) {
-        while (low < high && pivot <= A[high])
-            --high;
-        A[low] = A[high];
-        while (low < high && A[low] <= pivot)
-            ++low;
-        A[high] = A[low];
+    if (low < high) {
+        // 以分区找到的 pivot 位置将数组一分为二，然后递归执行快速排序。
+        size_t pos_pivot = partition(t, low, high);
+        quick_sort_asc(t, low, pos_pivot - 1);
+        quick_sort_asc(t, pos_pivot + 1, high);
     }
-    A[low] = pivot;
+}
+
+template <class T>
+void quick_sort_asc(T t[], size_t len)
+{
+    // 调用另一个形式的 quick_sort_asc() 函数。
+    // XXX 注意 high 是排序范围的尾部元素的索引值。
+    quick_sort_asc(t, 0, len - 1);
+}
+```
+
+	
+- `partition()` 是快速排序的关键代码。
+
+```cpp
+template <class T>
+size_t partition(T t[], size_t low, size_t high)
+{
+    // 选择数组中的第一个元素作为基准，并保存到临时变量；
+    // XXX 注意 low 的值在后续操作中会不断变化。
+    T pivot = t[low];
+
+    // 在数组中不断将大于 pivot 的值放到右边，将小于 pivot 的值放到左边。
+    // 同时调整 pivot 所在位置，也就是 low 的值。
+    while (low < high) {
+        // 注意在整个循环中 low 在逐步变大，high 在逐步变小。
+
+        // 此循环将从数组尾部开始找比 pivot 还小的元素。
+        while (low < high && pivot < t[high])
+            --high;
+        t[low] = t[high];   // 将找到的比 pivot 还小的元素放到头部。
+
+        // 此循环将从数组头部开始找比 pivot 还大的元素。
+        while (low < high && t[low] < pivot)
+            ++low;
+        t[high] = t[low];   // 将找到的比 pivot 还大的元素放到尾部。
+    }
+
+    // low 中包含的是 pivot 的新位置，将保存的 pivot 值放到这个位置。
+    t[low] = pivot;
+
+    // 返回 pivot 的位置（索引值）。
     return low;
 }
 
-template <typename T>
-void quick_sort(T A[], size_t low, size_t high)
-{
-    if (low < high) {
-        size_t pivot = partition(A, low, high);
-        quick_sort(A, low, pivot - 1);
-        quick_sort(A, pivot + 1, high);
-    }
-}
-
-template <typename T>
-void quick_sort(T A[], size_t len)
-{
-    quick_sort(A, 0, len - 1);
-}
 ```
 
 	
