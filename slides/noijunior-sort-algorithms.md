@@ -461,10 +461,10 @@ void merge_sort_asc(T *t, size_t start, size_t stop, T* buf)
     merge_sort_asc(t, start, mid, buf);
     merge_sort_asc(t, mid, stop, buf);
 
-    // 合并到 tmp 数组中。
+    // 合并到 buf 数组中。
     merge(t + start, mid - start, t + mid, stop - mid, buf + start);
 
-    // 将合并后的 buf 放到 t 中。
+    // 将合并后的 buf 数组中的元素放回 t 中。
     for (size_t i = start; i < stop; ++i)
         t[i] = buf[i];
 }
@@ -497,7 +497,7 @@ void merge_sort_asc(T *t, size_t start, size_t stop, T* buf)
 	
 ### C++ STL 提供的排序接口
 
-- 函数模板，可用于支持随机访问迭代器的容器，如内置数组、`array`、`vector`：
+- `sort()` 和 `stable_sort()` 函数模板，可用于支持随机访问迭代器的容器，如内置数组、`array`、`vector`：
 
 ```cpp
 template <class RandomAccessIterator>
@@ -505,6 +505,12 @@ void sort(RandomAccessIterator first, RandomAccessIterator last);
 
 template <class RandomAccessIterator, class Compare>
 void sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp);
+
+template <class RandomAccessIterator>
+void stable_sort(RandomAccessIterator first, RandomAccessIterator last);
+
+template <class RandomAccessIterator, class Compare>
+void stable_sort( RandomAccessIterator first, RandomAccessIterator last, Compare comp);
 ```
 
 	
