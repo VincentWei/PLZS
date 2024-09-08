@@ -1006,7 +1006,7 @@ bigint& bigint::operator*= (intmax_t other)
 }
 
 template <class T>
-void bigint::absdiv_slice(const T& dividend, slice_t denominator,
+void bigint::absdiv_slice(const T& dividend, slice_t divisor,
         bigint& quotient, bigint& remainder)
 {
     size_t pos = dividend.size() - 1;
@@ -1016,9 +1016,9 @@ void bigint::absdiv_slice(const T& dividend, slice_t denominator,
     slice_t rem = 0;
     while (true) {
         twin_t numerator = dividend[pos] + rem * (twin_t)slice_base_k;
-        imaxdiv_t div = imaxdiv(numerator, denominator);
+        imaxdiv_t div = imaxdiv(numerator, divisor);
 
-        // clog << numerator << " / " << denominator << ": "
+        // clog << numerator << " / " << divisor << ": "
         //      << div.quot << "..." << div.rem << endl;
 
         slice_t quot = (slice_t)div.quot;
@@ -1052,7 +1052,7 @@ intmax_t bigint::makenint(const T& slices, size_t off, size_t len)
 }
 
 template <class T>
-void bigint::absdiv_nint(const T& dividend, intmax_t denominator,
+void bigint::absdiv_nint(const T& dividend, intmax_t divisor,
         bigint& quotient, bigint& remainder)
 {
     intmax_t rem = 0;
@@ -1081,7 +1081,7 @@ void bigint::absdiv_nint(const T& dividend, intmax_t denominator,
         }
 
         numerator += rem * scale;
-        imaxdiv_t div = imaxdiv(numerator, denominator);
+        imaxdiv_t div = imaxdiv(numerator, divisor);
 
         quotient *= scale;
         quotient += div.quot;
@@ -1211,6 +1211,100 @@ bool bigint::divmod(const bigint& dividend, intmax_t divisor,
     return true;
 }
 
+/*
+ * This function calculates the result of
+ * (rem_pre + ((factor * base^exp) % modulus)) % modulus
+ */
+bigint::slice_t bigint::quick_modulo(slice_t factor, slice_t base, uintmax_t exp,
+        slice_t modulus, slice_t rem_pre)
+{
+    twin_t rem_w = 1;
+    twin_t base_w = base;
+
+    while (exp) {
+        if (exp & 1)
+            rem_w = (rem_w * base_w) % modulus;
+        base_w = (base_w * base_w) % modulus;
+        exp >>= 1;
+    }
+
+    rem_w = (rem_w * factor) % modulus;
+    rem_w = (rem_w + rem_pre) % modulus;
+    return static_cast<slice_t>(rem_w);
+}
+
+/*
+ * This function calculates the result of
+ * (rem_pre + ((factor * base^exp) % modulus)) % modulus
+ */
+intmax_t bigint::quick_modulo_128(intmax_t factor, intmax_t base, uintmax_t exp,
+        intmax_t modulus, intmax_t rem_pre)
+{
+    __int128 rem_128 = 1;
+    __int128 base_128 = base;
+
+    while (exp) {
+        if (exp & 1)
+            rem_128 = (rem_128 * base_128) % modulus;
+        base_128 = (base_128 * base_128) % modulus;
+        exp >>= 1;
+    }
+
+    rem_128 = (rem_128 * factor) % modulus;
+    rem_128 += rem_pre;
+    rem_128 %= modulus;
+    return static_cast<intmax_t>(rem_128);
+}
+
+template <class T>
+void bigint::absmod_slice(const T& dividend, slice_t divisor,
+        bigint& remainder)
+{
+    size_t pos = dividend.size() - 1;
+
+    uintmax_t exp = 0;
+    slice_t rem = 0;
+    while (true) {
+        slice_t numerator = dividend[pos];
+
+        rem = quick_modulo(numerator, group_base_k, exp, divisor, rem);
+        exp++;
+        if (pos == 0)
+            break;
+        pos--;
+    }
+
+    remainder = rem;
+}
+
+template <class T>
+void bigint::absmod_nint(const T& dividend, intmax_t divisor,
+        bigint& remainder)
+{
+    uintmax_t exp = 0;
+    intmax_t rem = 0;
+    size_t left = dividend.size();
+    while (left > 0) {
+        size_t len;
+        if (left < max_group_slices_k) {
+            len = left;
+        }
+        else {
+            len = max_group_slices_k;
+        }
+
+        size_t pos = left - len;
+        intmax_t numerator = makenint(dividend, pos, len);
+
+        rem = quick_modulo_128(numerator, group_base_k, exp, divisor, rem);
+        exp++;
+
+        left -= len;
+    }
+
+    remainder = rem;
+}
+
 bigint  bigint::operator/  (const bigint& other) const
 {
     bigint quotient, remainder;
@@ -1245,32 +1339,80 @@ bigint& bigint::operator/= (intmax_t other)
 
 bigint  bigint::operator%  (const bigint& other) const
 {
-    bigint quotient, remainder;
-    divmod(*this, other, quotient, remainder);
+    bigint remainder;
+
+    if (other.iszero())
+        throw std::runtime_error("BigInt: divide by zero!");
+    else if (other.isone()) {
+        remainder = 0;
+    }
+    else if (other._slices.size() == 1) {
+        absmod_slice(_slices, other._slices[0], remainder);
+        if (!remainder.iszero())
+            remainder._sign = _sign;
+    }
+    else if (other._slices.size() <= max_group_slices_k) {
+        intmax_t denominator = makenint(other._slices);
+        absmod_nint(_slices, denominator, remainder);
+        if (!remainder.iszero())
+            remainder._sign = _sign;
+    }
+    else {
+        bigint quotient;
+        divmod(*this, other, quotient, remainder);
+    }
+
     return remainder;
 }
 
 bigint& bigint::operator%= (const bigint& other)
 {
-    bigint quotient, remainder;
-    divmod(*this, other, quotient, remainder);
-    _sign = remainder._sign;
-    _slices = std::move(remainder._slices);
+    if (other.iszero())
+        throw std::runtime_error("BigInt: divide by zero!");
+    else if (other.isone()) {
+        _slices.clear();
+        _slices.push_back(1);
+    }
+    else if (other._slices.size() == 1) {
+        bigint remainder;
+        absmod_slice(_slices, other._slices[0], remainder);
+        if (remainder.iszero())
+            _sign = false;
+        _slices = std::move(remainder._slices);
+    }
+    else if (other._slices.size() <= max_group_slices_k) {
+        bigint remainder;
+        intmax_t denominator = makenint(other._slices);
+        absmod_nint(_slices, denominator, remainder);
+        if (remainder.iszero())
+            _sign = false;
+        _slices = std::move(remainder._slices);
+    }
+    else {
+        bigint quotient, remainder;
+        divmod(*this, other, quotient, remainder);
+        _sign = remainder._sign;
+        _slices = std::move(remainder._slices);
+    }
+
     return *this;
 }
 
 bigint  bigint::operator%  (intmax_t other) const
 {
-    bigint quotient, remainder;
-    divmod(*this, other, quotient, remainder);
+    bigint remainder;
+    absmod_nint(_slices, other, remainder);
+    if (!remainder.iszero())
+        remainder._sign = _sign;
     return remainder;
 }
 
 bigint& bigint::operator%= (intmax_t other)
 {
-    bigint quotient, remainder;
-    divmod(*this, other, quotient, remainder);
-    _sign = remainder._sign;
+    bigint remainder;
+    absmod_nint(_slices, other, remainder);
+    if (remainder.iszero())
+        _sign = false;
     _slices = std::move(remainder._slices);
     return *this;
 }
