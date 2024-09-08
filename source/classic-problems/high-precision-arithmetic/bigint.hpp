@@ -217,7 +217,7 @@ class bigint {
     static bool absdiv_fast(const Ta& dividend, const Tb& divisor,
             bigint& quotient, bigint& remainder);
 
-    static void absdiv_slow(const slice_v& dividend, const slice_v& divisor,
+    static void absdiv_slow(const bigint& dividend, const bigint& divisor,
             bigint& quotient, bigint& remainder);
 
     template <class T>

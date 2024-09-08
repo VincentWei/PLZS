@@ -52,7 +52,6 @@ bigint bigint_gcd(const bigint &_a, const bigint &_b)
     while (b != 0) {
         bigint tmp(a);
         a = b;
-        cout << "modulo: " << tmp << " % " << b << endl;
         b = tmp % b;
     }
 
