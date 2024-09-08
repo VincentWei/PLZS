@@ -17,6 +17,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <exception>
 #include <cstdlib>
 #include <cstdint>
 #include <cstring>
@@ -194,6 +195,10 @@ class bigint {
         return false;
     }
 
+    template <class T>
+    static intmax_t makenint(const T& slices, size_t off = 0,
+            size_t len = max_group_slices_k);
+
     template <class Ta, class Tb>
     static void absadd(const Ta& one, const Tb& other, bigint& result);
     template <class Ta, class Tb>
@@ -203,25 +208,34 @@ class bigint {
     template <class Ta, class Tb>
     static void absmul(const Ta& one, const Tb& other, bigint& result);
     template <class T>
-    static void absdiv_slice(const T& dividend, slice_t denominator,
+    static void absdiv_slice(const T& dividend, slice_t divisor,
             bigint& quotient, bigint& remainder);
     template <class T>
-    static void absdiv_nint(const T& dividend, intmax_t denominator,
+    static void absdiv_nint(const T& dividend, intmax_t divisor,
             bigint& quotient, bigint& remainder);
     template <class Ta, class Tb>
     static bool absdiv_fast(const Ta& dividend, const Tb& divisor,
             bigint& quotient, bigint& remainder);
-    template <class T>
-    static intmax_t makenint(const T& slices, size_t off = 0,
-            size_t len = max_group_slices_k);
 
-    static void absdiv_slow(const slice_v& dividend, const slice_v& divisor,
+    static void absdiv_slow(const bigint& dividend, const bigint& divisor,
             bigint& quotient, bigint& remainder);
+
+    template <class T>
+    static void absmod_slice(const T& dividend, slice_t divisor,
+            bigint& remainder);
+    template <class T>
+    static void absmod_nint(const T& dividend, intmax_t divisor,
+            bigint& remainder);
 
     template <class T>
     void abssubfrom(const T& other);
     template <class T>
     void absaddto(const T& other);
+
+    static slice_t quick_modulo(slice_t factor, slice_t base, uintmax_t exp,
+            slice_t modulus, slice_t rem_pre = 0);
+    static intmax_t quick_modulo_128(intmax_t factor, intmax_t base,
+            uintmax_t exp, intmax_t modulus, intmax_t rem_pre = 0);
 };
 
 #include <iostream>
