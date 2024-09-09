@@ -380,6 +380,54 @@ ostream& operator<< (ostream& os, const rational& q)
     return os;
 }
 
+int compare_square(const bigint& mid, const bigint& n)
+{
+    bigint square_mid = mid * mid;
+    if (square_mid == n)
+        return 0;
+
+    if (square_mid < n) {
+        square_mid += mid * 2;
+        square_mid++;
+        if (square_mid > n) {
+            return 0;
+        }
+
+        return -1;
+    }
+
+    return 1;
+}
+
+bigint maximum_le_sqrt(const bigint& n)
+{
+    if (n < 2)
+        return bigint(n);
+
+    bigint start = 0;
+    bigint end = n;
+    bigint mid = 0;
+
+    while (start <= end) {
+        mid = start + (end - start) / 2;
+        if (mid == 0)
+            break;
+
+        int r = compare_square(mid, n);
+        if (r == 0) {
+            break;
+        }
+        else if (r > 0) {
+            end = mid;
+        }
+        else {
+            start = mid;
+        }
+    }
+
+    return mid;
+}
+
 rational q_sqrt(const rational& q, unsigned scale)
 {
     // clog << "rational number: " << q << endl;
@@ -403,7 +451,13 @@ rational q_sqrt(const rational& q, unsigned scale)
     // clog << "tolerance: " << tolerance << endl;
 
     rational x0;
-    if (q > 1)
+    if (q > 4) {
+        bigint quot, rem;
+        bigint::divmod(q.first, q.second, quot, rem);
+        rem = maximum_le_sqrt(quot);
+        x0 = rational {rem, bigint {1}};
+    }
+    else if (q > 1)
         x0 = (q + 1) / 2;
     else if (q < 1)
         x0 = q / 2;
@@ -418,7 +472,7 @@ rational q_sqrt(const rational& q, unsigned scale)
         x1 = x0 - (x0 * x0 - q) / (x0 * 2);
         q_normalize(x1);
         rational errors = q_abs(last - x1);
-        clog << "Iteration #" << i << ":\tx_i = " << x1 << "; errors: "
+        clog << "Iteration #" << i << ":\tx = " << x1 << "; errors: "
             << errors << endl;
         if (errors < tolerance) {
             break;
