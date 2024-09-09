@@ -1,5 +1,6 @@
 /*
- * This program calculates the summary of factorials.
+ * This program calculates the maximum integer less than or equal to
+ * the square root of a big positive integer.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.

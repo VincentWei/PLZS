@@ -1,5 +1,6 @@
 /*
- * This program converts a given rational number to a fraction.
+ * This program estimates the square root of a positive rational number
+ * to the given number of the decimal part.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.
@@ -25,15 +26,19 @@
  *
  * returns: The power of @base raised to @exp.
  */
-bigint bigint_power(bigint &base, unsigned exp)
+bigint bigint_power(const bigint &base, unsigned exp)
 {
-    bigint r(1);
+    bigint ret = 1;
+    bigint lifting_base = base;
 
-    while (exp--) {
-        r *= base;
+    while (exp) {
+        if (exp & 1)
+            ret = ret * lifting_base;
+        lifting_base = lifting_base * lifting_base;
+        exp >>= 1;
     }
 
-    return r;
+    return ret;
 }
 
 /*
@@ -50,7 +55,7 @@ bigint bigint_gcd(const bigint &_a, const bigint &_b)
     bigint b(_b);
 
     while (b != 0) {
-        bigint tmp(a);
+        bigint tmp = move(a);
         a = b;
         b = tmp % b;
     }
