@@ -216,6 +216,19 @@ void bigint::normalize()
     _slices.shrink_to_fit();
 }
 
+bigint bigint::abs() const
+{
+    bigint ret;
+    ret._sign = false;
+    ret._slices = _slices;
+    return ret;
+}
+
+int bigint::abscmp(const bigint& other) const
+{
+    return abscmp(_slices, other._slices);
+}
+
 template <class Ta, class Tb>
 void bigint::absadd(const Ta& one, const Tb& other, bigint &result)
 {
@@ -1335,7 +1348,7 @@ void bigint::absmod_nint(const T& dividend, intmax_t divisor,
 bigint  bigint::operator/  (const bigint& other) const
 {
     if (other.iszero())
-        throw std::runtime_error("BigInt: divide by zero!");
+        throw std::runtime_error("BigInt: division by zero!");
 
     bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
@@ -1345,7 +1358,7 @@ bigint  bigint::operator/  (const bigint& other) const
 bigint& bigint::operator/= (const bigint& other)
 {
     if (other.iszero())
-        throw std::runtime_error("BigInt: divide by zero!");
+        throw std::runtime_error("BigInt: division by zero!");
 
     bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
@@ -1357,7 +1370,7 @@ bigint& bigint::operator/= (const bigint& other)
 bigint  bigint::operator/  (intmax_t other) const
 {
     if (other == 0)
-        throw std::runtime_error("BigInt: divide by zero!");
+        throw std::runtime_error("BigInt: division by zero!");
 
     bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
@@ -1367,7 +1380,7 @@ bigint  bigint::operator/  (intmax_t other) const
 bigint& bigint::operator/= (intmax_t other)
 {
     if (other == 0)
-        throw std::runtime_error("BigInt: divide by zero!");
+        throw std::runtime_error("BigInt: division by zero!");
 
     bigint quotient, remainder;
     divmod(*this, other, quotient, remainder);
@@ -1381,7 +1394,7 @@ bigint  bigint::operator%  (const bigint& other) const
     bigint remainder;
 
     if (other.iszero())
-        throw std::runtime_error("BigInt: divide by zero!");
+        throw std::runtime_error("BigInt: division by zero!");
     else if (other.isone()) {
         remainder = 0;
     }
@@ -1407,7 +1420,7 @@ bigint  bigint::operator%  (const bigint& other) const
 bigint& bigint::operator%= (const bigint& other)
 {
     if (other.iszero())
-        throw std::runtime_error("BigInt: divide by zero!");
+        throw std::runtime_error("BigInt: division by zero!");
     else if (other.isone()) {
         _slices.clear();
         _slices.push_back(1);

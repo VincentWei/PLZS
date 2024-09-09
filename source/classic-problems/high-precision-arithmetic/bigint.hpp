@@ -171,6 +171,9 @@ class bigint {
     static bool divmod(const bigint& dividend, intmax_t divisor,
             bigint& quotient, bigint& remainder);
 
+    bigint abs() const;
+    int abscmp(const bigint& other) const;
+
   private:
     static int _max_nint_slices;
 
