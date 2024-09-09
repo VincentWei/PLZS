@@ -202,6 +202,7 @@ void operator /= (rational& q, intmax_t n)
         q.first.reverse();
         q.second *= -n;
     }
+    // q_normalize(q);
 }
 
 rational operator / (const rational& q, intmax_t n)
@@ -217,6 +218,7 @@ rational operator / (const rational& q, intmax_t n)
         r.second *= -n;
     }
 
+    // q_normalize(r);
     return r;
 }
 
@@ -226,21 +228,21 @@ rational operator / (const rational& q1, const rational& q2)
         throw std::runtime_error("Rational: division by zero!");
 
     rational r = { q1.first * q2.second, q1.second * q2.first };
-    q_normalize(r);
+    // q_normalize(r);
     return r;
 }
 
 rational operator * (const rational& q, intmax_t n)
 {
     rational r = { q.first * n, q.second };
-    q_normalize(r);
+    // q_normalize(r);
     return r;
 }
 
 rational operator * (const rational& q1, const rational& q2)
 {
     rational r = { q1.first * q2.first, q1.second * q2.second };
-    q_normalize(r);
+    // q_normalize(r);
     return r;
 }
 
@@ -248,6 +250,7 @@ rational operator + (const rational& q, intmax_t n)
 {
     rational p = q;
     p.first += q.second * n;
+    // q_normalize(r);
     return p;
 }
 
@@ -256,8 +259,7 @@ rational operator - (const rational& q1, const rational& q2)
     rational r;
     r.first = q1.first * q2.second - q2.first * q1.second;
     r.second = q1.second * q2.second;
-
-    q_normalize(r);
+    // q_normalize(r);
     return r;
 }
 
@@ -373,7 +375,7 @@ ostream& operator<< (ostream& os, const rational& q)
     return os;
 }
 
-rational q_estimate_square_root(const rational& q, unsigned scale)
+rational q_sqrt(const rational& q, unsigned scale)
 {
     // clog << "rational number: " << q << endl;
 
@@ -409,10 +411,11 @@ rational q_estimate_square_root(const rational& q, unsigned scale)
 
         rational last = x1;
         x1 = x0 - (x0 * x0 - q) / (x0 * 2);
+        q_normalize(x1);
         rational errors = q_abs(last - x1);
         clog << "Iteration #" << i << ":\tx_i = " << x1 << "; errors: "
             << errors << endl;
-        if (errors == 0 || errors < tolerance) {
+        if (errors < tolerance) {
             break;
         }
 
@@ -475,7 +478,7 @@ int main()
 
     cout.precision(scale);
     try {
-        q = q_estimate_square_root(q, scale);
+        q = q_sqrt(q, scale);
         cout << q << endl;
     }
     catch (std::exception& e) {
