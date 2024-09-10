@@ -159,6 +159,29 @@ uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
 ```cpp
 bool primality_miller_rabin(uint64_t n)
 {
+    // 处理小于 3 的特殊情形。
+    if (n < 3)
+        return n == 2;
+
+    // 定义小质数数组，用于过滤简单合数。
+    static const unsigned little_primes[] = {
+        2, 3, 5, 7, 11, 13
+    };
+
+    // 使用小质数过滤掉简单合数。
+    for (size_t i = 0; i < sizeof(little_primes)/sizeof(little_primes[0]); i++) {
+        if (n % little_primes[i] == 0)
+            return n == little_primes[i];
+    }
+
+    // n-1 一定是偶数；此处将 n-1 分解成 u * 2^t 形式的 u 和 t。
+    uint64_t u = n - 1;
+    int t = 0;
+    while (u % 2 == 0) {
+        u /= 2, ++t;
+    }
+
+    // 可选基数数组。
     static const uint64_t bases_32[] = {
         2, 7, 61,
     };
@@ -167,18 +190,7 @@ bool primality_miller_rabin(uint64_t n)
         2, 325, 9375, 28178, 450775, 9780504, 1795265022ULL,
     };
 
-
-    if (n < 3 || (n & 1) == 0)
-        return n == 2;
-
-    if (n % 3 == 0)
-        return n == 3;
-
-    uint64_t u = n - 1, t = 0;
-    while (u % 2 == 0) {
-        u /= 2, ++t;
-    }
-
+    // 根据待测试的整数大小选择合适的基数数组。
     const uint64_t *bases;
     int nr_tests;
     if (n <= UINT32_MAX) {
@@ -192,21 +204,25 @@ bool primality_miller_rabin(uint64_t n)
 
     for (int i = 0; i < nr_tests; i++) {
         uint64_t a = bases[i];
-        uint64_t v = quick_power_modulo(a, u, n);
-        if (v == 1)
-            continue;
+        if (a >= n)
+            a %= n;     // 当 a 大于 n 时，取模作为基数。
+        if (a == 0)
+            continue;   // 这表明基数 a 是 n 的倍数，选择下一个基数进行测试。
 
-        uint64_t s;
-        for (s = 0; s < t; ++s) {
-            // 若得到平凡平方根 n-1，则通过此轮测试
-            if (v == n - 1)
-                break;
-            v = v * v % n;
+        uint64_t x = quick_power_modulo(a, u, n);
+        if (x == 1 || x == n - 1)
+            continue;   // 通过此轮测试；n 是概素数，继续使用下个基数测试。
+
+        int j;
+        for (j = 0; j < t; ++j) {
+            // 计算模意义下的平方根；注意防止溢出。
+            x = (((unsigned __int128)x) * x) % n;
+            if (x == n - 1)
+                break;  // 得到平凡平方根 n-1，通过二次探测。
         }
 
-        // 如果找到了非平凡平方根，则会由于无法提前 break; 而运行到 s == t
-        // 如果费马素性测试无法通过，则一直运行到 s == t 前 v 都不会等于 -1
-        if (s == t)
+        // 此时表明找到了 *非* 平凡平方根，则 n 一定是合数。
+        if (j == t)
             return false;
     }
 
@@ -216,13 +232,13 @@ bool primality_miller_rabin(uint64_t n)
 
 	
 - 选择固定的素数作为基数，溢出风险降低，但仍存在，故而需要改进 `quick_power_modulo()` 函数的实现。
-- 使用了 G++ 和 Clang++ 在 64 位平台上的 `__int128` 非标准整数类型。
+- 使用了 G++ 和 Clang++ 在 64 位平台上的 `__int128` 非标准整数类型；注意符号。
 
 ```cpp
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 {
     uint64_t ret = 1;
-    __int128 base_128 = base;
+    unsigned __int128 base_128 = base;
 
     while (exp) {
         if (exp & 1)
