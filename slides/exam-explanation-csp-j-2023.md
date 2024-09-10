@@ -175,7 +175,6 @@ struct Node {
 ```cpp []
 #include<iostream>
 #include<cmath>
-
 using namespace std;
 
 double f(double a, double b, double c){
