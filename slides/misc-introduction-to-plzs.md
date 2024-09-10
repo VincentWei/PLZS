@@ -1,0 +1,90 @@
+# 面向十岁及以上学生的信息学系列课程介绍
+
+		
+## 信息学的内容
+
+`$$
+\mbox{信息学}
+\begin{cases}
+  \mbox{数学}
+  \begin{cases}
+   \mbox{初等数论} \\
+   \mbox{微积分} \\
+   \mbox{离散数学} \\
+   \mbox{编解码}  \\
+   \cdots
+  \end{cases} \\
+  \mbox{算法和数据结构}
+  \begin{cases}
+   \mbox{二分、倍增、排序、搜索、分治、动态规划} \cdots \\
+   \mbox{线性数据结构、树型数据结构、哈希表} \cdots
+  \end{cases}  \\
+  \mbox{编程语言}
+  \begin{cases}
+   \mbox{Python} \\
+   \mbox{C/C++} \\
+   \cdots
+  \end{cases} \\
+  \mbox{平台及工具}
+  \begin{cases}
+   \mbox{操作系统} \\
+   \mbox{数据库} \\
+   \mbox{Web} \\
+   \mbox{AI} \\
+   \cdots
+  \end{cases}
+\end{cases}
+$$`
+
+		
+## 考鼎学堂的课程体系
+
+`$$
+\mbox{考鼎学堂}
+\begin{cases}
+  \mbox{信奥生的数学素养课}
+  \begin{cases}
+   \mbox{数系及其运算} \\
+   \mbox{离散数学结构}
+   \cdots
+  \end{cases} \\
+  \mbox{算法和数据结构}
+  \begin{cases}
+   \mbox{入门 (NOI CSP-J) } \\
+   \mbox{提高 (NOI CSP-S) } \\
+   \mbox{经典编程题讲解}
+     \begin{cases}
+      \mbox{数论主题} \\
+      \mbox{CSP-J 真题讲解} \\
+      \mbox{CSP-S 真题讲解} \\
+      \cdots
+     \end{cases}
+  \end{cases} \\
+  \mbox{编程语言}
+  \begin{cases}
+   \mbox{Python 实战} \\
+   \mbox{C++ 基础} \\
+  \end{cases} \\
+  \mbox{平台及工具}
+  \begin{cases}
+   \mbox{零基础普及}
+  \end{cases}
+\end{cases}
+$$`
+
+		
+## 信息学的学习阶段
+
+1. 培养兴趣阶段：
+   - 四年级：零基础普及、Python 实战
+1. 信息学特长生阶段：
+   - 五年级暑假：信奥筑基（C++ 编程语言）
+   - 五年级：算法和数据结构入门、信奥生的数学素养课之数系及其运算
+   - 六年级：算法和数据结构提高、信奥生的数学素养课之离散数学结构
+
+		
+## 考鼎学堂特色
+
+1. 学员专属定制课表（联系客服添加班主任企微）
+1. 线上录播课 + 一对一私教课后辅导（可选）
+
