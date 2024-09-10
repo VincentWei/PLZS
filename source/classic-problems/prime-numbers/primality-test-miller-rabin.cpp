@@ -29,8 +29,8 @@ long long pi(uint64_t n)
 
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 {
-    __int128 ret = 1;
-    __int128 base_128 = base;
+    unsigned __int128 ret = 1;
+    unsigned __int128 base_128 = base;
 
     while (exp) {
         if (exp & 1)
@@ -64,7 +64,8 @@ bool primality_miller_rabin(uint64_t n)
             return n == little_primes[i];
     }
 
-    uint64_t u = n - 1, t = 0;
+    uint64_t u = n - 1;
+    int t = 0;
     while (u % 2 == 0) {
         u /= 2, ++t;
     }
@@ -82,21 +83,25 @@ bool primality_miller_rabin(uint64_t n)
 
     for (int i = 0; i < nr_tests; i++) {
         uint64_t a = bases[i];
-        uint64_t v = quick_power_modulo(a, u, n);
-        if (v == 1)
+        if (a >= n)
+            a %= n;
+        if (a == 0)
             continue;
 
-        uint64_t s;
-        for (s = 0; s < t; ++s) {
-            // 若得到平凡平方根 n-1，则通过此轮测试
-            if (v == n - 1)
+        uint64_t x = quick_power_modulo(a, u, n);
+        if (x == 1 || x == n - 1)
+            continue;
+
+        int j;
+        for (j = 0; j < t; ++j) {
+            x = (((unsigned __int128)x) * x) % n;
+            if (x == 1)
+                return false;
+            if (x == n - 1)
                 break;
-            v = v * v % n;
         }
 
-        // 如果找到了非平凡平方根，则会由于无法提前 break; 而运行到 s == t
-        // 如果费马素性测试无法通过，则一直运行到 s == t 前 v 都不会等于 -1
-        if (s == t)
+        if (j == t)
             return false;
     }
 
@@ -130,8 +135,10 @@ int main()
     assert(primality_miller_rabin(1975) == false);
     assert(primality_miller_rabin(1979) == true);
     assert(primality_miller_rabin(4294967029UL) == true);
+    assert(primality_miller_rabin((1ULL << 31) - 1) == true);
     assert(primality_miller_rabin(UINT32_MAX) == false);
     assert(primality_miller_rabin(UINT64_MAX) == false);
+    assert(primality_miller_rabin(18446744073709551557ULL) == true);
 
     long long nr_all_primes = pi(UINT64_MAX);
     cout << "According to the Prime Numbers Theorem, there are approximately "
