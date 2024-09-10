@@ -46,7 +46,7 @@ $$`
   \begin{cases}
    \mbox{数系及其运算} \\
    \mbox{离散数学结构} \\
-   \color{Yellow}{\mbox{编解码}}  \\
+   \\mbox{编解码}  \\
    \cdots
   \end{cases} \\
   \mbox{算法和数据结构}
@@ -65,12 +65,12 @@ $$`
   \begin{cases}
    \mbox{Python 实战} \\
    \mbox{C++ 基础} \\
-   \color{Yellow}{\mbox{C 语言最佳实践}}
+   \mbox{C 语言最佳实践}
   \end{cases} \\
   \mbox{平台及工具}
   \begin{cases}
    \mbox{零基础普及} \\
-   \color{Yellow}{\mbox{Linux 环境高级编程}}
+   \mbox{Linux 环境高级编程}
   \end{cases}
 \end{cases}
 $$`
