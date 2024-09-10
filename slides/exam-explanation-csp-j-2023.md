@@ -219,7 +219,7 @@ D. `120. 0000`
 		
 ## 阅读程序题
 
-```cpp []
+```cpp [19]
 #include<iostream>
 #include<vector>
 #include<algorithm>
@@ -230,7 +230,7 @@ int f(string x, string y){
     int n=y.size();
     vector<vector<int>>v(m+1, vector<int>(n+1,0));
     for (int i=1;i<=m; i++){
-        for（int j=1;j n;j++){
+        for（int j=1;j<=n;j++){
             if(x[i-1]==y[j-1]){
                 v[i][j]=v[i-1][j-1]+1;
             } else {
@@ -245,7 +245,7 @@ bool g(string x, string y){
     if(x.size() != y.size()){
         return false;
     }
-    return f(x+x, y)==y.size();
+    return f(x+x,y)==y.size();
 }
 
 int main(){
@@ -266,7 +266,7 @@ int main(){
 	
 ### 选择
 
-24) 将第19行中的 `[vm][n]` 替换为 `v[n][m]”，那么该程序（）  
+24) 将第 `19` 行中的 `v[m][n]` 替换为 `v[n][m]`，那么该程序（）  
 A. 行为不变  
 B. 只会改变输出  
 C. 一定非正常退出  
