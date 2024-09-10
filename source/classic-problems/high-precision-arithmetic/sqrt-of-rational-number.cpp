@@ -55,7 +55,7 @@ bigint bigint_gcd(const bigint &_a, const bigint &_b)
     bigint b(_b);
 
     while (b != 0) {
-        bigint tmp = move(a);
+        bigint tmp = std::move(a);
         a = b;
         b = tmp % b;
     }

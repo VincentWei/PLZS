@@ -937,3 +937,183 @@ $ ./sqrt-of-rational-number
 2.0371548787
 ```
 
+	
+### 使用两个整数构成的分式表达有理数
+
+- `bigint` 是一个压位高精度整数实现，提供了必要的运算符重载功能。
+- 使用两个整数构成的分式表示一个有理数，可使用 `<utility>` 中定义的`pair` 类模板。
+
+```cpp
+#include <utility>
+
+using rational = pair<bigint, bigint>;
+
+rational q_from_int(intmax_t n)
+{
+    return rational {bigint {n}, bigint {1}};
+}
+
+void operator /= (rational& q, intmax_t n)
+{
+    if (n == 0)
+        throw std::runtime_error("Rational: division by zero!");
+    else if (n > 0)
+        q.second *= n;
+    else {
+        q.first.reverse();
+        q.second *= -n;
+    }
+}
+
+rational operator / (const rational& q1, const rational& q2)
+{
+    if (q2.first == 0)
+        throw std::runtime_error("Rational: division by zero!");
+
+    rational r = { q1.first * q2.second, q1.second * q2.first };
+    return r;
+}
+
+ostream& operator<< (ostream& os, const rational& q)
+{
+    bigint numerator = q.first;
+    const bigint& denominator = q.second;
+
+    if (numerator.sign()) {
+        numerator.reverse();
+        os << "-";
+    }
+
+    bigint quot, rem;
+    bigint::divmod(numerator, denominator, quot, rem);
+    os << quot;
+    if (rem != 0) {
+        os << ".";
+
+        bigint last_quot;
+        numerator = rem * 10;
+        size_t precision = os.precision() + 1;
+        while (precision--) {
+            last_quot = quot;
+            bigint::divmod(numerator, denominator, quot, rem);
+            if (precision > 1)
+                os << quot;
+            if (rem == 0) {
+                break;
+            }
+
+            numerator = rem * 10;
+        }
+
+        if (rem != 0) {
+            if (quot > 4)
+                last_quot++;
+            os << last_quot;
+        }
+    }
+
+    return os;
+}
+
+```
+
+	
+### 分式的化简
+
+- 分式化简需要求最大公约数。
+- 注意 `std::move()` 的用法。
+
+```cpp
+bigint bigint_gcd(const bigint &_a, const bigint &_b)
+{
+    bigint a(_a);
+    bigint b(_b);
+
+    while (b != 0) {
+        bigint tmp = std::move(a);
+        a = b;
+        b = tmp % b;
+    }
+
+    return a;
+}
+
+void q_normalize(rational& q)
+{
+    bigint gcd = bigint_gcd(q.first, q.second);
+
+    if (gcd != 1) {
+        q.first /= gcd;
+        q.second /= gcd;
+    }
+
+    if (q.first.sign() == q.second.sign()) {
+        q.first.sign(false);
+        q.second.sign(false);
+    }
+    else {
+        q.first.sign(true);
+        q.second.sign(false);
+    }
+}
+```
+
+	
+### 使用牛顿逼近法计算平方根
+
+- `scale` 是小数点位数
+
+```cpp
+rational q_sqrt(const rational& q, unsigned scale)
+{
+    if (q.first < 0)
+        throw std::domain_error("Rational: the square root for a negative number is undefined!");
+
+    if (q.first == 0) {
+        return q_from_int(0);
+    }
+    else if (q.first == q.second) {
+        return q_from_int(1);
+    }
+
+    rational tolerance = q_from_int(1);
+    while (scale != 0) {
+        tolerance /= 10;
+        scale--;
+    }
+
+    rational x0;
+    if (q > 4) {
+        bigint quot, rem;
+        bigint::divmod(q.first, q.second, quot, rem);
+        rem = maximum_le_sqrt(quot);
+        x0 = rational {rem, bigint {1}};
+    }
+    else if (q > 1)
+        x0 = (q + 1) / 2;
+    else if (q < 1)
+        x0 = q / 2;
+    else
+        x0 = q_from_int(1);
+
+    rational x1 = x0;
+    unsigned i = 0;
+    while (i < 1000) {
+
+        rational last = x1;
+        x1 = x0 - (x0 * x0 - q) / (x0 * 2);
+        q_normalize(x1);
+        rational errors = q_abs(last - x1);
+        clog << "Iteration #" << i << ":\tx = " << x1 << "; errors: "
+            << errors << endl;
+        if (errors < tolerance) {
+            break;
+        }
+
+        x0 = x1;
+        i++;
+    }
+
+    return x1;
+}
+```
