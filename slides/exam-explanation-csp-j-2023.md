@@ -197,8 +197,8 @@ int main(){
 	
 ### 判断
 
-16) 当输入为 `2 2 2`时，输出为 `1.7321`。
-17) 将第 7 行中的 `(s-b) * (s-c)` 改为 `(s-c)*(s-b)` 不会影响程序运行的结果。
+16) 当输入为 `2 2 2` 时，输出为 `1.7321`。
+17) 将第 7 行中的 `(s-b)*(s-c)` 改为 `(s-c)*(s-b)` 不会影响程序运行的结果。
 18) 程序总是输出四位小数。
 
 	
@@ -216,4 +216,71 @@ B. `30.0000`
 C. `60.0000`  
 D. `120. 0000`
 
+		
+## 阅读程序题
+
+```cpp []
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int f(string x, string y){
+    int m=x.size();
+    int n=y.size();
+    vector<vector<int>>v(m+1, vector<int>(n+1,0));
+    for (int i=1;i<=m; i++){
+        for（int j=1;j n;j++){
+            if(x[i-1]==y[j-1]){
+                v[i][j]=v[i-1][j-1]+1;
+            } else {
+                v[i][j]=max(v[i-1][j], v[i][j-1]);
+            }
+        }
+    }
+    return v[m][n];
+}
+
+bool g(string x, string y){
+    if(x.size() != y.size()){
+        return false;
+    }
+    return f(x+x, y)==y.size();
+}
+
+int main(){
+    string x,y;
+    cin>>х>>у;
+    cout<<g(x,y)<<endl;
+    return 0;
+}
+```
+
+	
+### 判断
+
+21) `f` 函数的返回值小于等于 `min(n, m)`。
+22) `f` 函数的返回值等于两个输入字符串的最长公共子串的长度。
+23) 当输入两个完全相同的字符串时，`g` 函数的返回值总是 `true`。
+
+	
+### 选择
+
+24) 将第19行中的 `[vm][n]` 替换为 `v[n][m]”，那么该程序（）  
+A. 行为不变  
+B. 只会改变输出  
+C. 一定非正常退出  
+D. 可能非正常退出
+
+25) 当输入为 `csp-j p-jcs` 时，输出为（）  
+A. `0`  
+С. `1`  
+B. `T`  
+D. `F`
+
+26) 当输入为 `csppsc spsccp` 时，输出为（）  
+A. `T`  
+B. `F`  
+C. `0`  
+D. `1`
 
