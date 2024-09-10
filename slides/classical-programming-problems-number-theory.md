@@ -943,6 +943,8 @@ $ ./sqrt-of-rational-number
 - `bigint` 是一个压位高精度整数实现，提供了必要的运算符重载功能。
 - 使用两个整数构成的分式表示一个有理数，可使用 `<utility>` 中定义的`pair` 类模板。
 
+	
+
 ```cpp
 #include <utility>
 
@@ -1117,3 +1119,4 @@ rational q_sqrt(const rational& q, unsigned scale)
     return x1;
 }
 ```
+
