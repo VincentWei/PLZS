@@ -229,7 +229,7 @@ int f(string x, string y){
     int m=x.size();
     int n=y.size();
     vector<vector<int>>v(m+1, vector<int>(n+1,0));
-    for (int i=1;i<=m; i++){
+    for (int i=1;i<=m;i++){
         for（int j=1;j<=n;j++){
             if(x[i-1]==y[j-1]){
                 v[i][j]=v[i-1][j-1]+1;
