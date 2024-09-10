@@ -928,9 +928,9 @@ intmax_t ex_gcd_i(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 		
 ## 求有理数的平方根
 
-### 给定一个十进制小数 `d`，给出其平方根（要求精确到小数点后 `n` 位）
+#### 给定一个十进制小数 `d`，给出其平方根（要求精确到小数点后 `n` 位）
 
-运行效果如下：
+- 运行效果如下：
 
 ```console
 $ ./sqrt-of-rational-number
