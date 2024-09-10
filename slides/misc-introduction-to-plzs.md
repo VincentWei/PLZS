@@ -45,7 +45,7 @@ $$`
   \mbox{信奥生的数学素养课}
   \begin{cases}
    \mbox{数系及其运算} \\
-   \mbox{离散数学结构}
+   \mbox{离散数学结构} \\
    \cdots
   \end{cases} \\
   \mbox{算法和数据结构}
@@ -63,11 +63,12 @@ $$`
   \mbox{编程语言}
   \begin{cases}
    \mbox{Python 实战} \\
-   \mbox{C++ 基础} \\
+   \mbox{信奥筑基（C++ 编程语言）} \\
   \end{cases} \\
   \mbox{平台及工具}
   \begin{cases}
-   \mbox{零基础普及}
+   \mbox{零基础普及} \\
+   \mbox{Linux、Git、Vim}
   \end{cases}
 \end{cases}
 $$`
