@@ -994,7 +994,7 @@ ostream& operator<< (ostream& os, const rational& q)
         numerator = rem * 10;
         size_t precision = os.precision() + 1;
         while (precision--) {
-            last_quot = quot;
+            last_quot = std::move(quot);
             bigint::divmod(numerator, denominator, quot, rem);
             if (precision > 1)
                 os << quot;
@@ -1006,7 +1006,7 @@ ostream& operator<< (ostream& os, const rational& q)
         }
 
         if (rem != 0) {
-            if (quot > 4)
+            if (quot > 4 && last_quot < 9)   /* TODO */
                 last_quot++;
             os << last_quot;
         }
