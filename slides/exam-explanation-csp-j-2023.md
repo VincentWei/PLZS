@@ -172,7 +172,7 @@ struct Node {
 		
 ## 阅读程序题
 
-```cpp []
+```cpp [7]
 #include<iostream>
 #include<cmath>
 using namespace std;
