@@ -4650,10 +4650,10 @@
     {
       "id": "WEAkz_9Rs-KVpI449EobY",
       "type": "line",
-      "x": 1000,
-      "y": 380,
+      "x": 960,
+      "y": 360,
       "width": 0,
-      "height": 100,
+      "height": 120,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -4667,11 +4667,11 @@
       "index": "b2z",
       "roundness": null,
       "seed": 80486122,
-      "version": 10,
-      "versionNonce": 594243638,
+      "version": 13,
+      "versionNonce": 877917930,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1726024084832,
+      "updated": 1726024972276,
       "link": null,
       "locked": false,
       "points": [
@@ -4681,7 +4681,7 @@
         ],
         [
           0,
-          100
+          120
         ]
       ],
       "lastCommittedPoint": null,
