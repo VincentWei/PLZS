@@ -26,7 +26,8 @@ int main()
     cout.precision(20);
     while (true) {
         long double ratio = (long double)a / b;
-        cout << a << " / " << b << ":\n\t\e[1;31m" << ratio << "\e[0m" << endl;
+        cout << a << " / " << b << ":\t\e[1;31m" << ratio << "\e[0m" << endl;
+        cout << b << " / " << a << ":\t\e[1;31m" << (1/ratio) << "\e[0m" << endl;
 
         auto tmp = a;
         a = b;
