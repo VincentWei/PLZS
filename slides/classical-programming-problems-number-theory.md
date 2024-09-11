@@ -938,10 +938,32 @@ $ ./sqrt-of-rational-number
 ```
 
 	
+### 面临的挑战
+
+- `double` 或者 `long double` 只保留固定的小数精度（浮点数）。
+- 数学上的科学计数法：x * 10 ^ E（abs(x) >= 1 && abs(x) < 10）
+- 光速：`299792458 m/s`，`2.99792458E8 m/s`。
+- 计算机中的浮点数：`$ base \times 2^E, \quad abs(base) \ge 1 \and abs(base) \lt 2 $`
+
+	
+- 计算机浮点数类型
+
+```
+     sign    e      base
+ 16   1      5       10
+ 32   1      8       23     (Single, float)
+ 64   1      11      52     (Double, double)
+ 96   1      15      64     (Double-Extended)
+ 128  1      15      112    (Quadruple, long double)
+```
+
+- 需要引入高精度整数运算。
+
+	
 ### 使用两个整数构成的分式表达有理数
 
 - `bigint` 是一个压位高精度整数实现，提供了必要的运算符重载功能。
-- 使用两个整数构成的分式表示一个有理数，可使用 `<utility>` 中定义的`pair` 类模板。
+- 使用两个整数构成的分式表示一个有理数，可使用 `<utility>` 中定义的 `pair` 类模板。
 
 	
 
