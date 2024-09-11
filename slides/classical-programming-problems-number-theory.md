@@ -940,16 +940,16 @@ $ ./sqrt-of-rational-number
 	
 ### 面临的挑战
 
-- 计算机中的浮点数只保留实数的有效位数，如数学上的科学计数法：
+计算机中的浮点数只保留实数的有效位数，如数学上的科学计数法：
 
 `$$
-base \times 10^exp, \quad \left| base \right| >= 1 \land \left| base \right| < 10
+base \times 10^{exp}, \quad \left| base \right| >= 1 \land \left| base \right| < 10
 $$`
 
-- 计算机中的浮点数：
+计算机中的浮点数：
 
 `$$
-base \times 2^exp
+base \times 2^{exp}
 $$`
 
 	
