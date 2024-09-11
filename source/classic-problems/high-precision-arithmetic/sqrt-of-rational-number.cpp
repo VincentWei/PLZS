@@ -370,9 +370,13 @@ ostream& operator<< (ostream& os, const rational& q)
         }
 
         if (rem != 0) {
-            if (quot > 4 && last_quot < 9)   /* TODO */
+            if (quot > 4)       // round the quotient
                 last_quot++;
-            os << last_quot;
+
+            if (last_quot == 10)
+                os << "X";      // TODO: work-around
+            else
+                os << last_quot;
         }
     }
 
