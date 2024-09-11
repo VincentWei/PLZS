@@ -941,9 +941,9 @@ $ ./sqrt-of-rational-number
 ### 面临的挑战
 
 - `double` 或者 `long double` 只保留固定的小数精度（浮点数）。
-- 数学上的科学计数法：x * 10 ^ E（abs(x) >= 1 && abs(x) < 10）
+- 数学上的科学计数法：`$ base \times 10^E, \quad \left| base \right| >= 1 \land \left| base \right| < 10 $`
 - 光速：`299792458 m/s`，`2.99792458E8 m/s`。
-- 计算机中的浮点数：`$ base \times 2^E, \quad abs(base) \ge 1 \and abs(base) \lt 2 $`
+- 计算机中的浮点数：`$ base \times 2^E, \quad \left| base \right| \ge 1 \land \left| base \right| \lt 2 $`
 
 	
 - 计算机浮点数类型
