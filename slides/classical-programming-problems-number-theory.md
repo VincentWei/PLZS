@@ -958,10 +958,10 @@ $$`
 ```
      sign    exp     base
  16   1      5       10
- 32   1      8       23     (Single, float)
- 64   1      11      52     (Double, double)
+ 32   1      8       23     (Single; C/C++ float)
+ 64   1      11      52     (Double; C/C++ double, Python float)
  96   1      15      64     (Double-Extended)
- 128  1      15      112    (Quadruple, long double)
+ 128  1      15      112    (Quadruple; C/C++ long double)
 ```
 
 - 需要引入高精度整数运算。
