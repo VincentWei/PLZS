@@ -326,6 +326,6 @@ $$`
 - 我们可以将任意非负整数 `$ n $` 用 `$ 0 $` 和 `$ 1 $` 表示：
 
 `$$
-n = (b_{m}b_{m-1}\cdotsb_2)_F \Leftrightarrow n = \sum_{k=2}^{m} b_kF_k
+n = (b_{m}b_{m-1} \cdots b_2)_F \Leftrightarrow n = \sum_{k=2}^{m} b_kF_k
 $$`
 
