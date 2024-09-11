@@ -952,6 +952,7 @@ $$`
 base \times 2^{exp}
 $$`
 
+
 	
 - 计算机浮点数类型
 
@@ -963,6 +964,8 @@ $$`
  96   1      15      64     (Double-Extended)
  128  1      15      112    (Quadruple; C/C++ long double)
 ```
+
+- 使用 Quadruple 浮点数时，`$ \pi \approx 3.141592653589793238462643383279502884L $`。
 
 	
 ### 用有理数逼近结果
