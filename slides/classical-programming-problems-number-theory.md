@@ -448,11 +448,11 @@ NO SOLUTION
 	
 裴蜀（Bezout）定理
 
-- 若 `$ a, b $` 是不全为零的整数，且 `$ gcd(a, b) = d $`，则 `$ ax + by = m $` 有正整数解，当且仅当 `$ m $` 是 `$ d $` 的整数倍；若有解，则有无穷多个解。
+- 若 `$ a, b $` 是不全为零的整数，且 `$ \gcd(a, b) = d $`，则 `$ ax + by = m $` 有正整数解，当且仅当 `$ m $` 是 `$ d $` 的整数倍；若有解，则有无穷多个解。
 - 设 `$ ax + by = d $` 的一个解是 `$ x_0, y_0 $`，且，`$ m_0 = \frac{m}{d} $`，则上述方程的解集为：
 
 `$$
-\left \{ \left( m_0 x_0 + \frac{kb}{d}, m_0 y_0 - \frac{ka}{d} \right) \vert k \in \mathbb{Z} \right \}
+\left \{ \left( m_0 x_0 + \frac{kb}{d}, \quad m_0 y_0 - \frac{ka}{d} \right) \vert k \in \mathbb{Z} \right \}
 $$`
 
 	
@@ -822,7 +822,7 @@ intmax_t ex_gcd(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 ### 扩展欧几里得算法的数学基础
 
 - 裴蜀（Bezout）定理
-   1. 若 `$ a, b $` 是不全为零的整数，且 `$ gcd(a, b) = d $`，则 `$ ax + by = m $` 有正整数解，当且仅当 `$ m $` 是 `$ d $` 的整数倍；若有解，则有无穷多个解。
+   1. 若 `$ a, b $` 是不全为零的整数，且 `$ \gcd(a, b) = d $`，则 `$ ax + by = m $` 有正整数解，当且仅当 `$ m $` 是 `$ d $` 的整数倍；若有解，则有无穷多个解。
    1. 设 `$ ax + by = d $` 的一个解是 `$ x_0, y_0 $`，且，`$ m_0 = \frac{m}{d} $`，则上述方程的解集为：
 
 `$$
@@ -831,8 +831,8 @@ $$`
 
 - 裴蜀定理的几个推论
    1. 若方程 `$ ax + by = m $` 有整数解，则 `$ bx + \left( a \bmod b \right)y = m $` 亦有整数解。
-   1. 若方程 `$ ax + by = d $` 有整数解，且 `$ b \mid a $`，亦即 `$ a \bmod b = 0 $`，则有 `$ b = d $`，且 `$ \left( x = 1, y = 1 - \frac{a}{b} \right) $` 是该方程的一个解。
-   1. 若对方程 `$ bx + \left( a \bmod b \right) y = d $` 可求得一个整数解 `$ \left(\phi, \psi \right) $`，且 `$ \left( a \bmod b \right) = \left( a - qb \right) $`，则 `$ \left( \psi, (\phi - q\psi) \right) $` 是方程 `$ ax + by = d $` 的一对整数解。
+   1. 若方程 `$ ax + by = d $` 有整数解，且 `$ b \mid a $`，亦即 `$ a \bmod b = 0 $`，则有 `$ b = d $`，且 `$ \left( x = 1, \  y = 1 - \frac{a}{b} \right) $` 是该方程的一对整数解。
+   1. 若对方程 `$ bx + \left( a \bmod b \right) y = d $` 可求得一个整数解 `$ \left(\phi, \ \psi \right) $`，且 `$ \left( a \bmod b \right) = \left( a - qb \right) $`，则 `$ \left( \psi, \  (\phi - q\psi) \right) $` 是方程 `$ ax + by = d $` 的一对整数解。
 
 	
 ### 欧几里得算法
