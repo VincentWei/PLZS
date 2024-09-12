@@ -46,13 +46,13 @@ $$`
   \begin{cases}
    \mbox{数系及其运算} \\
    \mbox{离散数学结构} \\
-   \\mbox{编解码}  \\
+   \mbox{编解码}  \\
    \cdots
   \end{cases} \\
   \mbox{算法和数据结构}
   \begin{cases}
-   \mbox{入门 (NOI CSP-J) } \\
-   \mbox{提高 (NOI CSP-S) } \\
+   \mbox{入门} \\
+   \mbox{提高} \\
    \mbox{经典编程题讲解}
      \begin{cases}
       \mbox{数论主题} \\
