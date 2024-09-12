@@ -51,9 +51,9 @@ $$`
   \end{cases} \\
   \mbox{算法和数据结构}
   \begin{cases}
-   \mbox{入门} \\
-   \mbox{提高} \\
-   \mbox{经典编程题讲解}
+   \mbox{算法和数据结构入门} \\
+   \mbox{算法和数据结构提高} \\
+   \mbox{经典编程主题解析}
      \begin{cases}
       \mbox{数论主题} \\
       \mbox{解析器主题} \\
