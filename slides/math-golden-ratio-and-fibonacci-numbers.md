@@ -333,8 +333,7 @@ $$`
 
 `$$
 \begin{align}
-F_{n} & = \left[ \frac{\left( \frac{1 + \sqrt{5}}{2} \right)^n}{\sqrt{5}} \right] \\
-      & = \left[ \frac{\phi^n}{\sqrt{5}} \right]
+F_{n} & = \left[ \frac{\left( \frac{1 + \sqrt{5}}{2} \right)^n}{\sqrt{5}} \right] = \left[ \frac{\phi^n}{\sqrt{5}} \right]
 \end{align}
 $$`
 
