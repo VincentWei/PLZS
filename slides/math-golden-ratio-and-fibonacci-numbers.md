@@ -11,21 +11,21 @@
 - 希腊艺术家菲狄亚斯的雕刻
 - 《几何原本》中有关正五边形“中外比”的描述
 
-<img style="height:auto;width:100%;" src="assets/math-golden-ratio.svg" />
+	
+<img style="height:30%;width:auto;" src="assets/math-golden-ratio.svg" />
+
+	
+
+- 正五边形中的中外比满足如下条件：
 
 `$$
 \begin{align}
     \frac{x}{1} & = \frac{1}{x-1} \\
     x^2 - x - 1 & = 0
-\endi{align}
+\end{align}
 $$`
 
-	
-- 尺规作图画正五边形
-
-	
-### `$ \phi $` 和 `$ \hat{\phi} $`
-
+- 求解后得：
 
 `$$
 \begin{align}
@@ -35,6 +35,9 @@ $$`
              & \approx -0.6180339887
 \end{align}
 $$`
+
+	
+- 尺规作图画正五边形
 
 		
 ## 斐波那契数列和黄金分割比的关系
