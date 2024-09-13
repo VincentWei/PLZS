@@ -322,7 +322,7 @@ $$`
 
 `$$
 forall \ k, n \in \mathbb{Z} \\
-  F_{n+k}  & = F_kF_{n+1} + F_{k-1}F_{n}
+           F_{n+k}  = F_kF_{n+1} + F_{k-1}F_{n}
 $$`
 
 	
