@@ -419,7 +419,7 @@ $$`
 事实上，
 
 `$$
-    F_{n+1} = \phiF_n + \hat{\phi}^n
+    F_{n+1} = \phi F_n + \hat{\phi}^n
 $$`
 
 		
