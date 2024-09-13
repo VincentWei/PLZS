@@ -12,11 +12,11 @@
 - 《几何原本》中有关正五边形“中外比”的描述
 
 	
+- 正五边形中的中外比满足如下条件：
+
 <img style="height:30%;width:auto;" src="assets/math-golden-ratio.svg" />
 
-	
-
-- 正五边形中的中外比满足如下条件：
+- 对应代数式：
 
 `$$
 \begin{align}
@@ -24,6 +24,8 @@
     x^2 - x - 1 & = 0
 \end{align}
 $$`
+
+	
 
 - 求解后得：
 
