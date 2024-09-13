@@ -329,8 +329,8 @@ $$`
 
 `$$
 \begin{align}
-  \large{ F_{2n}   & = F_n(2F_{n+1} - F_{n}) } \\
-  \large{ F_{2n+1} & = F^2_{n+1} + F^2_n }
+  F_{2n}   & = F_n(2F_{n+1} - F_{n}) \\
+  F_{2n+1} & = F^2_{n+1} + F^2_n
 \end{align}
 $$`
 
