@@ -315,11 +315,15 @@ $$`
   F_{n+4}  & = 3F_{n+1} + 2F_{n}    \\
   F_{n+5}  & = 5F_{n+1} + 3F_{n}    \\
   \cdots                            \\
-  F_{n+k}  & = F_kF_{n+1} + F_{k-1}F_{n}
 \end{align}
 $$`
 
-`$ \forall \ k, n \in \mathbb{Z} $` 成立。
+也就是说，
+
+`$$
+forall \ k, n \in \mathbb{Z} \\
+  F_{n+k}  & = F_kF_{n+1} + F_{k-1}F_{n}
+$$`
 
 	
 - 倍增法计算斐波那契数
