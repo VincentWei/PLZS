@@ -321,8 +321,7 @@ $$`
 也就是说，
 
 `$$
-forall \ k, n \in \mathbb{Z} \\
-           F_{n+k}  = F_kF_{n+1} + F_{k-1}F_{n}
+\large{ F_{n+k} = F_kF_{n+1} + F_{k-1}F_{n} \qquad (\forall \ k, n \in \mathbb{Z}) }
 $$`
 
 	
