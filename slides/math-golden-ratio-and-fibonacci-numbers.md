@@ -11,8 +11,13 @@
 - 希腊艺术家菲狄亚斯的雕刻
 - 《几何原本》中有关正五边形“中外比”的描述
 
+<img style="height:auto;width:100%;" src="assets/math-golden-ratio.svg" />
+
 `$$
-x^2 - x - 1 = 0
+\begin{align}
+    \frac{x}{1} & = \frac{1}{x-1} \\
+    x^2 - x - 1 & = 0
+\endi{align}
 $$`
 
 	
