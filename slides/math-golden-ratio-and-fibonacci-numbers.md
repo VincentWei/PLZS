@@ -452,7 +452,7 @@ $$`
 - 我们可以将任意非负整数 `$ n $` 用 `$ 0 $` 和 `$ 1 $` 的序列表示：
 
 `$$
-n = (b_{m}b_{m-1} \cdots b_2)_F \Leftrightarrow n = \sum_{k=2}^{m} b_kF_k, \qquad b_k = 0 \or 1
+n = (b_{m}b_{m-1} \cdots b_2)_F \Leftrightarrow n = \sum_{k=2}^{m} b_kF_k, \qquad b_k = 0 or 1
 $$`
 
 		
