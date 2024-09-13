@@ -326,7 +326,11 @@ $$`
 - 通项公式（Binet's Formula）
 
 `$$
-F_{n} = \frac{\left( \frac{1 + \sqrt{5}}{2} \right)^n - \left( \frac{1 - \sqrt{5}}{2} \right)^n}{\sqrt{5}}
+\begin{align}
+F_{n} & = \frac{\left( \frac{1 + \sqrt{5}}{2} \right)^n - \left( \frac{1 - \sqrt{5}}{2} \right)^n}{\sqrt{5}} \\
+      & = \frac{\phi^n - {\hat{\phi}}^n}{\sqrt{5}} \\
+      & = \frac{\phi^n - (-\phi)^{-n}}{\sqrt{5}}
+\end{align}
 $$`
 
 - 或，
