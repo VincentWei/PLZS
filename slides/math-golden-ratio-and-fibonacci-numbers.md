@@ -11,7 +11,7 @@
 ## 黄金分割比
 
 - 希腊艺术家菲狄亚斯的雕刻
-- 《几何原本》中有关正五边形“中外比”的描述
+- 《几何原本》中有关正五边形“中外比”的描述  
 
 <img style="height:30%;width:auto;" src="assets/math-pentagon.svg" />
 
