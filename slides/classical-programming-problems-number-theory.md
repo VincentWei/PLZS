@@ -838,7 +838,7 @@ $$`
 ### 欧几里得算法
 
 - 欧几里得算法（辗转相除法）可用来求最大公约数。
-- 数学基础：`$ \gcd (a, b) = \gcd (b, b \bmod a) $`
+- 数学基础：`$ \gcd (a, b) = \gcd (b, a \bmod b) $`
 
 ```cpp
 intmax_t gcd_r(intmax_t a, intmax_t b)
