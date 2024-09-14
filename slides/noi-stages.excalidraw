@@ -16,8 +16,8 @@
       "roughness": 0,
       "opacity": 100,
       "angle": 0,
-      "x": 945.5750704353023,
-      "y": 559.8642553721795,
+      "x": 920,
+      "y": 720.0000000000001,
       "strokeColor": "#000000",
       "backgroundColor": "#ffec99",
       "width": 239.99999999999997,
@@ -39,43 +39,43 @@
       "endArrowhead": null,
       "points": [
         [
-          -25.57507043530231,
-          160.13574462782063
+          0,
+          0
         ],
         [
-          -25.57507043530231,
-          -253.10784756603184
+          0,
+          -413.24359219385246
         ],
         [
-          -265.5750704353023,
-          -459.86425537217946
+          -239.99999999999997,
+          -620.0000000000001
         ],
         [
-          -265.5750704353023,
-          -271.6836280008617
+          -239.99999999999997,
+          -431.81937262868234
         ],
         [
-          -134.2066791364048,
-          -159.690614089131
+          -108.6316087011025,
+          -319.82635871695163
         ],
         [
-          -134.92843136029896,
-          65.91078312852282
+          -109.35336092499665,
+          -94.2249614992978
         ],
         [
-          -25.57507043530231,
-          160.13574462782063
+          0,
+          0
         ],
         [
-          -25.57507043530231,
-          160.13574462782063
+          0,
+          0
         ]
       ]
     },
     {
       "type": "line",
-      "version": 296,
-      "versionNonce": 1845275027,
+      "version": 297,
+      "versionNonce": 2122814720,
       "index": "ar",
       "isDeleted": false,
       "id": "_LsfAP_jI6WKYKzGp3MY0",
@@ -85,8 +85,8 @@
       "roughness": 0,
       "opacity": 100,
       "angle": 0,
-      "x": 723.6422029136977,
-      "y": 607.3802022509868,
+      "x": 739.9999999999999,
+      "y": 760,
       "strokeColor": "#000000",
       "backgroundColor": "#ffc9c9",
       "width": 239.9999999999999,
@@ -98,7 +98,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1726306470364,
+      "updated": 1726307236089,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -108,36 +108,36 @@
       "endArrowhead": null,
       "points": [
         [
-          16.35779708630224,
-          152.61979774901317
+          0,
+          0
         ],
         [
-          16.35779708630224,
-          -207.28739560910742
+          0,
+          -359.9071933581206
         ],
         [
-          -223.64220291369764,
-          -387.3802022509868
+          -239.9999999999999,
+          -540
         ],
         [
-          -223.64220291369764,
-          -219.5348262326669
+          -239.9999999999999,
+          -372.15462398168006
         ],
         [
-          -94.85648283933935,
-          -123.78223296521048
+          -111.21427992564159,
+          -276.40203071422366
         ],
         [
-          -95.28506912953635,
-          68.83633463455728
+          -111.6428662158386,
+          -83.7834631144559
         ],
         [
-          16.35779708630224,
-          152.61979774901317
+          0,
+          0
         ],
         [
-          16.35779708630224,
-          152.61979774901317
+          0,
+          0
         ]
       ]
     },
@@ -154,12 +154,12 @@
       "roughness": 0,
       "opacity": 100,
       "angle": 0,
-      "x": 581.7092604102115,
-      "y": 646.9249041244193,
+      "x": 580,
+      "y": 780,
       "strokeColor": "#000000",
       "backgroundColor": "#aecbfa",
       "width": 180,
-      "height": 447.971255717072,
+      "height": 447.9712557170719,
       "seed": 261503389,
       "groupIds": [
         "H81BsQwOthRlToPgHjZgm"
@@ -177,110 +177,73 @@
       "endArrowhead": null,
       "points": [
         [
-          -1.7092604102115274,
-          133.07509587558064
+          0,
+          0
         ],
         [
-          -1.7092604102115274,
-          -165.47772630447605
+          0,
+          -298.5528221800567
         ],
         [
-          -181.70926041021153,
-          -314.8961598414913
+          -180,
+          -447.9712557170719
         ],
         [
-          -181.70926041021153,
-          -171.4430957548136
+          -180,
+          -304.51819163039426
         ],
         [
-          -87.75322187623985,
-          -94.17727684055839
+          -86.04396146602832,
+          -227.25237271613904
         ],
         [
-          -88.1488188325279,
-          61.49066247152902
+          -86.43955842231637,
+          -71.58443340405162
         ],
         [
-          -1.7092604102115274,
-          133.07509587558064
+          0,
+          0
         ],
         [
-          -1.7092604102115274,
-          133.07509587558064
+          0,
+          0
         ]
       ]
     },
     {
-      "id": "exuu4r2SY-gCy0tQWrJwI",
       "type": "text",
-      "x": 398.804909811548,
-      "y": 419.15799388565296,
-      "width": 143.93143439292908,
-      "height": 44.9085240429483,
-      "angle": 0.6542253911632754,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "#ffec99",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "index": "au",
-      "roundness": null,
-      "seed": 1019912029,
       "version": 99,
       "versionNonce": 163475165,
+      "index": "au",
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1726306347427,
-      "link": null,
-      "locked": false,
-      "text": "兴趣培养",
-      "fontSize": 35.92681923435864,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "兴趣培养",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
-      "type": "text",
-      "version": 213,
-      "versionNonce": 952852573,
-      "index": "av",
-      "isDeleted": false,
-      "id": "rT23z-WdidbaThid35kHr",
+      "id": "exuu4r2SY-gCy0tQWrJwI",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
-      "angle": 0.576592132627094,
-      "x": 494.3888657304543,
-      "y": 339.69637244314254,
+      "angle": 0.6542253911632754,
+      "x": 398.804909811548,
+      "y": 419.15799388565296,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ffec99",
-      "width": 233.4252203160162,
-      "height": 48.639240499711235,
-      "seed": 1735477011,
+      "width": 143.93143439292908,
+      "height": 44.9085240429483,
+      "seed": 1019912029,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1726306467604,
+      "updated": 1726306347427,
       "link": null,
       "locked": false,
-      "fontSize": 38.911392399768985,
+      "fontSize": 35.92681923435864,
       "fontFamily": 5,
-      "text": "信息学特长生",
+      "text": "兴趣培养",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "信息学特长生",
+      "originalText": "兴趣培养",
       "autoResize": true,
       "lineHeight": 1.25
     },
@@ -322,35 +285,35 @@
       "lineHeight": 1.25
     },
     {
-      "id": "-2aET0ienfd2XubX2SV4_",
       "type": "text",
-      "x": 436.20802307128906,
-      "y": 603.7919769287109,
-      "width": 207.58395385742188,
-      "height": 40.000000000000036,
-      "angle": 1.5707963267948966,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "#ffec99",
+      "version": 48,
+      "versionNonce": 1592105053,
+      "index": "ax",
+      "isDeleted": false,
+      "id": "-2aET0ienfd2XubX2SV4_",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 1.5707963267948966,
+      "x": 436.20802307128906,
+      "y": 603.7919769287109,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffec99",
+      "width": 207.58395385742188,
+      "height": 40.000000000000036,
+      "seed": 1424636381,
       "groupIds": [],
       "frameId": null,
-      "index": "ax",
       "roundness": null,
-      "seed": 1424636381,
-      "version": 48,
-      "versionNonce": 1592105053,
-      "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1726306350510,
       "link": null,
       "locked": false,
-      "text": "Linux/Python",
       "fontSize": 32.00000000000003,
       "fontFamily": 5,
+      "text": "Linux/Python",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
@@ -429,6 +392,43 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "C++/高级算法/数学",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "type": "text",
+      "version": 141,
+      "versionNonce": 1222712064,
+      "index": "b00",
+      "isDeleted": false,
+      "id": "uum7Wu5UT1JzDvViNstiE",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0.6542253911632754,
+      "x": 491.4140913345806,
+      "y": 340.94041373448727,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffec99",
+      "width": 215.51998901367188,
+      "height": 44.9085240429483,
+      "seed": 532870400,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1726307267610,
+      "link": null,
+      "locked": false,
+      "fontSize": 35.92681923435864,
+      "fontFamily": 5,
+      "text": "信息学特长生",
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "信息学特长生",
       "autoResize": true,
       "lineHeight": 1.25
     }
