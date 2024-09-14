@@ -82,7 +82,7 @@ $$`
 		
 ## 三个阶段
 
-<img style="height:70%;width:auto;" src="assets/noi-stages.svg" />
+<img style="height:30%;width:auto;" src="assets/noi-stages.svg" />
 
 	
 ### 四年级开始
