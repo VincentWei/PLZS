@@ -1,6 +1,6 @@
 /*
- * The plain version to factor an integer number by using
- *  Pollard Rho algorithm with Floyd judgment loop.
+ * This program factors an integer number by using Pollard Rho algorithm
+ *  with Floyd judgment loop.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.
