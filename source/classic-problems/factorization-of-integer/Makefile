@@ -1,4 +1,4 @@
-TARGETS = prime-factors-plain prime-factors-optimized
+TARGETS = prime-factors-plain prime-factors-optimized pollard-rho-plain pollard-rho-binary-lifted
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

@@ -161,7 +161,7 @@ int main()
 
     srandom(time(NULL));
 
-#define FROM_TOP  0
+#define FROM_TOP  1
 #if FROM_TOP
     uint64_t n = UINT64_MAX;
 #else
