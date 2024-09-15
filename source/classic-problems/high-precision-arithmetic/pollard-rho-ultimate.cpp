@@ -24,16 +24,12 @@
 
 using namespace std;
 
-bigint generator(bigint x, bigint c, bigint n)
+bigint generator(const bigint& x, const bigint& c, const bigint& n)
 {
-    bigint next;
-
-    next = x * x;
-    next = (next % n + c % n) % n;
-    return next;
+    return (x * x + c) % n;
 }
 
-bigint random(bigint n)
+bigint random(const bigint& n)
 {
     bigint ret;
     auto slices = n.slices();
@@ -49,6 +45,7 @@ bigint random(bigint n)
         base *= bigint::slice_base_k;
     }
 
+    // clog << "random number " << ret << " for " << n << endl;
     return ret;
 }
 
@@ -172,16 +169,40 @@ bool primality_miller_rabin(bigint n)
     return true;
 }
 
-#define MAX_STEPS       ((1U << 8) - 1)
-
-bigint pollard_rho(bigint n)
+bigint pollard_rho_floyd_loop(const bigint& n)
 {
     bigint c = random(n);
-    bigint x_i = generator(random(n), c, n);
-    unsigned goal;
+    bigint loop_t = 0;
+    loop_t = generator(loop_t, c, n);
+    bigint loop_r = generator(loop_t, c, n);
+
+    while (loop_t != loop_r) {
+        bigint d = gcd(abs_diff(loop_t, loop_r), n);
+        if (d > 1)
+            return d;
+
+        loop_t = generator(loop_t, c, n);
+        loop_r = generator(generator(loop_r, c, n), c, n);
+    }
+
+    return n;
+}
+
+#define MAX_STEPS       ((1U << 8) - 1)
+
+bigint pollard_rho_binary_lifting(bigint n)
+{
+    bigint c = random(n);
+    bigint x_i = 0;
+    x_i = generator( x_i, c, n);
+
+    for (int i = 0; i < 73; i++)
+        x_i = generator(x_i, c, n);
+
+    // clog << "x_i is ready: " << x_i << endl;
 
     // 使用倍增法降低 GCD 的求解次数。
-    for (goal = 1;; goal <<= 1) {
+    for (unsigned goal = 1;; goal <<= 1) {
         bigint d;
 
         bigint x_0 = x_i;
@@ -250,7 +271,7 @@ bigint_v factor_integer(bigint n, double& duration)
 
         unsigned tries = 0;
         while (true) {
-            factor = pollard_rho(n);
+            factor = pollard_rho_binary_lifting(n);
             if (factor < n) {
                 factors.push_back(factor);
                 clog << "Got a nontrivial factor: " << factor << endl;
@@ -264,7 +285,8 @@ bigint_v factor_integer(bigint n, double& duration)
         }
 
         n /= factor;
-        clog << "Now n is " << n << endl;
+        // clog << "Now n is " << n << endl;
+
         if (primality_miller_rabin(n)) {
             clog << n << " is a prime number." << endl;
             goto done;
@@ -315,6 +337,9 @@ int main()
     factors = factor_integer(bigint {str}, duration);
 
     if (factors.size() > 0) {
+        cout << "Totally " << factors.size() << " nontrivial factors found (" << duration
+            << " seconds consumed):\n";
+
         cout << factors[0];
         for (size_t i = 1; i < factors.size(); i++) {
             cout << ", " << factors[i];
@@ -324,8 +349,5 @@ int main()
     else {
         cout << "PRIME" << endl;
     }
-
-    cout << "Totally " << factors.size() << " nontrivial factors found (" << duration
-        << " seconds consumed)." << endl;
 }
 
