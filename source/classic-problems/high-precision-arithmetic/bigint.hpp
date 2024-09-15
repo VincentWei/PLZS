@@ -39,8 +39,8 @@ class bigint {
     static const int max_slice_nint_k = 99999999;   // 21 4748 3647 (int32max)
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 00000000
     static const int max_nint_slices_k = 2;    // 922 33720368 54775807
-    static const int max_group_slices_k = 1;
-    static const int group_base_k = 100000000;
+    static const int max_group_slices_k = 2;
+    static const intmax_t group_base_k = 100000000LL * 100000000LL;
         // slice_base_k ^ max_group_slices_k
 #elif defined(USE_INT16_AS_SLICE)
     using slice_t = int16_t;
@@ -50,8 +50,8 @@ class bigint {
     static const int max_slice_nint_k = 9999;       // 3 2767 (int16max)
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 0000
     static const int max_nint_slices_k = 4;    // 922 3372 0368 5477 5807
-    static const int max_group_slices_k = 2;
-    static const int group_base_k = 100000000;
+    static const int max_group_slices_k = 4;
+    static const intmax_t group_base_k = 100000000LL * 100000000LL;
         // slice_base_k ^ max_group_slices_k */
 #elif defined(USE_INT8_AS_SLICE)
     using slice_t = int8_t;
@@ -61,8 +61,8 @@ class bigint {
     static const int max_slice_nint_k = 99;         // 1 27 (int8max)
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 00
     static const int max_nint_slices_k = 9;    // 922 33 72 03 68 54 77 58 07
-    static const int max_group_slices_k = 4;
-    static const int group_base_k = 1000000000;
+    static const int max_group_slices_k = 8;
+    static const intmax_t group_base_k = 1000000000LL * 1000000000LL;
         // slice_base_k ^ max_group_slices_k
 #endif
 
@@ -95,7 +95,9 @@ class bigint {
        }
 
        slice_t front() const {
-           return _slices[0];
+            if (_size > 0)
+                return _slices[0];
+            return 0;
        }
 
        slice_t back() const {
@@ -116,10 +118,15 @@ class bigint {
     // some getters
     bool sign() const { return _sign; }
     const slice_v& slices() const { return _slices; }
-    slice_t last_slice() const {
+    slice_t most_significant_slice() const {
         if (_slices.size() == 0)
             return 0;
         return _slices.back();
+    }
+    slice_t least_significant_slice() const {
+        if (_slices.size() == 0)
+            return 0;
+        return _slices.front();
     }
 
     // getter or setter for max number of slices for native integer

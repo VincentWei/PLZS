@@ -42,9 +42,10 @@ bigint random(bigint n)
     else
         ret = 0;
 
+    bigint base = bigint::slice_base_k;
     for (size_t i = 1; i < slices.size(); i++) {
-        ret *= bigint::slice_base_k;
-        ret += random() % slices[i];
+        ret += base * (random() % slices[i]);
+        base *= bigint::slice_base_k;
     }
 
     return ret;
@@ -61,6 +62,7 @@ bigint gcd(const bigint &_a, const bigint &_b)
         b = tmp % b;
     }
 
+    // clog << __func__ << "(" << _a << ", " << _b << "): " << a << endl;
     return a;
 }
 
@@ -79,8 +81,8 @@ bigint quick_power_modulo(const bigint& base, const bigint& exp,
     bigint my_exp = exp;
 
     while (my_exp != 0) {
-        bigint::slice_t last_slice = my_exp.last_slice();
-        if (last_slice & 1)
+        bigint::slice_t lsd = my_exp.least_significant_slice();
+        if (lsd & 1)
             ret = (ret * my_base) % modulus;
         my_base = (my_base * my_base) % modulus;
         my_exp /= 2;
@@ -235,8 +237,10 @@ bigint_v factor_integer(bigint n, double& duration)
 
     bigint_v factors;
 
-    if (primality_miller_rabin(n))
+    if (primality_miller_rabin(n)) {
+        clog << n << " is a prime." << endl;
         return factors;
+    }
 
     while (n > 1) {
         bigint factor;
@@ -269,10 +273,29 @@ int main()
 
     double duration;
     vector<bigint> factors;
-    factors = factor_integer(bigint {"18446744073709551615" }, duration);
+
+    bigint n;
+    n = bigint { "18446744073709551615" };
+    cout << "Trying to factor " << n << ":" << endl;
+    factors = factor_integer(n, duration);
     assert(factors.size() > 0);
 
-    cout << "You can try 2305843009213693907" << endl;
+    n = bigint { "65537" };
+    cout << "Trying to factor " << n << ":" << endl;
+    factors = factor_integer(n, duration);
+    assert(factors.size() == 0);
+
+    n = bigint { "2305843009213693907" };
+    cout << "Trying to factor " << n << ":" << endl;
+    factors = factor_integer(n, duration);
+    assert(factors.size() == 0);
+
+    n = bigint { "18446744073709551253" };
+    cout << "Trying to factor " << n << ":" << endl;
+    factors = factor_integer(n, duration);
+    assert(factors.size() == 0);
+
+    cout << "You can try 42535295865117306265797330267470315471 (= 2305843009213693907 * 18446744073709551253) now." << endl;
 
     string str;
     cin >> str;
