@@ -40,6 +40,7 @@ class bigint {
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 00000000
     static const int max_nint_slices_k = 2;    // 922 33720368 54775807
     static const int max_group_slices_k = 2;
+    static const intmax_t max_nint_to_fit_k = 9999999999999999LL;
     static const intmax_t group_base_k = 100000000LL * 100000000LL;
         // slice_base_k ^ max_group_slices_k
 #elif defined(USE_INT16_AS_SLICE)
@@ -51,6 +52,7 @@ class bigint {
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 0000
     static const int max_nint_slices_k = 4;    // 922 3372 0368 5477 5807
     static const int max_group_slices_k = 4;
+    static const intmax_t max_nint_to_fit_k = 9999999999999999LL;
     static const intmax_t group_base_k = 100000000LL * 100000000LL;
         // slice_base_k ^ max_group_slices_k */
 #elif defined(USE_INT8_AS_SLICE)
@@ -62,6 +64,7 @@ class bigint {
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 00
     static const int max_nint_slices_k = 9;    // 922 33 72 03 68 54 77 58 07
     static const int max_group_slices_k = 8;
+    static const intmax_t max_nint_to_fit_k = 999999999999999999LL;
     static const intmax_t group_base_k = 1000000000LL * 1000000000LL;
         // slice_base_k ^ max_group_slices_k
 #endif
