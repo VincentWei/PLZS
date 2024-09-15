@@ -15,6 +15,7 @@
  */
 
 #include "bigint.hpp"
+#include <cinttypes>
 
 using namespace std;
 
@@ -75,14 +76,11 @@ void bigint::initfrom(intmax_t nint, T& slices)
     if (nint < 0)
         nint = -nint;
 
-    for (size_t i = 0; i < sizeof(intmax_t); i++) {
+    do {
         slice_t r = nint % slice_base_k;
         slices.push_back(r);
         nint /= slice_base_k;
-
-        if (nint == 0)
-            break;
-    }
+    } while (nint != 0);
 }
 
 void bigint::initfrom(intmax_t nint)
@@ -498,8 +496,12 @@ bigint bigint::operator+ (intmax_t other) const
         return *this;
     }
 
-    bigint result;
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this + other_bi;
+    }
 
+    bigint result;
     slice_a other_slices;
     initfrom(other, other_slices);
 
@@ -528,6 +530,12 @@ bigint bigint::operator+ (intmax_t other) const
 bigint& bigint::operator+= (intmax_t other)
 {
     if (other == 0) {
+        return *this;
+    }
+
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        *this += other_bi;
         return *this;
     }
 
@@ -631,6 +639,11 @@ bigint bigint::operator- (intmax_t other) const
         return *this;
     }
 
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this - other_bi;
+    }
+
     bigint result;
 
     slice_a other_slices;
@@ -661,6 +674,12 @@ bigint bigint::operator- (intmax_t other) const
 bigint& bigint::operator-= (intmax_t other)
 {
     if (other == 0) {
+        return *this;
+    }
+
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        *this -= other_bi;
         return *this;
     }
 
@@ -838,6 +857,11 @@ bool bigint::operator<= (const bigint& other) const
 
 bool bigint::operator== (intmax_t other) const
 {
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this == other_bi;
+    }
+
     slice_a other_slices;
     initfrom(other, other_slices);
 
@@ -849,6 +873,11 @@ bool bigint::operator== (intmax_t other) const
 
 bool bigint::operator!= (intmax_t other) const
 {
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this != other_bi;
+    }
+
     slice_a other_slices;
     initfrom(other, other_slices);
 
@@ -860,6 +889,11 @@ bool bigint::operator!= (intmax_t other) const
 
 bool bigint::operator> (intmax_t other) const
 {
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this > other_bi;
+    }
+
     if (!_sign && (other < 0))
         return true;
 
@@ -878,6 +912,11 @@ bool bigint::operator> (intmax_t other) const
 
 bool bigint::operator>= (intmax_t other) const
 {
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this >= other_bi;
+    }
+
     if (!_sign && (other < 0))
         return true;
 
@@ -896,6 +935,11 @@ bool bigint::operator>= (intmax_t other) const
 
 bool bigint::operator< (intmax_t other) const
 {
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this < other_bi;
+    }
+
     if (!_sign && (other < 0))
         return false;
 
@@ -914,6 +958,11 @@ bool bigint::operator< (intmax_t other) const
 
 bool bigint::operator<= (intmax_t other) const
 {
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this <= other_bi;
+    }
+
     if (!_sign && (other < 0))
         return false;
 
@@ -975,6 +1024,11 @@ bigint  bigint::operator*  (intmax_t other) const
 {
     bigint result;
 
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this * other_bi;
+    }
+
     if (iszero() || other == 0) {
         return result;
     }
@@ -1002,11 +1056,17 @@ bigint& bigint::operator*= (intmax_t other)
         return *this;
     }
 
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        *this *= other_bi;
+        return *this;
+    }
+
     bigint result;
     slice_a other_slices;
     initfrom(other, other_slices);
-
     absmul(_slices, other_slices, result);
+
     if (_sign == (other < 0)) {
         _sign = false;
     }
@@ -1080,8 +1140,8 @@ void bigint::absdiv_nint(const T& dividend, intmax_t divisor,
         }
 
         size_t pos = left - len;
-        intmax_t numerator = makenint(dividend, pos, len);
-        intmax_t scale = 1;
+        __int128 numerator = makenint(dividend, pos, len);
+        __int128 scale = 1;
         if (len == max_group_slices_k) {
             scale = group_base_k;
         }
@@ -1094,11 +1154,11 @@ void bigint::absdiv_nint(const T& dividend, intmax_t divisor,
         }
 
         numerator += rem * scale;
-        imaxdiv_t div = imaxdiv(numerator, divisor);
+        // imaxdiv_t div = imaxdiv(numerator, divisor);
 
         quotient *= scale;
-        quotient += div.quot;
-        rem = div.rem;
+        quotient += (numerator / divisor);
+        rem = (numerator % divisor);
 
         left -= len;
     }
@@ -1219,6 +1279,11 @@ bool bigint::divmod(const bigint& dividend, const bigint& divisor,
 bool bigint::divmod(const bigint& dividend, intmax_t divisor,
             bigint& quotient, bigint& remainder)
 {
+    if (imaxabs(divisor) > max_nint_to_fit_k) {
+        bigint divisor_bi { divisor };
+        return divmod(dividend, divisor_bi, quotient, remainder);
+    }
+
     if (divisor ==  0) {
         return false;
     }

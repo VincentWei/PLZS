@@ -44,7 +44,8 @@ bigint random(bigint n)
 
     bigint base = bigint::slice_base_k;
     for (size_t i = 1; i < slices.size(); i++) {
-        ret += base * (random() % slices[i]);
+        if (slices[i] > 0)
+            ret += base * (random() % slices[i]);
         base *= bigint::slice_base_k;
     }
 
@@ -238,9 +239,11 @@ bigint_v factor_integer(bigint n, double& duration)
     bigint_v factors;
 
     if (primality_miller_rabin(n)) {
-        clog << n << " is a prime." << endl;
-        return factors;
+        clog << n << " is a prime number." << endl;
+        goto done;
     }
+
+    clog << n << " is not a prime number." << endl;
 
     while (n > 1) {
         bigint factor;
@@ -261,8 +264,14 @@ bigint_v factor_integer(bigint n, double& duration)
         }
 
         n /= factor;
+        clog << "Now n is " << n << endl;
+        if (primality_miller_rabin(n)) {
+            clog << n << " is a prime number." << endl;
+            goto done;
+        }
     }
 
+done:
     duration = calc_elapsed_seconds(&t1, NULL);
     return factors;
 }
@@ -295,7 +304,11 @@ int main()
     factors = factor_integer(n, duration);
     assert(factors.size() == 0);
 
-    cout << "You can try 42535295865117306265797330267470315471 (= 2305843009213693907 * 18446744073709551253) now." << endl;
+    cout << "You can try the following numbers now: \n"
+        << "\t4295098369 = 65537 * 65537\n"
+        << "\t18446743979220271189 = 4294967291 * 4294967279\n"
+        << "\t79228162422030615665923065623 = 4294967291 * 18446744073709551253\n"
+        << "\t42535295865117306265797330267470315471 = 2305843009213693907 * 18446744073709551253\n";
 
     string str;
     cin >> str;
