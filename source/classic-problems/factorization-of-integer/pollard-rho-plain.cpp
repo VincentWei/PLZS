@@ -64,16 +64,18 @@ T abs_diff(T a, T b)
 uint64_t pollard_rho(uint64_t n)
 {
     uint64_t c = randomll(n);
-    uint64_t t = generator(0, c, n);
-    uint64_t r = generator(generator(0, c, n), c, n);
+    uint64_t loop_t = randomll(n);
+    loop_t = generator(loop_t, c, n);
+    uint64_t loop_r = generator(loop_t, c, n);
 
-    while (t != r) {
-        uint64_t d = gcd(abs_diff(t, r), n);
+    while (loop_t != loop_r) {
+        uint64_t d = gcd(abs_diff(loop_t, loop_r), n);
         if (d > 1)
             return d;
-        t = generator(t, c, n);
-        r = generator(generator(r, c, n), c, n);
+        loop_t = generator(loop_t, c, n);
+        loop_r = generator(generator(loop_r, c, n), c, n);
     }
+
     return n;
 }
 
@@ -94,19 +96,17 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
     return ds + dns * 1.0E-9;
 }
 
-int main()
+using uint64_v = vector<uint64_t>;
+
+#define MAX_TRIES   91
+
+uint64_v factor_integer(uint64_t n, double& duration)
 {
-    uint64_t org_n;
-    cin >> org_n;
+    uint64_v factors;
 
     struct timespec t1;
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    srandom(time(NULL));
-
-    vector<uint64_t> factors;
-
-    uint64_t n = org_n;
     while (n > 1) {
         uint64_t factor;
 
@@ -119,16 +119,36 @@ int main()
                 break;
             }
 
-            if (++tries == 100) {
+            if (++tries == MAX_TRIES) {
                 clog << "May be a prime number: " << n << endl;
                 break;
             }
         }
 
         n /= factor;
+        clog << "Try to factor: " << n << endl;
     }
 
-    double duration = calc_elapsed_seconds(&t1, NULL);
+    duration = calc_elapsed_seconds(&t1, NULL);
+    return factors;
+}
+
+int main()
+{
+    srandom(time(NULL));
+
+    double duration;
+
+    uint64_v factors;
+    factors = factor_integer(UINT64_MAX, duration);
+    assert(factors.size());
+
+    cout << "You can try 2305843009213693907" << endl;
+
+    uint64_t n;
+    cin >> n;
+
+    factors = factor_integer(n, duration);
 
     if (factors.size() > 0) {
         cout << factors[0];

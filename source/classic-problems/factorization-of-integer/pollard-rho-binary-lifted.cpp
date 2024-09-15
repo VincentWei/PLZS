@@ -1,6 +1,6 @@
 /*
  * The optimized version to factor an integer number by using
- *  Pollard Rho algorithm with Floyd judgment loop.
+ *  Pollard Rho algorithm with binary lifting.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.
@@ -61,34 +61,39 @@ T abs_diff(T a, T b)
     return b - a;
 }
 
+#define MAX_STEPS       ((1U << 8) - 1)
+
 uint64_t pollard_rho(uint64_t n)
 {
     uint64_t c = randomll(n);
+    uint64_t x_i = generator(randomll(n), c, n);
+    unsigned goal;
 
-    uint64_t t = 0;
-    for (int i = 0; i < 1973; ++i)
-        t = generator(t, c, n);
+    // 使用倍增法降低 GCD 的求解次数。
+    for (goal = 1;; goal <<= 1) {
+        uint64_t d;
 
-    uint64_t s = t;
-    uint64_t val = 1;
-    unsigned step = 0, goal = 1;
-    for (goal = 1;; goal <<= 1, s = t, val = 1) {
-        for (step = 1; step <= goal; ++step) {
-            t = generator(t, c, n);
-            val = val * abs_diff(t, s) % n;
+        uint64_t x_0 = x_i;
+        uint128_t prod = 1;
 
-            // 如果 val 为 0，退出重新分解
-            if (!val)
+        // 这层循环的 goal 值每轮倍增。
+        for (unsigned step = 1; step <= goal; ++step) {
+            x_i = generator(x_i, c, n);
+
+            // prod = \prod |x_0 - x_i| \bmod n
+            prod = prod * abs_diff(x_i, x_0) % n;
+            if (prod == 0)
                 return n;
 
-            if (step % 127 == 0) {
-                uint64_t d = gcd(val, n);
+            // 每隔 MAX_STEPS 次求解一次 GCD。
+            if (step % MAX_STEPS == 0) {
+                d = gcd(static_cast<uint64_t>(prod), n);
                 if (d > 1)
                     return d;
             }
         }
 
-        uint64_t d = gcd(val, n);
+        d = gcd(static_cast<uint64_t>(prod), n);
         if (d > 1)
             return d;
     }
@@ -113,19 +118,15 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
     return ds + dns * 1.0E-9;
 }
 
-int main()
-{
-    uint64_t org_n;
-    cin >> org_n;
+using uint64_v = vector<uint64_t>;
 
+uint64_v factor_integer(uint64_t n, double& duration)
+{
     struct timespec t1;
     clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
 
-    srandom(time(NULL));
+    uint64_v factors;
 
-    vector<uint64_t> factors;
-
-    uint64_t n = org_n;
     while (n > 1) {
         uint64_t factor;
 
@@ -147,7 +148,24 @@ int main()
         n /= factor;
     }
 
-    double duration = calc_elapsed_seconds(&t1, NULL);
+    duration = calc_elapsed_seconds(&t1, NULL);
+    return factors;
+}
+
+int main()
+{
+    srandom(time(NULL));
+
+    double duration;
+    vector<uint64_t> factors;
+    factors = factor_integer(UINT64_MAX, duration);
+    assert(factors.size() > 0);
+
+    cout << "You can try 2305843009213693907" << endl;
+
+    uint64_t n;
+    cin >> n;
+    factors = factor_integer(n, duration);
 
     if (factors.size() > 0) {
         cout << factors[0];
