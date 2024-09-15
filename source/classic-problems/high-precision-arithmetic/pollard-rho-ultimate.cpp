@@ -1,0 +1,295 @@
+/*
+ * The ultimate (bigint) version to factor an integer number by using
+ *  Pollard Rho algorithm with binary lifting.
+ *
+ * This program is a part of PLZS (the Programming Lessons for
+ * Zero-based Students Aged 10+) project.
+ * For more information about PLZS, please visit:
+ *
+ *  - <https://github.com/VincentWei/PLZS>
+ *  - <https://gitee.com/vincentwei7/PLZS>
+ *
+ * Author: Vincent Wei
+ *
+ * Copyright (C) 2024 FMSoft <https://www.fmsoft.cn>.
+ * License: GPLv3
+ */
+
+#define NTEST
+#include "bigint.cpp"
+
+#include <cstdlib>
+#include <ctime>
+#include <cassert>
+
+using namespace std;
+
+bigint generator(bigint x, bigint c, bigint n)
+{
+    bigint next;
+
+    next = x * x;
+    next = (next % n + c % n) % n;
+    return next;
+}
+
+bigint random(bigint n)
+{
+    bigint ret;
+    auto slices = n.slices();
+    if (slices.size())
+        ret = random() % slices.front();
+    else
+        ret = 0;
+
+    for (size_t i = 1; i < slices.size(); i++) {
+        ret *= bigint::slice_base_k;
+        ret += random() % slices[i];
+    }
+
+    return ret;
+}
+
+bigint gcd(const bigint &_a, const bigint &_b)
+{
+    bigint a(_a);
+    bigint b(_b);
+
+    while (b != 0) {
+        bigint tmp = std::move(a);
+        a = b;
+        b = tmp % b;
+    }
+
+    return a;
+}
+
+bigint abs_diff(const bigint& a, const bigint& b)
+{
+    if (a >= b)
+        return a - b;
+    return b - a;
+}
+
+bigint quick_power_modulo(const bigint& base, const bigint& exp,
+        const bigint& modulus)
+{
+    bigint ret = 1;
+    bigint my_base = base;
+    bigint my_exp = exp;
+
+    while (my_exp != 0) {
+        bigint::slice_t last_slice = my_exp.last_slice();
+        if (last_slice & 1)
+            ret = (ret * my_base) % modulus;
+        my_base = (my_base * my_base) % modulus;
+        my_exp /= 2;
+    }
+
+    return ret;
+}
+
+bool primality_miller_rabin(bigint n)
+{
+    // 处理小于 3 的特殊情形。
+    if (n < 3)
+        return n == 2;
+
+    // 定义小质数数组，用于过滤简单合数。
+    static const unsigned little_primes[] = {
+        2, 3, 5, 7, 11, 13
+    };
+
+    // 使用小质数过滤掉简单合数。
+    for (size_t i = 0; i < sizeof(little_primes)/sizeof(little_primes[0]); i++) {
+        if (n % little_primes[i] == 0)
+            return n == little_primes[i];
+    }
+
+    // n-1 一定是偶数；此处将 n-1 分解成 u * 2^t 形式。
+    bigint u = n - 1;
+    bigint t = 0;
+    while (u % 2 == 0) {
+        u /= 2, ++t;
+    }
+
+    // 可选基数数组。
+    static const uint64_t bases_32[] = {
+        2, 7, 61,
+    };
+
+    static const uint64_t bases_64[] = {
+        2, 325, 9375, 28178, 450775, 9780504, 1795265022ULL,
+    };
+
+    static const uint64_t bases_big[] = {
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
+    };
+
+    // 根据待测试的整数大小选择合适的基数数组。
+    const uint64_t *bases;
+    int nr_tests;
+    if (n <= UINT32_MAX) {
+        bases = bases_32;
+        nr_tests = sizeof(bases_32)/sizeof(bases_32[0]);
+    }
+    else if (n <= UINT64_MAX) {
+        bases = bases_64;
+        nr_tests = sizeof(bases_64)/sizeof(bases_64[0]);
+    }
+    else {
+        bases = bases_big;
+        nr_tests = sizeof(bases_big)/sizeof(bases_big[0]);
+    }
+
+    for (int i = 0; i < nr_tests; i++) {
+        bigint a = bases[i];
+        if (a >= n)
+            a %= n;     // 当 a 大于 n 时，取模作为基数。
+        if (a == 0)
+            continue;   // 这表明基数 a 是 n 的倍数，选择下一个基数进行测试。
+
+        bigint x = quick_power_modulo(a, u, n);
+        if (x == 1 || x == n - 1)
+            continue;   // 通过此轮测试；n 是概素数，继续使用下个基数测试。
+
+        bigint j;
+        for (j = 0; j < t; ++j) {
+            // 计算模意义下的平方根
+            x = (x * x) % n;
+            if (x == n - 1)
+                break;  // 得到平凡平方根 n-1，通过二次探测。
+        }
+
+        // 此时表明找到了 *非* 平凡平方根，则 n 一定是合数。
+        if (j == t)
+            return false;
+    }
+
+    return true;
+}
+
+#define MAX_STEPS       ((1U << 8) - 1)
+
+bigint pollard_rho(bigint n)
+{
+    bigint c = random(n);
+    bigint x_i = generator(random(n), c, n);
+    unsigned goal;
+
+    // 使用倍增法降低 GCD 的求解次数。
+    for (goal = 1;; goal <<= 1) {
+        bigint d;
+
+        bigint x_0 = x_i;
+        bigint prod = 1;
+
+        // 这层循环的 goal 值每轮倍增。
+        for (unsigned step = 1; step <= goal; ++step) {
+            x_i = generator(x_i, c, n);
+
+            // prod = \prod |x_0 - x_i| \bmod n
+            prod = prod * abs_diff(x_i, x_0) % n;
+            if (prod == 0)
+                return n;
+
+            // 每隔 MAX_STEPS 次求解一次 GCD。
+            if (step % MAX_STEPS == 0) {
+                d = gcd(prod, n);
+                if (d > 1)
+                    return d;
+            }
+        }
+
+        d = gcd(prod, n);
+        if (d > 1)
+            return d;
+    }
+
+    return n;
+}
+
+double calc_elapsed_seconds(const struct timespec *ts_from,
+        const struct timespec *ts_to)
+{
+    struct timespec ts_curr;
+    time_t ds;
+    long dns;
+
+    if (ts_to == NULL) {
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts_curr);
+        ts_to = &ts_curr;
+    }
+
+    ds = ts_to->tv_sec - ts_from->tv_sec;
+    dns = ts_to->tv_nsec - ts_from->tv_nsec;
+    return ds + dns * 1.0E-9;
+}
+
+using bigint_v = vector<bigint>;
+
+bigint_v factor_integer(bigint n, double& duration)
+{
+    struct timespec t1;
+    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t1);
+
+    bigint_v factors;
+
+    if (primality_miller_rabin(n))
+        return factors;
+
+    while (n > 1) {
+        bigint factor;
+
+        unsigned tries = 0;
+        while (true) {
+            factor = pollard_rho(n);
+            if (factor < n) {
+                factors.push_back(factor);
+                clog << "Got a nontrivial factor: " << factor << endl;
+                break;
+            }
+
+            if (++tries == 100) {
+                clog << "May be a prime number: " << n << endl;
+                break;
+            }
+        }
+
+        n /= factor;
+    }
+
+    duration = calc_elapsed_seconds(&t1, NULL);
+    return factors;
+}
+
+int main()
+{
+    srandom(time(NULL));
+
+    double duration;
+    vector<bigint> factors;
+    factors = factor_integer(bigint {"18446744073709551615" }, duration);
+    assert(factors.size() > 0);
+
+    cout << "You can try 2305843009213693907" << endl;
+
+    string str;
+    cin >> str;
+    factors = factor_integer(bigint {str}, duration);
+
+    if (factors.size() > 0) {
+        cout << factors[0];
+        for (size_t i = 1; i < factors.size(); i++) {
+            cout << ", " << factors[i];
+        }
+        cout << "." << endl;
+    }
+    else {
+        cout << "PRIME" << endl;
+    }
+
+    cout << "Totally " << factors.size() << " nontrivial factors found (" << duration
+        << " seconds consumed)." << endl;
+}
+

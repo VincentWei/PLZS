@@ -93,6 +93,16 @@ class bigint {
            assert(i < _size);
            return _slices[i];
        }
+
+       slice_t front() const {
+           return _slices[0];
+       }
+
+       slice_t back() const {
+            if (_size > 0)
+                return _slices[_size - 1];
+            return 0;
+       }
     };
 
   public:
@@ -106,6 +116,11 @@ class bigint {
     // some getters
     bool sign() const { return _sign; }
     const slice_v& slices() const { return _slices; }
+    slice_t last_slice() const {
+        if (_slices.size() == 0)
+            return 0;
+        return _slices.back();
+    }
 
     // getter or setter for max number of slices for native integer
     static int max_nint_slices();

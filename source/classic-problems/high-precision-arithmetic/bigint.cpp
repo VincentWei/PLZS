@@ -1393,9 +1393,10 @@ bigint  bigint::operator%  (const bigint& other) const
 {
     bigint remainder;
 
-    if (other.iszero())
+    if (other.iszero()) {
         throw std::runtime_error("BigInt: division by zero!");
-    else if (other.isone()) {
+    }
+    else if (iszero() || other.isone()) {
         remainder = 0;
     }
     else if (other._slices.size() == 1) {
