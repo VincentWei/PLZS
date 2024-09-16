@@ -1,6 +1,5 @@
 /*
- * The ultimate (bigint) version to factor an integer number by using
- *  Pollard Rho algorithm with binary lifting.
+ * This program factors an integer number by using Pollard Brent algorithm.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.
