@@ -314,8 +314,51 @@ done:
     return factors;
 }
 
+#include <sstream>
+
+void test_gcd()
+{
+    static struct bigintcase {
+        const char *a;
+        const char *b;
+        const char *gcd;
+    } cases[] = {
+        {
+            "42535295865117306265797330267470315471",
+            "2305843009213693907",
+            "2305843009213693907",
+        },
+        {
+            "18446744073709551253",
+            "42535295865117306265797330267470315471",
+            "18446744073709551253",
+        },
+        {
+            "2305843009213693907",
+            "18446744073709551253",
+            "1",
+        },
+    };
+
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        bigint a(cases[i].a);
+        bigint b(cases[i].b);
+
+        clog << "Tesing with " << a << " and " << b << endl;
+        string expect;
+        ostringstream oss;
+
+        expect = cases[i].gcd;
+        oss.str("");
+        oss << gcd(a, b);
+        assert(oss.str() == expect);
+    }
+}
+
 int main()
 {
+    test_gcd();
+
     srandom(time(NULL));
 
     double duration;
