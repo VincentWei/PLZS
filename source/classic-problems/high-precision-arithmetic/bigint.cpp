@@ -1184,12 +1184,12 @@ bool bigint::absdiv_fast(const Ta& dividend, const Tb& divisor,
         }
     }
     else if (divisor.size() == 1) {
-        clog << "calling absdiv_slice()\n";
+        // clog << "calling absdiv_slice()\n";
         absdiv_slice(dividend, divisor[0], quotient, remainder);
     }
     else if (divisor.size() <= max_group_slices_k) {
         intmax_t denominator = makenint(divisor);
-        clog << "calling absdiv_nint()\n";
+        // clog << "calling absdiv_nint()\n";
         absdiv_nint(dividend, denominator, quotient, remainder);
     }
     else {
@@ -1999,7 +1999,7 @@ void test_bigint2(void)
         expect = cases[i].quot;
         oss.str("");
         oss << (a / b);
-        clog << (a / b) << " vs " << expect << endl;
+        // clog << (a / b) << " vs " << expect << endl;
         assert(oss.str() == expect);
 
         expect = cases[i].rem;
