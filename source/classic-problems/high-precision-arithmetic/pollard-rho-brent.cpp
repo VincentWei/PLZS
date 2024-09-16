@@ -178,7 +178,7 @@ bigint pollard_rho_floyd_loop(const bigint& n)
     bigint loop_r = generator(loop_t, c, n);
 
     clog << "Try with a random constant " << c
-        << " and x_0 " << loop_r << "...\n";
+        << " and y " << loop_r << "...\n";
 
     uintmax_t nr_tests = 0;
     while (loop_t != loop_r) {
@@ -198,31 +198,31 @@ bigint pollard_rho_floyd_loop(const bigint& n)
 
 #define MAX_STEPS       ((1U << 10) - 1)
 
-bigint pollard_rho_binary_lifting(const bigint& n)
+bigint pollard_rho_brent(const bigint& n)
 {
-    bigint c = random(n);
-    bigint x_i = 0;
-    x_i = generator(x_i, c, n);
+    bigint c = random(); c = (c % (n - 1)) + 1;
+    bigint x = 0;
+    x = generator(x, c, n);
 
     for (int i = 0; i < 73; i++)
-        x_i = generator(x_i, c, n);
+        x = generator(x, c, n);
 
     clog << "Try with a random constant " << c
-        << " and x_0 " << x_i << "...\n";
+        << " and x " << x << "...\n";
 
     // 使用倍增法降低 GCD 的求解次数。
     for (unsigned goal = 1; goal != 0; goal <<= 1) {
         bigint d;
 
-        bigint x_0 = x_i;
+        bigint y = x;
         bigint prod = 1;
 
         // 这层循环的 goal 值每轮倍增。
         for (unsigned step = 1; step <= goal; ++step) {
-            x_i = generator(x_i, c, n);
+            x = generator(x, c, n);
 
-            // prod = (\prod \times |x_0 - x_i|) \bmod n
-            prod = (prod * abs_diff(x_i, x_0)) % n;
+            // prod = (\prod \times |y - x|) \bmod n
+            prod = prod * abs_diff(x, y) % n;
             if (prod == 0)
                 return n;
 
@@ -236,7 +236,8 @@ bigint pollard_rho_binary_lifting(const bigint& n)
         }
 
         d = gcd(prod, n);
-        // clog << "\tgcd(" << prod << ", " << n << "): " << d << endl;
+        clog << "\tGoal #" << goal << ": gcd(" << prod << ", " << n << "): "
+            << d << endl;
         if (d > 1)
             return d;
     }
@@ -284,7 +285,7 @@ bigint_v factor_integer(bigint n, double& duration)
 
         unsigned attempts = 0;
         while (true) {
-            factor = pollard_rho_floyd_loop(n);
+            factor = pollard_rho_brent(n);
             if (factor < n) {
                 factors.push_back(factor);
                 clog << "Got a nontrivial factor: " << factor << endl;
