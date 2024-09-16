@@ -1,5 +1,5 @@
 /*
- * This program factors an integer number by using Pollard Brent algorithm.
+ * This program factors an integer number by using Pollard Brent rho algorithm.
  *
  * This program is a part of PLZS (the Programming Lessons for
  * Zero-based Students Aged 10+) project.
