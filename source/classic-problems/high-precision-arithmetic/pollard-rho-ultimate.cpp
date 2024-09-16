@@ -31,17 +31,19 @@ bigint generator(const bigint& x, const bigint& c, const bigint& n)
 
 bigint random(const bigint& n)
 {
+    long rand = random();
+
     bigint ret;
     auto slices = n.slices();
     if (slices.size())
-        ret = random() % slices.front();
+        ret = rand % slices.front();
     else
         ret = 0;
 
     bigint base = bigint::slice_base_k;
     for (size_t i = 1; i < slices.size(); i++) {
         if (slices[i] > 0)
-            ret += base * (random() % slices[i]);
+            ret += base * (rand % slices[i]);
         base *= bigint::slice_base_k;
     }
 
@@ -176,6 +178,10 @@ bigint pollard_rho_floyd_loop(const bigint& n)
     loop_t = generator(loop_t, c, n);
     bigint loop_r = generator(loop_t, c, n);
 
+    clog << "Try with a random constant " << c
+        << " and x_0 " << loop_r << "...\n";
+
+    uintmax_t nr_tests = 0;
     while (loop_t != loop_r) {
         bigint d = gcd(abs_diff(loop_t, loop_r), n);
         if (d > 1)
@@ -183,26 +189,30 @@ bigint pollard_rho_floyd_loop(const bigint& n)
 
         loop_t = generator(loop_t, c, n);
         loop_r = generator(generator(loop_r, c, n), c, n);
+        nr_tests++;
     }
 
+    clog << "Failed to factor the integer with the initial arguments; "
+       << "the number of total tests: " << nr_tests << endl;
     return n;
 }
 
-#define MAX_STEPS       ((1U << 8) - 1)
+#define MAX_STEPS       ((1U << 10) - 1)
 
-bigint pollard_rho_binary_lifting(bigint n)
+bigint pollard_rho_binary_lifting(const bigint& n)
 {
     bigint c = random(n);
     bigint x_i = 0;
-    x_i = generator( x_i, c, n);
+    x_i = generator(x_i, c, n);
 
     for (int i = 0; i < 73; i++)
         x_i = generator(x_i, c, n);
 
-    // clog << "x_i is ready: " << x_i << endl;
+    clog << "Try with a random constant " << c
+        << " and x_0 " << x_i << "...\n";
 
     // 使用倍增法降低 GCD 的求解次数。
-    for (unsigned goal = 1;; goal <<= 1) {
+    for (unsigned goal = 1; goal != 0; goal <<= 1) {
         bigint d;
 
         bigint x_0 = x_i;
@@ -212,20 +222,22 @@ bigint pollard_rho_binary_lifting(bigint n)
         for (unsigned step = 1; step <= goal; ++step) {
             x_i = generator(x_i, c, n);
 
-            // prod = \prod |x_0 - x_i| \bmod n
-            prod = prod * abs_diff(x_i, x_0) % n;
+            // prod = (\prod \times |x_0 - x_i|) \bmod n
+            prod = (prod * abs_diff(x_i, x_0)) % n;
             if (prod == 0)
                 return n;
 
             // 每隔 MAX_STEPS 次求解一次 GCD。
             if (step % MAX_STEPS == 0) {
                 d = gcd(prod, n);
+                // clog << "\tStep #" << step << ": gcd(" << prod << ", " << n << "): " << d << endl;
                 if (d > 1)
                     return d;
             }
         }
 
         d = gcd(prod, n);
+        // clog << "\tgcd(" << prod << ", " << n << "): " << d << endl;
         if (d > 1)
             return d;
     }
@@ -252,6 +264,8 @@ double calc_elapsed_seconds(const struct timespec *ts_from,
 
 using bigint_v = vector<bigint>;
 
+#define MAX_ATTEMPTS        ((1U << 16) - 1)
+
 bigint_v factor_integer(bigint n, double& duration)
 {
     struct timespec t1;
@@ -269,17 +283,18 @@ bigint_v factor_integer(bigint n, double& duration)
     while (n > 1) {
         bigint factor;
 
-        unsigned tries = 0;
+        unsigned attempts = 0;
         while (true) {
-            factor = pollard_rho_binary_lifting(n);
+            factor = pollard_rho_floyd_loop(n);
             if (factor < n) {
                 factors.push_back(factor);
                 clog << "Got a nontrivial factor: " << factor << endl;
                 break;
             }
 
-            if (++tries == 100) {
-                clog << "May be a prime number: " << n << endl;
+            if (++attempts == MAX_ATTEMPTS) {
+                clog << "Reached the attempt limit; give up to factor "
+                    << n << endl;
                 break;
             }
         }
@@ -288,6 +303,7 @@ bigint_v factor_integer(bigint n, double& duration)
         // clog << "Now n is " << n << endl;
 
         if (primality_miller_rabin(n)) {
+            factors.push_back(n);
             clog << n << " is a prime number." << endl;
             goto done;
         }
