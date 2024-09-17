@@ -236,9 +236,9 @@ void travese(node* head)
 
 （十分钟内完成）
 
-1. 在 `singly-linked-list.cpp` 文件中实现针对单向链表的 `size()` 和 `at()` 方法并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
+1. 在 `singly-linked-list.cpp` 文件中实现针对单向链表的 `size()` 和 `at()` 函数模板并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
 1. 将 `singly-linked-list.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-3/` 目录（下同），并推送到远程仓库。
-1. 思考使用 `at()` 方法遍历单向链表的时间复杂度。
+1. 思考使用 `at()` 函数遍历单向链表的时间复杂度。
 
 		
 ## 双向链表
@@ -249,9 +249,6 @@ void travese(node* head)
 ## 循环链表
 
 `Circular Linked List`
-
-		
-## 链表的应用
 
 		
 ## 队列和栈
