@@ -192,44 +192,32 @@ void travese(node* head)
 ```
 
 	
-3) 插入尾部（push front）
+3) 删除头节点（pop front）
 
 ```cpp
 ```
 
 	
-4) 插入到指定位置（insert）
+4) 插入尾部（push front）
 
 ```cpp
 ```
 
 	
-5) 删除头节点（pop front）
+5) 删除尾节点（pop back）
 
 ```cpp
 ```
 
 	
-6) 删除尾节点（pop back）
+6) 清空（clear）
 
 ```cpp
 ```
 
 	
-7) 删除指定位置的节点（erase）
-
-```cpp
-```
-
-	
-8) 清空（clear）
-
-```cpp
-```
-
-	
-9) 其他常见操作
-   - 获取节点数量并使用索引值访问。
+7) 其他操作
+   - 获取节点数量并使用索引值访问并执行在指定位置插入节点或移除节点的操作。
    - 串接（concatenate）两个单向链表。
    - 查找（find）和给定数据相等的第一个节点。
    - 移除重复值（unique）。
