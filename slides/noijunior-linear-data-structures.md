@@ -132,14 +132,22 @@ public:
 		
 ## 单向链表
 
+`Singly Linked List`
+
 		
 ## 双向链表
+
+`Doubly Linked List`
 
 		
 ## 循环链表
 
+`Circular Linked List`
+
 		
 ## 队列和栈
+
+`Queue and Stack`
 
 		
 ## 实用技巧
