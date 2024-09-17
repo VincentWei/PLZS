@@ -135,6 +135,56 @@ public:
 
 `Singly Linked List`
 
+	
+### 结构图
+
+	
+### 单向链表的节点类模板
+
+```cpp
+template <class T>
+class node {
+public:
+    // 节点负载
+    T payload;
+    // 指向下一个节点的指针
+    node* next;
+
+    // 节点的构造函数。
+    node(const T& payload) {
+        this->payload = payload;
+        this->next = nullptr;
+    }
+};
+```
+
+	
+### 单向链表常见操作
+
+1) 遍历
+
+```cpp
+// C++ Function to traverse and print the elements of the linked list
+void travese(node* head)
+{
+    // Start from the head of the linked list
+    node* current = head;
+
+    // Traverse the linked list until reaching the end (nullptr)
+    while (current != nullptr) {
+
+        // Print the data of the current node
+        cout << current->payload << " ";
+
+        // Move to the next node
+        current = current->next;
+    }
+
+    cout << std::endl;
+}
+```
+
+
 		
 ## 双向链表
 
@@ -144,6 +194,9 @@ public:
 ## 循环链表
 
 `Circular Linked List`
+
+		
+## 链表的应用
 
 		
 ## 队列和栈
