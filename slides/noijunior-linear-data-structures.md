@@ -141,9 +141,12 @@ public:
 	
 ### 单向链表的节点类模板
 
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-linked-list.cpp)
+- 基本定义：
+
 ```cpp
 template <class T>
-class node {
+struct node {
 public:
     // 节点负载
     T payload;
@@ -157,14 +160,13 @@ public:
     }
 };
 ```
-
 	
 ### 单向链表常见操作
 
-1) 遍历
+1) 遍历（travese）
 
 ```cpp
-// C++ Function to traverse and print the elements of the linked list
+// Traverse and print the elements of the linked list
 void travese(node* head)
 {
     // Start from the head of the linked list
@@ -184,6 +186,59 @@ void travese(node* head)
 }
 ```
 
+	
+2) 插入头部（push front）
+
+```cpp
+```
+
+	
+3) 插入尾部（push front）
+
+```cpp
+```
+
+	
+4) 插入到指定位置（insert）
+
+```cpp
+```
+
+	
+5) 删除头节点（pop front）
+
+```cpp
+```
+
+	
+6) 删除尾节点（pop back）
+
+```cpp
+```
+
+	
+7) 删除指定位置的节点（erase）
+
+```cpp
+```
+
+	
+8) 其他常见操作
+   - 获取节点数量并使用索引值访问。
+   - 串接（concatenate）两个单向链表。
+   - 查找（find）和给定数据相等的第一个节点。
+   - 清空（clear）。
+   - 排序（sort）。
+   - 移除重复值（unique）。
+
+	
+### 课堂练习
+
+（十分钟内完成）
+
+1. 在 `singly-linked-list.cpp` 文件中实现针对单向链表的 `size()` 和 `at()` 方法并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
+1. 将 `singly-linked-list.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-3/` 目录（下同），并推送到远程仓库。
+1. 思考使用 `at()` 方法遍历单向链表的时间复杂度。
 
 		
 ## 双向链表
@@ -210,9 +265,15 @@ void travese(node* head)
 ## 作业
 
 	
-1) 
+1) 针对单向链表实现 `unique()` 函数模板，该函数可移除单向链表中所有重复的值。编写用来展示该功能的程序，用户每行输入一个浮点数，直到输入 `END` 为止，然后给出经 `unique()` 函数处理后的链表内容。运行效果如下：
 
 ```console
+$ unique-values
+<100>
+<101>
+<100>
+<END>
+100 101
 ```
 
 	
