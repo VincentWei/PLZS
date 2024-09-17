@@ -3,7 +3,7 @@
 1. 链表的引入
 1. 单向链表
 1. 双向链表
-1. 循环链表
+1. 环形链表
 1. 队列和栈
 1. 实用技巧
 
@@ -108,13 +108,13 @@ public:
 ### 链表的引入和优缺点
 
 - 火车（train，列车）是一个个车厢（coach）连接构成的。
-- 如果将元素打包到类似车厢的数据结构当中，然后将这些数据结构通过某种方式连接起来使用，插入和移除操作将变简单。
-- 链表是由节点（node）构成的一个链条式式（chain）数据结构，其中每个节点都包含有数据以及相邻节点的引用信息。在 C/C++ 中，通常使用指针（pointer）作为相邻节点的引用信息。
+- 如果将元素打包到类似车厢的数据结构当中，然后将这些数据结构通过某种方式连接起来使用，在已知位置处执行插入和移除操作将变简单；时间复杂度：`$ O(1) $`。
+- 链表是由节点（node）构成的一个链条式（chain）数据结构，其中每个节点都包含有数据以及相邻节点的引用信息。在 C/C++ 中，通常使用指针（pointer）作为相邻节点的引用信息。
 - 链表的优点：
-   1. 解决了线性表数据结构的插入、移除等操作性能低下的问题，时间复杂度变为 `$ O(1) $`。
-   1. 避免了动态分配整块的连续存储空间，每个节点可以单独分配和释放，这可有效提高内存空间的使用效率。
+   1. 解决了线性表数据结构的插入、移除等操作性能低下的问题，时间复杂度大幅降低。
+   1. 避免了动态分配整块的连续存储空间，每个节点可以单独分配和释放，可有效提高内存空间的使用效率。
 - 链表的缺点：
-   1. 通过位置（索引）访问元素时，时间复杂度变高：`$ O(n) $`。
+   1. 通过位置（索引）访问元素时，时间复杂度将变高：`$ O(n) $`。
    1. 节点中需要保存用于引用相邻节点的额外成员信息。
 
 	
@@ -122,6 +122,7 @@ public:
 
 - 链表：linked list
 - 链表头：head
+- 链表尾：tail
 - 节点：node
 - 下一个节点：next node
 - 上一个节点：previous node
@@ -135,7 +136,12 @@ public:
 `Singly Linked List`
 
 	
-### 结构图
+### 定义
+
+1. 单向链表（亦称“单链表”）的每个节点有两个字段（field）：`data/payload` 和 `next` 指针。
+1. 其中，`data` 存储节点的负载，`next` 指针指向链表的下一个节点。
+1. 最后一个节点的 `next` 指针始终设定为 `nullptr`，因为它是链表的最后一个结点，没有下一个结点。
+1. 单向链表中，由于每个节点都链接到下一个节点，因此只能沿正向遍历各个节点。
 
 	
 ### 单向链表的节点类模板
@@ -198,7 +204,7 @@ void travese(node* head)
 ```
 
 	
-4) 插入尾部（push front）
+4) 插入尾部（push back）
 
 ```cpp
 ```
@@ -226,21 +232,113 @@ void travese(node* head)
 	
 ### 课堂练习
 
-（十分钟内完成）
+（十五分钟内完成）
 
-1. 在 `singly-linked-list.cpp` 文件中实现针对单向链表的 `size()` 和 `at()` 函数模板并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
+1. 在 `singly-linked-list.cpp` 文件中实现针对单向链表的 `size()` 和 `at()` 方法并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
 1. 将 `singly-linked-list.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-3/` 目录（下同），并推送到远程仓库。
-1. 思考使用 `at()` 函数遍历单向链表的时间复杂度。
+1. 思考使用 `at()` 方法遍历单向链表的时间复杂度。
 
 		
 ## 双向链表
 
 `Doubly Linked List`
 
+	
+### 定义
+
+1. 双向链表的每个节点有三个字段（field）：`data/payload`、`next` 指针和 `prev` 指针。
+1. 其中，`data/payload` 存储数据（节点的负载），`next` 指针指向链表的下一个节点，而 `prev` 指针指向链表的上一个节点。
+1. 第一个节点的 `prev` 指针始终设定为 `nullptr`，因为它是链表的第一个结点，没有上一个结点。
+1. 最后一个节点的 `next` 指针始终设定为 `nullptr`，因为它是链表的最后一个结点，没有下一个结点。
+1. 在双向链表中，由于每个节点都同时链接到下一个节点和上一个节点，因此可以在两个方向上（向前或向后）遍历各个节点。
+
+	
+### 双向链表的节点类模板
+
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/doubly-linked-list.cpp)
+- 基本定义：
+
+```cpp
+template <class T>
+struct node {
+    T payload;      // 节点负载
+    node* next;     // 指向下一个节点的指针
+    node* prev;     // 指向上一个节点的指针
+
+    // 节点的构造函数。
+    node(const T& value) {
+        this->payload = value;
+        this->next = nullptr;
+        this->prev = nullptr;
+    }
+```
+
 		
-## 循环链表
+## 环形链表
 
 `Circular Linked List`
+
+	
+### 定义
+
+- 不论是单向链表还是双向链表，将链表的首尾节点链接起来，可构成环形链表（circular linked list 或 loop list）：
+   1. 将链表最后一个节点的 `next` 字段指向第一个节点；将链表第一个节点的 `prev` 字段指向最后一个节点。
+   1. 通过 `next` 指针，链表的所有节点构成一个前向环；而通过 `prev` 指针，链表的所有节点构成一个后向环。
+- 结构图
+
+	
+- 环形链表的好处：
+   1. 环可以用来实现环形缓冲区。
+   1. 使用环形单向链表时，通过保存指向头部和尾部的 `head`、`tail` 指针，可以快速定位头部或尾部，从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
+   1. 使用环形双向链表时，仅通过指向头部的 `head` 指针即可快速定位头部或尾部，从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
+
+	
+### 环形单向链表的节点类模板
+
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/circula-singly-linked-list.cpp)
+- 基本定义：
+
+```cpp
+template <class T>
+struct node {
+    T payload;      // 节点负载
+    node* next;     // 指向下一个节点的指针
+
+    // 节点的构造函数。
+    node(const T& value) {
+        this->payload = value;
+        this->next = this;
+    }
+
+    static bool empty(const node *) {
+        return (node->next == node);
+    }
+```
+
+	
+### 环形双向链表的节点类模板
+
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/circula-doubly-linked-list.cpp)
+- 基本定义：
+
+```cpp
+template <class T>
+struct node {
+    T payload;      // 节点负载
+    node* next;     // 指向下一个节点的指针
+    node* prev;     // 指向上一个节点的指针
+
+    // 节点的构造函数。
+    node(const T& value) {
+        this->payload = value;
+        this->next = this;
+        this->prev = this;
+    }
+
+    static bool empty(const node *) {
+        return (node->next == node);
+    }
+```
 
 		
 ## 队列和栈

@@ -22,7 +22,7 @@ struct node {
     // 节点的构造函数。
     node(const T& value) {
         this->payload = value;
-        this->next = nullptr;
+        this->next = this;
     }
 
     // Traverse and print the elements of the linked list

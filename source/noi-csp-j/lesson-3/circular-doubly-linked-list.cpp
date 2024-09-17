@@ -18,11 +18,13 @@ template <class T>
 struct node {
     T payload;      // 节点负载
     node* next;     // 指向下一个节点的指针
+    node* prev;     // 指向上一个节点的指针
 
     // 节点的构造函数。
     node(const T& value) {
         this->payload = value;
-        this->next = nullptr;
+        this->next = this;
+        this->prev = this;
     }
 
     // Traverse and print the elements of the linked list

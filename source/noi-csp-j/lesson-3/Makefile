@@ -1,4 +1,4 @@
-TARGETS = simple-vector singly-linked-list
+TARGETS = simple-vector singly-linked-list doubly-linked-list circular-singly-linked-list circular-doubly-linked-list
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
