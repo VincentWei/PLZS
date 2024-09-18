@@ -411,9 +411,7 @@ $$`
 2) 构造分式，使之满足
 
 `$$
-\large{
     \frac{A}{1-\alpha z} + \frac{B}{1-\beta z} = \frac{z}{1 - z - z^2}
-}
 $$`
 
 	
