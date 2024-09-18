@@ -414,7 +414,7 @@ $$`
 \large{
     \frac{A}{1-\alpha z} + \frac{B}{1-\beta z} = \frac{z}{1 - z - z^2}
 }
-$`
+$$`
 
 	
 3) 根据 `$ (1-\alpha z)(1-\beta z) = 1 - z - z^2 $` 求解常数 `$ \alpha, \ \beta $`
