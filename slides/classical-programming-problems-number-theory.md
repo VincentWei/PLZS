@@ -766,7 +766,13 @@ $ ./prime-factors
 	
 ### Pollard Rho 算法
 
-- 
+- 按一定的规律找出一些数，求这些数和 `n` 的最大公约数 GCD，如果 GCD 不是 1，则 GCD 就是 `n` 的一个非平凡因子（nontrival factor）。
+- 算法名称中 Rho 的来历。
+
+	
+### Pollard Brent Rho 算法
+
+- 优化目标：降低 GCD 的求解次数。
 
 		
 ## 斐波那契数列
