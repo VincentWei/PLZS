@@ -409,10 +409,10 @@ $$`
 2) 构造分式，使之满足 `$ \frac{A}{1-\alpha z} + \frac{B}{1-\beta z} = \frac{z}{1 - z - z^2} $`
 
 	
-3) 根据 `$ (1-\alpha z)(1-\beta z) = 1 - z - z^2 $` 求解 `$ \alpha, \ \beta $`
+3) 根据 `$ (1-\alpha z)(1-\beta z) = 1 - z - z^2 $` 求解常数 `$ \alpha, \ \beta $`
 
 	
-4) 根据 `$ A - A \beta z + B - B \alpha z = z $` 求解 `$ A, \ B $`
+4) 根据 `$ A - A \beta z + B - B \alpha z = z $` 求解常数 `$ A, \ B $`
 
 	
 5) 得出最终的通项公式（此推导由丹尼尔 伯努利于 1728 年给出）
