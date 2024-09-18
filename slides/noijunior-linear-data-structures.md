@@ -17,7 +17,7 @@
 ### 简单矢量类模板
 
 - 按需分配后背存储空间（back storage），避免了伪矢量类模板具有固定上限的问题；增加成员变量跟踪后背空间的实际大小。
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/my-vector.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/simple-vector.cpp)
 
 ```cpp
 #define NR_EXTRA_SLOTS      4
@@ -108,11 +108,11 @@ public:
 	
 ### 链表的引入和优缺点
 
-- 火车（train，列车）是一个个车厢（coach）连接构成的。
-- 如果将元素打包到类似车厢的数据结构当中，然后将这些数据结构通过某种方式连接起来使用，在已知位置处执行插入和移除操作将变简单；时间复杂度：`$ O(1) $`。
+- 火车（train，列车）是一个个车厢（coach）连接构成的，可非常方便地更换损坏的车厢或者重组。
+- 如果将元素打包到类似车厢的数据结构当中，然后将这些数据结构通过某种方式连接起来使用，在已知位置处执行插入和移除操作将变得非常简单；时间复杂度：`$ O(1) $`。
 - 链表是由节点（node）构成的一个链条式（chain）数据结构，其中每个节点都包含有数据以及相邻节点的引用信息。在 C/C++ 中，通常使用指针（pointer）作为相邻节点的引用信息。
 - 链表的优点：
-   1. 解决了线性表数据结构的插入、移除等操作性能低下的问题，时间复杂度大幅降低。
+   1. 解决了线性表数据结构中执行插入、移除等操作性能低下的问题，时间复杂度大幅降低。
    1. 避免了动态分配整块的连续存储空间，每个节点可以单独分配和释放，可有效提高内存的使用效率。
 - 链表的缺点：
    1. 通过位置（索引）访问元素时，时间复杂度将变高：`$ O(n) $`。
@@ -164,6 +164,23 @@ public:
         this->payload = payload;
         this->next = nullptr;
     }
+
+    // 测试是否为空链表。
+    static bool empty(node* head) {
+        return (head->next == nullptr);
+    }
+
+    // 返回链表的节点数量。
+    static size_t size(node* head) {
+        size_t sz = 0;
+
+        while (head) {
+            sz++;
+            head = head->next;
+        }
+
+        return sz;
+    }
 };
 ```
 
@@ -173,11 +190,11 @@ public:
 - 使用单向链表时，维护一个指向链表第一个节点的指针（`head`），所有的操作通过该指针进行。
 
 	
-1) 遍历（travese）
+1) 遍历（traverse）
 
 ```cpp
 // Traverse and print the elements of the linked list
-void travese(node* head)
+void node::traverse(node* head)
 {
     // Start from the head of the linked list
     node* current = head;
@@ -305,10 +322,10 @@ struct node {
 - 使用双向链表时，维护指向链表头部的指针（`head`）和指向链表尾部的指针（`tail`），操作通过这两个指针之一进行。
 
 	
-1) 前向遍历（travese forward）
+1) 前向遍历（traverse forward）
 
 ```cpp
-void travese_forward(node* head)
+void traverse_forward(node* head)
 {
     // Start from the head of the linked list
     node* current = head;
@@ -328,13 +345,13 @@ void travese_forward(node* head)
 ```
 
 	
-2) 后向遍历（travese backward）
+2) 后向遍历（traverse backward）
 
 ```cpp
-void travese_backward(node* head)
+void traverse_backward(node* tail)
 {
     // Start from the head of the linked list
-    node* current = head;
+    node* current = tail;
 
     // Traverse the linked list until reaching the end (nullptr)
     while (current != nullptr) {
@@ -343,7 +360,7 @@ void travese_backward(node* head)
         cout << current->payload << " ";
 
         // Move to the next node
-        current = current->next;
+        current = current->prev;
     }
 
     cout << std::endl;
