@@ -200,7 +200,7 @@ bigint pollard_rho_floyd_loop(const bigint& n)
 
 bigint pollard_rho_brent(const bigint& n)
 {
-    bigint c = random(); c = (c % (n - 1)) + 1;
+    bigint c = random(n);
     bigint x = 0;
     x = generator(x, c, n);
 
