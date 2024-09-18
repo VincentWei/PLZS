@@ -4,7 +4,7 @@
 1. 单向链表
 1. 双向链表
 1. 环形链表
-1. 环形缓冲区
+1. 选择哪种链表？
 1. 队列和栈
 1. 实用技巧
 
@@ -170,6 +170,9 @@ public:
 	
 ### 单向链表常见操作
 
+- 使用单向链表时，维护一个指向链表第一个节点的指针（`head`），所有的操作通过该指针进行。
+
+	
 1) 遍历（travese）
 
 ```cpp
@@ -218,18 +221,39 @@ void travese(node* head)
 ```
 
 	
-6) 清空（clear）
+6) 后置插入（insert after）
 
 ```cpp
 ```
 
 	
-7) 其他操作
+7) 删除后置节点（erase after）
+
+```cpp
+```
+
+	
+8) 清空（clear）
+
+```cpp
+```
+
+	
+9) 其他操作
    - 获取节点数量并使用索引值访问并执行在指定位置插入节点或移除节点的操作。
-   - 串接（concatenate）两个单向链表。
+   - 铰接（splice）两个单向链表。
    - 查找（find）和给定数据相等的第一个节点。
    - 移除重复值（unique）。
    - 排序（sort）。
+
+	
+### 单向链表的特点
+
+- 只能前向遍历。
+- `push_front()` 和 `pop_front()` 的执行效率很高；时间复杂度：`$ O(1) $`。
+- `push_back()` 和 `pop_back()` 的执行效率很低；时间复杂度：`$ O(n) $`。
+- 无法高效实现前置插入（insert before）操作。
+- 无法高效实现前置移除（erase before）操作。
 
 	
 ### 课堂练习
@@ -275,6 +299,121 @@ struct node {
     }
 ```
 
+	
+### 双向链表常见操作
+
+- 使用双向链表时，维护指向链表头部的指针（`head`）和指向链表尾部的指针（`tail`），操作通过这两个指针之一进行。
+
+	
+1) 前向遍历（travese forward）
+
+```cpp
+void travese_forward(node* head)
+{
+    // Start from the head of the linked list
+    node* current = head;
+
+    // Traverse the linked list until reaching the end (nullptr)
+    while (current != nullptr) {
+
+        // Print the data of the current node
+        cout << current->payload << " ";
+
+        // Move to the next node
+        current = current->next;
+    }
+
+    cout << std::endl;
+}
+```
+
+	
+2) 后向遍历（travese backward）
+
+```cpp
+void travese_backward(node* head)
+{
+    // Start from the head of the linked list
+    node* current = head;
+
+    // Traverse the linked list until reaching the end (nullptr)
+    while (current != nullptr) {
+
+        // Print the data of the current node
+        cout << current->payload << " ";
+
+        // Move to the next node
+        current = current->next;
+    }
+
+    cout << std::endl;
+}
+```
+
+	
+2) 插入头部（push front）
+
+```cpp
+```
+
+	
+3) 删除头节点（pop front）
+
+```cpp
+```
+
+	
+4) 插入尾部（push back）
+
+```cpp
+```
+
+	
+5) 删除尾节点（pop back）
+
+```cpp
+```
+
+	
+6) 插入节点（insert before/after）
+
+```cpp
+```
+
+	
+7) 删除节点（erase before/after）
+
+```cpp
+```
+
+	
+8) 清空（clear）
+
+```cpp
+```
+
+	
+9) 其他操作
+   - 获取节点数量并使用索引值访问并执行在指定位置插入节点或移除节点的操作。
+   - 铰接（splice）两个双向链表。
+   - 查找（find）和给定数据相等的第一个节点。
+   - 移除重复值（unique）。
+   - 排序（sort）。
+
+	
+### 双向链表的特点
+
+- 可执行前向或者后向遍历。
+- `push_front()/pop_front()` 和 `push_back()/pop_back()` 的执行效率都很高；时间复杂度：`$ O(1) $`。
+- 可高效实现前置/后置插入（insert before/after）操作以及前置/后置移除（erase before/after）操作。
+
+	
+### 课堂练习
+
+（十五分钟内完成）
+
+1. 在 `doubly-linked-list.cpp` 文件中实现针对双向链表的 `splice()` 方法，并编写展示该功能的完整程序。
+
 		
 ## 环形链表
 
@@ -291,9 +430,8 @@ struct node {
 	
 - 环形链表的好处：
    1. 从任意一个节点出发，可遍历所有节点。
-   1. 可用来实现环形缓冲区、队列或者栈。
-   1. 使用环形单向链表时，通过保存指向头部和尾部的 `head`、`tail` 指针，可以快速定位头部或尾部，从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
-   1. 使用环形双向链表时，仅通过指向头部的 `head` 指针即可快速定位头部或尾部，从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
+   1. 使用环形单向链表时，仅保存指向尾部的 `tail` 指针即可快速定位尾部或头部（`tail->next`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
+   1. 使用环形双向链表时，仅通过指向头部的 `head` 指针即可快速定位头部或尾部（`head->prev`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
 
 	
 ### 环形单向链表的节点类模板
@@ -313,8 +451,15 @@ struct node {
         this->next = this;
     }
 
-    static bool empty(const node *) {
+    static bool empty(const node *) const {
         return (node->next == node);
+    }
+
+    static size_t size() const {
+        size_t sz = 0;
+        while (node->next != node)
+            sz++;
+        return sz;
     }
 ```
 
@@ -372,7 +517,7 @@ struct node {
 	
 ### C++ STL 提供的单向链表类模板
 
-- 类模板 `std::forward_list`：前向链表（使用单向链表实现）。
+- `std::forward_list` 类模板：前向链表（使用单向链表实现）。
    - `#include <forward_list>`
    - 方法 `empty()`： 判断链表是否为空。
    - 方法 `clear()`： 清空链表。
@@ -395,7 +540,7 @@ struct node {
 	
 ### C++ STL 提供的双向链表类模板
 
-- 类模板：`std::list`：前后向链表（使用双向链表实现）。
+- `std::list` 类模板：前后向链表（使用双向链表实现）。
    - `#include <list>`
    - 方法 `empty()`：判断链表是否为空。
    - 方法 `size()`：返回链表中的元素数量。
@@ -421,7 +566,7 @@ struct node {
 	
 ### C++ STL 提供的队列类模板
 
-- `std::queue`：队列类模板；基于支持 FIFO 操作的容器实现。
+- `std::queue` 类模板；基于支持 FIFO 操作的容器实现。
    - `#include <queue>`
    - 方法 `empty()`：判断队列是否为空。
    - 方法 `size()`：返回队列中的元素数量。
@@ -434,7 +579,7 @@ struct node {
 	
 ### C++ STL 提供的栈类模板
 
-- `std::stack`：栈类模板；基于支持 LIFO 操作的容器实现。
+- `std::stack` 类模板；基于支持 LIFO 操作的容器实现。
    - `#include <stack>`
    - 方法 `empty()`：判断栈是否为空。
    - 方法 `size()`：返回栈中的元素数量。
@@ -447,7 +592,7 @@ struct node {
 ## 作业
 
 	
-1) 针对单向链表实现 `unique()` 函数模板，该函数可移除单向链表中所有重复的值，然后编写用来展示该功能的程序：用户每行输入一个浮点数，直到输入 `END` 为止，最后给出经 `unique()` 函数处理后的链表内容。运行效果如下：
+1) 针对单向链表实现 `unique()` 方法，该函数可移除单向链表中所有重复的值，然后编写用来展示该功能的程序：用户每行输入一个浮点数，直到输入 `END` 为止，最后给出经 `unique()` 方法处理后的链表内容。运行效果如下：
 
 ```console
 $ unique-values
@@ -459,22 +604,56 @@ $ unique-values
 ```
 
 	
-2) 参照环形单向链表实现环形双向链表，并实现一个环形缓冲区。运行效果如下：
+2) 参照环形单向链表实现环形双向链表，并针对双向链表实现 `sort()` 方法，然后编写用来展示该功能的程序：用户每行输入一个浮点数，直到输入 `END` 为止，最后给出经 `sort()` 方法处理后的链表内容。运行效果如下：
 
 ```console
+$ unique-values
+<100>
+<101>
+<99>
+<102>
+<END>
+99 100 101 102
 ```
 
 	
-3) 使用 STL 的 `vector` 解析后缀表达式（仅支持加减乘除四种运算）并求值。运行效果如下：
+3) 使用`std::vector` 类模板解析前缀表达式（仅支持加减乘除四种运算）并求值。运行效果如下：
 
 ```console
-$ evaluate-postfix-expression
+$ evaluate-postfix-expression-vector
+<- / + 6 * 2 3 4 5>
+-2
+```
+
+	
+4) 使用 STL 的 `std::stack` 类模板解析后缀表达式（仅支持加减乘除四种运算）并求值。运行效果如下：
+
+```console
+$ evaluate-postfix-expression-stack
 <500 100 200 + ->
 200
 ```
 
 	
-5) 经典比赛题（思考）
+5) 使用 STL 的 `std::queue` 类模板使用队列实现一个批处理程序。该程序不停地从标准输入读取前缀表达式（每行一个），并在队列中暂存这些前缀表达式，当读取到四个表达式时，统一进行求值并输出结果，之后继续从标准输入读取新的前缀表达式，直到读入 `END` 为止。运行效果如下：
+
+```console
+$ evaluate-postfix-expression-batch
+<+ 500 100>
+<- 500 100>
+<* 500 100>
+</ 500 100>
+600
+400
+50000
+5
+<+ 5 1>
+<END>
+6
+```
+
+	
+6) 经典比赛题（思考）
    - [Luogu B3968/成绩排序](https://www.luogu.com.cn/problem/B3968)
    - [Luogu P1628/合并序列](https://www.luogu.com.cn/problem/P1628)
    - [Luogu P1716/双调序列](https://www.luogu.com.cn/problem/P1716)
