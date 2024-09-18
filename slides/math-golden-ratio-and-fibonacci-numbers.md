@@ -408,7 +408,13 @@ $$`
 1) 考虑 `$ F(z) = F_0 + F_1 z + F_2 z^2 + F_3 z^3 + ... $`
 
 	
-2) 构造分式，使之满足 `$ \frac{A}{1-\alpha z} + \frac{B}{1-\beta z} = \frac{z}{1 - z - z^2} $`
+2) 构造分式，使之满足
+
+`$$
+\large{
+    \frac{A}{1-\alpha z} + \frac{B}{1-\beta z} = \frac{z}{1 - z - z^2}
+}
+$`
 
 	
 3) 根据 `$ (1-\alpha z)(1-\beta z) = 1 - z - z^2 $` 求解常数 `$ \alpha, \ \beta $`
