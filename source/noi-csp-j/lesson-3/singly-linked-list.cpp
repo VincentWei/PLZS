@@ -14,11 +14,7 @@
 #include <stdexcept>    // for std::out_of_range
 #include <cassert>      // for assert()
 
-// 遍历节点时的回调函数类型；返回 false 将停止遍历。
-template <class T>
-using cb_on_node = bool (*)(T& value);
-
-template <class T>
+template <class T, class VisitNode>
 class node {
 
     T payload;      // 节点负载
@@ -51,8 +47,8 @@ size_t size(node* head) {
 }
 
 // 遍历节点
-template <class node, class T, typename cb_on_node>
-void traverse(node* head, cb_on_node cb)
+template <class node, class T, class VisitNode>
+void traverse(node* head, VisitNode visit)
 {
     // Start from the head of the linked list
     node* current = head;
@@ -61,7 +57,7 @@ void traverse(node* head, cb_on_node cb)
     while (current != nullptr) {
 
         // call the call back function
-        if (!cb(current->payload))
+        if (!visit(current->payload))
             break;
 
         // Move to the next node
