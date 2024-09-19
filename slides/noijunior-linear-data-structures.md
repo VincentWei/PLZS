@@ -364,7 +364,7 @@ node* clear(node* head)
 	
 7) 使用示例
 
-- 思考：如果在
+   - 思考：如果将第 28 行的 `push_back()` 修改为 `push_front()`，则当输入为 `-1 0 1 2 3 4 end` 时，结果如何？
 
 ```cpp []
 using namespace std;
@@ -381,6 +381,8 @@ int main()
 {
     node<double>* head = nullptr;
 
+    // 此循环将持续读取用户的输入，直到 stod() 函数
+    // 无法正常将空格分隔的字符串解析为浮点数而抛出异常为止。
     do {
         string buf;
         cin >> buf;
@@ -394,11 +396,10 @@ int main()
             break;
         }
 
-        head = push_front(head, d);
+        head = push_back(head, d);
     } while (true);
 
     traverse(head, print_positive_value);
-    head = pop_back(head);
     clear(head);
 }
 ```

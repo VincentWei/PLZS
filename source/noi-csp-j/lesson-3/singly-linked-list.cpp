@@ -202,6 +202,8 @@ int main()
 {
     node<double>* head = nullptr;
 
+    // 此循环将持续读取用户的输入，直到 stod() 函数
+    // 无法正常将空格分隔的字符串解析为浮点数而抛出异常为止。
     do {
         string buf;
         cin >> buf;
@@ -219,7 +221,6 @@ int main()
     } while (true);
 
     traverse(head, print_positive_value);
-    head = pop_back(head);
     clear(head);
 }
 
