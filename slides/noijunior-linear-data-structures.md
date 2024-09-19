@@ -144,6 +144,8 @@ public:
 1. 最后一个节点的 `next` 指针始终设定为 `nullptr`，因为它是链表的最后一个结点，没有下一个结点。
 1. 单向链表中，由于每个节点都链接到下一个节点，因此只能前向（forward）遍历各个节点。
 
+<img style="height:200px;width:auto;" src="assets/noijunior-singly-linked-list.webp" />
+
 	
 ### 单向链表的节点类模板
 
@@ -417,9 +419,8 @@ int main()
 
 - 只能前向遍历。
 - `push_front()` 和 `pop_front()` 的执行效率很高；时间复杂度：`$ O(1) $`。
-- `push_back()` 和 `pop_back()` 的执行效率很低；时间复杂度：`$ O(n) $`。
-- 无法高效实现前置插入（insert before）操作。
-- 无法高效实现前置移除（erase before）操作。
+- `push_back()` 和 `pop_back()` 的执行效率较低；虽然可以通过维护 `tail` 指针提升，但容易导致混乱。
+- 无法高效实现前置插入（insert before）和前置移除（erase before）操作。
 
 	
 ### 课堂练习
