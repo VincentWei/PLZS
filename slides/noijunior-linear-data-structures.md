@@ -190,6 +190,7 @@ size_t size(node* head) {
 ### 单向链表常见操作
 
 - 使用单向链表时，维护一个指向链表第一个节点的指针（`head`），所有的操作通过该指针进行。
+- 若同时维护指向最后一个节点的指针（`tail`）容易引入混乱。
 
 	
 1) 遍历（traverse）
@@ -684,7 +685,6 @@ node* erase_before(node* current)
 
     return head;
 }
-
 ```
 
 	
