@@ -738,6 +738,9 @@ string nap_mul_vert(const string &a, const string &b)
 
 - 倍增法实现乘法的原理
 
+	
+- 固有整数类型乘法的倍增法实现
+
 ```cpp []
 intmax_t binary_mul_r(intmax_t a, intmax_t b)
 {
@@ -775,7 +778,6 @@ intmax_t binary_mul_i(intmax_t a, intmax_t b)
 ```
 
 	
-
 - 高精度自然数乘法的倍增实现
 
 ```cpp []
