@@ -364,7 +364,7 @@ node* clear(node* head)
 	
 7) 使用示例
 
-   - 思考：如果将第 28 行的 `push_back()` 修改为 `push_front()`，则当输入为 `-1 0 1 2 3 4 end` 时，结果如何？
+思考：如果将第 30 行的 `push_back()` 修改为 `push_front()`，则当输入为 `-1 0 1 2 3 4 end` 时，结果如何？
 
 ```cpp []
 using namespace std;
