@@ -14,8 +14,8 @@
 #include <stdexcept>    // for std::out_of_range
 #include <cassert>      // for assert()
 
-template <class T, class VisitNode>
-class node {
+template <typename T>
+struct node {
 
     T payload;      // 节点负载
     node* next;     // 指向下一个节点的指针
@@ -28,13 +28,13 @@ class node {
 };
 
 // 测试是否为空链表。
-template <class node>
+template <typename node>
 bool empty(node* head) {
     return (head == nullptr);
 }
 
 // 返回链表的节点数量。
-template <class node>
+template <typename node>
 size_t size(node* head) {
     size_t sz = 0;
 
@@ -47,8 +47,8 @@ size_t size(node* head) {
 }
 
 // 遍历节点
-template <class node, class T, class VisitNode>
-void traverse(node* head, VisitNode visit)
+template <typename node, typename visit_func>
+void traverse(node* head, visit_func visitor)
 {
     // Start from the head of the linked list
     node* current = head;
@@ -57,7 +57,7 @@ void traverse(node* head, VisitNode visit)
     while (current != nullptr) {
 
         // call the call back function
-        if (!visit(current->payload))
+        if (!visitor(current->payload))
             break;
 
         // Move to the next node
@@ -66,7 +66,7 @@ void traverse(node* head, VisitNode visit)
 }
 
 // 在给定节点之后插入新节点（不会修改头部）
-template <class node, class T>
+template <typename node, typename T>
 void insert_after(node* current, const T& value)
 {
     // Create a new node with the given value
@@ -80,7 +80,7 @@ void insert_after(node* current, const T& value)
 }
 
 // 移除给定节点之后的节点（不会修改头部）
-template <class node>
+template <typename node>
 void erase_after(node* current)
 {
     if (current->next) {
@@ -94,8 +94,8 @@ void erase_after(node* current)
     }
 }
 
-// 在头部插入节点，返回新的头部节点
-template <class node, class T>
+// 在头部压入新节点，返回新的头部节点
+template <typename node, typename T>
 node* push_front(node* head, const T& value)
 {
     // Create a new node with the given value
@@ -111,8 +111,8 @@ node* push_front(node* head, const T& value)
     return head;
 }
 
-// 移除头部节点，返回新的头部节点
-template <class node>
+// 弹出头部节点，返回新的头部节点
+template <typename node>
 node* pop_front(node* head)
 {
     if (head == nullptr)
@@ -127,8 +127,8 @@ node* pop_front(node* head)
     return head;
 }
 
-// 在尾部插入节点，返回新的头部节点
-template <class node, class T>
+// 在尾部压入新节点，返回新的头部节点
+template <typename node, typename T>
 node* push_back(node* head, const T& value)
 {
     // Create a new node with the given value
@@ -139,7 +139,7 @@ node* push_back(node* head, const T& value)
         return newnode;
 
     // Traverse the list until the last node is reached
-    node* current = *head;
+    node* current = head;
     while (current->next != nullptr) {
         current = current->next;
     }
@@ -149,8 +149,8 @@ node* push_back(node* head, const T& value)
     return head;
 }
 
-// 移除尾部节点，返回新的头部节点
-template <class node>
+// 弹出尾部节点，返回新的头部节点
+template <typename node>
 node* pop_back(node* head)
 {
     if (head == nullptr)
@@ -176,7 +176,7 @@ node* pop_back(node* head)
 }
 
 // 清空链表，返回新的头部节点（始终为 nullptr）
-template <class node>
+template <typename node>
 node* clear(node* head)
 {
     while (head) {
@@ -190,7 +190,36 @@ node* clear(node* head)
 
 using namespace std;
 
+bool print_positive_value(double payload)
+{
+    if (payload > 0)
+        cout << payload << endl;
+
+    return true;
+}
+
 int main()
 {
+    node<double>* head = nullptr;
+
+    do {
+        string buf;
+        cin >> buf;
+
+        double d;
+        try {
+            size_t sz;
+            d = stod(buf, &sz);
+        }
+        catch (std::exception& e) {
+            break;
+        }
+
+        head = push_back(head, d);
+    } while (true);
+
+    traverse(head, print_positive_value);
+    head = pop_back(head);
+    clear(head);
 }
 

@@ -151,37 +151,37 @@ public:
 - 基本定义：
 
 ```cpp
-template <class T>
+template <typename T>
 struct node {
-public:
-    // 节点负载
-    T payload;
-    // 指向下一个节点的指针
-    node* next;
+
+    T payload;      // 节点负载
+    node* next;     // 指向下一个节点的指针
 
     // 节点的构造函数。
-    node(const T& payload) {
-        this->payload = payload;
+    node(const T& value) {
+        this->payload = value;
         this->next = nullptr;
     }
-
-    // 测试是否为空链表。
-    static bool empty(node* head) {
-        return (head->next == nullptr);
-    }
-
-    // 返回链表的节点数量。
-    static size_t size(node* head) {
-        size_t sz = 0;
-
-        while (head) {
-            sz++;
-            head = head->next;
-        }
-
-        return sz;
-    }
 };
+
+// 测试是否为空链表。
+template <typename node>
+bool empty(node* head) {
+    return (head == nullptr);
+}
+
+// 返回链表的节点数量。
+template <typename node>
+size_t size(node* head) {
+    size_t sz = 0;
+
+    while (head) {
+        sz++;
+        head = head->next;
+    }
+
+    return sz;
+}
 ```
 
 	
@@ -193,8 +193,9 @@ public:
 1) 遍历（traverse）
 
 ```cpp
-// Traverse and print the elements of the linked list
-void node::traverse(node* head)
+// 遍历节点
+template <typename node, typename visit_func>
+void traverse(node* head, visit_func visitor)
 {
     // Start from the head of the linked list
     node* current = head;
@@ -202,61 +203,208 @@ void node::traverse(node* head)
     // Traverse the linked list until reaching the end (nullptr)
     while (current != nullptr) {
 
-        // Print the data of the current node
-        cout << current->payload << " ";
+        // call the call back function
+        if (!visitor(current->payload))
+            break;
 
         // Move to the next node
         current = current->next;
     }
-
-    cout << std::endl;
 }
 ```
 
 	
-2) 插入头部（push front）
+2) 后置插入（insert after）
 
 ```cpp
+// 在给定节点之后插入新节点（不会修改头部）
+template <typename node, typename T>
+void insert_after(node* current, const T& value)
+{
+    // Create a new node with the given value
+    node* newnode = new node(value);
+
+    // Link the original next node to the new node.
+    newnode->next = current->next;
+
+    // Link the new node to the current last node
+    current->next = newnode;
+}
 ```
 
 	
-3) 删除头节点（pop front）
+3) 后置删除（erase after）
 
 ```cpp
+// 移除给定节点之后的节点（不会修改头部）
+template <typename node>
+void erase_after(node* current)
+{
+    if (current->next) {
+        node* next_next = current->next->next;
+
+        // Delete last node
+        delete (current->next);
+
+        // Change the next of current
+        current->next = next_next;
+    }
+}
 ```
 
 	
-4) 插入尾部（push back）
+4) 压入/弹出头部（push/pop front）
 
 ```cpp
+// 在头部压入新节点，返回新的头部节点
+template <typename node, typename T>
+node* push_front(node* head, const T& value)
+{
+    // Create a new node with the given value
+    node* newnode = new node(value);
+
+    // Set the next pointer of the new node to the current head
+    newnode->next = head;
+
+    // Move the head to point to the new node
+    head = newnode;
+
+    // Return the new head of the linked list
+    return head;
+}
+
+// 弹出头部节点，返回新的头部节点
+template <typename node>
+node* pop_front(node* head)
+{
+    if (head == nullptr)
+        return nullptr;
+
+    // Move the head pointer to the next node
+    node* temp = head;
+    head = head->next;
+
+    delete temp;
+
+    return head;
+}
 ```
 
 	
-5) 删除尾节点（pop back）
+5) 压入/弹出尾部（push/pop back）
 
 ```cpp
+// 在尾部压入新节点，返回新的头部节点
+template <typename node, typename T>
+node* push_back(node* head, const T& value)
+{
+    // Create a new node with the given value
+    node* newnode = new node(value);
+
+    // If the list is empty, make the new node the head
+    if (head == nullptr)
+        return newnode;
+
+    // Traverse the list until the last node is reached
+    node* current = head;
+    while (current->next != nullptr) {
+        current = current->next;
+    }
+
+    // Link the new node to the current last node
+    current->next = newnode;
+    return head;
+}
+
+// 弹出尾部节点，返回新的头部节点
+template <typename node>
+node* pop_back(node* head)
+{
+    if (head == nullptr)
+        return nullptr;
+
+    if (head->next == nullptr) {
+        delete head;
+        return nullptr;
+    }
+
+    // Find the second last node
+    node* second_last = head;
+    while (second_last->next->next != nullptr)
+        second_last = second_last->next;
+
+    // Delete last node
+    delete (second_last->next);
+
+    // Change next of second last
+    second_last->next = nullptr;
+
+    return head;
+}
 ```
 
 	
-6) 后置插入（insert after）
+6) 清空（clear）
 
 ```cpp
+// 清空链表，返回新的头部节点（始终为 nullptr）
+template <typename node>
+node* clear(node* head)
+{
+    while (head) {
+        node* next = head->next;
+        delete head;
+        head = next;
+    };
+
+    return nullptr;
+}
 ```
 
 	
-7) 删除后置节点（erase after）
+7) 使用示例
 
-```cpp
+- 思考：如果在
+
+```cpp []
+using namespace std;
+
+bool print_positive_value(double payload)
+{
+    if (payload > 0)
+        cout << payload << endl;
+
+    return true;
+}
+
+int main()
+{
+    node<double>* head = nullptr;
+
+    do {
+        string buf;
+        cin >> buf;
+
+        double d;
+        try {
+            size_t sz;
+            d = stod(buf, &sz);
+        }
+        catch (std::exception& e) {
+            break;
+        }
+
+        head = push_front(head, d);
+    } while (true);
+
+    traverse(head, print_positive_value);
+    head = pop_back(head);
+    clear(head);
+}
 ```
 
 	
-8) 清空（clear）
-
-```cpp
-```
-
-	
-9) 其他操作
+8) 其他操作
    - 获取节点数量并使用索引值访问并执行在指定位置插入节点或移除节点的操作。
    - 铰接（splice）两个单向链表。
    - 查找（find）和给定数据相等的第一个节点。
