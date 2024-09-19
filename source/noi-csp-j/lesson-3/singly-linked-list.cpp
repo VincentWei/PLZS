@@ -56,7 +56,7 @@ void traverse(node* head, visit_func visitor)
     // Traverse the linked list until reaching the end (nullptr)
     while (current != nullptr) {
 
-        // call the call back function
+        // call visitor
         if (!visitor(current->payload))
             break;
 

@@ -427,9 +427,9 @@ int main()
 
 （十五分钟内完成）
 
-1. 在 [`singly-linked-list.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-linked-list.cpp) 文件中实现针对单向链表的 `at()` 函数并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
+1. 基于 [singly-linked-list.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-linked-list.cpp) 文件，补充实现针对单向链表的 `at()` 函数并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
 1. 将 `singly-linked-list.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-3/` 目录（下同），并推送到远程仓库。
-1. 思考使用 `at()` 方法遍历单向链表的时间复杂度。
+1. 思考使用 `at()` 函数遍历单向链表的时间复杂度。
 
 		
 ## 双向链表
@@ -444,6 +444,8 @@ int main()
 1. 第一个节点的 `prev` 指针始终设定为 `nullptr`，因为它是链表的第一个结点，没有上一个结点。
 1. 最后一个节点的 `next` 指针始终设定为 `nullptr`，因为它是链表的最后一个结点，没有下一个结点。
 1. 在双向链表中，由于每个节点都同时链接到下一个节点和上一个节点，因此可以在两个方向上（前向或向后）遍历各个节点。
+
+<img style="height:300px;width:auto;" src="assets/noijunior-doubly-linked-list.webp" />
 
 	
 ### 双向链表的节点类模板
@@ -464,99 +466,334 @@ struct node {
         this->next = nullptr;
         this->prev = nullptr;
     }
+};
+
+// 测试是否为空链表。
+template <typename node>
+bool empty(node* head) {
+    return (head == nullptr);
+}
+
+// 返回链表的节点数量。
+template <typename node>
+size_t size(node* head) {
+    size_t sz = 0;
+
+    while (head) {
+        sz++;
+        head = head->next;
+    }
+
+    return sz;
+}
 ```
 
 	
 ### 双向链表常见操作
 
-- 使用双向链表时，维护指向链表头部的指针（`head`）和指向链表尾部的指针（`tail`），操作通过这两个指针之一进行。
+- 使用双向链表时，维护指向链表头部的指针（`head`），操作通过这个指针进行。
+- 若同时维护 `head` 和 `tail` 指针，容易引入混乱。
 
 	
-1) 前向遍历（traverse forward）
+1) 前向遍历或后向遍历（traverse forward/backward）
 
 ```cpp
-void traverse_forward(node* head)
+// 前向遍历节点
+template <typename node, typename visit_func>
+size_t traverse_forward(node* head, visit_func visitor)
 {
+    size_t nr_visited = 0;
+
     // Start from the head of the linked list
     node* current = head;
 
     // Traverse the linked list until reaching the end (nullptr)
     while (current != nullptr) {
 
-        // Print the data of the current node
-        cout << current->payload << " ";
+        // call the visitor
+        if (!visitor(current->payload))
+            break;
+
+        nr_visited++;
 
         // Move to the next node
         current = current->next;
     }
 
-    cout << std::endl;
+    return nr_visited;
 }
-```
 
-	
-2) 后向遍历（traverse backward）
+// 定位尾部
+template <typename node>
+node* locate_tail(node* current) {
+    node *tail = current;
+    while (tail && tail->next) {
+        tail = tail->next;
+    }
+    return tail;
+}
 
-```cpp
-void traverse_backward(node* tail)
+// 后向遍历节点
+template <typename node, typename visit_func>
+size_t traverse_backward(node* head, visit_func visitor)
 {
-    // Start from the head of the linked list
-    node* current = tail;
+    size_t nr_visited = 0;
 
-    // Traverse the linked list until reaching the end (nullptr)
+    // Start from the tail of the linked list
+    node* current = locate_tail(head);
+
+    // Traverse the linked list until reaching the head (nullptr)
     while (current != nullptr) {
 
-        // Print the data of the current node
-        cout << current->payload << " ";
+        // call visitor
+        if (!visitor(current->payload))
+            break;
 
-        // Move to the next node
+        nr_visited++;
+
+        // Move to the previous node
         current = current->prev;
     }
 
-    cout << std::endl;
+    return nr_visited;
 }
 ```
 
 	
-2) 插入头部（push front）
+2) 后置插入/删除（insert/erase after）
 
 ```cpp
+// 在给定节点之后插入新节点（不会修改头部）
+template <typename node, typename T>
+void insert_after(node* current, const T& value)
+{
+    // Create a new node with the given value
+    node* newnode = new node(value);
+
+    // Set the previous of new node to current
+    newnode->prev = current;
+    // Set the next of new node to next of current
+    newnode->next = current->next;
+
+    // Update the next of current node to new node
+    current->next = newnode;
+
+    // If the new node is not the tail, update previous of next node to new node
+    if (newnode->next != nullptr)
+        newnode->next->prev = newnode;
+}
+
+// 移除给定节点之后的节点（不会修改头部）
+template <typename node>
+void erase_after(node* current)
+{
+    if (current->next) {
+        node* next_next = current->next->next;
+
+        // Delete last node
+        delete (current->next);
+
+        // Change the next of current
+        current->next = next_next;
+
+        if (next_next) {
+            // Update the previous of next of next to current
+            next_next->prev = current;
+        }
+    }
+}
 ```
 
 	
-3) 删除头节点（pop front）
+3) 前置插入/移除（inseret/erase before）
 
-```cpp
+```cpp []
+// 定位头部
+template <typename node>
+node* locate_head(node* current) {
+    node *head = current;
+    while (head && head->prev) {
+        head = head->prev;
+    }
+    return head;
+}
+
+// 在给定节点之前插入新节点；可能修改头部，返回新的头部
+template <typename node, typename T>
+node* insert_before(node* current, const T& value)
+{
+    // Create a new node with the given value
+    node* newnode = new node(value);
+
+    node* head = locate_head(current);
+    if (head == nullptr) {
+        // make newnode the head
+        return newnode;
+    }
+
+    // Set previous of new node to previous of given node
+    newnode->prev = current->prev;
+    // Set next of new node to given node
+    newnode->next = current;
+
+    // Update next of given node's previous to new node
+    if (current->prev != nullptr) {
+        newnode->prev->next = newnode;
+    }
+    else {
+        // If the current node is the head, update the head
+        head = newnode;
+    }
+
+    // Update previous of given node to new node
+    current->prev = newnode;
+
+    // Return the head of the doubly linked list
+    return head;
+}
+
+// 移除给定节点之前的节点；可能修改头部，返回新的头部
+template <typename node>
+node* erase_before(node* current)
+{
+    node* head = locate_head(current);
+    if (head == nullptr) {
+        // If it is an empty list
+        return nullptr;
+    }
+
+    if (current->prev) {
+        node* prev_prev = current->prev->prev;
+
+        // If the deleted node is head, update head to the current
+        if (current->prev == head)
+            head = current;
+
+        // Delete previous node
+        delete (current->prev);
+
+        // Change the next of current
+        current->prev = prev_prev;
+
+        if (prev_prev) {
+            // Update next of previous of previous to current
+            prev_prev->next = current;
+        }
+
+    }
+
+    return head;
+}
+
 ```
 
 	
-4) 插入尾部（push back）
+4) 压入/弹出头部（push/pop front）
 
 ```cpp
+// 在头部压入新节点，返回新的头部节点
+template <typename node, typename T>
+node* push_front(node* head, const T& value)
+{
+    // Create a new node with the given value
+    node* newnode = new node(value);
+
+    // Set the next pointer of the new node to the current head
+    newnode->next = head;
+
+    // Return the new head of the linked list
+    return newnode;
+}
+
+// 弹出头部节点，返回新的头部节点
+template <typename node>
+node* pop_front(node* head)
+{
+    if (head == nullptr)
+        return nullptr;
+
+    // Move the head pointer to the next node
+    node* temp = head;
+    head = head->next;
+
+    delete temp;
+
+    return head;
+}
 ```
 
 	
-5) 删除尾节点（pop back）
+5) 压入/弹出尾部（push/pop back）
 
 ```cpp
-```
+// 在尾部压入新节点，返回新的头部节点
+template <typename node, typename T>
+node* push_back(node* head, const T& value)
+{
+    // Create a new node with the given value
+    node* newnode = new node(value);
 
-	
-6) 插入节点（insert before/after）
+    // Locate the tail
+    node* tail = locate_tail(head);
+    if (tail == nullptr) {
+        // If the list is empty, make the new node the head
+        head = newnode;
+        goto done;
+    }
 
-```cpp
-```
+    // Link the new node to the current last node
+    tail->next = newnode;
+    newnode->prev = tail;
 
-	
-7) 删除节点（erase before/after）
+done:
+    return head;
+}
 
-```cpp
+// 弹出尾部节点，返回新的头部节点
+template <typename node>
+node* pop_back(node* head)
+{
+    if (head == nullptr)
+        return nullptr;
+
+    if (head->next == nullptr) {
+        delete head;
+        return nullptr;
+    }
+
+    node* tail = locate_tail(head);
+
+    // Change next of second last
+    if (tail->prev)
+        tail->prev->next = nullptr;
+
+    // Delete last node
+    delete (tail);
+
+    // If tail is head, the list is empty
+    if (head == tail)
+        return nullptr;
+
+    return head;
+}
 ```
 
 	
 8) 清空（clear）
 
 ```cpp
+// 清空链表，返回新的头部节点（始终为 nullptr）
+template <typename node>
+node* clear(node* head)
+{
+    while (head) {
+        node* next = head->next;
+        delete head;
+        head = next;
+    };
+
+    return nullptr;
+}
 ```
 
 	
@@ -571,15 +808,16 @@ void traverse_backward(node* tail)
 ### 双向链表的特点
 
 - 可执行前向或者后向遍历。
-- `push_front()/pop_front()` 和 `push_back()/pop_back()` 的执行效率都很高；时间复杂度：`$ O(1) $`。
+- `push_front()/pop_front()` 的执行效率很高；时间复杂度：`$ O(1) $`。
+- `push_back()/pop_back()` 的执行效率较低；虽然可以通过维护 `tail` 指针提升，但容易导致混乱。
 - 可高效实现前置/后置插入（insert before/after）操作以及前置/后置移除（erase before/after）操作。
 
 	
 ### 课堂练习
 
-（十五分钟内完成）
+（十分钟内完成）
 
-1. 在 `doubly-linked-list.cpp` 文件中实现针对双向链表的 `splice()` 方法，并编写展示该功能的完整程序。
+1. 基于 [doubly-linked-list.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/doubly-linked-list.cpp) 文件，补充实现针对双向链表的 `splice()` 函数，并编写展示该功能的完整程序。
 
 		
 ## 环形链表
@@ -592,7 +830,8 @@ void traverse_backward(node* tail)
 - 不论是单向链表还是双向链表，将链表的首尾节点链接起来，可构成环形链表（circular linked list 或 loop list）：
    1. 将链表最后一个节点的 `next` 字段指向第一个节点；将链表第一个节点的 `prev` 字段指向最后一个节点。
    1. 通过 `next` 指针，链表的所有节点构成一个前向环；而通过 `prev` 指针，链表的所有节点构成一个后向环。
-- 结构图
+
+<img style="height:300px;width:auto;" src="assets/noijunior-circular-linked-list.webp" />
 
 	
 - 环形链表的好处：
@@ -600,10 +839,12 @@ void traverse_backward(node* tail)
    1. 使用环形单向链表时，仅保存指向尾部的 `tail` 指针即可快速定位尾部或头部（`tail->next`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
    1. 使用环形双向链表时，仅通过指向头部的 `head` 指针即可快速定位头部或尾部（`head->prev`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
 
+<img style="height:300px;width:auto;" src="assets/noijunior-doubly-circular-linked-list.webp" />
+
 	
 ### 环形单向链表的节点类模板
 
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/circula-singly-linked-list.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-circula-linked-list.cpp)
 - 基本定义：
 
 ```cpp
@@ -633,7 +874,7 @@ struct node {
 	
 ### 环形双向链表的节点类模板
 
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/circula-doubly-linked-list.cpp)
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/doubly-circula-linked-list.cpp)
 - 基本定义：
 
 ```cpp
