@@ -148,7 +148,7 @@ string nap_mul(const string &a, const string &b)
     return result;
 }
 
-string nap_mul_alt(const string &a, const string &b)
+string nap_mul_plain(const string &a, const string &b)
 {
     string times("0");
     string result("0");
@@ -212,6 +212,71 @@ string nap_mul_vert(const string &a, const string &b)
     }
 
     return r;
+}
+
+bool nap_is_zero(const string &n)
+{
+    size_t len = n.length();
+    for (size_t i = 0; i < len; i++) {
+        if (n[i] != '0')
+            return false;
+    }
+
+    return true;
+}
+
+bool nap_is_one(const string &n)
+{
+    if (n == "1")
+        return true;
+    return false;
+}
+
+/*
+ * 33 / 2 = 16
+ * 33 * 5 = 165 / 10 = 16
+ */
+string nap_half(const string& n)
+{
+    string result = nap_mul_vert(n, "5");
+    result.pop_back();
+    if (result.size() == 0)
+        result = "0";
+    return result;
+}
+
+string nap_mul_bin(const string& a, const string& b)
+{
+    if (nap_is_zero(a) || nap_is_zero(b))
+        return "0";
+
+    if (nap_is_one(a))
+        return b;
+    if (nap_is_one(b))
+        return a;
+
+    string longer;
+    string shorter;
+    if (a.size() >= b.size()) {
+        longer = a;
+        shorter = b;
+    }
+    else {
+        longer = b;
+        shorter = a;
+    }
+
+    string result = "0";
+    while (shorter != "0") {
+        if (shorter.back() & 1) {
+            nap_add_to(result, longer);
+        }
+
+        longer = nap_add(longer, longer);
+        shorter = nap_half(shorter);
+    }
+
+    return result;
 }
 
 void nap_dec(string &n)
@@ -298,16 +363,16 @@ int main()
     assert(r == "9");
     clog << "test for nap_dec() passed\n";
 
-    // test nap_mul_alt()
-    r = nap_mul_alt("2", "2");
+    // test nap_mul_plain()
+    r = nap_mul_plain("2", "2");
     assert(r == "4");
-    r = nap_mul_alt("2", "10");
+    r = nap_mul_plain("2", "10");
     assert(r == "20");
-    r = nap_mul_alt("20", "20");
+    r = nap_mul_plain("20", "20");
     assert(r == "400");
-    r= nap_mul_alt("11", "11");
+    r= nap_mul_plain("11", "11");
     assert(r == "121");
-    cout << "test for nap_mul_alt() passed\n";
+    cout << "test for nap_mul_plain() passed\n";
 
     // test nap_mul_vert()
     r = nap_mul_vert("33", "77");
@@ -321,6 +386,19 @@ int main()
     r = nap_mul_vert("11", "11");
     assert(r == "121");
     cout << "test for nap_mul_vert() passed\n";
+
+    // test nap_mul_bin()
+    r = nap_mul_bin("33", "77");
+    assert(r == "2541");
+    r = nap_mul_bin("2", "2");
+    assert(r == "4");
+    r = nap_mul_bin("2", "10");
+    assert(r == "20");
+    r = nap_mul_bin("20", "20");
+    assert(r == "400");
+    r = nap_mul_bin("11", "11");
+    assert(r == "121");
+    cout << "test for nap_mul_bin() passed\n";
 
 }
 #endif /* not defined NTEST */

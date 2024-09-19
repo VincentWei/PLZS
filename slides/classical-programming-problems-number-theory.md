@@ -581,12 +581,49 @@ $ ./summary-of-factorials
 94269001683709979260859834124473539872070722613982672442938359305624678223479506023400294093599136466986609124347432647622826870038220556442336528920420940314
 ```
 
+		
+## 高精度自然数算术（字符串实现）
+
+- 高精度算术在信息学中有重要意义。
+- 高精度算术的实现方法：
+   1. 自然数算术，自然数数系中的常见运算，常用于阶乘、三角形数、斐波那契数的生成等；一般使用字符串实现。
+   1. 整数算术，整数数系中的常见运算，出于性能考虑，通常使用压位实现。
+   1. 有理数算术，用于高精度的小数运算，可给出指定精度的小数点位数。
+
 	
-### 高精度整数算术（字符串实现）
+### 加法
 
-1) 加法
+```cpp []
+string nap_add(const string &a, const string &b)
+{
+    string result;
+    size_t len_a = a.length();
+    size_t len_b = b.length();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
 
-```cpp
+    int c = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = ((i < len_a) ? a[len_a - i - 1] : '0') - '0';
+        int n_b = ((i < len_b) ? b[len_b - i - 1] : '0') - '0';
+
+        int r = n_a + n_b + c;
+        if (r >= 10) {
+            c = 1;
+            r -= 10;
+        }
+        else
+            c = 0;
+
+        result.insert(0, 1, '0' + r);
+    }
+
+    if (c > 0) {
+        result.insert(0, 1, '1');
+    }
+
+    return result;
+}
+
 void nap_add_to(string &r, const string &a)
 {
     size_t len_r = r.length();
@@ -618,26 +655,174 @@ void nap_add_to(string &r, const string &a)
 }
 ```
 
-		
-## 高精度整数算术（字符串实现）
-
 	
-### 加法
+### 朴素乘法
 
-	
-### 减法
+```cpp []
+string nap_mul_plain(const string &a, const string &b)
+{
+    string times("0");
+    string result("0");
+    while (b != times) {
+        nap_add_to(result, a);
+        nap_add_to(times, "1");
+    }
+
+    return result;
+}
+```
 
 	
 ### 竖式乘法
 
+```cpp []
+string nap_mul_vert(const string &a, const string &b)
+{
+    string r;
+
+    size_t len_a = a.length();
+    size_t len_b = b.length();
+    size_t len_r = 0;
+
+    for (size_t i = 0; i < len_a; i++) {
+        int value_a = a[len_a - i - 1] - '0';
+
+        int carry = 0;
+        for (size_t j = 0; j < len_b; j++) {
+            int value_b = b[len_b - j - 1]  - '0';
+
+            int p = value_a * value_b + carry;
+            if (p >= 10) {
+                carry = p / 10;
+                p %= 10;
+            }
+            else {
+                carry = 0;
+            }
+
+            size_t k = j + i;
+            if (k >= len_r) {
+                r.insert(0, 1, '0' + p);
+                len_r++;
+            }
+            else {
+                int value_r = r[len_r - k - 1]  - '0';
+                value_r += p;
+                if (value_r >= 10) {
+                    carry++;
+                    value_r -= 10;
+                }
+
+                r[len_r - k - 1] = '0' + value_r;
+            }
+        }
+
+        if (carry > 0) {
+            r.insert(0, 1, '0' + carry);
+            len_r++;
+            carry = 0;
+        }
+
+        assert(len_r == r.length());
+    }
+
+    return r;
+}
+```
+
 	
 ### 倍增乘法
 
-	
-### 除法
+- 倍增法实现乘法的原理
+
+```cpp []
+intmax_t binary_mul_r(intmax_t a, intmax_t b)
+{
+    assert(b >= 0);
+
+    if (b == 0)
+        return 0;
+
+    intmax_t res = binary_mul_r(a, b >> 1);
+    if (b % 2)
+        return res + res + a;
+
+    return res + res;
+}
+
+intmax_t binary_mul_i(intmax_t a, intmax_t b)
+{
+    int sign = 1;
+    if (b < 0) {
+        b = -b;
+        sign = -1;
+    }
+
+    intmax_t res = 0;
+
+    while (b > 0) {
+        if (b & 1)
+            res += a;
+        a += a;
+        b >>= 1;
+    }
+
+    return sign * res;
+}
+```
 
 	
-### 取模
+
+- 高精度自然数乘法的倍增实现
+
+```cpp []
+/*
+ * 33 / 2 = 16
+ * 33 * 5 = 165 / 10 = 16
+ */
+string nap_half(const string& n)
+{
+    string result = nap_mul_vert(n, "5");
+    result.pop_back();
+    if (result.size() == 0)
+        result = "0";
+    return result;
+}
+
+string nap_mul_bin(const string& a, const string& b)
+{
+    if (nap_is_zero(a) || nap_is_zero(b))
+        return "0";
+
+    if (nap_is_one(a))
+        return b;
+    if (nap_is_one(b))
+        return a;
+
+    string longer;
+    string shorter;
+    if (a.size() >= b.size()) {
+        longer = a;
+        shorter = b;
+    }
+    else {
+        longer = b;
+        shorter = a;
+    }
+
+    string result = "0";
+    while (shorter != "0") {
+        if (shorter.back() & 1) {
+            nap_add_to(result, longer);
+        }
+
+        longer = nap_add(longer, longer);
+        shorter = nap_half(shorter);
+    }
+
+    return result;
+}
+```
 
 		
 ## 高精度整数算术（压位实现）

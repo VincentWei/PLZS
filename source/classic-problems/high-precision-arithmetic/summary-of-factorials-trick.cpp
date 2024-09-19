@@ -18,7 +18,7 @@
 
 #include "nap-arithmetic.cpp"
 
-string nap_mul_alt(const string &a, unsigned b)
+string nap_mul_plain(const string &a, unsigned b)
 {
     unsigned times = 0;
     string result("0");
@@ -39,7 +39,7 @@ int main()
     string last = "1";  // factorial of 0
     for (unsigned i = 1; i <= n; i++) {
 
-        string factorial = nap_mul_alt(last, i);
+        string factorial = nap_mul_plain(last, i);
         nap_add_to(summary, factorial);
         last = factorial;
     }
