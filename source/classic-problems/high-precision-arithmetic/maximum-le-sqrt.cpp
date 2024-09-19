@@ -18,19 +18,6 @@
 #define NTEST
 #include "nap-arithmetic.cpp"
 
-/*
- * 33 / 2 = 16
- * 33 * 5 = 165 / 10 = 16
- */
-string nap_half(const string& n)
-{
-    string result = nap_mul_vert(n, "5");
-    result.pop_back();
-    if (result.size() == 0)
-        result = "0";
-    return result;
-}
-
 string nap_average(const string& a, const string& b)
 {
     string ave = a;
