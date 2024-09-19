@@ -144,7 +144,7 @@ public:
 1. 最后一个节点的 `next` 指针始终设定为 `nullptr`，因为它是链表的最后一个结点，没有下一个结点。
 1. 单向链表中，由于每个节点都链接到下一个节点，因此只能前向（forward）遍历各个节点。
 
-<img style="height:200px;width:auto;" src="assets/noijunior-singly-linked-list.webp" />
+<img style="height:300px;width:auto;" src="assets/noijunior-singly-linked-list.webp" />
 
 	
 ### 单向链表的节点类模板
