@@ -152,7 +152,7 @@ public:
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-linked-list.cpp)
 - 基本定义：
 
-```cpp
+```cpp []
 template <typename T>
 struct node {
 
@@ -194,7 +194,7 @@ size_t size(node* head) {
 	
 1) 遍历（traverse）
 
-```cpp
+```cpp []
 // 遍历节点
 template <typename node, typename visit_func>
 void traverse(node* head, visit_func visitor)
@@ -218,7 +218,7 @@ void traverse(node* head, visit_func visitor)
 	
 2) 后置插入（insert after）
 
-```cpp
+```cpp []
 // 在给定节点之后插入新节点（不会修改头部）
 template <typename node, typename T>
 void insert_after(node* current, const T& value)
@@ -237,7 +237,7 @@ void insert_after(node* current, const T& value)
 	
 3) 后置删除（erase after）
 
-```cpp
+```cpp []
 // 移除给定节点之后的节点（不会修改头部）
 template <typename node>
 void erase_after(node* current)
@@ -257,7 +257,7 @@ void erase_after(node* current)
 	
 4) 压入/弹出头部（push/pop front）
 
-```cpp
+```cpp []
 // 在头部压入新节点，返回新的头部节点
 template <typename node, typename T>
 node* push_front(node* head, const T& value)
@@ -295,7 +295,7 @@ node* pop_front(node* head)
 	
 5) 压入/弹出尾部（push/pop back）
 
-```cpp
+```cpp []
 // 在尾部压入新节点，返回新的头部节点
 template <typename node, typename T>
 node* push_back(node* head, const T& value)
@@ -348,7 +348,7 @@ node* pop_back(node* head)
 	
 6) 清空（clear）
 
-```cpp
+```cpp []
 // 清空链表，返回新的头部节点（始终为 nullptr）
 template <typename node>
 node* clear(node* head)
@@ -427,7 +427,7 @@ int main()
 
 （十五分钟内完成）
 
-1. 在 `singly-linked-list.cpp` 文件中实现针对单向链表的 `size()` 和 `at()` 方法并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
+1. 在 [`singly-linked-list.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-linked-list.cpp) 文件中实现针对单向链表的 `at()` 函数并使用索引值遍历该单向链表，并编写展示该功能的完整程序。
 1. 将 `singly-linked-list.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-3/` 目录（下同），并推送到远程仓库。
 1. 思考使用 `at()` 方法遍历单向链表的时间复杂度。
 
