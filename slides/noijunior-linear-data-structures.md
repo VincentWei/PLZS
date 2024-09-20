@@ -1243,16 +1243,52 @@ void test()
 - 栈（Stack）：先进后出（last in first out/LIFO）
 
 	
-### 队列和栈的实现
+### 队列相关术语
 
-- 数组
-- 矢量
-- 链表
+- 入队：enqueue
+- 出队：dequeue
 
 	
-### 环形缓冲区
+### 队列的分类
 
-- `Ring/Loop Buffer`
+- 输入受限队列（input restricted queue）
+- 输出受限队列（output restricted queue）
+- 双头队列（double-ended queue，deque）
+- 环形队列（circular queue），也称作环形/循环缓冲区（ring/loop buffer）
+
+	
+### 输入受限队列
+
+- 仅允许在一端入队
+- 一般使用双向链表实现
+
+<img style="height:300px;width:auto;" src="assets/noijunior-input-restricted-queue.jpg" />
+
+	
+### 输出受限队列
+
+- 仅允许在一端出队
+- 一般使用双向链表实现
+
+<img style="height:300px;width:auto;" src="assets/noijunior-output-restricted-queue.jpg" />
+
+	
+### 双头队列
+
+- 可在两端入队或出队
+- 一般使用双向链表实现
+
+<img style="height:300px;width:auto;" src="assets/noijunior-double-ended-queue.jpg" />
+
+	
+### 环形队列
+
+- 可在两端入队或出队
+- 可使用数组、矢量或者链表实现
+
+<img style="height:300px;width:auto;" src="assets/noijunior-circular-queue.png" />
+
+<img style="height:300px;width:auto;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.png" />
 
 		
 ## 实用技巧
