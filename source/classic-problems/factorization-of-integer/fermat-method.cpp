@@ -22,10 +22,10 @@
 
 using namespace std;
 
-using uint128_t = unsigned __int128;
-
 uint64_t fermat_method(uint64_t n)
 {
+    using uint128_t = unsigned __int128;
+
     uint128_t a = llroundl(ceill(sqrtl(static_cast<long double>(n))));
     uint128_t b2 = a * a - n;
     uint128_t b = llroundl(sqrtl(static_cast<long double>(b2)));
@@ -41,7 +41,7 @@ uint64_t fermat_method(uint64_t n)
 
 int main()
 {
-    cout << "You can try 18446744073709551557\n";
+    cout << "You can try " << ((1ULL << 31) - 1) << endl;
 
     uint64_t n;
     cin >> n;
@@ -50,7 +50,7 @@ int main()
         return 1;
 
     auto factor = fermat_method(n);
-    if (factor != 1 || factor != n)
+    if (factor != 1 && factor != n)
         cout << "Got a nontrival factor: " << factor << endl;
     else
         cout << "PRIME\n";

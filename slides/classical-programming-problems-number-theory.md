@@ -969,17 +969,23 @@ factor_v prime_factors(uintmax_t n)
 ### 费马分解法
 
 ```cpp []
-int fermat(int n) {
-    int a = ceil(sqrt(n));
-    int b2 = a*a - n;
-    int b = round(sqrt(b2));
+uint64_t fermat_method(uint64_t n)
+{
+    using uint128_t = unsigned __int128;
+
+    uint128_t a = llroundl(ceill(sqrtl(static_cast<long double>(n))));
+    uint128_t b2 = a * a - n;
+    uint128_t b = llroundl(sqrtl(static_cast<long double>(b2)));
+
     while (b * b != b2) {
         a = a + 1;
         b2 = a*a - n;
-        b = round(sqrt(b2));
+        b = llroundl(sqrtl(static_cast<long double>(b2)));
     }
-    return a - b;
+
+    return static_cast<uint64_t>(a - b);
 }
+
 ```
 
 	
