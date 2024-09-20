@@ -984,7 +984,7 @@ factor_v prime_factors(uintmax_t n)
 <img style="height:400px;width:auto;" src="assets/pollard_rho.png" />
 
 	
-```cpp
+```cpp []
 using uint128_t = unsigned __int128;
 
 uint64_t generator(uint64_t x, uint64_t c, uint64_t n)
