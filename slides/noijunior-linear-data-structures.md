@@ -129,6 +129,8 @@ public:
 - 上一个节点：previous node
 - 第一个节点：first node
 - 最后一个节点：last node
+- 第二个节点：second node
+- 倒数第二个节点：second last node
 - 负载：payload；节点中保存的数据（data）。
 
 		
@@ -837,7 +839,7 @@ node* clear(node* head)
 	
 - 环形链表的好处：
    1. 从任意一个节点出发，可遍历所有节点。
-   1. 使用环形单向链表时，对头部、尾部的操作都要顾忌尾部或者倒数第一个节点的 `next` 指针，故而并不能提高在头部和尾部的操作性能。
+   1. 使用环形单向链表时，对头部、尾部的操作都要顾忌尾部或者倒数第二个节点的 `next` 指针，故而并不能提高在头部和尾部的操作性能。
    1. 使用环形双向链表时，仅通过指向头部的 `head` 指针即可快速定位头部或尾部（`head->prev`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
 
 <img style="height:300px;width:auto;" src="assets/noijunior-doubly-circular-linked-list.webp" />
@@ -1271,6 +1273,9 @@ void test()
    - 方法 `erase_after()`：移除迭代器所在位置后面的元素。
    - 方法 `assign()`：修改迭代器指向位置的元素内容。
    - 方法 `splice_after()`：将一个前向链表铰接到迭代器所在位置的后面。
+
+	
+- `std::forward_list` 类模板（续）：
    - 方法 `remove()`：移除链表中的指定值。
    - 方法 `unique()`：移除链表中的重复值。
    - 方法 `merge()`：合并两个已排序的链表。
@@ -1297,6 +1302,9 @@ void test()
    - 方法 `erase()`：移除迭代器所在位置的元素。
    - 方法 `assign()`：修改迭代器指向位置的元素内容。
    - 方法 `splice()`：将一个前后向链表铰接到迭代器所在位置。
+
+	
+- `std::list` 类模板（续）：
    - 方法 `remove()`：移除链表中的指定值。
    - 方法 `unique()`：移除链表中的重复值。
    - 方法 `merge()`：合并两个已排序的链表。
