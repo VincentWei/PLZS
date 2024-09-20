@@ -1256,6 +1256,8 @@ void test()
 - 入队：enqueue
 - 出队：dequeue
 
+<img style="height:400px;width:auto;" src="assets/noijunior-representation-of-queue.jpg" />
+
 	
 ### 队列的分类
 
@@ -1292,7 +1294,7 @@ void test()
 ### 环形队列
 
 - 环形队列主要用于内存受限的情况；在队列大小固定的情况下，如果队列已满，则新的入队操作会覆盖最老的元素。
-- 可使用固定大小的数组、尺寸受限的矢量或者链表实现
+- 可使用固定大小的数组、尺寸受限的矢量或者双向环形链表实现
 
 <img style="height:400px;width:auto;" src="assets/noijunior-circular-queue.jpg" />
 
@@ -1302,7 +1304,7 @@ void test()
 <img style="height:auto;width:1024px;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.jpg" />
 
 	
-### 使用队列实现环形缓冲区
+### 使用数组实现环形缓冲区
 
 - 初始化一个大小为 `n` 的数组 `queue`，其中 `n` 是队列可以容纳的最大元素数。
 - 将 `front` 和 `rear` 两个变量初始化为 `-1`。
