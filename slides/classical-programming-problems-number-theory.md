@@ -951,18 +951,141 @@ $ ./prime-factors
 ### 朴素算法
 
 - 类似质数判定的试除法，在 `$ \left[ 2, \sqrt{n} \right] $` 中遍历。
-- 找到一个因子再判断是否是质数？
+- 试试分解 64 位正整数中最大的质数： `$ 18446744073709551557 $`。
+
+```cpp []
+using namespace std;
+using factor_v = vector<uintmax_t>;
+
+factor_v prime_factors(uintmax_t n)
+{
+    factor_v factors;
+
+    for (uintmax_t i = 2; i <= n; i++) {
+        if (n % i == 0) {
+            do {
+                n = n / i;
+            } while (n % i == 0);
+
+            factors.push_back(i);
+        }
+    }
+
+    return factors;
+}
+```
 
 	
 ### Pollard Rho 算法
 
 - 按一定的规律找出一些数，求这些数和 `n` 的最大公约数 GCD，如果 GCD 不是 1，则 GCD 就是 `n` 的一个非平凡因子（nontrival factor）。
-- 算法名称中 Rho 的来历。
+- 算法名称中 Rho 的来历：当 `$ n = 2206637 $`、`$ p = 317 $`、`$ x_0 = 2 $` 时，若对序列生成函数 `$ f(x) = x^2 + 1 $` 每个返回值 `$ x_i $` 求`$ \{x_i \bmod p\} $`，则将生成下图的序列。
+
+<img style="height:300px;width:auto;" src="assets/pollard_rho.png" />
+
+	
+```cpp
+using uint128_t = unsigned __int128;
+
+uint64_t generator(uint64_t x, uint64_t c, uint64_t n)
+{
+    uint128_t next;
+
+    next = x * x;
+    next = (next % n + c % n) % n;
+    return static_cast<uint64_t>(next);
+}
+
+uint64_t randomll(uint64_t n)
+{
+    uint64_t low = random() % (static_cast<uint32_t>(n) - 1) + 1;
+    uint64_t high = random() % (static_cast<uint32_t>(n >> 32) - 1) + 1;
+    return (low | (high << 32));
+}
+
+template <typename T>
+T gcd(T a, T b)
+{
+    while (b != 0) {
+        T tmp = a;
+        a = b;
+        b = tmp % b;
+    }
+
+    return a;
+}
+
+template <typename T>
+T abs_diff(T a, T b)
+{
+    if (a >= b)
+        return a - b;
+    return b - a;
+}
+
+uint64_t pollard_rho(uint64_t n)
+{
+    uint64_t c = randomll(n);
+    uint64_t loop_t = randomll(n);
+    loop_t = generator(loop_t, c, n);
+    uint64_t loop_r = generator(loop_t, c, n);
+
+    while (loop_t != loop_r) {
+        uint64_t d = gcd(abs_diff(loop_t, loop_r), n);
+        if (d > 1)
+            return d;
+        loop_t = generator(loop_t, c, n);
+        loop_r = generator(generator(loop_r, c, n), c, n);
+    }
+
+    return n;
+}
+```
 
 	
 ### Pollard Brent Rho 算法
 
 - 优化目标：降低 GCD 的求解次数。
+
+```cpp []
+uint64_t pollard_brent_rho(uint64_t n)
+{
+    uint64_t c = randomll(n);
+    uint64_t x_i = generator(randomll(n), c, n);
+    unsigned goal;
+
+    // 使用倍增法降低 GCD 的求解次数。
+    for (goal = 1;; goal <<= 1) {
+        uint64_t d;
+
+        uint64_t x_0 = x_i;
+        uint128_t prod = 1;
+
+        // 这层循环的 goal 值每轮倍增。
+        for (unsigned step = 1; step <= goal; ++step) {
+            x_i = generator(x_i, c, n);
+
+            // prod = \prod |x_0 - x_i| \bmod n
+            prod = prod * abs_diff(x_i, x_0) % n;
+            if (prod == 0)
+                return n;
+
+            // 每隔 MAX_STEPS 次求解一次 GCD。
+            if (step % MAX_STEPS == 0) {
+                d = gcd(static_cast<uint64_t>(prod), n);
+                if (d > 1)
+                    return d;
+            }
+        }
+
+        d = gcd(static_cast<uint64_t>(prod), n);
+        if (d > 1)
+            return d;
+    }
+
+    return n;
+}
+```
 
 		
 ## 斐波那契数列

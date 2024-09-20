@@ -63,7 +63,7 @@ T abs_diff(T a, T b)
 
 #define MAX_STEPS       ((1U << 8) - 1)
 
-uint64_t pollard_rho(uint64_t n)
+uint64_t pollard_brent_rho(uint64_t n)
 {
     uint64_t c = randomll(n);
     uint64_t x_i = generator(randomll(n), c, n);
@@ -132,7 +132,7 @@ uint64_v factor_integer(uint64_t n, double& duration)
 
         unsigned tries = 0;
         while (true) {
-            factor = pollard_rho(n);
+            factor = pollard_brent_rho(n);
             if (factor < n) {
                 factors.push_back(factor);
                 clog << "Got a nontrivial factor: " << factor << endl;
@@ -161,7 +161,7 @@ int main()
     factors = factor_integer(UINT64_MAX, duration);
     assert(factors.size() > 0);
 
-    cout << "You can try 2305843009213693907" << endl;
+    cout << "You can try 18446744073709551557" << endl;
 
     uint64_t n;
     cin >> n;

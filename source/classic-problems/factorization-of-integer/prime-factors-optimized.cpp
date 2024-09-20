@@ -41,6 +41,8 @@ factor_v prime_factors(uintmax_t n)
 
 int main()
 {
+    cout << "You can try 18446744073709551557\n";
+
     uintmax_t n;
     cin >> n;
 

@@ -143,7 +143,7 @@ int main()
     factors = factor_integer(UINT64_MAX, duration);
     assert(factors.size());
 
-    cout << "You can try 2305843009213693907" << endl;
+    cout << "You can try 18446744073709551557" << endl;
 
     uint64_t n;
     cin >> n;
