@@ -1256,11 +1256,12 @@ void test()
 - 入队：enqueue
 - 出队：dequeue
 
-<img style="height:400px;width:auto;" src="assets/noijunior-representation-of-queue.jpg" />
+<img style="height:400px;width:auto;" src="assets/noijunior-representation-of-queue.png" />
 
 	
 ### 队列的分类
 
+- 简单队列（simple queue）
 - 输入受限队列（input restricted queue）
 - 输出受限队列（output restricted queue）
 - 双头队列（double-ended queue，deque）
