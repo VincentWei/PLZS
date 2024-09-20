@@ -1286,9 +1286,10 @@ void test()
 - 可在两端入队或出队
 - 可使用数组、矢量或者链表实现
 
-<img style="height:300px;width:auto;" src="assets/noijunior-circular-queue.png" />
-
-<img style="height:300px;width:auto;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.png" />
+<div class="r-stack">
+    <img class="fragment" style="height:300px;width:auto;" src="assets/noijunior-circular-queue.png" />
+    <img class="fragment" style="height:300px;width:auto;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.png" />
+</div>
 
 		
 ## 实用技巧
