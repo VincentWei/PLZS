@@ -981,7 +981,7 @@ uint64_t fermat_method(uint64_t n)
 
     while (b * b != b2) {
         a = a + 1;
-        b2 = a*a - n;
+        b2 = a * a - n;
         b = llroundl(sqrtl(static_cast<long double>(b2)));
     }
 
