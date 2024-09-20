@@ -258,7 +258,7 @@ public:
 
 using namespace std;
 
-void test()
+void test_forward_loop_list()
 {
     struct context_print {
         ostream& os;
@@ -384,6 +384,6 @@ void test()
 
 int main()
 {
-    test();
+    test_forward_loop_list();
 }
 

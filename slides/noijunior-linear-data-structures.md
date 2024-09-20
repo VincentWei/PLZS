@@ -110,7 +110,7 @@ public:
 ### 链表的引入和优缺点
 
 - 火车（train，列车）是一个个车厢（coach）连接构成的，可非常方便地更换损坏的车厢或者重组。
-- 如果将元素打包到类似车厢的数据结构当中，然后将这些数据结构通过某种方式连接起来使用，在已知位置处执行插入和移除操作将变得非常简单；时间复杂度：`$ O(1) $`。
+- 如果将元素打包到类似车厢的数据结构当中，然后将这些数据结构通过某种方式连接起来使用，在已知位置处执行插入和移除操作将变得更加高效。
 - 链表是由节点（node）构成的一个链条式（chain）数据结构，其中每个节点都包含有数据以及相邻节点的引用信息。在 C/C++ 中，通常使用指针（pointer）作为相邻节点的引用信息。
 - 链表的优点：
    1. 解决了线性表数据结构中执行插入、移除等操作性能低下的问题，时间复杂度大幅降低。
@@ -123,14 +123,14 @@ public:
 ### 链表相关术语
 
 - 链表：linked list
-- 链表头：head
-- 链表尾：tail
+- 链表头：head/front
+- 链表尾：tail/back/rear
 - 节点：node
 - 下一个节点：next node
 - 上一个节点：previous node
 - 第一个节点：first node
-- 最后一个节点：last node
 - 第二个节点：second node
+- 最后一个节点：last node
 - 倒数第二个节点：second last node
 - 负载：payload；节点中保存的数据（data）。
 
@@ -838,7 +838,7 @@ node* clear(node* head)
 <img style="height:300px;width:auto;" src="assets/noijunior-circular-linked-list.webp" />
 
 	
-- 环形链表的好处：
+- 环形链表的特点：
    1. 从任意一个节点出发，可遍历所有节点。
    1. 使用环形单向链表时，对头部、尾部的操作都要顾忌尾部或者倒数第二个节点的 `next` 指针，故而并不能提高在头部和尾部的操作性能。
    1. 使用环形双向链表时，仅通过指向头部的 `head` 指针即可快速定位头部或尾部（`head->prev`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
@@ -1099,7 +1099,7 @@ public:
 ### 使用示例
 
 ```cpp
-void test()
+void test_forward_loop_list()
 {
     struct context_print {
         ostream& os;
@@ -1513,7 +1513,7 @@ $ ./evaluate-prefix-expression-batch
 ```
 
 	
-6) 使用 STL `array` 实现一个环形缓冲区（尺寸为 `5`)，并编写程序展示其功能。该程序不停地从标准输入读取后缀表达式（每行一个），并在环形缓冲区中暂存这些后缀表达式，当读取 `END` 时，统一进行求值并输出结果。运行效果如下：
+6) 使用 STL `array` 或 `vector` 实现一个环形缓冲区（尺寸为 `5`），并编写程序展示其功能。该程序不停地从标准输入读取后缀表达式（每行一个），并在环形缓冲区中暂存这些后缀表达式，当读取 `END` 时，统一进行求值并输出结果。运行效果如下：
 
 ```console
 $ ./evaluate-postfix-expression-ring-buffer
@@ -1541,5 +1541,6 @@ $ ./evaluate-postfix-expression-ring-buffer
 	
 ### 参考链接
 
+- [本讲示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/)
 - [前缀、中缀、后缀表达式](https://www.cnblogs.com/chensongxian/p/7059802.html)
 
