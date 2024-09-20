@@ -5,7 +5,8 @@
 1. 双向链表
 1. 环形链表
 1. 选择哪种链表？
-1. 队列和栈
+1. 队列
+1. 栈
 1. 实用技巧
 
 		
@@ -1232,19 +1233,26 @@ void test()
 1. 调试通过后添加到作业仓库并提交、推送。
 
 		
-## 队列和栈
+## 栈
 
-`Queue and Stack`
+`Stack`
 
 	
-### 队列和栈的基本概念
+### 栈的基本概念和术语
+
+- 栈（Stack）：先进后出（last in first out/LIFO）
+- 压入：push
+- 弹出：pop
+
+		
+## 队列
+
+`Queue`
+
+	
+### 队列的基本概念和术语
 
 - 队列（Queue）：先进先出（first in first out/FIFO）
-- 栈（Stack）：先进后出（last in first out/LIFO）
-
-	
-### 队列相关术语
-
 - 入队：enqueue
 - 出队：dequeue
 
@@ -1287,8 +1295,8 @@ void test()
 - 可使用固定大小的数组、尺寸受限的矢量或者链表实现
 
 <div class="r-stack">
-    <img class="fragment" style="height:300px;width:auto;" src="assets/noijunior-circular-queue.jpg" />
-    <img class="fragment" style="height:300px;width:auto;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.jpg" />
+    <img class="fragment" style="height:500px;width:auto;" src="assets/noijunior-circular-queue.jpg" />
+    <img class="fragment" style="height:500px;width:auto;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.jpg" />
 </div>
 
 	
