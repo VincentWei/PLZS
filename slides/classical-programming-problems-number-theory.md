@@ -979,9 +979,9 @@ factor_v prime_factors(uintmax_t n)
 ### Pollard Rho 算法
 
 - 按一定的规律找出一些数，求这些数和 `n` 的最大公约数 GCD，如果 GCD 不是 1，则 GCD 就是 `n` 的一个非平凡因子（nontrival factor）。
-- 算法名称中 Rho 的来历：当 `$ n = 2206637 $`、`$ p = 317 $`、`$ x_0 = 2 $` 时，若对序列生成函数 `$ f(x) = x^2 + 1 $` 每个返回值 `$ x_i $` 求`$ \{x_i \bmod p\} $`，则将生成下图的序列。
+- 算法名称中 Rho 的来历：当 `$ n = 2206637 $`、`$ p = 317 $`、`$ x_0 = 2 $` 时，若对序列生成函数 `$ f(x) = x^2 + 1 $` 的每个返回值 `$ x_i $` 求`$ \{x_i \bmod p\} $`，则将生成下图的序列：
 
-<img style="height:300px;width:auto;" src="assets/pollard_rho.png" />
+<img style="height:400px;width:auto;" src="assets/pollard_rho.png" />
 
 	
 ```cpp
