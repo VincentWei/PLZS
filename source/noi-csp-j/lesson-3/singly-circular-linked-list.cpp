@@ -41,17 +41,22 @@ private:
         }
     };
 
-    node* _tail;
+    node* _head;
 
 public:
     // 构造函数
     forward_loop_list() {
-        _tail = nullptr;
+        _head = nullptr;
+    }
+
+    // 析构函数
+    ~forward_loop_list() {
+        clear();
     }
 
     // 测试是否为空链表
     bool empty() {
-        return (_tail == nullptr);
+        return (_head == nullptr);
     }
 
     // 获取大小（节点数量）
@@ -61,54 +66,64 @@ public:
         return ctxt.nr;
     }
 
-    // 遍历链表节点
+    // （只读）遍历链表节点
     template <typename context, typename visitor_func>
-    node* traverse(context* ctxt, visitor_func visitor)
+    const node* traverse(context* ctxt, visitor_func visitor) const
     {
-        if (_tail == nullptr)
-            return nullptr;
-
         // Start from the tail of the linked list
-        node* current = _tail;
+        node* current = _head;
 
         // Traverse the linked list until reaching the tail
-        do {
-            // Move to the next node
-            current = current->next;
-
+        while (current) {
             // call the visitor
             if (!visitor(ctxt, current->payload))
                 break;
 
-        } while (current != _tail);
+            // Move to next node
+            current = current->next;
+
+            // Test if reached the tail
+            if (current == _head)
+                break;
+        }
 
         return current;
     }
 
     // 访问头部负载
     T& front() {
-        if (_tail == nullptr)
+        if (empty())
             throw std::out_of_range(__func__);
-        return _tail->next->payload;
+        return _head->payload;
     }
 
     const T& front() const {
-        if (_tail == nullptr)
+        if (empty())
             throw std::out_of_range(__func__);
-        return _tail->next->payload;
+        return _head->payload;
     }
 
     // 访问尾部负载
     T& back() {
-        if (_tail == nullptr)
+        if (empty())
             throw std::out_of_range(__func__);
-        return _tail->payload;
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+        return tail->payload;
     }
 
     const T& back() const {
-        if (_tail == nullptr)
+        if (empty())
             throw std::out_of_range(__func__);
-        return _tail->payload;
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+        return tail->payload;
     }
 
     // 压入头部
@@ -117,33 +132,53 @@ public:
         // Create a new node with the given value
         node* newnode = new node(value);
 
-        if (_tail == nullptr) {
-            _tail = newnode;
-            newnode->next = _tail;
+        // Check if the list is empty before pushing
+        if (_head == nullptr) {
+            _head = newnode;
+            _head->next = _head;
             return;
         }
 
-        // Set the next pointer of the new node to the current head
-        node* head = _tail->next;
-        newnode->next = head;
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+
+        // Set the next of the tail new node
+        tail->next = newnode;
+        // Set the next of the new node to the current head
+        newnode->next = _head;
+        // Reset head
+        _head = newnode;
     }
 
     // 弹出头部
     void pop_front()
     {
-        if (_tail == nullptr)
-            return;
+        if (empty())
+            return;             // Return silently
+
+        // Save original head temporarily
+        node *org_head = _head;
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+
+        // Set the next of the tail new head
+        tail->next = _head->next;
 
         // Move the head pointer to the next node
-        node* head = _tail->next;
-        node* head_next = head->next;
+        _head = _head->next;
 
-        delete head;
+        // Delete the original head
+        delete org_head;
 
-        if (head == _tail)
-            _tail = nullptr;
-        else
-            _tail->next = head_next;
+        // Check if there was only one node before popping
+        if (_head == org_head) {
+            _head = nullptr;
+        }
     }
 
     // 压入尾部
@@ -153,59 +188,71 @@ public:
         node* newnode = new node(value);
 
         // If the list is empty, make the new node the head/tail
-        if (_tail == nullptr) {
-            _tail = newnode;
+        if (_head == nullptr) {
+            _head = newnode;
             newnode->next = newnode;
             return;
         }
 
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+
         // Link the new node to the current tail
-        newnode->next = _tail->next->next;
-        _tail->next = newnode;
+        newnode->next = tail->next;
+        tail->next = newnode;
     }
 
-    // Remove the last node of the linked list
+    // 弹出尾部
     void pop_back()
     {
-        if (_tail == nullptr)
+        if (empty())
             return;
 
-        node* head = _tail->next;
         // If there is only one node in the list
-        if (_tail == head) {
-            delete _tail;
-            _tail = nullptr;
+        if (_head->next == _head) {
+            delete _head;
+            _head = nullptr;
             return;
         }
 
-        // Find the second last node
-        node* second_last = _tail->next;
-        while (second_last->next->next != _tail)
+        // Find the second last
+        node* second_last = _head;
+        while (second_last->next->next != _head)
             second_last = second_last->next;
 
-        // Delete tail
-        delete _tail;
+        // Remove tail from list
+        node *tail = second_last->next;
+        second_last->next = _head;
 
-        // Reset pointer to tail and change next of tail to head
-        _tail = second_last;
-        _tail->next = head;
+        // Delete tail
+        delete tail;
     }
 
+    // 清空链表
     void clear()
     {
-        if (_tail == nullptr)
-            return;
+        // Start from the head of the linked list
+        node* current = _head;
 
-        node* current = _tail->next;
-        while (current != _tail) {
-            // Move to the next node
+        // Traverse the linked list until reaching the tail
+        while (current) {
+            // Save next node temporarily.
             node* next = current->next;
+
+            // Delete current node
             delete current;
+
+            // Check if reached the tail
+            if (next == _head)
+                break;
+
+            // Move to next
             current = next;
         }
 
-        delete _tail;
-        _tail = nullptr;
+        _head = nullptr;
     }
 };
 
@@ -248,7 +295,91 @@ void test()
     assert(list.back() == 1);
 
     list.clear();
-    assert(list.empty() == true);
+    assert(list.empty());
+    cout << "clear() passed\n";
+
+    list.push_front(0);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 1);
+    cout << "#1 push_front() passed\n";
+
+    list.push_front(1);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 2);
+    cout << "#2 push_front() passed\n";
+
+    list.push_front(2);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 3);
+    cout << "#3 push_front() passed\n";
+
+    list.push_front(3);
+    assert(list.size() == 4);
+    cout << "#4 push_front() passed\n";
+
+    list.push_back(-1);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 5);
+    cout << "#1 push_back() passed\n";
+
+    list.push_back(-2);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 6);
+    cout << "#2 push_back() passed\n";
+
+    list.push_back(-3);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 7);
+    cout << "#3 push_back() passed\n";
+
+    assert(list.front() == 3);
+    assert(list.back() == -3);
+    cout << "push_front() and push_back() passed\n";
+
+    list.pop_front();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 6);
+    assert(list.front() == 2);
+    assert(list.back() == -3);
+    cout << "#1 pop_front() passed\n";
+
+    list.pop_front();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 5);
+    assert(list.front() == 1);
+    assert(list.back() == -3);
+    cout << "#2 pop_front() passed\n";
+
+    list.pop_front();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 4);
+    assert(list.front() == 0);
+    assert(list.back() == -3);
+    cout << "#3 pop_front() passed\n";
+
+    list.pop_back();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 3);
+    assert(list.front() == 0);
+    assert(list.back() == -2);
+    cout << "#1 pop_back() passed\n";
+
+    list.pop_back();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 2);
+    assert(list.front() == 0);
+    assert(list.back() == -1);
+    cout << "#2 pop_back() passed\n";
+
+    list.pop_back();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 1);
+    assert(list.front() == 0);
+    assert(list.back() == 0);
+    cout << "#3 pop_back() passed\n";
+
+    list.clear();
+    assert(list.empty());
 }
 
 int main()

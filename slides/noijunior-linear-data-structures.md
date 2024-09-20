@@ -818,6 +818,7 @@ node* clear(node* head)
 （十分钟内完成）
 
 1. 基于 [doubly-linked-list.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/doubly-linked-list.cpp) 文件，补充实现针对双向链表的 `splice()` 函数，并编写展示该功能的完整程序。
+1. 调试通过后添加到作业仓库并提交、推送。
 
 		
 ## 环形链表
@@ -827,7 +828,7 @@ node* clear(node* head)
 	
 ### 定义
 
-- 不论是单向链表还是双向链表，将链表的首尾节点链接起来，可构成环形链表（circular linked list 或 loop list）：
+- 不论是单向链表还是双向链表，将链表的首尾节点链接起来，可构成环形（或循环）链表（circular linked list 或 loop list）：
    1. 将链表最后一个节点的 `next` 字段指向第一个节点；将链表第一个节点的 `prev` 字段指向最后一个节点。
    1. 通过 `next` 指针，链表的所有节点构成一个前向环；而通过 `prev` 指针，链表的所有节点构成一个后向环。
 
@@ -836,65 +837,397 @@ node* clear(node* head)
 	
 - 环形链表的好处：
    1. 从任意一个节点出发，可遍历所有节点。
-   1. 使用环形单向链表时，仅保存指向尾部的 `tail` 指针即可快速定位尾部或头部（`tail->next`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
+   1. 使用环形单向链表时，对头部、尾部的操作都要顾忌尾部或者倒数第一个节点的 `next` 指针，故而并不能提高在头部和尾部的操作性能。
    1. 使用环形双向链表时，仅通过指向头部的 `head` 指针即可快速定位头部或尾部（`head->prev`），从而使得 `push_back()/pop_back()` 方法的时间复杂度降为 `$ O(1) $`。
 
 <img style="height:300px;width:auto;" src="assets/noijunior-doubly-circular-linked-list.webp" />
 
 	
-### 环形单向链表的节点类模板
+### 环形链表的实现：以单向环形链表为例
 
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-circula-linked-list.cpp)
-- 基本定义：
+- 类模板的定义：
 
 ```cpp
 template <class T>
-struct node {
-    T payload;      // 节点负载
-    node* next;     // 指向下一个节点的指针
+class forward_loop_list {
+private:
+    struct context_sizing {
+        size_t nr;
+    };
 
-    // 节点的构造函数。
-    node(const T& value) {
-        this->payload = value;
-        this->next = this;
+    struct visitor_sizing {
+        bool operator() (context_sizing* ctxt, const T& /* value */) {
+            ctxt->nr++;
+            return true;
+        }
+
+        size_t nr;
+    };
+
+    struct node {
+        T payload;      // 节点负载
+        node* next;     // 指向下一个节点的指针
+
+        // 节点的构造函数。
+        node(const T& value) {
+            this->payload = value;
+            this->next = nullptr;
+        }
+    };
+
+    node* _head;
+
+public:
+    // 构造函数
+    forward_loop_list() {
+        _head = nullptr;
     }
 
-    static bool empty(const node *) const {
-        return (node->next == node);
+    // 析构函数
+    ~forward_loop_list() {
+        clear();
     }
 
-    static size_t size() const {
-        size_t sz = 0;
-        while (node->next != node)
-            sz++;
-        return sz;
+    // 测试是否为空链表
+    bool empty() {
+        return (_head == nullptr);
     }
+
+    // 获取大小（节点数量）
+    size_t size() {
+        context_sizing ctxt = { 0 };
+        traverse(&ctxt, visitor_sizing{});
+        return ctxt.nr;
+    }
+
+    // （只读）遍历链表节点
+    template <typename context, typename visitor_func>
+    const node* traverse(context* ctxt, visitor_func visitor) const
+    {
+        // Start from the tail of the linked list
+        node* current = _head;
+
+        // Traverse the linked list until reaching the tail
+        while (current) {
+            // call the visitor
+            if (!visitor(ctxt, current->payload))
+                break;
+
+            // Move to next node
+            current = current->next;
+
+            // Test if reached the tail
+            if (current == _head)
+                break;
+        }
+
+        return current;
+    }
+
+    // 访问头部负载
+    T& front() {
+        if (empty())
+            throw std::out_of_range(__func__);
+        return _head->payload;
+    }
+
+    const T& front() const {
+        if (empty())
+            throw std::out_of_range(__func__);
+        return _head->payload;
+    }
+
+    // 访问尾部负载
+    T& back() {
+        if (empty())
+            throw std::out_of_range(__func__);
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+        return tail->payload;
+    }
+
+    const T& back() const {
+        if (empty())
+            throw std::out_of_range(__func__);
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+        return tail->payload;
+    }
+
+    // 压入头部
+    void push_front(const T& value)
+    {
+        // Create a new node with the given value
+        node* newnode = new node(value);
+
+        // Check if the list is empty before pushing
+        if (_head == nullptr) {
+            _head = newnode;
+            _head->next = _head;
+            return;
+        }
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+
+        // Set the next of the tail new node
+        tail->next = newnode;
+        // Set the next of the new node to the current head
+        newnode->next = _head;
+        // Reset head
+        _head = newnode;
+    }
+
+    // 弹出头部
+    void pop_front()
+    {
+        if (empty())
+            return;             // Return silently
+
+        // Save original head temporarily
+        node *org_head = _head;
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+
+        // Set the next of the tail new head
+        tail->next = _head->next;
+
+        // Move the head pointer to the next node
+        _head = _head->next;
+
+        // Delete the original head
+        delete org_head;
+
+        // Check if there was only one node before popping
+        if (_head == org_head) {
+            _head = nullptr;
+        }
+    }
+
+    // 压入尾部
+    void push_back(const T& value)
+    {
+        // Create a new node with the given value
+        node* newnode = new node(value);
+
+        // If the list is empty, make the new node the head/tail
+        if (_head == nullptr) {
+            _head = newnode;
+            newnode->next = newnode;
+            return;
+        }
+
+        // Find the tail
+        node* tail = _head;
+        while (tail->next != _head)
+            tail = tail->next;
+
+        // Link the new node to the current tail
+        newnode->next = tail->next;
+        tail->next = newnode;
+    }
+
+    // 弹出尾部
+    void pop_back()
+    {
+        if (empty())
+            return;
+
+        // If there is only one node in the list
+        if (_head->next == _head) {
+            delete _head;
+            _head = nullptr;
+            return;
+        }
+
+        // Find the second last
+        node* second_last = _head;
+        while (second_last->next->next != _head)
+            second_last = second_last->next;
+
+        // Remove tail from list
+        node *tail = second_last->next;
+        second_last->next = _head;
+
+        // Delete tail
+        delete tail;
+    }
+
+    // 清空链表
+    void clear()
+    {
+        // Start from the head of the linked list
+        node* current = _head;
+
+        // Traverse the linked list until reaching the tail
+        while (current) {
+            // Save next node temporarily.
+            node* next = current->next;
+
+            // Delete current node
+            delete current;
+
+            // Check if reached the tail
+            if (next == _head)
+                break;
+
+            // Move to next
+            current = next;
+        }
+
+        _head = nullptr;
+    }
+};
 ```
 
 	
-### 环形双向链表的节点类模板
-
-- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/doubly-circula-linked-list.cpp)
-- 基本定义：
+### 使用示例
 
 ```cpp
-template <class T>
-struct node {
-    T payload;      // 节点负载
-    node* next;     // 指向下一个节点的指针
-    node* prev;     // 指向上一个节点的指针
+void test()
+{
+    struct context_print {
+        ostream& os;
+    };
 
-    // 节点的构造函数。
-    node(const T& value) {
-        this->payload = value;
-        this->next = this;
-        this->prev = this;
-    }
+    struct visitor_print {
+        bool operator() (context_print* ctxt, const double& value) {
+            ctxt->os << value << endl;
+            return true;
+        }
 
-    static bool empty(const node *) {
-        return (node->next == node);
-    }
+        size_t nr;
+    };
+
+    forward_loop_list<double> list;
+
+    assert(list.empty() == true);
+
+    list.push_front(0);
+
+    context_print ctxt = { cout };
+    list.traverse(&ctxt, visitor_print{});
+
+    assert(list.empty() == false);
+    assert(list.size() == 1);
+    assert(list.front() == 0);
+    assert(list.back() == 0);
+
+    list.push_back(1);
+    list.traverse(&ctxt, visitor_print{});
+
+    assert(list.size() == 2);
+    assert(list.front() == 0);
+    assert(list.back() == 1);
+
+    list.clear();
+    assert(list.empty());
+    cout << "clear() passed\n";
+
+    list.push_front(0);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 1);
+    cout << "#1 push_front() passed\n";
+
+    list.push_front(1);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 2);
+    cout << "#2 push_front() passed\n";
+
+    list.push_front(2);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 3);
+    cout << "#3 push_front() passed\n";
+
+    list.push_front(3);
+    assert(list.size() == 4);
+    cout << "#4 push_front() passed\n";
+
+    list.push_back(-1);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 5);
+    cout << "#1 push_back() passed\n";
+
+    list.push_back(-2);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 6);
+    cout << "#2 push_back() passed\n";
+
+    list.push_back(-3);
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 7);
+    cout << "#3 push_back() passed\n";
+
+    assert(list.front() == 3);
+    assert(list.back() == -3);
+    cout << "push_front() and push_back() passed\n";
+
+    list.pop_front();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 6);
+    assert(list.front() == 2);
+    assert(list.back() == -3);
+    cout << "#1 pop_front() passed\n";
+
+    list.pop_front();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 5);
+    assert(list.front() == 1);
+    assert(list.back() == -3);
+    cout << "#2 pop_front() passed\n";
+
+    list.pop_front();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 4);
+    assert(list.front() == 0);
+    assert(list.back() == -3);
+    cout << "#3 pop_front() passed\n";
+
+    list.pop_back();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 3);
+    assert(list.front() == 0);
+    assert(list.back() == -2);
+    cout << "#1 pop_back() passed\n";
+
+    list.pop_back();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 2);
+    assert(list.front() == 0);
+    assert(list.back() == -1);
+    cout << "#2 pop_back() passed\n";
+
+    list.pop_back();
+    list.traverse(&ctxt, visitor_print{});
+    assert(list.size() == 1);
+    assert(list.front() == 0);
+    assert(list.back() == 0);
+    cout << "#3 pop_back() passed\n";
+
+    list.clear();
+    assert(list.empty());
+}
 ```
+
+	
+### 课堂练习
+
+（十分钟内完成）
+
+1. 基于 [singly-circular-linked-list.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-3/singly-circular-linked-list.cpp) 文件，在 `main()` 函数中补充实现一个完整的程序功能，该程序从标准输入读取浮点数构造一个单向循环链表，直到读取到 `END` 为止，并利用 `traverse()` 方法输出其内容。
+1. 调试通过后添加到作业仓库并提交、推送。
 
 		
 ## 队列和栈
@@ -1003,7 +1336,7 @@ struct node {
 1) 针对单向链表实现 `unique()` 方法，该函数可移除单向链表中所有重复的值，然后编写用来展示该功能的程序：用户每行输入一个浮点数，直到输入 `END` 为止，最后给出经 `unique()` 方法处理后的链表内容。运行效果如下：
 
 ```console
-$ unique-values
+$ ./unique-values
 <100>
 <101>
 <100>
@@ -1012,10 +1345,10 @@ $ unique-values
 ```
 
 	
-2) 参照环形单向链表实现环形双向链表，并针对双向链表实现 `sort()` 方法，然后编写用来展示该功能的程序：用户每行输入一个浮点数，直到输入 `END` 为止，最后给出经 `sort()` 方法处理后的链表内容。运行效果如下：
+2) 参照单向环形链表实现双向环形链表，并针对双向链表实现 `sort()` 方法，然后编写用来展示该功能的程序：用户每行输入一个浮点数，直到输入 `END` 为止，最后给出经 `sort()` 方法处理后的链表内容。运行效果如下：
 
 ```console
-$ unique-values
+$ ./sort-loop-list
 <100>
 <101>
 <99>
