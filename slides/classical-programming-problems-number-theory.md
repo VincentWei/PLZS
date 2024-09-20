@@ -968,6 +968,8 @@ factor_v prime_factors(uintmax_t n)
 	
 ### 费马分解法
 
+- 原理：从 `$ a = \sqrt{n} $` 开始，寻找能够满足等式 `$ a^2 - n = b^2 $` 的完全平方数 `$ b^2 $`。
+
 ```cpp []
 uint64_t fermat_method(uint64_t n)
 {
