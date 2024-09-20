@@ -1283,13 +1283,31 @@ void test()
 	
 ### 环形队列
 
-- 可在两端入队或出队
-- 可使用数组、矢量或者链表实现
+- 环形队列主要用于内存受限的情况；在队列大小固定的情况下，如果队列已满，则新的入队操作会覆盖最老的元素。
+- 可使用固定大小的数组、尺寸受限的矢量或者链表实现
 
 <div class="r-stack">
     <img class="fragment" style="height:300px;width:auto;" src="assets/noijunior-circular-queue.png" />
     <img class="fragment" style="height:300px;width:auto;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.png" />
 </div>
+
+	
+### 使用队列实现环形缓冲区
+
+- 初始化一个大小为 `n` 的数组 `queue`，其中 `n` 是队列可以容纳的最大元素数。
+- 将 `front` 和 `back` 两个变量初始化为 `-1`。
+- 入队：要将元素 `x` 加入队列，执行以下操作：
+  1. `back` 增加 `1`。
+  1. 如果 `back` 等于 `n`，则将后部设置为 `0`。
+  1. 如果 `front` 为 `-1`，则将 `front` 设置为 `0`。
+  1. 将 `queue[back]` 设置为 `x`。
+- 出队：要从队列中取出元素，执行以下操作：
+   1. 通过检查 `front` 是否为 `-1` 来检查队列是否为空。
+   1. 如果是，则返回一条错误消息，指示队列为空。
+   1. 将 `x` 设置为 `queue[front]`。
+   1. 如果 `front` 等于 `back`，将 `front` 和 `back` 设置为 `-1`。
+   1. 否则，将 `front` 增加 `1`，如果 `front` 等于 `n`，则将 `front` 设置为 `0`。
+   1. 返回 `x`。
 
 		
 ## 实用技巧
@@ -1406,7 +1424,7 @@ $ ./sort-loop-list
 3) 使用`std::vector` 类模板解析前缀表达式（仅支持加减乘除四种运算）并求值。运行效果如下：
 
 ```console
-$ evaluate-postfix-expression-vector
+$ ./evaluate-prefix-expression-vector
 <- / + 6 * 2 3 4 5>
 -2
 ```
@@ -1415,7 +1433,7 @@ $ evaluate-postfix-expression-vector
 4) 使用 STL 的 `std::stack` 类模板解析后缀表达式（仅支持加减乘除四种运算）并求值。运行效果如下：
 
 ```console
-$ evaluate-postfix-expression-stack
+$ ./evaluate-postfix-expression-stack
 <500 100 200 + ->
 200
 ```
@@ -1424,7 +1442,7 @@ $ evaluate-postfix-expression-stack
 5) 使用 STL 的 `std::queue` 类模板使用队列实现一个批处理程序。该程序不停地从标准输入读取前缀表达式（每行一个），并在队列中暂存这些前缀表达式，当读取到四个表达式时，统一进行求值并输出结果，之后继续从标准输入读取新的前缀表达式，直到读入 `END` 为止。运行效果如下：
 
 ```console
-$ evaluate-postfix-expression-batch
+$ ./evaluate-prefix-expression-batch
 <+ 500 100>
 <- 500 100>
 <* 500 100>
@@ -1439,7 +1457,26 @@ $ evaluate-postfix-expression-batch
 ```
 
 	
-6) 经典比赛题（思考）
+6) 使用 STL `array` 实现一个环形缓冲区（尺寸为 `5`)，并编写程序展示其功能。该程序不停地从标准输入读取后缀表达式（每行一个），并在环形缓冲区中暂存这些后缀表达式，当读取 `END` 时，统一进行求值并输出结果。运行效果如下：
+
+```console
+$ ./evaluate-postfix-expression-ring-buffer
+<+ 500 100>
+<- 500 100>
+<* 500 100>
+</ 500 100>
+<+ 5 1>
+<* 5 1>
+<END>
+400
+50000
+5
+6
+5
+```
+
+	
+7) 经典比赛题（思考）
    - [Luogu B3968/成绩排序](https://www.luogu.com.cn/problem/B3968)
    - [Luogu P1628/合并序列](https://www.luogu.com.cn/problem/P1628)
    - [Luogu P1716/双调序列](https://www.luogu.com.cn/problem/P1716)
