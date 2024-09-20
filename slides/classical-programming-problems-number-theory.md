@@ -934,18 +934,8 @@ $ ./dn-on
 ## 整数的因子分解
 
 - 整数的因子分解（factorization）在计算机技术中有至关重要的意义。
-- 挑战：性能和内置整数类型的有限范围。
-- 实现方法：朴素算法及其优化版本、Pollard Rho 算法及其优化版本。
-- 给定任意大于 1 的正整数，给出其所有质因子（重复的质因子只保留一个）。运行效果如下：
-
-```console
-$ ./prime-factors
-<12>
-2, 3.
-$ ./prime-factors
-<11>
-11.
-```
+- 挑战：性能。
+- 实现方法：朴素算法、费马分解法、Pollard Rho 算法及其优化版本。
 
 	
 ### 朴素算法
@@ -972,6 +962,23 @@ factor_v prime_factors(uintmax_t n)
     }
 
     return factors;
+}
+```
+
+	
+### 费马分解法
+
+```cpp []
+int fermat(int n) {
+    int a = ceil(sqrt(n));
+    int b2 = a*a - n;
+    int b = round(sqrt(b2));
+    while (b * b != b2) {
+        a = a + 1;
+        b2 = a*a - n;
+        b = round(sqrt(b2));
+    }
+    return a - b;
 }
 ```
 
