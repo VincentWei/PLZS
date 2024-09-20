@@ -1241,8 +1241,44 @@ void test()
 ### 栈的基本概念和术语
 
 - 栈（Stack）：先进后出（last in first out/LIFO）
-- 压入：push
-- 弹出：pop
+- 压入/弹出：push/pop
+- 栈顶/底：top/bottom
+
+<img style="height:400px;width:auto;" src="assets/noijunior-representation-of-stack.png" />
+
+	
+### 栈的分类和基本操作
+
+- 固定尺寸的栈，可使用数组实现。
+- 动态尺寸的栈，可使用矢量或者单向链表实现。
+- 基本操作
+   1. `push()`：压入元素。
+   1. `pop()`：弹出元素。
+   1. `empty()`：判断是否为空。
+   1. `full()`：判断是否已满（用于固定尺寸的栈）。
+   1. `top()`：访问栈顶元素。
+
+	
+### 栈的最基本应用
+
+- 表达式求值
+- 函数调用
+
+	
+### 三种算术表达式
+
+- 前缀表达式：运算符位于操作数之前（波兰式）
+   - 简单形式：`+ 3 5`
+   - 复杂形式：`+ 3 * 5 8 `
+- 中缀表达式：运算符位于操作数之间
+   - 简单形式：`3 + 5`
+   - 复杂形式：`3 + 5 * 8`
+- 后缀表达式：运算符位于操作数之后（波兰式）
+   - 简单形式：`3 5 +`
+   - 复杂形式：`5 8 * 3 +`
+- 以上复杂形式的表达式求值过程，本质上相当于函数调用：`add(3, mul(5, 8))`。
+- 前缀表达式和后缀表达式的解析和求值，只需要栈即可完成。
+- 中缀表达式可转换为前缀表达式或后缀表达式。
 
 		
 ## 队列
@@ -1391,6 +1427,16 @@ void test()
    - [更多接口](https://cplusplus.com/reference/queue/)
 
 	
+### C++ STL 提供的双头队列类模板
+
+- `std::deque` 类模板；
+   - `#include <deque>`
+   - `std::deque` 提供了几乎和 `std::vector` 一样的功能和接口。
+   - 和 `std::vector` 不同的是，`std::deque` 通常使用链表实现，从而可在队列的末尾和头部均能高效执行插入和删除操作。
+   - `std::deque` 不保证将其所有元素存储在连续的内存空间，故而不能提供基于索引值的高效随机访问能力。
+   - [更多接口](https://cplusplus.com/reference/deque/)
+
+	
 ### C++ STL 提供的栈类模板
 
 - `std::stack` 类模板；基于支持 LIFO 操作的容器实现。
@@ -1431,10 +1477,10 @@ $ ./sort-loop-list
 ```
 
 	
-3) 使用`std::vector` 类模板解析前缀表达式（仅支持加减乘除四种运算）并求值。运行效果如下：
+3) 使用`std::deque` 类模板解析前缀表达式（仅支持加减乘除四种运算）并求值。运行效果如下：
 
 ```console
-$ ./evaluate-prefix-expression-vector
+$ ./evaluate-prefix-expression-deque
 <- / + 6 * 2 3 4 5>
 -2
 ```
@@ -1487,12 +1533,13 @@ $ ./evaluate-postfix-expression-ring-buffer
 
 	
 7) 经典比赛题（思考）
-   - [Luogu B3968/成绩排序](https://www.luogu.com.cn/problem/B3968)
-   - [Luogu P1628/合并序列](https://www.luogu.com.cn/problem/P1628)
-   - [Luogu P1716/双调序列](https://www.luogu.com.cn/problem/P1716)
-   - [Luogu B3630/排队顺序](https://www.luogu.com.cn/problem/B3630)
+   - [Luogu P1160/团队队列](https://www.luogu.com.cn/problem/P1160)
+   - [Luogu P1886/滑动窗口/单调队列](https://www.luogu.com.cn/problem/P1886)
+   - [Luogu P1044/栈（NOIP2003 普及组）](https://www.luogu.com.cn/problem/P1044)
+   - [Luogu P1750/出栈序列](https://www.luogu.com.cn/problem/P1750)
 
 	
 ### 参考链接
 
-（无）
+- [前缀、中缀、后缀表达式](https://www.cnblogs.com/chensongxian/p/7059802.html)
+
