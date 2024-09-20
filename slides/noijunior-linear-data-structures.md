@@ -1294,12 +1294,12 @@ void test()
 - 环形队列主要用于内存受限的情况；在队列大小固定的情况下，如果队列已满，则新的入队操作会覆盖最老的元素。
 - 可使用固定大小的数组、尺寸受限的矢量或者链表实现
 
-<img style="height:300px;width:auto;" src="assets/noijunior-circular-queue.jpg" />
+<img style="height:400px;width:auto;" src="assets/noijunior-circular-queue.jpg" />
 
 	
 - 环形队列的入队和出队
 
-<img style="height:700px;width:auto;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.jpg" />
+<img style="height:auto;width:1024px;" src="assets/noijunior-enqueue-dequeue-of-circular-queue.jpg" />
 
 	
 ### 使用队列实现环形缓冲区
