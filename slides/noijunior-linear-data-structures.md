@@ -5,8 +5,8 @@
 1. 双向链表
 1. 环形链表
 1. 选择哪种链表？
-1. 队列
 1. 栈
+1. 队列
 1. 实用技巧
 
 		
@@ -1241,8 +1241,9 @@ void test_forward_loop_list()
 ### 栈的基本概念和术语
 
 - 栈（Stack）：先进后出（last in first out/LIFO）
-- 压入/弹出：push/pop
-- 栈顶/底：top/bottom
+- 压入（入栈）：push
+- 弹出（出栈）：pop
+- 栈顶/栈底：top/bottom
 
 <img style="height:400px;width:auto;" src="assets/noijunior-representation-of-stack.png" />
 
