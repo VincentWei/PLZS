@@ -146,7 +146,7 @@ True
 	
 ### 演示视频
 
-[3-1：Python 数据类型：数值](https://www.douyin.com/video/7418032085169884426)  <!-- .element: target="_blank" -->
+[3-1：Python 数据类型：数值](https://www.douyin.com/video/7418032085169884426)<!-- .element: target="_blank" -->
 
 1) 在 Python 中布尔值被视作等同于整数；算术表达式中使用布尔值时，`False` 等同于 0，`True` 等同于 1。
 2) 我们直接输入到代码中数值称为立即数（immediate value）；所有带有小数点的立即数被视作浮点数。
@@ -156,7 +156,7 @@ True
 6) 大部分算术运算符的结果数据类型取决于操作数（operand）的类型：操作数中有浮点数时，结果一定是浮点数；`/` 运算符的结果一定是浮点数。
 
 	
-[3-1：Python 数据类型：数值（续）](https://www.douyin.com/video/7418032883962563867){:target="_blank"}
+[3-1：Python 数据类型：数值（续）](https://www.douyin.com/video/7418032883962563867)<!-- .element: target="_blank" -->
 
 7) 针对数值的常用内置函数：
    - `int()`、`float()`、`bool()`：构造对应的数值类型；这些函数接受字符串作为参数，但必须可解析（parse）为对应的数值，否则会产生 `ValueError` 错误。
@@ -192,7 +192,7 @@ True
 	
 ### 演示视频
 
-[3-2：Python 数据类型：字符串](https://www.douyin.com/video/7418032883962563867){:target="_blank"}
+[3-2：Python 数据类型：字符串](https://www.douyin.com/video/7418032883962563867)<!-- .element: target="_blank" -->
 
 1. 定义字符串字面值时要考虑的两个问题：
    - 如果文本本身包含单引号（`'`）或者双引号（`"`）怎么办？
@@ -228,7 +228,7 @@ print(True)
 	
 ### 演示视频
 
-[3-3：Python 数据类型：列表和元组](https://www.douyin.com/video/7418034319005928742){:target="_blank"}
+[3-3：Python 数据类型：列表和元组](https://www.douyin.com/video/7418034319005928742)<!-- .element: target="_blank" -->
 
 1) Python 中的列表使用成对出现的中括号（square brackets，`[]`）定义，各个单元之间使用逗号（comma，`,`）分隔。
 2) Python 中的元组（`tuple`）本质上是就是不可变的列表，使用成对出现的小括号（parentheses，`()`）定义，各个单元之间使用逗号（comma，`,`）分隔。
@@ -237,7 +237,7 @@ print(True)
 5) 使用 `l += other` 可将 `other` 列表的内容追加到 `l` 列表之后。
 
 	
-[3-3：Python 数据类型：列表和元组（续）](https://www.douyin.com/video/7418034319005928742){:target="_blank"}
+[3-3：Python 数据类型：列表和元组（续）](https://www.douyin.com/video/7418034319005928742)<!-- .element: target="_blank" -->
 
 6) 列表中的数据项可以是任意数据类型，也就是列表中可以包含另一个列表；列表中的数据可以改变：`l[index] = value`。
 7) 元组中的单元不可改变，但若其中的某成员是一个列表，则这个列表中的数据项可以改变。
@@ -263,7 +263,7 @@ print(True)
 	
 ### 演示视频
 
-[3-4：Python 数据类型：字典](https://www.douyin.com/video/7418035913189592361){:target="_blank"}
+[3-4：Python 数据类型：字典](https://www.douyin.com/video/7418035913189592361)<!-- .element: target="_blank" -->
 
 1) Python 中的字典使用成对出现的大括号（braces，`{}`）定义，各个键值对之间使用逗号（comma，`,`）分隔，键和值之间使用冒号（colon，`:`）分隔。
 2) 使用 `dict()` 可基于键值对参数构造一个字典：`dict(one=1, two=2, three=3)`。
