@@ -62,7 +62,7 @@
 	
 ### 演示视频
 
-[0-1-1：有关 Ubuntu Linux 和虚拟机的背景知识](https://www.douyin.com/video/7355029937885138176)
+[0-1-1：有关 Ubuntu Linux 和虚拟机的背景知识](https://www.douyin.com/video/7355029937885138176)<!-- .element: target="_blank" -->
 
 - 常见桌面操作系统
    - 微软的 Windows
@@ -125,7 +125,7 @@
 	
 ### 演示视频
 
-[0-1-2：在 Windows 10/11 上安装 VirtualBox 和 Ubuntu Linux 22.04](https://www.douyin.com/video/7355032540748500239)
+[0-1-2：在 Windows 10/11 上安装 VirtualBox 和 Ubuntu Linux 22.04](https://www.douyin.com/video/7355032540748500239)<!-- .element: target="_blank" -->
 
 - 安装 VirtualBox。
 - 创建一个虚拟机，指定 CPU、内存和虚拟硬盘位置及大小。

@@ -13,7 +13,7 @@
 
 ### 演示视频
 
-[2-1：零基础普及班作业回顾](https://www.douyin.com/video/7418020235996974345)
+[2-1：作业回顾](https://www.douyin.com/video/7418020235996974345)<!-- .element: target="_blank" -->
 
 1. 使用 Vim 编写作业程序。
 1. 从课件（浏览器）中复制代码到 Vim 编辑器。
@@ -169,7 +169,7 @@ prompt_for_square()
 
 ### 演示视频
 
-[2-2：Python 的逻辑表达式和逻辑运算符](https://www.douyin.com/video/7418020805138828581)
+[2-2：Python 的逻辑表达式和逻辑运算符](https://www.douyin.com/video/7418020805138828581)<!-- .element: target="_blank" -->
 
 1. 计算机程序中的命题来自哪里？算术表达式的值、数值比较的结果、逻辑表达式、函数的返回值等等。
 1. Python 中用于比较数值的运算符（等于、不等于、大于、小于、大于等于、小于等于）。

@@ -14,7 +14,7 @@
 	
 ### 演示视频
 
-[0-2-1：初识 Ubuntu Linux 桌面环境](https://www.douyin.com/video/7355037996367744296)
+[0-2-1：初识 Ubuntu Linux 桌面环境](https://www.douyin.com/video/7355037996367744296)<!-- .element: target="_blank" -->
 
 1. 通过程序坞（Dock）启动应用。
 1. 启动浏览器（FireFox）；访问 PLZS 仓库以及在线课件；设置书签。
@@ -176,15 +176,15 @@ $ find . -name "*.md"
 	
 ### 演示视频
 
-1. [0-2-2-1：常用系统命令及工具（上）](https://www.douyin.com/video/7355039401547795764)
+1. [0-2-2-1：常用系统命令及工具（上）](https://www.douyin.com/video/7355039401547795764)<!-- .element: target="_blank" -->
    - 获取帮助
    - 环境变量
    - 常用命令
-1. [0-2-2-2：常用系统命令及工具（中）](https://www.douyin.com/video/7355102308025240872)
+1. [0-2-2-2：常用系统命令及工具（中）](https://www.douyin.com/video/7355102308025240872)<!-- .element: target="_blank" -->
    - 文件及文件系统工具
    - 网络管理工具
    - 压缩或归档工具
-1. [0-2-2-3：常用系统命令及工具（下）](https://www.douyin.com/video/7355105221888052520)
+1. [0-2-2-3：常用系统命令及工具（下）](https://www.douyin.com/video/7355105221888052520)<!-- .element: target="_blank" -->
    - 文本文件工具
    - 流编辑器
    - 系统管理工具
@@ -309,7 +309,7 @@ $ find . -name "*.md"
 	
 ### 演示视频
 
-[0-2-3：有趣的 Shell 命令行](https://www.douyin.com/video/7355355329766395187)
+[0-2-3：有趣的 Shell 命令行](https://www.douyin.com/video/7355355329766395187)<!-- .element: target="_blank" -->
 
 1. 重定向标准输出、标准错误的方法：
    - `[1]>FILE`：将标准输出重定向到文件 `FILE`。
@@ -518,7 +518,7 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 	
 ### 演示视频
 
-[0-2-4：用 Vim 编辑文本文件](https://www.douyin.com/video/7355331037934685490)
+[0-2-4：用 Vim 编辑文本文件](https://www.douyin.com/video/7355331037934685490)<!-- .element: target="_blank" -->
 
 1. `vi` 和 `vim` 的区别。
 1. 安装 `vim`。
@@ -687,7 +687,7 @@ $ sed -i 's/SHELL/Shell/g` `grep SHELL -l *.md`
 	
 ### 演示视频
 
-[0-2-5：使用 Gtypist 练习键盘打字](https://www.douyin.com/video/7369652386752662835)
+[0-2-5：使用 Gtypist 练习键盘打字](https://www.douyin.com/video/7369652386752662835)<!-- .element: target="_blank" -->
 
 1. 了解键盘打字的指法规范。
 1. 安装 `Gtypist`。
