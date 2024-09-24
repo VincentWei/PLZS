@@ -146,7 +146,7 @@ True
 	
 ### 演示视频
 
-[3-1：Python 数据类型：数值](https://www.douyin.com/video/7418032085169884426){:target="_blank"}
+[3-1：Python 数据类型：数值](https://www.douyin.com/video/7418032085169884426)  <!-- .element: target="_blank" -->
 
 1) 在 Python 中布尔值被视作等同于整数；算术表达式中使用布尔值时，`False` 等同于 0，`True` 等同于 1。
 2) 我们直接输入到代码中数值称为立即数（immediate value）；所有带有小数点的立即数被视作浮点数。
