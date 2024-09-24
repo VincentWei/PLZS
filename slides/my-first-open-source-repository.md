@@ -13,7 +13,7 @@
 	
 ### 演示视频
 
-<a targe="_blank" href="https://www.douyin.com/video/7355347061836942618">0-4-1：在 Gitee 上创建代码仓库</a>
+[0-4-1：在 Gitee 上创建代码仓库](https://www.douyin.com/video/7355347061836942618)
 
 1. 访问 Gitee/GitHub 网站并登录。
 1. 生成 SSH 密钥対，并将公钥登记到 Gitee/GitHub。
