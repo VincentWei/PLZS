@@ -62,14 +62,14 @@ $$`
 <img style="height:700px;width:auto;" src="assets/math-circle-and-squares.svg" />
 
 	
-### 用边数更多的多边形继续逼近
+### 用两倍边数的正多边形继续逼近
 
 <img style="height:700px;width:auto;" src="assets/math-archimedes-and-pi.svg" />
 
 	
 ### 阿基米德的结论
 
-- 阿基米德从正六边形开始，然后将边数倍增为 12、24、48、96，最终确定了：
+- 阿基米德从正六边形开始，然后将边数依次倍增为 12、24、48、96，最终确定了：
 
 `$$
 \large{
@@ -121,6 +121,10 @@ $$`
 
 	
 ### 让泰勒级数收敛得更快
+
+`$$
+    \frac{\pi}{4} = \arctan {\frac{1}{2}} + \arctan {\frac{1}{5}} + \arctan {\frac{1}{8}}
+$$`
 
 - 约翰・马钦（1706 年）
 
