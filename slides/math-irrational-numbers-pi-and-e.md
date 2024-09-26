@@ -190,8 +190,8 @@ $$`
 
 `$$
 \begin{align}
-    (\ln x)' & = \frac{1}{x} \\
-    (e^x)' & = e^x
+    { \left( \ln x \right) }' & = \frac{1}{x} \\
+    { \left( e^x \right) }' & = e^x
 \end{align}
 $$`
 
