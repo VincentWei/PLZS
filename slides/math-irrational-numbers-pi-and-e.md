@@ -16,6 +16,8 @@
   1. 在平面内，和给定点的距离等于定长的点构成的集合叫作圆。
   1. 在平面内，给定一条封闭曲线 C 和一个定点 O，若曲线 C 上的任意一点到 O 点的距离都相等，则曲线 C 就是圆。
 
+<img style="height:500px;width:auto;" src="assets/math-circle.svg" />
+
 	
 ### 圆周率
 
