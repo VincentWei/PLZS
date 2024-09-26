@@ -201,13 +201,13 @@ $$`
 `$ e^x $` 使用泰勒公式展开后的级数是收敛的：
 
 `$$
-   f(x) & =\sum^{\infty}_{k=0}\frac{f^{(k)}(a)}{k!}(x-a)^{k}
+   f(x) =\sum^{\infty}_{k=0}\frac{f^{(k)}(a)}{k!}(x-a)^{k}
 $$`
 
 取 `$ a = 0 $`，即可得到：
 
 `$$
-   e^x & = \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \frac{x^6}{6!} + \cdots
+   e^x = \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \frac{x^6}{6!} + \cdots
 $$`
 
 	
