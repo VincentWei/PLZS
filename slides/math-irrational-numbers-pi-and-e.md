@@ -35,14 +35,14 @@
 		
 ## 阿基米德估测圆周率的方法
 
-- 用内接正多边形逼近圆
+用内接正多边形逼近圆  
 
-<img style="height:500px;width:auto;" src="assets/math-circle.svg" />
+<img style="height:700px;width:auto;" src="assets/math-circle.svg" />
 
 	
 ### 用边数更多的多边形继续逼近
 
-<img style="height:500px;width:auto;" src="assets/math-archimedes-and-pi.svg" />
+<img style="height:700px;width:auto;" src="assets/math-archimedes-and-pi.svg" />
 
 		
 ## 计算圆周率的现代方法
