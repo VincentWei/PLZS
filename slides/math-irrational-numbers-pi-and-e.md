@@ -188,16 +188,14 @@ $$`
 1) 极限
 
 `$$
-e^x = \lim_{k \to \infty} \left( 1 + \frac{x}{k}\right)^k
+\begin{align}
+    e  & = \lim_{k \to \infty} \left( 1 + \frac{1}{k}\right)^k = 2.718281828459045\cdots \\
+    e^x & = \lim_{k \to \infty} \left( 1 + \frac{x}{k}\right)^k
+\end{align}
 $$`
 
-2) 无穷级数
-
-`$$
-e^x = \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \frac{x^6}{6!} + \cdots
-$$`
-
-3) 导函数
+	
+2) 两个有关自然常数的函数的导函数
 
 `$$
 \begin{align}
@@ -207,11 +205,10 @@ $$`
 $$`
 
 	
-### 推导
-
-1) 泰勒级数
+3) 泰勒级数
 
 `$$
+   e^x = \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \frac{x^6}{6!} + \cdots
 $$`
 
 		
