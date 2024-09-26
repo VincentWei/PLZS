@@ -89,7 +89,7 @@ $$`
 \end{align}
 $$`
 
-- 弗朗索瓦 爱维特（1593 年）
+- 弗朗索瓦・爱维特（1593 年）
 
 `$$
   \frac{2}{\pi} = \frac{\sqrt{2}}{2} \times \frac{\sqrt{2 + \sqrt{2}}}{2} \times \frac{\sqrt{2 + \sqrt{2 + \sqrt {2}}}}{2} \times \cdots
@@ -97,6 +97,28 @@ $$`
 
 		
 ## 计算圆周率的现代方法
+
+### 约翰・沃利斯（1655 年）
+
+`$$
+  \frac{\pi}{2} = \frac{2}{1} \times \frac{2}{3} \times \frac{4}{3} \times \frac{4}{5} \times \frac{6}{5} \times \frac{6}{7} \times \frac{8}{7} \times \frac{8}{9} \times \cdots
+$$`
+
+	
+### 泰勒级数
+
+- 反正切函数的泰勒级数展开：
+
+`$$
+    \arctan {x} = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \frac{x^9}{9} - \cdots
+$$`
+
+- `$ x = 1 $` 时，有：
+
+`$$
+    \frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \cdots
+$$`
+
 
 		
 ## 自然常数为何『自然』？
