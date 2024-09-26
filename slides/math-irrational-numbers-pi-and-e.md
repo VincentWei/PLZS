@@ -1,6 +1,6 @@
 # 圆周率、自然常数及其计算
 
-- 圆和圆周率的定义
+- 圆和圆周率
 - 阿基米德估测圆周率的方法
 - 计算圆周率的现代方法
 - 自然常数为何『自然』？
@@ -32,6 +32,28 @@
 
 <img style="height:700px;width:auto;" src="assets/math-circle-area-and-circumference.svg" />
 
+	
+### 巴塞尔问题
+
+- 欧拉给出的答案（1735 年）：
+
+`$$
+\large{
+    \frac{\pi^2}{6} = \frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \frac{1}{4^2} + \frac{1}{5^2} + \cdots
+}
+$$`
+
+- 试试求下面的级数？
+
+`$$
+\begin{array}{c}
+    \frac{1}{1^4} + \frac{1}{2^4} + \frac{1}{3^4} + \frac{1}{4^4} + \frac{1}{5^4} + \cdots  \\
+    \frac{1}{1^6} + \frac{1}{2^6} + \frac{1}{3^6} + \frac{1}{4^6} + \frac{1}{5^6} + \cdots  \\
+    \frac{1}{1^2} + \frac{1}{3^2} + \frac{1}{5^2} + \frac{1}{7^2} + \frac{1}{9^2} + \cdots  \\
+    \frac{1}{2^2} + \frac{1}{4^2} + \frac{1}{6^2} + \frac{1}{8^2} + \frac{1}{10^2} + \cdots
+\end{array}
+$$`
+
 		
 ## 阿基米德估测圆周率的方法
 
@@ -56,26 +78,17 @@
 $$`
 
 	
-### 巴塞尔问题
+### 阿基米德方法的现代描述
 
-- 欧拉给出的答案（1735 年）：
-
-`$$
-\large{
-    \frac{\pi^2}{6} = \frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \frac{1}{4^2} + \frac{1}{5^2} + \cdots
-}
-$$`
-
-- 试试求下面的级数？
+用正 4096 变形估测圆周率：
 
 `$$
-\begin{array}{c}
-    \frac{1}{1^4} + \frac{1}{2^4} + \frac{1}{3^4} + \frac{1}{4^4} + \frac{1}{5^4} + \cdots  \\
-    \frac{1}{1^6} + \frac{1}{2^6} + \frac{1}{3^6} + \frac{1}{4^6} + \frac{1}{5^6} + \cdots  \\
-    \frac{1}{1^2} + \frac{1}{3^2} + \frac{1}{5^2} + \frac{1}{7^2} + \frac{1}{9^2} + \cdots  \\
-    \frac{1}{2^2} + \frac{1}{4^2} + \frac{1}{6^2} + \frac{1}{8^2} + \frac{1}{10^2} + \cdots
-\end{array}
+\begin{align}
+\pi & \approx 2048 \sqrt {2 - \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt{2} } }}}}}}}}}
+    & = 3.141\ 594 \ 618\cdots
+\end
 $$`
+
 
 		
 ## 计算圆周率的现代方法
