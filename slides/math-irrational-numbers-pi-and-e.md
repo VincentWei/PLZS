@@ -80,15 +80,20 @@ $$`
 	
 ### 阿基米德方法的现代描述
 
-用正 4096 变形估测圆周率：
+- 用正 4096 边形估测圆周率：
 
 `$$
 \begin{align}
-\pi & \approx 2048 \sqrt {2 - \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt{2} } }}}}}}}}}
+\pi & \approx 2048 \sqrt {2 - \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt {2 + \sqrt{2} } }}}}}}}}} \\
     & = 3.141\ 594 \ 618\cdots
-\end
+\end{align}
 $$`
 
+- 弗朗索瓦 爱维特（1593 年）
+
+`$$
+  \frac{2}{\pi} = \frac{\sqrt{2}}{2} \times \frac{\sqrt{2 + \sqrt{2}}}{2} \times \frac{\sqrt{2 + \sqrt{2 + \sqrt {2}}}}{2} \times \cdots
+$$`
 
 		
 ## 计算圆周率的现代方法
