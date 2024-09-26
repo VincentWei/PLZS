@@ -37,12 +37,17 @@
 
 用内接正多边形逼近圆  
 
-<img style="height:700px;width:auto;" src="assets/math-circle.svg" />
+<img style="height:700px;width:auto;" src="assets/math-circle-squares.svg" />
 
 	
 ### 用边数更多的多边形继续逼近
 
 <img style="height:700px;width:auto;" src="assets/math-archimedes-and-pi.svg" />
+
+	
+### 用内接正方形和外切正方形的中间值估计圆周率
+
+<img style="height:700px;width:auto;" src="assets/math-circle-squares.svg" />
 
 		
 ## 计算圆周率的现代方法
