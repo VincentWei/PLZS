@@ -191,6 +191,14 @@ $$`
 
 1) 极限。考虑 `$ u_n = \left( 1 + \frac{1}{n}\right)^n $` 的牛顿二项式展开。
 
+`$$
+\begin{align}
+（x+y)^n & = \binom{n}{0}x^n y^0 + \binom{n}{1}x^{n-1} y^1 + \binom{n}{2}x^{n-2} y^2 + \cdots + \binom{n}{n-1}x^1 y^{n-1} + \binom{n}{n}x^0 y^n \\
+         & = \sum_{k=0}^{n} \binom{n}{k}x^{n-k}y^k \\
+         & = \sum_{k=0}^{n} \binom{n}{k}x^{k}y^{n-k}
+ \end{align}
+$$`
+
 	
 2) 两个有关自然常数的函数的导函数
 
