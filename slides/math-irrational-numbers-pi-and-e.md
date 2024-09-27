@@ -311,14 +311,16 @@ $$`
 	
 ### 代数数和超越数
 
-- 代数数（algebraic number）和超越数（transcendental number）的定义。
-- 所有整系数多项式方程的根构成了代数数集合 `$ \mathbb{A} $`（复数亦可是代数数）：
+- 代数数（algebraic number）：所有整系数多项式方程的根构成了代数数集合 `$ \mathbb{A} $`（复数亦可是代数数）：
 
 `$$
 a_0 + a_1 x + a_2 x^2 + .. + a_n x^n = 0, a_i \in \mathbb{Z}
 $$`
 
-- 刘维尔构造的第一个超越数：
+- `$ \sqrt{2} $` 和 `$ i $` 都是代数数。
+
+	
+- 超越数（transcendental number）的定义；刘维尔构造的第一个超越数：
 
 `$$
 \begin{align}
@@ -328,6 +330,7 @@ $$`
 \end{align}
 $$`
 
+	
 - 埃尔米特于 1873 年证明了：`$ \forall r \in \mathbb{Q},\ (r \ne 0) \Rightarrow e^r \in \mathbb{R} \setminus \mathbb{A} $`
 - 在此基础上，利用欧拉恒等式，林德曼于 1882 年证明了 `𝝅` 是超越数。
 
@@ -336,3 +339,4 @@ $$`
 $$`
 
 - 试证明：`$ \pi + e $` 和 `$ \pi e $` 不会同时是超越数。
+
