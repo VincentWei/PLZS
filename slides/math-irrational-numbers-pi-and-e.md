@@ -315,11 +315,11 @@ $$`
 - 刘维尔构造的第一个超越数：
 
 `$$
-\begin(align)
+\begin{align}
     \alpha & = \sum_{n=0}^{\infty } \frac{1}{10^{r!}} \\
            & = \frac{1}{10^{1!}} + \frac{1}{10^{2!}} + \frac{1}{10^{3!}} + \frac{1}{10^{4!}} + \cdots \\
            & = 0.1100010000000000000000001 \cdots
-\endi(align)
+\end{align}
 $$`
 
 - 埃尔米特于 1873 年证明了：`$ \forall r \in \mathbb{Q},\ (r \ne 0) \Rightarrow e^r 是超越数. $`
