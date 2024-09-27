@@ -317,7 +317,7 @@ $$`
 a_0 + a_1 x + a_2 x^2 + .. + a_n x^n = 0, a_i \in \mathbb{Z}
 $$`
 
-- `$ \sqrt{2} $` 和 `$ i $` 都是代数数。
+- 有理数、`$ \sqrt{2} $` 和 `$ i $` 都是代数数。
 
 	
 - 超越数（transcendental number）的定义；刘维尔构造的第一个超越数：
