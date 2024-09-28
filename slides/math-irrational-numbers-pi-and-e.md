@@ -340,10 +340,8 @@ $$`
 - 试证明：`$ \pi + e $` 和 `$ \pi e $` 不会同时是超越数。
 
 	
-- 林德曼定理
+- 林德曼-魏尔斯特拉斯定理：
 
-`$$
-对任意给定的 n 个互不相同的代数数 \alpha_1, \alpha_2, \alpha_3, \cdots, \alpha_n，如果存在代数数 a_1, a_2, a_3, \cdots, a_n，使得
-a_1 e^{\alpha_1} + a_2 e^{\alpha_2} + a_3 e^{\alpha_3} + \cdots + a_n e^{\alpha_n} = 0 成立，那么必定有 a_1 = a_2 = a_3 = \cdots = a_n  = 0.
-$$`
+对任意给定的 `$ n $` 个互不相同的代数数 `$ \alpha_1, \alpha_2, \alpha_3, \cdots, \alpha_n $`，如果存在代数数 `$ a_1, a_2, a_3, \cdots, a_n $`，使得
+`$ a_1 e^{\alpha_1} + a_2 e^{\alpha_2} + a_3 e^{\alpha_3} + \cdots + a_n e^{\alpha_n} = 0 $` 成立，那么必定有 `$ a_1 = a_2 = a_3 = \cdots = a_n  = 0 $`。
 
