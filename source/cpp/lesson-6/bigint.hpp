@@ -196,6 +196,11 @@ class bigint {
     static bool divmod(const bigint& dividend, intmax_t divisor,
             bigint& quotient, bigint& remainder);
 
+    static void fastmul(const bigint& multiplicand, const bigint& multiplier,
+            bigint& result);
+    static void fastmul(const bigint& multiplicand, intmax_t multiplier,
+            bigint& result);
+
     bigint abs() const;
     int abscmp(const bigint& other) const;
 

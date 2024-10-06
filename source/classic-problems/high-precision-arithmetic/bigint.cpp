@@ -2324,8 +2324,10 @@ int main()
     test_bigint3();
 
     bigint result;
-    factorial(result, 5);
-    assert(result == 120);
+
+    bigint nine = 9;
+    result = nine * 9;
+    assert(result == 81);
 
     bigint r1, r2;
     factorial(r1, 50);

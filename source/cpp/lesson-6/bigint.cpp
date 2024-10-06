@@ -320,7 +320,6 @@ void bigint::abssub(const Ta& one, const Tb& other, bigint &result)
     result.normalize();
 }
 
-/* this must be larger than other */
 template <class Ta, class Tb>
 void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
 {
@@ -370,6 +369,92 @@ void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
         }
 
         assert(len_r == result._slices.size());
+    }
+}
+
+void bigint::fastmul(const bigint& multiplicand, const bigint& multiplier,
+        bigint& result)
+{
+    if (multiplicand.iszero() || multiplier.iszero()) {
+        result._sign = false;
+        result._slices.clear();
+        return;
+    }
+    else if (multiplicand.isone() == 1) {
+        result = multiplier;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return;
+    }
+    else if (multiplier.isone() == 1) {
+        result = multiplicand;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return;
+    }
+
+    result._sign = false;
+    result._slices.clear();
+
+    bigint longer;
+    bigint shorter;
+
+    if (multiplicand._slices.size() > multiplier._slices.size()) {
+        longer = multiplicand;
+        shorter = multiplier;
+    }
+    else {
+        longer = multiplier;
+        shorter = multiplicand;
+    }
+
+    while (!shorter.iszero()) {
+        bigint quot, rem;
+        divmod(shorter, 2, quot, rem);
+        shorter = std::move(quot);
+
+        if (!rem.iszero()) {
+            result += longer;
+        }
+
+        longer += longer;
+    }
+
+    result._sign = (multiplicand._sign != multiplier._sign);
+}
+
+void bigint::fastmul(const bigint& multiplicand, intmax_t multiplier,
+        bigint& result)
+{
+    if (multiplicand.iszero() || multiplier == 0) {
+        result._sign = false;
+        result._slices.clear();
+        return;
+    }
+    else if (multiplicand.isone() == 1) {
+        result = multiplier;
+        result._sign = (multiplicand._sign != (multiplier < 0));
+        return;
+    }
+    else if (multiplier == 1) {
+        result = multiplicand;
+        result._sign = (multiplicand._sign != (multiplier < 0));
+        return;
+    }
+
+    result._sign = false;
+    result._slices.clear();
+
+    bigint longer = multiplicand;
+    intmax_t shorter = imaxabs(multiplier);
+    while (shorter > 0) {
+        if (shorter & 1) {
+            result += longer;
+        }
+        longer += longer;
+        shorter >>= 1;
+    }
+
+    if (multiplier < 0) {
+        result._sign = !result._sign;
     }
 }
 
@@ -1996,6 +2081,161 @@ void test_bigint2(void)
         oss << (a * b);
         assert(oss.str() == expect);
 
+        bigint prod;
+        bigint::fastmul(a, b, prod);
+        expect = cases[i].prod;
+        oss.str("");
+        oss << prod;
+        clog << prod << " vs " << expect << endl;
+        assert(oss.str() == expect);
+
+        expect = cases[i].quot;
+        oss.str("");
+        oss << (a / b);
+        // clog << (a / b) << " vs " << expect << endl;
+        assert(oss.str() == expect);
+
+        expect = cases[i].rem;
+        oss.str("");
+        oss << (a % b);
+        assert(oss.str() == expect);
+
+        bigint quot, rem;
+        bigint::divmod(a, b, quot, rem);
+
+        expect = cases[i].quot;
+        oss.str("");
+        oss << quot;
+        assert(oss.str() == expect);
+
+        expect = cases[i].rem;
+        oss.str("");
+        oss << rem;
+        assert(oss.str() == expect);
+
+        bigint ret;
+
+        ret = a, ret += b;
+        expect = cases[i].sum;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret -= b;
+        expect = cases[i].diff;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret *= b;
+        expect = cases[i].prod;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret /= b;
+        expect = cases[i].quot;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret %= b;
+        expect = cases[i].rem;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+    }
+}
+
+void test_bigint3(void)
+{
+    static struct bigintcase {
+        const char *op1;
+        intmax_t    op2;
+        const char *sum;
+        const char *diff;
+        const char *prod;
+        const char *quot;
+        const char *rem;
+    } cases[] = {
+        {
+            "30257056966624049406876268303231201200",
+            41908997LL,
+            "30257056966624049406876268303273110197",
+            "30257056966624049406876268303189292203",
+            "1268042909643076386720629307691311501397196400",
+            "721970439107002475074177229849",
+            "21149747",
+        },
+        {
+            "30257056966624049406876268303231201200",
+            -41908997,
+            "30257056966624049406876268303189292203",
+            "30257056966624049406876268303273110197",
+            "-1268042909643076386720629307691311501397196400",
+            "-721970439107002475074177229849",
+            "21149747",
+        },
+        {
+            "-30257056966624049406876268303231201200",
+            -41908997,
+            "-30257056966624049406876268303273110197",
+            "-30257056966624049406876268303189292203",
+            "1268042909643076386720629307691311501397196400",
+            "721970439107002475074177229849",
+            "-21149747",
+        },
+        {
+            "30257056966624049406876268303231201200",
+            1,
+            "30257056966624049406876268303231201201",
+            "30257056966624049406876268303231201199",
+            "30257056966624049406876268303231201200",
+            "30257056966624049406876268303231201200",
+            "0",
+        },
+        {
+            "-30257056966624049406876268303231201200",
+            1,
+            "-30257056966624049406876268303231201199",
+            "-30257056966624049406876268303231201201",
+            "-30257056966624049406876268303231201200",
+            "-30257056966624049406876268303231201200",
+            "0",
+        },
+    };
+
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        bigint a(cases[i].op1);
+        bigint b(cases[i].op2);
+
+        clog << "Tesing with " << a << " and " << b << endl;
+        string expect;
+        ostringstream oss;
+
+        expect = cases[i].sum;
+        oss.str("");
+        oss << (a + b);
+        assert(oss.str() == expect);
+
+        expect = cases[i].diff;
+        oss.str("");
+        oss << (a - b);
+        assert(oss.str() == expect);
+
+        expect = cases[i].prod;
+        oss.str("");
+        oss << (a * b);
+        assert(oss.str() == expect);
+
+        bigint prod;
+        bigint::fastmul(a, b, prod);
+        expect = cases[i].prod;
+        oss.str("");
+        oss << prod;
+        clog << prod << " vs " << expect << endl;
+        assert(oss.str() == expect);
+
         expect = cases[i].quot;
         oss.str("");
         oss << (a / b);
@@ -2081,10 +2321,13 @@ int main()
 {
     test_bigint();
     test_bigint2();
+    test_bigint3();
 
     bigint result;
-    factorial(result, 5);
-    assert(result == 120);
+
+    bigint nine = 9;
+    result = nine * 9;
+    assert(result == 81);
 
     bigint r1, r2;
     factorial(r1, 50);
