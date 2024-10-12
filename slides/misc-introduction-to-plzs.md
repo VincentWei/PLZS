@@ -22,7 +22,7 @@
   \mbox{算法和数据结构}
   \begin{cases}
    \mbox{二分、倍增、排序、搜索、分治、动态规划} \cdots \\
-   \mbox{线性数据结构、树型数据结构、哈希表} \cdots
+   \mbox{线性数据结构、树形数据结构、哈希表} \cdots
   \end{cases}  \\
   \mbox{编程语言}
   \begin{cases}
