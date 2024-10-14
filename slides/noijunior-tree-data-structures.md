@@ -115,7 +115,7 @@
 	
 #### HTML 文档
 
-- 一个简单的 HTML 文档内容：
+一个简单的 HTML 文档内容
 
 ```html
 <!DOCTYPE html>
@@ -131,9 +131,9 @@
 ```
 
 	
-- 解析后的 DOM 树：
+解析后的 DOM 树
 
-<img style="height:300px;width:auto;" src="assets/noijunior-html-dom-tree.svg" />
+<img style="height:600px;width:auto;" src="assets/noijunior-html-dom-tree.svg" />
 
 		
 ## 一般树
