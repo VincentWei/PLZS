@@ -16,30 +16,30 @@
   1. 数据库系统中常用特殊的树来保存索引信息，用于快速查询符合特定条件的记录。
 
 	
-### 定义及术语
+### 定义
 
 - 树是一种非线性（non-linear）数据结构和由节点集合组成的层次结构（hierarchy），树的每个节点都存储一个值以及对子节点的引用信息。
 
 <img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
-- 常用术语：
-  1. 父（parent）节点：作为节点前身的节点称为该节点的父节点。
-  1. 子（child）节点：节点的直接后继节点称为该节点的子节点。
-  1. 根（root）节点：树的最顶端节点或没有父节点的节点称为根节点。
-  1. 叶子（leaf）节点：没有任何子节点的节点称为叶子节点。
-  1. 节点级别（level）：从根节点到该节点的路径上的边数。根节点的级别为 `0`。
+### 术语
+
+-  父（parent）节点：作为节点前身的节点称为该节点的父节点。
+-  子（child）节点：节点的直接后继节点称为该节点的子节点。
+-  根（root）节点：树的最顶端节点或没有父节点的节点称为根节点。
+-  叶子（leaf）节点：没有任何子节点的节点称为叶子节点。
+-  节点级别（level）：从根节点到该节点的路径上的边数。根节点的级别为 `0`。
 
 <img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
-- 其他术语：
-  1. 节点的祖先（ancestor）：根到该节点的路径上的任何前任节点都称为该节点的祖先。
-  1. 兄弟（sibling）节点：同一父节点的子节点称为兄弟节点。
-  1. 内部（internal）节点：至少有一个子节点的节点称为内部节点。
-  1. 外部（external）节点：即叶子节点。
-  1. 节点的邻居（neighbour）：一个节点的父节点或子节点称为该节点的邻居。
-  1. 子树（subtree）：树中任意一个节点及其后代（descendant）构成了子树。
+-  节点的祖先（ancestor）：根到该节点的路径上的任何前任节点都称为该节点的祖先。
+-  兄弟（sibling）节点：同一父节点的子节点称为兄弟节点。
+-  内部（internal）节点：至少有一个子节点的节点称为内部节点。
+-  外部（external）节点：即叶子节点。
+-  节点的邻居（neighbour）：一个节点的父节点或子节点称为该节点的邻居。
+-  子树（subtree）：树中任意一个节点及其后代（descendant）构成了子树。
 
 <img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
