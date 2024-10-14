@@ -137,7 +137,7 @@
 	
 解析后的 DOM 树
 
-<img style="height:800px;width:auto;" src="assets/noijunior-html-dom-tree.svg" />
+<img style="height:1000px;width:auto;" src="assets/noijunior-html-dom-tree.svg" />
 
 	
 ### 树的分类
