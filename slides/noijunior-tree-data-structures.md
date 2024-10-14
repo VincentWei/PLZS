@@ -19,6 +19,10 @@
 ### 定义及术语
 
 - 树是一种非线性（non-linear）数据结构和由节点集合组成的层次结构（hierarchy），树的每个节点都存储一个值以及对子节点的引用信息。
+
+<img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
+
+	
 - 常用术语：
   1. 父（parent）节点：作为节点前身的节点称为该节点的父节点。
   1. 子（child）节点：节点的直接后继节点称为该节点的子节点。
@@ -26,7 +30,7 @@
   1. 叶子（leaf）节点：没有任何子节点的节点称为叶子节点。
   1. 节点级别（level）：从根节点到该节点的路径上的边数。根节点的级别为 `0`。
 
-<img style="height:300px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
+<img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
 - 其他术语：
@@ -37,7 +41,7 @@
   1. 节点的邻居（neighbour）：一个节点的父节点或子节点称为该节点的邻居。
   1. 子树（subtree）：树中任意一个节点及其后代（descendant）构成了子树。
 
-<img style="height:300px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
+<img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
 ### 实例
