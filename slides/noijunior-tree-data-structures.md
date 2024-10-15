@@ -10,6 +10,9 @@
 		
 ## 概览
 
+`Overview`
+
+	
 - 树是一种非线性（non-linear）数据结构，常用于表达具有从属关系的层次结构（hierarchy）：
   1. 某个国家的各级行政区划可以构成一颗树。
   1. 一个公司的组织结构可以构成一棵树。
@@ -159,8 +162,113 @@
 		
 ## 一般树
 
+`Generic Tree`
+
+	
+### 定义
+
+- 一般树是具有以下属性的 N 元树：
+  1. 每个节点可能会有很多子节点。
+  1. 无法预测每个节点的子节点数量。
+
+<img style="height:600px;width:auto;" src="assets/noijunior-generic-tree.png" />
+
+	
+### 实现
+
+1) 使用节点指针构成的 `vector` 表示子节点。
+
+```cpp
+#include <vector>
+
+template <typename T>
+class TreeNode {
+public:
+    T payload;
+    std::vector<TreeNode*> children;
+
+    TreeNode(const T& data) {
+        this->paylod = data;
+    }
+};
+```
+
+	
+2) 在节点中保存第一个子节点指针以及下一个兄弟节点指针；相当于使用单向链表表示同级节点。
+
+```cpp
+template <typename T>
+class TreeNode {
+public:
+    T payload;
+    TreeNode* firstChild;
+    TreeNode* nextSibling;
+};
+```
+
+<img style="height:600px;width:auto;" src="assets/noijunior-generic-tree-linked-list.png" />
+
+	
+3) 在节点中保存第一个子节点指针以及下一个和上一个兄弟节点指针；相当于使用双向（循环）链表表示同级节点。
+
+```cpp
+template <typename T>
+class TreeNode {
+public:
+    T payload;
+    TreeNode* firstChild;
+    TreeNode* nextSibling;
+    TreeNode* prevSibling;
+};
+```
+
 		
 ## 二叉树
+
+`Binary Tree`
+
+	
+### 定义
+
+- 二叉树是一种最多有两个子树的树。
+- 二叉树中一个节点左侧的子节点被称为“左子节点”，右侧的子节点称为“右子节点”。
+- 二叉树中一个节点左侧的子树称为“左子树”，右侧的子树则称为“右子树”。
+
+<img style="height:600px;width:auto;" src="assets/noijunior-binary-tree-representation.webp" />
+
+	
+### 术语
+
+- 节点深度（depth）：从特定节点到根节点的边数；根节点的深度为零。
+- 二叉树的高度（height）：从最深的叶子节点到根节点的节点数；根节点的高度为1。
+
+<img style="height:600px;width:auto;" src="assets/noijunior-binary-tree.png" />
+
+	
+### 实现
+
+1) 泛型类声明
+
+```cpp
+// Structure of the Binary Tree Node
+template <typename T>
+class BinaryTreeNode {
+    T payload;
+    BinaryTreeNode *left;
+    BinaryTreeNode *right;
+
+    BinaryTreeNode(const T& data) {
+        this->payload = data;
+        this->left = nullptr;
+        this->right = nullptr;
+    }
+};
+```
+
+	
+### 遍历
+
+
 
 		
 ## 特殊树
