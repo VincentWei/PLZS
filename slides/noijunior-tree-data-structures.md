@@ -120,8 +120,6 @@
 	
 #### HTML 文档
 
-一个简单的 HTML 文档内容
-
 ```html
 <!DOCTYPE html>
 <html>
@@ -137,7 +135,7 @@
 
 解析后的 DOM 树
 
-<img style="height:400px;width:auto;" src="assets/noijunior-html-dom-tree.png" />
+<img style="height:460px;width:auto;" src="assets/noijunior-html-dom-tree.png" />
 
 	
 ### 树的分类
