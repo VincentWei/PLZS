@@ -157,9 +157,9 @@
 - 插入（insert）：在树中插入数据。
 - 删除（delete）：在树中移除数据。
 - 搜索（search）：在树中搜索特定数据，以判断它是否存在。
-- 遍历（traverse）或搜索（search）：以特定的规则遍历或搜索树中的每个节点：
-  1. 深度优先搜索（depth-first search，DFS）
-  1. 广度优先搜索（breadth-first search，BFS）
+- 遍历（traverse）：以特定的规则访问树中的每个节点：
+  1. 深度优先遍历（depth-first search，DFS）
+  1. 广度优先遍历（breadth-first search，BFS）
 
 		
 ## 一般树
@@ -176,6 +176,16 @@
 <img style="height:400px;width:auto;" src="assets/noijunior-generic-tree.png" />
 
 	
+### 术语
+
+- 边（edge）数：边可以定义为两个节点之间的连接。如果一棵树有 `N` 个节点，那么它将有 `N-1` 条边。从每个节点到树的任何其他节点只有一条路径。
+- 节点深度（depth）：节点的深度定义为从根到该节点的路径长度。每条边为路径增加 `1` 个单位的长度。因此，它也可以定义为从树根到节点的路径中的边数。
+- 节点高度（height）：节点的高度可以定义为从节点到树的叶子节点的最长路径的长度。
+- 树的高度（height）：树的高度是从树根到树叶节点的最长路径的长度。
+- 节点的度（degree）：连接到一个节点的子树总数称为该节点的度。叶子节点的度数一定为 `0`。
+- 树的度：树的度是树中所有节点的度的最大值。
+
+	
 ### 实现
 
 1) 使用节点指针构成的 `vector` 表示子节点。
@@ -184,12 +194,12 @@
 #include <vector>
 
 template <typename T>
-class TreeNode {
+class tree_node {
 public:
     T payload;
-    std::vector<TreeNode*> children;
+    std::vector<tree_node*> children;
 
-    TreeNode(const T& data) {
+    tree_node(const T& data) {
         this->paylod = data;
     }
 };
@@ -200,11 +210,11 @@ public:
 
 ```cpp
 template <typename T>
-class TreeNode {
+class tree_node {
 public:
     T payload;
-    TreeNode* firstChild;
-    TreeNode* nextSibling;
+    tree_node* firstChild;
+    tree_node* nextSibling;
 };
 ```
 
@@ -215,14 +225,31 @@ public:
 
 ```cpp
 template <typename T>
-class TreeNode {
+class tree_node {
 public:
     T payload;
-    TreeNode* firstChild;
-    TreeNode* nextSibling;
-    TreeNode* prevSibling;
+    tree_node* firstChild;
+    tree_node* nextSibling;
+    tree_node* prevSibling;
 };
 ```
+
+	
+4) 创建
+
+	
+5) 遍历
+
+	
+6) 示例
+
+	
+### 课堂练习
+
+（十分钟内完成）
+
+1. 复制一般树的源文件 `generic-tree.cpp`，修改其中的 `dfs()` 和 `bfs()` 两个遍历方法，将其调整为迭代实现。
+1. 将 `generic-tree.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-4/` 目录（下同），并推送到远程仓库。
 
 		
 ## 二叉树
@@ -271,14 +298,14 @@ public:
 1) 泛型类声明
 
 ```cpp
-// Structure of the Binary Tree Node
+// Class for Binary Tree Node
 template <typename T>
-class BinaryTreeNode {
+class bin_tree_node_node {
     T payload;
-    BinaryTreeNode *left;
-    BinaryTreeNode *right;
+    bin_tree_node_node *left;
+    bin_tree_node_node *right;
 
-    BinaryTreeNode(const T& data) {
+    bin_tree_node_node(const T& data) {
         this->payload = data;
         this->left = nullptr;
         this->right = nullptr;
