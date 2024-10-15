@@ -277,7 +277,7 @@ public:
 - 深度优先（DFS）
   1. 前序遍历（preorder traversal，当前、左、右）：首先访问节点，然后访问左子树，然后访问右子树。
   1. 中序遍历（inorder traversal，左、当前、右）：首先访问左子树，然后访问节点，然后访问右子树。
-  1. 后序遍历（posrtorder traversal，左、右、当前）：访问左子树，然后访问右子树，然后是节点。
+  1. 后序遍历（postorder traversal，左、右、当前）：访问左子树，然后访问右子树，然后是节点。
 - 广度优先（BFS）：
   1. 级序遍历（level order traversal）：
 
