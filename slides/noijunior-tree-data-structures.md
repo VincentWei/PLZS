@@ -157,7 +157,9 @@
 - 插入（insert）：在树中插入数据。
 - 删除（delete）：在树中移除数据。
 - 搜索（search）：在树中搜索特定数据，以判断它是否存在。
-- 遍历（traverse）：以特定的规则遍历树中的每个节点。
+- 遍历（traverse）或搜索（search）：以特定的规则遍历或搜索树中的每个节点：
+  1. 深度优先搜索（depth-first search，DFS）
+  1. 广度优先搜索（breadth-first search，BFS）
 
 		
 ## 一般树
@@ -171,7 +173,7 @@
   1. 每个节点可能会有很多子节点。
   1. 无法预测每个节点的子节点数量。
 
-<img style="height:600px;width:auto;" src="assets/noijunior-generic-tree.png" />
+<img style="height:400px;width:auto;" src="assets/noijunior-generic-tree.png" />
 
 	
 ### 实现
@@ -206,7 +208,7 @@ public:
 };
 ```
 
-<img style="height:600px;width:auto;" src="assets/noijunior-generic-tree-linked-list.png" />
+<img style="height:400px;width:auto;" src="assets/noijunior-generic-tree-linked-list.png" />
 
 	
 3) 在节点中保存第一个子节点指针以及下一个和上一个兄弟节点指针；相当于使用双向（循环）链表表示同级节点。
@@ -245,6 +247,25 @@ public:
 <img style="height:600px;width:auto;" src="assets/noijunior-binary-tree.png" />
 
 	
+### 课堂思考
+
+- `L` 级二叉树的最大节点数为？
+- 高度为 `H` 的二叉树，其最大节点数为？
+- 二叉树中的叶节点总数和具有 `2` 个子节点的节点总数的关系？
+- 在具有 `N` 个节点的二叉树中，最小的可能高度或最小层数为？
+- 具有 `L` 个叶节点的二叉树至少有多少个级别？
+
+	
+### 遍历
+
+- 深度优先（DFS）
+  1. 前序遍历（preorder traversal，当前、左、右）：首先访问节点，然后访问左子树，然后访问右子树。
+  1. 中序遍历（inorder traversal，左、当前、右）：首先访问左子树，然后访问节点，然后访问右子树。
+  1. 后序遍历（posrtorder traversal，左、右、当前）：访问左子树，然后访问右子树，然后是节点。
+- 广度优先（BFS）：
+  1. 级序遍历（level order traversal）：
+
+	
 ### 实现
 
 1) 泛型类声明
@@ -266,7 +287,7 @@ class BinaryTreeNode {
 ```
 
 	
-### 遍历
+2) 
 
 
 
