@@ -19,6 +19,7 @@
   1. 一个家族成员可以构成一棵树。
 - 树形数据结构在计算机中随处可见：
   1. 文件系统被组织成树形管理。
+  1. 用于数据压缩（霍夫曼编码）。
   1. 常见的图文文档被解释为树形数据结构进行处理。
   1. 程序被编译器或解释器解析为语法树然后做进一步处理。
   1. 数据库管理系统中常用特殊的树来保存索引信息，用于快速查询符合特定条件的记录。
@@ -188,7 +189,7 @@
 	
 ### 实现
 
-1) 使用节点指针构成的 `vector` 表示子节点。
+1) 泛型类声明
 
 ```cpp
 #include <vector>
@@ -197,37 +198,33 @@ template <typename T>
 class tree_node {
 public:
     T payload;
+
+    // 使用节点指针构成的 `vector` 表示子节点。
     std::vector<tree_node*> children;
 
     tree_node(const T& data) {
         this->paylod = data;
     }
 };
-```
 
-	
-2) 在节点中保存第一个子节点指针以及下一个兄弟节点指针；相当于使用单向链表表示同级节点。
-
-```cpp
 template <typename T>
-class tree_node {
+class tree_node_using_sgl_list {
 public:
     T payload;
+
+    // 在节点中保存第一个子节点指针以及下一个兄弟节点指针
+    // 相当于使用单向链表表示同级节点。
     tree_node* firstChild;
     tree_node* nextSibling;
 };
-```
 
-<img style="height:400px;width:auto;" src="assets/noijunior-generic-tree-linked-list.png" />
-
-	
-3) 在节点中保存第一个子节点指针以及下一个和上一个兄弟节点指针；相当于使用双向（循环）链表表示同级节点。
-
-```cpp
 template <typename T>
-class tree_node {
+class tree_node_using_dbl_list {
 public:
     T payload;
+
+    // 在节点中保存第一个子节点指针以及下一个和上一个兄弟节点指针
+    // 相当于使用双向（循环）链表表示同级节点。
     tree_node* firstChild;
     tree_node* nextSibling;
     tree_node* prevSibling;
@@ -235,13 +232,13 @@ public:
 ```
 
 	
-4) 创建
+2) 创建
 
 	
-5) 遍历
+3) 遍历
 
 	
-6) 示例
+4) 示例
 
 	
 ### 课堂练习
@@ -264,14 +261,6 @@ public:
 - 二叉树中一个节点左侧的子树称为“左子树”，右侧的子树则称为“右子树”。
 
 <img style="height:600px;width:auto;" src="assets/noijunior-binary-tree-representation.webp" />
-
-	
-### 术语
-
-- 节点深度（depth）：从特定节点到根节点的边数；根节点的深度为零。
-- 二叉树的高度（height）：从最深的叶子节点到根节点的节点数；根节点的高度为1。
-
-<img style="height:600px;width:auto;" src="assets/noijunior-binary-tree.png" />
 
 	
 ### 课堂思考
@@ -321,8 +310,19 @@ class bin_tree_node_node {
 		
 ## 特殊树
 
+`Special Trees`
+
 		
 ## 树的典型应用
+
+`Typical Applications`
+
+
+	
+### 文件系统
+
+	
+### 霍夫曼编码
 
 		
 ## 实用技巧
