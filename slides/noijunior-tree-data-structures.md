@@ -243,7 +243,7 @@ public:
 
 （十分钟内完成）
 
-1. 复制一般树的源文件 `generic-tree.cpp`，修改其中的 `dfs()` 和 `bfs()` 两个遍历方法，将其调整为迭代实现。
+1. 复制一般树的源文件 [`generic-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，修改其中的 `dfs()` 和 `bfs()` 两个遍历方法，将其调整为迭代实现。
 1. 将 `generic-tree.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-4/` 目录（下同），并推送到远程仓库。
 
 		
