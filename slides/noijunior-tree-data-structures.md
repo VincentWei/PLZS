@@ -289,37 +289,43 @@ class tree_node {
 3) 遍历
 
 ```cpp
+#include <queue>        // for queue
+
 class tree_node {
     ...
 
-    // 深度优先遍历
+    // 深度优先（depth-first）遍历
     template <typename context, typename visitor_func>
-    void dfs(const tree_node* node, context* ctxt, visitor_func visitor) const
+    void dfs(context* ctxt, visitor_func visitor) const
     {
-        size_t nr_children = node->children.size();
-        for (size_t i = 0; i < nr_children; i++) {
-            // depth-first
-            dfs(node->children[i], ctxt, visitor);
-        }
+        // call the visitor for the current node
+        visitor(ctxt, payload);
 
-        // call the visitor for current node
-        visitor(ctxt, node->payload);
+        size_t nr_children = children.size();
+        for (size_t i = 0; i < nr_children; i++) {
+            children[i]->dfs(ctxt, visitor);
+        }
     }
 
-    // 广度优先遍历
+    // 广度优先（breadth-first）遍历
     template <typename context, typename visitor_func>
-    void bfs(const tree_node* node, context* ctxt, visitor_func visitor) const
+    void bfs(context* ctxt, visitor_func visitor) const
     {
-        size_t nr_children = node->children.size();
+        std::queue<const tree_node*> queue;
+        queue.push(this);
 
-        // call the visitor for current node
-        visitor(ctxt, node->payload);
+        while (!queue.empty()) {
+            const tree_node* node = queue.front();
+            queue.pop();
 
-        for (size_t i = 0; i < nr_children; i++) {
-            // breadth-first
-            bfs(node->children[i], ctxt, visitor);
+            // call the visitor for current node
+            visitor(ctxt, node->payload);
+
+            size_t nr_children = node->children.size();
+            for (size_t i = 0; i < nr_children; i++) {
+                queue.push(node->children[i]);
+            }
         }
-
     }
 
     ...
@@ -331,62 +337,90 @@ class tree_node {
 
 ```cpp
 #include <iostream>     // for cin and cout
+#include <sstream>      // for ostringstream
 #include <string>       // for stod()
 #include <cassert>      // for assert()
 
 using namespace std;
 
-int main()
+void test_tree_node()
 {
-    using my_tree_node = tree_node<double>;
-    my_tree_node* root = new my_tree_node(0);
-
-    my_tree_node *node = root;
-
-    // 此循环将持续读取用户的输入，直到 stod() 函数
-    // 无法正常将空格分隔的字符串解析为浮点数而抛出异常为止。
-    do {
-        string buf;
-        cin >> buf;
-
-        double d;
-        try {
-            size_t sz;
-            d = stod(buf, &sz);
-        }
-        catch (std::exception& e) {
-            break;
-        }
-
-        if (d < 0) {
-            node->push_front(d);
-        }
-        else if (d > 0) {
-            node->push_back(d);
-        }
-        else {
-            node = node->push_back(d);
-        }
-
-    } while (true);
-
     struct context_print {
         ostream& os;
     };
 
     struct visitor_print {
-        void operator() (context_print* ctxt, const double& value) {
-            ctxt->os << value << endl;
+        void operator() (context_print* ctxt, const int& value) {
+            ctxt->os << value << " ";
         }
     };
 
-    context_print ctxt = { cout };
-    clog << "DFS Traversal\n";
-    root->dfs(root, &ctxt, visitor_print{});
+    ostringstream oss;
+    context_print ctxt = { oss };
+    using my_tree_node = tree_node<int>;
+    my_tree_node *level_0, *level_1, *level_2;
 
-    clog << "BFS Traversal\n";
-    root->bfs(root, &ctxt, visitor_print{});
-    delete root;
+    level_0 = new my_tree_node(0);
+
+    oss.str("");
+    level_0->dfs(&ctxt, visitor_print{});
+    assert(oss.str() == "0 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    assert(oss.str() == "0 ");
+
+    level_0->push_front(-1);
+    level_0->push_front(-2);
+    level_1 = level_0->push_back(0);
+    level_0->push_back(1);
+    level_0->push_back(2);
+
+    oss.str("");
+    level_0->dfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 1 2 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 1 2 ");
+
+    level_1->push_front(-10);
+    level_1->push_front(-20);
+    level_2 = level_1->push_back(0);
+    level_1->push_back(10);
+    level_1->push_back(20);
+
+    oss.str("");
+    level_0->dfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 1 2 -20 -10 0 10 20 ");
+
+    level_2->push_front(-100);
+    level_2->push_front(-200);
+    level_2->push_front(-300);
+    level_2->push_back(0);
+    level_2->push_back(100);
+    level_2->push_back(200);
+    level_2->push_back(300);
+
+    oss.str("");
+    level_0->dfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 1 2 -20 -10 0 10 20 -300 -200 -100 0 100 200 300 ");
+
+    delete level_0;
 }
 ```
 
@@ -395,7 +429,7 @@ int main()
 
 （十分钟内完成）
 
-1. 复制一般树的源文件 [`generic-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，修改其中的 `dfs()` 和 `bfs()` 两个遍历方法，将其调整为迭代实现。
+1. 复制一般树的源文件 [`generic-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，修改其中的 `dfs()` 遍历方法，将其调整为迭代实现。
 1. 将 `generic-tree.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-4/` 目录（下同），并推送到远程仓库。
 
 		

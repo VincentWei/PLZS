@@ -40,7 +40,7 @@ class tree_node {
     template <typename context, typename visitor_func>
     void dfs(context* ctxt, visitor_func visitor) const
     {
-        // call the visitor for current node
+        // call the visitor for the current node
         visitor(ctxt, payload);
 
         size_t nr_children = children.size();
