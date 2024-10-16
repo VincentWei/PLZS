@@ -190,18 +190,25 @@
 1) 泛型类声明
 
 ```cpp
-#include <vector>
+#include <vector>       // for vector
 
 template <typename T>
 class tree_node {
-public:
-    T payload;
+  public:
+    T payload;                          // 节点负载
+    std::vector<tree_node*> children;   // 子节点矢量
 
-    // 使用节点指针构成的 `vector` 表示子节点。
-    std::vector<tree_node*> children;
+    // 节点的构造函数
+    tree_node(const T& value) {
+        payload = value;
+    }
 
-    tree_node(const T& data) {
-        this->paylod = data;
+    // 节点的析构函数
+    ~tree_node() {
+        for (size_t i = 0; i < this->children.size(); i++) {
+            delete children[i];
+            children[i] = nullptr;
+        }
     }
 };
 
@@ -230,13 +237,158 @@ public:
 ```
 
 	
-2) 创建
+2) 创建（以矢量维护子节点为例，下同）
+
+```cpp
+class tree_node {
+    ...
+
+    // 在当前节点的子节点头部压入新节点，返回新节点
+    tree_node* push_front(const T& value)
+    {
+        // Create a new node with the given value
+        tree_node* child = new tree_node(value);
+        // Push the pointer to the front of children
+        children.insert(children.begin(), child);
+        return child;
+    }
+
+    // 弹出当前节点头部的子节点
+    void pop_front()
+    {
+        if (children.size() > 0) {
+            delete children.front();
+            children.erase(children.begin());
+        }
+    }
+
+    // 在当前节点的子节点尾部压入新节点，返回新节点
+    tree_node* push_back(const T& value)
+    {
+        // Create a new node with the given value
+        tree_node* child = new tree_node(value);
+        // Push the pointer to the front of children
+        children.push_back(child);
+        return child;
+    }
+
+    // 弹出当前节点尾部的子节点
+    void pop_back()
+    {
+        if (children.size() > 0) {
+            delete children.back();
+            children.pop_back();
+        }
+    }
+
+    ...
+};
+```
 
 	
 3) 遍历
 
+```cpp
+class tree_node {
+    ...
+
+    // 深度优先遍历
+    template <typename context, typename visitor_func>
+    void dfs(const tree_node* node, context* ctxt, visitor_func visitor) const
+    {
+        size_t nr_children = node->children.size();
+        for (size_t i = 0; i < nr_children; i++) {
+            // depth-first
+            dfs(node->children[i], ctxt, visitor);
+        }
+
+        // call the visitor for current node
+        visitor(ctxt, node->payload);
+    }
+
+    // 广度优先遍历
+    template <typename context, typename visitor_func>
+    void bfs(const tree_node* node, context* ctxt, visitor_func visitor) const
+    {
+        size_t nr_children = node->children.size();
+
+        // call the visitor for current node
+        visitor(ctxt, node->payload);
+
+        for (size_t i = 0; i < nr_children; i++) {
+            // breadth-first
+            bfs(node->children[i], ctxt, visitor);
+        }
+
+    }
+
+    ...
+};
+```
+
 	
 4) 示例
+
+```cpp
+#include <iostream>     // for cin and cout
+#include <string>       // for stod()
+#include <cassert>      // for assert()
+
+using namespace std;
+
+int main()
+{
+    using my_tree_node = tree_node<double>;
+    my_tree_node* root = new my_tree_node(0);
+
+    my_tree_node *node = root;
+
+    // 此循环将持续读取用户的输入，直到 stod() 函数
+    // 无法正常将空格分隔的字符串解析为浮点数而抛出异常为止。
+    do {
+        string buf;
+        cin >> buf;
+
+        double d;
+        try {
+            size_t sz;
+            d = stod(buf, &sz);
+        }
+        catch (std::exception& e) {
+            break;
+        }
+
+        if (d < 0) {
+            node->push_front(d);
+        }
+        else if (d > 0) {
+            node->push_back(d);
+        }
+        else {
+            node = node->push_back(d);
+        }
+
+    } while (true);
+
+    struct context_print {
+        ostream& os;
+    };
+
+    struct visitor_print {
+        void operator() (context_print* ctxt, const double& value) {
+            ctxt->os << value << endl;
+        }
+    };
+
+    context_print ctxt = { cout };
+    clog << "DFS Traversal\n";
+    root->dfs(root, &ctxt, visitor_print{});
+
+    clog << "BFS Traversal\n";
+    root->bfs(root, &ctxt, visitor_print{});
+    delete root;
+}
+```
 
 	
 ### 课堂练习
