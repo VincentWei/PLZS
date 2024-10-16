@@ -921,6 +921,7 @@ void test_binary_tree_node()
   - 标准对象 `cerr` 对应 C 的标准错误输出流（`stderr`）；未被重定向的情况下，同标准输出，但不带缓冲区。
   - 标准对象 `clog` 是 C++ 定义的标准日志输出流，默认保持和 `cerr` 的同步。
 
+	
 ```cpp
 #include <iostream>     // std::cout
 #include <fstream>      // std::ifstream and std::ofstream
@@ -966,6 +967,7 @@ void open(const string& filename, ios_base::openmode mode = ios_base::in | ios_b
 | `app`    | 追加（append）     | 所有的输出操作发生在文件尾部，也就是写入的内容将会被追加到文件尾部。|
 | `trunc`  | 截断（truncate）   | 打开时，文件中已有的任何内容将被清除/废弃。 |
 
+	
 ```cpp
 #include <fstream>      // std::fstream
 
@@ -973,7 +975,7 @@ int main()
 {
     std::fstream fs;
     fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
-    fs << " more lorem ipsum";
+    fs << " a line\n";
     fs.close();
     return 0;
 }
