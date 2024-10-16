@@ -874,14 +874,14 @@ void test_binary_tree_node()
 ### 霍夫曼树
 
 - 设二叉树具有 `$ n $` 个带权重（weight）的叶结点，从根结点到各叶结点的路径长度与相应叶节点权值的乘积之和称为该二叉树的带权路径长度（Weighted Path Length of Tree，WPL）：`$ WPL = \sum_{i=1}^n w_i l_i $`。
-- 对于一组具有确定权值的叶结点，可以构造出不同的二叉树，其中，WPL 最小的二叉树称为霍夫曼树（Huffman Tree）。
+- 对于一组具有确定权值的叶结点，可以构造出不同的二叉树，其中，WPL 最小的二叉树称为霍夫曼/哈夫曼树（Huffman Tree）。
 - 霍夫曼树的特点：
   1. 叶结点的权值越小，离根越远。
   1. 叶结点的权值越大，离根越近。
   1. 所有叶结点的度为 `0`，其他结点的度均为 `2`。
 
 	
-<img style="height:700px;width:auto;" src="assets/noijunior-wpl-of-huffman-tree.svg" />
+<img style="height:700px;width:auto;" src="assets/noijunior-wpl-of-binary-tree.svg" />
 
 	
 ### 霍夫曼算法
@@ -907,6 +907,14 @@ void test_binary_tree_node()
 
 	
 <img style="height:700px;width:auto;" src="assets/noijunior-huffman-code.svg" />
+
+	
+- 假设有一组字符 `{a, b, c, d, e, f}`，对应的频率分别为 `5%, 9%, 12%, 13%, 16%, 45%`。请问以下哪个选项是字符 `a, b, c, d, e, f` 分别对应的一组哈夫曼编码？（ ）
+
+   - A. `1111, 1110, 101, 100, 110, 0`
+   - В. `1010, 1001, 1000, 011, 010, 00`
+   - С. `000, 001, 010, 011, 10, 11`
+   - D. `1010, 1011, 110, 111, 00, 01`
 
 		
 ## 实用技巧
