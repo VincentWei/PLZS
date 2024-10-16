@@ -1008,6 +1008,8 @@ int main()
   1. `$ PROGRAM [1]>>FILE`：将标准错误重定向并追加到文件 `FILE`。
 - Shell 中重定向标准输入的方法：
   1. `$ PROGRAM <FILE`：将标准输入重定向为文件 `FILE`，程序将从 `FILE` 中读取输入内容。
+
+	
 - 使用 STL `std::iostream::rdbuf()` 方法实现重定向：
 
 ```cpp
@@ -1065,6 +1067,8 @@ int main()
   1. `opendir()`：打开一个目录用于读取其目录项。
   1. `readdir()`：读取一条目录项。
   1. `closedir()`：关闭已打开的目录。
+
+	
 - [示例程序]()
 
 ```cpp
