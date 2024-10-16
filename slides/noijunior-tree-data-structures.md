@@ -904,12 +904,175 @@ void test_binary_tree_node()
 		
 ## 实用技巧
 
+`Utilities`
+
+	
+### STL 文件读写流
+
+1) 复习一下基础 STL 文件读写相关类和对象
+  - `ofstream` 类是 `ostream` 类的子类，用于向普通文件中写入数据。
+  - `ifstream` 类是 `istream` 类的子类，用于从普通文件中读入数据。
+  - `fstream` 类是 `iostream` 类的子类，用于在普通文件中读写数据。
+  - 通过 `open()` 和 `close()` 方法打开/创建和关闭文件。
+  - 标准输入输出对象在 C++ 程序启动时被自动创建。
+  - 标准对象 `cout` 和 `cin` 分别是 `ostream` 和 `istream` 类的实例，而 `ostream` 和 `istream` 分别是 `basic_ostream` 和 `basic_istream` 类模板的实例。
+  - 标准对象 `cin` 对应 C 的标准输入流（`stdin`）；未被重定向的情况下，标准输入为键盘。
+  - 标准对象 `cout` 对应 C 的标准输出流（`stdout`）；未被重定向的情况下，标准输出为终端（屏幕终端或者伪终端）。
+  - 标准对象 `cerr` 对应 C 的标准错误输出流（`stderr`）；未被重定向的情况下，同标准输出，但不带缓冲区。
+  - 标准对象 `clog` 是 C++ 定义的标准日志输出流，默认保持和 `cerr` 的同步。
+
+```cpp
+#include <iostream>     // std::cout
+#include <fstream>      // std::ifstream and std::ofstream
+
+using namespace std;
+
+int main()
+{
+    ofstream ofs;
+    ofs.open("test.txt", ofstream::out);
+    ofs << "The first line" << endl;
+    ofs << "The second line" << endl;
+    ofs.close();
+
+    ifstream ifs;
+    ifs.open("test.txt", ifstream::in);
+
+    while (true) {
+        char c = ifs.get();
+        if (c == EOF)
+            break;
+        cout << c;
+    }
+
+    ifs.close();
+}
+```
+
+	
+2) `open()` 方法和 STL 文件打开模式
+
+```cpp
+void open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);
+void open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);
+```
+
+| 成员常量 | 含义               | 解释              |
+| ---      | ---                | ---               |
+| `in`     | 输入（input）      | 打开文件用于读取。|
+| `out`    | 输出（output）     | 打开文件用于写入。|
+| `binary` | 二进制（binary）   | 文件上的读写操作以二进制数据进行而不是文本。|
+| `at`     | 尾部（at end）     | 打开时的读写位置在文件尾部。|
+| `app`    | 追加（append）     | 所有的输出操作发生在文件尾部，也就是写入的内容将会被追加到文件尾部。|
+| `trunc`  | 截断（truncate）   | 打开时，文件中已有的任何内容将被清除/废弃。 |
+
+```cpp
+#include <fstream>      // std::fstream
+
+int main()
+{
+    std::fstream fs;
+    fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+    fs << " more lorem ipsum";
+    fs.close();
+    return 0;
+}
+```
+
+	
+3) 输入输出流的缓冲模式
+
+- 缓冲模式
+   1. 行缓冲（文本模式）
+   1. 块缓冲/完全缓冲（二进制模式）
+   1. 无缓冲
+- `ostream& flush();` 用于刷新输出缓冲区。
+- `ostream& endl(ostream& os);` 输出新行符，同时刷新输出缓冲区。
+- `void close();` 方法在关闭流之前，也会刷新输出缓冲区。
+
+	
+4) 文本模式常用读写方法
+
+	
+5) 二进制模式常用读写方法
+
+	
+6) 标准输入/输出的重定向
+
+- 重定向的概念。
+- Shell 中重定向标准输出、标准错误的方法：
+  1. `$ PROGRAM [1]>FILE`：将标准输出重定向到文件 `FILE`。
+  1. `$ PROGRAM 2>FILE`：将标准错误重定向到文件 `FILE`。
+  1. `$ PROGRAM [1]>>FILE`：将标准错误重定向并追加到文件 `FILE`。
+- Shell 中重定向标准输入的方法：
+  1. `$ PROGRAM <FILE`：将标准输入重定向为文件 `FILE`，程序将从 `FILE` 中读取输入内容。
+- 使用 STL `std::iostream::rdbuf()` 方法实现重定向：
+
+```cpp
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    // 备份cin和cout的默认buf
+    streambuf *cin_backup, *cout_backup;
+    cin_backup = cin.rdbuf();
+    cout_backup = cout.rdbuf();
+
+    // 打开要参与重定向的文件
+    fstream in, out;
+    in.open("in.txt", ios::in);
+    out.open("out.txt", ios::out);
+    if (in.fail() || out.fail())
+        return -1;
+
+    // 将in.txt内容重定向到cin；将cout重定向到out.txt
+    cin.rdbuf(in.rdbuf());
+    cout.rdbuf(out.rdbuf());
+
+    // 此后在 cin 和 cout 上的读取/写入，
+    // 相当于从 in.txt 中读取，向 out.txt 写入。
+    int n;
+    cin >> n;
+    cout << n << endl;
+
+    // 恢复 cin 和 cout 的默认缓冲区
+    cin.rdbuf(cin_backup);
+    cout.rdbuf(cout_backup);
+
+    // 关闭 in 和 out 流
+    in.close();
+    out.close();
+
+    return 0;
+}
+```
+
 	
 ### Linux 上的文件系统操作
+
+- 文件和目录操作
+  1. `creat()`：创建文件。
+  1. `unlink()`：移除文件。
+  1. `mkdir()`：创建目录。
+  1. `rmdir()`：移除目录。
+  1. `stat()`：获取文件的统计信息。
+- 遍历目录项：
+  1. `opendir()`：打开一个目录用于读取其目录项。
+  1. `readdir()`：读取一条目录项。
+  1. `closedir()`：关闭已打开的目录。
+- [示例程序]()
+
+```cpp
+```
 
 		
 ## 作业
 
 	
 ### 参考链接
+
+- [fstream](https://cplusplus.com/reference/fstream/)
 
