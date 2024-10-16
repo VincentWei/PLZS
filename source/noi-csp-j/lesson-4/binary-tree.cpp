@@ -88,12 +88,11 @@ class bin_tree_node {
     {
         if (left)
             left->dfs_postorder(ctxt, visitor);
+        if (right)
+            right->dfs_postorder(ctxt, visitor);
 
         // call the visitor for the current node
         visitor(ctxt, payload);
-
-        if (right)
-            right->dfs_postorder(ctxt, visitor);
     }
 
     // 广度优先（breadth-first）级序遍历
@@ -256,9 +255,19 @@ void test_binary_tree_node()
     assert(level_2->right_child()->payload == 100);
 
     oss.str("");
-    level_0->dfs_postorder(&ctxt, visitor_print{});
+    level_0->dfs_preorder(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
+
+    oss.str("");
+    level_0->dfs_inorder(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "-1 0 -10 1 -100 10 100 ");
+
+    oss.str("");
+    level_0->dfs_postorder(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "-1 -10 -100 100 10 1 0 ");
 
     oss.str("");
     level_0->bfs(&ctxt, visitor_print{});
