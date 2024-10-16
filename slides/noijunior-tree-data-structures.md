@@ -167,8 +167,10 @@
 - 删除（delete）：在树中移除数据。
 - 搜索（search）：在树中搜索特定数据，以判断它是否存在。
 - 遍历（traverse）：以特定的规则访问树中的每个节点：
-  1. 深度优先遍历（depth-first search，DFS）
-  1. 广度优先遍历（breadth-first search，BFS）
+  1. 深度优先遍历（depth-first traversal），亦称深度优先搜索（depth-first search，DFS）
+  1. 广度优先遍历（breadth-first traversal），亦称广度优先搜索（breadth-first search，BFS）
+  1. 广度优先遍历也称作级序遍历（level order traversal）。
+
 
 		
 ## 一般树
@@ -294,20 +296,24 @@ class tree_node {
 class tree_node {
     ...
 
-    // 深度优先（depth-first）遍历
+    // 深度优先（depth-first）遍历（递归实现）
     template <typename context, typename visitor_func>
     void dfs(context* ctxt, visitor_func visitor) const
     {
         // call the visitor for the current node
+        // 先访问再递归：先序（preorder）
         visitor(ctxt, payload);
 
         size_t nr_children = children.size();
         for (size_t i = 0; i < nr_children; i++) {
             children[i]->dfs(ctxt, visitor);
         }
+
+        // 先递归再访问：后序（postorder）
+        // visitor(ctxt, payload);
     }
 
-    // 广度优先（breadth-first）遍历
+    // 广度优先（breadth-first）遍历（迭代实现）
     template <typename context, typename visitor_func>
     void bfs(context* ctxt, visitor_func visitor) const
     {
@@ -458,12 +464,10 @@ void test_tree_node()
 	
 ### 遍历
 
-- 深度优先（DFS）
+- 二叉树的深度深度优先遍历有三种形式：
   1. 前序遍历（preorder traversal，当前、左、右）：首先访问节点，然后访问左子树，然后访问右子树。
   1. 中序遍历（inorder traversal，左、当前、右）：首先访问左子树，然后访问节点，然后访问右子树。
   1. 后序遍历（postorder traversal，左、右、当前）：访问左子树，然后访问右子树，然后是节点。
-- 广度优先（BFS）：
-  1. 级序遍历（level order traversal）：
 
 	
 ### 实现
@@ -471,25 +475,314 @@ void test_tree_node()
 1) 泛型类声明
 
 ```cpp
-// Class for Binary Tree Node
-template <typename T>
-class bin_tree_node_node {
-    T payload;
-    bin_tree_node_node *left;
-    bin_tree_node_node *right;
+#include <stack>        // for stack
+#include <queue>        // for queue
 
-    bin_tree_node_node(const T& data) {
-        this->payload = data;
-        this->left = nullptr;
-        this->right = nullptr;
+template <typename T>
+class bin_tree_node {
+  public:
+    T payload;                          // 节点负载
+    bin_tree_node *left;                // 左子节点
+    bin_tree_node *right;               // 右子节点
+
+    // 节点的构造函数
+    bin_tree_node(const T& value) {
+        payload = value;
+        left = nullptr;
+        right = nullptr;
+    }
+
+    // 节点的析构函数
+    ~bin_tree_node() {
+        if (left)
+            delete left;
+        if (right)
+            delete right;
     }
 };
 ```
 
 	
-2) 
+2) 创建
 
+```cpp
+class bin_tree_node {
+    ...
 
+    // 获取左子节点（const 版本）
+    const bin_tree_node* left_child() const
+    {
+        return left;
+    }
+
+    // 获取左子节点（非 const 版本）
+    bin_tree_node* left_child()
+    {
+        return left;
+    }
+
+    // 设置当前节点的左子节点，返回新节点；已有左子节点时返回 nullptr
+    bin_tree_node* left_child(const T& value)
+    {
+        if (left)
+            return nullptr;
+
+        // Create a new node with the given value
+        left = new bin_tree_node(value);
+        return left;
+    }
+
+    // 移除当前节点的左子树
+    bool erase_left_subtree()
+    {
+        if (left == nullptr)
+            return false;
+
+        delete left;
+        left = nullptr;
+        return true;
+    }
+
+    // 获取右子节点（const 版本）
+    const bin_tree_node* right_child() const
+    {
+        return right;
+    }
+
+    // 获取右子节点（非 const 版本）
+    bin_tree_node* right_child()
+    {
+        return right;
+    }
+
+    // 设置当前节点的右子节点，返回新节点；已有右子节点时返回 nullptr
+    bin_tree_node* right_child(const T& value)
+    {
+        if (right)
+            return nullptr;
+
+        // Create a new node with the given value
+        right = new bin_tree_node(value);
+        return right;
+    }
+
+    // 移除当前节点的右子树
+    bool erase_right_subtree()
+    {
+        if (right == nullptr)
+            return false;
+
+        delete right;
+        right = nullptr;
+        return true;
+    }
+
+    ...
+};
+```
+
+	
+3) 遍历
+
+```cpp
+class bin_tree_node {
+    ...
+
+    // 深度优先（depth-first）前序遍历
+    template <typename context, typename visitor_func>
+    void dfs_preorder(context* ctxt, visitor_func visitor) const
+    {
+        // call the visitor for the current node
+        visitor(ctxt, payload);
+
+        if (left)
+            left->dfs_preorder(ctxt, visitor);
+        if (right)
+            right->dfs_preorder(ctxt, visitor);
+    }
+
+    // 深度优先（depth-first）中序遍历
+    template <typename context, typename visitor_func>
+    void dfs_inorder(context* ctxt, visitor_func visitor) const
+    {
+        if (left)
+            left->dfs_inorder(ctxt, visitor);
+
+        // call the visitor for the current node
+        visitor(ctxt, payload);
+
+        if (right)
+            right->dfs_inorder(ctxt, visitor);
+    }
+
+    // 深度优先（depth-first）后序遍历
+    template <typename context, typename visitor_func>
+    void dfs_postorder(context* ctxt, visitor_func visitor) const
+    {
+        if (left)
+            left->dfs_postorder(ctxt, visitor);
+        if (right)
+            right->dfs_postorder(ctxt, visitor);
+
+        // call the visitor for the current node
+        visitor(ctxt, payload);
+    }
+
+    // 深度优先（depth-first）前序遍历（迭代实现）
+    template <typename context, typename visitor_func>
+    void dfs_preorder_i(context* ctxt, visitor_func visitor) const
+    {
+        std::stack<const bin_tree_node*> stack;
+        stack.push(this);
+
+        while (!stack.empty()) {
+            const bin_tree_node* node = stack.top();
+            stack.pop();
+
+            // call the visitor for the current node
+            visitor(ctxt, node->payload);
+
+            if (node->right)
+                stack.push(node->right);
+            if (node->left)
+                stack.push(node->left);
+        }
+    }
+
+    // 广度优先（breadth-first）级序遍历（迭代实现）
+    template <typename context, typename visitor_func>
+    void bfs(context* ctxt, visitor_func visitor) const
+    {
+        std::queue<const bin_tree_node*> queue;
+        queue.push(this);
+
+        while (!queue.empty()) {
+            const bin_tree_node* node = queue.front();
+            queue.pop();
+
+            // call the visitor for the current node
+            visitor(ctxt, node->payload);
+
+            if (node->left)
+                queue.push(node->left);
+            if (node->right)
+                queue.push(node->right);
+        }
+    }
+
+    ...
+};
+```
+
+	
+4) 示例
+
+```cpp
+#include <iostream>     // for cin and cout
+#include <sstream>      // for ostringstream
+#include <string>       // for stod()
+#include <cassert>      // for assert()
+
+using namespace std;
+
+void test_binary_tree_node()
+{
+    struct context_print {
+        ostream& os;
+    };
+
+    struct visitor_print {
+        void operator() (context_print* ctxt, const int& value) {
+            ctxt->os << value << " ";
+        }
+    };
+
+    ostringstream oss;
+    context_print ctxt = { oss };
+    using my_bin_tree_node = bin_tree_node<int>;
+    my_bin_tree_node *level_0, *level_1, *level_2;
+
+    level_0 = new my_bin_tree_node(0);
+
+    oss.str("");
+    level_0->dfs_preorder(&ctxt, visitor_print{});
+    assert(oss.str() == "0 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    assert(oss.str() == "0 ");
+
+    level_0->left_child(-1);
+    level_1 = level_0->right_child(1);
+    assert(level_0->left_child()->payload == -1);
+    assert(level_0->right_child()->payload == 1);
+
+    oss.str("");
+    level_0->dfs_preorder(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -1 1 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -1 1 ");
+
+    level_1->left_child(-10);
+    level_2 = level_1->right_child(10);
+    assert(level_1->left_child()->payload == -10);
+    assert(level_1->right_child()->payload == 10);
+
+    oss.str("");
+    level_0->dfs_inorder(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "-1 0 -10 1 10 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -1 1 -10 10 ");
+
+    level_2->left_child(-100);
+    level_2->right_child(100);
+    assert(level_2->left_child()->payload == -100);
+    assert(level_2->right_child()->payload == 100);
+
+    oss.str("");
+    level_0->dfs_preorder(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
+
+    oss.str("");
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
+
+    oss.str("");
+    level_0->dfs_inorder(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "-1 0 -10 1 -100 10 100 ");
+
+    oss.str("");
+    level_0->dfs_postorder(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "-1 -10 -100 100 10 1 0 ");
+
+    oss.str("");
+    level_0->bfs(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
+
+    delete level_0;
+}
+```
+
+	
+### 课堂练习
+
+（十五分钟内完成）
+
+1. 复制二叉树的源文件 [`binary-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp)，参照 `dfs_preorder_i()` 遍历方法实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
+1. 将增强后的 `binary-tree.cpp` 文件添加到 `plzs-homework` 仓库。
 
 		
 ## 特殊树
