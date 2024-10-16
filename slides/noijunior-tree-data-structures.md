@@ -478,7 +478,7 @@ void test_tree_node()
 
 （十五分钟内完成）
 
-1. 复制一般树的源文件 [`generic-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，在 `dfs_r()` 和 `dfs_i()` 遍历方法的基础上实现后序遍历方法 `dfs_postorder_r()` 和 `dfs_postorder_i()`，并添加对应的测试用例。
+1. 复制一般树的源文件 [generic-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，在 `dfs_r()` 和 `dfs_i()` 遍历方法的基础上实现后序遍历方法 `dfs_postorder_r()` 和 `dfs_postorder_i()`，并添加对应的测试用例。
 1. 将 `generic-tree.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-4/` 目录（下同），并推送到远程仓库。
 
 		
@@ -829,7 +829,7 @@ void test_binary_tree_node()
 
 （十五分钟内完成）
 
-1. 复制二叉树的源文件 [`binary-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp)，参照 `dfs_preorder_i()` 遍历方法实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
+1. 复制二叉树的源文件 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp)，参照 `dfs_preorder_i()` 遍历方法实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
 1. 将增强后的 `binary-tree.cpp` 文件添加到 `plzs-homework` 仓库。
 
 		
