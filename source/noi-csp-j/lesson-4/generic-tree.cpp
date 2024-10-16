@@ -10,6 +10,7 @@
  * License: GPLv3
  */
 #include <vector>       // for vector
+#include <stack>        // for stack
 #include <queue>        // for queue
 
 template <typename T>
@@ -36,16 +37,37 @@ class tree_node {
         return node->children.size();
     }
 
-    // 深度优先（depth-first）遍历
+    // 深度优先（depth-first）遍历（递归实现）
     template <typename context, typename visitor_func>
-    void dfs(context* ctxt, visitor_func visitor) const
+    void dfs_r(context* ctxt, visitor_func visitor) const
     {
         // call the visitor for the current node
         visitor(ctxt, payload);
 
         size_t nr_children = children.size();
         for (size_t i = 0; i < nr_children; i++) {
-            children[i]->dfs(ctxt, visitor);
+            children[i]->dfs_r(ctxt, visitor);
+        }
+    }
+
+    // 深度优先（depth-first）遍历（迭代实现）
+    template <typename context, typename visitor_func>
+    void dfs_i(context* ctxt, visitor_func visitor) const
+    {
+        std::stack<const tree_node*> stack;
+        stack.push(this);
+
+        while (!stack.empty()) {
+            const tree_node* node = stack.top();
+            stack.pop();
+
+            // call the visitor for current node
+            visitor(ctxt, node->payload);
+
+            size_t nr_children = node->children.size();
+            for (size_t i = 0; i < nr_children; i++) {
+                stack.push(node->children[nr_children - i - 1]);
+            }
         }
     }
 
@@ -136,7 +158,11 @@ void test_tree_node()
     level_0 = new my_tree_node(0);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    assert(oss.str() == "0 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     assert(oss.str() == "0 ");
 
     oss.str("");
@@ -150,7 +176,12 @@ void test_tree_node()
     level_0->push_back(2);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 1 2 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 1 2 ");
 
@@ -166,7 +197,12 @@ void test_tree_node()
     level_1->push_back(20);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
 
@@ -184,7 +220,12 @@ void test_tree_node()
     level_2->push_back(300);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
 
@@ -244,7 +285,7 @@ int main()
 
     context_print ctxt = { cout };
     clog << "DFS Traversal\n";
-    root->dfs(&ctxt, visitor_print{});
+    root->dfs_i(&ctxt, visitor_print{});
 
     clog << "BFS Traversal\n";
     root->bfs(&ctxt, visitor_print{});

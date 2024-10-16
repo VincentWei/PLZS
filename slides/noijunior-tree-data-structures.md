@@ -160,6 +160,11 @@
 <img style="height:600px;width:auto;" src="assets/noijunior-tree-types.png" />
 
 	
+### 课堂思考
+
+- 根节点的高度为 `1`，一根拥有 `2023` 个节点的三叉树高度至少多少？
+
+	
 ### 树的基本操作
 
 - 创建（create）：在数据结构中创建树。
@@ -298,19 +303,38 @@ class tree_node {
 
     // 深度优先（depth-first）遍历（递归实现）
     template <typename context, typename visitor_func>
-    void dfs(context* ctxt, visitor_func visitor) const
+    void dfs_r(context* ctxt, visitor_func visitor) const
     {
         // call the visitor for the current node
-        // 先访问再递归：先序（preorder）
+        // 前序（preorder）遍历
         visitor(ctxt, payload);
 
         size_t nr_children = children.size();
         for (size_t i = 0; i < nr_children; i++) {
-            children[i]->dfs(ctxt, visitor);
+            children[i]->dfs_r(ctxt, visitor);
         }
+    }
 
-        // 先递归再访问：后序（postorder）
-        // visitor(ctxt, payload);
+    // 深度优先（depth-first）遍历（迭代实现）
+    template <typename context, typename visitor_func>
+    void dfs_i(context* ctxt, visitor_func visitor) const
+    {
+        std::stack<const tree_node*> stack;
+        stack.push(this);
+
+        while (!stack.empty()) {
+            const tree_node* node = stack.top();
+            stack.pop();
+
+            // call the visitor for current node
+            visitor(ctxt, node->payload);
+
+            size_t nr_children = node->children.size();
+            for (size_t i = 0; i < nr_children; i++) {
+                // XXX 倒序压栈
+                stack.push(node->children[nr_children - i - 1]);
+            }
+        }
     }
 
     // 广度优先（breadth-first）遍历（迭代实现）
@@ -369,7 +393,11 @@ void test_tree_node()
     level_0 = new my_tree_node(0);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    assert(oss.str() == "0 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     assert(oss.str() == "0 ");
 
     oss.str("");
@@ -383,7 +411,12 @@ void test_tree_node()
     level_0->push_back(2);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 1 2 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 1 2 ");
 
@@ -399,7 +432,12 @@ void test_tree_node()
     level_1->push_back(20);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
 
@@ -417,7 +455,12 @@ void test_tree_node()
     level_2->push_back(300);
 
     oss.str("");
-    level_0->dfs(&ctxt, visitor_print{});
+    level_0->dfs_r(&ctxt, visitor_print{});
+    clog << oss.str() << endl;
+    assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
+
+    oss.str("");
+    level_0->dfs_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
 
@@ -433,9 +476,9 @@ void test_tree_node()
 	
 ### 课堂练习
 
-（十分钟内完成）
+（十五分钟内完成）
 
-1. 复制一般树的源文件 [`generic-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，修改其中的 `dfs()` 遍历方法，将其调整为迭代实现。
+1. 复制一般树的源文件 [`generic-tree.cpp`](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，在 `dfs_r()` 和 `dfs_i()` 遍历方法的基础上实现后序遍历方法 `dfs_postorder_r()` 和 `dfs_postorder_i()`，并添加对应的测试用例。
 1. 将 `generic-tree.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-4/` 目录（下同），并推送到远程仓库。
 
 		
@@ -470,6 +513,11 @@ void test_tree_node()
   1. 后序遍历（postorder traversal，左、右、当前）：访问左子树，然后访问右子树，然后是节点。
 
 	
+### 课堂思考
+
+- 给定一棵二叉树，其前序遍历结果为 `ABDECFG`，中序遍历结果为 `DEBACFG`。请问这棵树的正确后序遍历结果是什么？
+
+	
 ### 实现
 
 1) 泛型类声明
@@ -501,7 +549,6 @@ class bin_tree_node {
     }
 };
 ```
-
 	
 2) 创建
 
@@ -642,6 +689,7 @@ class bin_tree_node {
             // call the visitor for the current node
             visitor(ctxt, node->payload);
 
+            // XXX 先压右子节点，再压左子节点
             if (node->right)
                 stack.push(node->right);
             if (node->left)
