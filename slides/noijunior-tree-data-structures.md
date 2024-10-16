@@ -854,7 +854,15 @@ void test_binary_tree_node()
 	
 ### 完全二叉树
 
-- 定义：完全（complete）二叉树是一种特殊类型的二叉树，
+- 定义：完全（complete）二叉树是一种特殊类型的二叉树，除了最大级别之外，其中所有的级别都被完全填充，且所有叶子节点均具有相同深度。
+
+<img style="height:500px;width:auto;" src="assets/noijunior-complete-binary-tree.jpg" />
+
+	
+- 性质
+  1. 除最后一级外，所有级别都被填满。
+  1. 深度为 `$ d $` 的完全二叉树，其节点数量为 `$ 2^d $`。
+  1. 在一个有 `$ N $` 个节点的完全二叉树中，树的高度是 `$ log_2{N + 1} $`。
 
 	
 ### 霍夫曼树
