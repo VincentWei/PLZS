@@ -925,18 +925,14 @@ void test_binary_tree_node()
 	
 ### STL 文件读写流
 
-1) 复习一下基础 STL 文件读写相关类和对象
-  - [课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
+1) 复习一下基础 STL 文件读写相关类和对象：[课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
 
 	
-2) `open()` 方法和 STL 文件打开模式
+2) `open()` 方法和文件打开模式
+  - `void std::fstream::open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);`
+  - `void std::fstream::open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);`
 
-```cpp []
-void open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);
-void open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);
-```
-
-| 成员常量 | 含义               | 解释              |
+| 打开模式 | 含义               | 解释              |
 | ---      | ---                | ---               |
 | `in`     | 输入（input）      | 打开文件用于读取。|
 | `out`    | 输出（output）     | 打开文件用于写入。|
@@ -952,7 +948,7 @@ void open(const string& filename, ios_base::openmode mode = ios_base::in | ios_b
 int main()
 {
     std::fstream fs;
-    fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+    fs.open("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
     fs << "This is a line\n";
     fs.close();
     return 0;
@@ -976,6 +972,18 @@ int main()
 
 - `istream& std::istream::read(char* dst, streamsize n);` 方法从流中读取指定长度的字节到目标内存。
 - `ostream& std::ostream::write(const char* src, streamsize n);` 方法将目标内存中指定长度的字节写入流。
+- `istream& std::istream::seekg(streamoff off, ios_base::seekdir way);` 方法修改输入流的读取位置。
+- `streamoff std::istream::tellg();` 方法获得输入流的当前读取位置。
+- `ostream& std::ostream::seekp(streamoff off, ios_base::seekdir way);` 方法修改输出流的写入位置。
+- `streamoff std::ostream::tellp();` 方法获得输出流的当前写入位置。
+
+| 定位方式          | 含义                              |
+| ---               | ---                               |
+| `ios_base::beg`   | 相对于流的起始位置（beginning）   |
+| `ios_base::cur`   | 相对于流的当前位置（current）     |
+| `ios_base::end`   | 相对于流的结束位置（end）         |
+
+	
 - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/fstream-binary.cpp)
 
 ```cpp
