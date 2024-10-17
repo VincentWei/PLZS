@@ -913,7 +913,6 @@ void test_binary_tree_node()
 
 1) 复习一下基础 STL 文件读写相关类和对象
   - [课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
-  - [std::fstream 参考](https://zh.cppreference.com/w/cpp/io/basic_fstream)
 
 	
 2) `open()` 方法和 STL 文件打开模式
@@ -963,8 +962,6 @@ int main()
 
 - `istream& std::istream::read(char* dst, streamsize n);` 方法从流中读取指定长度的字节到目标内存。
 - `ostream& std::ostream::write(const char* src, streamsize n);` 方法将目标内存中指定长度的字节写入流。
-- [std::istream::read 参考](https://zh.cppreference.com/w/cpp/io/basic_istream/read)
-- [std::ostream::write 参考](https://zh.cppreference.com/w/cpp/io/basic_istream/write)
 - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/fstream-binary.cpp)
 
 ```cpp
@@ -1103,18 +1100,124 @@ int main()
   1. `opendir()`：打开一个目录用于读取其目录项。
   1. `readdir()`：读取一条目录项。
   1. `closedir()`：关闭已打开的目录。
+- 使用 Linux 手册页获取有关命令、C 标准库接口的文档。如：
+  1. `$ man 2 mkdir` 命令。
+  1. [在线手册页](https://www.man7.org/linux/man-pages/man2/mkdir.2.html)
 
 	
-- [示例程序]()
+- [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/readdir.cpp)
 
 ```cpp []
+#include <iostream>
+#include <string>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+using namespace std;
+
+struct _Spaces { unsigned n; };
+
+inline _Spaces indent(unsigned level) {
+    return { level };
+}
+
+inline ostream& operator<<(ostream& os, _Spaces _s) {
+    for (unsigned i = 0; i < _s.n; i++) {
+        os << ' ';
+    }
+
+    return os;
+}
+
+void list_dir_entries(unsigned level, const string& path)
+{
+    DIR*    dir;
+    struct  dirent* dir_ent;
+
+    dir = ::opendir(path.c_str());
+    if (dir == nullptr) {
+        cerr << "Failed to open directory: " << path << endl;
+        return;
+    }
+
+    cout << indent(level * 2) << path << "/" << endl;
+
+    while ((dir_ent = ::readdir(dir)) != nullptr) {
+        // 跳过 . 和 ..
+        if (strcmp(dir_ent->d_name, ".") == 0
+                || strcmp(dir_ent->d_name, "..") == 0)
+            continue;
+
+        // 组装完整文件路径
+        string full_path = path + "/" + dir_ent->d_name;
+
+        struct stat my_stat;
+        if (::stat(full_path.c_str(), &my_stat) < 0 ){
+            cerr << "Failed to stat file: " << full_path << endl;
+            continue;
+        }
+
+        if (S_ISDIR(my_stat.st_mode)) {
+            list_dir_entries(level + 1, full_path);
+        }
+        else {
+            cout << indent(level * 2 + 1) << dir_ent->d_name << endl;
+        }
+
+        // XXX struct stat 结构中的 st_size 字段包含有文件的尺寸信息。
+    }
+
+    ::closedir(dir);
+}
+
+int main(int argc, const char* argv[])
+{
+    string start;
+    if (argc > 1)
+        start = argv[1];
+    else
+        start = ".";
+
+    list_dir_entries(0, start);
+    return 0;
+}
 ```
 
 		
 ## 作业
 
+`Homework`
+
+	
+1. 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+
+```console
+./huffman-encode
+<asdfasdfasdf^D>        # Ctrl+D（^D） 表示输入结束。
+Compressed and saved to huffman-code.bin
+```
+
+2. 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
+```console
+./huffman-decode
+asdfasdfasdf
+```
+
+	
+3. 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和创建日期最新的文件。运行效果如下：
+
+```console
+./directoy-tree .
+The largest file: readdir (12,1234 Bytes)
+The smallest file: readdir.cpp (1,234 Bytes)
+The latest modified file: directory-tree
+```
+
 	
 ### 参考链接
 
-- [fstream](https://cplusplus.com/reference/fstream/)
+- [本讲示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/)
+- [std::fstream 参考](https://cplusplus.com/reference/fstream/)
+- [std::fstream 参考](https://zh.cppreference.com/w/cpp/io/basic_fstream)
 
