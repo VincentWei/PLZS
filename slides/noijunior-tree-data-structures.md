@@ -1161,12 +1161,16 @@ int main()
 
 using namespace std;
 
+// 为支持自定义的 ostream 操作器（manipulator）indent() 而定义一个新的结构类型。
 struct _Spaces { unsigned n; };
 
+// 该操作器可以如此使用：cout << indent(3) << endl;
 inline _Spaces indent(unsigned level) {
     return { level };
 }
 
+// 重载 ostream 的 << 运算符，其左值类型为 ostream&，右值类型为 _Space。
+// 从而支持 cout << indent(3) 这样的用法。
 inline ostream& operator<<(ostream& os, _Spaces _s) {
     for (unsigned i = 0; i < _s.n; i++) {
         os << ' ';
@@ -1175,6 +1179,26 @@ inline ostream& operator<<(ostream& os, _Spaces _s) {
     return os;
 }
 
+/*
+  该函数递归读取目录中的目录项并列出，效果如下：
+
+  ./lesson-4/
+   in.txt
+   out.txt
+   Makefile
+   generic-tree.cpp
+   students.bin
+   fstream-binary.cpp
+   binary-tree.cpp
+   readdir.cpp
+   iostream-rdbuf.cpp
+  ./lesson-3/
+   Makefile
+   simple-vector.cpp
+   doubly-linked-list.cpp
+   singly-linked-list.cpp
+   singly-circular-linked-list.cpp
+*/
 void list_dir_entries(unsigned level, const string& path)
 {
     DIR*    dir;
@@ -1189,7 +1213,7 @@ void list_dir_entries(unsigned level, const string& path)
     cout << indent(level * 2) << path << "/" << endl;
 
     while ((dir_ent = ::readdir(dir)) != nullptr) {
-        // 跳过 . 和 ..
+        // 跳过 . 和 ..，否则会无限递归
         if (strcmp(dir_ent->d_name, ".") == 0
                 || strcmp(dir_ent->d_name, "..") == 0)
             continue;
