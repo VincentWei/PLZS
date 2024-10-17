@@ -1023,19 +1023,22 @@ int main()
 ```
 
 	
-5) 标准输入/输出的重定向
+5) 输入/输出流的重定向
 
-- 重定向的概念。
+- 重定向（redirect）的概念。
 - Shell 中重定向标准输出、标准错误的方法：
   1. `$ PROGRAM [1]>FILE`：将标准输出重定向到文件 `FILE`。
   1. `$ PROGRAM 2>FILE`：将标准错误重定向到文件 `FILE`。
   1. `$ PROGRAM [1]>>FILE`：将标准错误重定向并追加到文件 `FILE`。
 - Shell 中重定向标准输入的方法：
   1. `$ PROGRAM <FILE`：将标准输入重定向为文件 `FILE`，程序将从 `FILE` 中读取输入内容。
-- C++ STL 文件流的 `filebuf` 对象。
+- C++ STL 输入/输出流的 `std::streambuf` 对象：
+  1. 每个文件流（`std::ifstream`、`std::ofstream` 或 `std::ofstream`）关联有一个 `std::filebuf` 对象。
+  1. 每个字符串流（`std::stringstream`）关联有一个 `std::stringbuf` 对象。
 
 	
-6) 使用 STL `std::iostream::rdbuf()` 方法实现“重定向”。
+6) 动态改变 C++ 的流对象的流缓冲区对象
+  - 使用 STL `std::ios::rdbuf()` 方法，通过设置输入输出流对象的流缓冲区对象，可实现“重定向”。
   - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/iostream-rdbuf.cpp)
 
 ```cpp []
