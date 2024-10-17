@@ -152,8 +152,8 @@
 ### 树的分类
 
 - 根据树中每个节点可以具有的子节点数量，树形数据结构可以分为三种类型：
-  1. 二叉（binary）树：二叉树中的每个节点最多可以有两个子节点。
-  1. 三元（ternary）树：三元树中的每个节点最多可以有三个子节点。
+  1. 二叉（binary）树：二叉树中的每个节点最多可以有两个子节点；分别称为左（left）子节点和右（right）子节点。
+  1. 三元（ternary）树：三元树中的每个节点最多可以有三个子节点；分别称为左子节点、中（middle）子节点和右子节点。
   1. N 元（N-ary）或一般（generic）树：一般树中，每个节点的子节点数量可以超过三个。
 
 <img style="height:600px;width:auto;" src="assets/noijunior-tree-types.png" />
@@ -514,9 +514,9 @@ void test_tree_node()
 ### 遍历
 
 - 二叉树的深度优先遍历有三种形式：
-  1. 前序遍历（preorder traversal，先节点，次左树，再右树）：首先访问节点，然后遍历左子树，然后遍历右子树。
-  1. 中序遍历（inorder traversal，先左树，次节点，再右树）：首先遍历左子树，然后访问节点，然后遍历右子树。
-  1. 后序遍历（postorder traversal，先左树，次右树，再节点）：首先遍历左子树，然后遍历右子树，然后访问节点。
+  1. 前序遍历（preorder traversal，先节点，次左树，再右树）：首先访问（根）节点，然后遍历左子树，然后遍历右子树。
+  1. 中序遍历（inorder traversal，先左树，次节点，再右树）：首先遍历左子树，然后访问（根）节点，然后遍历右子树。
+  1. 后序遍历（postorder traversal，先左树，次右树，再节点）：首先遍历左子树，然后遍历右子树，然后访问（根）节点。
 
 	
 ### 课堂思考
@@ -897,7 +897,7 @@ void test_binary_tree_node()
 - 霍夫曼树的特点：
   1. 叶结点的权值越小，离根越远。
   1. 叶结点的权值越大，离根越近。
-  1. 所有叶结点的度为 `0`，其他结点的度均为 `2`。
+  1. 所有叶结点的度为 `0`，其他结点的度均为 `2`；这样的二叉树亦称完满二叉树（full binary tree）或严格二叉树（strictly binary tree）。
 
 	
 <img style="height:700px;width:auto;" src="assets/noijunior-wpl-of-binary-tree.svg" />
@@ -1228,7 +1228,10 @@ int main(int argc, const char* argv[])
 `Homework`
 
 	
-1) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+1) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
+
+	
+2) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
 
 ```console
 ./huffman-encode
@@ -1236,14 +1239,14 @@ int main(int argc, const char* argv[])
 Compressed and saved to huffman-code.bin
 ```
 
-2) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
+3) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
 ```console
 ./huffman-decode
 asdfasdfasdf
 ```
 
 	
-3) 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
+4) 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
 
 ```console
 ./directoy-tree .
