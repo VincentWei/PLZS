@@ -863,9 +863,9 @@ void test_binary_tree_node()
   1. 树的高度：具有 `N` 个节点的完美二叉树的高度为 `$ \log_2{(N+1)} - 1 $`。
 
 	
-3) 完美二叉树的数组表达
+3) 数组表达
 
-见下图
+完美二叉树的数组表达
 
 <img style="height:700px;width:auto;" src="assets/noijunior-perfect-binary-tree-by-array.svg" />
 
@@ -883,9 +883,9 @@ void test_binary_tree_node()
   1. 在一个有 `$ N $` 个节点的完全二叉树中，树的高度为 `$ log_2{(N + 1)} $`。
 
 	
-3) 完全二叉树的数组表达
+3) 数组表达
 
-见下图
+完全二叉树的数组表达
 
 <img style="height:700px;width:auto;" src="assets/noijunior-complete-binary-tree-by-array.svg" />
 
