@@ -1218,7 +1218,8 @@ void list_dir_entries(unsigned level, const string& path)
 }
 
 /*
-  main() 的另一种形式，可通过 argc 和 argv 获得执行程序时的命令行参数信息。
+  这里展示了 main() 的另一种形式。
+  使用这一形式时，通过形参 argc 和 argv 获得执行该程序时的命令行参数信息。
   系统会将执行该程序时的命令行字符串按空格分隔并传入 main() 函数。其中，
 
   argc 表示参数的数量（包括程序名称在内）。
@@ -1226,9 +1227,10 @@ void list_dir_entries(unsigned level, const string& path)
 
   如对命令行：
 
-    ./directory-tree /etc
+    $ ./directory-tree /etc
 
   有：
+
     argc: 2
     argv: ["./directory-tree", "/etc"]
 */

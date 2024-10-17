@@ -66,11 +66,31 @@ void list_dir_entries(unsigned level, const string& path)
         else {
             cout << indent(level * 2 + 1) << dir_ent->d_name << endl;
         }
+
+        // XXX struct stat 结构中的 st_size 字段包含有文件的大小（字节为单位）。
+        // XXX struct stat 结构中的 st_mtim 字段包含有文件的最后修改时间。
     }
 
     ::closedir(dir);
 }
 
+/*
+  这里展示了 main() 的另一种形式。
+  使用这一形式时，通过形参 argc 和 argv 获得执行该程序时的命令行参数信息。
+  系统会将执行该程序时的命令行字符串按空格分隔并传入 main() 函数。其中，
+
+  argc 表示参数的数量（包括程序名称在内）。
+  argv 包含各个参数对应的字符串指针。
+
+  如对命令行：
+
+    $ ./directory-tree /etc
+
+  有：
+
+    argc: 2
+    argv: ["./directory-tree", "/etc"]
+*/
 int main(int argc, const char* argv[])
 {
     string start;
