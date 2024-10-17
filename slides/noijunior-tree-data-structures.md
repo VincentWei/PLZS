@@ -18,22 +18,22 @@
   1. 一个家族成员可以构成一棵树。
 - 树形数据结构在计算机中随处可见：
   1. 文件系统被组织成树形管理。
-  1. 用于数据压缩（霍夫曼编码）。
+  1. 可用于数据压缩，如霍夫曼编码。
   1. 常见的图文文档被解释为树形数据结构进行处理。
   1. 程序被编译器或解释器解析为语法树然后做进一步处理。
-  1. 数据库管理系统中常用特殊的树来保存索引信息，用于快速查询符合特定条件的记录。
+  1. 可用于搜索。数据库管理系统中常用特殊的树来保存索引信息，用于快速查询符合特定条件的记录。
 
 	
 ### 定义
 
 - 树是由节点集合（collection）组成的非线性层次结构，树的每个节点都存储一个值以及对子节点的引用信息。
 
-<img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
+<img style="height:500px;width:auto;" src="assets/noijunior-representation-of-tree-data-structure.png" />
 
 	
 ### 术语
 
--  父（parent）节点：作为节点前身的节点称为该节点的父节点。
+-  父（parent）节点：作为节点前任的节点称为该节点的父节点。
 -  子（child）节点：节点的直接后继节点称为该节点的子节点。
 -  根（root）节点：树的最顶端节点或没有父节点的节点称为根节点。
 -  叶子（leaf）节点：没有任何子节点的节点称为叶子节点。
@@ -175,7 +175,6 @@
   1. 广度优先遍历（breadth-first traversal），亦称广度优先搜索（breadth-first search，BFS）
   1. 广度优先遍历也称作级序遍历（level order traversal）。
 
-
 		
 ## 一般树
 
@@ -294,18 +293,21 @@ class tree_node {
 	
 3) 遍历
 
+- 一般树的深度优先遍历有两种形式：
+  1. 前序遍历（preorder traversal，先节点后子树）：首先访问节点，然后访问各个子树。
+  1. 后序遍历（postorder traversal，先子树后节点）：首先遍历各个子树，然后访问节点。
+
 ```cpp []
-#include <queue>        // for queue
+#include <queue>        // for std::queue
 
 class tree_node {
     ...
 
-    // 深度优先（depth-first）遍历（递归实现）
+    // 深度优先（depth-first）前序（preorder）遍历（递归实现）
     template <typename context, typename visitor_func>
     void dfs_r(context* ctxt, visitor_func visitor) const
     {
         // call the visitor for the current node
-        // 前序（preorder）遍历
         visitor(ctxt, payload);
 
         size_t nr_children = children.size();
@@ -314,7 +316,7 @@ class tree_node {
         }
     }
 
-    // 深度优先（depth-first）遍历（迭代实现）
+    // 深度优先（depth-first）前序（preorder）遍历（迭代实现）
     template <typename context, typename visitor_func>
     void dfs_i(context* ctxt, visitor_func visitor) const
     {
@@ -506,10 +508,10 @@ void test_tree_node()
 	
 ### 遍历
 
-- 二叉树的深度深度优先遍历有三种形式：
-  1. 前序遍历（preorder traversal，当前、左、右）：首先访问节点，然后访问左子树，然后访问右子树。
-  1. 中序遍历（inorder traversal，左、当前、右）：首先访问左子树，然后访问节点，然后访问右子树。
-  1. 后序遍历（postorder traversal，左、右、当前）：访问左子树，然后访问右子树，然后是节点。
+- 二叉树的深度优先遍历有三种形式：
+  1. 前序遍历（preorder traversal，先节点，次左树，再右树）：首先访问节点，然后遍历左子树，然后遍历右子树。
+  1. 中序遍历（inorder traversal，先左树，次节点，再右树）：首先遍历左子树，然后访问节点，然后遍历右子树。
+  1. 后序遍历（postorder traversal，先左树，次右树，再节点）：首先遍历左子树，然后遍历右子树，然后访问节点。
 
 	
 ### 课堂思考
@@ -522,8 +524,8 @@ void test_tree_node()
 1) 泛型类声明
 
 ```cpp []
-#include <stack>        // for stack
-#include <queue>        // for queue
+#include <stack>        // for std::stack
+#include <queue>        // for std::queue
 
 template <typename T>
 class bin_tree_node {
@@ -847,7 +849,7 @@ void test_binary_tree_node()
 - 性质
   1. 叶节点数：如果完美二叉树的高度为 `$ h $`，则叶节点数将为 `$ 2^h $`，因为最后一级已完全填充。
   1. 叶节点数（`$ N_l $`）与非叶节点数（`$ N_{nl} $`）的关系：`$ N_l = N_{nl} + 1 $`。
-  1. 节点总数：高度为 `$ h $` 的树的节点总数为 `$ 2^{h + 1} – 1 $`。树的每个节点都被填充。因此，节点总数可以计算为 `$ 2^0 + 2^1 + \cdots + 2^h = 2^h + 1 $`。
+  1. 节点总数：高度为 `$ h $` 的完美二叉树的节点总数为 `$ 2^{h + 1} – 1 $`。树的每个级别都被完全填充，因此，节点总数为 `$ 2^0 + 2^1 + \cdots + 2^h = 2^h + 1 $`。
   1. 树的高度：具有 `N` 个节点的完美二叉树的高度为 `$ \log_2{(N+1)} - 1 $`。
 
 	
@@ -910,45 +912,8 @@ void test_binary_tree_node()
 ### STL 文件读写流
 
 1) 复习一下基础 STL 文件读写相关类和对象
-  - `ofstream` 类是 `ostream` 类的子类，用于向普通文件中写入数据。
-  - `ifstream` 类是 `istream` 类的子类，用于从普通文件中读入数据。
-  - `fstream` 类是 `iostream` 类的子类，用于在普通文件中读写数据。
-  - 通过 `open()` 和 `close()` 方法打开/创建和关闭文件。
-  - 标准输入输出对象在 C++ 程序启动时被自动创建。
-  - 标准对象 `cout` 和 `cin` 分别是 `ostream` 和 `istream` 类的实例，而 `ostream` 和 `istream` 分别是 `basic_ostream` 和 `basic_istream` 类模板的实例。
-  - 标准对象 `cin` 对应 C 的标准输入流（`stdin`）；未被重定向的情况下，标准输入为键盘。
-  - 标准对象 `cout` 对应 C 的标准输出流（`stdout`）；未被重定向的情况下，标准输出为终端（屏幕终端或者伪终端）。
-  - 标准对象 `cerr` 对应 C 的标准错误输出流（`stderr`）；未被重定向的情况下，同标准输出，但不带缓冲区。
-  - 标准对象 `clog` 是 C++ 定义的标准日志输出流，默认保持和 `cerr` 的同步。
-
-	
-```cpp []
-#include <iostream>     // std::cout
-#include <fstream>      // std::ifstream and std::ofstream
-
-using namespace std;
-
-int main()
-{
-    ofstream ofs;
-    ofs.open("test.txt", ofstream::out);
-    ofs << "The first line" << endl;
-    ofs << "The second line" << endl;
-    ofs.close();
-
-    ifstream ifs;
-    ifs.open("test.txt", ifstream::in);
-
-    while (true) {
-        char c = ifs.get();
-        if (c == EOF)
-            break;
-        cout << c;
-    }
-
-    ifs.close();
-}
-```
+  - [课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
+  - [std::fstream 参考](https://zh.cppreference.com/w/cpp/io/basic_fstream)
 
 	
 2) `open()` 方法和 STL 文件打开模式
@@ -988,18 +953,77 @@ int main()
    1. 行缓冲（文本模式）
    1. 块缓冲/完全缓冲（二进制模式）
    1. 无缓冲
-- `ostream& flush();` 用于刷新输出缓冲区。
-- `ostream& endl(ostream& os);` 输出新行符，同时刷新输出缓冲区。
-- `void close();` 方法在关闭流之前，也会刷新输出缓冲区。
+- 操作器 `ostream& flush(ostream& os);` 可用于刷新输出缓冲区。
+- 操作器 `ostream& endl(ostream& os);` 输出新行符，同时刷新输出缓冲区。
+- `ostream& std::fstream::flush();` 方法可用于刷新输出缓冲区。
+- `void std::fstream::close();` 方法在关闭流之前，也会刷新输出缓冲区。
 
 	
-4) 文本模式常用读写方法
+4) 二进制模式常用读写方法
+
+- `istream& std::istream::read(char* dst, streamsize n);` 方法从流中读取指定长度的字节到目标内存。
+- `ostream& std::ostream::write(const char* src, streamsize n);` 方法将目标内存中指定长度的字节写入流。
+- [std::istream::read 参考](https://zh.cppreference.com/w/cpp/io/basic_istream/read)
+- [std::ostream::write 参考](https://zh.cppreference.com/w/cpp/io/basic_istream/write)
+- [示例程序]()
+
+```cpp
+#include <iostream>     // std::cout and std::cerr
+#include <fstream>      // std::ofstream and std::ifstream
+
+using namespace std;
+
+int main()
+{
+    struct student {
+        int id;
+        int age;
+        float height;
+        float weight;
+        char  name[16];
+    } students[] = {
+        { 10001, 10, 159.0f, 55.5f, "Tom" },
+        { 10002, 11, 160.0f, 58.5f, "Jerry" },
+    };
+
+    ofstream ofs;
+    ofs.open("students.bin", ofstream::out | ofstream::binary | std::ostream::app);
+    for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
+        ofs.write((const char*)(students + i), sizeof(struct student));
+    }
+    ofs.close();
+
+    ifstream ifs("students.bin", ofstream::in | ofstream::binary);
+    if (ifs) {
+        // 调用 seekg() 将读取位置置于文件尾。
+        ifs.seekg(0, ifs.end);
+        // 然后调用 tellg() 确定文件长度。
+        size_t length = ifs.tellg();
+
+        // 确定文件中保存的学生记录数
+        size_t nr_students = length/sizeof(struct student);
+
+        // XXX 改变流中的读取位置到文件头
+        ifs.seekg(0, ifs.beg);
+
+        // 依次读取学生记录并输出基本信息
+        for (size_t i = 0; i < nr_students; i++) {
+            struct student student;
+
+            ifs.read((char*)(&student), sizeof(struct student));
+            cout << "Got a student: " << student.id << " (" << student.name << ")\n";
+        }
+
+        ifs.close();
+    }
+    else {
+        cerr << "Failed to open students.bin file\n";
+    }
+}
+```
 
 	
-5) 二进制模式常用读写方法
-
-	
-6) 标准输入/输出的重定向
+5) 标准输入/输出的重定向
 
 - 重定向的概念。
 - Shell 中重定向标准输出、标准错误的方法：
