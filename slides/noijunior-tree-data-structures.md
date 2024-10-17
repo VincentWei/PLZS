@@ -1218,6 +1218,8 @@ The latest modified file: directory-tree
 ### 参考链接
 
 - [本讲示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/)
-- [std::fstream 参考](https://cplusplus.com/reference/fstream/)
-- [std::fstream 参考](https://zh.cppreference.com/w/cpp/io/basic_fstream)
+- [在线Linux手册页](https://www.man7.org/linux/man-pages)：目前只有英文版。
+- [std::fstream 参考](https://cplusplus.com/reference/fstream/)：来自 cplusplus.com，只有英文版，但易懂。
+- [std::fstream 参考](https://zh.cppreference.com/w/cpp/io/basic_fstream)：来自 cppreference.com，有中文版，但晦涩。
+
 
