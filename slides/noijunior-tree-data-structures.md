@@ -900,6 +900,9 @@ void test_binary_tree_node()
   1. 所有叶结点的度为 `0`，其他结点的度均为 `2`。
 
 	
+<img style="height:700px;width:auto;" src="assets/noijunior-wpl-of-binary-tree.svg" />
+
+	
 ### 霍夫曼算法
 
 - 霍夫曼算法可用于构造霍夫曼树：
@@ -917,6 +920,8 @@ void test_binary_tree_node()
   1. 设需要编码的字符集为：`$ d_1,d_2, \dots, d_n $`，这些字符在字符串中出现的频率为：`$ w_1,w_2,\dots,w_n $`。
   1. 以 `$ d_1,d_2,\dots,d_n $` 作为叶结点，`$ w_1,w_2,\dots,w_n $` 作为叶结点的权值，构造一棵霍夫曼树。
   1. 规定哈夫曼编码树的左分支代表 `0`，右分支代表 `1`，则从根结点到每个叶结点所经过的路径组成的 `0、1` 序列即为该叶结点对应字符的编码。
+
+<img style="height:700px;width:auto;" src="assets/noijunior-huffman-code.svg" />
 
 	
 - 假设有一组字符 `{a, b, c, d, e, f}`，对应的频率分别为 `5%, 9%, 12%, 13%, 16%, 45%`，则字符 `a, b, c, d, e, f` 对应的哈夫曼编码是什么？
