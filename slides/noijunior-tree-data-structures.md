@@ -162,7 +162,7 @@
   1. 三元（ternary）树：三元树中的每个节点最多可以有三个子节点；分别称为左子节点、中（middle）子节点和右子节点。
   1. N 元（N-ary）或一般（generic）树：一般树中，每个节点的子节点数量可以超过三个。
 
-<img style="height:600px;width:auto;" src="assets/noijunior-tree-types.png" />
+<img style="height:560px;width:auto;" src="assets/noijunior-tree-types.png" />
 
 	
 ### 课堂思考
