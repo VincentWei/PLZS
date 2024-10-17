@@ -939,7 +939,7 @@ void test_binary_tree_node()
 | `in`     | 输入（input）；打开文件用于读取。                              |
 | `out`    | 输出（output）；打开文件用于写入。                             |
 | `binary` | 二进制（binary）；文件上的读写操作以二进制数据进行而不是文本。 |
-| `at`     | 尾部（at end）；打开时的读写位置在文件尾部。                   |
+| `ate`    | 尾部（at end）；打开时的读写位置在文件尾部。                   |
 | `app`    | 追加（append）；所有的输出操作发生在文件尾部。                 |
 | `trunc`  | 截断（truncate）；打开时，文件中已有的任何内容将被清除/废弃。  |
 
@@ -1216,7 +1216,7 @@ int main(int argc, const char* argv[])
 `Homework`
 
 	
-1. 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+1) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
 
 ```console
 ./huffman-encode
@@ -1224,14 +1224,14 @@ int main(int argc, const char* argv[])
 Compressed and saved to huffman-code.bin
 ```
 
-2. 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
+2) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
 ```console
 ./huffman-decode
 asdfasdfasdf
 ```
 
 	
-3. 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
+3) 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
 
 ```console
 ./directoy-tree .
