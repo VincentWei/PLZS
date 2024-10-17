@@ -1227,7 +1227,7 @@ void list_dir_entries(unsigned level, const string& path)
 
   如对命令行：
 
-    $ ./directory-tree /etc
+    $ ./readdir /etc
 
   有：
 
