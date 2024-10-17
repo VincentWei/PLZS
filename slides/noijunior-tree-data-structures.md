@@ -485,7 +485,7 @@ void test_tree_node()
 	
 ### 一般树的数组表达
 
-<img style="height:600px;width:auto;" src="assets/noijunior-generic-tree-by-arrays.svg" />
+<img style="height:700px;width:auto;" src="assets/noijunior-generic-tree-by-arrays.svg" />
 
 		
 ## 二叉树
@@ -841,7 +841,7 @@ void test_binary_tree_node()
 	
 ### 二叉树的数组表达
 
-<img style="height:600px;width:auto;" src="assets/noijunior-binary-tree-by-array.svg" />
+<img style="height:700px;width:auto;" src="assets/noijunior-binary-tree-by-array.svg" />
 
 		
 ## 特殊树
@@ -863,16 +863,16 @@ void test_binary_tree_node()
   1. 树的高度：具有 `N` 个节点的完美二叉树的高度为 `$ \log_2{(N+1)} - 1 $`。
 
 	
-3) 完美二叉树的数组表达
+3) 完美二叉树的数组表达  
 
-<img style="height:600px;width:auto;" src="assets/noijunior-perfect-binary-tree-by-array.svg" />
+<img style="height:700px;width:auto;" src="assets/noijunior-perfect-binary-tree-by-array.svg" />
 
 	
 ### 完全二叉树
 
 1) 定义：完全（complete）二叉树是一种特殊类型的二叉树，除了最大级别之外，其中所有的级别都被完全填充，且所有叶子节点均具有相同深度。
 
-<img style="height:500px;width:auto;" src="assets/noijunior-complete-binary-tree.jpg" />
+<img style="height:500px;width:auto;" src="assets/noijunior-complete-binary-tree.png" />
 
 	
 2) 性质
@@ -881,9 +881,9 @@ void test_binary_tree_node()
   1. 在一个有 `$ N $` 个节点的完全二叉树中，树的高度是 `$ log_2{(N + 1)} $`。
 
 	
-3) 完全二叉树的数组表达
+3) 完全二叉树的数组表达  
 
-<img style="height:600px;width:auto;" src="assets/noijunior-complete-binary-tree-by-array.svg" />
+<img style="height:700px;width:auto;" src="assets/noijunior-complete-binary-tree-by-array.svg" />
 
 	
 ### 霍夫曼树
