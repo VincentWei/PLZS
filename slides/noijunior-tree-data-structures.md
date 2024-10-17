@@ -929,17 +929,19 @@ void test_binary_tree_node()
 
 	
 2) `open()` 方法和文件打开模式
-  - `void std::fstream::open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);`
-  - `void std::fstream::open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);`
+  - `void std::fstream::open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
+  - `void std::fstream::open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
 
-| 打开模式 | 含义               | 解释              |
-| ---      | ---                | ---               |
-| `in`     | 输入（input）      | 打开文件用于读取。|
-| `out`    | 输出（output）     | 打开文件用于写入。|
-| `binary` | 二进制（binary）   | 文件上的读写操作以二进制数据进行而不是文本。|
-| `at`     | 尾部（at end）     | 打开时的读写位置在文件尾部。|
-| `app`    | 追加（append）     | 所有的输出操作发生在文件尾部，也就是写入的内容将会被追加到文件尾部。|
-| `trunc`  | 截断（truncate）   | 打开时，文件中已有的任何内容将被清除/废弃。 |
+----
+
+| 打开模式 | 含义                                                           |
+| ---      | ---                                                            |
+| `in`     | 输入（input）；打开文件用于读取。                              |
+| `out`    | 输出（output）；打开文件用于写入。                             |
+| `binary` | 二进制（binary）；文件上的读写操作以二进制数据进行而不是文本。 |
+| `at`     | 尾部（at end）；打开时的读写位置在文件尾部。                   |
+| `app`    | 追加（append）；所有的输出操作发生在文件尾部。                 |
+| `trunc`  | 截断（truncate）；打开时，文件中已有的任何内容将被清除/废弃。  |
 
 	
 ```cpp []
@@ -976,6 +978,8 @@ int main()
 - `streamoff std::istream::tellg();` 方法获得输入流的当前读取位置。
 - `ostream& std::ostream::seekp(streamoff off, ios_base::seekdir way);` 方法修改输出流的写入位置。
 - `streamoff std::ostream::tellp();` 方法获得输出流的当前写入位置。
+
+----
 
 | 定位方式          | 含义                              |
 | ---               | ---                               |
