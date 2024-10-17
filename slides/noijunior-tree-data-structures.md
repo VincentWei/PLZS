@@ -132,7 +132,7 @@
 
 标准 Linux 文件系统层次结构
 
-<img style="height:auto;width:800px;" src="assets/noijunior-standard-linux-filesystem-hierarchy.png" />
+<img style="height:720px;width:auto;" src="assets/noijunior-standard-linux-filesystem-hierarchy.png" />
 
 	
 2) HTML 文档
