@@ -968,7 +968,8 @@ void test_binary_tree_node()
 int main()
 {
     std::fstream fs;
-    fs.open("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+    fs.open("test.txt",
+            std::fstream::in | std::fstream::out | std::fstream::app);
     fs << "This is a line\n";
     fs.close();
     return 0;
