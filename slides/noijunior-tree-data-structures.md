@@ -195,7 +195,7 @@
 
 1) 泛型类声明
 
-```cpp
+```cpp []
 #include <vector>       // for vector
 
 template <typename T>
@@ -245,7 +245,7 @@ public:
 	
 2) 创建（以矢量维护子节点为例，下同）
 
-```cpp
+```cpp []
 class tree_node {
     ...
 
@@ -294,7 +294,7 @@ class tree_node {
 	
 3) 遍历
 
-```cpp
+```cpp []
 #include <queue>        // for queue
 
 class tree_node {
@@ -364,7 +364,7 @@ class tree_node {
 	
 4) 示例
 
-```cpp
+```cpp []
 #include <iostream>     // for cin and cout
 #include <sstream>      // for ostringstream
 #include <string>       // for stod()
@@ -521,7 +521,7 @@ void test_tree_node()
 
 1) 泛型类声明
 
-```cpp
+```cpp []
 #include <stack>        // for stack
 #include <queue>        // for queue
 
@@ -551,7 +551,7 @@ class bin_tree_node {
 	
 2) 创建
 
-```cpp
+```cpp []
 class bin_tree_node {
     ...
 
@@ -630,7 +630,7 @@ class bin_tree_node {
 	
 3) 遍历
 
-```cpp
+```cpp []
 class bin_tree_node {
     ...
 
@@ -724,7 +724,7 @@ class bin_tree_node {
 	
 4) 示例
 
-```cpp
+```cpp []
 #include <iostream>     // for cin and cout
 #include <sstream>      // for ostringstream
 #include <string>       // for stod()
@@ -848,7 +848,7 @@ void test_binary_tree_node()
   1. 叶节点数：如果完美二叉树的高度为 `$ h $`，则叶节点数将为 `$ 2^h $`，因为最后一级已完全填充。
   1. 叶节点数（`$ N_l $`）与非叶节点数（`$ N_{nl} $`）的关系：`$ N_l = N_{nl} + 1 $`。
   1. 节点总数：高度为 `$ h $` 的树的节点总数为 `$ 2^{h + 1} – 1 $`。树的每个节点都被填充。因此，节点总数可以计算为 `$ 2^0 + 2^1 + \cdots + 2^h = 2^h + 1 $`。
-  1. 树的高度：具有 `N` 个节点的完美二叉树的高度为 `$ \log_2{N+1} - 1 $`。
+  1. 树的高度：具有 `N` 个节点的完美二叉树的高度为 `$ \log_2{(N+1)} - 1 $`。
 
 	
 - 完美二叉树的数组表达
@@ -864,7 +864,7 @@ void test_binary_tree_node()
 - 性质
   1. 除最后一级外，所有级别都被填满。
   1. 深度为 `$ d $` 的完全二叉树，其节点数量为 `$ 2^d $`。
-  1. 在一个有 `$ N $` 个节点的完全二叉树中，树的高度是 `$ log_2{N + 1} $`。
+  1. 在一个有 `$ N $` 个节点的完全二叉树中，树的高度是 `$ log_2{(N + 1)} $`。
 
 	
 - 完全二叉树的数组表达
@@ -922,7 +922,7 @@ void test_binary_tree_node()
   - 标准对象 `clog` 是 C++ 定义的标准日志输出流，默认保持和 `cerr` 的同步。
 
 	
-```cpp
+```cpp []
 #include <iostream>     // std::cout
 #include <fstream>      // std::ifstream and std::ofstream
 
@@ -953,7 +953,7 @@ int main()
 	
 2) `open()` 方法和 STL 文件打开模式
 
-```cpp
+```cpp []
 void open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);
 void open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);
 ```
@@ -968,14 +968,14 @@ void open(const string& filename, ios_base::openmode mode = ios_base::in | ios_b
 | `trunc`  | 截断（truncate）   | 打开时，文件中已有的任何内容将被清除/废弃。 |
 
 	
-```cpp
+```cpp []
 #include <fstream>      // std::fstream
 
 int main()
 {
     std::fstream fs;
     fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
-    fs << " a line\n";
+    fs << "This is a line\n";
     fs.close();
     return 0;
 }
@@ -1012,7 +1012,7 @@ int main()
 	
 - 使用 STL `std::iostream::rdbuf()` 方法实现重定向：
 
-```cpp
+```cpp []
 #include <iostream>
 #include <fstream>
 
@@ -1055,15 +1055,15 @@ int main()
 ```
 
 	
-### Linux 上的文件系统操作
+### Linux 上的文件及文件系统操作
 
 - 文件和目录操作
   1. `creat()`：创建文件。
   1. `unlink()`：移除文件。
   1. `mkdir()`：创建目录。
   1. `rmdir()`：移除目录。
-  1. `stat()`：获取文件的统计信息。
-- 遍历目录项：
+  1. `stat()`：获取文件的统计信息，如类型、大小、创建日期、修改日期、所有者、许可模式等。
+- 遍历目录项（directory entry）：
   1. `opendir()`：打开一个目录用于读取其目录项。
   1. `readdir()`：读取一条目录项。
   1. `closedir()`：关闭已打开的目录。
@@ -1071,7 +1071,7 @@ int main()
 	
 - [示例程序]()
 
-```cpp
+```cpp []
 ```
 
 		
