@@ -62,7 +62,7 @@
 	
 ### 实例
 
-#### Linux 文件系统
+1) Linux 文件系统
 
 ```console
 /
@@ -129,7 +129,13 @@
 ```
 
 	
-#### HTML 文档
+
+标准 Linux 文件系统层次结构
+
+<img style="height:auto;width:800px;" src="assets/noijunior-standard-linux-filesystem-hierarchy.png" />
+
+	
+2) HTML 文档
 
 ```html
 <!DOCTYPE html>
