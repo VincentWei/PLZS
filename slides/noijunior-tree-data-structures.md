@@ -965,7 +965,7 @@ int main()
 - `ostream& std::ostream::write(const char* src, streamsize n);` 方法将目标内存中指定长度的字节写入流。
 - [std::istream::read 参考](https://zh.cppreference.com/w/cpp/io/basic_istream/read)
 - [std::ostream::write 参考](https://zh.cppreference.com/w/cpp/io/basic_istream/write)
-- [示例程序]()
+- [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/fstream-binary.cpp)
 
 ```cpp
 #include <iostream>     // std::cout and std::cerr
@@ -1032,9 +1032,11 @@ int main()
   1. `$ PROGRAM [1]>>FILE`：将标准错误重定向并追加到文件 `FILE`。
 - Shell 中重定向标准输入的方法：
   1. `$ PROGRAM <FILE`：将标准输入重定向为文件 `FILE`，程序将从 `FILE` 中读取输入内容。
+- C++ STL 文件流的 `filebuf` 对象。
 
 	
-- 使用 STL `std::iostream::rdbuf()` 方法实现重定向：
+6) 使用 STL `std::iostream::rdbuf()` 方法实现“重定向”。
+  - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/iostream-rdbuf.cpp)
 
 ```cpp []
 #include <iostream>
@@ -1044,29 +1046,36 @@ using namespace std;
 
 int main()
 {
-    // 备份cin和cout的默认buf
+    // 备份 cin 和 cout 的默认 filebuf 对象
     streambuf *cin_backup, *cout_backup;
     cin_backup = cin.rdbuf();
     cout_backup = cout.rdbuf();
 
     // 打开要参与重定向的文件
     fstream in, out;
-    in.open("in.txt", ios::in);
-    out.open("out.txt", ios::out);
+    in.open("in.txt", ios::in | ios::out | ios::trunc);
+    out.open("out.txt", ios::out | ios::app);
     if (in.fail() || out.fail())
         return -1;
 
-    // 将in.txt内容重定向到cin；将cout重定向到out.txt
+    // 向 `in.txt` 文件写入一个整数
+    in << 1000 << endl;
+
+    in.seekg(0, in.beg);
+
+    // 将 `in` 的 filebuf 对象设置给 cin 使用
     cin.rdbuf(in.rdbuf());
+
+    // 将 `out` 的 filebuf 对象设置给 cout 使用
     cout.rdbuf(out.rdbuf());
 
-    // 此后在 cin 和 cout 上的读取/写入，
+    // 此后在 cin 和 cout 上的读取和写入，
     // 相当于从 in.txt 中读取，向 out.txt 写入。
     int n;
     cin >> n;
     cout << n << endl;
 
-    // 恢复 cin 和 cout 的默认缓冲区
+    // 恢复 cin 和 cout 的 filebuf 对象
     cin.rdbuf(cin_backup);
     cout.rdbuf(cout_backup);
 

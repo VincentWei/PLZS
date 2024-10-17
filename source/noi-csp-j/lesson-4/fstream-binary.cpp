@@ -52,7 +52,8 @@ int main()
             struct student student;
 
             ifs.read((char*)(&student), sizeof(struct student));
-            cout << "Got a student: " << student.id << " (" << student.name << ")\n";
+            cout << "Got a student: " << student.id
+                << " (" << student.name << ")\n";
         }
 
         ifs.close();

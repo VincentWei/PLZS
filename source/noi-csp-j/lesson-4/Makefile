@@ -1,4 +1,4 @@
-TARGETS = generic-tree binary-tree fstream-binary
+TARGETS = generic-tree binary-tree fstream-binary iostream-rdbuf
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 
