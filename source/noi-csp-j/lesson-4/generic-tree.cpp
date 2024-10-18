@@ -37,7 +37,7 @@ class tree_node {
         return node->children.size();
     }
 
-    // 深度优先（depth-first）遍历（递归实现）
+    // 深度优先（depth-first）前序遍历（递归实现）
     template <typename context, typename visitor_func>
     void dfs_preorder_r(context* ctxt, visitor_func visitor) const
     {
@@ -50,9 +50,9 @@ class tree_node {
         }
     }
 
-    // 深度优先（depth-first）遍历（迭代实现）
+    // 深度优先（depth-first）前序遍历（迭代实现）
     template <typename context, typename visitor_func>
-    void dfs_i(context* ctxt, visitor_func visitor) const
+    void dfs_preorder_i(context* ctxt, visitor_func visitor) const
     {
         std::stack<const tree_node*> stack;
         stack.push(this);
@@ -162,7 +162,7 @@ void test_tree_node()
     assert(oss.str() == "0 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     assert(oss.str() == "0 ");
 
     oss.str("");
@@ -181,7 +181,7 @@ void test_tree_node()
     assert(oss.str() == "0 -2 -1 0 1 2 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 1 2 ");
 
@@ -202,7 +202,7 @@ void test_tree_node()
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
 
@@ -225,7 +225,7 @@ void test_tree_node()
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
 
@@ -285,7 +285,7 @@ int main()
 
     context_print ctxt = { cout };
     clog << "DFS Traversal\n";
-    root->dfs_i(&ctxt, visitor_print{});
+    root->dfs_preorder_i(&ctxt, visitor_print{});
 
     clog << "BFS Traversal\n";
     root->bfs(&ctxt, visitor_print{});

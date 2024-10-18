@@ -328,7 +328,7 @@ class tree_node {
 
     // 深度优先（depth-first）前序（preorder）遍历（迭代实现）
     template <typename context, typename visitor_func>
-    void dfs_i(context* ctxt, visitor_func visitor) const
+    void dfs_preorder_i(context* ctxt, visitor_func visitor) const
     {
         std::stack<const tree_node*> stack;
         stack.push(this);
@@ -408,7 +408,7 @@ void test_tree_node()
     assert(oss.str() == "0 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     assert(oss.str() == "0 ");
 
     oss.str("");
@@ -427,7 +427,7 @@ void test_tree_node()
     assert(oss.str() == "0 -2 -1 0 1 2 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 1 2 ");
 
@@ -448,7 +448,7 @@ void test_tree_node()
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
 
@@ -471,7 +471,7 @@ void test_tree_node()
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
 
     oss.str("");
-    level_0->dfs_i(&ctxt, visitor_print{});
+    level_0->dfs_preorder_i(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
 
@@ -818,7 +818,7 @@ void test_binary_tree_node()
 
 （十分钟内完成）
 
-1. 复制二叉树的源文件 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp)，参照一般树的 `dfs_i()` 方法，实现 `dfs_preorder_i()` 方法，并添加测试用例。
+1. 复制二叉树的源文件 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp)，参照一般树的 `dfs_preorder_i()` 方法，实现 `dfs_preorder_i()` 方法，并添加测试用例。
 1. 将增强后的 `binary-tree.cpp` 文件添加到 `plzs-homework` 仓库。
 
 	
