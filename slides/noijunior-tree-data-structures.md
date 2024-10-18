@@ -37,12 +37,12 @@
 -  子（child）节点：节点的直接后继节点称为该节点的子节点。
 -  根（root）节点：树的最顶端节点或没有父节点的节点称为根节点。
 -  叶子（leaf）节点：没有任何子节点的节点称为叶子节点。
--  节点层级（level）：从根节点到该节点的路径（path）上的边数。根节点的层级为 `0`。
+-  节点层级（level）：从根节点到该节点的路径（path）上的边（edge）数。根节点的层级为 `0`。
 
 <img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
--  节点的祖先（ancestor）：根到该节点的路径上的任何前任节点都称为该节点的祖先。
+-  节点的祖先（ancestor）：根到该节点的路径上的任何前置节点都称为该节点的祖先。
 -  兄弟（sibling）节点：同一父节点的子节点称为兄弟节点。
 -  内部（internal）节点：至少有一个子节点的节点称为内部节点。
 -  外部（external）节点：即叶子节点。
@@ -52,7 +52,7 @@
 <img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
-- 边（edge）数：边定义为两个节点之间的连接。如果一棵树有 `N` 个节点，那么它将有 `N-1` 条边。从每个节点到树的任何其他节点只有一条路径。
+- 边（edge）数：边定义为两个节点之间的连接。如果一棵树有 `N` 个节点，那么它将有 `N-1` 条边。从每个节点到树的任何其他节点只有一条路径（path）。
 - 节点深度（depth）：节点的深度定义为从根到该节点的路径长度。每条边为路径增加 `1` 个单位的长度。因此，它也可以定义为从树根到节点的路径中的边数。
 - 节点高度（height）：节点的高度可以定义为从节点到树的叶子节点的最长路径的长度。
 - 树的高度（height）：树的高度是从树根到树叶节点的最长路径的长度。
@@ -300,10 +300,14 @@ class tree_node {
 3) 遍历
 
 - 一般树的深度优先遍历有两种形式：
-  1. 前序遍历（preorder traversal，先节点后子树）：首先访问节点，然后访问各个子树。
-  1. 后序遍历（postorder traversal，先子树后节点）：首先遍历各个子树，然后访问节点。
+  1. 前序遍历（preorder traversal，先节点后子树）：首先访问节点，然后递归遍历各个子树。
+  1. 后序遍历（postorder traversal，先子树后节点）：首先递归遍历各个子树，然后访问节点。
+- 深度优先遍历的迭代实现，使用栈（stack）实现。
+- 广度优先遍历的迭代实现，使用队列（queue）实现。
 
+	
 ```cpp []
+#include <stack>        // for std::stack
 #include <queue>        // for std::queue
 
 class tree_node {
@@ -510,7 +514,7 @@ void test_tree_node()
 	
 ### 课堂思考
 
-- `L` 层二叉树的最大节点数为？
+- 二叉树在 `L` 层的最大节点数为？
 - 高度为 `H` 的二叉树，其最大节点数为？
 - 二叉树中的叶节点总数和具有 `2` 个子节点的节点总数的关系？
 - 在具有 `N` 个节点的二叉树中，最小的可能高度或最小层数为？
@@ -899,14 +903,15 @@ void test_binary_tree_node()
 ### 霍夫曼树
 
 - 设二叉树具有 `$ n $` 个带权重（weight）的叶结点，从根结点到各叶结点的路径长度与相应叶节点权值的乘积之和称为该二叉树的带权路径长度（Weighted Path Length of Tree，WPL）：`$ WPL = \sum_{i=1}^n w_i l_i $`。
+
+<img style="height:700px;width:auto;" src="assets/noijunior-wpl-of-binary-tree.svg" />
+
+	
 - 对于一组具有确定权值的叶结点，可以构造出不同的二叉树，其中，WPL 最小的二叉树称为霍夫曼/哈夫曼树（Huffman Tree）。
 - 霍夫曼树的特点：
   1. 叶结点的权值越小，离根越远。
   1. 叶结点的权值越大，离根越近。
   1. 所有叶结点的度为 `0`，其他结点的度均为 `2`；这样的二叉树亦称完满二叉树（full binary tree）或严格二叉树（strictly binary tree）。
-
-	
-<img style="height:700px;width:auto;" src="assets/noijunior-wpl-of-binary-tree.svg" />
 
 	
 ### 霍夫曼算法
