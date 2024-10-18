@@ -291,7 +291,7 @@ int main()
     };
 
     context_print ctxt = { true, cout };
-    clog << "DFS Traversal\n";
+    clog << "DFS Traversal (preorder)\n";
     root->dfs_preorder_i(&ctxt, visitor_print{});
     cout << endl;
 
