@@ -74,27 +74,6 @@ class bin_tree_node {
         visitor(ctxt, payload);
     }
 
-    // 深度优先（depth-first）前序遍历（迭代实现）
-    template <typename context, typename visitor_func>
-    void dfs_preorder_i(context* ctxt, visitor_func visitor) const
-    {
-        std::stack<const bin_tree_node*> stack;
-        stack.push(this);
-
-        while (!stack.empty()) {
-            const bin_tree_node* node = stack.top();
-            stack.pop();
-
-            // call the visitor for the current node
-            visitor(ctxt, node->payload);
-
-            if (node->right)
-                stack.push(node->right);
-            if (node->left)
-                stack.push(node->left);
-        }
-    }
-
     // 广度优先（breadth-first）级序遍历
     template <typename context, typename visitor_func>
     void bfs(context* ctxt, visitor_func visitor) const
@@ -260,11 +239,6 @@ void test_binary_tree_node()
     assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
 
     oss.str("");
-    level_0->dfs_preorder_i(&ctxt, visitor_print{});
-    clog << oss.str() << endl;
-    assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
-
-    oss.str("");
     level_0->dfs_inorder(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "-1 0 -10 1 -100 10 100 ");
@@ -314,7 +288,8 @@ int main()
             last_node = node->right_child(d);
         }
         else {
-            node = last_node;
+            if (last_node)
+                node = last_node;
         }
 
     } while (true);

@@ -33,8 +33,8 @@
 	
 ### 术语
 
--  父（parent）节点：作为节点前任的节点称为该节点的父节点。
--  子（child）节点：节点的直接后继节点称为该节点的子节点。
+-  父（parent）节点：某个节点的直接前置节点称为该节点的父节点。
+-  子（child）节点：某个节点的直接后继节点称为该节点的子节点。
 -  根（root）节点：树的最顶端节点或没有父节点的节点称为根节点。
 -  叶子（leaf）节点：没有任何子节点的节点称为叶子节点。
 -  节点层级（level）：从根节点到该节点的路径（path）上的边（edge）数。根节点的层级为 `0`。
@@ -315,14 +315,14 @@ class tree_node {
 
     // 深度优先（depth-first）前序（preorder）遍历（递归实现）
     template <typename context, typename visitor_func>
-    void dfs_r(context* ctxt, visitor_func visitor) const
+    void dfs_preorder_r(context* ctxt, visitor_func visitor) const
     {
         // call the visitor for the current node
         visitor(ctxt, payload);
 
         size_t nr_children = children.size();
         for (size_t i = 0; i < nr_children; i++) {
-            children[i]->dfs_r(ctxt, visitor);
+            children[i]->dfs_preorder_r(ctxt, visitor);
         }
     }
 
@@ -404,7 +404,7 @@ void test_tree_node()
     level_0 = new my_tree_node(0);
 
     oss.str("");
-    level_0->dfs_r(&ctxt, visitor_print{});
+    level_0->dfs_preorder_r(&ctxt, visitor_print{});
     assert(oss.str() == "0 ");
 
     oss.str("");
@@ -422,7 +422,7 @@ void test_tree_node()
     level_0->push_back(2);
 
     oss.str("");
-    level_0->dfs_r(&ctxt, visitor_print{});
+    level_0->dfs_preorder_r(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 1 2 ");
 
@@ -443,7 +443,7 @@ void test_tree_node()
     level_1->push_back(20);
 
     oss.str("");
-    level_0->dfs_r(&ctxt, visitor_print{});
+    level_0->dfs_preorder_r(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 10 20 1 2 ");
 
@@ -466,7 +466,7 @@ void test_tree_node()
     level_2->push_back(300);
 
     oss.str("");
-    level_0->dfs_r(&ctxt, visitor_print{});
+    level_0->dfs_preorder_r(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "0 -2 -1 0 -20 -10 0 -300 -200 -100 0 100 200 300 10 20 1 2 ");
 
@@ -487,9 +487,9 @@ void test_tree_node()
 	
 ### 课堂练习
 
-（十五分钟内完成）
+（十分钟内完成）
 
-1. 复制一般树的源文件 [generic-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，在 `dfs_r()` 和 `dfs_i()` 遍历方法的基础上实现后序遍历方法 `dfs_postorder_r()` 和 `dfs_postorder_i()`，并添加对应的测试用例。
+1. 复制一般树的源文件 [generic-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/generic-tree.cpp)，在 `dfs_preorder_r()` 遍历方法的基础上实现后序遍历方法 `dfs_postorder_r()`，并添加对应的测试用例。
 1. 将 `generic-tree.cpp` 文件添加到 `plzs-homework` 仓库的 `source/noi-csp-j/lesson-4/` 目录（下同），并推送到远程仓库。
 
 	
@@ -691,28 +691,6 @@ class bin_tree_node {
         visitor(ctxt, payload);
     }
 
-    // 深度优先（depth-first）前序遍历（迭代实现）
-    template <typename context, typename visitor_func>
-    void dfs_preorder_i(context* ctxt, visitor_func visitor) const
-    {
-        std::stack<const bin_tree_node*> stack;
-        stack.push(this);
-
-        while (!stack.empty()) {
-            const bin_tree_node* node = stack.top();
-            stack.pop();
-
-            // call the visitor for the current node
-            visitor(ctxt, node->payload);
-
-            // XXX 先压右子节点，再压左子节点
-            if (node->right)
-                stack.push(node->right);
-            if (node->left)
-                stack.push(node->left);
-        }
-    }
-
     // 广度优先（breadth-first）层序遍历（迭代实现）
     template <typename context, typename visitor_func>
     void bfs(context* ctxt, visitor_func visitor) const
@@ -817,11 +795,6 @@ void test_binary_tree_node()
     assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
 
     oss.str("");
-    level_0->dfs_preorder_i(&ctxt, visitor_print{});
-    clog << oss.str() << endl;
-    assert(oss.str() == "0 -1 1 -10 10 -100 100 ");
-
-    oss.str("");
     level_0->dfs_inorder(&ctxt, visitor_print{});
     clog << oss.str() << endl;
     assert(oss.str() == "-1 0 -10 1 -100 10 100 ");
@@ -843,9 +816,9 @@ void test_binary_tree_node()
 	
 ### 课堂练习
 
-（十五分钟内完成）
+（十分钟内完成）
 
-1. 复制二叉树的源文件 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp)，参照 `dfs_preorder_i()` 遍历方法实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
+1. 复制二叉树的源文件 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp)，参照一般树的 `dfs_i()` 方法，实现 `dfs_preorder_i()` 方法，并添加测试用例。
 1. 将增强后的 `binary-tree.cpp` 文件添加到 `plzs-homework` 仓库。
 
 	
@@ -1282,10 +1255,15 @@ int main(int argc, const char* argv[])
 `Homework`
 
 	
-1) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
+1) 在课堂练习基础上继续完成如下增强：
+  1. 增强 `generic-tree.cpp`，实现 `dfs_postorder_i()` 方法，并添加测试用例。
+  1. 增强 `binary-tree.cpp`，实现 `dfs_inorder_i()` 和 `dfs_posrtorder_i()` 方法，并添加测试用例。
 
 	
-2) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+2) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
+
+	
+3) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
 
 ```console
 ./huffman-encode
@@ -1293,14 +1271,14 @@ int main(int argc, const char* argv[])
 Compressed and saved to huffman-code.bin
 ```
 
-3) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
+4) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
 ```console
 ./huffman-decode
 asdfasdfasdf
 ```
 
 	
-4) 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
+5) 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
 
 ```console
 ./directoy-tree .
