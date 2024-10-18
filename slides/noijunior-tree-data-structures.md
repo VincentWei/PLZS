@@ -1256,8 +1256,8 @@ int main(int argc, const char* argv[])
 
 	
 1) 在课堂练习基础上继续完成如下增强：
-  1. 增强 `generic-tree.cpp`，实现 `dfs_postorder_i()` 方法，并添加测试用例。
-  1. 增强 `binary-tree.cpp`，实现 `dfs_inorder_i()` 和 `dfs_posrtorder_i()` 方法，并添加测试用例。
+  - 增强 `generic-tree.cpp`，实现 `dfs_postorder_i()` 方法，并添加测试用例。
+  - 增强 `binary-tree.cpp`，实现 `dfs_inorder_i()` 和 `dfs_posrtorder_i()` 方法，并添加测试用例。
 
 	
 2) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
