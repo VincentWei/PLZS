@@ -274,21 +274,32 @@ int main()
     } while (true);
 
     struct context_print {
+        bool root;
         ostream& os;
     };
 
     struct visitor_print {
         void operator() (context_print* ctxt, const double& value) {
-            ctxt->os << value << endl;
+            if (ctxt->root) {
+                ctxt->os << value;
+                ctxt->root = false;
+            }
+            else {
+                ctxt->os << ", " << value;
+            }
         }
     };
 
-    context_print ctxt = { cout };
+    context_print ctxt = { true, cout };
     clog << "DFS Traversal\n";
     root->dfs_preorder_i(&ctxt, visitor_print{});
+    cout << endl;
 
     clog << "BFS Traversal\n";
+    ctxt.root = true;
     root->bfs(&ctxt, visitor_print{});
+    cout << endl;
+
     delete root;
 }
 
