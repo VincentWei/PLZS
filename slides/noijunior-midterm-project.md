@@ -3,6 +3,7 @@
 1. 三种算术运算表达式
 1. 将中缀表达式解析为求值二叉树
 1. 综合练习
+1. 实用技巧及工具
 
 		
 ## 算术运算表达式
@@ -195,4 +196,50 @@ INVALID
   1. 将中缀表达式解析为求值二叉树时，若出现括号不匹配的情形，则表达式为非法。
 - 如何判断运算符的优先级以及括号的嵌套关系？
   1. 参考中缀表达式转前缀表达式的算法，使用栈来跟踪。
+
+		
+## 实用技巧及工具
+
+`Skills and Utilities`
+
+	
+### STL 字符串转换接口
+
+| 函数      | 用途 |
+| ---       | ---  |
+| `stoi`    | 字符串转换为整数（函数模板）                  |
+| `stol`    | 字符串转换为长整型（函数模板）                |
+| `stoul`   | 字符串转换为无符号整型（函数模板）            |
+| `stoll`   | 字符串转换为长长整型（函数模板）              |
+| `stoull`  | 字符串转换为无符号长长整型（函数模板）        |
+| `stof`    | 字符串转换为单精度浮点数（函数模板）          |
+| `stod`    | 字符串转换为双精度浮点数（函数模板）          |
+| `stold`   | 字符串转换为长双精度浮点数（函数模板）        |
+
+- 原型及用法（`stol` 为例）
+
+```cpp
+#include <string>
+
+long stol(const string&  str, size_t* idx = 0, int base = 10);
+
+    std::string str_bad = "xyz";
+    std::string str_dec = "1987520";
+    std::string str_hex = "2f04e009";
+    std::string str_bin = "-11101001100100111010";
+    std::string str_auto = "0x7fffff";
+
+    std::string::size_type sz;   // alias of size_t
+
+    long li_bad = std::stol(str_bad, &sz);      // sz = 0; li_bad = 0;
+    long li_dec = std::stol(str_dec, &sz);
+    long li_hex = std::stol(str_hex, nullptr, 16);
+    long li_bin = std::stol(str_bin, nullptr, 2);
+    long li_auto = std::stol(str_auto, nullptr, 0);
+```
+
+- 参数说明
+  1. `str`：用于表达一个数值的字符串对象。
+  1. `idx`：如果 `idx` 不是空指针，则该函数会将 `idx` 的值设置为 `str` 中合法数值后的第一个字符的索引。
+  1. `base`：决定有效字符及其解释的数字基数（进制）。如果此值为 `0`，则使用的进制由字符串序列的格式决定（如 `0x` 前缀表示 16 进制）。注意此参数的默认值为为 `10`，而不是 `0`。
 
