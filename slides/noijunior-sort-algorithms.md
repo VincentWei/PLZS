@@ -534,6 +534,8 @@ class Rectangle {
    1. 我们可以认为 C++ 为所有非静态成员函数 `隐式` 传入了 `this` 指针作为第一个形参。
 
 	
+- [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/dynamic-class-object.cpp)
+
 ```cpp
 class Rectangle {
     // 该静态成员变量可用于统计 Rectangle 实例的个数。
