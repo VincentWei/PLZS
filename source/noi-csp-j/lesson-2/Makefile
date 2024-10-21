@@ -1,4 +1,4 @@
-TARGETS = selection-sort-asc selection-sort bubble-sort-asc bubble-sort insertion-sort-asc merge-sort-asc quick-sort-asc merge-sort-asc-alloc stl-sort-for-native-array stl-sort-for-stl-vector std-qsort-for-native-array stl-sort-for-variable-length-array
+TARGETS = selection-sort-asc selection-sort bubble-sort-asc bubble-sort insertion-sort-asc merge-sort-asc quick-sort-asc merge-sort-asc-alloc stl-sort-for-native-array stl-sort-for-stl-vector std-qsort-for-native-array stl-sort-for-variable-length-array dynamic-class-object
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

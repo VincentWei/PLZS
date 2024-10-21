@@ -21,8 +21,8 @@ struct node {
     node* next;     // 指向下一个节点的指针
 
     // 节点的构造函数。
-    node(const T& value) {
-        this->payload = value;
+    node(const T& payload) {
+        this->payload = payload;
         this->next = nullptr;
     }
 };

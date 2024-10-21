@@ -491,6 +491,118 @@ void merge_sort_asc(T *t, size_t start, size_t stop, T* buf)
 - 使用 `new[]` 分配的类对象数组，会依次调用其中所有元素的构造函数，且只能使用 `delete[]` 释放，且在释放时，会对每个元素调用类的析构函数。
 - C++ 的 `new/new[]` 和 `delete/delete[]` 运算符可被重载。
 
+	
+### 类对象的动态创建和销毁
+
+- 使用 `new` 可动态创建一个类的对象，此时获得一个指针类型。
+- 对使用指针表达的类对象，我们使用 `->` 运算符引用其成员变量或成员函数。
+
+```cpp
+class Rectangle {
+    double width, height;
+
+  public:
+    // Rectangle 类的构造器（constructor)
+    Rectangle(double w, double h) {
+        width = w; height = h;
+    }
+
+    // Rectangle 类的 perimeter 方法（method)，用于计算周长。
+    double perimeter() {
+        return (width + height) * 2.0;
+    }
+
+    // Rectangle 类的 area 方法，用于计算面积。
+    double area() {
+        return width * height;
+    }
+};
+
+    // 使用 new/delete 创建/销毁一个类对象
+    Rectangle *rc = new Rectangle { 20.0, 20.0 };
+    cout << rc->perimeter() << endl;
+    cout << rc->area() << endl;
+    delete rc;
+```
+
+	
+### `this` 指针和静态成员
+
+- C++ 的 `this` 关键词用于指代当前类对象，其类型是这个类的指针；`this` 关键词只能在类的非静态成员函数中使用。
+   1. 类的非静态成员函数，必须通过这个类的一个对象调用。
+   1. 类的静态成员函数，可在没有类对象的情况下调用，从而不能在静态成员函数中使用 `this` 指针。
+   1. 我们可以认为 C++ 为所有非静态成员函数 `隐式` 传入了 `this` 指针作为第一个形参。
+
+```cpp
+class Rectangle {
+    // 该静态成员变量可用于统计 Rectangle 实例的个数。
+    // 注意：
+    // 下面这条语句只是声明了该静态成员变量，
+    // 在使用前，还必须在 C++ 源文件中显式定义这一静态成员变量。
+    static unsigned _nr_rectangles;
+
+    double width, height;
+
+  public:
+    // Rectangle 类的构造器（constructor)
+    Rectangle(double width, double height) {
+        _nr_rectangles++;
+
+        this->width = width;
+        this->height = height;
+    }
+
+    // Rectangle 类的析构函数（denstructor)
+    ^Rectangle() {
+        _nr_rectangles--;
+    }
+
+    /* 我们可以认为 C++ 编译器为非静态成员函数传入了调用该成员函数时
+       对应的那个类对象的指针，而该指针作为一个隐式的形参存在，
+       其名称为 `this`：
+
+        double area(Rectangle *this) {
+            return this->width * this->height;
+        }
+     */
+    // Rectangle 类的 area 方法，用于计算面积。
+    double area() {
+        return this->width * this->height;
+    }
+
+    /* 为方便书写，在不引起歧义的情形下，在成员函数中无需使用 this
+       来引用当前类的成员函数或者成员变量。
+     */
+    // Rectangle 类的 perimeter 方法（method)，用于计算周长。
+    double perimeter() {
+        return (width + height) * 2.0;
+    }
+
+    // 在静态成员函数中，只能访问静态成员变量，不能使用 this 指针。
+    static unsigned quantity() {
+        return _nr_rectangles;
+    }
+};
+
+// 必须在 C++ 源文件中显式定义类的静态成员变量
+unsigned Rectangle::_nr_rectangles;
+
+int main()
+{
+    // 使用 new/delete 创建/销毁一个类对象
+    Rectangle *rc = new Rectangle { 20.0, 20.0 };
+
+    // 调用静态成员函数时，不需要通过某个特定的类对象
+    cout << Rectangle::quantity() << endl;
+
+    cout << rc->area() << endl;
+
+    delete rc;
+
+    cout << Rectangle::quantity() << endl;
+}
+```
+
 		
 ## 实用技巧
 
