@@ -875,7 +875,7 @@ void test_binary_tree_node()
 	
 ### 霍夫曼树
 
-- 设二叉树具有 `$ n $` 个带权重（weight）的叶结点，从根结点到各叶结点的路径长度与相应叶节点权值的乘积之和称为该二叉树的带权路径长度（Weighted Path Length of Tree，WPL）：`$ WPL = \sum_{i=1}^n w_i l_i $`。
+- 设二叉树具有 `$ n $` 个带权重（weight）的叶结点，从根结点到各叶结点的路径长度与相应叶节点权值的乘积之和称为该二叉树的带权路径长度（Weighted Path Length of Tree，WPL）：`$ {WPL} = \sum_{i=1}^n w_i l_i $`。
 
 <img style="height:700px;width:auto;" src="assets/noijunior-wpl-of-binary-tree.svg" />
 
