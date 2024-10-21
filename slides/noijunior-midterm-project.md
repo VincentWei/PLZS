@@ -118,7 +118,7 @@
 	
 - 举例：将中缀表达式 `a+((b+c)×d)-e` 转换为后缀表达式
 
-| 词元  | `result`栈                | `operators`栈     | 说明                                          |
+| 词元  | `result`                  | `operators`    | 说明                                          |
 | ---   | ---                       | ---               | ---                                           |
 | a     | a                         | EMPTY             | 数值，压入 `results` 栈                       |
 | -     | e                         | -                 | 运算符，`operators` 为空，直接入栈            |
@@ -134,8 +134,6 @@
 | +     | ×, + b, c, d, e           | +, -              | 优先级与栈顶的 - 相同，直接入栈               |
 | a     | a, ×, + b, c, d, e        | +, -              | 数值，压入 `results` 栈                       |
 | EMPTY | -, +, a, ×, + b, c, d, e  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
-
-- 结果为：`- + a × + b c d e`
 
 		
 ## 将中缀表达式解析为求值二叉树
