@@ -129,7 +129,7 @@
 | ×     | +, c, b, a                | ×, (, +           | `operators` 栈顶是左括号，直接入栈            |
 | d     | d, + c, b, a              | ×, ), +           | 数值，压入 `results` 栈                       |
 | )     | ×, d, + c, b, a           | +                 | 右括号，弹出运算符压入`result`直至遇到左括号  |
-| -     | +, ×, d, + c, b, a        | -                 | 优先级与`operators`栈顶的 + 相同，先弹出 + 并压入`result`，再压入 -  |
+| -     | +, ×, d, + c, b, a        | -                 | 优先级与栈顶的 + 相同，先弹出 + 并压入`result`，再压入 -  |
 | e     | e, +, ×, d, + c, b, a     | -                 | 数值，压入 `results` 栈                       |
 | NONE  | -, e, +, ×, d, + c, b, a  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
 
