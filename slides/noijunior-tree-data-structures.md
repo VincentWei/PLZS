@@ -42,7 +42,8 @@
 <img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
--  节点的祖先（ancestor）：根到该节点的路径上的任何前置节点都称为该节点的祖先。
+-  节点的祖先（ancestor）：根到某节点的路径上的任何前置节点都称为该节点的祖先。
+-  节点的子孙（descendant）：某节点的任何后置节点都称为该节点的子孙。
 -  兄弟（sibling）节点：同一父节点的子节点称为兄弟节点。
 -  内部（internal）节点：至少有一个子节点的节点称为内部节点。
 -  外部（external）节点：即叶子节点。
