@@ -539,9 +539,10 @@ class Rectangle {
 ```cpp
 class Rectangle {
     // 该静态成员变量可用于统计 Rectangle 实例的个数。
-    // 注意：
-    // 下面这条语句只是声明了该静态成员变量，
-    // 在使用前，还必须在 C++ 源文件中显式定义这一静态成员变量。
+    // Rectangle 类的所有实例将共享这一静态成员变量。
+    //
+    // 注意：下面这条语句只是声明了该静态成员变量，
+    // 还必须在 C++ 源文件中显式定义这一静态成员变量。
     static unsigned _nr_rectangles;
 
     double width, height;
