@@ -1128,7 +1128,7 @@ intmax_t binary_mul_i(intmax_t a, intmax_t b)
 ## 作业
 
 	
-1) 构造一个有 1024 项的浮点数构成的等差数列数组，然后使用逐项匹配法、二分搜索法（自己的实现）、二分搜索法（调用 `<algorithm>` 中定义的 `binary_search()`）、二分逼近法（使用通项公式）寻找给定的数值是否存在于该数列中，并给出各方法的执行时间。运行效果如下所示：
+1) 构造一个由 1024 个浮点数构成的等差数列数组，然后使用逐项匹配法、二分搜索法（自己的实现）、二分搜索法（调用 `<algorithm>` 中定义的 `binary_search()`）、直接使用通项公式寻找给定的数值是否存在于该数列中，并给出各方法的执行时间。运行效果如下所示：
 
 ```console
 % ./find-value-in-arithmetic-sequence
@@ -1138,7 +1138,7 @@ False
 0.001s consumed when comparing sequentially.
 0.001s consumed when using my binary search implementation.
 0.001s consumed when using binary_search().
-0.001s consumed when using bisection method.
+0.001s consumed when using formula.
 ```
 
 	
