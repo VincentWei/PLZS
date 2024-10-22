@@ -203,18 +203,18 @@ INVALID
 `Skills and Utilities`
 
 	
-### C++ STL 字符串转换接口
+### C++ STL 字符串转换接口（函数模板）
 
 | 函数      | 用途 |
 | ---       | ---  |
-| `stoi`    | 字符串转换为整数（函数模板）                  |
-| `stol`    | 字符串转换为长整型（函数模板）                |
-| `stoul`   | 字符串转换为无符号整型（函数模板）            |
-| `stoll`   | 字符串转换为长长整型（函数模板）              |
-| `stoull`  | 字符串转换为无符号长长整型（函数模板）        |
-| `stof`    | 字符串转换为单精度浮点数（函数模板）          |
-| `stod`    | 字符串转换为双精度浮点数（函数模板）          |
-| `stold`   | 字符串转换为长双精度浮点数（函数模板）        |
+| `stoi`    | 字符串转换为整数（int）                           |
+| `stol`    | 字符串转换为长整型（long）                        |
+| `stoul`   | 字符串转换为无符号整型（unsigned long）           |
+| `stoll`   | 字符串转换为长长整型（long long）                 |
+| `stoull`  | 字符串转换为无符号长长整型（unsigned long long）  |
+| `stof`    | 字符串转换为单精度浮点数（float）                 |
+| `stod`    | 字符串转换为双精度浮点数（double）                |
+| `stold`   | 字符串转换为长双精度浮点数（long double）         |
 
 	
 - 原型及用法（`stol` 为例）
@@ -266,7 +266,7 @@ long stol(const string& str, size_t* idx = 0, int base = 10);
 
 int atoi(const char* str);
 long int strtol(const char* str, char** endptr, int base);
-long double strtold (const char* str, char** endptr);
+long double strtold(const char* str, char** endptr);
 
   char reals[] = "90613.305 365.24";
   char* end;
