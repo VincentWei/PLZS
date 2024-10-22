@@ -258,7 +258,8 @@ long stol(const string& str, size_t* idx = 0, int base = 10);
 | `strtod`  | 字符串转换为双精度浮点数（double）        |
 | `strtold` | 字符串转换为长双精度浮点数（long double） |
 
-- 对应 C 标准库接口
+	
+- 原型及用法示例
 
 ```cpp
 #include <cstdlib>
