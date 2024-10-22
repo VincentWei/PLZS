@@ -203,7 +203,7 @@ INVALID
 `Skills and Utilities`
 
 	
-### STL 字符串转换接口
+### C++ STL 字符串转换接口
 
 | 函数      | 用途 |
 | ---       | ---  |
@@ -216,12 +216,13 @@ INVALID
 | `stod`    | 字符串转换为双精度浮点数（函数模板）          |
 | `stold`   | 字符串转换为长双精度浮点数（函数模板）        |
 
+	
 - 原型及用法（`stol` 为例）
 
 ```cpp
 #include <string>
 
-long stol(const string&  str, size_t* idx = 0, int base = 10);
+long stol(const string& str, size_t* idx = 0, int base = 10);
 
     std::string str_bad = "xyz";
     std::string str_dec = "1987520";
@@ -242,4 +243,35 @@ long stol(const string&  str, size_t* idx = 0, int base = 10);
   1. `str`：用于表达一个数值的字符串对象。
   1. `idx`：如果 `idx` 不是空指针，则该函数会将 `idx` 的值设置为 `str` 中合法数值后的第一个字符的索引。
   1. `base`：决定有效字符及其解释的数字基数（进制）。如果此值为 `0`，则使用的进制由字符串序列的格式决定（如 `0x` 前缀表示 16 进制）。注意此参数的默认值为为 `10`，而不是 `0`。
+
+	
+### C 字符串转换接口
+
+| 函数      | 用途 |
+| ---       | ---  |
+| `atoi`    | 字符串转换为整数（int）                   |
+| `strtol`  | 字符串转换为长整型（long）                |
+| `strtoul` | 字符串转换为无符号整型（long long）       |
+| `strtoll` | 字符串转换为长长整型（long long）         |
+| `strtoull`| 字符串转换为无符号长长整型（unsigned long long）|
+| `strtof`  | 字符串转换为单精度浮点数（float）         |
+| `strtod`  | 字符串转换为双精度浮点数（double）        |
+| `strtold` | 字符串转换为长双精度浮点数（long double） |
+
+- 对应 C 标准库接口
+
+```cpp
+#include <cstdlib>
+
+int atoi(const char* str);
+long int strtol(const char* str, char** endptr, int base);
+long double strtold (const char* str, char** endptr);
+
+  char reals[] = "90613.305 365.24";
+  char* end;
+
+  long double f1, f2;
+  f1 = strtold(reals, &end);
+  f2 = strtold(end, NULL);
+```
 
