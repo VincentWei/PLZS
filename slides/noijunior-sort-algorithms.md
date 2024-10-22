@@ -548,7 +548,7 @@ class Rectangle {
     double width, height;
 
   public:
-    // Rectangle 类的构造器（constructor)
+    // Rectangle 类的构造函数（constructor)
     Rectangle(double width, double height) {
         _nr_rectangles++;
 
@@ -556,7 +556,7 @@ class Rectangle {
         this->height = height;
     }
 
-    // Rectangle 类的析构函数（denstructor)
+    // Rectangle 类的析构函数（destructor)
     ^Rectangle() {
         _nr_rectangles--;
     }
