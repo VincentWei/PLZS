@@ -94,7 +94,7 @@
 | (     | ×, + b, c, d, e           | -                 | 左括号，从`operators`弹出运算符并压入`result`直至遇到右括号 |
 | +     | ×, + b, c, d, e           | +, -              | 优先级与栈顶的 `-` 相同，直接入栈             |
 | a     | a, ×, + b, c, d, e        | +, -              | 数值，压入 `results` 栈                       |
-| EMPTY | -, +, a, ×, + b, c, d, e  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
+| NONE  | -, +, a, ×, + b, c, d, e  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
 
 	
 #### 中缀表达式转换为后缀表达式
