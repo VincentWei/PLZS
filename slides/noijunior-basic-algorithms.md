@@ -1162,10 +1162,10 @@ $ ./nap-multiple
 0.001s consumed when using binary lifting summation.
 
 $ ./nap-multiple
-<78260869565217391304347826086956521 * 4347826086956521739130434782608695>
+<78260869565217391304347826086956521 4347826086956521739130434782608695>
 340264650283553875236294896030245692438563327032136105860113421550095
 
-0.001s consumed when using summation.
+0.001s consumed when using plain bvebsummation.
 0.001s consumed when using vertical multiplication.
 0.001s consumed when using binary lifting summation.
 ```
