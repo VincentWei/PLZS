@@ -134,7 +134,6 @@ void bubble_sort_asc(T* t, size_t len)
         }
     }
 }
-
 ```
 
 	
@@ -368,7 +367,6 @@ size_t partition(T t[], size_t low, size_t high)
     // 返回 pivot 的位置（索引值）。
     return low;
 }
-
 ```
 
 	
@@ -844,6 +842,7 @@ int main()
 
 ```console
 % ./insertion-sort
+<5>                 # 表示待排序数值的数量
 <12 344 8 234 23>
 Ascending order:
 8 12 23 234 344
@@ -856,6 +855,7 @@ Descending order:
 
 ```console
 $ ./merge-sort-iteration
+<9>                 # 表示待排序数值的数量
 <11 -9 10 -13 14 15 9 -7 5>
 -13 -9 -7 5 10 11 14 15
 ```
@@ -865,6 +865,7 @@ $ ./merge-sort-iteration
 
 ```console
 $ ./quick-sort-iteration
+<9>                 # 表示待排序数值的数量
 <11 -9 10 -13 14 15 9 -7 5>
 -13 -9 -7 5 10 11 14 15
 ```
