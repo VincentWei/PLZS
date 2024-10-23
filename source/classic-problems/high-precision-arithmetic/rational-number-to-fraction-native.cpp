@@ -108,7 +108,7 @@ int main()
         numerator_rc = stoll(recurring_part);
 
         intmax_t base(10);
-        denominator_rc = intmax_power(base, not_recurring_part.length() + n);
+        denominator_rc = intmax_power(base, recurring_part.length());
         denominator_rc--;
     }
     else {
@@ -116,8 +116,11 @@ int main()
         denominator_rc = 1;
     }
 
-    intmax_t denominator = denominator_nr * denominator_rc;
-    intmax_t numerator = integer * denominator
+    denominator_rc *= denominator_nr;
+
+    intmax_t denominator, numerator;
+    denominator = denominator_nr * denominator_rc;
+    numerator = integer * denominator
         + numerator_nr * denominator_rc
         + numerator_rc * denominator_nr;
 
