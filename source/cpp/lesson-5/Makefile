@@ -19,4 +19,4 @@ $(TARGETS):%:%.o
 .PHONY: clean
 
 clean:
-	rm -f *.o $(TARGETS)
+	rm -f *.o test.* $(TARGETS)

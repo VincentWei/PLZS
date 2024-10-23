@@ -27,4 +27,4 @@ $(TARGETS):%:%.o
 .PHONY: clean
 
 clean:
-	rm -f *.o $(TARGETS)
+	rm -f *.o in.txt out.txt students.bin $(TARGETS)
