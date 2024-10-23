@@ -100,13 +100,15 @@ int main()
         numerator_rc = recurring_part;
 
         bigint base(10);
-        denominator_rc = bigint_power(base, not_recurring_part.length() + n);
+        denominator_rc = bigint_power(base, recurring_part.length());
         denominator_rc--;
     }
     else {
         numerator_rc = 0;
         denominator_rc = 1;
     }
+
+    denominator_rc *= denominator_nr;
 
     bigint denominator = denominator_nr * denominator_rc;
     bigint numerator = integer * denominator
