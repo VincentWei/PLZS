@@ -42,6 +42,98 @@
   1. 表达式扫描完成，取出栈顶数值 `29`，得出表达式的求值结果为 `29`。
 
 	
+#### 参考实现
+
+```cpp
+#include <iostream>     // for std::cin and std::cout
+#include <string>       // for std::string
+#include <deque>        // for std::deque
+#include <cstdlib>      // for strtod()
+#include <cctype>       // for isdigit()
+#include <cassert>      // for assert()
+
+using namespace std;
+
+double evaluate_prefix_expression(string exp)
+{
+    deque<double> operands;
+
+    while (!exp.empty()) {
+        const char* last_token;
+
+        size_t found = exp.rfind(' ');
+        if (found != string::npos) {
+            last_token = exp.c_str() + found + 1;
+        }
+        else {
+            found = 0;
+            last_token = exp.c_str();
+        }
+
+        if (strlen(last_token) == 1 && !isdigit(*last_token)) {
+            if (operands.size() < 2) {
+                throw std::invalid_argument("Bad expression");
+            }
+
+            double left = operands.back();
+            operands.pop_back();
+            double right = operands.back();
+            operands.pop_back();
+            double result;
+
+            switch (*last_token) {
+            case '+':
+                result = left + right;
+                break;
+
+            case '-':
+                result = left - right;
+                break;
+
+            case '*':
+                result = left * right;
+                break;
+
+            case '/':
+                result = left / right;
+                break;
+
+            default:
+                throw std::invalid_argument("Unknown operator");
+                break;
+            }
+
+            operands.push_back(result);
+        }
+        else {
+            char* end;
+            double operand = strtod(last_token, &end);
+            if (end == last_token) {
+                throw std::invalid_argument("Bad operand");
+            }
+
+            operands.push_back(operand);
+        }
+
+        exp.erase(found);
+    }
+
+    if (operands.size() > 0) {
+        return operands.back();
+    }
+
+    throw std::invalid_argument("Bad expression");
+    return 0;
+}
+
+    assert(evaluate_prefix_expression("+ 1 2") == 3);
+    assert(evaluate_prefix_expression("- 10 20") == -10);
+    assert(evaluate_prefix_expression("* 3 2") == 6);
+    assert(evaluate_prefix_expression("/ 6 2") == 3);
+    assert(evaluate_prefix_expression("- * + 3 4 5 6") == 29);
+```
+
+	
 #### 后缀表达式的求值
 
 - 算法描述：
@@ -57,6 +149,100 @@
   1. 其后是数值 `6`，压入 `operands`。
   1. 其后是 `-` 运算符，从 `operands` 中依次弹出 `6` 和 `35`，计算 `35 - 6`，得 `29`，将 `29` 压入 `operands`。
   1. 表达式扫描完成，取出栈顶数值 `29`，得出表达式的求值结果为 `29`。
+
+	
+#### 参考实现
+
+```cpp
+#include <iostream>     // for std::cin and std::cout
+#include <string>       // for std::string
+#include <stack>        // for std::stack
+#include <cstdlib>      // for strtod()
+#include <cctype>       // for isdigit()
+#include <cassert>      // for assert()
+
+using namespace std;
+
+double evaluate_postfix_expression(string exp)
+{
+    stack<double> operands;
+
+    while (!exp.empty()) {
+        const char* token = exp.c_str();
+
+        size_t found = exp.find(' ');
+        size_t token_len;
+        if (found != string::npos) {
+            token_len = found;
+        }
+        else {
+            token_len = exp.length();
+            found = token_len - 1;
+        }
+
+        if (token_len == 1 && !isdigit(*token)) {
+            if (operands.size() < 2) {
+                throw std::invalid_argument("Bad expression");
+            }
+
+            // 注意栈顶操作数应该是右操作数
+            double right = operands.top();
+            operands.pop();
+            double left = operands.top();
+            operands.pop();
+            double result;
+
+            switch (*token) {
+            case '+':
+                result = left + right;
+                break;
+
+            case '-':
+                result = left - right;
+                break;
+
+            case '*':
+                result = left * right;
+                break;
+
+            case '/':
+                result = left / right;
+                break;
+
+            default:
+                throw std::invalid_argument("Unknown operator");
+                break;
+            }
+
+            operands.push(result);
+        }
+        else {
+            char* end;
+            double operand = strtod(token, &end);
+            if (end == token) {
+                throw std::invalid_argument("Bad operand");
+            }
+
+            operands.push(operand);
+        }
+
+        exp.erase(0, found + 1);
+    }
+
+    if (operands.size() > 0) {
+        return operands.top();
+    }
+
+    throw std::invalid_argument("Bad expression");
+    return 0;
+}
+
+    assert(evaluate_postfix_expression("1 2 +") == 3);
+    assert(evaluate_postfix_expression("10 20 -") == -10);
+    assert(evaluate_postfix_expression("3 2 *") == 6);
+    assert(evaluate_postfix_expression("6 2 /") == 3);
+    assert(evaluate_postfix_expression("3 4 + 5 * 6 -") == 29);
+```
 
 	
 #### 中缀表达式转换为前缀表达式
@@ -189,7 +375,8 @@ INVALID
 
 - 假定表达式使用十进制表示实数或整数，表达式支持 `+`、`-`、`*`、`/`、`%` 五种运算以及 `()`，且不含非法字符。
 - 如何处理负号（`-`）？
-  1. 前缀和后缀表达式无法有效识别负号和减号。有两种解决办法：可将负号转为减法运算，比如 `-5`，对应 `0 - 5`；或者始终在运算符和操作数之间插入至少一个空白字符，而负号和数字之间不插入任何空白字符。
+  1. 若表达式字符串中，运算符和操作符之间没有任何空白字符，则无法有效区分前缀和后缀表达式中的负号和减号。
+  1. 有两种解决办法：可将负号转为减法运算，比如 `-5`，对应 `0 - 5`；或者始终在运算符和操作数之间插入至少一个空白字符，而负号和数字之间不插入任何空白字符。
   1. 中缀表达式中，可通过上下文判断是否为负号，比如 `-3 + -5`，或者 `(-3) + (-5)`。
 - 如何判断非法表达式？
   1. 前缀和后缀表达式的处理中，在执行运算时，若操作数栈中只有一个操作数，则对应表达式为非法。
