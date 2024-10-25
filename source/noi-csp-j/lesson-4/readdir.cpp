@@ -114,7 +114,7 @@ void list_dir_entries(unsigned level, const string& path)
   有：
 
     argc: 2
-    argv: ["./directory-tree", "/etc"]
+    argv: { "./readdir", "/etc" }
 */
 int main(int argc, const char* argv[])
 {

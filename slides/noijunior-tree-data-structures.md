@@ -1235,7 +1235,7 @@ void list_dir_entries(unsigned level, const string& path)
   有：
 
     argc: 2
-    argv: ["./directory-tree", "/etc"]
+    argv: { "./readdir", "/etc" }
 */
 int main(int argc, const char* argv[])
 {
@@ -1279,7 +1279,7 @@ asdfasdfasdf
 ```
 
 	
-5) 编写程序 `directory-tree.cpp`，该程序递归读取给定目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
+5) 编写程序 `directory-tree.cpp`，该程序递归读取通过命令行参数给定的目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
 
 ```console
 ./directoy-tree .
