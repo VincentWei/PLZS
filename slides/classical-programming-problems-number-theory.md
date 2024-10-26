@@ -832,7 +832,8 @@ string nap_mul_bin(const string& a, const string& b)
 		
 ## 高精度整数算术（压位实现）
 
-- 从高精度自然数算术的字符串实现说起
+- 为何不干脆用多个固有整数（如 `int64_t/intmax_t`）代表一个高精度整数？
+- 高精度自然数算术的字符串实现中存在的问题
 
 ```cpp []
 string nap_add(const string &a, const string &b)
@@ -869,7 +870,6 @@ string nap_add(const string &a, const string &b)
 	
 ### 压位实现的基本思路
 
-- 为何不干脆用多个固有整数（如 `int64_t/intmax_t`）代表一个高精度整数？
 - 将十进制整数按照 100 进制或者更高进制（如万进制、亿进制等）进行分割（切片，slice）。
 - 最大可能利用固有整数的运算来提升性能。
 - 使用最接近的固有整数类型存储单个切片。
