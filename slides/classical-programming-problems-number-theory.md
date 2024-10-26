@@ -92,7 +92,7 @@ Totally 267 natural numbers tested (0.00195938 seconds consumed).
 - 在 `[2, n)` 中随机取某个值作为底，然后调用 `quick_power_modulo()` 函数测试取模结果是否为 `1`。
 - 执行至少 8 次测试，若任意一次不满足，则认为是合数，若都满足，则认为是素数。
 
-```cpp
+```cpp []
 #define NR_TESTS        9
 
 bool primality_fermat(uint32_t n)
@@ -119,7 +119,7 @@ bool primality_fermat(uint32_t n)
 - `quick_power_modulo()` 函数利用快速幂算法计算幂，为避免溢出，可同时执行取模操作，但需要使用更宽的整数类型。
 - 其数学原理为：`$ ab \bmod p = \left( (a \bmod p) (b \bmod p) \right) \bmod p $`
 
-```cpp
+```cpp []
 uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
 {
     uint64_t ret = 1;
@@ -155,7 +155,7 @@ uint32_t quick_power_modulo(uint32_t base, uint32_t exp, uint32_t modulus)
 
 	
 
-```cpp
+```cpp []
 bool primality_miller_rabin(uint64_t n)
 {
     // 处理小于 3 的特殊情形。
@@ -233,7 +233,7 @@ bool primality_miller_rabin(uint64_t n)
 - 选择固定的素数作为基数，溢出风险降低，但仍存在，故而需要改进 `quick_power_modulo()` 函数的实现。
 - 使用了 G++ 和 Clang++ 在 64 位平台上的 `__int128` 非标准整数类型；注意符号。
 
-```cpp
+```cpp []
 uint64_t quick_power_modulo(uint64_t base, uint64_t exp, uint64_t modulus)
 {
     uint64_t ret = 1;
@@ -457,7 +457,7 @@ $$`
 	
 - 利用扩展欧几里得算法，在求最大公约数的同时求出 `$ x_0, y_0 $`：
 
-```cpp
+```cpp []
 intmax_t ex_gcd(intmax_t a, intmax_t b, intmax_t& x, intmax_t& y)
 {
     if (b == 0) {
@@ -1038,7 +1038,7 @@ class bigint {
 
 - 以求最大公约数为例
 
-```cpp
+```cpp []
 intmax_t gcd(intmax_t a, intmax_t b)
 {
     while (b != 0) {
@@ -1068,7 +1068,7 @@ bigint gcd(bigint a, const b)
 	
 ### 加减法
 
-```cpp
+```cpp []
 template <class Ta, class Tb>
 void bigint::absadd(const Ta& one, const Tb& other, bigint &result)
 {
@@ -1135,7 +1135,7 @@ void bigint::abssub(const Ta& one, const Tb& other, bigint &result)
 	
 ### 一个辅助私有类
 
-```cpp
+```cpp []
 class bigint {
     ...
 
@@ -1187,7 +1187,7 @@ class bigint {
 	
 ### 运算符重载
 
-```cpp
+```cpp []
 bigint bigint::operator+ (intmax_t other) const
 {
     if (other == 0) {
@@ -1254,7 +1254,7 @@ $ ./maximum-le-sqrt
 	
 ### 二分搜索的典型实现
 
-```cpp
+```cpp []
 template <class T>
 const T* binary_search(const T* arr, const T& needle, size_t start, size_t end)
 {

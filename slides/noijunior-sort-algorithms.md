@@ -495,7 +495,7 @@ void merge_sort_asc(T *t, size_t start, size_t stop, T* buf)
 - 使用 `new` 可动态创建一个类的对象，此时获得一个指针类型。
 - 对使用指针表达的类对象，我们使用 `->` 运算符引用其成员变量或成员函数。
 
-```cpp
+```cpp []
 class Rectangle {
     double width, height;
 
@@ -534,7 +534,7 @@ class Rectangle {
 	
 - [完整程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-2/dynamic-class-object.cpp)
 
-```cpp
+```cpp []
 class Rectangle {
     // 该静态成员变量可用于统计 Rectangle 实例的个数。
     // Rectangle 类的所有实例将共享这一静态成员变量。
