@@ -832,26 +832,407 @@ string nap_mul_bin(const string& a, const string& b)
 		
 ## 高精度整数算术（压位实现）
 
-	
-### 压位实现的基本原理
+- 从高精度自然数算术的字符串实现说起
+
+```cpp []
+string nap_add(const string &a, const string &b)
+{
+    string result;
+    size_t len_a = a.length();
+    size_t len_b = b.length();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    int c = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = ((i < len_a) ? a[len_a - i - 1] : '0') - '0';
+        int n_b = ((i < len_b) ? b[len_b - i - 1] : '0') - '0';
+
+        int r = n_a + n_b + c;
+        if (r >= 10) {
+            c = 1;
+            r -= 10;
+        }
+        else
+            c = 0;
+
+        result.insert(0, 1, '0' + r);
+    }
+
+    if (c > 0) {
+        result.insert(0, 1, '1');
+    }
+
+    return result;
+}
+```
 
 	
-### 加法
+### 压位实现的基本思路
+
+- 为何不干脆用多个固有整数（如 `int64_t/intmax_t`）代表一个高精度整数？
+- 将十进制整数按照 100 进制或者更高进制（如万进制、亿进制等）进行分割（切片，slice）。
+- 最大可能利用固有整数的运算来提升性能。
+- 使用最接近的固有整数类型存储单个切片。
+  1. 百进制：`char/int8_t`；
+  1. 万进制：`short/int16_t`；
+  1. 亿进制：`int/int32_t`。
+- 使用切片构成的矢量（vector）代表一个高精度整数。
+- 其他考虑：
+  1. 大头（big-endian）还是小头（little-endian）？
+  1. 正负号如何处理？
+- 接口考虑：
+  1. 实现为 C++ 类。
+  1. 支持常见算术运算符的重载，大大方便使用。
+  1. 支持 `ostream` 和 `istream` 流上的 `<<` 和 `>>` 运算符等。
 
 	
-### 减法
+### `bigint` 类
+
+```cpp []
+/* Choose one of the following macros */
+// #define USE_INT8_AS_SLICE   1
+// #define USE_INT16_AS_SLICE  1
+#define USE_INT32_AS_SLICE  1
+
+class bigint {
+  public:
+#if defined(USE_INT32_AS_SLICE)
+    using slice_t = int32_t;
+    using twin_t  = int64_t;
+    using slice_v = std::vector<bigint::slice_t>;
+    static const int slice_width_k = 8;             //    9999 9999
+    static const int max_slice_nint_k = 99999999;   // 21 4748 3647 (int32max)
+    static const int slice_base_k = (max_slice_nint_k + 1); // 1 00000000
+    static const int max_nint_slices_k = 2;    // 922 33720368 54775807
+    static const int max_group_slices_k = 2;
+    static const intmax_t max_nint_to_fit_k = 9999999999999999LL;
+    static const intmax_t group_base_k = 100000000LL * 100000000LL;
+        // slice_base_k ^ max_group_slices_k
+#elif defined(USE_INT16_AS_SLICE)
+    using slice_t = int16_t;
+    using twin_t  = int32_t;
+    using slice_v = std::vector<bigint::slice_t>;
+    static const int slice_width_k = 4;             //   9999
+    static const int max_slice_nint_k = 9999;       // 3 2767 (int16max)
+    static const int slice_base_k = (max_slice_nint_k + 1); // 1 0000
+    static const int max_nint_slices_k = 4;    // 922 3372 0368 5477 5807
+    static const int max_group_slices_k = 4;
+    static const intmax_t max_nint_to_fit_k = 9999999999999999LL;
+    static const intmax_t group_base_k = 100000000LL * 100000000LL;
+        // slice_base_k ^ max_group_slices_k */
+#elif defined(USE_INT8_AS_SLICE)
+    using slice_t = int8_t;
+    using twin_t  = int16_t;
+    using slice_v = std::vector<bigint::slice_t>;
+    static const int slice_width_k = 2;             //   99
+    static const int max_slice_nint_k = 99;         // 1 27 (int8max)
+    static const int slice_base_k = (max_slice_nint_k + 1); // 1 00
+    static const int max_nint_slices_k = 9;    // 922 33 72 03 68 54 77 58 07
+    static const int max_group_slices_k = 8;
+    static const intmax_t max_nint_to_fit_k = 999999999999999999LL;
+    static const intmax_t group_base_k = 1000000000LL * 1000000000LL;
+        // slice_base_k ^ max_group_slices_k
+#endif
+
+    bool _sign;
+    slice_v _slices;
+
+  public:
+    bigint(): _sign(false) { }
+
+    bigint(intmax_t nint);
+    bigint(const std::string& str);
+    bigint(const bigint& other);            // copy constructor
+    bigint(bigint&& other);                 // move constructor
+
+    // some getters
+    bool sign() const { return _sign; }
+    const slice_v& slices() const { return _slices; }
+    slice_t most_significant_slice() const {
+        if (_slices.size() == 0)
+            return 0;
+        return _slices.back();
+    }
+    slice_t least_significant_slice() const {
+        if (_slices.size() == 0)
+            return 0;
+        return _slices.front();
+    }
+
+    // getter or setter for max number of slices for native integer
+    static int max_nint_slices();
+
+    // some setters
+    void sign(bool sign) { _sign = sign; }
+    void reverse() { _sign = !_sign; }
+
+    // overloaded operators
+    bigint& operator= (const bigint& other);        // copy assignment operator
+    bigint& operator= (bigint&& other) noexcept;    // move assignment operator
+    bigint& operator= (intmax_t other);
+
+    bigint  operator+  (const bigint& other) const;
+    bigint& operator+= (const bigint& other);
+    bigint  operator+  (intmax_t other) const;
+    bigint& operator+= (intmax_t other);
+
+    bigint  operator-  () const;             // -bi
+
+    bigint  operator-  (const bigint& other) const;
+    bigint& operator-= (const bigint& other);
+    bigint  operator-  (intmax_t other) const;
+    bigint& operator-= (intmax_t other);
+
+    bigint& operator++ ();                  // ++bi
+    bigint  operator++ (int);               // bi++
+
+    bigint& operator-- ();                  // --bi
+    bigint  operator-- (int);               // bi--
+
+    bool operator== (const bigint& other) const;
+    bool operator!= (const bigint& other) const;
+    bool operator>  (const bigint& other) const;
+    bool operator>= (const bigint& other) const;
+    bool operator<  (const bigint& other) const;
+    bool operator<= (const bigint& other) const;
+
+    bool operator== (intmax_t other) const;
+    bool operator!= (intmax_t other) const;
+    bool operator>  (intmax_t other) const;
+    bool operator>= (intmax_t other) const;
+    bool operator<  (intmax_t other) const;
+    bool operator<= (intmax_t other) const;
+
+    bigint  operator*  (const bigint& other) const;
+    bigint& operator*= (const bigint& other);
+    bigint  operator*  (intmax_t other) const;
+    bigint& operator*= (intmax_t other);
+
+    bigint  operator/  (const bigint& other) const;
+    bigint& operator/= (const bigint& other);
+    bigint  operator/  (intmax_t other) const;
+    bigint& operator/= (intmax_t other);
+
+    bigint  operator%  (const bigint& other) const;
+    bigint& operator%= (const bigint& other);
+    bigint  operator%  (intmax_t other) const;
+    bigint& operator%= (intmax_t other);
+
+    static bool divmod(const bigint& dividend, const bigint& divisor,
+            bigint& quotient, bigint& remainder);
+    static bool divmod(const bigint& dividend, intmax_t divisor,
+            bigint& quotient, bigint& remainder);
+
+    static void fastmul(const bigint& multiplicand, const bigint& multiplier,
+            bigint& result);
+    static void fastmul(const bigint& multiplicand, intmax_t multiplier,
+            bigint& result);
+
+    bigint abs() const;
+    int abscmp(const bigint& other) const;
+}
+```
 
 	
-### 竖式乘法
+### 典型用法
+
+- 以求最大公约数为例
+
+```cpp
+intmax_t gcd(intmax_t a, intmax_t b)
+{
+    while (b != 0) {
+        intmax_t tmp = a;
+        a = b;
+        b = tmp % b;
+    }
+
+    return a;
+}
+
+bigint gcd(bigint a, const b)
+{
+    while (b != 0) {
+        bigint tmp = std::move(a);
+        a = b;
+        b = tmp % b;
+    }
+
+    return a;
+}
+
+    bigint a(11), b("33");
+    std::cout << gdc(a, b) << std::endl;
+```
 
 	
-### 倍增乘法
+### 加减法
+
+```cpp
+template <class Ta, class Tb>
+void bigint::absadd(const Ta& one, const Tb& other, bigint &result)
+{
+    size_t len_a = one.size();
+    size_t len_b = other.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    result._slices.clear();
+
+    int carry = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = (i < len_a) ? one[i] : 0;
+        int n_b = (i < len_b) ? other[i] : 0;
+
+        int r = n_a + n_b + carry;
+        if (r >= slice_base_k) {
+            carry = 1;
+            r -= slice_base_k;
+        }
+        else
+            carry = 0;
+
+        result._slices.push_back(r);
+    }
+
+    if (carry > 0) {
+        result._slices.push_back(carry);
+    }
+}
+
+/* this must be larger than other */
+template <class Ta, class Tb>
+void bigint::abssub(const Ta& one, const Tb& other, bigint &result)
+{
+    size_t len_a = one.size();
+    size_t len_b = other.size();
+    size_t len_max = (len_a > len_b) ? len_a : len_b;
+
+    result._slices.clear();
+
+    int borrow = 0;
+    for (size_t i = 0; i < len_max; i++) {
+        int n_a = (i < len_a) ? one[i] : 0;
+        int n_b = (i < len_b) ? other[i] : 0;
+
+        int r;
+        if (n_a - borrow >= n_b) {
+            r = n_a - borrow - n_b;
+            borrow = 0;
+        }
+        else {
+            r = n_a - borrow + slice_base_k - n_b;
+            borrow = 1;
+        }
+
+        result._slices.push_back(r);
+    }
+
+    assert(borrow == 0);
+    result.normalize();
+}
+```
 
 	
-### 除法
+### 一个辅助私有类
+
+```cpp
+class bigint {
+    ...
+
+  private:
+    class slice_a {
+       size_t  _size;
+       slice_t _slices[max_nint_slices_k];
+
+    public:
+       slice_a(): _size(0) { }
+
+       slice_a(slice_t slice) {
+           _size = 1;
+           _slices[0] = slice;
+       }
+
+       size_t size() const { return _size; };
+
+       void clear() { _size = 0; }
+
+       void push_back(slice_t val) {
+           assert(_size < max_nint_slices_k);
+           _slices[_size] = val;
+           _size++;
+       }
+
+       slice_t operator[](size_t i) const {
+           assert(i < _size);
+           return _slices[i];
+       }
+
+       slice_t front() const {
+            if (_size > 0)
+                return _slices[0];
+            return 0;
+       }
+
+       slice_t back() const {
+            if (_size > 0)
+                return _slices[_size - 1];
+            return 0;
+       }
+    };
+
+    ...
+};
+```
 
 	
-### 取模
+### 运算符重载
+
+```cpp
+bigint bigint::operator+ (intmax_t other) const
+{
+    if (other == 0) {
+        return *this;
+    }
+
+    if (imaxabs(other) > max_nint_to_fit_k) {
+        bigint other_bi { other };
+        return *this + other_bi;
+    }
+
+    bigint result;
+    slice_a other_slices;
+    initfrom(other, other_slices);
+
+    if (_sign == (other < 0)) {
+        absadd(_slices, other_slices, result);
+        result._sign = _sign;
+    }
+    else {
+        int cmp = abscmp(_slices, other_slices);
+        if (cmp == 0) {
+            return result;
+        }
+        else if (cmp > 0) {
+            abssub(_slices, other_slices, result);
+            result._sign = _sign;
+        }
+        else {      // cmp < 0
+            abssub(other_slices, _slices, result);
+            result._sign = (other < 0);
+        }
+    }
+
+    return result;
+}
+```
+
+	
+### 其他实现解析
+
+- 竖式乘法
+- 倍增乘法
+- 除法
+- 取模
 
 		
 ## 高精度算术：求小于平方根的最大整数
