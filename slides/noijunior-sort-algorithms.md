@@ -555,7 +555,7 @@ class Rectangle {
     }
 
     // Rectangle 类的析构函数（destructor)
-    ^Rectangle() {
+    ~Rectangle() {
         _nr_rectangles--;
     }
 
