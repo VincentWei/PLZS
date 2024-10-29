@@ -915,9 +915,9 @@ void test_binary_tree_node()
 - 假设有一组字符 `{a, b, c, d, e, f}`，对应的频率分别为 `5%, 9%, 12%, 13%, 16%, 45%`，则字符 `a, b, c, d, e, f` 对应的哈夫曼编码是什么？
 
 		
-## 实用工具
+## 实用技巧及工具
 
-`Utilities`
+`Skills and Utilities`
 
 	
 ### STL 文件读写流
@@ -1285,6 +1285,37 @@ int main(int argc, const char* argv[])
 }
 ```
 
+	
+### STL `map` 和 `unordered_map` 类模板
+
+- STL `map`（`<map>`）是一种非线性容器，用于包含多个键值对（key-value pairs）；会对键排序。
+- STL `unordered_map`（`<unordered_map>`）和 `map` 的功能类似，但不对键排序。
+
+```cpp
+// accessing mapped values
+#include <iostream>
+#include <map>
+#include <string>
+
+int main ()
+{
+    std::map<char, std::string> mymap;
+
+    mymap['a'] = "an element";
+    mymap['b'] = "another element";
+    mymap['c'] = mymap['b'];
+
+    std::cout << "mymap['a'] is " << mymap['a'] << '\n';
+    std::cout << "mymap['b'] is " << mymap['b'] << '\n';
+    std::cout << "mymap['c'] is " << mymap['c'] << '\n';
+    std::cout << "mymap['d'] is " << mymap['d'] << '\n';
+
+    std::cout << "mymap now contains " << mymap.size() << " elements.\n";
+
+    return 0;
+}
+```
+
 		
 ## 作业
 
@@ -1387,7 +1418,8 @@ The latest modified file: directory-tree
 
 - [本讲示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/)
 - [在线Linux手册页](https://www.man7.org/linux/man-pages)：目前只有英文版。
-- [std::fstream 参考](https://cplusplus.com/reference/fstream/)：来自 cplusplus.com，只有英文版，但易懂。
-- [std::fstream 参考](https://zh.cppreference.com/w/cpp/io/basic_fstream)：来自 cppreference.com，有中文版，但晦涩。
-
+- [`std::fstream` 参考](https://cplusplus.com/reference/fstream/)
+- [`std::map` 参考](https://cplusplus.com/reference/map/map/)
+- [`std::unordered_map` 参考](https://cplusplus.com/reference/unordered_map/unordered_map/)
+- [cppreference.com](https://zh.cppreference.com/w/cpp/)：有中文版，但文字晦涩。
 
