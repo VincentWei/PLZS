@@ -1026,7 +1026,8 @@ bool ios::fail() const;
 	
 #### 二进制读写示例程序
 
-- [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/fstream-binary.cpp)
+- [完整示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/fstream-binary.cpp)
+- 思考：将一般的类对象以二进制形式存入文件后再行读取，是否可行？
 
 ```cpp
 #include <iostream>     // std::cout and std::cerr
