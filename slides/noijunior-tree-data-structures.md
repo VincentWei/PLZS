@@ -1264,18 +1264,24 @@ int main(int argc, const char* argv[])
 2) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
 
 	
-3) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩标准输入中给定的任意文本（仅 ASCII 码），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+3) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩作为命令行参数指定的 C++ 源文件（若给定的文件名为 `-`，则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
 
 ```console
-./huffman-encode
-<asdfasdfasdf^D>        # Ctrl+D（^D） 表示输入结束。
-Compressed and saved to huffman-code.bin
+./huffman-encode huffman-encode.cpp
+File huffman-encode.cpp (11631 bytes) compressed and saved to huffman-code.bin (3456 bytes).
 ```
 
-4) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本。运行效果如下：
+```console
+./huffman-encode -
+<asdfasdfasdf sadfasf asf asdf asfsafasfasf^D>        # Ctrl+D（^D） 表示输入结束。
+Contents from stdio compressed (43 bytes) and saved to huffman-code.bin (110 bytes).
+
+	
+```
+4) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
 ```console
 ./huffman-decode
-asdfasdfasdf
+asdfasdfasdf sadfasf asf asdf asfsafasfasf
 ```
 
 	
