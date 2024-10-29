@@ -1373,28 +1373,7 @@ The size of compressed contents: 355 bytes (Origin: 530 bytes)
 ```
 
 	
-4) 【选做】在第 3 题的基础上继续增强程序 `huffman-encode.cpp`：
-
-  - 该程序使用霍夫曼编码压缩作为命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
-
-```console
-./huffman-encode huffman-encode.cpp
-File compressed and saved to huffman-code.bin (11631 -> 3456 bytes).
-
-./huffman-encode
-<asdfasdfasdf sadfasf asf asdf asfsafasfasf^D>        # Ctrl+D（^D） 表示输入结束。
-File compressed and saved to huffman-code.bin (43 -> 121 bytes).
-```
-
-  - 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
-
-```console
-./huffman-decode
-asdfasdfasdf sadfasf asf asdf asfsafasfasf
-```
-
-	
-5) 编写程序 `directory-tree.cpp`，该程序递归读取通过命令行参数给定的目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
+4) 编写程序 `directory-tree.cpp`，该程序递归读取通过命令行参数给定的目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
 
 ```console
 ./directoy-tree .

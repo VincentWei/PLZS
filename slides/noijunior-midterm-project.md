@@ -340,12 +340,14 @@ double evaluate_postfix_expression(string exp)
 - 课堂思考：中缀表达式的求值二叉树和前后缀表达式之间有何关系？
 
 		
-## 综合练习：算术表达式解析器
+## 综合练习
+
+`Comprehensive Practice`
+
+		
+### 第一题：算术表达式解析器
 
 `Arithmetic expression parser`
-
-	
-### 要求
 
 - 编写一个算术表达式解析器（`arithmetic-expression-parser.cpp`）完成中缀表达式的解析和求值。
 - 要求支持如下功能：
@@ -374,7 +376,7 @@ INVALID
 ```
 
 	
-### 实现解析器时要考虑的问题
+#### 实现时要考虑的问题
 
 - 假定表达式使用十进制表示实数或整数，表达式支持 `+`、`-`、`*`、`/`、`%` 五种运算以及 `()`，且不含非法字符。
 - 如何处理负号（`-`）？
@@ -387,6 +389,33 @@ INVALID
   1. 将中缀表达式解析为求值二叉树时，若出现括号不匹配的情形，或者没有预期的操作数时，则表达式为非法。
 - 如何判断表达式中括号的嵌套关系？
   1. 参考中缀表达式转前缀表达式的算法，使用栈来跟踪括号的嵌套关系。
+
+	
+### 第二题：使用霍夫曼编码压缩解压文件
+
+- 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩作为命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+
+```console
+./huffman-encode huffman-encode.cpp
+File compressed and saved to huffman-code.bin (11631 -> 3456 bytes).
+
+./huffman-encode
+<asdfasdfasdf sadfasf asf asdf asfsafasfasf^D>        # Ctrl+D（^D） 表示输入结束。
+File compressed and saved to huffman-code.bin (43 -> 121 bytes).
+```
+
+- 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
+
+```console
+./huffman-decode
+asdfasdfasdf sadfasf asf asdf asfsafasfasf
+```
+
+	
+#### 实现时要考虑的问题
+
+- 如何将霍夫曼树存储到文件中？
+- 如何处理变长编码？
 
 		
 ## 实用技巧及工具
@@ -479,4 +508,42 @@ long double fmodl(long double x, long double y);
 ```
 
 - 对浮点数亦可定义取模运算：设 `fmod(x, y)` 的返回值为 `m`，则有 `x = n * y + m`，其中 `n` 是整数，`m` 和 `x` 有相同的符号，而且 `m` 的绝对值小于 `y` 的绝对值。
+
+	
+### 位运算
+
+- C++ 二进制位运算符
+   1. 位非：`~`；
+   1. 位与：`&`；位与并赋值：`&=`
+   1. 位或：`|`；位或并赋值：`|=`
+   1. 位亦或：`^`；位亦或并赋值：`^=`
+   1. 左移：`<<`；左移并赋值：`<<=`
+   1. 右移：`>>`；右移并赋值：`>>=`
+- 二进制位的表述规则：
+   1. 最高位（most significant bit，MSB），始终在最左侧。
+   1. 最低位（least significant bit，LSB），始终在最右侧。
+
+```cpp
+unsigned char set_bit_in_byte(unsigned char byte, size_t index)
+{
+    assert(index < 8);
+    unsigned char my_byte = 0x01 << index;
+    return (byte | my_byte);
+}
+
+unsigned char clear_bit_in_byte(unsigned char byte, size_t index)
+{
+    assert(index < 8);
+    unsigned char my_byte = 0x01 << index;
+    return (byte & ~my_byte);
+}
+
+bool is_bit_set_in_bytes_array(unsigned char* bytes, size_t index_bit)
+{
+    size_t index_byte = index_bit / 8;
+    index_bit %= 8;
+
+    return (bytes[index_byte] & (0x01 << index_bit));
+}
+```
 
