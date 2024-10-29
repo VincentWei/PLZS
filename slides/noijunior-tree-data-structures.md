@@ -1291,7 +1291,7 @@ int main(int argc, const char* argv[])
 `Homework`
 
 	
-1) 在课堂练习基础上继续完成如下增强：<!-- .element: style="align:left" -->
+1) 在课堂练习基础上继续完成如下增强：
   - 增强 `generic-tree.cpp`，实现 `dfs_postorder_i()` 方法，并添加测试用例。
   - 增强 `binary-tree.cpp`，实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
 
