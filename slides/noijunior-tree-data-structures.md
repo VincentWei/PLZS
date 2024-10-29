@@ -1299,19 +1299,93 @@ int main(int argc, const char* argv[])
 2) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
 
 	
-3) 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩作为命令行参数指定的 C++ 源文件（若给定的文件名为 `-`，则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+3) 编写程序 `huffman-encode.cpp`，该程序给出通过命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代）的霍夫曼编码信息。运行效果如下：
+
+```console
+$ ./huffman-encode Makefile
+0x9: 11100101
+0xa: 0101
+   : 100
+  $: 01000
+  %: 1010010
+  (: 01001
+  ): 00111
+  *: 101000111
+  +: 110001
+  ,: 1010110
+  -: 11110
+  .: 1101010
+  0: 10100001
+  1: 0000101
+  2: 101000100
+  4: 101000101
+  :: 011000
+  <: 10101011
+  =: 101111
+  @: 10101000
+  A: 00100
+  C: 110000
+  D: 1010011
+  E: 000111
+  F: 000011
+  G: 110011
+  H: 101011110
+  I: 10101001
+  L: 101100
+  M: 11100110
+  N: 1111110
+  O: 10100000
+  P: 101011111
+  R: 1101011
+  S: 00010
+  T: 011001
+  U: 0110100
+  W: 0110111
+  X: 11011
+  Y: 101011100
+  _: 11100111
+  a: 00000
+  b: 101011101
+  c: 101110
+  d: 1111111
+  e: 0111
+  f: 111110
+  g: 0110110
+  h: 11100100
+  i: 00101
+  l: 111000
+  m: 1100100
+  n: 00110
+  o: 110100
+  p: 10101010
+  q: 0110101
+  r: 11101
+  s: 1100101
+  t: 101101
+  u: 0001100
+  w: 101000110
+  x: 0001101
+  y: 0000100
+Number of distinct characters to encode: 63
+Code lengthes are in [3, 9]
+The size of compressed contents: 355 bytes (Origin: 530 bytes)
+```
+
+	
+4) 【选做】在第 3 题的基础上增强程序 `huffman-encode.cpp`：
+
+- 该程序使用霍夫曼编码压缩作为命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
 
 ```console
 ./huffman-encode huffman-encode.cpp
 File compressed and saved to huffman-code.bin (11631 -> 3456 bytes).
 
-./huffman-encode -
+./huffman-encode
 <asdfasdfasdf sadfasf asf asdf asfsafasfasf^D>        # Ctrl+D（^D） 表示输入结束。
 File compressed and saved to huffman-code.bin (43 -> 121 bytes).
 ```
 
-	
-4) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
+- 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
 
 ```console
 ./huffman-decode
