@@ -842,7 +842,7 @@ void test_binary_tree_node()
 <img style="height:500px;width:auto;" src="assets/noijunior-perfect-binary-tree.jpg" />
 
 	
-#### 性质
+#### 完美二叉树的性质
 
 1. 叶节点数：如果完美二叉树的高度为 `$ h $`，则叶节点数将为 `$ 2^h $`，因为最后一层已完全填充。
 1. 叶节点数（`$ N_l $`）与非叶节点数（`$ N_{nl} $`）的关系：`$ N_l = N_{nl} + 1 $`。
@@ -850,9 +850,7 @@ void test_binary_tree_node()
 1. 树的高度：具有 `N` 个节点的完美二叉树的高度为 `$ \log_2{(N+1)} - 1 $`。
 
 	
-#### 数组表达
-
-完美二叉树的数组表达
+#### 完美二叉树的数组表达
 
 <img style="height:700px;width:auto;" src="assets/noijunior-perfect-binary-tree-by-array.svg" />
 
@@ -866,16 +864,14 @@ void test_binary_tree_node()
 <img style="height:500px;width:auto;" src="assets/noijunior-complete-binary-tree.png" />
 
 	
-#### 性质
+#### 完全二叉树的性质
 
 1. 除最后一层外，所有层都被填满。
 1. 深度为 `$ d $` 的完全二叉树，其节点数量小于等于 `$ 2^d $`。
 1. 在一个有 `$ N $` 个节点的完全二叉树中，树的高度为 `$ log_2{(N + 1)} $`。
 
 	
-#### 数组表达
-
-完全二叉树的数组表达
+#### 完全二叉树的数组表达
 
 <img style="height:700px;width:auto;" src="assets/noijunior-complete-binary-tree-by-array.svg" />
 
