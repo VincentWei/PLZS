@@ -347,8 +347,6 @@ double evaluate_postfix_expression(string exp)
 	
 ### 第一题：算术表达式解析器
 
-`Arithmetic expression parser`
-
 - 编写一个算术表达式解析器（`arithmetic-expression-parser.cpp`）完成中缀表达式的解析和求值。
 - 要求支持如下功能：
   1. 读取用户输入的中缀算术表达式；该表达式支持加减乘除四则混合运算，支持负号、括号。
