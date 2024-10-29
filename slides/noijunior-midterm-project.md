@@ -521,6 +521,8 @@ long double fmodl(long double x, long double y);
    1. 最高位（most significant bit，MSB），始终在最左侧。
    1. 最低位（least significant bit，LSB），始终在最右侧。
 
+	
+
 ```cpp
 unsigned char set_bit_in_byte(unsigned char byte, size_t index)
 {
