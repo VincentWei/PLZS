@@ -412,7 +412,7 @@ asdfasdfasdf sadfasf asf asdf asfsafasfasf
 	
 #### 实现时要考虑的问题
 
-- 如何将霍夫曼树存储到文件中？
+- 如何将霍夫曼树存储到文件且便于再读入？
 - 如何处理变长编码？
 
 		
