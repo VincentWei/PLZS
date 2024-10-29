@@ -1173,7 +1173,8 @@ int main()
 	
 #### 文件系统操作示例程序
 
-- [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/readdir.cpp)
+- [完整示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/readdir.cpp)
+- 本例还展示如何定义一个自己的 `iostream` 操作器（manipulator）。
 
 ```cpp
 #include <iostream>
@@ -1331,16 +1332,17 @@ int main ()
 `Homework`
 
 	
-1) 在课堂练习基础上继续完成如下增强：
+1) 在课堂练习基础上继续增强 `generic-tree.cpp`，实现 `dfs_postorder_i()` 方法，并添加测试用例。
 
-  - 增强 `generic-tree.cpp`，实现 `dfs_postorder_i()` 方法，并添加测试用例。
-  - 增强 `binary-tree.cpp`，实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
 
 	
-2) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
+2) 在课堂练习基础上继续增强 `binary-tree.cpp`，实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
 
 	
-3) 编写程序 `huffman-encode.cpp`，该程序给出通过命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代）的霍夫曼编码信息。运行效果如下：
+3) 参考示例程序 [binary-tree.cpp](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/binary-tree.cpp) 编写程序 `ternary-tree.cpp`，用以实现三元树的基本接口。注意，三元树的中序遍历顺序为：先遍历左子树，然后访问根节点，再依次遍历中子树、右子树。
+
+	
+4) 编写程序 `huffman-encode.cpp`，该程序给出通过命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代）的霍夫曼编码信息。运行效果如下：
 
 ```console
 $ ./huffman-encode Makefile
@@ -1413,7 +1415,7 @@ The size of compressed contents: 355 bytes (Origin: 530 bytes)
 ```
 
 	
-4) 编写程序 `directory-tree.cpp`，该程序递归读取通过命令行参数给定的目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
+5) 编写程序 `directory-tree.cpp`，该程序递归读取通过命令行参数给定的目录下的所有子目录及其文件，并构造为一个一般树，之后使用三种方式（深度优先前序、深度优先后序、广度优先）遍历这棵树，分别找出尺寸最大、最小和修改日期最新的文件。运行效果如下：
 
 ```console
 ./directoy-tree .
