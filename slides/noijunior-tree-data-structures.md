@@ -63,7 +63,7 @@
 	
 ### 实例
 
-1) Linux 文件系统
+#### Linux 文件系统
 
 ```console
 /
@@ -130,13 +130,12 @@
 ```
 
 	
-
 标准 Linux 文件系统层次结构
 
 <img style="height:800px;width:auto;" src="assets/noijunior-standard-linux-filesystem-hierarchy.png" />
 
 	
-2) HTML 文档
+#### HTML 文档
 
 ```html
 <!DOCTYPE html>
@@ -199,7 +198,7 @@
 	
 ### 实现
 
-1) 泛型类声明
+#### 泛型类声明
 
 ```cpp
 #include <vector>       // for vector
@@ -249,7 +248,7 @@ public:
 ```
 
 	
-2) 创建（以矢量维护子节点为例，下同）
+#### 创建（以矢量维护子节点为例，下同）
 
 ```cpp
 class tree_node {
@@ -298,7 +297,7 @@ class tree_node {
 ```
 
 	
-3) 遍历
+#### 遍历
 
 - 一般树的深度优先遍历有两种形式：
   1. 前序遍历（preorder traversal，先节点后子树）：首先访问节点，然后递归遍历各个子树。
@@ -375,7 +374,7 @@ class tree_node {
 ```
 
 	
-4) 示例
+#### 示例
 
 ```cpp
 #include <iostream>     // for cin and cout
@@ -537,7 +536,7 @@ void test_tree_node()
 	
 ### 实现
 
-1) 泛型类声明
+#### 泛型类声明
 
 ```cpp
 #include <stack>        // for std::stack
@@ -566,8 +565,9 @@ class bin_tree_node {
     }
 };
 ```
+
 	
-2) 创建
+#### 创建
 
 ```cpp
 class bin_tree_node {
@@ -646,7 +646,7 @@ class bin_tree_node {
 ```
 
 	
-3) 遍历
+#### 遍历
 
 ```cpp
 class bin_tree_node {
@@ -718,7 +718,7 @@ class bin_tree_node {
 ```
 
 	
-4) 示例
+#### 示例
 
 ```cpp
 #include <iostream>     // for cin and cout
