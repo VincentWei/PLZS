@@ -4,7 +4,7 @@
 1. 一般树
 1. 二叉树
 1. 特殊树
-1. 实用工具
+1. 实用技巧及工具
 
 		
 ## 概览
@@ -922,12 +922,15 @@ void test_binary_tree_node()
 	
 ### STL 文件读写流
 
-1) 复习一下基础 STL 文件读写相关类和对象：[课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
+#### 复习一下基础 STL 文件读写相关类和对象：
+
+- [课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
 
 	
-2) `open()` 方法和文件打开模式
-  - `void std::fstream::open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
-  - `void std::fstream::open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
+#### `open()` 方法和文件打开模式
+
+- `void std::fstream::open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
+- `void std::fstream::open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
 
 ----
 
@@ -956,7 +959,10 @@ int main()
 ```
 
 	
-3) 更基础的字符读取方法及状态判断
+#### 更基础的字符读取方法及状态判断
+
+- `int istream::get()` 读取单个或者多个字符，在无内容可读取的情况下返回 `EOF`。
+- `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
 
 ```cpp
 // 读取单个字符
@@ -986,11 +992,8 @@ bool ios::fail() const;
     }
 ```
 
-- `int istream::get()` 在无内容可读取的情况下返回 `EOF`。
-- `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
-
 	
-4) 输入输出流的缓冲模式
+#### 输入输出流的缓冲模式
 
 - 缓冲模式
    1. 行缓冲（文本模式）
@@ -1002,7 +1005,7 @@ bool ios::fail() const;
 - `void std::fstream::close();` 方法在关闭流之前，也会刷新输出缓冲区。
 
 	
-5) 二进制模式常用读写方法
+#### 二进制模式常用读写方法
 
 - 格式化输入输出和无格式化输入输出的区别。
 - `istream& std::istream::read(char* dst, streamsize n);` 方法从流中读取指定长度的字节到目标内存。
@@ -1021,6 +1024,8 @@ bool ios::fail() const;
 | `ios_base::end`   | 相对于流的结束位置（end）         |
 
 	
+#### 二进制读写示例程序
+
 - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/fstream-binary.cpp)
 
 ```cpp
@@ -1079,7 +1084,7 @@ int main()
 ```
 
 	
-6) 输入/输出流的重定向
+#### 输入/输出流的重定向
 
 - 重定向（redirect）的概念。
 - Shell 中重定向标准输出、标准错误的方法：
@@ -1093,9 +1098,10 @@ int main()
   1. 每个字符串流（`std::stringstream`）关联有一个 `std::stringbuf` 对象。
 
 	
-7) 动态改变 C++ 的流对象的流缓冲区对象
-  - 使用 STL `std::ios::rdbuf()` 方法，通过设置输入输出流对象的流缓冲区对象，可实现“重定向”。
-  - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/iostream-rdbuf.cpp)
+#### 动态改变 C++ 的流对象的流缓冲区对象
+
+- 使用 STL `std::ios::rdbuf()` 方法，通过设置输入输出流对象的流缓冲区对象，可实现“重定向”。
+- [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/iostream-rdbuf.cpp)
 
 ```cpp
 #include <iostream>
@@ -1164,6 +1170,8 @@ int main()
   1. [在线手册页](https://www.man7.org/linux/man-pages/man2/mkdir.2.html)
 
 	
+#### 文件系统操作示例程序
+
 - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/readdir.cpp)
 
 ```cpp
