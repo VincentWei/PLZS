@@ -956,19 +956,34 @@ int main()
 ```
 
 	
-3) 更基础的字符读取方法
+3) 更基础的字符读取方法及状态判断
 
 ```cpp
 // 读取单个字符
 int istream::get();
 istream& istream::get(char& c);
 
-// 读取到 C 字符串
+// 读取到 C 字符串缓冲区
 istream& istream::get(char* s, streamsize n);
 istream& istream::get(char* s, streamsize n, char delim);
 
 // 判断是否到达文件尾
 bool ios::eof() const;
+
+// 判断是否失败
+bool ios::fail() const;
+
+    std::fstream fs { "test.txt", std::fstream::in };
+    if (fs.fail()) {
+        cerr << "Failed to open 'test.txt'\n";
+    }
+    else {
+        char c;
+        while ((c = fs.get()) != EOF) {
+            cout << c;
+        }
+        fs.close();
+    }
 ```
 
 - `int istream::get()` 在无内容可读取的情况下返回 `EOF`。
