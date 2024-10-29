@@ -922,7 +922,7 @@ void test_binary_tree_node()
 	
 ### STL 文件读写流
 
-#### 复习一下基础 STL 文件读写相关类和对象：
+#### 复习一下基础 STL 文件读写相关类和对象
 
 - [课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
 
@@ -964,6 +964,7 @@ int main()
 - `int istream::get()` 读取单个或者多个字符，在无内容可读取的情况下返回 `EOF`。
 - `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
 
+	
 ```cpp
 // 读取单个字符
 int istream::get();
