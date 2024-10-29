@@ -201,7 +201,7 @@
 
 1) 泛型类声明
 
-```cpp []
+```cpp
 #include <vector>       // for vector
 
 template <typename T>
@@ -251,7 +251,7 @@ public:
 	
 2) 创建（以矢量维护子节点为例，下同）
 
-```cpp []
+```cpp
 class tree_node {
     ...
 
@@ -307,7 +307,7 @@ class tree_node {
 - 广度优先遍历的迭代实现，使用队列（queue）实现。
 
 	
-```cpp []
+```cpp
 #include <stack>        // for std::stack
 #include <queue>        // for std::queue
 
@@ -377,7 +377,7 @@ class tree_node {
 	
 4) 示例
 
-```cpp []
+```cpp
 #include <iostream>     // for cin and cout
 #include <sstream>      // for ostringstream
 #include <string>       // for stod()
@@ -539,7 +539,7 @@ void test_tree_node()
 
 1) 泛型类声明
 
-```cpp []
+```cpp
 #include <stack>        // for std::stack
 #include <queue>        // for std::queue
 
@@ -569,7 +569,7 @@ class bin_tree_node {
 	
 2) 创建
 
-```cpp []
+```cpp
 class bin_tree_node {
     ...
 
@@ -648,7 +648,7 @@ class bin_tree_node {
 	
 3) 遍历
 
-```cpp []
+```cpp
 class bin_tree_node {
     ...
 
@@ -720,7 +720,7 @@ class bin_tree_node {
 	
 4) 示例
 
-```cpp []
+```cpp
 #include <iostream>     // for cin and cout
 #include <sstream>      // for ostringstream
 #include <string>       // for stod()
@@ -941,7 +941,7 @@ void test_binary_tree_node()
 | `ios_base::trunc`     | 截断（truncate）；打开时，文件中已有的任何内容将被清除/废弃。  |
 
 	
-```cpp []
+```cpp
 #include <fstream>      // std::fstream
 
 int main()
@@ -960,14 +960,18 @@ int main()
 
 ```cpp
 // 读取单个字符
-int get();istream& get(char& c);
+int istream::get();
+istream& istream::get(char& c);
+
 // 读取到 C 字符串
-istream& get(char* s, streamsize n);istream& get(char* s, streamsize n, char delim);
+istream& istream::get(char* s, streamsize n);
+istream& istream::get(char* s, streamsize n, char delim);
+
 // 判断是否到达文件尾
-bool eof() const;
+bool ios::eof() const;
 ```
 
-- `istream:get()` 在无内容可读取的情况下返回 `EOF`。
+- `int istream::get()` 在无内容可读取的情况下返回 `EOF`。
 - `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
 
 	
@@ -985,6 +989,7 @@ bool eof() const;
 	
 5) 二进制模式常用读写方法
 
+- 格式化输入输出和无格式化输入输出的区别。
 - `istream& std::istream::read(char* dst, streamsize n);` 方法从流中读取指定长度的字节到目标内存。
 - `ostream& std::ostream::write(const char* src, streamsize n);` 方法将目标内存中指定长度的字节写入流。
 - `istream& std::istream::seekg(streamoff off, ios_base::seekdir way);` 方法修改输入流的读取位置。
@@ -1077,7 +1082,7 @@ int main()
   - 使用 STL `std::ios::rdbuf()` 方法，通过设置输入输出流对象的流缓冲区对象，可实现“重定向”。
   - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/iostream-rdbuf.cpp)
 
-```cpp []
+```cpp
 #include <iostream>
 #include <fstream>
 
@@ -1146,7 +1151,7 @@ int main()
 	
 - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/readdir.cpp)
 
-```cpp []
+```cpp
 #include <iostream>
 #include <string>
 #include <dirent.h>
