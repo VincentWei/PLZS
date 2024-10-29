@@ -1292,6 +1292,7 @@ int main(int argc, const char* argv[])
 
 	
 1) 在课堂练习基础上继续完成如下增强：
+
   - 增强 `generic-tree.cpp`，实现 `dfs_postorder_i()` 方法，并添加测试用例。
   - 增强 `binary-tree.cpp`，实现 `dfs_inorder_i()` 和 `dfs_postorder_i()` 方法，并添加测试用例。
 
@@ -1374,7 +1375,7 @@ The size of compressed contents: 355 bytes (Origin: 530 bytes)
 	
 4) 【选做】在第 3 题的基础上继续增强程序 `huffman-encode.cpp`：
 
-- 该程序使用霍夫曼编码压缩作为命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
+  - 该程序使用霍夫曼编码压缩作为命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
 
 ```console
 ./huffman-encode huffman-encode.cpp
@@ -1385,7 +1386,7 @@ File compressed and saved to huffman-code.bin (11631 -> 3456 bytes).
 File compressed and saved to huffman-code.bin (43 -> 121 bytes).
 ```
 
-- 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
+  - 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
 
 ```console
 ./huffman-decode
