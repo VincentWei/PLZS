@@ -956,7 +956,22 @@ int main()
 ```
 
 	
-3) 输入输出流的缓冲模式
+3) 更基础的字符读取方法
+
+```cpp
+// 读取单个字符
+int get();istream& get(char& c);
+// 读取到 C 字符串
+istream& get(char* s, streamsize n);istream& get(char* s, streamsize n, char delim);
+// 判断是否到达文件尾
+bool eof() const;
+```
+
+- `istream:get()` 在无内容可读取的情况下返回 `EOF`。
+- `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
+
+	
+4) 输入输出流的缓冲模式
 
 - 缓冲模式
    1. 行缓冲（文本模式）
@@ -968,7 +983,7 @@ int main()
 - `void std::fstream::close();` 方法在关闭流之前，也会刷新输出缓冲区。
 
 	
-4) 二进制模式常用读写方法
+5) 二进制模式常用读写方法
 
 - `istream& std::istream::read(char* dst, streamsize n);` 方法从流中读取指定长度的字节到目标内存。
 - `ostream& std::ostream::write(const char* src, streamsize n);` 方法将目标内存中指定长度的字节写入流。
@@ -1044,7 +1059,7 @@ int main()
 ```
 
 	
-5) 输入/输出流的重定向
+6) 输入/输出流的重定向
 
 - 重定向（redirect）的概念。
 - Shell 中重定向标准输出、标准错误的方法：
@@ -1058,7 +1073,7 @@ int main()
   1. 每个字符串流（`std::stringstream`）关联有一个 `std::stringbuf` 对象。
 
 	
-6) 动态改变 C++ 的流对象的流缓冲区对象
+7) 动态改变 C++ 的流对象的流缓冲区对象
   - 使用 STL `std::ios::rdbuf()` 方法，通过设置输入输出流对象的流缓冲区对象，可实现“重定向”。
   - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/iostream-rdbuf.cpp)
 
@@ -1268,17 +1283,16 @@ int main(int argc, const char* argv[])
 
 ```console
 ./huffman-encode huffman-encode.cpp
-File huffman-encode.cpp (11631 bytes) compressed and saved to huffman-code.bin (3456 bytes).
-```
+File compressed and saved to huffman-code.bin (11631 -> 3456 bytes).
 
-```console
 ./huffman-encode -
 <asdfasdfasdf sadfasf asf asdf asfsafasfasf^D>        # Ctrl+D（^D） 表示输入结束。
-Contents from stdio compressed (43 bytes) and saved to huffman-code.bin (110 bytes).
+File compressed and saved to huffman-code.bin (43 -> 121 bytes).
+```
 
 	
-```
 4) 编写程序 `huffman-decode.cpp`，该程序读取 `huffman-code.bin` 中的内容并还原为原始文本并输出到标准输出。运行效果如下：
+
 ```console
 ./huffman-decode
 asdfasdfasdf sadfasf asf asdf asfsafasfasf
