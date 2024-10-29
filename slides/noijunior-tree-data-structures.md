@@ -963,6 +963,8 @@ int main()
 
 - `int istream::get()` 读取单个或者多个字符，在无内容可读取的情况下返回 `EOF`。
 - `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
+- `bool ios::eof()` 可用来判断是否到达文件尾。
+- `bool ios::fail()` 可用来判断是否产生文件读写错误。
 
 	
 ```cpp
@@ -1050,7 +1052,8 @@ int main()
     };
 
     ofstream ofs;
-    ofs.open("students.bin", ofstream::out | ofstream::binary | std::ostream::app);
+    ofs.open("students.bin",
+            ofstream::out | ofstream::binary | std::ostream::app);
     for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
         ofs.write((const char*)(students + i), sizeof(struct student));
     }
@@ -1074,7 +1077,8 @@ int main()
             struct student student;
 
             ifs.read((char*)(&student), sizeof(struct student));
-            cout << "Got a student: " << student.id << " (" << student.name << ")\n";
+            cout << "Got a student: " << student.id
+                << " (" << student.name << ")\n";
         }
 
         ifs.close();
