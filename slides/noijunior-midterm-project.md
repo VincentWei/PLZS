@@ -6,12 +6,12 @@
 1. 实用技巧及工具
 
 		
-## 算术运算表达式
+## 1) 算术运算表达式
 
 `Arithmetic operation expression`
 
 	
-### 三种算术运算表达式
+### 1.1) 三种算术运算表达式
 
 - 如果不将负号视作取反运算符的话，则算术运算符均为双目运算符。
 - 前缀表达式（prefix expression）：运算符（operator）位于操作数（operand）之前（波兰式）
@@ -27,7 +27,9 @@
 - 中缀表达式可转换为前缀表达式或后缀表达式再行求值；亦可解析为求值二叉树再后序遍历求值。
 
 	
-#### 前缀表达式的求值
+### 1.2) 前缀表达式
+
+#### 1.2.1) 前缀表达式的求值
 
 - 算法描述：
   1. 创建一个空的操作数栈 `operands`。
@@ -42,7 +44,7 @@
   1. 表达式扫描完成，取出栈顶数值 `29`，得出表达式的求值结果为 `29`。
 
 	
-#### 参考实现
+#### 1.2.2) 参考实现
 
 ```cpp
 #include <iostream>     // for std::cin and std::cout
@@ -134,7 +136,9 @@ double evaluate_prefix_expression(string exp)
 ```
 
 	
-#### 后缀表达式的求值
+### 1.3) 后缀表达式
+
+#### 1.3.1) 后缀表达式的求值
 
 - 算法描述：
   1. 创建一个空的操作数栈 `operands`。
@@ -151,7 +155,7 @@ double evaluate_prefix_expression(string exp)
   1. 表达式扫描完成，取出栈顶数值 `29`，得出表达式的求值结果为 `29`。
 
 	
-#### 参考实现
+#### 1.3.2) 参考实现
 
 ```cpp
 #include <iostream>     // for std::cin and std::cout
@@ -245,7 +249,9 @@ double evaluate_postfix_expression(string exp)
 ```
 
 	
-#### 中缀表达式转换为前缀表达式
+### 1.4) 中缀表达式
+
+#### 1.4.1) 中缀表达式转换为前缀表达式
 
 - 算法描述：
   1. 初始化两个栈：运算符栈 `operators` 和结果的栈 `result`。
@@ -283,7 +289,7 @@ double evaluate_postfix_expression(string exp)
 | NONE  | -, +, a, ×, + b, c, d, e  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
 
 	
-#### 中缀表达式转换为后缀表达式
+#### 1.4.2) 中缀表达式转换为后缀表达式
 
 - 算法描述：
   1. 初始化两个栈：运算符栈 `operators` 和结果栈 `result`。
@@ -321,7 +327,7 @@ double evaluate_postfix_expression(string exp)
 | NONE  | -, e, +, ×, d, + c, b, a  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
 
 		
-## 将中缀表达式解析为求值二叉树
+## 2) 将中缀表达式解析为求值二叉树
 
 - 原理
    1. 单个双目算术运算，可构成一个以操作数为叶子节点，结果为根节点的二叉树。
@@ -340,19 +346,19 @@ double evaluate_postfix_expression(string exp)
 - 课堂思考：中缀表达式的求值二叉树和前后缀表达式之间有何关系？
 
 		
-## 综合练习
+## 3) 综合练习
 
 `Comprehensive Practices`
 
 	
-### 第一题：算术表达式解析器
+### 3.1) 算术表达式解析器
 
 - 编写一个算术表达式解析器（`arithmetic-expression-parser.cpp`）完成中缀表达式的解析和求值。
 - 要求支持如下功能：
   1. 读取用户输入的中缀算术表达式；该表达式支持加减乘除四则混合运算，支持负号、括号。
   1. 将中缀表达式转换为前缀表达式进行求值，输出前缀表达式及其求值结果。
   1. 将中缀表达式转换为后缀表达式进行求值，输出后缀表达式及其求值结果。
-  1. 将中缀表达式解析为求值二叉树进行求值，按求值二叉树输出其正规中缀表达式（全部使用括号表示运算顺序）及其求值结果。
+  1. 将中缀表达式解析为求值二叉树进行求值，按求值二叉树输出其正规中缀表达式（全部使用括号表示运算顺序）、前缀表达式及中缀表达式，并给出其求值结果。
   1. 若发现表达式有误，输出 `INVALID`。
 
 	
@@ -366,6 +372,8 @@ Prefix expression: + 300.5 50.6
 Postfix expression: 50.6 300.5 +
     = 351.1
 Normalized infix expression: (300.5 + 50.6)
+Prefix expression: + 300.5 50.6
+Postfix expression: 50.6 300.5 +
     = 351.1
 
 $ ./arithmetic-expression-parser
@@ -374,7 +382,7 @@ INVALID
 ```
 
 	
-#### 实现时要考虑的问题
+#### 3.1.1) 实现时要考虑的问题
 
 - 假定表达式使用十进制表示实数或整数，表达式支持 `+`、`-`、`*`、`/`、`%` 五种运算以及 `()`，且不含非法字符。
 - 如何处理负号（`-`）？
@@ -389,7 +397,7 @@ INVALID
   1. 参考中缀表达式转前缀表达式的算法，使用栈来跟踪括号的嵌套关系。
 
 	
-### 第二题：使用霍夫曼编码压缩解压文件
+### 3.2) 使用霍夫曼编码压缩解压文件
 
 - 编写程序 `huffman-encode.cpp`，该程序使用霍夫曼编码压缩作为命令行参数指定的文本文件（若未指定文件名则从标准输入读取；对文件中的非 ASCII 码，全部使用 `?` 替代），并将压缩后的内容保存为二进制文件 `huffman-code.bin`。运行效果如下：
 
@@ -410,18 +418,18 @@ asdfasdfasdf sadfasf asf asdf asfsafasfasf
 ```
 
 	
-#### 实现时要考虑的问题
+#### 3.2.1) 实现时要考虑的问题
 
 - 如何将霍夫曼树存储到文件且便于再读入？
 - 如何处理变长编码？
 
 		
-## 实用技巧及工具
+## 4) 实用技巧及工具
 
 `Skills and Utilities`
 
 	
-### C++ STL 字符串转换接口（函数）
+### 4.1) C++ STL 字符串转换接口（函数）
 
 | 函数      | 用途 |
 | ---       | ---  |
@@ -463,7 +471,7 @@ long stol(const string& str, size_t* idx = 0, int base = 10);
   1. `base`：决定有效字符及其解释的数字基数（进制）。如果此值为 `0`，则使用的进制由字符串序列的格式决定（如 `0x` 前缀表示 16 进制）。注意此参数的默认值为为 `10`，而不是 `0`。
 
 	
-### C 字符串转换接口（函数）
+### 4.2) C 字符串转换接口（函数）
 
 | 函数      | 用途 |
 | ---       | ---  |
@@ -495,7 +503,7 @@ long double strtold(const char* str, char** endptr);
 ```
 
 	
-### 浮点数取模接口
+### 4.3) 浮点数取模接口
 
 ```cpp
 #include <cmath>
@@ -508,7 +516,7 @@ long double fmodl(long double x, long double y);
 - 对浮点数亦可定义取模运算：设 `fmod(x, y)` 的返回值为 `m`，则有 `x = n * y + m`，其中 `n` 是整数，`m` 和 `x` 有相同的符号，而且 `m` 的绝对值小于 `y` 的绝对值。
 
 	
-### 位运算
+### 4.4) 位运算
 
 - C++ 二进制位运算符
    1. 位非：`~`；
@@ -548,14 +556,14 @@ bool is_bit_set_in_bytes_array(unsigned char* bytes, size_t index_bit)
 ```
 
 	
-### STL 文件读写流
+### 4.5) STL 文件读写流
 
-#### 复习一下基础 STL 文件读写相关类和对象
+#### 4.5.1) 复习一下基础 STL 文件读写相关类和对象
 
 - [课件：C++ STL（标准模板库）](https://courses.fmsoft.cn/plzs/cpp-class-template-and-stl.html#/6)
 
 	
-#### `open()` 方法和文件打开模式
+#### 4.5.2) `open()` 方法和文件打开模式
 
 - `void std::fstream::open(const char* filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
 - `void std::fstream::open(const string& filename, ios_base::openmode mode = ios_base::in | ios_base::out);`：打开或创建文件。
@@ -587,7 +595,7 @@ int main()
 ```
 
 	
-#### 更基础的字符读写方法及状态判断
+#### 4.5.3) 更基础的字符读写方法及状态判断
 
 - `istream::get()` 读取单个或者多个字符。
 - `ostream::put()` 写入单个字符。
@@ -629,7 +637,7 @@ bool ios::fail() const;
 ```
 
 	
-#### 输入输出流的缓冲模式
+#### 4.5.4) 输入输出流的缓冲模式
 
 - 缓冲模式
    1. 行缓冲（文本模式）
@@ -642,7 +650,7 @@ bool ios::fail() const;
 - `void std::istream::sync();` 方法可用于同步输入流，通常意味着清空缓冲区中的内容。但该方法的效果和 STL 的实现有关，不具有可移植性，不建议使用。
 
 	
-#### 二进制模式常用读写方法
+#### 4.5.5) 二进制模式常用读写方法
 
 - 格式化输入输出和无格式化输入输出的区别。
 - `istream& std::istream::read(char* dst, streamsize n);` 方法从流中读取指定长度的字节到目标内存。
@@ -661,7 +669,7 @@ bool ios::fail() const;
 | `ios_base::end`   | 相对于流的结束位置（end）         |
 
 	
-#### 二进制读写示例程序
+#### 4.5.6) 二进制读写示例程序
 
 - [完整示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-5/fstream-binary.cpp)
 - 思考：将一般的类对象以二进制形式存入文件后再行读取，是否可行？
@@ -724,7 +732,7 @@ int main()
 ```
 
 	
-#### 输入/输出流的重定向
+#### 4.5.7) 输入/输出流的重定向
 
 - 重定向（redirect）的概念。
 - Shell 中重定向标准输出、标准错误的方法：
@@ -739,7 +747,7 @@ int main()
   1. `std::filebuf` 和 `std::stringbuf` 类是 `std:streambuf` 的子类。
 
 	
-#### 动态改变 C++ 的流对象的流缓冲区对象
+#### 4.5.8) 动态改变 C++ 的流对象的流缓冲区对象
 
 - 使用 STL `std::ios::rdbuf()` 方法，通过设置输入输出流对象的流缓冲区对象，可实现“重定向”。
 - [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-5/iostream-rdbuf.cpp)
