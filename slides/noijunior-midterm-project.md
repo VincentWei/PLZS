@@ -617,12 +617,12 @@ bool ios::fail() const;
 
     std::fstream fs { "test.txt", std::fstream::in };
     if (fs.fail()) {
-        cerr << "Failed to open 'test.txt'\n";
+        std::cerr << "Failed to open 'test.txt'\n";
     }
     else {
         int c;
         while ((c = fs.get()) != EOF) {
-            cout.put((char)c);
+            std::cout.put((char)c);
         }
         fs.close();
     }
@@ -639,6 +639,7 @@ bool ios::fail() const;
 - 操作器 `ostream& endl(ostream& os);` 输出新行符，行缓冲模式下同时刷新输出缓冲区。
 - `ostream& std::ostream::flush();` 方法可用于刷新输出缓冲区。
 - `void std::fstream::close();` 方法在关闭文件读写流之前，也会刷新输出缓冲区。
+- `void std::istream::sync();` 方法可用于同步输入流，通常意味着清空缓冲区中的内容。但该方法的效果和 STL 的实现有关，不具有可移植性，不建议使用。
 
 	
 #### 二进制模式常用读写方法
@@ -662,7 +663,7 @@ bool ios::fail() const;
 	
 #### 二进制读写示例程序
 
-- [完整示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/fstream-binary.cpp)
+- [完整示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-5/fstream-binary.cpp)
 - 思考：将一般的类对象以二进制形式存入文件后再行读取，是否可行？
 
 ```cpp
@@ -741,7 +742,7 @@ int main()
 #### 动态改变 C++ 的流对象的流缓冲区对象
 
 - 使用 STL `std::ios::rdbuf()` 方法，通过设置输入输出流对象的流缓冲区对象，可实现“重定向”。
-- [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/iostream-rdbuf.cpp)
+- [示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-5/iostream-rdbuf.cpp)
 
 ```cpp
 #include <iostream>

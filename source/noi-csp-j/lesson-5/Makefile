@@ -1,4 +1,4 @@
-TARGETS = istream-sync
+TARGETS = istream-eof istream-sync fstream-binary iostream-rdbuf ifstream-get
 
 CXXFLAGS = -Wall -Wextra -Werror -O2 -g -std=c++14
 

@@ -19,7 +19,7 @@ int main()
     std::cout << "Please, enter a word: ";
     first = std::cin.get();
 
-    // XXX：此调用的效果和 STL 的实现有关，在 macOS 上无效。
+    // XXX：此调用的效果和 STL 的实现有关，g++ 和 clang++ 无效。
     std::cin.sync();
 
     std::cout << "Please, enter another word: ";
