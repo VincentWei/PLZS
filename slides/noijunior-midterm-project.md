@@ -587,22 +587,27 @@ int main()
 ```
 
 	
-#### 更基础的字符读取方法及状态判断
+#### 更基础的字符读写方法及状态判断
 
-- `int istream::get()` 读取单个或者多个字符，在无内容可读取的情况下返回 `EOF`。
-- `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
+- `istream::get()` 读取单个或者多个字符。
+- `ostream::put()` 写入单个字符。
 - `bool ios::eof()` 可用来判断是否到达文件尾。
 - `bool ios::fail()` 可用来判断是否产生文件读写错误。
+- `EOF` 表示文件尾（end of file），是一个常量宏，在 `<cstdio>` 中定义其值为 `-1`。
 
 	
 ```cpp
-// 读取单个字符
+// 读取单个字符，在无内容可读取的情况下返回 `EOF`
 int istream::get();
+// 读取单个字符到 c，不返回 `EOF`。
 istream& istream::get(char& c);
 
 // 读取到 C 字符串缓冲区
 istream& istream::get(char* s, streamsize n);
 istream& istream::get(char* s, streamsize n, char delim);
+
+// 写入单个字符。
+ostream& ostream::put(char c);
 
 // 判断是否到达文件尾
 bool ios::eof() const;
@@ -615,9 +620,9 @@ bool ios::fail() const;
         cerr << "Failed to open 'test.txt'\n";
     }
     else {
-        char c;
+        int c;
         while ((c = fs.get()) != EOF) {
-            cout << c;
+            cout.put((char)c);
         }
         fs.close();
     }
@@ -631,9 +636,9 @@ bool ios::fail() const;
    1. 块缓冲/完全缓冲（二进制模式）
    1. 无缓冲
 - 操作器 `ostream& flush(ostream& os);` 可用于刷新输出缓冲区。
-- 操作器 `ostream& endl(ostream& os);` 输出新行符，同时刷新输出缓冲区。
-- `ostream& std::fstream::flush();` 方法可用于刷新输出缓冲区。
-- `void std::fstream::close();` 方法在关闭流之前，也会刷新输出缓冲区。
+- 操作器 `ostream& endl(ostream& os);` 输出新行符，行缓冲模式下同时刷新输出缓冲区。
+- `ostream& std::ostream::flush();` 方法可用于刷新输出缓冲区。
+- `void std::fstream::close();` 方法在关闭文件读写流之前，也会刷新输出缓冲区。
 
 	
 #### 二进制模式常用读写方法
