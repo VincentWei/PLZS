@@ -8,7 +8,7 @@
 		
 ## 1) 算术运算表达式
 
-`Arithmetic operation expression`
+`Arithmetic Operation Expression`
 
 	
 ### 1.1) 三种算术运算表达式
@@ -28,6 +28,10 @@
 
 	
 ### 1.2) 前缀表达式
+
+`Prefix operation expression`
+
+	
 
 #### 1.2.1) 前缀表达式的求值
 
@@ -138,6 +142,9 @@ double evaluate_prefix_expression(string exp)
 	
 ### 1.3) 后缀表达式
 
+`Postfix operation expression`
+
+	
 #### 1.3.1) 后缀表达式的求值
 
 - 算法描述：
@@ -248,10 +255,13 @@ double evaluate_postfix_expression(string exp)
     assert(evaluate_postfix_expression("3 4 + 5 * 6 -") == 29);
 ```
 
-	
-### 1.4) 中缀表达式
+		
+## 2) 中缀表达式
 
-#### 1.4.1) 中缀表达式转换为前缀表达式
+`Infix Operation Expression`
+
+	
+### 2.1) 中缀表达式转换为前缀表达式
 
 - 算法描述：
   1. 初始化两个栈：运算符栈 `operators` 和结果的栈 `result`。
@@ -289,7 +299,7 @@ double evaluate_postfix_expression(string exp)
 | NONE  | -, +, a, ×, + b, c, d, e  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
 
 	
-#### 1.4.2) 中缀表达式转换为后缀表达式
+#### 2.2) 中缀表达式转换为后缀表达式
 
 - 算法描述：
   1. 初始化两个栈：运算符栈 `operators` 和结果栈 `result`。
@@ -326,8 +336,8 @@ double evaluate_postfix_expression(string exp)
 | e     | e, +, ×, d, + c, b, a     | -                 | 数值，压入 `result` 栈                       |
 | NONE  | -, e, +, ×, d, + c, b, a  | EMPTY             | 从 `operators` 弹出所有运算符并压入 `result`  |
 
-		
-## 2) 将中缀表达式解析为求值二叉树
+	
+### 2.3) 将中缀表达式解析为求值二叉树
 
 - 原理
    1. 单个双目算术运算，可构成一个以操作数为叶子节点，结果为根节点的二叉树。
