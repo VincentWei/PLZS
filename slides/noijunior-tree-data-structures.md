@@ -1067,10 +1067,10 @@ int main(int argc, const char* argv[])
 	
 ### STL `map` 和 `unordered_map` 类模板
 
-- 映射（mapping）用于建立一个离散值和另外一个值之间的映射关系；比如身份证号和个人资料。
+- 映射（mapping）用于建立一个值和另外一个值之间的映射关系；比如身份证号和包括姓名、性别、年龄等在内的多项个人资料，程序可通过身份证号来访问这些个人资料。
 - STL `map`（`<map>`）是一种非线性容器，用于包含多个键值对（key-value pairs）；会对键排序。
 - STL `unordered_map`（`<unordered_map>`）和 `map` 的功能类似，但不对键排序。
-- 其功能同 Python 中的字典（dict）数据类型，在映射中维护的元素亦称属性（property）。
+- 其功能同 Python 中的字典（dict）数据类型类似，在映射中维护的元素亦称属性（property）。
 
 	
 ```cpp
