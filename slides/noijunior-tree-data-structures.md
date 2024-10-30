@@ -942,7 +942,8 @@ void test_binary_tree_node()
 #### 文件系统操作示例程序
 
 - [完整示例程序](https://gitee.com/vincentwei7/PLZS/blob/main/source/noi-csp-j/lesson-4/readdir.cpp)
-- 本例还展示如何定义一个自己的 `iostream` 操作器（manipulator）。
+- 本例还展示了如何定义一个自己的 `iostream` 操作器（manipulator）。
+- 本例还展示了如何获取执行程序时指定的命令行参数。
 
 ```cpp
 #include <iostream>
@@ -1069,10 +1070,10 @@ int main(int argc, const char* argv[])
 - 映射（mapping）用于建立一个离散值和另外一个值之间的映射关系；比如身份证号和个人资料。
 - STL `map`（`<map>`）是一种非线性容器，用于包含多个键值对（key-value pairs）；会对键排序。
 - STL `unordered_map`（`<unordered_map>`）和 `map` 的功能类似，但不对键排序。
+- 其功能同 Python 中的字典（dict）数据类型，在映射中维护的元素亦称属性（property）。
 
 	
 ```cpp
-// accessing mapped values
 #include <iostream>
 #include <map>
 #include <string>
@@ -1088,6 +1089,9 @@ int main ()
     std::cout << "mymap['a'] is " << mymap['a'] << '\n';
     std::cout << "mymap['b'] is " << mymap['b'] << '\n';
     std::cout << "mymap['c'] is " << mymap['c'] << '\n';
+
+    // 之前并未对 mymap['d'] 做显式赋值。通过 mymap['d'] 引用键 'd' 的值时，
+    // 将在 mymap 中插入一个键为 'd' 的键值对，而其对应的值为一个空的字符串。
     std::cout << "mymap['d'] is " << mymap['d'] << '\n';
 
     std::cout << "mymap now contains " << mymap.size() << " elements.\n";
