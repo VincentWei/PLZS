@@ -134,9 +134,9 @@ $$`
 
 `$$
 \begin{align}
-    (b_3b_2b_1b_0)_{2} & = b_3 \times 2 \times 2 \times 2 + b_2 \times 2 \times 2 + b_1 \times 2 + b_0 \times 2^0 \\
+    (b_3b_2b_1b_0)_{2} & = b_3 \times 2^3  + b_2 \times 2^2 + b_1 \times 2^1 + b_0 \times 2^0 \\
                        & = (b_3 \times 2 ) \times 4 + (b_2 \times 1) \times 4 + b_1 \times 2^1 + b_0 \times 2^0 \\
-                       & = (b_3 \times 2 + (b_2 \times 2^0) \times 4 + (b_1 \times 2^1 + b_0 \times 2^0) \times 4^0
+                       & = (b_3 \times 2^1 + b_2 \times 2^0) \times 4^1 + (b_1 \times 2^1 + b_0 \times 2^0) \times 4^0
 \end{align}
 $$`
 
