@@ -80,8 +80,8 @@ $$`
 \begin{align}
 算法开始 \ & 转换进制 \ (x, b)          \\
     & 循环开始 (当 x \neq 0 时)         \\
-    & \hspace{2em} 令 x = x // b        \\
     & \hspace{2em} 令 r = x \% b        \\
+    & \hspace{2em} 令 x = x // b        \\
     & \hspace{2em} 输出 r               \\
     & 循环结束                          \\
 算法结束
@@ -98,9 +98,10 @@ $$`
     & 如果 (x = 0)                      \\
     & \hspace{2em} 将 0 放入 s          \\
     & \hspace{2em} 返回 s               \\
+    & 如果结束                          \\
     & 循环开始 (当 x \neq 0 时)         \\
-    & \hspace{2em} 令 x = x // b        \\
     & \hspace{2em} 令 r = x \% b        \\
+    & \hspace{2em} 令 x = x // b        \\
     & \hspace{2em} 将 r 插到 s 的最前面 \\
     & 循环结束                          \\
     & 返回 s                            \\
