@@ -92,14 +92,14 @@ $$`
 `$$
 \begin{align}
 算法开始 \ & 转换进制 \ (x, b)          \\
-    & 令 s 是一个空的数字序列           \\
-    & 如果 (x \eq 0)                    \\
+    & 令 s = []                         \\
+    & 如果 (x = 0)                      \\
     & \hspace{2em} s = [0]              \\
-    & \hspace{2em} 返回 r               \\
+    & \hspace{2em} 返回 s               \\
     & 循环开始 (当 x \neq 0 时)         \\
     & \hspace{2em} 令 x = x // b        \\
     & \hspace{2em} 令 r = x \% b        \\
-    & \hspace{2em} 将 r 插入 s 的最前面 \\
+    & \hspace{2em} 将 r 插到 s 的最前面 \\
     & 循环结束                          \\
     & 返回 s                            \\
 算法结束
