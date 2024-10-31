@@ -76,11 +76,12 @@ $$`
 
 `$$
 \begin{align}
-算法  转换进制 (x, b)       \\
-    当 x \neq 0 时，循环    \\
-       令 x = x // b        \\
-       令 r = x % b         \\
-       输出 r               \\
+算法 \ & 转换进制 (x, b)                \\
+    & 循环 (当 x \neq 0 时)             \\
+    & \hspace{2em} 令 x = x // b        \\
+    & \hspace{2em} 令 r = x \% b        \\
+    & \hspace{2em} 输出 r               \\
+    & 循环结束                          \\
 算法结束
 \end{align}
 $$`
