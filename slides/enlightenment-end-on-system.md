@@ -94,9 +94,9 @@ $$`
 `$$
 \begin{align}
 算法开始 \ & 转换进制 \ (x, b)          \\
-    & 令 s = []                         \\
+    & 令 s 为一个空的序列               \\
     & 如果 (x = 0)                      \\
-    & \hspace{2em} s = [0]              \\
+    & \hspace{2em} 将 0 放入 s          \\
     & \hspace{2em} 返回 s               \\
     & 循环开始 (当 x \neq 0 时)         \\
     & \hspace{2em} 令 x = x // b        \\
