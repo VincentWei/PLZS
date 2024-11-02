@@ -705,7 +705,7 @@ int main()
 
     ofstream ofs;
     ofs.open("students.bin",
-            ofstream::out | ofstream::binary | std::ostream::app);
+            ofstream::out | ofstream::binary | std::ofstream::app);
     for (size_t i = 0; i < sizeof(students)/sizeof(students[0]); i++) {
         ofs.write((const char*)(students + i), sizeof(struct student));
     }
