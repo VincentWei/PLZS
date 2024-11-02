@@ -50,7 +50,7 @@
 -  节点的邻居（neighbour）：一个节点的父节点或子节点称为该节点的邻居。
 -  子树（subtree）：树中任意一个节点及其后代（descendant）构成了子树。
 
-<img style="height:500px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
+<img style="height:400px;width:auto;" src="assets/noijunior-tree-data-structure.png" />
 
 	
 - 边（edge）数：边定义为两个节点之间的连接。如果一棵树有 `N` 个节点，那么它将有 `N-1` 条边。从每个节点到树的任何其他节点只有一条路径（path）。
