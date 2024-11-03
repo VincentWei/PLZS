@@ -43,6 +43,8 @@ class bigint {
     static const intmax_t max_nint_to_fit_k = 9999999999999999LL;
     static const intmax_t group_base_k = 100000000LL * 100000000LL;
         // slice_base_k ^ max_group_slices_k
+
+    static const int32_t ntt_prime_k = 998244353;   // for FNTT algorithm
 #elif defined(USE_INT16_AS_SLICE)
     using slice_t = int16_t;
     using twin_t  = int32_t;
@@ -196,9 +198,14 @@ class bigint {
     static bool divmod(const bigint& dividend, intmax_t divisor,
             bigint& quotient, bigint& remainder);
 
-    static void fastmul(const bigint& multiplicand, const bigint& multiplier,
+#if defined(USE_INT32_AS_SLICE)
+    static void nttmul(const bigint& multiplicand, const bigint& multiplier,
             bigint& result);
-    static void fastmul(const bigint& multiplicand, intmax_t multiplier,
+#endif
+
+    static void binmul(const bigint& multiplicand, const bigint& multiplier,
+            bigint& result);
+    static void binmul(const bigint& multiplicand, intmax_t multiplier,
             bigint& result);
 
     bigint abs() const;
@@ -264,6 +271,10 @@ class bigint {
     void abssubfrom(const T& other);
     template <class T>
     void absaddto(const T& other);
+
+#if defined(USE_INT32_AS_SLICE)
+    static void ntt(slice_v& x, slice_v& r, int32_t limit, bool opt = false);
+#endif
 
     static slice_t quick_modulo(slice_t factor, slice_t base, uintmax_t exp,
             slice_t modulus, slice_t rem_pre = 0);

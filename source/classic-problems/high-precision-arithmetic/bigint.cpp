@@ -372,7 +372,142 @@ void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
     }
 }
 
-void bigint::fastmul(const bigint& multiplicand, const bigint& multiplier,
+#if defined(USE_INT32_AS_SLICE)
+static int32_t
+quick_power_modulo(int32_t base, int32_t exp, int32_t modulus)
+{
+    int64_t ret = 1;
+    int64_t base_64 = base;
+
+    while (exp) {
+        if (exp & 1)
+            ret = (ret * base_64) % modulus;
+        base_64 = (base_64 * base_64) % modulus;
+        exp >>= 1;
+    }
+
+    return static_cast<int32_t>(ret);
+}
+
+void bigint::ntt(slice_v& x, slice_v& r, int32_t limit, bool opt)
+{
+    for (int32_t i = 0; i < limit; ++i) {
+        if (r[i] < i)
+            std::swap(x[i], x[r[i]]);
+    }
+
+    for (int32_t m = 2; m <= limit; m <<= 1) {
+        int32_t k = m >> 1;
+        int32_t gn = quick_power_modulo(3, (ntt_prime_k - 1) / m, ntt_prime_k);
+        for (int32_t i = 0; i < limit; i += m) {
+            int64_t g = 1;
+            for (int32_t j = 0; j < k; ++j, g = g * gn % ntt_prime_k) {
+                int64_t tmp = x[i + j + k] * g % ntt_prime_k;
+                x[i + j + k] = (x[i + j] - tmp + ntt_prime_k) % ntt_prime_k;
+                x[i + j] = (x[i + j] + tmp) % ntt_prime_k;
+            }
+        }
+    }
+
+    if (opt) {
+        std::reverse(x.begin() + 1, x.begin() + limit);
+        int64_t inv = quick_power_modulo(limit, ntt_prime_k - 2, ntt_prime_k);
+        for (int32_t i = 0; i < limit; ++i) {
+            int64_t tmp = x[i] * inv;
+            x[i] = tmp % ntt_prime_k;
+        }
+    }
+}
+
+/* using FNTT algorithm */
+void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
+            bigint& result)
+{
+    if (multiplicand.iszero() || multiplier.iszero()) {
+        result._sign = false;
+        result._slices.clear();
+        return;
+    }
+    else if (multiplicand.isone() == 1) {
+        result = multiplier;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return;
+    }
+    else if (multiplier.isone() == 1) {
+        result = multiplicand;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return;
+    }
+
+    size_t _limit = 1;
+    size_t n = multiplicand._slices.size();
+    while (_limit < (n << 1))
+        _limit <<= 1;
+    n = multiplier._slices.size();
+    while (_limit < (n << 1))
+        _limit <<= 1;
+    assert(_limit <= INT32_MAX);
+    int32_t limit = (int32_t)_limit;
+
+    slice_v r;
+    for (int32_t i = 0; i < limit; ++i) {
+        r.push_back(0);
+        r[i] = (i & 1) * (limit >> 1) + (r[i >> 1] >> 1);
+    }
+
+    slice_v a = multiplicand._slices;
+    if ((size_t)limit > a.size())
+        a.resize(limit, 0);
+    ntt(a, r, limit);
+
+    slice_v b = multiplier._slices;
+    if ((size_t)limit > b.size())
+        b.resize(limit, 0);
+    ntt(b, r, limit);
+
+    slice_v my_result;
+    for (int32_t i = 0; i < limit; ++i) {
+        my_result.push_back(0);
+        twin_t tmp = 1ll * a[i] * b[i];
+        my_result[i] = (slice_t)(tmp % ntt_prime_k);
+    }
+
+    ntt(my_result, r, limit, true);
+
+    size_t len = 0;
+    for (size_t i = 0; i < (size_t)limit; ++i) {
+        if (my_result[i] >= slice_base_k) {
+            len = i + 1;
+            if (len >= my_result.size())
+                my_result.push_back(0);
+            my_result[i + 1] += my_result[i] / slice_base_k;
+            assert(my_result[i + 1] >= 0);
+            result._slices.push_back(my_result[i] % slice_base_k);
+        }
+        else {
+            assert(my_result[i] >= 0);
+            result._slices.push_back(my_result[i]);
+        }
+
+        if (my_result[i])
+            len = std::max(len, i);
+    }
+
+    while (my_result[len] >= slice_base_k) {
+        my_result.push_back(0);
+        my_result[len + 1] += my_result[len] / slice_base_k;
+        result._slices.push_back(my_result[len] % slice_base_k);
+        len++;
+    }
+
+    result._sign = (multiplicand._sign != multiplier._sign);
+    result.normalize();
+}
+#endif /* defined(USE_INT32_AS_SLICE) */
+
+/* This method uses binary-lifting algorithm. But for small multiplicand,
+   we cannot gain much benefit from this algorithm. */
+void bigint::binmul(const bigint& multiplicand, const bigint& multiplier,
         bigint& result)
 {
     if (multiplicand.iszero() || multiplier.iszero()) {
@@ -421,7 +556,9 @@ void bigint::fastmul(const bigint& multiplicand, const bigint& multiplier,
     result._sign = (multiplicand._sign != multiplier._sign);
 }
 
-void bigint::fastmul(const bigint& multiplicand, intmax_t multiplier,
+/* This method uses binary-lifting algorithm. But for small multiplicand,
+   we cannot gain much benefit from this algorithm. */
+void bigint::binmul(const bigint& multiplicand, intmax_t multiplier,
         bigint& result)
 {
     if (multiplicand.iszero() || multiplier == 0) {
@@ -2082,7 +2219,7 @@ void test_bigint2(void)
         assert(oss.str() == expect);
 
         bigint prod;
-        bigint::fastmul(a, b, prod);
+        bigint::nttmul(a, b, prod);
         expect = cases[i].prod;
         oss.str("");
         oss << prod;
@@ -2229,7 +2366,7 @@ void test_bigint3(void)
         assert(oss.str() == expect);
 
         bigint prod;
-        bigint::fastmul(a, b, prod);
+        bigint::nttmul(a, b, prod);
         expect = cases[i].prod;
         oss.str("");
         oss << prod;
