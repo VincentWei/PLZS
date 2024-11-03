@@ -389,7 +389,7 @@ quick_power_modulo(int32_t base, int32_t exp, int32_t modulus)
     return static_cast<int32_t>(ret);
 }
 
-void bigint::ntt(slice_v& x, slice_v& r, int32_t limit, bool opt)
+void bigint::ntt(slice_v& x, const slice_v& r, int32_t limit, bool opt)
 {
     for (int32_t i = 0; i < limit; ++i) {
         if (r[i] < i)
@@ -474,20 +474,16 @@ void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
 
     ntt(my_result, r, limit, true);
 
+    result._slices.clear();
+
     size_t len = 0;
     for (size_t i = 0; i < (size_t)limit; ++i) {
         if (my_result[i] >= slice_base_k) {
             len = i + 1;
-            if (len >= my_result.size())
-                my_result.push_back(0);
             my_result[i + 1] += my_result[i] / slice_base_k;
-            assert(my_result[i + 1] >= 0);
-            result._slices.push_back(my_result[i] % slice_base_k);
+            my_result[i] = my_result[i] % slice_base_k;
         }
-        else {
-            assert(my_result[i] >= 0);
-            result._slices.push_back(my_result[i]);
-        }
+        result._slices.push_back(my_result[i]);
 
         if (my_result[i])
             len = std::max(len, i);
@@ -496,7 +492,8 @@ void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
     while (my_result[len] >= slice_base_k) {
         my_result.push_back(0);
         my_result[len + 1] += my_result[len] / slice_base_k;
-        result._slices.push_back(my_result[len] % slice_base_k);
+        my_result[len] = my_result[len] % slice_base_k;
+        result._slices.push_back(my_result[len]);
         len++;
     }
 

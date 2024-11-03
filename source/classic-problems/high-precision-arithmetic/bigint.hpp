@@ -273,7 +273,7 @@ class bigint {
     void absaddto(const T& other);
 
 #if defined(USE_INT32_AS_SLICE)
-    static void ntt(slice_v& x, slice_v& r, int32_t limit, bool opt = false);
+    static void ntt(slice_v& x, const slice_v& r, int32_t limit, bool opt = false);
 #endif
 
     static slice_t quick_modulo(slice_t factor, slice_t base, uintmax_t exp,
