@@ -374,7 +374,7 @@ void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
 
 #if defined(USE_INT32_AS_SLICE)
 static int32_t
-quick_power_modulo(int32_t base, int32_t exp, int32_t modulus)
+qpower(int32_t base, int32_t exp, int32_t modulus)
 {
     int64_t ret = 1;
     int64_t base_64 = base;
@@ -389,37 +389,104 @@ quick_power_modulo(int32_t base, int32_t exp, int32_t modulus)
     return static_cast<int32_t>(ret);
 }
 
-void bigint::ntt(slice_v& x, const slice_v& r, int32_t limit, bool opt)
+std::map<size_t, bigint::slice_v> bigint::ntt_reverse_map;
+
+/*
+ * This function prepare the reverse data for different lengthes.
+ * @length should be an integer in power of 2 and
+ *      less than or equal to ntt_max_slices_k.
+ */
+const bigint::slice_v& bigint::get_reverse(size_t length)
 {
-    for (int32_t i = 0; i < limit; ++i) {
-        if (r[i] < i)
-            std::swap(x[i], x[r[i]]);
+    if (ntt_reverse_map.count(length) == 0) {
+        slice_v& rev = ntt_reverse_map[length];
+
+        rev.resize(length, 0);
+        for (size_t i = 1; i < length; ++i) {
+            rev[i] = rev[i >> 1] >> 1;
+            if (i & 1)
+                rev[i] |= length >> 1;
+        }
+
+        return rev;
     }
 
-    for (int32_t m = 2; m <= limit; m <<= 1) {
+    return ntt_reverse_map[length];
+}
+
+std::map<size_t, bigint::slice_v> bigint::ntt_omega_powers_map;
+
+/*
+ * This function prepare the omega powers for different lengthes.
+ * @length should be an integer in power of 2 and
+ *      less than or equal to ntt_max_slices_k.
+ */
+const bigint::slice_v& bigint::get_omega_powers(size_t length)
+{
+    if (ntt_omega_powers_map.count(length) == 0) {
+        slice_v& omega_powers = ntt_omega_powers_map[length];
+
+        omega_powers.resize(length, 0);
+
+        for (size_t m = 2; m <= length; m <<= 1) {
+            size_t k = m >> 1;
+            int32_t gn = qpower(ntt_g_k, (ntt_prime_k - 1) / m, ntt_prime_k);
+
+            for (size_t i = 0; i < length; i += m) {
+                int64_t g = 1;
+                for (size_t j = 0; j < k; ++j) {
+                    assert(i + k + j < length);
+                    omega_powers[i + k + j] = static_cast<int32_t>(g);
+                    g = g * gn % ntt_prime_k;
+                }
+            }
+        }
+
+        return omega_powers;
+    }
+
+    return ntt_omega_powers_map[length];
+}
+
+void bigint::ntt(slice_v& x, int32_t length, bool idft)
+{
+    const slice_v& reverse = get_reverse(length);
+
+    for (int32_t i = 0; i < length; ++i) {
+        if (reverse[i] < i)
+            std::swap(x[i], x[reverse[i]]);
+    }
+
+    const slice_v& omega_powers = get_omega_powers(length);
+    for (int32_t m = 2; m <= length; m <<= 1) {
         int32_t k = m >> 1;
-        int32_t gn = quick_power_modulo(3, (ntt_prime_k - 1) / m, ntt_prime_k);
-        for (int32_t i = 0; i < limit; i += m) {
-            int64_t g = 1;
-            for (int32_t j = 0; j < k; ++j, g = g * gn % ntt_prime_k) {
-                int64_t tmp = x[i + j + k] * g % ntt_prime_k;
-                x[i + j + k] = (x[i + j] - tmp + ntt_prime_k) % ntt_prime_k;
+        for (int32_t i = 0; i < length; i += m) {
+            for (int32_t j = 0; j < k; ++j) {
+                int64_t g = omega_powers[i + j + k];
+                int64_t tmp = (x[i + j + k] * g) % ntt_prime_k;
+                x[i + j + k] = ((x[i + j] - tmp) % ntt_prime_k + ntt_prime_k)
+                    % ntt_prime_k;
                 x[i + j] = (x[i + j] + tmp) % ntt_prime_k;
             }
         }
     }
 
-    if (opt) {
-        std::reverse(x.begin() + 1, x.begin() + limit);
-        int64_t inv = quick_power_modulo(limit, ntt_prime_k - 2, ntt_prime_k);
-        for (int32_t i = 0; i < limit; ++i) {
-            int64_t tmp = x[i] * inv;
-            x[i] = tmp % ntt_prime_k;
+    if (idft) {
+        std::reverse(x.begin() + 1, x.begin() + length);
+        int64_t inv = qpower(length, ntt_prime_k - 2, ntt_prime_k);
+        for (int32_t i = 0; i < length; ++i) {
+            x[i] = (x[i] * inv) % ntt_prime_k;
         }
     }
 }
 
-/* using FNTT algorithm */
+/*
+ * This function uses NTT algorithm for multiplication.
+ *
+ * For more information, please refer to:
+ *  https://www.cnblogs.com/zimujun/p/14472471.html
+ *  https://github.com/SRI-CSL/NTT
+ */
 void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
             bigint& result)
 {
@@ -439,62 +506,70 @@ void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
         return;
     }
 
-    size_t _limit = 1;
+    size_t length = 1;
     size_t n = multiplicand._slices.size();
-    while (_limit < (n << 1))
-        _limit <<= 1;
+    while (length < (n << 1))
+        length <<= 1;
     n = multiplier._slices.size();
-    while (_limit < (n << 1))
-        _limit <<= 1;
-    assert(_limit <= INT32_MAX);
-    int32_t limit = (int32_t)_limit;
+    while (length < (n << 1))
+        length <<= 1;
 
-    slice_v r;
-    for (int32_t i = 0; i < limit; ++i) {
-        r.push_back(0);
-        r[i] = (i & 1) * (limit >> 1) + (r[i >> 1] >> 1);
-    }
+    assert(length > 0 && length <= ntt_max_slices_k);
+    assert((length & (length - 1)) == 0);
+    clog << "Rounded number of slices: " << length << endl;
 
     slice_v a = multiplicand._slices;
-    if ((size_t)limit > a.size())
-        a.resize(limit, 0);
-    ntt(a, r, limit);
+    if (length > a.size())
+        a.resize(length, 0);
+    ntt(a, (int32_t)length);
 
     slice_v b = multiplier._slices;
-    if ((size_t)limit > b.size())
-        b.resize(limit, 0);
-    ntt(b, r, limit);
+    if (length > b.size())
+        b.resize(length, 0);
+    ntt(b, (int32_t)length);
 
     slice_v my_result;
-    for (int32_t i = 0; i < limit; ++i) {
-        my_result.push_back(0);
-        twin_t tmp = 1ll * a[i] * b[i];
+    my_result.resize(length, 0);
+    for (size_t i = 0; i < length; ++i) {
+        twin_t tmp = 1LL * a[i] * b[i];
         my_result[i] = (slice_t)(tmp % ntt_prime_k);
     }
 
-    ntt(my_result, r, limit, true);
+    ntt(my_result, (int32_t)length, true);
 
     result._slices.clear();
 
-    size_t len = 0;
-    for (size_t i = 0; i < (size_t)limit; ++i) {
+    // normalize the result to make sure
+    // that all slice values are in [0, slice_base_k).
+    size_t last = 0;
+    for (size_t i = 0; i < length; ++i) {
+        clog << "slice[" << i << "]: " << my_result[i] << endl;
         if (my_result[i] >= slice_base_k) {
-            len = i + 1;
+            last = i + 1;
+            if (last >= my_result.size()) {
+                clog << "my_result resized to " << last << endl;
+                my_result.push_back(0);
+            }
+
             my_result[i + 1] += my_result[i] / slice_base_k;
             my_result[i] = my_result[i] % slice_base_k;
+            clog << "    slice[" << i << "]: " << my_result[i] << endl;
+            clog << "    slice[" << (i + 1) << "]: " << my_result[i + 1] << endl;
         }
+
         result._slices.push_back(my_result[i]);
 
         if (my_result[i])
-            len = std::max(len, i);
+            last = std::max(last, i);
     }
 
-    while (my_result[len] >= slice_base_k) {
+    while (my_result[last] >= slice_base_k) {
+        clog << "my_result resized to " << (last + 1) << endl;
         my_result.push_back(0);
-        my_result[len + 1] += my_result[len] / slice_base_k;
-        my_result[len] = my_result[len] % slice_base_k;
-        result._slices.push_back(my_result[len]);
-        len++;
+        my_result[last + 1] += my_result[last] / slice_base_k;
+        my_result[last] = my_result[last] % slice_base_k;
+        result._slices.push_back(my_result[last]);
+        last++;
     }
 
     result._sign = (multiplicand._sign != multiplier._sign);
@@ -2082,6 +2157,15 @@ void test_bigint2(void)
         const char *quot;
         const char *rem;
     } cases[] = {
+        {
+            "000000010000000200000003",
+            "000000010000000200000003",
+            "20000000400000006",
+            "0",
+            "100000004000000100000001200000009",
+            "1",
+            "0",
+        },
         {
             "30257056966624049406876268303231201200",
             "41908997197273957480890101023095532464",

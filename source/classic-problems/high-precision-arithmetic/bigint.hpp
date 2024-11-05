@@ -15,6 +15,7 @@
  */
 #include <array>
 #include <vector>
+#include <map>
 #include <string>
 #include <algorithm>
 #include <exception>
@@ -43,8 +44,6 @@ class bigint {
     static const intmax_t max_nint_to_fit_k = 9999999999999999LL;
     static const intmax_t group_base_k = 100000000LL * 100000000LL;
         // slice_base_k ^ max_group_slices_k
-
-    static const int32_t ntt_prime_k = 998244353;   // for FNTT algorithm
 #elif defined(USE_INT16_AS_SLICE)
     using slice_t = int16_t;
     using twin_t  = int32_t;
@@ -273,7 +272,25 @@ class bigint {
     void absaddto(const T& other);
 
 #if defined(USE_INT32_AS_SLICE)
-    static void ntt(slice_v& x, const slice_v& r, int32_t limit, bool opt = false);
+    // Constants for NTT algorithm:
+    // the modulus; must be a prime larger than the maximum value of a slice
+    // (99999999)
+    static const int32_t ntt_prime_k = 998244353;
+    // the primitive root
+    static const int32_t ntt_g_k = 3;
+    // the inverse of the primitive root
+    static const int32_t ntt_invg_k = 332748118;
+    // the maximum number of slices of a big integer using NTT algorithm
+    static const int32_t ntt_max_slices_k = 4194304;    // 2^22
+
+    // the map holding omega powers for different lengthes
+    static std::map<size_t, slice_v> ntt_omega_powers_map;
+    // the map holding reverse data for different lengthes
+    static std::map<size_t, slice_v> ntt_reverse_map;
+
+    static const slice_v& get_reverse(size_t length);
+    static const slice_v& get_omega_powers(size_t length);
+    static void ntt(slice_v& x, int32_t length, bool idft = false);
 #endif
 
     static slice_t quick_modulo(slice_t factor, slice_t base, uintmax_t exp,
