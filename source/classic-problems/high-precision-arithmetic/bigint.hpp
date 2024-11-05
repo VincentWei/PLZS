@@ -290,7 +290,7 @@ class bigint {
 
     static const slice_v& get_reverse(size_t length);
     static const slice_v& get_omega_powers(size_t length);
-    static void ntt(slice_v& x, int32_t length, bool idft = false);
+    static void ntt(slice_v& x, int32_t length, bool invert = false);
 #endif
 
     static slice_t quick_modulo(slice_t factor, slice_t base, uintmax_t exp,

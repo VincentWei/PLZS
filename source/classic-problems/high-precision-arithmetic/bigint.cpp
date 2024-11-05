@@ -426,18 +426,16 @@ const bigint::slice_v& bigint::get_omega_powers(size_t length)
     if (ntt_omega_powers_map.count(length) == 0) {
         slice_v& omega_powers = ntt_omega_powers_map[length];
 
-        omega_powers.resize(length, 0);
-
+        size_t oi = 0;
         for (size_t m = 2; m <= length; m <<= 1) {
             size_t k = m >> 1;
             int32_t gn = qpower(ntt_g_k, (ntt_prime_k - 1) / m, ntt_prime_k);
-
             for (size_t i = 0; i < length; i += m) {
                 int64_t g = 1;
                 for (size_t j = 0; j < k; ++j) {
-                    assert(i + k + j < length);
-                    omega_powers[i + k + j] = static_cast<int32_t>(g);
+                    omega_powers.push_back(static_cast<int32_t>(g));
                     g = g * gn % ntt_prime_k;
+                    oi++;
                 }
             }
         }
@@ -448,7 +446,7 @@ const bigint::slice_v& bigint::get_omega_powers(size_t length)
     return ntt_omega_powers_map[length];
 }
 
-void bigint::ntt(slice_v& x, int32_t length, bool idft)
+void bigint::ntt(slice_v& x, int32_t length, bool invert)
 {
     const slice_v& reverse = get_reverse(length);
 
@@ -458,20 +456,39 @@ void bigint::ntt(slice_v& x, int32_t length, bool idft)
     }
 
     const slice_v& omega_powers = get_omega_powers(length);
+
+    size_t oi = 0;
     for (int32_t m = 2; m <= length; m <<= 1) {
         int32_t k = m >> 1;
+#if 0
+        int32_t gn;
+        if (invert)
+           gn = qpower(ntt_invg_k, (ntt_prime_k - 1) / m, ntt_prime_k);
+        else
+           gn = qpower(ntt_g_k, (ntt_prime_k - 1) / m, ntt_prime_k);
+#endif
+
         for (int32_t i = 0; i < length; i += m) {
+            // int64_t g = 1;
             for (int32_t j = 0; j < k; ++j) {
-                int64_t g = omega_powers[i + j + k];
-                int64_t tmp = (x[i + j + k] * g) % ntt_prime_k;
-                x[i + j + k] = ((x[i + j] - tmp) % ntt_prime_k + ntt_prime_k)
-                    % ntt_prime_k;
+                int64_t g = omega_powers[oi];
+#if 1
+                int64_t tmp = x[i + j + k] * g % ntt_prime_k;
+                x[i + j + k] = (x[i + j] - tmp + ntt_prime_k) % ntt_prime_k;
                 x[i + j] = (x[i + j] + tmp) % ntt_prime_k;
+#else
+                int64_t e = x[i + j], o = x[i + j + k];
+                x[i + j] = (e + o * g) % ntt_prime_k;
+                x[i + j + k] = ((e - o * g) % ntt_prime_k + ntt_prime_k)
+                    % ntt_prime_k;
+#endif
+                oi++;
+                // g = g * gn % ntt_prime_k;
             }
         }
     }
 
-    if (idft) {
+    if (invert) {
         std::reverse(x.begin() + 1, x.begin() + length);
         int64_t inv = qpower(length, ntt_prime_k - 2, ntt_prime_k);
         for (int32_t i = 0; i < length; ++i) {
@@ -516,7 +533,6 @@ void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
 
     assert(length > 0 && length <= ntt_max_slices_k);
     assert((length & (length - 1)) == 0);
-    clog << "Rounded number of slices: " << length << endl;
 
     slice_v a = multiplicand._slices;
     if (length > a.size())
@@ -543,18 +559,14 @@ void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
     // that all slice values are in [0, slice_base_k).
     size_t last = 0;
     for (size_t i = 0; i < length; ++i) {
-        clog << "slice[" << i << "]: " << my_result[i] << endl;
         if (my_result[i] >= slice_base_k) {
             last = i + 1;
             if (last >= my_result.size()) {
-                clog << "my_result resized to " << last << endl;
                 my_result.push_back(0);
             }
 
             my_result[i + 1] += my_result[i] / slice_base_k;
             my_result[i] = my_result[i] % slice_base_k;
-            clog << "    slice[" << i << "]: " << my_result[i] << endl;
-            clog << "    slice[" << (i + 1) << "]: " << my_result[i + 1] << endl;
         }
 
         result._slices.push_back(my_result[i]);
@@ -564,7 +576,6 @@ void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
     }
 
     while (my_result[last] >= slice_base_k) {
-        clog << "my_result resized to " << (last + 1) << endl;
         my_result.push_back(0);
         my_result[last + 1] += my_result[last] / slice_base_k;
         my_result[last] = my_result[last] % slice_base_k;
@@ -2164,6 +2175,33 @@ void test_bigint2(void)
             "0",
             "100000004000000100000001200000009",
             "1",
+            "0",
+        },
+        {
+            "000000020000000400000006",
+            "000000010000000200000003",
+            "30000000600000009",
+            "10000000200000003",
+            "200000008000000200000002400000018",
+            "2",
+            "0",
+        },
+        {
+            "000000050000001000000015",
+            "000000010000000200000003",
+            "60000001200000018",
+            "40000000800000012",
+            "500000020000000500000006000000045",
+            "5",
+            "0",
+        },
+        {
+            "000000150000021000000015",
+            "3",
+            "150000021000000018",
+            "150000021000000012",
+            "450000063000000045",
+            "50000007000000005",
             "0",
         },
         {
