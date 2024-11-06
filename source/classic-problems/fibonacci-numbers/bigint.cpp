@@ -320,7 +320,6 @@ void bigint::abssub(const Ta& one, const Tb& other, bigint &result)
     result.normalize();
 }
 
-/* this must be larger than other */
 template <class Ta, class Tb>
 void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
 {
@@ -331,13 +330,13 @@ void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
     result._slices.clear();
 
     for (size_t i = 0; i < len_a; i++) {
-        twin_t slice_a = one[i];
+        wider_t slice_a = one[i];
 
-        twin_t carry = 0;
+        wider_t carry = 0;
         for (size_t j = 0; j < len_b; j++) {
-            twin_t slice_b = other[j];
+            wider_t slice_b = other[j];
 
-            twin_t p = slice_a * slice_b + carry;
+            wider_t p = slice_a * slice_b + carry;
             if (p >= slice_base_k) {
                 carry = p / slice_base_k;
                 p %= slice_base_k;
@@ -352,7 +351,7 @@ void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
                 len_r++;
             }
             else {
-                twin_t slice_r = result._slices[k];
+                wider_t slice_r = result._slices[k];
                 slice_r += p;
                 if (slice_r >= slice_base_k) {
                     carry++;
@@ -370,6 +369,306 @@ void bigint::absmul(const Ta& one, const Tb& other, bigint &result)
         }
 
         assert(len_r == result._slices.size());
+    }
+}
+
+#if defined(USE_INT32_AS_SLICE)
+static int64_t
+qpower(int64_t base, int64_t exp, int64_t modulus)
+{
+    __int128 ret = 1;
+    __int128 base_128 = base;
+
+    while (exp) {
+        if (exp & 1)
+            ret = (ret * base_128) % modulus;
+        base_128 = (base_128 * base_128) % modulus;
+        exp >>= 1;
+    }
+
+    return static_cast<int64_t>(ret);
+}
+
+std::map<size_t, bigint::slice_v> bigint::ntt_reverse_map;
+
+/*
+ * This function prepare the reverse table for different lengthes.
+ * @length should be an integer in power of 2 and
+ *      less than or equal to ntt_max_slices_k.
+ */
+const bigint::slice_v& bigint::get_reverse(size_t length)
+{
+    if (ntt_reverse_map.count(length) == 0) {
+        slice_v& rev = ntt_reverse_map[length];
+
+        rev.resize(length, 0);
+        for (size_t i = 1; i < length; ++i) {
+            rev[i] = rev[i >> 1] >> 1;
+            if (i & 1)
+                rev[i] |= length >> 1;
+        }
+
+        return rev;
+    }
+
+    return ntt_reverse_map[length];
+}
+
+std::map<size_t, bigint::wider_v> bigint::ntt_omega_powers_map;
+
+/*
+ * This function prepare the omega powers for different lengthes.
+ * @length should be an integer in power of 2 and
+ *      less than or equal to ntt_max_slices_k.
+ */
+const bigint::wider_v& bigint::get_omega_powers(size_t length)
+{
+    if (ntt_omega_powers_map.count(length) == 0) {
+        wider_v& omega_powers = ntt_omega_powers_map[length];
+
+        for (size_t m = 2; m <= length; m <<= 1) {
+            size_t k = m >> 1;
+            int64_t gn = qpower(ntt_g_k, (ntt_prime_k - 1) / m, ntt_prime_k);
+            for (size_t i = 0; i < length; i += m) {
+                __int128 g = 1;
+                for (size_t j = 0; j < k; ++j) {
+                    omega_powers.push_back(static_cast<wider_t>(g));
+                    g = g * gn % ntt_prime_k;
+                }
+            }
+        }
+
+        return omega_powers;
+    }
+
+    return ntt_omega_powers_map[length];
+}
+
+void bigint::ntt(wider_v& x, int32_t length, bool invert)
+{
+    const slice_v& reverse = get_reverse(length);
+
+    for (int32_t i = 0; i < length; ++i) {
+        if (reverse[i] < i)
+            std::swap(x[i], x[reverse[i]]);
+    }
+
+    const wider_v& omega_powers = get_omega_powers(length);
+
+    size_t oi = 0;
+    for (int32_t m = 2; m <= length; m <<= 1) {
+        int32_t k = m >> 1;
+        for (int32_t i = 0; i < length; i += m) {
+            for (int32_t j = 0; j < k; ++j) {
+                __int128 g = omega_powers[oi];
+                __int128 tmp = x[i + j + k] * g % ntt_prime_k;
+                x[i + j + k] = (x[i + j] - tmp + ntt_prime_k) % ntt_prime_k;
+                x[i + j] = (x[i + j] + tmp) % ntt_prime_k;
+                oi++;
+            }
+        }
+    }
+
+    if (invert) {
+        std::reverse(x.begin() + 1, x.begin() + length);
+        __int128 inv = qpower(length, ntt_prime_k - 2, ntt_prime_k);
+        for (int32_t i = 0; i < length; ++i) {
+            x[i] = (x[i] * inv) % ntt_prime_k;
+        }
+    }
+}
+#endif // defined(USE_INT32_AS_SLICE)
+
+/*
+ * This function uses NTT algorithm for multiplication.
+ *
+ * For more information, please refer to:
+ *  https://www.cnblogs.com/zimujun/p/14472471.html
+ *  https://github.com/SRI-CSL/NTT
+ */
+bool bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
+            bigint& result)
+{
+    if (multiplicand.iszero() || multiplier.iszero()) {
+        result._sign = false;
+        result._slices.clear();
+        return true;
+    }
+    else if (multiplicand.isone() == 1) {
+        result = multiplier;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return true;
+    }
+    else if (multiplier.isone() == 1) {
+        result = multiplicand;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return true;
+    }
+
+#if not defined(USE_INT32_AS_SLICE)
+    // for other slice, use naive implementation
+    return false;
+#else
+    clog << "real nttmul() called\n";
+    size_t length = 1;
+    size_t n = multiplicand._slices.size();
+    while (length < (n << 1))
+        length <<= 1;
+    n = multiplier._slices.size();
+    while (length < (n << 1))
+        length <<= 1;
+
+    assert(length > 0 && length <= ntt_max_slices_k);
+    assert((length & (length - 1)) == 0);
+
+    wider_v a;
+    for (size_t i = 0; i < multiplicand._slices.size(); i++) {
+        a.push_back(multiplicand._slices[i]);
+    }
+    if (length > a.size())
+        a.resize(length, 0);
+    ntt(a, (int32_t)length);
+
+    wider_v b;
+    for (size_t i = 0; i < multiplier._slices.size(); i++) {
+        b.push_back(multiplier._slices[i]);
+    }
+    if (length > b.size())
+        b.resize(length, 0);
+    ntt(b, (int32_t)length);
+
+    wider_v my_result;
+    my_result.resize(length, 0);
+    for (size_t i = 0; i < length; ++i) {
+        __int128 tmp = a[i];
+        my_result[i] = tmp * b[i] % ntt_prime_k;
+    }
+
+    ntt(my_result, (int32_t)length, true);
+
+    result._slices.clear();
+
+    // normalize the result to make sure
+    // that all slice values are in [0, slice_base_k).
+    size_t last = 0;
+    for (size_t i = 0; i < length; ++i) {
+        if (my_result[i] >= slice_base_k) {
+            last = i + 1;
+            if (last >= my_result.size()) {
+                my_result.push_back(0);
+            }
+
+            my_result[i + 1] += my_result[i] / slice_base_k;
+            my_result[i] = my_result[i] % slice_base_k;
+        }
+
+        result._slices.push_back(my_result[i]);
+
+        if (my_result[i])
+            last = std::max(last, i);
+    }
+
+    while (my_result[last] >= slice_base_k) {
+        my_result.push_back(0);
+        my_result[last + 1] += my_result[last] / slice_base_k;
+        my_result[last] = my_result[last] % slice_base_k;
+        result._slices.push_back(my_result[last]);
+        last++;
+    }
+
+    result._sign = (multiplicand._sign != multiplier._sign);
+    result.normalize();
+    return true;
+#endif /* defined(USE_INT32_AS_SLICE) */
+}
+
+/* This method uses binary-lifting algorithm. But for small multiplicand,
+   we cannot gain much benefit from this algorithm. */
+void bigint::binmul(const bigint& multiplicand, const bigint& multiplier,
+        bigint& result)
+{
+    if (multiplicand.iszero() || multiplier.iszero()) {
+        result._sign = false;
+        result._slices.clear();
+        return;
+    }
+    else if (multiplicand.isone() == 1) {
+        result = multiplier;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return;
+    }
+    else if (multiplier.isone() == 1) {
+        result = multiplicand;
+        result._sign = (multiplicand._sign != multiplier._sign);
+        return;
+    }
+
+    result._sign = false;
+    result._slices.clear();
+
+    bigint longer;
+    bigint shorter;
+
+    if (multiplicand._slices.size() > multiplier._slices.size()) {
+        longer = multiplicand;
+        shorter = multiplier;
+    }
+    else {
+        longer = multiplier;
+        shorter = multiplicand;
+    }
+
+    while (!shorter.iszero()) {
+        bigint quot, rem;
+        divmod(shorter, 2, quot, rem);
+        shorter = std::move(quot);
+
+        if (!rem.iszero()) {
+            result += longer;
+        }
+
+        longer += longer;
+    }
+
+    result._sign = (multiplicand._sign != multiplier._sign);
+}
+
+/* This method uses binary-lifting algorithm. But for small multiplicand,
+   we cannot gain much benefit from this algorithm. */
+void bigint::binmul(const bigint& multiplicand, intmax_t multiplier,
+        bigint& result)
+{
+    if (multiplicand.iszero() || multiplier == 0) {
+        result._sign = false;
+        result._slices.clear();
+        return;
+    }
+    else if (multiplicand.isone() == 1) {
+        result = multiplier;
+        result._sign = (multiplicand._sign != (multiplier < 0));
+        return;
+    }
+    else if (multiplier == 1) {
+        result = multiplicand;
+        result._sign = (multiplicand._sign != (multiplier < 0));
+        return;
+    }
+
+    result._sign = false;
+    result._slices.clear();
+
+    bigint longer = multiplicand;
+    intmax_t shorter = imaxabs(multiplier);
+    while (shorter > 0) {
+        if (shorter & 1) {
+            result += longer;
+        }
+        longer += longer;
+        shorter >>= 1;
+    }
+
+    if (multiplier < 0) {
+        result._sign = !result._sign;
     }
 }
 
@@ -987,12 +1286,12 @@ bigint  bigint::operator*  (const bigint& other) const
         return result;
     }
 
-    absmul(_slices, other._slices, result);
-    if (_sign == other._sign) {
-        result._sign = false;
-    }
-    else {
-        result._sign = true;
+    // only use nttmul() when the total size of two slices is
+    // larger than or equal to 8
+    if (_slices.size() + other._slices.size() < 8
+            || !nttmul(*this, other, result)) {
+        absmul(_slices, other._slices, result);
+        result._sign = _sign != other._sign;
     }
 
     return result;
@@ -1008,15 +1307,16 @@ bigint& bigint::operator*= (const bigint& other)
     }
 
     bigint result;
-    absmul(_slices, other._slices, result);
-    if (_sign == other._sign) {
-        _sign = false;
-    }
-    else {
-        _sign = true;
-    }
-    _slices = std::move(result._slices);
 
+    // only use nttmul() when the total size of two slices is
+    // larger than or equal to 8
+    if (_slices.size() + other._slices.size() < 8
+            || !nttmul(*this, other, result)) {
+        absmul(_slices, other._slices, result);
+    }
+
+    _sign = _sign != other._sign;
+    _slices = std::move(result._slices);
     return *this;
 }
 
@@ -1088,7 +1388,7 @@ void bigint::absdiv_slice(const T& dividend, slice_t divisor,
 
     slice_t rem = 0;
     while (true) {
-        twin_t numerator = dividend[pos] + rem * (twin_t)slice_base_k;
+        wider_t numerator = dividend[pos] + rem * (wider_t)slice_base_k;
         imaxdiv_t div = imaxdiv(numerator, divisor);
 
         // clog << numerator << " / " << divisor << ": "
@@ -1327,8 +1627,8 @@ bool bigint::divmod(const bigint& dividend, intmax_t divisor,
 bigint::slice_t bigint::quick_modulo(slice_t factor, slice_t base, uintmax_t exp,
         slice_t modulus, slice_t rem_pre)
 {
-    twin_t rem_w = 1;
-    twin_t base_w = base;
+    wider_t rem_w = 1;
+    wider_t base_w = base;
 
     while (exp) {
         if (exp & 1)
@@ -1864,6 +2164,87 @@ void test_bigint2(void)
         const char *rem;
     } cases[] = {
         {
+            "000000010000000200000003",
+            "000000010000000200000003",
+            "20000000400000006",
+            "0",
+            "100000004000000100000001200000009",
+            "1",
+            "0",
+        },
+        {
+            "000000020000000400000006",
+            "000000010000000200000003",
+            "30000000600000009",
+            "10000000200000003",
+            "200000008000000200000002400000018",
+            "2",
+            "0",
+        },
+        {
+            "000000050000001000000015",
+            "000000010000000200000003",
+            "60000001200000018",
+            "40000000800000012",
+            "500000020000000500000006000000045",
+            "5",
+            "0",
+        },
+        {
+            "000000150000021000000015",
+            "3",
+            "150000021000000018",
+            "150000021000000012",
+            "450000063000000045",
+            "50000007000000005",
+            "0",
+        },
+        {
+            "9999",
+            "9999",
+            "19998",
+            "0",
+            "99980001",
+            "1",
+            "0",
+        },
+        {
+            "31595",
+            "31595",
+            "63190",
+            "0",
+            "998244025",
+            "1",
+            "0",
+        },
+        {
+            "31596",
+            "31596",
+            "63192",
+            "0",
+            "998307216",
+            "1",
+            "0",
+        },
+        {
+            "99999",
+            "99999",
+            "199998",
+            "0",
+            "9999800001",
+            "1",
+            "0",
+        },
+        {
+            "999999999",
+            "999999999",
+            "1999999998",
+            "0",
+            "999999998000000001",
+            "1",
+            "0",
+        },
+        {
             "30257056966624049406876268303231201200",
             "41908997197273957480890101023095532464",
             "72166054163898006887766369326326733664",
@@ -1996,6 +2377,169 @@ void test_bigint2(void)
         oss << (a * b);
         assert(oss.str() == expect);
 
+        bigint prod;
+#if defined(USE_INT32_AS_SLICE)
+        bigint::nttmul(a, b, prod);
+#else
+        bigint::binmul(a, b, prod);
+#endif
+        expect = cases[i].prod;
+        oss.str("");
+        oss << prod;
+        clog << prod << " vs " << expect << endl;
+        assert(oss.str() == expect);
+
+        expect = cases[i].quot;
+        oss.str("");
+        oss << (a / b);
+        // clog << (a / b) << " vs " << expect << endl;
+        assert(oss.str() == expect);
+
+        expect = cases[i].rem;
+        oss.str("");
+        oss << (a % b);
+        assert(oss.str() == expect);
+
+        bigint quot, rem;
+        bigint::divmod(a, b, quot, rem);
+
+        expect = cases[i].quot;
+        oss.str("");
+        oss << quot;
+        assert(oss.str() == expect);
+
+        expect = cases[i].rem;
+        oss.str("");
+        oss << rem;
+        assert(oss.str() == expect);
+
+        bigint ret;
+
+        ret = a, ret += b;
+        expect = cases[i].sum;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret -= b;
+        expect = cases[i].diff;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret *= b;
+        expect = cases[i].prod;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret /= b;
+        expect = cases[i].quot;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+
+        ret = a, ret %= b;
+        expect = cases[i].rem;
+        oss.str("");
+        oss << ret;
+        assert(oss.str() == expect);
+    }
+}
+
+void test_bigint3(void)
+{
+    static struct bigintcase {
+        const char *op1;
+        intmax_t    op2;
+        const char *sum;
+        const char *diff;
+        const char *prod;
+        const char *quot;
+        const char *rem;
+    } cases[] = {
+        {
+            "30257056966624049406876268303231201200",
+            41908997LL,
+            "30257056966624049406876268303273110197",
+            "30257056966624049406876268303189292203",
+            "1268042909643076386720629307691311501397196400",
+            "721970439107002475074177229849",
+            "21149747",
+        },
+        {
+            "30257056966624049406876268303231201200",
+            -41908997,
+            "30257056966624049406876268303189292203",
+            "30257056966624049406876268303273110197",
+            "-1268042909643076386720629307691311501397196400",
+            "-721970439107002475074177229849",
+            "21149747",
+        },
+        {
+            "-30257056966624049406876268303231201200",
+            -41908997,
+            "-30257056966624049406876268303273110197",
+            "-30257056966624049406876268303189292203",
+            "1268042909643076386720629307691311501397196400",
+            "721970439107002475074177229849",
+            "-21149747",
+        },
+        {
+            "30257056966624049406876268303231201200",
+            1,
+            "30257056966624049406876268303231201201",
+            "30257056966624049406876268303231201199",
+            "30257056966624049406876268303231201200",
+            "30257056966624049406876268303231201200",
+            "0",
+        },
+        {
+            "-30257056966624049406876268303231201200",
+            1,
+            "-30257056966624049406876268303231201199",
+            "-30257056966624049406876268303231201201",
+            "-30257056966624049406876268303231201200",
+            "-30257056966624049406876268303231201200",
+            "0",
+        },
+    };
+
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        bigint a(cases[i].op1);
+        bigint b(cases[i].op2);
+
+        clog << "Tesing with " << a << " and " << b << endl;
+        string expect;
+        ostringstream oss;
+
+        expect = cases[i].sum;
+        oss.str("");
+        oss << (a + b);
+        assert(oss.str() == expect);
+
+        expect = cases[i].diff;
+        oss.str("");
+        oss << (a - b);
+        assert(oss.str() == expect);
+
+        expect = cases[i].prod;
+        oss.str("");
+        oss << (a * b);
+        assert(oss.str() == expect);
+
+        bigint prod;
+#if defined(USE_INT32_AS_SLICE)
+        bigint::nttmul(a, b, prod);
+#else
+        bigint::binmul(a, b, prod);
+#endif
+        expect = cases[i].prod;
+        oss.str("");
+        oss << prod;
+        clog << prod << " vs " << expect << endl;
+        assert(oss.str() == expect);
+
         expect = cases[i].quot;
         oss.str("");
         oss << (a / b);
@@ -2081,10 +2625,13 @@ int main()
 {
     test_bigint();
     test_bigint2();
+    test_bigint3();
 
     bigint result;
-    factorial(result, 5);
-    assert(result == 120);
+
+    bigint nine = 9;
+    result = nine * 9;
+    assert(result == 81);
 
     bigint r1, r2;
     factorial(r1, 50);

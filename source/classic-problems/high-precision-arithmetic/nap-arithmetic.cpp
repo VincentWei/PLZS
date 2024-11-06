@@ -41,7 +41,7 @@ void nap_add(string &result, const string &a, const string &b)
         else
             c = 0;
 
-        result.insert(0, 1, '0' + r);
+        result.insert((size_t)0, (size_t)1, '0' + r);
     }
 
     if (c > 0) {
@@ -69,7 +69,7 @@ string nap_add(const string &a, const string &b)
         else
             c = 0;
 
-        result.insert(0, 1, '0' + r);
+        result.insert((size_t)0, (size_t)1, '0' + r);
     }
 
     if (c > 0) {
@@ -99,7 +99,7 @@ void nap_add_to(string &r, const string &a)
             carry = 0;
 
         if (i >= len_r)
-            r.insert(0, 1, '0' + value_r);
+            r.insert((size_t)0, (size_t)1, '0' + value_r);
         else
             r[len_r - i - 1] = '0' + value_r;
     }
@@ -187,7 +187,7 @@ string nap_mul_vert(const string &a, const string &b)
 
             size_t k = j + i;
             if (k >= len_r) {
-                r.insert(0, 1, '0' + p);
+                r.insert((size_t)0, (size_t)1, '0' + p);
                 len_r++;
             }
             else {
@@ -203,7 +203,7 @@ string nap_mul_vert(const string &a, const string &b)
         }
 
         if (carry > 0) {
-            r.insert(0, 1, '0' + carry);
+            r.insert((size_t)0, (size_t)1, '0' + carry);
             len_r++;
             carry = 0;
         }

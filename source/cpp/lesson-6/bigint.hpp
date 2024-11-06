@@ -15,6 +15,7 @@
  */
 #include <array>
 #include <vector>
+#include <map>
 #include <string>
 #include <algorithm>
 #include <exception>
@@ -33,8 +34,7 @@ class bigint {
   public:
 #if defined(USE_INT32_AS_SLICE)
     using slice_t = int32_t;
-    using twin_t  = int64_t;
-    using slice_v = std::vector<bigint::slice_t>;
+    using wider_t = int64_t;
     static const int slice_width_k = 8;             //    9999 9999
     static const int max_slice_nint_k = 99999999;   // 21 4748 3647 (int32max)
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 00000000
@@ -45,8 +45,7 @@ class bigint {
         // slice_base_k ^ max_group_slices_k
 #elif defined(USE_INT16_AS_SLICE)
     using slice_t = int16_t;
-    using twin_t  = int32_t;
-    using slice_v = std::vector<bigint::slice_t>;
+    using wider_t = int32_t;
     static const int slice_width_k = 4;             //   9999
     static const int max_slice_nint_k = 9999;       // 3 2767 (int16max)
     static const int slice_base_k = (max_slice_nint_k + 1); // 1 0000
@@ -57,7 +56,7 @@ class bigint {
         // slice_base_k ^ max_group_slices_k */
 #elif defined(USE_INT8_AS_SLICE)
     using slice_t = int8_t;
-    using twin_t  = int16_t;
+    using wider_t = int16_t;
     using slice_v = std::vector<bigint::slice_t>;
     static const int slice_width_k = 2;             //   99
     static const int max_slice_nint_k = 99;         // 1 27 (int8max)
@@ -68,6 +67,9 @@ class bigint {
     static const intmax_t group_base_k = 1000000000LL * 1000000000LL;
         // slice_base_k ^ max_group_slices_k
 #endif
+
+    using slice_v = std::vector<bigint::slice_t>;
+    using wider_v = std::vector<bigint::wider_t>;
 
   private:
     class slice_a {
@@ -196,9 +198,12 @@ class bigint {
     static bool divmod(const bigint& dividend, intmax_t divisor,
             bigint& quotient, bigint& remainder);
 
-    static void fastmul(const bigint& multiplicand, const bigint& multiplier,
+    static bool nttmul(const bigint& multiplicand, const bigint& multiplier,
             bigint& result);
-    static void fastmul(const bigint& multiplicand, intmax_t multiplier,
+
+    static void binmul(const bigint& multiplicand, const bigint& multiplier,
+            bigint& result);
+    static void binmul(const bigint& multiplicand, intmax_t multiplier,
             bigint& result);
 
     bigint abs() const;
@@ -264,6 +269,27 @@ class bigint {
     void abssubfrom(const T& other);
     template <class T>
     void absaddto(const T& other);
+
+#if defined(USE_INT32_AS_SLICE)
+    // Constants for NTT algorithm:
+    // the modulus must be a prime larger than the square of
+    // the maximum value of a slice
+    //          99999999 * 99999999  = 9999999800000001
+    static const int64_t ntt_prime_k = 31525197391593473LL;
+    // the primitive root
+    static const int64_t ntt_g_k = 3;
+    // the maximum number of slices of a big integer using NTT algorithm
+    static const int32_t ntt_max_slices_k = INT_MAX;
+
+    // the map holding omega powers for different lengthes
+    static std::map<size_t, wider_v> ntt_omega_powers_map;
+    // the map holding reverse table for different lengthes
+    static std::map<size_t, slice_v> ntt_reverse_map;
+
+    static const slice_v& get_reverse(size_t length);
+    static const wider_v& get_omega_powers(size_t length);
+    static void ntt(wider_v& x, int32_t length, bool invert = false);
+#endif
 
     static slice_t quick_modulo(slice_t factor, slice_t base, uintmax_t exp,
             slice_t modulus, slice_t rem_pre = 0);

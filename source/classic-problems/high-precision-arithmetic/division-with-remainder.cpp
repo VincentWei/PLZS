@@ -72,7 +72,7 @@ string nap_subtract(const string &a, const string &b)
             borrow = 1;
         }
 
-        result.insert(0, 1, '0' + r);
+        result.insert((size_t)0, 1, '0' + r);
     }
 
     assert(borrow == 0);
