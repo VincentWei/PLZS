@@ -509,7 +509,6 @@ bool bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
     // for other slice, use naive implementation
     return false;
 #else
-    clog << "real nttmul() called\n";
     size_t length = 1;
     size_t n = multiplicand._slices.size();
     while (length < (n << 1))
