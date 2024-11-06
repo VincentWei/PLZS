@@ -76,7 +76,7 @@
 	
 ### 看看这个进制转换算法有没有问题？
 
-```mathematica []
+```mathematica
 算法开始 转换进制 (x, b)
     循环开始 (当 x ≠ 0 时)
         令 r = x % b
@@ -89,7 +89,7 @@
 	
 ### 修改的版本
 
-```mathematica []
+```mathematica
 算法开始 转换进制 (x, b)
     令 s 为一个空的序列
     如果 (x = 0)
