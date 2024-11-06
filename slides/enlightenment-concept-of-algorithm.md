@@ -8,9 +8,9 @@
 		
 ## 什么是算法
 
-1. 从猜拳游戏说起     <!-- .element: class="fragment fade-in-then-out" data-fragment-index="1" -->
-1. 什么是机械计算     <!-- .element: class="fragment fade-in-then-out" data-fragment-index="2" -->
-1. 自然语言描述算法   <!-- .element: class="fragment fade-in-then-out" data-fragment-index="3" -->
+1. 从猜拳游戏说起     <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
+1. 什么是机械计算     <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
+1. 自然语言描述算法   <!-- .element: class="fragment highlight-current-red" data-fragment-index="3" -->
 
 		
 ## 抽象和代数
