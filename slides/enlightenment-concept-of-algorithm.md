@@ -13,6 +13,13 @@
 1. 自然语言描述算法   <!-- .element: class="fragment fade-in-then-out" data-fragment-index="3" -->
 
 		
+## 抽象和代数
+
+1. 脱离具体物体的数：人类历史上最伟大的抽象   <!-- .element: class="fragment fade-in-then-out" data-fragment-index="1" -->
+1. 代数：用字母代表数   <!-- .element: class="fragment fade-in-then-out" data-fragment-index="2" -->
+1. 常见代数符号及书写习惯   <!-- .element: class="fragment fade-in-then-out" data-fragment-index="3" -->
+
+		
 ## 描述算法的方法：流程图
 
 		
