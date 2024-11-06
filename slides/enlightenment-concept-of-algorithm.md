@@ -9,22 +9,32 @@
 ## 什么是算法
 
 1. 旁白：清华大大，您老说算法、算法，算法到底是个啥？
+1. 主播：这个问题好！要说明白这个问题，咱玩一个数数游戏。
 1. 作业：用文字描述猜拳游戏的算法。
 
 	
-### 从猜拳游戏说起     <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
+### 从数数游戏说起     <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
 ### 什么是机械计算     <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
 ### 自然语言描述算法   <!-- .element: class="fragment highlight-current-red" data-fragment-index="3" -->
 
 		
-## 抽象和代数
+## 抽象的概念
 
 1. 旁白：清华大大，怎么理解抽象？
-1. 作业：用代数符号描述从 3 开始的奇数一直加到 99。
+1. 主播：这个可不好讲哦，我试试能不能给兮兮讲明白。
+1. 作业：给自己的同学解释什么叫抽象。
 
 	
 ### 脱离具体物体的数    <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
 ### 用字母代表数  <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
+
+		
+## 代数基础
+
+1. 旁白：清华大大，你写有些式子我看不懂，怎么办？
+1. 用代数式描述加法交换律、结合律、加法和乘法结合律。
+1. 举例说明幂、和、积、阶乘的含义。
+1. 作业：用代数符号描述从 3 开始的奇数一直加到 99。
 
 	
 ### 常见代数符号及书写习惯
@@ -41,8 +51,20 @@
 		
 ## 描述算法的方法：流程图
 
+1. 主播：兮兮，今天我们用流程图描写下数数游戏的必胜算法。准备好笔和纸哦。
+1. 作业：画一个将大象塞到冰箱的算法流程图。
+
+	
+### 用流程图描述数数游戏的必胜算法
+
 		
 ## 描述算法的方法：伪代码
+
+1. 主播：兮兮，今天我们用伪代码描写下数数游戏的必胜算法。准备好笔和纸哦。
+1. 作业：写一个将大象塞到冰箱的算法伪代码。
+
+	
+### 用伪代码描述数数游戏的必胜算法
 
 		
 ## 进制转换算法
