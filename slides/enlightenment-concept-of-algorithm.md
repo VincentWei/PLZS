@@ -116,7 +116,7 @@
 	
 ### 看看这个加法实现的乘法算法有没有问题？
 
-```mathematica []
+```mathematica
 算法开始 乘法 (n, m)
     循环开始 (当 m ≠ 0 时)
         令 n = n + n
@@ -129,7 +129,7 @@
 	
 ### 修改后的版本
 
-```mathematica []
+```mathematica
 算法开始 乘法 (n, m)
     令 r = 0
     循环开始 (当 m ≠ 0 时)
@@ -149,7 +149,7 @@
 	
 ### 看看这个求幂算法有没有问题？
 
-```mathematica []
+```mathematica
 算法开始 求幂 (x, n)
     令 r = 1
     循环开始 (当 n ≠ 0 时)
@@ -163,7 +163,7 @@
 	
 ### 常见的错误版本
 
-```mathematica []
+```mathematica
 算法开始 求幂 (x, n)
     循环开始 (当 n ≠ 0 时)
         令 x = x * x
@@ -182,7 +182,7 @@
 	
 ### 看看这个阶乘算法有没有问题？
 
-```mathematica []
+```mathematica
 算法开始 阶乘 (x, n)
     令 r = n
     循环开始 (当 n > 1 时)
@@ -196,7 +196,7 @@
 	
 ### 修改版本
 
-```mathematica []
+```mathematica
 算法开始 阶乘 (n)
     令 r = 1
     令 i = 2
