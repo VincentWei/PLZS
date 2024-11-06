@@ -426,7 +426,6 @@ const bigint::slice_v& bigint::get_omega_powers(size_t length)
     if (ntt_omega_powers_map.count(length) == 0) {
         slice_v& omega_powers = ntt_omega_powers_map[length];
 
-        size_t oi = 0;
         for (size_t m = 2; m <= length; m <<= 1) {
             size_t k = m >> 1;
             int32_t gn = qpower(ntt_g_k, (ntt_prime_k - 1) / m, ntt_prime_k);
@@ -435,7 +434,6 @@ const bigint::slice_v& bigint::get_omega_powers(size_t length)
                 for (size_t j = 0; j < k; ++j) {
                     omega_powers.push_back(static_cast<int32_t>(g));
                     g = g * gn % ntt_prime_k;
-                    oi++;
                 }
             }
         }
@@ -474,6 +472,9 @@ void bigint::ntt(slice_v& x, int32_t length, bool invert)
                 int64_t g = omega_powers[oi];
 #if 1
                 int64_t tmp = x[i + j + k] * g % ntt_prime_k;
+                clog << "tmp: " << tmp << endl;
+                clog << "tmp: " << (int64_t)(x[i + j] - tmp + ntt_prime_k) << endl;
+                clog << "tmp: " << (int64_t)(x[i + j] + tmp) << endl;
                 x[i + j + k] = (x[i + j] - tmp + ntt_prime_k) % ntt_prime_k;
                 x[i + j] = (x[i + j] + tmp) % ntt_prime_k;
 #else
@@ -491,7 +492,9 @@ void bigint::ntt(slice_v& x, int32_t length, bool invert)
     if (invert) {
         std::reverse(x.begin() + 1, x.begin() + length);
         int64_t inv = qpower(length, ntt_prime_k - 2, ntt_prime_k);
+        clog << "inv: " << inv << endl;
         for (int32_t i = 0; i < length; ++i) {
+            clog << "x[i]: " << (x[i] * inv) << endl;
             x[i] = (x[i] * inv) % ntt_prime_k;
         }
     }
@@ -547,8 +550,13 @@ void bigint::nttmul(const bigint& multiplicand, const bigint& multiplier,
     slice_v my_result;
     my_result.resize(length, 0);
     for (size_t i = 0; i < length; ++i) {
+#if 1
+        int64_t tmp = a[i];
+        my_result[i] = tmp * b[i] % ntt_prime_k;
+#else
         twin_t tmp = 1LL * a[i] * b[i];
         my_result[i] = (slice_t)(tmp % ntt_prime_k);
+#endif
     }
 
     ntt(my_result, (int32_t)length, true);
@@ -2202,6 +2210,51 @@ void test_bigint2(void)
             "150000021000000012",
             "450000063000000045",
             "50000007000000005",
+            "0",
+        },
+        {
+            "9999",
+            "9999",
+            "19998",
+            "0",
+            "99980001",
+            "1",
+            "0",
+        },
+        {
+            "31595",
+            "31595",
+            "63190",
+            "0",
+            "998244025",
+            "1",
+            "0",
+        },
+        {
+            "31596",
+            "31596",
+            "63192",
+            "0",
+            "998307216",
+            "1",
+            "0",
+        },
+        {
+            "99999",
+            "99999",
+            "199998",
+            "0",
+            "9999800001",
+            "1",
+            "0",
+        },
+        {
+            "999999999",
+            "999999999",
+            "1999999998",
+            "0",
+            "999999998000000001",
+            "1",
             "0",
         },
         {

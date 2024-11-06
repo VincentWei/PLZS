@@ -1,16 +1,16 @@
 # 信息学启蒙（算法及其描述）
 
-1. 什么是算法，从猜拳游戏说起
+1. 什么是算法
 1. 描述算法的方法：流程图
-1. 描述算法的方法：文字
 1. 描述算法的方法：伪代码
 1. 进制转换算法
 
 		
-## 什么是算法，从猜拳游戏说起
+## 什么是算法
 
-		
-## 描述算法的方法：文字
+1. 从猜拳游戏说起     <!-- .element: class="fragment fade-in-then-out" data-fragment-index="1" -->
+1. 什么是机械计算     <!-- .element: class="fragment fade-in-then-out" data-fragment-index="2" -->
+1. 自然语言描述算法   <!-- .element: class="fragment fade-in-then-out" data-fragment-index="3" -->
 
 		
 ## 描述算法的方法：流程图

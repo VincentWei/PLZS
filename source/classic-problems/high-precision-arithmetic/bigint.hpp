@@ -274,7 +274,7 @@ class bigint {
 #if defined(USE_INT32_AS_SLICE)
     // Constants for NTT algorithm:
     // the modulus; must be a prime larger than the maximum value of a slice
-    // (99999999)
+    //                                  99999999
     static const int32_t ntt_prime_k = 998244353;
     // the primitive root
     static const int32_t ntt_g_k = 3;
