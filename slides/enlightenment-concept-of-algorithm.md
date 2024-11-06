@@ -8,6 +8,10 @@
 		
 ## 什么是算法
 
+1. 旁白：清华大大，您老说算法、算法，算法到底是个啥？
+1. 作业：用文字描述猜拳游戏的算法。
+
+	
 ### 从猜拳游戏说起     <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
 ### 什么是机械计算     <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
 ### 自然语言描述算法   <!-- .element: class="fragment highlight-current-red" data-fragment-index="3" -->
@@ -15,9 +19,12 @@
 		
 ## 抽象和代数
 
-### 脱离具体物体的数：人类历史上最伟大的抽象   <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
+1. 旁白：清华大大，您老说算法、算法，算法到底是个啥？
+1. 作业：用文字描述猜拳游戏的算法。
 
-### 代数：用字母代表数   <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
+	
+### 脱离具体物体的数    <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
+### 代数：用字母代表数  <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
 
 	
 ### 常见代数符号及书写习惯
