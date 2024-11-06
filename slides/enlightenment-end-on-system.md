@@ -125,12 +125,8 @@ $$`
 - 结语：我的信奥启蒙课专门为想学编程、走信奥的小学三年级孩子准备；建议家长带着孩子一起学习，和孩子一起思考，一起答题；也许你还没有孩子快呢。
 
 		
-## 进制转换练习（一）
+## 进制转换练习
 
-- 八进制数 <code>(12345670)<sub>8</sub></code> 和 <code>(07654321)<sub>8</sub></code> 的和为（  ）。
-
-		
-## 进制转换练习（二）
-
-- 数 <code>(101010)<sub>2</sub></code> 和 <code>(166)<sub>8</sub></code> 的和为（  ）。
+1. 求八进制数 <code>(12345670)<sub>8</sub></code> 和 <code>(07654321)<sub>8</sub></code> 的和。<!-- .element: class="fragment fade-in-then-out" data-fragment-index="1" -->
+1. 数 <code>(101010)<sub>2</sub></code> 和 <code>(166)<sub>8</sub></code> 的和表达为十六进制是多少？<!-- .element: class="fragment fade-in-then-out" data-fragment-index="1" -->
 
