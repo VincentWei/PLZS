@@ -18,20 +18,20 @@
 ### 自然语言描述算法   <!-- .element: class="fragment highlight-current-red" data-fragment-index="3" -->
 
 		
-## 抽象的概念
+## 怎么理解“抽象”这个词？
 
 1. 旁白：清华大大，怎么理解抽象？
 1. 主播：这个可不好讲哦，我试试能不能给兮兮讲明白。
-1. 作业：给自己的同学解释什么叫抽象。
+1. 脱离具体物体的数
+1. 作业：试着给自己的同学解释什么叫抽象。
 
 	
-### 脱离具体物体的数    <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
-### 用字母代表数  <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
+### 怎么理解“抽象”这个词？
 
 		
 ## 代数基础
 
-1. 旁白：清华大大，你写有些式子我看不懂，怎么办？
+1. 旁白：清华大大，你写的有些式子我看不懂，怎么办？
 1. 用代数式描述加法交换律、结合律、加法和乘法结合律。
 1. 举例说明幂、和、积、阶乘的含义。
 1. 作业：用代数符号描述从 3 开始的奇数一直加到 99。
