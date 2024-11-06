@@ -24,17 +24,16 @@
 
 	
 ### 脱离具体物体的数    <!-- .element: class="fragment highlight-current-red" data-fragment-index="1" -->
-### 代数：用字母代表数  <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
+### 用字母代表数  <!-- .element: class="fragment highlight-current-red" data-fragment-index="2" -->
 
 	
-### 常见代数符号及书写习惯
+### 常见代数符号及习惯
 
 - 表示整数：`n`
-- 表示常数：`a, b, c`
-- 表示未知数：`x`
+- 表示一般的数（小数）：`a, b, c`
 - 下标表示法：`$ a_0, a_1, ... a_n $`
+- 表示未知数或者变的数：`x, y, z`
 - 幂： `$ x^n $`
-- 指数： `$ n^x $`
 - 和：`$ \sum $`
 - 积：`$ \prod $`
 
