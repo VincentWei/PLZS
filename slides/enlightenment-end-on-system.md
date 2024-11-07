@@ -187,9 +187,12 @@ $$`
 
 `$$
 \begin{align}
-    (d_3d_2d_1d_0)_{2} & = d_3 \times 2^3  + d_2 \times 2^2 + d_1 \times 2^1 + d_0 \times 2^0 \\
-                       & = (d_3 \times 2 ) \times 4 + (d_2 \times 1) \times 4 + d_1 \times 2^1 + d_0 \times 2^0 \\
-                       & = (d_3 \times 2^1 + d_2 \times 2^0) \times 4^1 + (d_1 \times 2^1 + d_0 \times 2^0) \times 4^0
+    (b_3b_2b_1b_0)_{2} & = b_3 \times 2^3  + b_2 \times 2^2 + b_1 \times 2^1 + b_0 \times 2^0 \\
+                       & = (b_3 \times 2 ) \times 4 + (b_2 \times 1) \times 4 + b_1 \times 2^1 + b_0 \times 2^0 \\
+                       & = (b_3 \times 2^1 + b_2 \times 2^0) \times 4^1 + (b_1 \times 2^1 + b_0 \times 2^0) \times 4^0 \\
+                       & = q_1 \times 4^1 + q_0 \times 4^0 \\
+                   q_1 & = b_3 \times 2^1 + b_2 \times 2^0 \\
+                   q_0 & = b_1 \times 2^1 + b_0 \times 2^0
 \end{align}
 $$`
 
