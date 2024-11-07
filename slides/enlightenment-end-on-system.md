@@ -190,7 +190,7 @@ $$`
     (b_3b_2b_1b_0)_{2} & = b_3 \times 2^3  + b_2 \times 2^2 + b_1 \times 2^1 + b_0 \times 2^0 \\
                        & = (b_3 \times 2 ) \times 4 + (b_2 \times 1) \times 4 + b_1 \times 2^1 + b_0 \times 2^0 \\
                        & = (b_3 \times 2^1 + b_2 \times 2^0) \times 4^1 + (b_1 \times 2^1 + b_0 \times 2^0) \times 4^0 \\
-                       & = q_1 \times 4^1 + q_0 \times 4^0 \\
+                       & = q_1 \times 4^1 + q_0 \times 4^0 = (q_1q_0)_4 \\
                    q_1 & = b_3 \times 2^1 + b_2 \times 2^0 \\
                    q_0 & = b_1 \times 2^1 + b_0 \times 2^0
 \end{align}
