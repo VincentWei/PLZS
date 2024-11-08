@@ -215,18 +215,7 @@ $$`
 | `16`      | `01.00.00`        | `100`     | `010.000`         |  `20`     |
 
 	
-## 数学原理
-
-`$$
-\large{
-\begin{align}
-    (b_3b_2b_1b_0)_{2} & = b_3 \times 2^3  + b_2 \times 2^2 + b_1 \times 2^1 + b_0 \times 2^0 \\
-                       & = (b_3 \times 2 ) \times 4 + (b_2 \times 1) \times 4 + b_1 \times 2^1 + b_0 \times 2^0 \\
-                       & = (b_3 \times 2^1 + b_2 \times 2^0) \times 4^1 + (b_1 \times 2^1 + b_0 \times 2^0) \times 4^0
-\end{align}
-}
-$$`
-
+## 数学原理 <!-- .element: class="fragment fade-out" -->
 
 		
 ## 第六讲
