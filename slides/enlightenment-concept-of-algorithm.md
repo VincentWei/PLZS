@@ -222,7 +222,7 @@
 ```mathematica
 ALGO countingGame (x)
     IF (x % 7 == 0)
-        EXEC clapHands
+        EXECUTE clapHands
         STOP
     ELSE
 
