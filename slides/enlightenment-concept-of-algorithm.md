@@ -195,12 +195,11 @@
 	
 ### 用伪代码描述数数游戏的必胜算法
 
-	
 ```mathematica
 算法开始 数数游戏必胜 (x)
     如果开始 (当 x % 7 == 0 时)
         执行 拍手
-        算法结束
+        停止
     否则
 
         y := x
@@ -213,15 +212,38 @@
             如果结束
         循环结束
 
-        说出 y
+        执行 说出 y
     如果结束
 算法结束
 ```
 
 	
-### 用考鼎码描述数数游戏的必胜算法
+
+```mathematica
+ALGO count_game (x)
+    IF (x % 7 == 0)
+        EXEC clap_hand
+        STOP
+    ELSE
+
+        y := x
+        WHILE (y != 0)
+            x := y // 10
+            r := y % 10
+            IF (r == 7)
+                EXECUTE clap hand
+                STOP
+            ENDIF
+        ENDWHILE
+
+        EXECUTE speak y
+    ENDIF
+ENDALGO
+```
 
 	
+### 用考鼎码描述数数游戏的必胜算法
+
 ```mathematica
 算始 数数游戏必胜 (x)
     若始 (x % 7 == 0)
