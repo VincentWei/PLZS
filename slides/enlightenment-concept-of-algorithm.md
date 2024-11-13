@@ -220,7 +220,7 @@
 	
 
 ```mathematica
-ALGO counting_game (x)
+ALGO countingGame (x)
     IF (x % 7 == 0)
         EXEC clapHands
         STOP
