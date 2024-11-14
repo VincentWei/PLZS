@@ -252,12 +252,12 @@
 算法开始 数数游戏必胜 (x)
     如果开始 (当 x % 7 == 0 时)
         执行 拍手
-        停止
+        终止
     否则
 
         y := x
         循环开始 (当 y != 0 时)
-            x := y // 10
+            y := y // 10
             r := y % 10
             如果开始 (当 r == 7 时)
                 执行 拍手
@@ -265,7 +265,7 @@
             如果结束
         循环结束
 
-        执行 说出 y
+        执行 说出 x
     如果结束
 算法结束
 ```
@@ -281,7 +281,7 @@ ALGO countingGame (x)
 
         y := x
         WHILE (y != 0)
-            x := y // 10
+            y := y // 10
             r := y % 10
             IF (r == 7)
                 EXECUTE clapHands
@@ -289,7 +289,7 @@ ALGO countingGame (x)
             ENDIF
         ENDWHILE
 
-        EXECUTE speak y
+        EXECUTE speak x
     ENDIF
 ENDALGO
 ```
@@ -305,7 +305,7 @@ ENDALGO
     若否
         y := x
         当始 (y != 0)
-            x := y // 10
+            y := y // 10
             r := y % 10
             若始 (r == 7)
                 执行 拍手
@@ -313,7 +313,7 @@ ENDALGO
             若终
         当终
 
-        执行 说出 y
+        执行 说出 x
     若终
 算终
 ```
