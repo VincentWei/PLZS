@@ -258,12 +258,12 @@ $$`
 
 - 该质数的十进制表达有 `41,024,320` 位。
 - 2024 年由前英伟达员工通过 GPU 集群发现。
-- 人类为啥要不停地计算新的质数？
+- 人类为啥要不停地寻找新的质数？
 
 	
 ### 质数的性质
 
-1. 质数有无穷多个。
+1. 质数有无穷多个。<!-- .element: class="fragment fade-in" -->
 1. 2 是唯一的偶质数；大于 2 的质数都是奇数。<!-- .element: class="fragment fade-in" -->
 1. 两个质数之间的缺口可以任意长。<!-- .element: class="fragment fade-in" -->
 1. 孪生质数貌似有无穷多对。<!-- .element: class="fragment fade-in" -->
