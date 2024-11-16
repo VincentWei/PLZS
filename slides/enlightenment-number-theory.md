@@ -263,11 +263,11 @@ $$`
 ### 质数的性质
 
 1. 质数有无穷多个。
-1. `2` 是唯一的偶质数；大于 `2` 的质数都是奇数。<!-- .element: class="fragment fade-in" -->
+1. 2 是唯一的偶质数；大于 2 的质数都是奇数。<!-- .element: class="fragment fade-in" -->
 1. 两个质数之间的缺口可以任意长。<!-- .element: class="fragment fade-in" -->
 1. 孪生质数貌似有无穷多对。<!-- .element: class="fragment fade-in" -->
-1. 三胞胎质数只有一组：`3, 5, 7`。<!-- .element: class="fragment fade-in" -->
-1. `n` 和 `2n` 之间一定存在一个质数。<!-- .element: class="fragment fade-in" -->
+1. 三胞胎质数只有一组：(3, 5, 7)。<!-- .element: class="fragment fade-in" -->
+1. n 和 2n 之间一定存在一个质数。<!-- .element: class="fragment fade-in" -->
 
 	
 ### 哥德巴赫猜想
@@ -319,15 +319,17 @@ $$`
    1. 再证明算术基本定理。
 
 	
-### 算术基本定理<!-- .element: class="fragment fade-out" -->
+### 算术基本定理
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+- 任何一个大于 `1` 的自然数 `n`，如果 `n` 不为质数，那么 `n` 可以唯一分解成有限个质数的乘积形式：
+
+`$$
+\begin{align}
+  n &= p_1^{a_1}p_2^{a_2} \cdots p_k^{a_k}
+\end{align}
+$$`
+
+- 其中，`$ p_1 < p_2 < \cdots < p_k $` 均为质数，其中指数 `$ a_i $` 是正整数。
 
 	
 ### 有无穷多个质数的证明<!-- .element: class="fragment fade-out" -->
