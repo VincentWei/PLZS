@@ -64,52 +64,44 @@ $$`
 $$`
 
 	
-### 多位数相乘的竖式计算
+### 多位数相乘
 
-1. 十进制的本质<!-- .element: class="fragment fade-in" -->
+1. 十进制的本质
+
+`$$
+\begin{align}
+    1234 &= 1000 + 200 + 30 + 4
+\end{align}
+$$`
+
+	
+### 利用分配律计算多位数相乘
+
+- 假定我们只会计算多位数和一位数相乘
+
+`$$
+\begin{align}
+    1234 \times 5678 &= (1000 + 200 + 30 + 4) \times 5678 \\
+                     &= 1000 \times 5678 + 200 \times 5678 + 30 \times 5678 + 4 \times 5678 \\
+                     &= 5678000 + 200 \times 5678 + 30 \times 5678 + 4 \times 5678 \\
+                     &= 5678000 + 2 \times 100 \times 5678 + 3 \times 10 \times 5678 + 5678 \times 4 \\
+                     &= 5678000 + 5678 \times 2 \times 100 + 5678 \times 3 \times 10 + 5678 \times 4 \\
+                     &= 5678000 + 1135600 + 170340 + 22712 \\
+                     &= 7006652
+\end{align}
+$$`
+
+	
+### 多位数的竖式乘法<!-- .element: class="fragment fade-out" -->
 
 	
 ### 减法<!-- .element: class="fragment fade-out" -->
 
 	
-### 除法<!-- .element: class="fragment fade-out" -->
+### 带余除法<!-- .element: class="fragment fade-out" -->
 
 	
 ### 作业
 
 1. 
-
-		
-## 第二讲
-
-- 标题：AAA
-- 旁白：
-- 主播：
-- 讲解要点：
-- 作业：
-- 结语：
-
-	
-### AAA<!-- .element: class="fragment fade-out" -->
-
-### 算法描述样例
-
-```console
-算始 转换进制 (x, b)
-    当始 (x != 0)
-        r := x % b
-        x := x // b
-        输出 r
-    当终
-算终
-```
-
-### 数学公式样例
-
-`$$
-\begin{align}
-  1,000,000 &= 832,040 &&+ 121,393 &&+ 46,368 &&+ 144    &&+ 55 \\
-            &= F_{30}  &&+ F_{26}  &&+ F_{24} &&+ F_{12} &&+ F_{10}
-\end{align}
-$$`
 
