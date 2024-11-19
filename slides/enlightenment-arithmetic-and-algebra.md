@@ -75,7 +75,7 @@ $$`
 
 `$$
 \begin{align}
-    35 \times 7 &= \\
+    35 \times 2 &= \\
     12345 \times 3 &=
 \end{align}
 $$`
