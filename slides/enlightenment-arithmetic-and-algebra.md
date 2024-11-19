@@ -36,7 +36,7 @@
 `$$
 \large{
     a \times b = 0 + \underbrace{a + a + \cdots + a}_{b个}
-\}
+}
 $$`
 
 <br/>
