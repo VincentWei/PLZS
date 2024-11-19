@@ -84,7 +84,7 @@ $$`
 ### 乘法的性质
 
 1. 交换律：`$ \large{ a \times b = b \times a } $`
-1. 结合律：`$ \large{ a \times b \times c = a \times (b times c) } $`
+1. 结合律：`$ \large{ a \times b \times c = a \times (b \times c) } $`
 1. 乘法的单位元：`$ \large{ a \times 1 = a } $`
 1. 十进制数相乘的特殊之处
 
