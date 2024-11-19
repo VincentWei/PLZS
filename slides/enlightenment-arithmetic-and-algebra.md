@@ -105,7 +105,7 @@ $$`
 `$$
 \begin{align}
     5 \times 1356 \times 2 &= \\
-    25 \times 2789 \times 4 &= \\
+    5 \times 5 \times 2789 \times 4 &= \\
 \end{align}
 $$`
 
@@ -115,7 +115,7 @@ $$`
 `$$
 \large{
     a \times (b + c) = a \times b + a \times c
-\}
+}
 $$`
 
 	
