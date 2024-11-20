@@ -236,8 +236,9 @@ $$`
 `$$
 \large{
 \begin{align}
-    105 \mod 10 &=  \\
+    2903405 \mod 10 &=  \\
     95 \mod 9 &=
+    365 \mod 9 &=
 \end{align}
 }
 $$`<!-- .element: class="fragment fade-in" -->
