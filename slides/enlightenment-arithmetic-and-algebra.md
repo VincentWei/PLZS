@@ -49,7 +49,7 @@
     3 + 5 + 7 &=            \\
     8 + 31 + 22 + 9 &=
 \end{align}
-$$`<!-- .element: class="fragment fade-in" -->
+$$`
 
 	
 ### 乘法的定义
@@ -97,7 +97,7 @@ $$`
     1234 \times 1000 &= 1234000 \\
     \cdots
 \end{align}
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
 #### 课堂练习
