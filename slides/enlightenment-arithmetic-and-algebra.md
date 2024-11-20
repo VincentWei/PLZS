@@ -56,7 +56,7 @@ $$`
 
 `$$
 \large{
-    a \times b = 0 + \underbrace{a + a + \cdots + a}_{b个}
+    a \times b = 0 \underbrace{+ a + a + \cdots + a}_{b个}
 }
 $$`
 
@@ -250,7 +250,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \large{
-    a^b = 1 \times \underbrace{a \times a \times \cdots \times a}_{b个}
+    a^b = 1 \underbrace{\times a \times a \times \cdots \times a}_{b个}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
