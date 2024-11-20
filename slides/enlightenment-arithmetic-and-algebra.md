@@ -75,8 +75,10 @@ $$`
 
 `$$
 \begin{align}
-    35 \times 2 &= \\
-    12345 \times 3 &=
+    35 \times 2 &=      \\
+    12345 \times 3 &=   \\
+    0 \times 123 &=     \\
+    123456 \times 0 &=
 \end{align}
 $$`
 
