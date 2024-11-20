@@ -229,7 +229,6 @@ $$`
 		
 ## 其他运算
 
-	
 ### 取模运算
 
 - 只求余数，不关心商。
@@ -260,6 +259,17 @@ $$`<!-- .element: class="fragment fade-in" -->
 ### 混合运算
 
 - 括号和运算优先级。
+
+`$$
+\large{
+\begin{align}
+    120 - (105 + (10 - 3)) &=  \\
+    120 \div 3 \times 6 &=  \\
+    100 + 120 \div 3 \times 6 &=  \\
+    100 + 120 \div (12 - (26 - 17)) \times 6 &=  \\
+\end{align}
+}
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 课堂练习
