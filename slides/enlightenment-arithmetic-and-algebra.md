@@ -236,8 +236,8 @@ $$`
 `$$
 \large{
 \begin{align}
-    2903405 \mod 10 &=  \\
-    95 \mod 9 &=
+    2903405 \mod 10 &=      \\
+    95 \mod 9 &=            \\
     365 \mod 9 &=
 \end{align}
 }
