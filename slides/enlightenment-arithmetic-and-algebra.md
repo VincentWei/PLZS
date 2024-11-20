@@ -58,7 +58,7 @@ $$`
 \large{
     a \times b = 0 \underbrace{+ a + a + \cdots + a}_{b个}
 }
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 <br/>
 <br/>
@@ -118,7 +118,15 @@ $$`
 \large{
     a \times (b + c) = a \times b + a \times c
 }
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 	
 ### 课堂练习
