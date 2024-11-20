@@ -236,9 +236,9 @@ $$`
 `$$
 \large{
 \begin{align}
-    2903405 \mod 10 &=      \\
-    95 \mod 9 &=            \\
-    365 \mod 9 &=
+    2903405 \bmod 10 &=      \\
+    95 \bmod 9 &=            \\
+    365 \bmod 9 &=
 \end{align}
 }
 $$`<!-- .element: class="fragment fade-in" -->
@@ -282,7 +282,7 @@ $$`<!-- .element: class="fragment fade-in" -->
     (33 \div 11) \times 70 &=          \\
     (1234 \times 23) \div (77 - 19) &= \\
     (3^3 \times 2^5) - 120 &=          \\
-    53896 \mod 9 =
+    53896 \bmod 9 =
 \end{align}
 $$`
 
