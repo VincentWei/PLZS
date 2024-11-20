@@ -28,9 +28,9 @@
 	
 ### 加法的性质
 
-1. 交换律：`$ \large{ a + b = b + a } $`
-1. 结合律：`$ \large{ a + b + c = a + (b + c) } $`
-1. 加法的单位元：`$ \large{ a + 0 = a } $`
+1. 交换律：`$ \large{ a + b = b + a } $`<!-- .element: class="fragment fade-in" -->
+1. 结合律：`$ \large{ a + b + c = (a + b) + c = a + (b + c) } $`<!-- .element: class="fragment fade-in" -->
+1. 加法的单位元：`$ \large{ a + 0 = a } $`<!-- .element: class="fragment fade-in" -->
 <br/>
 <br/>
 <br/>
@@ -83,10 +83,10 @@ $$`
 	
 ### 乘法的性质
 
-1. 交换律：`$ \large{ a \times b = b \times a } $`
-1. 结合律：`$ \large{ a \times b \times c = a \times (b \times c) } $`
-1. 乘法的单位元：`$ \large{ a \times 1 = a } $`
-1. 十进制数相乘的特殊之处
+1. 交换律：`$ \large{ a \times b = b \times a } $`<!-- .element: class="fragment fade-in" -->
+1. 结合律：`$ \large{ a \times b \times c = (a \times b) \times c = a \times (b \times c) } $`<!-- .element: class="fragment fade-in" -->
+1. 乘法的单位元：`$ \large{ a \times 1 = a } $`<!-- .element: class="fragment fade-in" -->
+1. 十进制数相乘的特殊之处：
 
 `$$
 \begin{align}
