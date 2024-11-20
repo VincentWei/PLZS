@@ -49,7 +49,7 @@
     3 + 5 + 7 &=            \\
     8 + 31 + 22 + 9 &=
 \end{align}
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 乘法的定义
