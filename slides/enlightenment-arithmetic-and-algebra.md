@@ -271,7 +271,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
-- 根据幂运算的定义：`$ a^0 = 1 $`
+- 根据幂运算的定义：`$ a^0 = 1 (a \ne 0) $`
 
 	
 ### 混合运算
