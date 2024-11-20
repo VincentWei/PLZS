@@ -243,7 +243,7 @@ $$`
 - 余数始终小于除数；除数可以整除被除数时，余数为 `0`。
 
 `$$
-若 a \bmod b = r，对任意的整数k，有 (kb + a) \bmod b = r。
+若 a \bmod b = r，对任意的整数k，有 (k \times b + a) \bmod b = r。
 $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
