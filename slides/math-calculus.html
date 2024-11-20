@@ -53,8 +53,11 @@
 				center: false,
 				hash: true,
 				slideNumber: true,
+				mathjax3: {
+					mathjax: 'https://courses.fmsoft.cn/js/mathjax3/tex-mml-chtml.js'
+				},
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3 ]
 			}).then(() => initCodeCopy());
 		</script>
 	</body>
