@@ -243,8 +243,7 @@ $$`
 - 余数始终小于除数；除数可以整除被除数时，余数为 `0`。
 
 `$$
-若 a \bmod b = r，
-则一定有一个 q，满足 a = qb + r ，而且 0 \le r \lt q
+若 a \bmod b = r，则一定有一个 q，满足 a = qb + r ，而且 0 \le r \lt q。
 $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
