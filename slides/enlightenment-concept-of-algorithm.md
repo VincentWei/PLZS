@@ -569,9 +569,10 @@ ENDALGO
 
 `$$
 \begin{align}
-    ab &:  a * b        \\
-    2a + b&:             \\
-    a^2 + 3b&:           \\
+    ab &:  a * b            \\
+    2a + b&:                \\
+    a^2 + 3b&:              \\
+    a^3 \bmod b&:           \\
 \end{align}
 $$`
 
