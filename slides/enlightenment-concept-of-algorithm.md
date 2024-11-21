@@ -147,11 +147,12 @@ $$`
 
 `$$
 \begin{align}
-    a &= b   \quad: a = 2, b = 2     \\
+    a &= b:   \quad a = 2, b = 2     \\
     a - 3 &\gt b                    \\
     2a &\gt b                       \\
     2^a &\ge b                      \\
     a^2 &\lt b                      \\
+    a^3 &\le b                      \\
 \end{align}
 $$`
 
