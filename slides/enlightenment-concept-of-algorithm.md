@@ -629,7 +629,8 @@ $$`
 `$$
 \begin{align}
     a^3 \times a^5 &:  a^8      \\
-    a^5 \div a^2 \div a^3 &:    \\
+    a^5 \times a^2 \div a^3 &:    \\
+    a^5 \div a^2 \times a^3 &:    \\
     (a^5)^3 &:                  \\
     (a^n)^m \div a^n&:          \\
 \end{align}
