@@ -373,7 +373,7 @@ $$`
 \begin{align}
   n &= p_1^{e_1}p_2^{e_2} \cdots p_k^{e_k}
 \end{align}
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 - 其中，`$ p_1 < p_2 < \cdots < p_k $` 均为质数，其中指数 `$ e_i $` 是正整数。
 
