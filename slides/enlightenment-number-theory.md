@@ -623,7 +623,9 @@ $$`
 <img style="height:700px;width:auto;" src="assets/enlightenment-magic-square-yanghui.svg" />
 
 	
-### 异形幻方<!-- .element: class="fragment fade-out" -->
+### 异形幻方
+
+<img style="height:700px;width:auto;" src="assets/enlightenment-magic-triangle.svg" />
 
 	
 ### 作业
