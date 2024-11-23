@@ -97,7 +97,7 @@
 	
 - 流行的桌面虚拟机管理软件
    - Oracle VirtualBox（开源软件，免费）。
-   - VMware Fusion（商业软件，但可申请针对个人的免费许可证）。
+   - VMware Fusion（非开源软件，已完全免费）。
 
 		
 ## 在虚拟机上安装 Ubuntu Linux
@@ -109,24 +109,24 @@
 ### 下载链接
 
 - Windows 10/11
-    - [Visual Studio Redistributable X64](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+    - [Visual Studio Redistributable X64（微软扩展包，VirtualBox 需要）](https://aka.ms/vs/17/release/vc_redist.x64.exe)
     - [VirtualBox 安装程序](https://download.virtualbox.org/virtualbox/7.0.14/VirtualBox-7.0.14-161095-Win.exe)
-    - [Ubuntu Linux 22.04.5 AMD64 ISO](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
-    - [Ubuntu Linux 22.04.6 AMD64 ISO](https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso)
-    - [Ubuntu Linux 24.04.1 AMD64 ISO](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
+    - [Ubuntu Linux 22.04.5 AMD64 ISO（三选一；推荐）](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
+    - [Ubuntu Linux 22.04.6 AMD64 ISO（三选一）](https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso)
+    - [Ubuntu Linux 24.04.1 AMD64 ISO（三选一）](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
 - macOS（Intel 芯片）
     - [VirtualBox 安装程序](https://download.virtualbox.org/virtualbox/7.0.14/VirtualBox-7.0.14-161095-OSX.dmg)
-    - [Ubuntu Linux 22.04.5 AMD64 ISO](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
-    - [Ubuntu Linux 22.04.6 AMD64 ISO](https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso)
-    - [Ubuntu Linux 24.04.1 AMD64 ISO](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
+    - [Ubuntu Linux 22.04.5 AMD64 ISO（三选一；推荐）](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
+    - [Ubuntu Linux 22.04.6 AMD64 ISO（三选一）](https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso)
+    - [Ubuntu Linux 24.04.1 AMD64 ISO（三选一）](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
 - macOS（Apple 的 M1/M2 芯片）
-    - [VMware Fusion](https://www.vmware.com/products/fusion/fusion-evaluation.html)：需要自行注册账号并获得针对个人的免费许可证
-    - [Ubuntu Linux 25.04 ARM64 ISO](https://cdimage.ubuntu.com/daily-live/current/plucky-desktop-arm64.iso)
+    - [VMware Fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion)：需要注册账号（免费）
+    - [Ubuntu Linux 25.04 ARM64 ISO（暂无 LTS 版本）](https://cdimage.ubuntu.com/daily-live/current/plucky-desktop-arm64.iso)
 - 其他非 Ubuntu Linux PC
     - [VirtualBox 安装包](https://www.virtualbox.org/wiki/Linux_Downloads)：根据自己的 Linux 发行版选择下载对应的安装包
-    - [Ubuntu Linux 22.04.5 AMD64 ISO](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
-    - [Ubuntu Linux 22.04.6 AMD64 ISO](https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso)
-    - [Ubuntu Linux 24.04.1 AMD64 ISO](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
+    - [Ubuntu Linux 22.04.5 AMD64 ISO（三选一；推荐）](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
+    - [Ubuntu Linux 22.04.6 AMD64 ISO（三选一）](https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso)
+    - [Ubuntu Linux 24.04.1 AMD64 ISO（三选一）](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
 
 	
 ### 演示视频
