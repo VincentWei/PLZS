@@ -121,10 +121,10 @@
     - [Ubuntu Linux 24.04.1 AMD64 ISO](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
 - macOS（Apple 的 M1/M2 芯片）
     - [VMware Fusion](https://www.vmware.com/products/fusion/fusion-evaluation.html)：需要自行注册账号并获得针对个人的免费许可证
-    - [Ubuntu Linux 22.04 ARM64 ISO](https://cdimage.ubuntu.com/daily-live/current/plucky-desktop-arm64.iso)
+    - [Ubuntu Linux 25.04 ARM64 ISO](https://cdimage.ubuntu.com/daily-live/current/plucky-desktop-arm64.iso)
 - 其他非 Ubuntu Linux PC
     - [VirtualBox 安装包](https://www.virtualbox.org/wiki/Linux_Downloads)：根据自己的 Linux 发行版选择下载对应的安装包
-    - [Ubuntu Linux 22.04 AMD64 ISO](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
+    - [Ubuntu Linux 22.04.5 AMD64 ISO](https://releases.ubuntu.com/jammy/ubuntu-22.04.5-desktop-amd64.iso)
     - [Ubuntu Linux 22.04.6 AMD64 ISO](https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso)
     - [Ubuntu Linux 24.04.1 AMD64 ISO](https://releases.ubuntu.com/noble/ubuntu-24.04.1-desktop-amd64.iso)
 
