@@ -452,7 +452,7 @@ $$`
 1. 质数有无穷多个。<!-- .element: class="fragment fade-in" -->
 1. 2 是唯一的偶质数；大于 2 的质数都是奇数。<!-- .element: class="fragment fade-in" -->
 1. 两个质数之间的缺口可以任意长。<!-- .element: class="fragment fade-in" -->
-1. 孪生质数貌似有无穷多对。<!-- .element: class="fragment fade-in" -->
+1. 孪生（双胞胎）质数貌似有无穷多对。<!-- .element: class="fragment fade-in" -->
 1. 三胞胎质数只有一组：(3, 5, 7)。<!-- .element: class="fragment fade-in" -->
 1. n 和 2n 之间一定存在一个质数。<!-- .element: class="fragment fade-in" -->
 
@@ -460,6 +460,12 @@ $$`
 <br/>
 <br/>
 <br/>
+
+	
+### 记住两个中国人的名字
+
+- 陈景润：一个大于2的偶数可以表达为一个素数和不超过两个两个素数的乘积之和。
+- 张益唐：证明了孪生素数猜想的一种弱化形式（无穷多素数成对存在的首次证明），目前接近证明黎曼猜想。
 
 	
 ### 哥德巴赫猜想
