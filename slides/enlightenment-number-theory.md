@@ -530,7 +530,7 @@ $$`
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
-- 其中，`$ p_1 < p_2 < \cdots < p_k $` 均为质数，指数 `$ e_i $` 是正整数。
+- 其中，`$ p_1 < p_2 < \cdots < p_k $` 均为质数，指数 `$ e_1, e_2, \codts, e_k $` 是正整数。<!-- .element: class="fragment fade-in" -->
 
 	
 ### 有无穷多个质数的证明<!-- .element: class="fragment fade-out" -->
