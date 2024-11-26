@@ -204,9 +204,9 @@ $$`
 	
 ### 整数的性质
 
+1. 如果 `$ n $` 是合数，则 `$ 2^n - 1 $` 也是合数。<!-- .element: class="fragment fade-in" -->
 1. 任意合数至少有一个质因数。<!-- .element: class="fragment fade-in" -->
 1. 有无穷多个既是完全平方数又是完全立方数的数。<!-- .element: class="fragment fade-in" -->
-1. 如果 `$ n $` 是合数，则 `$ n^n - 1 $` 也是合数。<!-- .element: class="fragment fade-in" -->
 1. 从 1 开始的连续奇数之和是一个完全平方数。<!-- .element: class="fragment fade-in" -->
 <br/>
 <br/>
