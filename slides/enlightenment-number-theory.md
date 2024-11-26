@@ -346,7 +346,6 @@ $$`<!-- .element: class="fragment fade-in" -->
 ```mathematica
 算始 序列元素之和 (seq, n)
     sum := 0
-
     i := 0
     当始 (i < n)
         sum  = sum + seq[i]
