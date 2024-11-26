@@ -70,7 +70,7 @@
 <br/>
 
 	
-#### 负号的意义
+#### 负号和减法<!-- .element: class="fragment fade-out" -->
 
 <br/>
 <br/>
@@ -122,7 +122,18 @@
 ```
 
 	
-### 如何理解一个正数和一个负数相乘的意义？<!-- .element: class="fragment fade-out" -->
+### 如何理解乘数为负数时乘法的意义？<!-- .element: class="fragment fade-out" -->
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 	
 ### 作业
