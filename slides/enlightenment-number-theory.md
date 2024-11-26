@@ -526,11 +526,11 @@ $$`
 
 `$$
 \begin{align}
-  n &= p_1^{e_1} \times p_2^{e_2} \times \cdots \times p_k^{e_k}
+  n &= p_1^{e_1} \times p_2^{e_2} \times \cdots \times p_k^{e_k} \\
+    其中：p_1 < p_2 < \cdots < p_k 是质数   \\
+    指数 e_1, e_2, \cdots, e_k 是正整数     \\
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
-
-- 其中，`$ p_1 < p_2 < \cdots < p_k $` 均为质数，指数 `$ e_1, e_2, \codts, e_k $` 是正整数。<!-- .element: class="fragment fade-in" -->
 
 	
 ### 有无穷多个质数的证明<!-- .element: class="fragment fade-out" -->
