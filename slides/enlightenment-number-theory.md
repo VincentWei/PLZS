@@ -589,7 +589,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 &但 p_s 同时可整除 m，满足 \\
     p_s &\mid m \\
 &也就是说：p_s \mid 1，但 p_s \ge 2。矛盾！\\
-&故而假设错误，也就是说没有最大的质数。
+&故而假设错误，也就是说没有最大的质数。证毕。
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
