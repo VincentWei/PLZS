@@ -349,7 +349,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
-1. 可以表达为 `$ 2 $` 的一些连续正整数次幂之和，而且这些次幂项的数量构成连续的质数序列。
+1. 可以表达为 `$ 2 $` 的一些连续正整数次幂之和，而且这些次幂项的数量是质数。
 
 `$$
 \begin{align}
