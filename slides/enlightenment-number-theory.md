@@ -133,6 +133,14 @@
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
+- 或者
+
+`$$
+\large{
+    a \times b = 0 \underbrace{- a - a + \cdots - a}_{-b组}
+}
+$$`<!-- .element: class="fragment fade-in" -->
+
 <br/>
 <br/>
 <br/>
