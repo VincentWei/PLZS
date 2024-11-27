@@ -583,8 +583,7 @@ $$`<!-- .element: class="fragment fade-in" -->
     n &= m + 1 = p_1 \times p_2 \times \cdots \times p_k + 1 \\
 &按照假设，n 大于任意一个质数，则 n 一定是合数。\\
 &所以 n 一定有一个质因子。设这个质因子为 p_s，则 \\
-&p_s 一定是 p_1, p_2, \cdots, p_k 中的一个，且 p_s \mid n \\
-&也就是：\\
+p_s &一定是 p_1, p_2, \cdots, p_k 中的一个，且 p_s \mid n，也就是：\\
     p_s &\mid (m + 1) \\
 &但 p_s 同时可整除 m，满足 \\
     p_s &\mid m \\
