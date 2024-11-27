@@ -575,7 +575,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-&假设质数的数量是有限的，则一定有一个最大的，设最大的质数为 p_k，则全部质数满足： \\
+&假设质数的数量是有限的，则一定有一个最大的。设最大的质数为 p_k，则全部质数满足： \\
     p_1 &< p_2 < \cdots < p_k，其中 p_1 = 2 \\
 &构造一个整数：\\
     m &= p_1 \times p_2 \times \cdots \times p_k \\
