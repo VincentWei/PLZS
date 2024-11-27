@@ -220,8 +220,9 @@ $$`
 <br/>
 
 	
-### 整数的性质
+### 正整数的性质
 
+1. `$ 1 $` 既不是质数也不是合数；最小的质数是 `$ 2 $`，最小的合数是 `$ 4 $`。
 1. 如果 `$ n $` 是合数，则 `$ 2^n - 1 $` 也是合数。<!-- .element: class="fragment fade-in" -->
 1. 任意合数至少有一个质因数。<!-- .element: class="fragment fade-in" -->
 1. 有无穷多个既是完全平方数又是完全立方数的数。<!-- .element: class="fragment fade-in" -->
