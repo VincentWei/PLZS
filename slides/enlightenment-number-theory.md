@@ -580,8 +580,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 &构造一个整数：\\
     m &= p_1 \times p_2 \times \cdots \times p_k \\
 &构造另一个整数： \\
-    n &= m + 1 \\
-      &= p_1 \times p_2 \times \cdots \times p_k + 1 \\
+    n &= m + 1 = p_1 \times p_2 \times \cdots \times p_k + 1 \\
 &按照假设，n 大于任意一个质数，则 n 一定是合数。\\
 &所以 n 一定有一个质因子。设这个质因子为 p_s，则 \\
 &p_s 一定是 p_1, p_2, \cdots, p_k 中的一个，且 p_s \mid n \\
