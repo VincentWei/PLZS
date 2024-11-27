@@ -239,6 +239,7 @@ $$`
 
 1. 对任意整数 `$ a $` 和正整数 `$ b $`，存在唯一一对整数 `$ q, r $`，使 `$ a = qb + r $` 成立，其中 `$ 0 \le r \lt b $`。
 当 `$ r = 0 $` 时，称为 `$ b $` 整除 `$ a $`，记作 `$ b \mid a $`。
+1. `$ 若 a \ne 0，则 \pm a \mid 0。$`
 1. `$ 若 a \ne 0，则 \pm a \mid a。$`
 1. `$ 若 a \mid b，b \mid a，则 \left | a \right | = \left | b \right |。$`
 1. `$ 若 a \mid b，c 是任意整数，则 a \mid bc。$`
