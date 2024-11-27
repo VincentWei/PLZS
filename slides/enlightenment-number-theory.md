@@ -179,7 +179,7 @@ $$`
 		
 ## 第二讲
 
-- 标题：整数相关的定义
+- 标题：整数的性质
 - 旁白：清华大大，感觉整数没啥好玩的，加法、乘法太简单了。
 - 主播：别急别急，数论可是一个很重要的数学分支呢。
 - 讲解要点：
@@ -218,13 +218,11 @@ $$`
 	
 ### 整除和余数的性质
 
+1. `$ 对任意整数 a 和正整数 b，存在唯一一对整数 q 和 r，使 a = bq + r 成立，其中 0 \le r \lt b。当 r = 0 时，b \mid a。$`
 1. `$ 若 a \mid b，c 是任意整数，则 a \mid bc。$`
-1. `$ 若 a \mid b，a \mid \c，则 a \mid (b \pm c)。$`
-1. `$ 对任意整数 a, b > 0，存在唯一一对整数 q 和 r，使 a = bq + r 成立，其中 0 \le r \lt b。$`
+1. `$ 若 a \mid b，且 a \mid c，则 a \mid (b \pm c)。$`
+1. `$ 若 a \mid (b + c)，且 a \mid b，则 a \mid c。$`
 
-1. 任意合数至少有一个质因数。<!-- .element: class="fragment fade-in" -->
-1. 有无穷多个既是完全平方数又是完全立方数的数。<!-- .element: class="fragment fade-in" -->
-1. 从 1 开始的连续奇数之和是一个完全平方数。<!-- .element: class="fragment fade-in" -->
 <br/>
 <br/>
 <br/>
