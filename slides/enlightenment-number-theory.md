@@ -151,11 +151,12 @@ $$`<!-- .element: class="fragment fade-in" -->
 <br/>
 
 	
-### 整数范围内四则运算的性质<!-- .element: class="fragment fade-out" -->
+### 整数范围内四则运算的性质
 
+1. 加法的单位元：`$ \large{ a + 0 = a } $`<!-- .element: class="fragment fade-in" -->
 1. 加法交换律：`$ \large{ a + b = b + a } $`<!-- .element: class="fragment fade-in" -->
 1. 加法结合律：`$ \large{ a + b + c = (a + b) + c = a + (b + c) } $`<!-- .element: class="fragment fade-in" -->
-1. 加法的单位元：`$ \large{ a + 0 = a } $`<!-- .element: class="fragment fade-in" -->
+1. 乘法的单位元：`$ \large{ a \times 1 = a } $`<!-- .element: class="fragment fade-in" -->
 1. 乘法交换律：`$ \large{ a \times b = b \times a } $`<!-- .element: class="fragment fade-in" -->
 1. 乘法结合律：`$ \large{ a \times b \times c = (a \times b) \times c = a \times (b \times c) } $`<!-- .element: class="fragment fade-in" -->
 1. 乘法分配律：`$ \large{ a \times (b + c) = a \times b + a \times c } $`<!-- .element: class="fragment fade-in" -->
