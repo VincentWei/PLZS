@@ -587,9 +587,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 &p_s 一定是 p_1, p_2, \cdots, p_k 中的一个，且 p_s \mid n \\
 &也就是：p_s \mid (m + 1) \\
 &但 p_s 同时可整除 m，满足 p_s \mid m \\
-&也就是说：p_s \mid 1 \\
-&但 p_s \ge 2 \\
-&矛盾！故而假设错误，也就是说没有最大的质数。
+&也就是说：p_s \mid 1，但 p_s \ge 2。矛盾！\\
+&故而假设错误，也就是说没有最大的质数。
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
