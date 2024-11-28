@@ -221,9 +221,9 @@
 
 `$$
 \large{
-    \sum_{n=1}^{\infty} \frace{1}{10^n}
+    \sum_{n=1}^{\infty} \frac{1}{10^n}
 }
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 - 无理数：无限不循环小数。
 - 实数：有理数和无理数统称为实数。
@@ -238,9 +238,23 @@ $$`
 	
 ### 人类发现的第一个无理数
 
-- 人类发现的第一个无理数：`$ \large{ \sqrt{2} } $`。<!-- .element: class="fragment fade-in" -->
-- 开方运算是幂的一种逆运算：已知 `$ n $` 和 `$ P $`，求满足等式 `$ x^n = P $` 的 `$ x $` 的过程叫开方，记作 `$ x = \sqrt[n]{P} $`。<!-- .element: class="fragment fade-in" -->
-- 对数运算是幂的另一种逆运算：如果 `$ a^x = N\ (a \gt 0, 且 a\ne 1) $`，则 `$ x $` 叫做以 `$ a $` 为底 `$ N $` 的对数，记做 `$ x = \log_a{N} $`。<!-- .element: class="fragment fade-in" -->
+- 人类发现的第一个无理数：`$ \large{ \sqrt{2} } $`。
+- 开方运算是幂的一种逆运算：已知 `$ n $` 和 `$ P $`，求满足等式 `$ x^n = P $` 的 `$ x $` 的过程叫开方，记作
+
+`$$
+\large{
+    x = \sqrt[n]{P}
+}
+$$`。<!-- .element: class="fragment fade-in" -->
+
+- 对数运算是幂的另一种逆运算：如果 `$ a^x = N\ (a \gt 0, 且 a\ne 1) $`，则 `$ x $` 叫做以 `$ a $` 为底 `$ N $` 的对数，记作
+
+`$$
+\large{
+    x = \log_a{N}
+}
+$$`。<!-- .element: class="fragment fade-in" -->
+
 <br/>
 <br/>
 <br/>
