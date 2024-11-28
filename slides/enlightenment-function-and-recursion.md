@@ -245,7 +245,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 \large{
     x = \sqrt[n]{P}
 }
-$$`。<!-- .element: class="fragment fade-in" -->
+$$`<!-- .element: class="fragment fade-in" -->
 
 - 对数运算是幂的另一种逆运算：如果 `$ a^x = N\ (a \gt 0, 且 a\ne 1) $`，则 `$ x $` 叫做以 `$ a $` 为底 `$ N $` 的对数，记作
 
@@ -253,9 +253,8 @@ $$`。<!-- .element: class="fragment fade-in" -->
 \large{
     x = \log_a{N}
 }
-$$`。<!-- .element: class="fragment fade-in" -->
+$$`<!-- .element: class="fragment fade-in" -->
 
-<br/>
 <br/>
 <br/>
 <br/>
