@@ -243,7 +243,7 @@
 
 `$$
 \large{
-    \sum_{n=0}^{\infty} \frac{1}{10^n}
+    \displaystyle{ \sum_{n=0}^{\infty} \frac{1}{10^n} }
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
@@ -409,7 +409,7 @@ $$`
 \end{align}
 $$`
 
-3) 编写考鼎码算法调用常用数学函数计算代数合式的值，其中 `$ n $` 为输入的整数：`$ \sum_{i=1}^{n}\sqrt{i} $`。
+3) 编写考鼎码算法调用常用数学函数计算代数合式的值，其中 `$ n $` 为输入的整数：`$ \displaystyle{ \sum_{i=1}^{n}\sqrt{i} } $`。
 
 </div>
 
