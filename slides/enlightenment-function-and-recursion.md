@@ -221,7 +221,7 @@
 
 `$$
 \large{
-    \sum_{n=1}^{\infty} \frac{1}{10^n}
+    \sum_{n=0}^{\infty} \frac{1}{10^n}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
