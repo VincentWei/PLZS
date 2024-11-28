@@ -342,8 +342,8 @@
 
 `$$
 \begin{align}
-    \frac{1}{2} + \frac{3}{5} &= \\
-    \frac{1}{2} - \frac{1}{3} &= \\
+    \frac{1}{2} + 4\frac{3}{5} &= \\
+    10\frac{1}{2} - \frac{1}{3} &= \\
     \frac{1}{2} \times 3\frac{1}{3} &= \\
     \frac{1}{2} \div \frac{1}{3} &= \\
 \end{align}
