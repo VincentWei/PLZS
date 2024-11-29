@@ -85,14 +85,12 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 <div class="no-list-style">
 
-1) 将下面的假分数化为真分数：
+1) 将下面的假分数化为最简分数形式：
 
 `$$
 \begin{align}
-    \frac{3}{2} &= \\
-    \frac{28}{11} &= \\
-    \frac{77}{33} &= \\
-    5\frac{89}{3} &= \\
+    \frac{3}{2} &= \qquad\qquad \frac{28}{11} &&= \\
+    \frac{77}{33} &= \qquad\qquad \frac{89}{3} &&= \\
 \end{align}
 $$`
 
