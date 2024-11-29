@@ -240,8 +240,6 @@ $$`<!-- .element: class="fragment fade-in" -->
 </div>
 
 	
-<div class="move-top">
-
 ### 人类发现的第一个无理数
 
 - 人类发现的第一个无理数：`$ \large{ \sqrt{2} } $`。
@@ -260,8 +258,6 @@ $$`<!-- .element: class="fragment fade-in" -->
     x = \log_a{N}
 }
 $$`<!-- .element: class="fragment fade-in" -->
-
-</div>
 
 	
 <div class="move-top">
