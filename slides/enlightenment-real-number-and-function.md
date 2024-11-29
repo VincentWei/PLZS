@@ -89,8 +89,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    \frac{3}{2} &= \qquad \frac{28}{11} &&= \\
-    \frac{77}{33} &= \qquad 5\frac{89}{3} &&= \\
+    \frac{3}{2} &= \qquad \frac{28}{11} &= \\
+    \frac{77}{33} &= \qquad 5\frac{89}{3} &= \\
 \end{align}
 $$`
 
