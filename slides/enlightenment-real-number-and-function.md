@@ -89,10 +89,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    \frac{3}{2} &= \\
-    \frac{28}{11} &= \\
-    \frac{77}{33} &= \\
-    5\frac{89}{3} &= \\
+    \frac{3}{2} &= \quad \frac{28}{11} &&= \\
+    \frac{77}{33} &= \quad 5\frac{89}{3} &&= \\
 \end{align}
 $$`
 
@@ -100,10 +98,8 @@ $$`
 
 `$$
 \begin{align}
-    \frac{1}{2} &= \\
-    10\frac{1}{2} &= \\
-    \frac{11}{28} &= \\
-    5\frac{17}{89} &= \\
+    \frac{1}{2} &= \quad 10\frac{1}{2} &&= \\
+    \frac{11}{28} &= \quad 5\frac{17}{89} &&= \\
 \end{align}
 $$`
 
