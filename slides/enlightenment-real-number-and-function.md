@@ -233,16 +233,16 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 <div class="no-list-style">
 
-1) 完成如下分数相关的计算：
+- 1) 完成如下分数相关的计算：
 
 `$$
 \begin{align}
-    \frac{1}{2} + 4\frac{3}{5} &= \\
-    10\frac{1}{2} - \frac{1}{3} &= \\
-    \frac{1}{2} \times 3\frac{1}{3} &= \\
-    \frac{1}{2} \div \frac{1}{3} &= \\
+    &\frac{1}{2} + 4\frac{3}{5} = \qquad \qquad &&10\frac{1}{2} - \frac{1}{3} = \\
+    &\frac{1}{2} \times 3\frac{1}{3} = \qquad \qquad &&\frac{1}{2} \div \frac{1}{3} = \\
 \end{align}
 $$`
+
+- 2) 编写考鼎码算法，将一个无限循环小数转为分数。程序应分别输入整数部分、不循环部分及循环部分，如 `$ 100.356\dot{1}\dot{7} $` 分为三部分输入：`$ 100 $`、`$ 356 $` 和 `$ 17 $`。
 
 </div>
 
