@@ -352,6 +352,12 @@ $$`
 - 主播：
 - 讲解要点：
    1. 从数学公式到函数
+   1. 笛卡尔坐标系
+
+	
+### 笛卡尔坐标系
+
+<img style="height:700px;width:auto;" src="assets/enlightenment-cartesian-coordinate-system.svg" />
 
 	
 ### 作业
