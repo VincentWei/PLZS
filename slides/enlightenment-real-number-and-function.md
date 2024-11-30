@@ -89,8 +89,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    \frac{3}{2} &= \qquad\qquad \frac{28}{11} &&= \\
-    \frac{77}{33} &= \qquad\qquad \frac{89}{3} &&= \\
+    \frac{3}{2} &= \qquad\qquad \frac{28}{11} &&= \qquad\qquad \frac{77}{33} &= \qquad\qquad \frac{89}{3} &&= \\
 \end{align}
 $$`
 
@@ -98,8 +97,7 @@ $$`
 
 `$$
 \begin{align}
-    \frac{1}{2} &= \qquad\qquad 10\frac{1}{2} &&= \\
-    \frac{11}{28} &= \qquad\qquad 5\frac{17}{89} &&= \\
+    \frac{1}{2} &= \qquad\qquad 10\frac{1}{2} &&= \qquad\qquad \frac{11}{28} &= \qquad\qquad 5\frac{17}{89} &&= \\
 \end{align}
 $$`
 
@@ -107,11 +105,9 @@ $$`
 
 `$$
 \begin{align}
-    0.9   &= \qquad\qquad 0.875 &&= \\
-    0.75  &= \qquad\qquad 0.5 &&= \\
-    0.25  &= \qquad\qquad 0.125 &&= \\
-    0.125 &= \qquad\qquad 0.75 &&= \\
-    7.89  &= \qquad\qquad 3.14 &&= \\
+    0.5   &= \qquad\qquad 0.25 &&= \qquad\qquad 0.125 &&= \\
+    0.75  &= \qquad\qquad 0.875 &&= \qquad\qquad 0.9  &&= \\
+    7.25  &= \qquad\qquad 3.125 &&= \qquad\qquad -9.75 &&= \\
 \end{align}
 $$`
 
