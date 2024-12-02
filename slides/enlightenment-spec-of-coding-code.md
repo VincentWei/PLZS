@@ -270,6 +270,7 @@
 1. 函数的调用栈帧应有最大上限控制，超过此上限的报 `函数调用嵌套过深` 错误。
 1. 应统计算法的基础运算次数、函数调用次数等，并在执行结束后输出统计信息。
 1. 在 WASM 平台上，`输入()` 函数的实现应通过对话框进行，加上提示信息。
+1. 在 WASM 平台上，若算法定义有参数，应通过对话框提示用户输入初始参数。
 1. 可参考 [HVML PurC 解释器](https://gitee.com/HVML/PurC)提供的变体实现各数据类型。
 1. 可基于[C++ `bigint` 类](https://gitee.com/vincentwei7/PLZS/blob/main/source/classic-problems/high-precision-arithmetic/bigint.cpp)实现对任意精度整数的支持。
 1. 可考虑同时支持中文及英文关键词。
