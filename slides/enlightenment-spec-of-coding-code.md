@@ -26,7 +26,6 @@
 		
 ## 考鼎码程序结构
 
-	
 ### Hello, world!
 
 ```mathematica
