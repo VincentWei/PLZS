@@ -568,7 +568,7 @@ $$`
 - 考鼎码在线练习场：<https://playground.fmsoft.cn/c2>
 
 ```mathematica
-算始 世界你好！
+算始 世界你好
     输出 ("Hello, world!")
 算终
 ```
