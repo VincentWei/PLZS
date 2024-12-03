@@ -558,7 +558,7 @@ $$`
 	
 ### 和伪代码的不同
 
-- [可执行的考鼎码（Executable Coding Code，EC2）](enlightenment-spec-of-executable-coding-code.html))基于考鼎伪代码（Coding Pseudo Code）定义，保留了大部分的设计，但语法要比伪代码严谨。和伪代码的主要区别：
+- [可执行的考鼎码（Executable Coding Code，C2）](enlightenment-spec-of-executable-coding-code.html))基于考鼎伪代码（Coding Pseudo Code）定义，保留了大部分的设计，但语法要比伪代码严谨。和伪代码的主要区别：
    1. `输入` 被定义为内置函数。
    1. `输出` 被定义为内置函数。
    1. `执行` 被定义为内置函数，该函数执行指定的系统功能。
