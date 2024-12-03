@@ -147,8 +147,6 @@ $$`
 ### 数数游戏必胜算法的流程图<!-- .element: class="fragment fade-out" -->
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L2</sub>
 
 <div class="no-list-style">
@@ -168,7 +166,6 @@ $$`
 
 - 2) 用流程图描述进制转换算法。
 
-</div>
 </div>
 
 		
