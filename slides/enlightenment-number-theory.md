@@ -301,7 +301,7 @@ $$`
 
 `$$
 \begin{align}
-    n  &=  \quad && -4 \quad && -3 \quad && 2-2 \quad && -1 \quad && 0 \quad && 5 \\
+    n  &=  -4 \quad && -3 \quad && -2 \quad && -1 \quad && 0 \quad && 5 \\
     2n &=                           \\
     2n + 1 &=                       \\
     n^2 &=                          \\
