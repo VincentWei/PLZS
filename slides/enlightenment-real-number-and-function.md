@@ -558,7 +558,7 @@ $$`
 	
 ### 和伪代码的不同
 
-- [可执行的考鼎码（Executable Coding Code，C2）](enlightenment-spec-of-executable-coding-code.html))基于考鼎伪代码（Coding Pseudo Code）定义，保留了大部分的设计，但语法要比伪代码严谨。和伪代码的主要区别：
+- [可执行的考鼎码（Executable Coding Code，EC2）](enlightenment-spec-of-executable-coding-code.html))基于考鼎伪代码（Coding Pseudo Code）定义，保留了大部分的设计，但语法要比伪代码严谨。和伪代码的主要区别：
    1. `输入` 被定义为内置函数。
    1. `输出` 被定义为内置函数。
    1. `执行` 被定义为内置函数，该函数执行指定的系统功能。
@@ -569,7 +569,7 @@ $$`
 - 人类向计算机输入的文本，也使用字符串表达，所以要进一步转换成我们需要的整数或者实数。
 - 计算机使用二进制的浮点数来 `近似` 表达任意实数。
 - 使用 `算始/算终` 定义的算法参数始终使用字符串表达，需要调用 `整数()`、`浮点()` 等函数做转换才能使用。
-- 考鼎码在线练习场：<https://playground.fmsoft.cn/c2>
+- 考鼎码在线练习场：<https://playground.fmsoft.cn/ec2>
 
 	
 ### 世界，你好！
