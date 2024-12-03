@@ -251,8 +251,6 @@ $$`
 ### 用运算符简化数数游戏必胜算法的流程图<!-- .element: class="fragment fade-out" -->
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L3</sub>
 
 <div class="no-list-style">
@@ -275,7 +273,6 @@ $$`
 
 - 2) 用学到的运算符重画进制转换算法的流程图。
 
-</div>
 </div>
 
 		
@@ -398,8 +395,6 @@ ENDALGO
 
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L4</sub>
 
 <div class="no-list-style">
@@ -431,7 +426,6 @@ ENDALGO
 
 - 3) 用考鼎码描述进制转换算法。
 
-</div>
 </div>
 
 		
@@ -501,8 +495,6 @@ ENDALGO
 ```
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L5</sub>
 
 <div class="no-list-style">
@@ -532,7 +524,6 @@ ENDALGO
 
 - 3) 本节给出的进制转换算法之修改版仍有待改进的地方：当我们使用大于十的进制（如十六进制）时，用于表示十及以上数值的符号不够用了，这时就要使用其他符号。但显然这个版本并未考虑这一点。请针对十六及以内的进制思考改进方案，并写出对应的增强版本。
 
-</div>
 </div>
 
 		
@@ -575,8 +566,6 @@ ENDALGO
 ```
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L6</sub>
 
 <div class="no-list-style">
@@ -596,7 +585,6 @@ $$`
      a) `$ n = 2, m = 0 $`<br/>
      b) `$ n = 11, m = 3 $`
 
-</div>
 </div>
 
 		
@@ -637,8 +625,6 @@ $$`
 ```
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L7</sub>
 
 <div class="no-list-style">
@@ -660,7 +646,6 @@ $$`
       a) `$ x = 3, n = 0 $`<br/>
       b) `$ x = 2, n = 4 $`
 
-</div>
 </div>
 
 		
@@ -709,8 +694,6 @@ $$`
 ```
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L8</sub>
 
 <div class="no-list-style">
@@ -734,7 +717,6 @@ $$`
       b) `$ n=1 $`<br/>
       c) `$ n=5 $`
 
-</div>
 </div>
 
 		
@@ -794,8 +776,6 @@ $$`
 ```
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L9</sub>
 
 <div class="no-list-style">
@@ -817,7 +797,6 @@ $$`
       c) `$ a=2, b=3 $`<br/>
       d) `$ a=3, b=2 $`
 
-</div>
 </div>
 
 		
@@ -853,8 +832,6 @@ $$`
 - 当被除数或除数是负数时，取模运算应该如何改进？
 
 	
-<div class="move-top">
-
 ### 作业<sub>U2L9</sub>
 
 <div class="no-list-style">
@@ -880,6 +857,5 @@ $$`
       c) `$ a=2, b=3 $`<br/>
       d) `$ a=3, b=2 $`
 
-</div>
 </div>
 
