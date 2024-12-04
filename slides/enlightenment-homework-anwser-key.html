@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>魏永明的信息学系列课程：信息学启蒙（作业参考答案）</title>
+		<link rel="stylesheet" href="/dist/reset.css">
+		<link rel="stylesheet" href="/dist/reveal.css">
+		<link rel="stylesheet" href="/dist/theme/solarized.css">
+		<link rel="stylesheet" href="/css/global.css">
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="/plugin/highlight/school-book.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<header class="screen-title">
+				<p><a href="/plzs">考鼎<span>&reg;</span>学堂：PLZS</a> / <a href="#/0">信息学启蒙（作业参考答案）</a></p>
+				<p><a href="https://work.weixin.qq.com/ca/cawcde42325deca4ec" target="_blank">客服</a></p>
+			</header>
+			<header class="print-title">
+				<p class="left-part">考鼎<span>&reg;</span>学堂 / 信息学启蒙（算法的概念）</p>
+				<p class="right-part">姓名：_____________；日期：_____________</p>
+			</header>
+			<div class="slides move-left narrow-code">
+				<section data-markdown="gitlab/enlightenment-homework-answer-key.md"
+						 data-separator="^\t\t\n"
+						 data-separator-vertical="^\t\n"
+						 data-separator-notes="^Note:"
+						 data-charset="utf-8">
+				</section>
+				<section id="grand-finale">
+					<h2>扫一扫</h2>
+					<img class="r-frame" style="height:30vh;width:auto;" src="assets/qrcode-wechat-channel-weiym.png">
+					<!-- img class="r-frame" style="height:30vh;width:auto;" src="assets/qrcode-bilibili-space-coding-log.jpg" -->
+					<img class="r-frame" style="height:30vh;width:auto;" src="assets/qrcode-wechat-enterprise-lee.png">
+				</section>
+			</div>
+		</div>
+		<script src="/dist/reveal.js"></script>
+		<script src="/plugin/notes/notes.js"></script>
+		<script src="/plugin/markdown/markdown.js"></script>
+		<script src="/plugin/highlight/highlight.js"></script>
+		<script src="/plugin/math/math.js"></script>
+		<script src="/js/utils/code-copy.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				width: (window.location.href.indexOf("?print-pdf") == -1) ? 1024 : 1050,
+				height: (window.location.href.indexOf("?print-pdf") == -1) ? 1024 : 1485,
+				margin: (window.location.href.indexOf("?print-pdf") == -1) ? 0.04 : 0.05,
+				center: window.location.href.indexOf("?print-pdf") == -1,
+				hash: true,
+				slideNumber: true,
+				mathjax3: {
+					mathjax: 'https://courses.fmsoft.cn/js/mathjax3/tex-mml-chtml.js'
+				},
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3 ]
+			}).then(() => initCodeCopy());
+		</script>
+	</body>
+</html>
