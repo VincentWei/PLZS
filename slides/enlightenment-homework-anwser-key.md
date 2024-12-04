@@ -253,7 +253,7 @@ $$`
     a^5 \div a^2 \times a^3 &:  &&a^6 \\
     (a^5)^3 &:                  && a^{15}       \\
     (a^n)^m \div a^n&:          && a^{n(m-1)}   \\
-    2^n \times 4^m:             && 2^{n-2m)}    \\
+    2^n \times 4^m&:            && 2^{n-2m}    \\
 \end{align}
 $$`
 
