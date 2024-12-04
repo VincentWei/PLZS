@@ -58,12 +58,12 @@ $$`
 
     - 数数游戏必胜算法的流程图
 
-<img style="height:700px;width:auto;" src="assets/enlightenment-flow-chart-counting-number.svg" />
+<img style="height:800px;width:auto;" src="assets/enlightenment-flow-chart-counting-number.svg" />
 
 	
     - 进制转换算法的流程图
 
-<img style="height:700px;width:auto;" src="assets/enlightenment-flow-chart-end-on-conversion.svg" />
+<img style="height:800px;width:auto;" src="assets/enlightenment-flow-chart-end-on-conversion.svg" />
 
 	
 ### 第三讲 简化算法的描述
@@ -87,6 +87,8 @@ $$`
 
 	
 2) 用学到的运算符简化进制转换算法的流程图。
+
+<img style="height:800px;width:auto;" src="assets/enlightenment-flow-chart-end-on-conversion-simplified.svg" />
 
 	
 ### 第四讲 用伪代码描述算法
