@@ -56,6 +56,15 @@ $$`
 	
 2) 自行绘制本讲数数游戏必胜算法的流程图，并尝试用流程图描述进制转换算法。
 
+    - 数数游戏必胜算法的流程图
+
+<img style="height:700px;width:auto;" src="assets/enlightenment-flow-chart-counting-number.svg" />
+
+	
+    - 进制转换算法的流程图
+
+<img style="height:700px;width:auto;" src="assets/enlightenment-flow-chart-end-on-conversion.svg" />
+
 	
 ### 第三讲 简化算法的描述
 
