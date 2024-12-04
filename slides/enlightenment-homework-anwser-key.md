@@ -211,7 +211,7 @@ $$`
     ab &:       && a * b                \\
     2a + b&:    && 2 * a + b            \\
     a^2 + 3b&:  && a * a + 3 * b        \\
-    a^3 \bmod b&: && a * a * a % b      \\
+    a^3 \bmod b&: && a * a * a \% b      \\
 \end{align}
 $$`
 
