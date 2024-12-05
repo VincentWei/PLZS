@@ -201,8 +201,6 @@ $$`<!-- .element: class="fragment fade-in" -->
    1. 通分
 
 	
-<div class="move-top">
-
 ### 两个分数相乘
 
 - 基本性质：
@@ -221,11 +219,7 @@ $$`
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
-</div>
-
 	
-<div class="move-top">
-
 ### 两个分数相除
 
 - 基本性质：
@@ -243,8 +237,6 @@ $$`
     \frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}= \frac{ad}{bc}
 }
 $$`<!-- .element: class="fragment fade-in" -->
-
-</div>
 
 	
 <div class="move-top">
