@@ -659,7 +659,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 <div class="no-list-style">
 
-- 1) 根据对数的性质计算或化简：
+- 1) 根据对数的性质计算：
 
 `$$
 \begin{align}
