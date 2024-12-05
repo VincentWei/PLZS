@@ -531,7 +531,28 @@ $$`<!-- .element: class="fragment fade-in" -->
 </div>
 
 	
+<div class="move-top">
+
+### 最简根式
+
+</div>
+
+	
 ### 作业<sub>U4L5</sub>
+
+<div class="no-list-style">
+
+- 1) 简化下列根式：
+
+`$$
+\begin{align}
+    \sqrt{8} &= \qquad\qquad &\sqrt{27} &= \\
+    \sqrt{4a^2} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
+    \sqrt{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{a^2}{2}} &= \\
+\end{align}
+$$`
+
+</div>
 
 		
 ## 第四单元 实数和函数<br/>`第六讲 对数运算的性质`
