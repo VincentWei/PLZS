@@ -375,17 +375,17 @@ $$`
 	
 ### 将循环小数转成分数
 
-- 将 `$ 0.\dot{1} $` 转成分数：
+- 将 `$ 0.\dot{3} $` 转成分数：
 
 `$$
 \begin{align}
-    x := 0.\dot{1} \\
-    \because 10x = 1.\dot{1} \\
-    \therefore  10x = 1 + 0.\dot{1} \\
-    \therefore  10x = 1 + x \\
-    \therefore  10x - x = 1 \\
-    \therefore  9x = 1 \\
-    \therefore  x = \frac{1}{9} \\
+    x := 0.\dot{5} \\
+    \because 10x &= 1.\dot{5} \\
+    \therefore  10x &= 1 + 0.\dot{5} \\
+    \therefore  10x &= 1 + x \\
+    \therefore  10x - x &= 5 \\
+    \therefore  9x &= 5 \\
+    \therefore  x &= \frac{5}{9} \\
 \end{align}
 $$`
 
