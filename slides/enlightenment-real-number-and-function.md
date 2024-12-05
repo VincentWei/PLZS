@@ -637,10 +637,23 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 ### 对数换底公式
 
+- 换底公式：
+
 `$$
 \large{
     \log_a b = \frac{\log_c b}{\log_c a}
 }
+$$`<!-- .element: class="fragment fade-in" -->
+
+- 推导
+
+- 应用
+
+`$$
+\begin{align}
+    \log_{100}{1000} &= \\
+    \log_{16}{32} &= \\
+\end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
 </div>
@@ -650,14 +663,25 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 <div class="no-list-style">
 
-- 1) 简化下列对数：
+- 1) 根据对数的性质计算或化简：
 
 `$$
 \begin{align}
-    \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \\
-    \sqrt{8} &= \qquad\qquad &\sqrt{27} &= \\
-    \sqrt{4a^2} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
-    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \\
+    \log_{64}{8} &= \\
+    \log_{100}{1000} &= \\
+    \log_{10}{1/1000} &= \\
+    \lg {5^4} &= \\
+    \lg {\sqrt{7}} &= \\
+\end{align}
+$$`
+
+- 2) 根据换底公式计算：
+
+`$$
+\begin{align}
+    \log_{100}{1000} &= \\
+    \log_{4}{8} &= \\
+    \log_{9}{27} &= \\
 \end{align}
 $$`
 
