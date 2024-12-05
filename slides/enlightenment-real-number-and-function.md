@@ -518,8 +518,6 @@ $$`
 - 在实数范围内，开方运算只求正数的非负方根。
 
 	
-<div class="move-top">
-
 ### 开方和幂的等价关系
 
 - 公式：
@@ -538,8 +536,6 @@ $$`<!-- .element: class="fragment fade-in" -->
     \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}} \\
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
-
-</div>
 
 	
 ### 最简根式
