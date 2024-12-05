@@ -238,6 +238,14 @@ $$`
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
+- 或者：
+
+`$$
+\large{
+    \frac{\frac{a}{b}}{x \times \frac{c}{d}} = \frace{\frac{a}{b} \times \frac{d}{c}}{x} = \frac{\frac{ad}{bc}}{x}
+}
+$$`<!-- .element: class="fragment fade-in" -->
+
 	
 ### 分母相等的两个分数相加
 
