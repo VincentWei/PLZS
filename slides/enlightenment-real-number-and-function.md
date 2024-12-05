@@ -380,12 +380,12 @@ $$`
 `$$
 \begin{align}
     x := 0.\dot{5} \\
-    \because 10x &= 1.\dot{5} \\
-    \therefore  10x &= 1 + 0.\dot{5} \\
-    \therefore  10x &= 1 + x \\
-    \therefore  10x - x &= 5 \\
-    \therefore  9x &= 5 \\
-    \therefore  x &= \frac{5}{9} \\
+    &\because 10x = 1.\dot{5} \\
+    &\therefore  10x = 1 + 0.\dot{5} \\
+    &\therefore  10x = 1 + x \\
+    &\therefore  10x - x = 5 \\
+    &\therefore  9x = 5 \\
+    &\therefore  x = \frac{5}{9} \\
 \end{align}
 $$`
 
