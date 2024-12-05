@@ -522,20 +522,39 @@ $$`
 
 ### 开方和幂的等价关系
 
+- 公式：
+
 `$$
 \large{
     \sqrt[n]{N} = N^{1/n}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
+- 性质：
+
+`$$
+\begin{align}
+    \sqrt[n]{NM} &= \sqrt[n]{N}{M} \\
+    \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}} \\
+\end{align}
+$$`<!-- .element: class="fragment fade-in" -->
+
 </div>
 
 	
-<div class="move-top">
-
 ### 最简根式
 
-</div>
+- 利用分式、幂、方根等的性质，简化根式。
+- 举例：
+
+`$$
+\begin{align}
+    \sqrt{10} &= \\
+    \sqrt{100} &= \\
+    \sqrt{\frac{1}{100}} &= \\
+    \sqrt[3]{\frac{1}{27a}} &= \\
+\end{align}
+$$`
 
 	
 ### 作业<sub>U4L5</sub>
@@ -549,7 +568,7 @@ $$`<!-- .element: class="fragment fade-in" -->
     \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \\
     \sqrt{8} &= \qquad\qquad &\sqrt{27} &= \\
     \sqrt{4a^2} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
-    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{a^2}{2}} &= \\
+    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \\
 \end{align}
 $$`
 
