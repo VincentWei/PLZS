@@ -379,7 +379,7 @@ $$`
 
 `$$
 \begin{align}
-    x := 0.\dot{5} \\
+    &x := 0.\dot{5} \\
     &\because 10x = 1.\dot{5} \\
     &\therefore  10x = 1 + 0.\dot{5} \\
     &\therefore  10x = 1 + x \\
@@ -387,7 +387,7 @@ $$`
     &\therefore  9x = 5 \\
     &\therefore  x = \frac{5}{9} \\
 \end{align}
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 - 公式：
 
@@ -395,7 +395,7 @@ $$`
 \large{
     (0.\dot{f_1} \dot{f_2} \cdots \dot{f_n})_b = \frac{(f_1 f_2 \cdots f_n)_b}{b^n - 1}
 }
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
 <div class="move-top">
