@@ -222,7 +222,7 @@ $$`
 
 `$$
 \large{
-    \frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd}
+    \frac{a}{b} \times \frac{c}{d} = \frac{a \times c}{b \times d}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
@@ -241,7 +241,7 @@ $$`
 
 `$$
 \large{
-    \frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}= \frac{ad}{bc}
+    \frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}= \frac{a \times d}{b \times c}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
@@ -249,7 +249,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \large{
-    \frac{\frac{a}{b}}{x \times \frac{c}{d}} = \frac{\frac{a}{b} \times \frac{d}{c}}{x} = \frac{\frac{ad}{bc}}{x}
+    \frac{\frac{a}{b}}{x \times \frac{c}{d}} = \frac{\frac{a}{b} \times \frac{d}{c}}{x} = \frac{\frac{a \times d}{b \times c}}{x}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
