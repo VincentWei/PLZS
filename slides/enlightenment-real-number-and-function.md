@@ -528,10 +528,12 @@ $$`
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
-- 性质：
+- 幂和开方的性质：
 
 `$$
 \begin{align}
+    {ab}^n &= a^n b^n \\
+    {a / b}^n &= a^n / b^n \\
     \sqrt[n]{NM} &= \sqrt[n]{N} \sqrt[n]{M} \\
     \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}} \\
 \end{align}
