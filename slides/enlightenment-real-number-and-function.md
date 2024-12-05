@@ -280,7 +280,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \large{
-    \frac{a}{b} \pm \frac{c}{d} = \frac{(a \pm c) \times \gcd(b, d)}{\\operatorname{lcm}(b, d)}
+    \frac{a}{b} \pm \frac{c}{d} = \frac{(a \pm c) \times \gcd(b, d)}{\operatorname{lcm}(b, d)}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
