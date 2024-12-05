@@ -404,8 +404,8 @@ $$`
 
 `$$
 \begin{align}
-    (72.45)_8 &= (\qquad)_{10} \qquad\qquad (1A6.3B8)_{16} &&= (\qquad)_{10}        \\
-    15.68 &= (\qquad)_2 \qquad\qquad                 10.68 &&= (\qquad)_8
+    (72.45)_8 &= (\underline{\qquad\qquad})_{10} \qquad\qquad (1A6.3B8)_{16} &&= (\underline{\qquad\qquad})_{10}        \\
+    15.68 &= (\underline{\qquad\qquad})_2 \qquad\qquad                 10.68 &&= (\underline{\qquad\qquad})_8
 \end{align}
 $$`
 
