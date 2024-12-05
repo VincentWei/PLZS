@@ -366,16 +366,9 @@ $$`
 </div>
 
 	
-<div class="move-top">
-
-### 0.9循环等于1
-
-</div>
-
-	
 ### 将循环小数转成分数
 
-- 将 `$ 0.\dot{3} $` 转成分数：
+- 将 `$ 0.\dot{5} $` 转成分数：
 
 `$$
 \begin{align}
@@ -396,6 +389,25 @@ $$`<!-- .element: class="fragment fade-in" -->
     (0.\dot{f_1} \dot{f_2} \cdots \dot{f_n})_b = \frac{(f_1 f_2 \cdots f_n)_b}{b^n - 1}
 }
 $$`<!-- .element: class="fragment fade-in" -->
+
+	
+### 0.9循环等于1的几种证明方法
+
+1. 长除法变戏法。
+1. 依照循环小数转分数的公式。
+1. 参照上述将 `$ 0.\dot{5} $` 转成分数的过程：
+
+`$$
+\begin{align}
+    &x := 0.\dot{9} \\
+    &\because 10x = 1.\dot{9} \\
+    &\therefore  10x = 1 + 0.\dot{9} \\
+    &\therefore  10x = 1 + x \\
+    &\therefore  10x - x = 9 \\
+    &\therefore  9x = 9 \\
+    &\therefore  x = \frac{9}{9} = 1 \\
+\end{align}
+$$`
 
 	
 <div class="move-top">
