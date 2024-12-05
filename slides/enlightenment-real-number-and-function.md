@@ -205,12 +205,44 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 ### 两个分数相乘
 
+- 基本性质：
+
+`$$
+\large{
+    \frac{a}{b} = a \times \frac{1}{b}
+}
+$$`
+
+- 分数相乘：
+
+`$$
+\large{
+    \frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd}
+}
+$$`<!-- .element: class="fragment fade-in" -->
+
 </div>
 
 	
 <div class="move-top">
 
 ### 两个分数相除
+
+- 基本性质：
+
+`$$
+\large{
+    1 \div \frac{a}{b} = \frac{1}{\frac{a}{b}} = \frac{b}{a}
+}
+$$`
+
+- 分数相除：
+
+`$$
+\large{
+    \frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}= \frac{ad}{bc}
+}
+$$`<!-- .element: class="fragment fade-in" -->
 
 </div>
 
