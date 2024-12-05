@@ -400,7 +400,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 \end{align}
 $$`
 
-- 2) 完成如下的进制转换（精确到小数点保留 `3` 位）：
+- 2) 完成如下的进制转换（精确到小数点后 `3` 位）：
 
 `$$
 \begin{align}
