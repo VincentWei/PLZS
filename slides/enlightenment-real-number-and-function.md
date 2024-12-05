@@ -367,8 +367,8 @@ $$`
 
 `$$
 \begin{align}
-    &(d_n d_{n-1} \cdots d_1 d_0.d_{-1}d_{-2} \cdots d_{1-m} d_{-m})_b \\
-  = &d_n b^n + d_{n-1} b^{n-1} + \cdots + d_1 b^1 + d_0 b^0 + d_{-1} b^{-1} + d_{-2} b^{-2} + \cdots + d_{1-m} b^{1-m} + d_{-m} b^{-m}
+    &(d_n d_{n-1} \cdots d_1 d_0.f_1f_2 \cdots f_{m-1} f_m)_b \\
+  = &d_n b^n + d_{n-1} b^{n-1} + \cdots + d_1 b^1 + d_0 b^0 + f_1 b^{-1} + f_2 b^{-2} + \cdots + f_{m-1} b^{1-m} + f_m b^{-m}
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
