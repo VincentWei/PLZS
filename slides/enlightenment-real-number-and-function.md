@@ -242,7 +242,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \large{
-    \frac{\frac{a}{b}}{x \times \frac{c}{d}} = \frace{\frac{a}{b} \times \frac{d}{c}}{x} = \frac{\frac{ad}{bc}}{x}
+    \frac{\frac{a}{b}}{x \times \frac{c}{d}} = \frac{\frac{a}{b} \times \frac{d}{c}}{x} = \frac{\frac{ad}{bc}}{x}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
