@@ -378,7 +378,7 @@ $$`<!-- .element: class="fragment fade-in" -->
     - `$ \log_a{(M / N)} = \log_aM - \log_aN $`<!-- .element: class="fragment fade-in" -->
     - `$ \log_a{(1 / N)} = -\log_a{N} $`<!-- .element: class="fragment fade-in" -->
     - `$ \log_a{M^n} = n \log_a{M} $`<!-- .element: class="fragment fade-in" -->
-    - `$ \log_a{\sqrt[n]M} = \log_a{M}/n $`<!-- .element: class="fragment fade-in" -->
+    - `$ \log_a{\sqrt[n]M} = (\log_a{M})/n $`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 对数换底公式
