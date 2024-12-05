@@ -546,7 +546,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{(a)^2} &= \\
+    \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \\
     \sqrt{8} &= \qquad\qquad &\sqrt{27} &= \\
     \sqrt{4a^2} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
     \sqrt{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{a^2}{2}} &= \\
