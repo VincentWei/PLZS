@@ -113,7 +113,7 @@ $$`
 \end{align}
 $$`
 
-- 4) 编写考鼎码算法，将给定的分数（依次输入分子和分母）化为最简分数形式，输出其整数部分以及最简分数的分子及分母。
+- 4) 编写考鼎码算法，将给定的分数（依次输入分子和分母）化为最简分数形式，分别输出其整数部分以及最简分数的分子及分母。
 
 </div>
 
@@ -648,6 +648,21 @@ $$`<!-- .element: class="fragment fade-in" -->
 	
 ### 作业<sub>U4L6</sub>
 
+<div class="no-list-style">
+
+- 1) 简化下列对数：
+
+`$$
+\begin{align}
+    \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \\
+    \sqrt{8} &= \qquad\qquad &\sqrt{27} &= \\
+    \sqrt{4a^2} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
+    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \\
+\end{align}
+$$`
+
+</div>
+
 		
 ## 第四单元 实数和函数<br/>`第七讲 数学中的函数`
 
@@ -668,6 +683,24 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 作业<sub>U4L7</sub>
+
+<div class="no-list-style">
+
+- 1) 给定函数 `$ f(x) = 2x + 5 $`，求下列各值，并在笛卡尔坐标系中标出对应的点。
+
+`$$
+\begin{align}
+    f(2) &=  \\
+    f(1) &=  \\
+    f(0) &=  \\
+    f(-1) &=  \\
+    f(-2) &=  \\
+\end{align}
+$$`
+
+- 2) 编写考鼎码算法，该算法根据函数 `$ f(x) = 5x^2 + 6x + 7 $` 计算自变量 `$ x $` 对应的应变量的值。
+
+</div>
 
 		
 ## 第四单元 实数和函数<br/>`第八讲 考鼎码中的函数`
