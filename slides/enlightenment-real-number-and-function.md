@@ -358,17 +358,17 @@ $$`
 	
 ### 对数运算的性质
 
-- `$ \log_a{1} = 0 $`
-- `$ \log_a{a} = 1 $`
-- `$ \log_a{b} \times \log_b{a} = 1 $`
-- `$ -\log_c{a \div b} = \log_c{b \div a} $`
-- `$ a^{\log_a{N}} = N $`
-- `$ \log_a{a^n}} = n $`
-- `$ \log_a{MN} = \log_aM + \log_aN $`
-- `$ \log_a{M \div N} = \log_aM - \log_aN $`
-- `$ \log_a{1 \div N} = -\log_a{N} $`
-- `$ \log_a{M^n} = n \log_a{M} $`
-- `$ \log_a{\sqrt[n]M} = \log_a{M} \div n $`
+- `$ \log_a{1} = 0 $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{a} = 1 $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{b} \times \log_b{a} = 1 $`<!-- .element: class="fragment fade-in" -->
+- `$ -\log_c{a \div b} = \log_c{b \div a} $`<!-- .element: class="fragment fade-in" -->
+- `$ a^{\log_a{N}} = N $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{a^n} = n $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{MN} = \log_aM + \log_aN $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{M \div N} = \log_aM - \log_aN $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{1 \div N} = -\log_a{N} $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{M^n} = n \log_a{M} $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{\sqrt[n]M} = \log_a{M} \div n $`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 对数换底公式
@@ -377,7 +377,7 @@ $$`
 \large{
     \log_a b = \frac{\log_c b}{\log_c a}
 }
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 作业<sub>U4L6</sub>
