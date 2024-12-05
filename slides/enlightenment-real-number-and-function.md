@@ -540,6 +540,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 - 开方的性质：
 
 `$$
+\begin{align}
     \sqrt[n]{NM} &= \sqrt[n]{N} \sqrt[n]{M} \\
     \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}} \\
 \end{align}
