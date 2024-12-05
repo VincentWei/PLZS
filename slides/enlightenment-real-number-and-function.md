@@ -373,9 +373,9 @@ $$`
 `$$
 \begin{align}
     &x := 0.\dot{5} \\
-    &\because 10x = 1.\dot{5} \\
-    &\therefore  10x = 1 + 0.\dot{5} \\
-    &\therefore  10x = 1 + x \\
+    &\because 10x = 5.\dot{5} \\
+    &\therefore  10x = 5 + 0.\dot{5} \\
+    &\therefore  10x = 5 + x \\
     &\therefore  10x - x = 5 \\
     &\therefore  9x = 5 \\
     &\therefore  x = \frac{5}{9} \\
@@ -400,9 +400,9 @@ $$`<!-- .element: class="fragment fade-in" -->
 `$$
 \begin{align}
     &x := 0.\dot{9} \\
-    &\because 10x = 1.\dot{9} \\
-    &\therefore  10x = 1 + 0.\dot{9} \\
-    &\therefore  10x = 1 + x \\
+    &\because 10x = 9.\dot{9} \\
+    &\therefore  10x = 9 + 0.\dot{9} \\
+    &\therefore  10x = 9 + x \\
     &\therefore  10x - x = 9 \\
     &\therefore  9x = 9 \\
     &\therefore  x = \frac{9}{9} = 1 \\
