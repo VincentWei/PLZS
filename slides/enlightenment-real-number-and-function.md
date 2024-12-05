@@ -532,8 +532,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    {ab}^n &= a^n b^n \\
-    {a / b}^n &= a^n / b^n \\
+    (ab)^n &= a^n b^n \\
+    (a / b)^n &= a^n / b^n \\
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
