@@ -198,9 +198,9 @@ $$`
 
 `$$
 \begin{align}
-    \sqrt{0} &= \qquad\qquad \sqrt{1} &= \qquad\qquad \sqrt{4} &= \qquad\qquad \sqrt{16} &= \\
-    \sqrt[3]{0} &= \qquad\qquad \sqrt[3]{1} &= \qquad\qquad \sqrt[3]{27} &= \qquad\qquad \sqrt[3]{64} &= \\
-    \sqrt[4]{0} &= \qquad\qquad \sqrt[4]{1} &= \qquad\qquad \sqrt[4]{16} &= \qquad\qquad \sqrt[4]{256} &= \\
+    \sqrt{0} &= \qquad\qquad &\sqrt{1} &= \qquad\qquad &\sqrt{4} &= \qquad\qquad &\sqrt{16} &= \\
+    \sqrt[3]{0} &= \qquad\qquad &\sqrt[3]{1} &= \qquad\qquad &\sqrt[3]{27} &= \qquad\qquad &\sqrt[3]{64} &= \\
+    \sqrt[4]{0} &= \qquad\qquad &\sqrt[4]{1} &= \qquad\qquad &\sqrt[4]{16} &= \qquad\qquad &\sqrt[4]{256} &= \\
 \end{align}
 $$`
 
