@@ -666,8 +666,8 @@ $$`<!-- .element: class="fragment fade-in" -->
     \log_{64}{8} &= \\
     \log_{100}{10} &= \\
     \lg {(1/1000)} &= \\
-    \lg {5^4} &= \\
-    \lg {\sqrt{7}} &= \\
+    \ln {e^4} &= \\
+    \lg {\sqrt{10}} &= \\
 \end{align}
 $$`
 
