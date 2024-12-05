@@ -208,8 +208,8 @@ $$`
 
 `$$
 \begin{align}
-    \log_{10}{1} &= \qquad\qquad \log_{10}{10} &&= \qquad\qquad \log_{10}{100} &&= \qquad\qquad \log_{10}{1000} &&= \\
-    \log_2{1} &= \qquad\qquad \log_2{2} &&= \qquad\qquad \log_2{8} &&= \qquad\qquad \log_2{256} &&= \\
+    \log_{10}{1} &= \qquad\qquad \log_{10}{10} &= \qquad\qquad \log_{10}{100} &= \qquad\qquad \log_{10}{1000} &= \\
+    \log_2{1} &= \qquad\qquad \log_2{2} &= \qquad\qquad \log_2{8} &= \qquad\qquad \log_2{256} &= \\
 \end{align}
 $$`
 
