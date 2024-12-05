@@ -272,7 +272,15 @@ $$`
 
 `$$
 \large{
-    \frac{a}{b} \pm \frac{c}{d} = \frac{ad}{bd} \pm \frac{cb}{cb} = \frac{ad \pm bc}{bd}
+    \frac{a}{b} \pm \frac{c}{d} = \frac{ad}{bd} \pm \frac{cb}{db} = \frac{ad \pm bc}{bd}
+}
+$$`<!-- .element: class="fragment fade-in" -->
+
+- 利用最大公约数和最小公倍数
+
+`$$
+\large{
+    \frac{a}{b} \pm \frac{c}{d} = \frac{(a \pm c) \div \gcd(b, d)}{\lcm(b, d)}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
