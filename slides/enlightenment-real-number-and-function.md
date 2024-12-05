@@ -343,7 +343,7 @@ $$`
 \large{
     \sqrt[n]{N} = N^{1/n}
 }
-$$`
+$$`<!-- .element: class="fragment fade-in" -->
 
 </div>
 
