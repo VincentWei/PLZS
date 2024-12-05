@@ -397,8 +397,10 @@ $$`<!-- .element: class="fragment fade-in" -->
 算始 序列元素之和 (seq)
     sum := 0
     i := 0
-    当始 (seq[i] != 未定义)     # 若第 i 个元素为 未定义，表明序列结束
-        sum  = sum + seq[i]
+
+    # 若第 i 个元素为 未定义，表明序列结束
+    当始 (seq[i] != 未定义)
+        sum := sum + seq[i]
         i := i + 1
     当终
 

@@ -327,9 +327,9 @@
    1. 使用 `b64` 前缀用Base64编码定义字节串字面量。
 
 ```mathematica
-    hex := bx00112233445566778899AABBCCDDEEFF
-    binary := bb0011.1100.0011.0011
-    base64 := b64UHVyQyBpcyBhbiBIVk1MIHBhcnNlciBhbmQgaW50ZXJwcmV0ZXIuCiA=
+hex := bx00112233445566778899AABBCCDDEEFF
+binary := bb0011.1100.0011.0011
+base64 := b64UHVyQyBpcyBhbiBIVk1MIHBhcnNlciBhbmQgaW50ZXJwcmV0ZXIuCiA=
 ```
 
 	
