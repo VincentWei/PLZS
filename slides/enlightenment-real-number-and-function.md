@@ -361,8 +361,15 @@ $$`
 - `$ \log_a{1} = 0 $`<!-- .element: class="fragment fade-in" -->
 - `$ \log_a{a} = 1 $`<!-- .element: class="fragment fade-in" -->
 - `$ \log_a{b} \log_b{a} = 1 $`<!-- .element: class="fragment fade-in" -->
-- `$ -\log_c{a/b} = \log_c{b/a} $`<!-- .element: class="fragment fade-in" -->
-- `$ a^{\log_a{N}} = N $`<!-- .element: class="fragment fade-in" -->
+- `$ -\log_c{(a/b)} = \log_c{(b/a)} $`<!-- .element: class="fragment fade-in" -->
+
+- 恒等式
+`$$
+\large{
+    a^{\log_a{N}} = N
+}
+$$`<!-- .element: class="fragment fade-in" -->
+
 - `$ \log_a{a^n} = n $`<!-- .element: class="fragment fade-in" -->
 - `$ \log_a{MN} = \log_aM + \log_aN $`<!-- .element: class="fragment fade-in" -->
 - `$ \log_a{\frac{M}{N}} = \log_aM - \log_aN $`<!-- .element: class="fragment fade-in" -->
