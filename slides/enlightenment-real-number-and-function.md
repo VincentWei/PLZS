@@ -239,18 +239,42 @@ $$`
 $$`<!-- .element: class="fragment fade-in" -->
 
 	
-<div class="move-top">
+### 分母相等时两个分数相加
 
-### 乘法分配律的推广
+- 利用乘法分配律
 
-</div>
+`$$
+\large{
+    \frac{a}{c} + \frac{b}{c} = a \times \frac{1}{c} + b \times \frac{1}{c}
+}
+$$`
+
+- 得出公式
+
+`$$
+\large{
+    \frac{a}{c} \pm \frac{b}{c} = \frac{a \pm b}{c}
+}
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
-<div class="move-top">
+### 分母不相等时两个分数相加
 
-### 通分
+- 利用性质
 
-</div>
+`$$
+\large{
+    \frac{a}{b} = \frac{ac}{bc} \quad (c \ne 0)
+}
+$$`
+
+- 得出公式
+
+`$$
+\large{
+    \frac{a}{b} \pm \frac{c}{d} = \frac{ad}{bd} \pm \frac{cb}{cb} = \frac{ad \pm bc}{bd}
+}
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 作业<sub>U4L3</sub>
