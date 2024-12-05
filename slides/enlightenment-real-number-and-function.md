@@ -404,6 +404,8 @@ $$`<!-- .element: class="fragment fade-in" -->
     - `$ \log_a{\sqrt[n]M} = (\log_a{M})/n $`<!-- .element: class="fragment fade-in" -->
 
 	
+<div class="move-top">
+
 ### 对数换底公式
 
 `$$
@@ -411,6 +413,8 @@ $$`<!-- .element: class="fragment fade-in" -->
     \log_a b = \frac{\log_c b}{\log_c a}
 }
 $$`<!-- .element: class="fragment fade-in" -->
+
+</div>
 
 	
 ### 作业<sub>U4L6</sub>
