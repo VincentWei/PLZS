@@ -532,7 +532,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    \sqrt[n]{NM} &= \sqrt[n]{N}{M} \\
+    \sqrt[n]{NM} &= \sqrt[n]{N} \sqrt[n]{M} \\
     \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}} \\
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
