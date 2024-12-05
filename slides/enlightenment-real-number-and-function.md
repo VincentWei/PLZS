@@ -633,8 +633,6 @@ $$`<!-- .element: class="fragment fade-in" -->
     - `$ \log_a{\sqrt[n]M} = (\log_a{M})/n $`<!-- .element: class="fragment fade-in" -->
 
 	
-<div class="move-top">
-
 ### 对数换底公式
 
 - 换底公式：
@@ -656,8 +654,6 @@ $$`<!-- .element: class="fragment fade-in" -->
 \end{align}
 $$`<!-- .element: class="fragment fade-in" -->
 
-</div>
-
 	
 ### 作业<sub>U4L6</sub>
 
@@ -668,8 +664,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 `$$
 \begin{align}
     \log_{64}{8} &= \\
-    \log_{100}{1000} &= \\
-    \log_{10}{1/1000} &= \\
+    \log_{100}{10} &= \\
+    \lg {1/1000} &= \\
     \lg {5^4} &= \\
     \lg {\sqrt{7}} &= \\
 \end{align}
