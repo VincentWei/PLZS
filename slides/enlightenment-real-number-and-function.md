@@ -378,20 +378,22 @@ $$`
 - 将 `$ 0.\dot{1} $` 转成分数：
 
 `$$
+\begin{align}
     设 x = 0.\dot{1} \\
-    则有 10 \times x = 1.\dot{1} \\
+    \because 10 \times x = 1.\dot{1} \\
     \therefore  10 \times x = 1 + 0.\dot{1} \\
     \therefore  10 \times x = 1 + x \\
     \therefore  10 \times x - x = 1 \\
     \therefore  9 \times x = 1 \\
     \therefore  x = \frac{1}{9} \\
+\end{align}
 $$`
 
 - 公式：
 
 `$$
 \large{
-    (0.\dot{f_1} \cdots \dot{f_n})_b = \frac{1}{b^n - 1}
+    (0.\dot{f_1} \dot{f_2) \cdots \dot{f_n})_b = \frac{(f_1 f_2 \cdots f_n)_b}{b^n - 1}
 }
 $$`
 
