@@ -358,49 +358,17 @@ $$`
 	
 ### 对数运算的性质
 
-`$$
-\log_a{1} = 0
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{a} = 1
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{b} \log_b{a} = 1
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
--\log_c{\frac{a}{b}} = \log_c{\frac{b}{a}}
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-a^{\log_a{N}} = N
-$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{a^n} = n
-$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{MN} = \log_aM + \log_aN
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{\frac{M}{N}} = \log_aM - \log_aN
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{\frac{1}{N}} = -\log_a{N}
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{M^n} = n \log_a{M}
-$$`<!-- .element: class="fragment fade-in" -->
-
-`$$
-\log_a{\sqrt[n]M} = \frace{\log_a{M}}{n}
-$$`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{1} = 0 $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{a} = 1 $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{b} \log_b{a} = 1 $`<!-- .element: class="fragment fade-in" -->
+- `$ -\log_c{\frac{a}{b}} = \log_c{\frac{b}{a}} $`<!-- .element: class="fragment fade-in" -->
+- `$ a^{\log_a{N}} = N $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{a^n} = n $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{MN} = \log_aM + \log_aN $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{\frac{M}{N}} = \log_aM - \log_aN $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{\frac{1}{N}} = -\log_a{N} $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{M^n} = n \log_a{M} $`<!-- .element: class="fragment fade-in" -->
+- `$ \log_a{\sqrt[n]M} = \frace{\log_a{M}}{n} $`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 对数换底公式
