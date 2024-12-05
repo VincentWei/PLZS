@@ -172,8 +172,6 @@ $$`<!-- .element: class="fragment fade-in" -->
 </div>
 
 	
-<div class="move-top">
-
 ### 四则运算的等价性
 
 - 减法本质上等价于加法：`$ a - b = a + (-b) $`。
@@ -182,7 +180,12 @@ $$`<!-- .element: class="fragment fade-in" -->
 - 倒数：对任意实数 `$ a \ne 0 $`，一定有实数 `$ b $` 使得 `$ ab = 1 $`；这时，称 `$ b $` 为 `$ a $` 的倒数。实际上有 `$ b = 1 \div a = \frac{1}{a} $`，而 `$ a $` 是 `$ b $` 的倒数。
 - 负次幂：根据幂的性质有 `$ a^{-n} = a^{0-n} = a^0 \div a^n = \frac{1}{a^n} $`，故而 `$ a $` 的倒数经常被表示为 `$ a^{-1} $`。
 
-</div>
+`$$
+\large{
+    a^{-1} = frac{1}{a}
+    a^{-3} = frac{1}{a^3}
+}
+$$`
 
 	
 ### 作业<sub>U4L2</sub>
