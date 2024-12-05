@@ -181,10 +181,12 @@ $$`<!-- .element: class="fragment fade-in" -->
 - 负次幂：根据幂的性质有 `$ a^{-n} = a^{0-n} = a^0 \div a^n = \frac{1}{a^n} $`，故而 `$ a $` 的倒数经常被表示为 `$ a^{-1} $`。
 
 `$$
+\begin{align}
 \large{
-    a^{-1} = frac{1}{a}
-    a^{-3} = frac{1}{a^3}
+    a^{-1} &= frac{1}{a}    \\
+    a^{-3} &= frac{1}{a^3}  \\
 }
+\end{align}
 $$`
 
 	
