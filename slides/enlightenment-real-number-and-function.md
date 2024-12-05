@@ -386,7 +386,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \large{
-    (0.\dot{f_1} \dot{f_2} \cdots \dot{f_n})_b = \frac{(f_1 f_2 \cdots f_n)_b}{b^n - 1}
+    (0.\dot{f_1} {f_2} \cdots \dot{f_n})_b = \frac{(f_1 f_2 \cdots f_n)_b}{b^n - 1}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
