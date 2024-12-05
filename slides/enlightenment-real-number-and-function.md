@@ -379,12 +379,12 @@ $$`
 
 `$$
 \begin{align}
-    设 x = 0.\dot{1} \\
-    \because 10 \times x = 1.\dot{1} \\
-    \therefore  10 \times x = 1 + 0.\dot{1} \\
-    \therefore  10 \times x = 1 + x \\
-    \therefore  10 \times x - x = 1 \\
-    \therefore  9 \times x = 1 \\
+    x := 0.\dot{1} \\
+    \because 10x = 1.\dot{1} \\
+    \therefore  10x = 1 + 0.\dot{1} \\
+    \therefore  10x = 1 + x \\
+    \therefore  10x - x = 1 \\
+    \therefore  9x = 1 \\
     \therefore  x = \frac{1}{9} \\
 \end{align}
 $$`
