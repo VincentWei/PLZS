@@ -410,15 +410,39 @@ $$`<!-- .element: class="fragment fade-in" -->
 $$`
 
 	
-<div class="move-top">
-
 ### 小数的四则运算
 
 - 要点：
    1. 加减法：对齐小数点。
-   1. 乘除法：去掉小数点乘除，再确定小数点位数。
+   1. 乘法：去掉小数点乘除，再确定小数部分位数：
 
-</div>
+`$$
+\begin{align}
+    \because 1.35 = 135 \times 10^{-2}  \\
+    12.5678 = 125678 \times 10^{-4}     \\
+    \therefore 1.35 \times 12.5678      \\
+        = 135 \times 10^{-2} \times 125678 \times 10^{-4} \\
+        = 135 \times 125678 \times 10^{-2} \times 10^{-4} \\
+        = 1696545 \times 10^{-6} \\
+        = 1.696545 \\
+\end{align}
+$$`<!-- .element: class="fragment fade-in" -->
+
+   1. 除法：同时放大被除数和除数以去掉除数的小数点，然后再用长除法：
+
+`$$
+\begin{align}
+    \because 1.35 = 135 \times 10^{-2}  \\
+    12.5678 = 125678 \times 10^{-4}     \\
+    \therefore 1.35 \div 12.5678      \\
+        = \frac{135 \times 10^{-2}}{125678 \times 10^{-4}} \\
+        = \frac{135 \times 10^{-2} \times 10^4}{125678 \times 10^{-4} \times 10^4} \\
+        = \frac{135 \times 10^{2}}{125678} \\
+        = \frac{13500}{125678} \\
+        = 1696545 \times 10^{-6} \\
+        \approx 0.1074173681 \\
+\end{align}
+$$`<!-- .element: class="fragment fade-in" -->
 
 	
 ### 小数的进制表达
