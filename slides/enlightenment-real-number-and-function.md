@@ -334,8 +334,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    &\frac{1}{2} + 4\frac{3}{5} = \qquad \qquad &&10\frac{1}{2} - \frac{1}{3} = \\
-    &\frac{1}{2} \times 3\frac{1}{3} = \qquad \qquad &&5\frac{1}{2} \div 3\frac{1}{3} = \\
+    &\frac{1}{2} + 4\frac{3}{5} = \qquad \qquad &&10\frac{1}{4} - \frac{1}{6} = \\
+    &\frac{1}{2} \times 3\frac{1}{3} = \qquad \qquad &&5\frac{1}{5} \div 3\frac{1}{7} = \\
 \end{align}
 $$`
 
