@@ -99,7 +99,7 @@ $$`
 
 `$$
 \begin{align}
-    \frac{1}{2} = \qquad\qquad 10\frac{1}{2} = \qquad\qquad \frac{11}{28} = \qquad\qquad 5\frac{17}{89} = \\
+    \frac{1}{2} = \qquad\qquad 10\frac{1}{10} = \qquad\qquad \frac{11}{4} = \qquad\qquad 5\frac{17}{100} = \\
 \end{align}
 $$`
 
@@ -217,7 +217,7 @@ $$`
 
 `$$
 \begin{align}
-    &0.1        &= 1 \times 10^{-1} &0.01 &= 1 \times 10^{-2} \\
+    &0.1        &= 1 \times 10^{-1} \qquad\qquad &0.01 &= 1 \times 10^{-2} \\
     &0.5        &= \qquad\qquad &0.25 &= \\
     &10.0350    &= \qquad\qquad &-30.895 &= \\
 \end{align}
@@ -450,7 +450,6 @@ $$`
         &= \frac{135 \times 10^{-2} \times 10^4}{125678 \times 10^{-4} \times 10^4} \\
         &= \frac{135 \times 10^{2}}{125678} \\
         &= \frac{13500}{125678} \\
-        &= 1696545 \times 10^{-6} \\
         &\approx 0.1074173681 \\
 \end{align}
 $$`
