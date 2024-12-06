@@ -509,16 +509,14 @@ $$`
 
 `$$
 \begin{align}
-    (72.45)_8 &= (\underline{\qquad\qquad})_{10} \qquad\qquad (1A6.3B8)_{16} &&= (\underline{\qquad\qquad})_{10}        \\
-    15.68 &= (\underline{\qquad\qquad})_2 \qquad\qquad                 10.68 &&= (\underline{\qquad\qquad})_8
+    (72.45)_8 &= (\underline{\qquad\qquad})_{10} \qquad\qquad &(1A6.3B8)_{16} &= (\underline{\qquad\qquad})_{10}        \\
+    15.68 &= (\underline{\qquad\qquad})_2 \qquad\qquad                 &10.68 &= (\underline{\qquad\qquad})_8
 \end{align}
 $$`
 
 - 3) 思考：针对小数部分，`b` 进制和 `b` 的正整数次幂进制之间的快速转换关系是否仍然适用？
 
 - 4) 编写考鼎码算法，将一个十进制小数转换为给定的 `b` 进制表达，精确到小数点 `n` 位。
-
-- 5) 编写考鼎码算法，将一个无限循环小数转为分数。程序应分别输入整数部分、小数中的不循环部分及循环部分，如 `$ 100.356\dot{1}\dot{7} $` 分为三部分输入：`$ 100 $`、`$ 356 $` 和 `$ 17 $`。
 
 </div>
 
