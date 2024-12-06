@@ -217,9 +217,9 @@ $$`
 
 `$$
 \begin{align}
-    &0.1        &= 1 \times 10^{-1} \qquad\qquad &0.01 &= 1 \times 10^{-2} \\
-    &0.5        &= \qquad\qquad &0.25 &= \\
-    &10.0350    &= \qquad\qquad &-30.895 &= \\
+    &0.1        &= 1 \times 10^{-1} \qquad\qquad &&0.01 &&= 1 \times 10^{-2} \\
+    &0.5        &= \qquad\qquad &&0.25 &&= \\
+    &10.0350    &= \qquad\qquad &&-30.895 &&= \\
 \end{align}
 $$`
 
