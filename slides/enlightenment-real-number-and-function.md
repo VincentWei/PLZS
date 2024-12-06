@@ -28,8 +28,6 @@
    - 其他常见的无理数：圆周率、黄金分割比。
 
 	
-<div class="move-top">
-
 ### 两个整数相除余数不为零时
 
 - 分数：`$ \frac{1}{2}, \ 3\frac{1}{2} $`
@@ -38,8 +36,6 @@
 - 小数转为分数。
 
 <img style="height:auto;width:auto;" src="assets/enlightenment-real-number-axis.svg" />
-
-</div>
 
 	
 <div class="move-top">
@@ -51,8 +47,6 @@
 </div>
 
 	
-<div class="move-top">
-
 ### 无理数和实数的定义
 
 - 有不循环小数或者循环小数，也应该有无限不循环小数。
@@ -66,8 +60,6 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 - 无理数：无限不循环小数。
 - 实数：有理数和无理数统称为实数。
-
-</div>
 
 	
 <div class="move-top">
