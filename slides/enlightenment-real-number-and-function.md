@@ -37,7 +37,7 @@
 - 分数转为小数；无限循环小数。
 - 小数转为分数。
 
-<img style="height:200px;width:auto;" src="assets/enlightenment-real-number-axis.svg" />
+<img style="height:auto;width:800px;" src="assets/enlightenment-real-number-axis.svg" />
 
 </div>
 
