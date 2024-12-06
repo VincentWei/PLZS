@@ -199,8 +199,7 @@ $$`
 `$$
 \begin{align}
     \sqrt{0} &= \qquad\qquad &\sqrt{1} &= \qquad\qquad &\sqrt{4} &= \qquad\qquad &\sqrt{16} &= \\
-    \sqrt[3]{0} &= \qquad\qquad &\sqrt[3]{1} &= \qquad\qquad &\sqrt[3]{27} &= \qquad\qquad &\sqrt[3]{64} &= \\
-    \sqrt[4]{0} &= \qquad\qquad &\sqrt[4]{1} &= \qquad\qquad &\sqrt[4]{16} &= \qquad\qquad &\sqrt[4]{256} &= \\
+    \sqrt[3]{27} &= \qquad\qquad &\sqrt[3]{64} &= \qquad\qquad &\sqrt[4]{16} &= \qquad\qquad &\sqrt[4]{256} &= \\
 \end{align}
 $$`
 
@@ -217,9 +216,9 @@ $$`
 
 `$$
 \begin{align}
-    &0.1        &= 1 \times 10^{-1} \qquad\qquad &&0.01 &&= 1 \times 10^{-2} \\
-    &0.5        &= \qquad\qquad &&0.25 &&= \\
-    &10.0350    &= \qquad\qquad &&-30.895 &&= \\
+    0.1        &= 1 \times 10^{-1} \qquad\qquad &0.01 &= 1 \times 10^{-2} \\
+    0.5        &= \qquad\qquad &0.25 &= \\
+    10.0350    &= \qquad\qquad &-30.895 &= \\
 \end{align}
 $$`
 
