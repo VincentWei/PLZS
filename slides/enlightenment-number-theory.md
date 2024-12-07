@@ -197,7 +197,7 @@ $$`
 
 - 3) 增强加法实现的乘法考鼎码算法，使之支持负数作为被乘数或乘数。
 
-- 4) 数学上余数的定义： `$ 若 a mod b = c，则 c = a - \lfloor \frace{a}{b} \rfloor $` 其中，`$ \lfloor \rfloor $` 为 `向下取整`运算符，如 `$ \lfloor 3.476 \rfloor = 3,\ \lfloor -3.14159 \rfloor = -4 $`。
+- 4) 数学上余数的定义：`$ 若 a mod b = c，则有 c = a - \lfloor \frac{a}{b} \rfloor $`， 其中 `$ \lfloor \rfloor $` 为 `向下取整`运算符，如 `$ \lfloor 3.476 \rfloor = 3,\ \lfloor -3.14159 \rfloor = -4 $`。请据此调整第二单元给出的取模算法，使之支持负数。
 
 </div>
 
