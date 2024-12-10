@@ -581,8 +581,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    \sqrt{10} &= \\
-    \sqrt{100} &= \\
+    \sqrt{20} &= \\
+    \sqrt{500} &= \\
     \sqrt{\frac{1}{100}} &= \\
     \sqrt[3]{\frac{1}{27a}} &= \\
 \end{align}
