@@ -62,11 +62,11 @@ $$`
 
 `$$
 \begin{align}
-    &n  &=  -4 \quad & -3 \quad & -2 \quad & -1 \quad & 0 \quad & 5 \\
-    &2n &=  -8 \quad & -6 \quad & -4 \quad & -2 \quad & 0 \quad & 10 \\
-    &2n + 1 &= -7 \quad & -5 \quad & -3 \quad & -1 \quad & 1 \quad & 11 \\
-    &n^2 &=  16 \quad & 9 \quad & 4 \quad & 1 \quad & 0 \quad & 25 \\
-    &n^3 &=  -64 \quad & -27 \quad & -8 \quad & -1 \quad & 0 \quad & 125 \\
+    &n      &=  &-4 \quad   &-3 \quad   &-2 \quad   &-1 \quad   &0 \quad &5 \\
+    &2n     &=  &-8 \quad   &-6 \quad   &-4 \quad   &-2 \quad   &0 \quad &10 \\
+    &2n + 1 &=  &-7 \quad   &-5 \quad   &-3 \quad   &-1 \quad   &1 \quad &11 \\
+    &n^2    &=  &16 \quad   &9 \quad    &4 \quad    &1 \quad    &0 \quad &25 \\
+    &n^3    &=  &-64 \quad  &-27 \quad  &-8 \quad   &-1 \quad   &0 \quad &125 \\
 \end{align}
 $$`
 
