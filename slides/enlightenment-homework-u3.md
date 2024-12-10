@@ -259,7 +259,7 @@ $$`
 
 `$$
 \large{
-    (d_n\cdotsd_1d_0)_10 = d_n^n + \cdots + d_1^n + d_0^n
+    (d_n \cdots d_1d_0)_10 = d_n^n + \cdots + d_1^n + d_0^n
 }
 $$`
 
