@@ -261,7 +261,15 @@ $$`
 
 `$$
 \large{
-    (d_n \cdots d_1d_0)_{10} = d_n^n + \cdots + d_1^n + d_0^n
+    (d_{n-1} \cdots d_1d_0)_{10} = d_{n-1}^n + \cdots + d_1^n + d_0^n
+}
+$$`
+
+或，
+
+`$$
+\large{
+    (d_n \cdots d_2d_1)_{10} = d_n^n + \cdots + d_2^n + d_1^n
 }
 $$`
 
