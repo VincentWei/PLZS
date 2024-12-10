@@ -176,7 +176,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 <div class="no-list-style">
 
-- 1) 完成如下计算，如遇代数式，则 `$ a $` 取 `$ 11 $`，`$ b $` 取 `$ 33 $`：
+- 1) 完成如下计算，如遇代数式，则 `$ a $` 取 `$ 11 $`，`$ b $` 取 `$ -33 $`：
 
 `$$
 \begin{align}
