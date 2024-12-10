@@ -193,7 +193,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 \end{align}
 $$`
 
-- 2) 展开如下代数和式，体验代数的简洁之美：`$ \displaystyle{ \sum_{i=0}^{n}(-1)^i i } $`。
+- 2) 展开如下代数和式，体验代数的简洁之美：`$ \displaystyle{ \sum_{n=0}^{5}(-1)^n n } $`。
 
 - 3) 增强加法实现的乘法考鼎码算法，使之支持负数作为被乘数或乘数。
 
