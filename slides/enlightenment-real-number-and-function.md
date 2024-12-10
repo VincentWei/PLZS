@@ -765,8 +765,8 @@ $$`
 - 幂函数：`$ \large{ y = x^a  \quad (a \ne 0) } $`
    1. 一次（线性）函数： `$ \large{ y = ax + c \quad (a \ne 0)} $`
    1. 二次（抛物线）函数： `$ \large{ y = ax^2 + bx + c  \quad (a \ne 0)} $`
-- 指数函数：`$ \large{ y = a^x  \quad (a \ne 0, a \ne 1) } $`
-- 对数函数：`$ \large{ y = log_a{x} \quad (a > 0, a \ne 1)} $`
+- 指数函数：`$ \large{ y = a^x  \quad (a \ne 0,\ a \ne 1) } $`
+- 对数函数：`$ \large{ y = log_a{x} \quad (a > 0,\ a \ne 1)} $`
 
 	
 ### 函数带来的好处
