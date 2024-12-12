@@ -8,7 +8,7 @@
 
 `$$
 \begin{align}
-    \frac{3}{2} = \qquad\qquad \frac{28}{11} = \qquad\qquad \frac{77}{33} = \qquad\qquad \frac{89}{3} = \\
+    \frac{3}{2} = 1\frac{1}{2} \qquad\qquad \frac{28}{11} = 2\frac{6}{11}\qquad\qquad \frac{77}{33} = 2\frac{1}{3}\qquad\qquad \frac{89}{3} = 29\frac{2}{3}\\
 \end{align}
 $$`
 
@@ -17,7 +17,7 @@ $$`
 
 `$$
 \begin{align}
-    \frac{1}{2} = \qquad\qquad 10\frac{1}{10} = \qquad\qquad \frac{11}{4} = \qquad\qquad 5\frac{17}{100} = \\
+    \frac{1}{2} = 0.5 \qquad\qquad 10\frac{1}{10} =10.1 \qquad\qquad \frac{11}{4} = 2.75\qquad\qquad 5\frac{17}{100} = 5.17\\
 \end{align}
 $$`
 
@@ -26,14 +26,40 @@ $$`
 
 `$$
 \begin{align}
-    0.5   &= \qquad\qquad &0.25 &= \qquad\qquad &-0.125 &= \\
-    0.75  &= \qquad\qquad &0.875 &= \qquad\qquad &-0.9  &= \\
-    7.25  &= \qquad\qquad &3.125 &= \qquad\qquad &-9.75 &= \\
+    0.5   &= \frac{1}{2}\qquad\qquad &0.25 &= \frac{1}{4}\qquad\qquad &-0.125 &= -\frac{1}{8}   \\
+    0.75  &= \frac{3}{4}\qquad\qquad &0.875 &= \frac{7}{8}\qquad\qquad &-0.9  &= -\frac{9}{10}  \\
+    7.25  &= 7\frac{1}{4}\qquad\qquad &3.125 &= 3\frac{1}{4}\qquad\qquad &-9.75 &= -9\frac{3}{4}\\
 \end{align}
 $$`
 
 	
 4) 编写考鼎码算法，将给定的分数（依次输入分子和分母）化为最简分数形式，分别输出其整数部分以及最简分数的分子及分母。
+
+```mathematica
+# 假定 a, b 均为正整数
+算始 化简分数 (a, b)
+    n := 0          # 整数部分
+    若始 (a > b)
+        n := a // b
+        a := a % b
+    若终
+
+    # 求最大公约数
+    x : = a; y := b
+    当始 (y != 0)
+        tmp := x
+        x := y
+        y := tmp % y
+    当终
+
+    a := a // x
+    b := b // x
+
+    输出 n
+    输出 a
+    输出 b
+算终
+```
 
 		
 ## 第四单元 实数和函数<br/>`第二讲 从根号二说起`
@@ -43,8 +69,8 @@ $$`
 
 `$$
 \begin{align}
-    \sqrt{0} &= \qquad\qquad &\sqrt{1} &= \qquad\qquad &\sqrt{4} &= \qquad\qquad &\sqrt{16} &= \\
-    \sqrt[3]{27} &= \qquad\qquad &\sqrt[3]{64} &= \qquad\qquad &\sqrt[4]{16} &= \qquad\qquad &\sqrt[4]{256} &= \\
+    \sqrt{0} &= 0\qquad\qquad &\sqrt{1} &=1 \qquad\qquad &\sqrt{4} &=2 \qquad\qquad &\sqrt{16} &=4 \\
+    \sqrt[3]{27} &= 3\qquad\qquad &\sqrt[3]{64} &= 4\qquad\qquad &\sqrt[4]{16} &= 2\qquad\qquad &\sqrt[4]{256} &= 4\\
 \end{align}
 $$`
 
@@ -53,8 +79,8 @@ $$`
 
 `$$
 \begin{align}
-    \log_{10}{1} &= \qquad &\log_{10}{10} &= \qquad &\log_{10}{100} &= \qquad &\log_{10}{1000} &= \\
-    \log_2{1} &= \qquad   &\log_2{2} &= \qquad &\log_2{8} &= \qquad &\log_2{256} &= \\
+    \log_{10}{1} &= 0\qquad &\log_{10}{10} &= 1\qquad &\log_{10}{100} &= 2\qquad &\log_{10}{1000} &= 3\\
+    \log_2{1} &= 0\qquad   &\log_2{2} &=1 \qquad &\log_2{8} &= 3\qquad &\log_2{256} &= 8\\
 \end{align}
 $$`
 
@@ -64,13 +90,28 @@ $$`
 `$$
 \begin{align}
     0.1        &= 1 \times 10^{-1} \qquad\qquad &0.01 &= 1 \times 10^{-2} \\
-    0.5        &= \qquad\qquad &0.25 &= \\
-    10.0350    &= \qquad\qquad &-30.895 &= \\
+    0.5        &= 5 \times 10^{-1} \qquad\qquad &0.25 &= 25 \times 10^{-2}\\
+    10.0350    &= 10035 \times 10^{-3}\qquad\qquad &-30.895 &= -30895 \times 10^{-3}\\
 \end{align}
 $$`
 
 	
 4) 编写考鼎码算法，求出小于等于给定正整数 `n` 平方根的最大整数。如小于等于根号二的最大整数是 `1`，小于等于根号八的最大整数是 `2`。
+
+```mathematica
+# n 为正整数
+算始 小于等于平方根的最大整数 (n)
+    k := 0
+    当始 (真)
+        若始 (k * k > n)
+            跳出
+        若终
+        k := k + 1
+    当终
+
+    输出 k - 1
+算终
+```
 
 		
 ## 第四单元 实数和函数<br/>`第三讲 分数的性质及基本运算`
