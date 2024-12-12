@@ -237,8 +237,8 @@ $$`
 
 `$$
 \begin{align}
-    \sqrt{2^2} &= 2 \qquad\qquad &\sqrt{(-2)^2} &= 2 \qquad\qquad &\sqrt{a^2} &= |a| \\
-    \sqrt{8} &= 2\sqrt{2} \qquad\qquad &\sqrt{27} &= 3\sqrt{3} \qquad\qquad &\sqrt{20a^2} &= 2\sqrt{5}|a| \\
+    \sqrt{2^2} &= 2 \qquad\qquad &\sqrt{(-2)^2} &= 2 \qquad\qquad &\sqrt{a^2} &= \left | a \right | \\
+    \sqrt{8} &= 2\sqrt{2} \qquad\qquad &\sqrt{27} &= 3\sqrt{3} \qquad\qquad &\sqrt{20a^2} &= 2\sqrt{5} \left | a \right | \\
     \sqrt{4a^4} &= 2a^2\qquad\qquad &\sqrt[3]{2a^3} &= \sqrt{2}a\\
     \sqrt[3]{\frac{1}{8a}} &=\frac{1}{2a}\sqrt[3]{a^2} \qquad\qquad &\sqrt{\frac{3}{2a}} &= \frac{1}{2a}\sqrt{6a} \\
 \end{align}
