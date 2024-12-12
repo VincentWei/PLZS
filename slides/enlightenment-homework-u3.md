@@ -893,6 +893,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 	
 3) 在以上条件下，画出当选择两个中心位置之外的数值分别填充左上角和右上角，然后确定其他格子的数值并得出是否可以成功解出幻方的算法流程图。
 
+<div class="wide-code">
+
 ```mathematica
 # n 是起始整数（n > 0）
 算始 填充三乘三幻方 (n)
@@ -1138,4 +1140,6 @@ $$`<!-- .element: class="fragment fade-in" -->
     输出 row3
 算终
 ```
+
+</div>
 
