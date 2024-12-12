@@ -330,7 +330,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 <div class="no-list-style">
 
-- 1) 完成如下分数相关的计算：
+- 1) 完成如下分数相关的计算（结果要化简为最简分数）：
 
 `$$
 \begin{align}
