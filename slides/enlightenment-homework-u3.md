@@ -924,7 +924,6 @@ $$`<!-- .element: class="fragment fade-in" -->
 
     # i 表示当前从剩余的数中选来试着填入左上角的数的索引
     i := 0
-
     当始 (i < 8)
 
         # 将 c 放入幻方中心，其他清零
@@ -938,7 +937,7 @@ $$`<!-- .element: class="fragment fade-in" -->
         # 从 left_ns 中选择索引为 i 的数填充到左上角
         row1[0] := left_ns[i]
 
-        # 将这个数已经从 left_ns 中移除
+        # 将这个数从 left_ns 中移除
         left_ns[i] := 未定义
 
         # 确定右下角的数
@@ -954,16 +953,16 @@ $$`<!-- .element: class="fragment fade-in" -->
         # 然后确定这个数是否在 left_ns 序列中。
         # 若在，则设置格子并从 left_ns 中移除；
         # 若不在，则继续下一个 i。
-        j := 0
-        当始 (d > 0 且 left_ns[j] != 未定义)
-            若始 (left_ns[j] == d)
+        k := 0
+        当始 (d > 0 且 left_ns[k] != 未定义)
+            若始 (left_ns[k] == d)
                 row3[2] := d
-                left_ns[j] := 未定义
+                left_ns[k] := 未定义
                 d := 0      # 设置 d 为零，用作标志
                 跳出
             若终
 
-            j := j + 1
+            k := k + 1
         当终
 
         # 若 d 不等于 0，则表明 d 不在剩余可选的数当中，继续下个 i
@@ -978,6 +977,7 @@ $$`<!-- .element: class="fragment fade-in" -->
         j : = 0
         当始 (j < 7)
             # left_ns2 表示在当前这一轮选择中剩余可选的数构成的序列。
+            # 为不影响 left_ns 中的内容，需要一个新的序列。
             left_ns2 := left_ns
 
             row1[2] := left_ns2[j]
@@ -1127,6 +1127,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             # i 递增
             i := i + 1
         若否
+            # 已被全部填满，搞定幻方
             跳出
         若终
 
