@@ -886,7 +886,7 @@ $$`<!-- .element: class="fragment fade-in" -->
     # 计算行列和
     rs := s // 3
 
-    返回 (4 * rs - s) // 3
+    输出 (4 * rs - s) // 3
 算终
 ```
 
