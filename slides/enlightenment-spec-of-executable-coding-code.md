@@ -440,5 +440,5 @@ base64 := 0bsUHVyQyBpcyBhbiBIVk1MIHBhcnNlciBhbmQgaW50ZXJwcmV0ZXIuCiA=
    - 说出：通过某个 Text to Speach 引擎实现。
 1. 可参考 [HVML PurC 解释器](https://gitee.com/HVML/PurC) 或 [QuickJS](https://www.bellard.org/quickjs/) 实现各抽象数据类型。
 1. 可基于[LibBF](https://www.bellard.org/libbf/)实现对任意精度整数、任意精度小数和任意精度浮点数的支持。
-1. 可考虑同时支持中文及英文关键词。
+1. 可考虑同时支持中文及英文关键词（配置时确定，不能混用）。
 
