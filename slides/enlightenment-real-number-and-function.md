@@ -185,7 +185,7 @@ $$`
 
 `$$
 \large{
-    (\frac{a}{b})^n = \frac{a^n}(b^n}  \\
+    (\frac{a}{b})^n = \frac{a^n}{b^n}  \\
 }
 $$`
 
