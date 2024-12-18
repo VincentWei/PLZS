@@ -181,11 +181,11 @@ $$`<!-- .element: class="fragment fade-in" -->
 }
 $$`
 
-- 类似 `$ (ab)^n &= a^n b^n $`，有
+- 类似 `$ (ab)^n = a^n b^n $`，有
 
 `$$
 \large{
-    (\frac{a}{b})^n &= \frac{a^n}(b^n}  \\
+    (\frac{a}{b})^n = \frac{a^n}(b^n}  \\
 }
 $$`
 
