@@ -174,10 +174,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \large{
-\begin{align}
-    a^{-1} &= \frac{1}{a}    \\
-    a^{-3} &= \frac{1}{a^3}  \\
-\end{align}
+    a^{-1} &= \frac{1}{a}    \qquad a^{-3} &= \frac{1}{a^3}
 }
 $$`
 
