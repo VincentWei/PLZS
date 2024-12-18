@@ -283,7 +283,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \large{
-    \frac{\frac{a}{b}}{x \times \frac{c}{d}} = \frac{\frac{a}{b} \times \frac{d}{c}}{x} = \frac{\frac{a \times d}{b \times c}}{x}
+    \frac{\frac{a}{b}}{g \times \frac{c}{d}} = \frac{\frac{a}{b} \times \frac{d}{c}}{g} = \frac{\frac{a \times d}{b \times c}}{g}
 }
 $$`<!-- .element: class="fragment fade-in" -->
 
