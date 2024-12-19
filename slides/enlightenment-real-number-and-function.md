@@ -713,10 +713,8 @@ $$`<!-- .element: class="fragment fade-in" -->
 
 `$$
 \begin{align}
-    \log_{64}{8} &= \\
-    \log_{100}{10} &= \\
-    \lg {(1/1000)} &= \\
-    \ln {e^4} &= \\
+    \log_{64}{8} &= \qquad &\log_{100}{10} &= \\
+    \lg {(1/1000)} &= \qquad &\ln {e^4} &= \\
     \lg {\sqrt{10}} &= \\
 \end{align}
 $$`
