@@ -1074,7 +1074,7 @@ $$`
 
 `$$
 \large{
-    x \times 10^n \qquad (1 \ge |x| < 10)
+    x \times 10^n \quad (1 \le |x| < 10)
 }
 $$`
 
