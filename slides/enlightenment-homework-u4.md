@@ -638,7 +638,6 @@ $$`
 	
 2) 编写可执行考鼎码算法调用数学函数计算代数和式的值，其中 `$ n $` 为输入的整数：`$ \displaystyle{ \sum_{i=1}^{n}\sqrt{i} } $`。
 
-
 ```mathematica
 算始 计算代数和式(n)
     n := 整数(n)
@@ -649,7 +648,7 @@ $$`
     sum := 0
     i := 1
     当始 (i <= n)
-        sum := sum + sqrt(i)
+        sum := sum + math.sqrt(i)
         i := i + 1
     当终
 
