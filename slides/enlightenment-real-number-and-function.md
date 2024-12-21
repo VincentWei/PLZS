@@ -998,7 +998,7 @@ $$`
     sum_a := 序列元素之和 (真因子序列 (a))
     # sum_b := 序列元素之和 (真因子序列 (b))
 
-    若始 (a == sum_b 且 序列元素之和 (真因子序列 (a)) == b)
+    若始 (b == sum_a 且 序列元素之和 (真因子序列 (b)) == a)
         输出 真
     若终
 
@@ -1232,7 +1232,7 @@ y := math.cbrt(x)
 # math.pow() 用来求给定浮点数 x 的 y 次幂
 y := math.pow(x, y)
 
-# math.log2(), math.log10(), math.log()
+# math.log2(), math.log(), math.log10()
 # 分别返回给定浮点数以 2、e、10 为底的对数。
 y := math.log2(x)
 y := math.log10(x)
