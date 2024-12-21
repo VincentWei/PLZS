@@ -1215,22 +1215,27 @@ $$`
 	
 ### 可执行考鼎码提供的数学函数和常数
 
-- 几乎所有的编程语言都提供一样的数学函数。
+- 几乎所有的编程语言都提供一样的数学函数和常数（写法稍有差异）。
 - 在可执行考鼎码中，数学函数通过 `math` 对象提供，调用对应函数时，使用 `math.sqrt(2.)` 这样的写法。
 - 可执行考鼎码提供的常用数学函数和常数：
 
 ```mathematica
-# math.sqrt() 用来求给定实数 x 的平方根，x 必须大于等于 0。
+# math.abs() 求给定浮点数 x 的绝对值。
+y := math.abs(x)
+
+# math.sqrt() 求给定浮点数 x 的平方根，x 必须大于等于 0。
 y := math.sqrt(x)
 
-# math.pow() 用来求给定实数 x 的 y 次幂
+# math.cbrt() 求给定浮点数 x 的立方根
+y := math.cbrt(x)
+
+# math.pow() 用来求给定浮点数 x 的 y 次幂
 y := math.pow(x, y)
 
-# math.log10() 用来求给定实数以 10 为底的对数。
+# math.log2(), math.log10(), math.log()
+# 分别返回给定浮点数以 2、e、10 为底的对数。
+y := math.log2(x)
 y := math.log10(x)
-
-# math.log2() 用来求给定实数以 2 为底的对数。
-y := log2(x)
 
 # math.PI 是圆周率
 y := math.sqrt(math.PI)
