@@ -353,8 +353,8 @@ $$`
 
 `$$
 \begin{align}
-    f(2) =  9 \qquad f(1) =  6 \qquad f(0) =  5 \\
-    f(-1) =  3 \qquad f(-2) =  1 \\
+    &f(2) =  9 \qquad &f(1) =  6 \qquad f(0) =  5 \\
+    &f(-1) =  3 \qquad &f(-2) =  1 \\
 \end{align}
 $$`
 
