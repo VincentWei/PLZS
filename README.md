@@ -165,7 +165,7 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 多项式及因式分解
    - 一元一次方程
    - 二元一次方程组
-   - 二元一次方程
+   - 一元二次方程
    - 点线面及二维封闭图形
    - 三角形及勾股定理
    - 尺规作图
@@ -184,9 +184,13 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 杨辉三角
    - 概率
 1. 图和图论
-   - （待定）
+   - 图的概念
+   - 图的邻接矩阵存储
+   - 图的邻接表存储
+   - 有向图
+   - 有向图的拓扑表达
 1. 基础数据结构
-   - 序列
+   - 序列和栈
    - 序列构成的序列
    - 找最值
    - 计算平均值
@@ -194,17 +198,19 @@ Programming Lessons for Zero-based Students Aged 10+ (**PLZS**), by [Vincent Wei
    - 二分查找
    - 字符序列和字符串
    - 字符串对比
-   - 栈
+   - 二叉树
    - 映射
 1. 基础算法
    - 枚举法
    - 模拟法
    - 贪心法
-   - 递推法
-   - 递归法
+   - 选择排序
+   - 冒泡排序
    - 二分法
    - 倍增法
-   - 分治法
+   - 哈夫曼编码
+   - 格雷码
+   - 一维动态规划
 
 课程须知：
 
