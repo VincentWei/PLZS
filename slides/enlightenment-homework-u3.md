@@ -958,9 +958,10 @@ $$`<!-- .element: class="fragment fade-in" -->
     # 将中心位置的数从 n_s 中移除
     n_s[c - n] = 未定义
 
-    # i 表示当前从剩余的数中选来试着填入左上角的数的索引
-    i := 0
-    当始 (i < 8)
+    # i 表示当前从剩余的数中选来试着填入左上角的数的索引。
+    # 因为要移除序列中的元素，故而从最大的下标开始往下试探。
+    i := 7
+    当始 (i >= 0)
 
         # 将 c 放入幻方中心，其他清零
         row1[0] := 0; row1[1] := 0; row1[2] := 0
@@ -977,12 +978,12 @@ $$`<!-- .element: class="fragment fade-in" -->
         left_ns[i] := 未定义
 
         # 确定右下角的数
-        d = rs - c - left_ns[i]
+        d := rs - c - row1[0]
 
         # 先确定这个数是否是 n 开始的连续 9 个数。
         # 若不是，则继续测试下个 i。
         若始 (d < n 或 d > (n + 8))
-            i := i + 1
+            i := i - 1
             继续
         若终
 
@@ -995,6 +996,7 @@ $$`<!-- .element: class="fragment fade-in" -->
                 row3[2] := d
                 left_ns[k] := 未定义
                 d := 0      # 设置 d 为零，用作标志
+                i := i - 1
                 跳出
             若终
 
@@ -1003,15 +1005,15 @@ $$`<!-- .element: class="fragment fade-in" -->
 
         # 若 d 不等于 0，则表明 d 不在剩余可选的数当中，继续下个 i
         若始 (d != 0)
-            i := i + 1
+            i := i - 1
             继续
         若终
 
         # 选择 left_ns 中的一个数填入右上角。
         # j 表示当前从剩余的数中选来试着填入右上角的数的索引。
-        # 注意，此时剩余的数一共有 6 个。
-        j : = 0
-        当始 (j < 6)
+        # 注意，此时剩余的数一共有 6 个；从最大的下标开始往下试探。
+        j : = 5
+        当始 (j < 0)
             # left_ns2 表示在当前这一轮选择中剩余可选的数构成的序列。
             # 为不影响 left_ns 中的内容，需要一个新的序列。
             left_ns2 := left_ns
@@ -1025,7 +1027,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             # 先确定这个数是否是 n 开始的连续 9 个数。
             # 若不是，则继续测试下个 j。
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1038,6 +1040,7 @@ $$`<!-- .element: class="fragment fade-in" -->
                     row1[1] := d
                     left_ns2[k] := 未定义
                     d := 0
+                    j := j - 1
                     跳出
                 若终
 
@@ -1046,7 +1049,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # d 不等于 0 表明 d 不在 left_ns2 序列中，继续测试下个 j。
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1055,7 +1058,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1065,6 +1068,7 @@ $$`<!-- .element: class="fragment fade-in" -->
                     row3[1] := d
                     left_ns2[k] := 未定义
                     d := 0
+                    j := j - 1
                     跳出
                 若终
 
@@ -1072,7 +1076,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1081,7 +1085,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1091,6 +1095,7 @@ $$`<!-- .element: class="fragment fade-in" -->
                     row3[0] := d
                     left_ns2[k] := 未定义
                     d := 0
+                    j := j - 1
                     跳出
                 若终
 
@@ -1098,7 +1103,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1107,7 +1112,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1124,7 +1129,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1133,7 +1138,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1143,6 +1148,7 @@ $$`<!-- .element: class="fragment fade-in" -->
                     row2[2] := d
                     left_ns2[k] := 未定义
                     d := 0
+                    j := j - 1
                     跳出
                 若终
 
@@ -1150,7 +1156,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1160,8 +1166,8 @@ $$`<!-- .element: class="fragment fade-in" -->
         若始 (row1[0] == 0 或 row1[1] == 0 或 row1[2] == 0
                 或 row2[0] == 0 或 row2[1] == 0 或 row2[2] == 0
                 或 row3[0] == 0 或 row3[1] == 0 或 row3[2] == 0)
-            # i 递增
-            i := i + 1
+            # i 递减
+            i := i - 1
         若否
             # 已被全部填满，搞定幻方
             跳出
@@ -1212,8 +1218,8 @@ $$`<!-- .element: class="fragment fade-in" -->
     n_s[c - n] = 未定义
 
     # i 表示当前从剩余的数中选来试着填入左上角的数的索引
-    i := 0
-    当始 (i < 8)
+    i := 7
+    当始 (i >= 0)
 
         # 将 c 放入幻方中心，其他清零
         row1[0] := 0; row1[1] := 0; row1[2] := 0
@@ -1230,7 +1236,7 @@ $$`<!-- .element: class="fragment fade-in" -->
         left_ns[i] := 未定义
 
         # 确定右下角的数
-        d = rs - c - left_ns[i]
+        d = rs - c - row1[0]
 
         # 找到这个数在 left_ns 序列中的位置，
         # 设置格子并从 left_ns 中移除。
@@ -1250,8 +1256,8 @@ $$`<!-- .element: class="fragment fade-in" -->
         # 选择 left_ns 中的一个数填入右上角。
         # j 表示当前从剩余的数中选来试着填入右上角的数的索引。
         # 注意，此时剩余的数一共有 6 个。
-        j : = 0
-        当始 (j < 6)
+        j := 5
+        当始 (j >= 0)
             # left_ns2 表示在当前这一轮选择中剩余可选的数构成的序列。
             # 为不影响 left_ns 中的内容，需要一个新的序列。
             left_ns2 := left_ns
@@ -1265,7 +1271,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             # 先确定这个数是否是 n 开始的连续 9 个数。
             # 若不是，则继续测试下个 j。
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1286,7 +1292,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # d 不等于 0 表明 d 不在 left_ns2 序列中，继续测试下个 j。
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1295,7 +1301,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上；将来写成函数。
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1312,7 +1318,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1321,7 +1327,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1338,7 +1344,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1347,7 +1353,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1364,7 +1370,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1373,7 +1379,7 @@ $$`<!-- .element: class="fragment fade-in" -->
 
             # 确定合理性，逻辑同上
             若始 (d < n 或 d > (n + 8))
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1390,7 +1396,7 @@ $$`<!-- .element: class="fragment fade-in" -->
             当终
 
             若始 (d != 0)
-                j := j + 1
+                j := j - 1
                 继续
             若终
 
@@ -1400,8 +1406,8 @@ $$`<!-- .element: class="fragment fade-in" -->
         若始 (row1[0] == 0 或 row1[1] == 0 或 row1[2] == 0
                 或 row2[0] == 0 或 row2[1] == 0 或 row2[2] == 0
                 或 row3[0] == 0 或 row3[1] == 0 或 row3[2] == 0)
-            # i 递增
-            i := i + 1
+            # i 递减
+            i := i - 1
         若否
             # 已被全部填满，搞定幻方
             跳出
