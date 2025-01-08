@@ -1045,7 +1045,7 @@ $$`
 	
 ### 可执行考鼎码在线练习场
 
-- [可执行考鼎码在线练习场](https://playground.fmsoft.cn/ec2)
+- [可执行考鼎码在线练习场](https://play.fmsoft.cn/ec2)
 
 ```mathematica
 算始 世界你好
