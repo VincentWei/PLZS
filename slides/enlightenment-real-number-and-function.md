@@ -1303,17 +1303,17 @@ $$`
 <div class="no-list-style">
 
 - 1) 学习可执行考鼎码在线练习场的使用讲解视频，然后在考鼎码练习场中，基于老师给出的如下伪代码程序，修改伪代码中不严谨的写法，或调试有问题的程序，并分享可执行版本。
-   1. [算法的概念/数数游戏必胜（伪代码）](https://play.fmsoft.cn/ec2/?snippet=7b928931d15080189cae7580f5500cba)
-   1. [算法的概念/自然数进制转换（伪代码）](https://play.fmsoft.cn/ec2/?snippet=6e49056282a20cdee65209445b196752)
-   1. [数论基础/奇数之和（伪代码）](https://play.fmsoft.cn/ec2/?snippet=ee95945db15a78a866a6e036abf8236c)
-   1. [数论基础/正整数的质因子序列（伪代码）](https://play.fmsoft.cn/ec2/?snippet=fcd9b7584167dfc9785cae5c9353ffd3)
-   1. [实数和函数/分数相加（伪代码）](https://play.fmsoft.cn/ec2/?snippet=68afaa37f4ec9eb3bf6335759ccfae11)
-   1. [实数和函数/小数进制转换（伪代码）](https://play.fmsoft.cn/ec2/?snippet=dd01895f620c64d680aaca21e748aeb5)
-   1. [调试练习/世界您好！](https://play.fmsoft.cn/ec2/?snippet=7cd971d8ebb302429ae9d954eb178e7a)
-   1. [调试练习/自然数乘法](https://play.fmsoft.cn/ec2/?snippet=01831ee54fb0ac7803c3a68604e258ca)
-   1. [调试练习/生成斐波那契数列](https://play.fmsoft.cn/ec2/?snippet=f08dbfaf2a54e1585030b6f21dd46b4f)
-   1. [调试练习/正整数的质因子分解](https://play.fmsoft.cn/ec2/?snippet=d8e3ac2ec4d89ab0432ea06f6a7726bd)
-   1. [调试联系/填充三乘三幻方]()
+   - [算法的概念/数数游戏必胜（伪代码）](https://play.fmsoft.cn/ec2/?snippet=7b928931d15080189cae7580f5500cba)
+   - [算法的概念/自然数进制转换（伪代码）](https://play.fmsoft.cn/ec2/?snippet=6e49056282a20cdee65209445b196752)
+   - [数论基础/奇数之和（伪代码）](https://play.fmsoft.cn/ec2/?snippet=ee95945db15a78a866a6e036abf8236c)
+   - [数论基础/正整数的质因子序列（伪代码）](https://play.fmsoft.cn/ec2/?snippet=fcd9b7584167dfc9785cae5c9353ffd3)
+   - [实数和函数/分数相加（伪代码）](https://play.fmsoft.cn/ec2/?snippet=68afaa37f4ec9eb3bf6335759ccfae11)
+   - [实数和函数/小数进制转换（伪代码）](https://play.fmsoft.cn/ec2/?snippet=dd01895f620c64d680aaca21e748aeb5)
+   - [调试练习/世界您好！](https://play.fmsoft.cn/ec2/?snippet=7cd971d8ebb302429ae9d954eb178e7a)
+   - [调试练习/自然数乘法](https://play.fmsoft.cn/ec2/?snippet=01831ee54fb0ac7803c3a68604e258ca)
+   - [调试练习/生成斐波那契数列](https://play.fmsoft.cn/ec2/?snippet=f08dbfaf2a54e1585030b6f21dd46b4f)
+   - [调试练习/正整数的质因子分解](https://play.fmsoft.cn/ec2/?snippet=d8e3ac2ec4d89ab0432ea06f6a7726bd)
+   - [调试联系/填充三乘三幻方]()
 
 - 2) 在可执行考鼎码在线练习场中，编写一个从 1 开始从小到大枚举三角形数到给定正整数的程序，并给出每个三角形数的质因子，调试正确后分享该程序的可执行版本。输出示例如下：
 
