@@ -1313,14 +1313,7 @@ $$`
    - [调试练习/自然数乘法](https://play.fmsoft.cn/ec2/?snippet=01831ee54fb0ac7803c3a68604e258ca)
    - [调试练习/生成斐波那契数列](https://play.fmsoft.cn/ec2/?snippet=f08dbfaf2a54e1585030b6f21dd46b4f)
    - [调试练习/正整数的质因子分解](https://play.fmsoft.cn/ec2/?snippet=d8e3ac2ec4d89ab0432ea06f6a7726bd)
-   - [调试联系/填充三乘三幻方]()
-- （还有第二页）
-
-</div>
-
-	
-
-<div class="no-list-style">
+   - [调试练习/填充三乘三幻方](https://play.fmsoft.cn/ec2/?snippet=082b274ca5f2d0feb74fe72daa260461)
 
 - 2) 在可执行考鼎码在线练习场中，编写一个从 1 开始从小到大枚举三角形数到给定正整数的程序，并给出每个三角形数的质因子，调试正确后分享该程序的可执行版本。输出示例如下：
 
