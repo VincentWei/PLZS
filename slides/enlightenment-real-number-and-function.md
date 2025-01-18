@@ -1300,7 +1300,10 @@ $$`
 </div>
 
 		
-### 中期大作业<sub>U4</sub>
+## 中期综合练习<sub>U4CE</sub>
+
+	
+### 单元测验前
 
 <div class="no-list-style">
 
@@ -1310,6 +1313,7 @@ $$`
    - [数论基础/奇数之和（伪代码）](https://play.fmsoft.cn/ec2/?snippet=ee95945db15a78a866a6e036abf8236c)
    - [数论基础/正整数的质因子序列（伪代码）](https://play.fmsoft.cn/ec2/?snippet=fcd9b7584167dfc9785cae5c9353ffd3)
    - [实数和函数/分数相加（伪代码）](https://play.fmsoft.cn/ec2/?snippet=68afaa37f4ec9eb3bf6335759ccfae11)
+   - [实数和函数/非负有限小数转为分数（伪代码）](https://play.fmsoft.cn/ec2/?snippet=70701d3934e50a23ec41bdd15b56e24f)
    - [实数和函数/小数进制转换（伪代码）](https://play.fmsoft.cn/ec2/?snippet=dd01895f620c64d680aaca21e748aeb5)
    - [调试练习/世界您好！](https://play.fmsoft.cn/ec2/?snippet=7cd971d8ebb302429ae9d954eb178e7a)
    - [调试练习/自然数乘法](https://play.fmsoft.cn/ec2/?snippet=01831ee54fb0ac7803c3a68604e258ca)
@@ -1338,4 +1342,9 @@ n = 20 时，f(1) 的逼近值为：2.718281834649448；误差为：6.1904028569
 - 4) 请家长出一道题，在可执行考鼎码的在线练习场中完成对应的求解程序，并分享该程序。
 
 </div>
+
+	
+### 单元测验后
+
+- 在可执行考鼎码在线练习场中完成本单元测验中的所有程序编写题目。
 
