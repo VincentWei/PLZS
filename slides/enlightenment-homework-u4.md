@@ -28,7 +28,7 @@ $$`
 \begin{align}
     0.5   &= \frac{1}{2}\qquad\qquad &0.25 &= \frac{1}{4}\qquad\qquad &-0.125 &= -\frac{1}{8}   \\
     0.75  &= \frac{3}{4}\qquad\qquad &0.875 &= \frac{7}{8}\qquad\qquad &-0.9  &= -\frac{9}{10}  \\
-    7.25  &= 7\frac{1}{4}\qquad\qquad &3.125 &= 3\frac{1}{4}\qquad\qquad &-9.75 &= -9\frac{3}{4}\\
+    7.25  &= 7\frac{1}{4}\qquad\qquad &3.125 &= 3\frac{1}{8}\qquad\qquad &-9.75 &= -9\frac{3}{4}\\
 \end{align}
 $$`
 
