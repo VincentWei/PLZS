@@ -607,9 +607,8 @@ $$`
 
 `$$
 \begin{align}
-    \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \\
-    \sqrt{8} &= \qquad\qquad &\sqrt{27} &= \qquad\qquad &\sqrt{20a^2} &= \\
-    \sqrt{4a^4} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
+    \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \qquad\qquad &\sqrt{8} &=  \\
+    \sqrt{27} &= \qquad\qquad &\sqrt{20a^2} &= \qquad\qquad &\sqrt{4a^4} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
     \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \\
 \end{align}
 $$`
@@ -617,10 +616,7 @@ $$`
 - 2) 推导如下开方性质：
 
 `$$
-\begin{align}
-    \sqrt[n]{NM} &= \sqrt[n]{N} \sqrt[n]{M} \\
-    \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}} \\
-\end{align}
+    \sqrt[n]{NM} &= \sqrt[n]{N} \sqrt[n]{M} \qquad\qquad \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}}
 $$`
 
 - 3) 将下列算式/代数式转换为根式并计算结果/简化（第一行为示例解答）：
