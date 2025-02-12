@@ -627,7 +627,7 @@ $$`
 
 `$$
 \begin{align}
-    4^{1/2} &= \sqrt{4} = 2 \qquad\qquad a^{-1/2} &= \frace{1}{\sqrt{a}} = \frace{1}{a}\sqrt{a} \\
+    4^{1/2} &= \sqrt{4} = 2 \qquad\qquad a^{-1/2} &= \frac{1}{\sqrt{a}} = \frac{1}{a}\sqrt{a} \\
     8^{1/3} &=  \qquad\qquad a^{-1/3} &= \\
     16^{1/4} &= \qquad\qquad a^{-3/4} &= \\
 \end{align}
