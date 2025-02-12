@@ -296,7 +296,7 @@ $$`
     \sqrt{2^2} &= 2 \qquad\qquad &\sqrt{(-2)^2} &= 2 \qquad\qquad &\sqrt{a^2} &= \left | a \right | \\
     \sqrt{8} &= 2\sqrt{2} \qquad\qquad &\sqrt{27} &= 3\sqrt{3} \qquad\qquad &\sqrt{20a^2} &= 2\sqrt{5} \left | a \right | \\
     \sqrt{4a^4} &= 2a^2\qquad\qquad &\sqrt[3]{2a^3} &= \sqrt{2}a\\
-    \sqrt[3]{\frac{1}{8a}} &=\frac{1}{2a}\sqrt[3]{a^2} \qquad\qquad &\sqrt{\frac{3}{2a}} &= \frac{1}{2a}\sqrt{6a} \\
+    \sqrt[3]{\frac{1}{8a}} &=\frac{1}{2a}\sqrt[3]{a^2} \qquad\qquad &\sqrt{\frac{3}{2a}} &= \frac{1}{2a}\sqrt{6a} \qquad\qquad &\sqrt{\frac{4}{a}}\sqrt[3]{\frac{8}{a}} &= \\
 \end{align}
 $$`
 
@@ -311,7 +311,18 @@ $$`
 $$`
 
 	
-3) 第二单元给出的求幂算法只能用于自然数次幂，请增强使之支持负整数作为指数，算法名称调整为 `整数次幂`。
+3) 将下列算式/代数式转换为根式并计算结果/简化（第一行为示例解答）：
+
+`$$
+\begin{align}
+    &4^{1/2} = \sqrt{4} = 2 \qquad\qquad & a^{-1/2} = \frac{1}{\sqrt{a}} = \frac{1}{a}\sqrt{a} \\
+    &8^{1/3} = \sqrt[3]{8} = 2 \qquad\qquad & a^{-1/3} = \frac{1}{\sqrt[3]{a}} = \frac{1}{a}\sqrt[3]{a^2} \\
+    &4^{0.5} = \sqrt{4} = 2 \qquad\qquad & a^{-0.75} = \frac{1}{\sqrt[3]{a^4}} = \frac{1}{a}\sqrt[4]{a} \\
+\end{align}
+$$`
+
+	
+4) 第二单元给出的求幂算法只能用于自然数次幂，请增强使之支持负整数作为指数，算法名称调整为 `整数次幂`。
 
 ```mathematica
 算始 整数次幂 (x, n)

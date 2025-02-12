@@ -609,7 +609,7 @@ $$`
 \begin{align}
     \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \qquad\qquad &\sqrt{8} &=  \\
     \sqrt{27} &= \qquad\qquad &\sqrt{20a^2} &= \qquad\qquad &\sqrt{4a^4} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
-    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \qquad\qquad &\sqrt{\frac{4}{a}}\sqrt[3]{\frac{8}{a}} \\
+    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \qquad\qquad &\sqrt{\frac{4}{a}}\sqrt[3]{\frac{8}{a}} &= \\
 \end{align}
 $$`
 
