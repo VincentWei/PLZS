@@ -609,21 +609,21 @@ $$`
 \begin{align}
     \sqrt{2^2} &= \qquad\qquad &\sqrt{(-2)^2} &= \qquad\qquad &\sqrt{a^2} &= \qquad\qquad &\sqrt{8} &=  \\
     \sqrt{27} &= \qquad\qquad &\sqrt{20a^2} &= \qquad\qquad &\sqrt{4a^4} &= \qquad\qquad &\sqrt[3]{2a^3} &= \\
-    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \\
+    \sqrt[3]{\frac{1}{8a}} &= \qquad\qquad &\sqrt{\frac{3}{2a}} &= \qquad\qquad &\sqrt{\frac{4}{a}}\sqrt[3]{\frac{8}{a} \\
 \end{align}
 $$`
 
 - 2) 推导如下开方性质：
 
 `$$
-    \sqrt[n]{NM} &= \sqrt[n]{N} \sqrt[n]{M} \qquad\qquad \sqrt[n]{\frac{N}{M}} &= \frac{\sqrt[n]{N}}{\sqrt[n]{M}}
+    \sqrt[n]{NM} = \sqrt[n]{N} \sqrt[n]{M} \qquad\qquad \sqrt[n]{\frac{N}{M}} = \frac{\sqrt[n]{N}}{\sqrt[n]{M}}
 $$`
 
 - 3) 将下列算式/代数式转换为根式并计算结果/简化（第一行为示例解答）：
 
 `$$
 \begin{align}
-    &4^{1/2} = \sqrt{4} = 2 \qquad\qquad &a^{-1/2} = \frac{1}{\sqrt{a}} = \frac{1}{a}\sqrt{a} \\
+    &4^{1/2} = \sqrt{4} = 2 \qquad\qquad & a^{-1/2} = \frac{1}{\sqrt{a}} = \frac{1}{a}\sqrt{a} \\
     &8^{1/3} = \qquad\qquad & a^{-1/3} = \\
     &4^{0.5} = \qquad\qquad & a^{-0.75} = \\
 \end{align}
